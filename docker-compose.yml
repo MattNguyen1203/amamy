@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  next-app:
+    container_name: nextjs14-okhub
+    platform: linux/amd64
+    image: okhubvn/nextjs14-okhub:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        API: ${API}
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - nextjs14-okhub
+
+  # Add more containers below (nginx, postgres, etc.)
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  nextjs14-okhub:
+    external: true
