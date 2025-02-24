@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'montserrat-font', Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
@@ -13,6 +13,33 @@ body {
 }
 html {
   font-size: 1vw;
+}
+
+:root {
+  --background: #f8f9fa;
+  --blueprimary: #007bff;
+  --background-elevation5: #ffffff;
+  --black-shadows: rgba(0, 0, 0, 0.15);
+  --link: #007bff;
+  --greyscale-text60: rgba(0, 0, 0, 0.6);
+  --greyscale-text30: rgba(0, 0, 0, 0.3);
+  --blueblue-400: #0056b3;
+  --font-family-svn-gilroy-semibold: 'SVN-Gilroy', sans-serif;
+  --font-family-montserrat: 'Montserrat', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-l: 16px;
+}
+
+.shadow-banner {
+  box-shadow: 0px 4px 32px #00266014;
+}
+
+.shadow-menu {
+  box-shadow: 0px 0px 1px #0000000d;
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.8) 32.426%, rgb(56, 182, 255) 100%);
 }
 
 @media (max-width: 639px) {
@@ -47,6 +74,9 @@ html {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --color-blue: #38B6FF;
+    --12: 0.75rem;
+    --greyscaletext-0: #fff;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -83,4 +113,76 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-font';
+  src: url('/fonts/Montserrat/Montserrat-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.custom-dot {
+  border-radius: 0.625rem;
+  background: var(--Blue-blue-800, #1F648C) !important;
+  border-radius: 0.625rem !important; 
+  width: 2.5rem !important; /* 10px = 2.5rem */
+  height: 0.25rem !important; /* 1px = 0.25rem */
 }

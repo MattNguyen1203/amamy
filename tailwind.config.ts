@@ -22,8 +22,19 @@ const config: Config = {
     },
     extend: {
       colors: {
-        background: 'hsl(var(--background))',
+        // background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'color-blue': '--color-blue',
+        'background': '#f8f9fa',
+        'blueprimary': '#007bff',
+        'background-elevation5': '#ffffff',
+        'black-shadows': 'rgba(0, 0, 0, 0.15)',
+        'link': '#007bff',
+        'greyscale-text60': 'rgba(0, 0, 0, 0.6)',
+        'greyscale-text30': 'rgba(0, 0, 0, 0.3)',
+        'blueblue-400': '#0056b3',
+        'blueblue-600': '#004085',
+        'big-stone-2': '#262626',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
