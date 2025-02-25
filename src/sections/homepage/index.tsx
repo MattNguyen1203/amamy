@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Section1 from './section1/Section1'
 import Section4 from './section4.tsx'
@@ -6,19 +7,23 @@ import Section3 from './section3/Section3'
 import Section6 from './section6/Section6'
 import Section5 from './section5.tsx/Section5'
 import AIQuestion from './AIQuestion'
+import { IHomePage } from '@/utils/type'
 
-type Props = {}
+type Props = {
+  res: IHomePage
+}
 
-const Homepage = (props: Props) => {
+const Homepage = ({ res }: Props) => {
+  console.log(res)
   return (
     <div className='w-full bg-[#EDF5FA]'>
     <AIQuestion />
-    <Section1 />
-    <Section2 />
-    <Section3 />
+    <Section1 banner={res.banner} />
+    <Section2 services={res.services}  />
+    <Section3 sectionCountry={res.section_country} />
     
-    <Section4 />
-    <Section5 />
+    <Section4 withDHS={res.withDHS} />
+    <Section5 faq={res.faq} faqs={res.faqs} />
     <Section6 />
     </div>
   )

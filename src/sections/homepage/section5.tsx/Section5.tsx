@@ -1,37 +1,29 @@
+import { IFaq, IFaqs } from '@/utils/type'
 import Image from 'next/image'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  faq: IFaq
+  faqs: IFaqs[]
+}
 
-const Section5 = (props: Props) => {
+const Section5 = ({faq, faqs}: Props) => {
   return (
     <section className='flex relative flex-row w-[100rem] p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91]'>
       <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[26.625rem]'>
-        Giải đáp thắc mắc của bạn - FAQ
+        {faq.title}
       </h2>
         <Image src={'/homepage/icon/section-4-background.png'} alt='' width={1000} height={1000} className=' w-[66.25794rem] h-[33.91225rem] 
         rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden'/>
       <div className='flex flex-col gap-[1.5rem] static '>
-        <ItemContent
-          content='Thời gian vận chuyển trung bình là bao lâu?'
-          detail='Bạn có thể nhập mã vận đơn vào công cụ "Theo dõi đơn hàng" trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.'
-        />
-        <ItemContent
-          content='Thời gian vận chuyển trung bình là bao lâu?'
-          detail=''
-        />
-        <ItemContent
-          content='Thời gian vận chuyển trung bình là bao lâu?'
-          detail=''
-        />
-          <ItemContent
-          content='Thời gian vận chuyển trung bình là bao lâu?'
-          detail='Bạn có thể nhập mã vận đơn vào công cụ "Theo dõi đơn hàng" trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.'
-        />
-          <ItemContent
-          content='Thời gian vận chuyển trung bình là bao lâu?'
-          detail='Bạn có thể nhập mã vận đơn vào công cụ "Theo dõi đơn hàng" trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.'
-        />
+        {
+          faqs.map((item, index) => (
+            <ItemContent key={index} index={index}
+            content={item.question}
+            detail={item.answer}
+          />
+          ))
+        }
       </div>
     </section>
   )
@@ -39,14 +31,14 @@ const Section5 = (props: Props) => {
 
 export default Section5
 
-const ItemContent = ({ content, detail }: { content: string; detail: string }) => {
+const ItemContent = ({ content, detail, index }: { content: string; detail: string, index: number }) => {
     return (
       <div className="flex flex-col">
         {/* Checkbox ẩn để toggle hiển thị nội dung */}
-        <input type="checkbox" id="toggle-detail" className="hidden peer" />
+        <input type="checkbox" id={`toggle-detail${index}`} className="hidden peer" />
   
         {/* Div trên - Click để mở div dưới */}
-        <label htmlFor="toggle-detail" className="flex items-start gap-[0.4rem] h-full cursor-pointer">
+        <label htmlFor={`toggle-detail${index}`} className="flex items-start gap-[0.4rem] h-full cursor-pointer">
           <i className="rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]">
             <QuestionIcon />
           </i>
@@ -69,10 +61,12 @@ const ItemContent = ({ content, detail }: { content: string; detail: string }) =
                   <path d="M11 16L22 0H0L11 16Z" fill="white" />
                 </svg>
               </i>
-              <p>{detail}</p>
+              <p dangerouslySetInnerHTML={{__html: detail}}></p>
             </div>
             <i className="rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]">
-              <QuestionIcon />
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M5.00005 19.1667C4.99431 21.3665 5.50827 23.5365 6.50005 25.5C7.67599 27.853 9.4838 29.832 11.721 31.2155C13.9581 32.599 16.5363 33.3324 19.1667 33.3334C21.3665 33.3391 23.5365 32.8252 25.5 31.8334L35 35L31.8334 25.5C32.8252 23.5365 33.3391 21.3665 33.3334 19.1667C33.3324 16.5363 32.599 13.9581 31.2155 11.721C29.832 9.4838 27.853 7.67599 25.5 6.50005C23.5365 5.50827 21.3665 4.99431 19.1667 5.00005H18.3334C14.8595 5.1917 11.5783 6.65798 9.11815 9.11815C6.65798 11.5783 5.1917 14.8595 5.00005 18.3334V19.1667Z" fill="#38B6FF"/>
+          </svg>
             </i>
           </div>
         </div>

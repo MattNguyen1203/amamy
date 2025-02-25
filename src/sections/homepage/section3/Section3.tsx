@@ -1,10 +1,13 @@
 import React from 'react'
 import Section35 from './Section3.5'
 import Image from 'next/image'
+import { ShippingServiceObject } from '@/utils/type'
 
-type Props = {}
+type Props = {
+  sectionCountry: ShippingServiceObject
+}
 
-const Section3 = (props: Props) => {
+const Section3 = ({sectionCountry}: Props) => {
   return (
     <div>
     <div className="w-full flex ">
@@ -65,7 +68,7 @@ const Section3 = (props: Props) => {
         </div>
       </div>
     </div>
-    <Section35 />
+    <Section35 sectionCountry={sectionCountry} />
     </div>
   )
 }

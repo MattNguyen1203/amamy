@@ -2,8 +2,10 @@ import React from 'react';
 import CardIcon from './CardIcon';
 import OrderIcon from '../section1/OrderIcon';
 import Image from 'next/image';
+import ImageV2 from '@/components/image/ImageV2';
+import { Card, ImageIcon, ServicesObject } from '@/utils/type';
 
-const Section2 = () => {
+const Section2 = ({services}: {services: ServicesObject}) => {
   return (
     <div className="flex flex-col items-start gap-14 px-24 py-[120px] relative">
       <div className="inline-flex items-end gap-[1.5rem] relative">
@@ -11,34 +13,29 @@ const Section2 = () => {
           <div className="flex flex-col items-start gap-[1.5rem] w-full">
             <div className="flex h-[13.75rem] items-center gap-[1.5rem] w-full">
               <ServiceCard
-                icon={<CardIcon />}
-                title="Đặt hộ đơn Shopee"
-                description="Mua sắm dễ dàng trên Shopee từ mọi nơi. Chúng tôi hỗ trợ đặt hộ nhanh chóng, tiết kiệm."
+                icon={services.list_service_1[0].icon}
+                title={services.list_service_1[0].title}
+                description={services.list_service_1[0].description}
+                subtitle={services.list_service_1[0].subtitle}
               />
               <ServiceCard
-                icon={<OrderIcon />}
-                title="Hỗ trợ thanh toán"
-                description="Thanh toán đơn hàng quốc tế thật đơn giản. Bất kể phương thức nào, chúng tôi luôn sẵn sàng."
+                icon={services.list_service_1[1].icon}
+                title={services.list_service_1[1].title}
+                description={services.list_service_1[1].description}
+                subtitle={services.list_service_1[1].subtitle}
               />
 
               <ServiceCard
-                icon={
-                  <Image
-                    src={'/homepage/icon/BoxesIcon.svg'}
-                    alt=""
-                    width={100}
-                    height={100}
-                    className="w-[3.25rem] h-[3.25rem]"
-                  />
-                }
-                title="Gom nhiều đơn"
-                description="Giảm thiểu chi phí vận chuyển bằng cách kết hợp nhiều đơn hàng thành một lô hàng."
+                icon={services.list_service_1[2].icon}
+                subtitle={services.list_service_1[2].subtitle}
+                title={services.list_service_1[2].title}
+                description={services.list_service_1[2].description}
               />
             </div>
 
             <div className="inline-flex h-[20.625rem] items-center gap-[1.5rem]">
               <ServiceHighlight
-                backgroundUrl="/homepage/replace/Service-Item-Background.png"
+                backgroundUrl={services.list_service_2[0].image.url}
                 icon={
                   <Image
                     src={'/homepage/replace/BoxIcon.svg'}
@@ -52,7 +49,7 @@ const Section2 = () => {
               />
 
               <ServiceHighlight
-                backgroundUrl="/homepage/replace/Service-Item-Background.png"
+                backgroundUrl={services.list_service_2[1].image.url}
                 icon={
                   <Image
                     src={'/homepage/icon/houseIcon.svg'}
@@ -62,24 +59,27 @@ const Section2 = () => {
                     className="w-[2.3rem] h-[2.2rem]"
                   />
                 }
-                title="Lấy hàng tận nơi"
+                title={services.list_service_2[1].title}
               />
             </div>
           </div>
         </div>
 
-        <CustomerSatisfaction />
+        <CustomerSatisfaction card={services.card} />
       </div>
     </div>
   );
 };
 
-const ServiceCard = ({ icon, title, description } : { icon: React.JSX.Element, title: string, description: string }) => (
+const ServiceCard = ({ icon, title, description, subtitle } : {subtitle: string, icon: ImageIcon, title: string, description: string }) => (
   <div className="flex flex-col items-start gap-5 p-5 flex-1 bg-[#fcfdff] rounded-lg shadow-lg">
     <div className="flex items-center gap-4 w-full">
-      {icon}
+      <ImageV2 alt={icon.alt} src={icon.url} width={
+        icon.width
+      } height={icon.height} className="w-[3.25rem] h-[3.25rem]" />
+
       <div className="flex flex-col gap-2 flex-1">
-        <div className="text-sm text-[rgba(20,_41,_65,_0.60)] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase">DỊCH VỤ</div>
+        <div className="text-sm text-[rgba(20,_41,_65,_0.60)] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase">{subtitle}</div>
         <div className="text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%]">{title}</div>
       </div>
     </div>
@@ -105,7 +105,7 @@ const ServiceHighlight = ({ backgroundUrl, icon, title } : { icon: React.JSX.Ele
   </div>
 );
 
-const CustomerSatisfaction = () => (
+const CustomerSatisfaction = ({card} : {card: Card}) => (
   <div className="relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden">
     <div className="absolute  z-[10]">
       <Image src={'/homepage/icon/BG.png'} alt='' width={1000} height={1000} className='w-full ' />
@@ -122,13 +122,13 @@ const CustomerSatisfaction = () => (
       <div className="flex flex-col items-start bg-background-elevation5 rounded-lg p-4 w-full">
         <div className="flex justify-between w-full">
           <p className="text-transparent text-[28px] font-bold">
-            <span className="text-black font-bold">Hơn </span>
-            <span className="text-[#33a6e8] text-[36px] font-bold">85%</span>
+            <span className="text-black font-bold">{card.subtitle_2} </span>
+            <span className="text-[#33a6e8] text-[36px] font-bold">{card.number_percent}</span>
           </p>
           <ArrowIcon />
         </div>
         <p className="text-[1rem] not-italic font-bold leading-[130%]">
-          Khách hàng đánh giá hài lòng về chất lượng dịch vụ của Amamy.
+          {card.title_2}
         </p>
       </div>
     </div>
@@ -138,13 +138,13 @@ const CustomerSatisfaction = () => (
         <div className='relative'>
           <div className="text-[#38B6FF] top-[-3rem] left-[-0.5rem] absolute text-[2.875rem] font-bold">+</div>
           <div className="text-[1.25rem] not-italic font-bold leading-[120%] mb-2">
-            BƯU KIỆN
+            {card.unit}
           </div>
         </div>
         
       </div>
       <p className=" text-[1.375rem] not-italic font-medium leading-[130%]">
-        Được vận chuyển từ Việt Nam qua nước ngoài thành công.
+        {card.title}
       </p>
     </div>
   </div>

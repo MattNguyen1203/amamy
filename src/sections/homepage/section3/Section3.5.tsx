@@ -1,3 +1,5 @@
+import ImageV2 from "@/components/image/ImageV2";
+import { ShippingServiceObject } from "@/utils/type";
 import Image from "next/image";
 import React from "react";
 
@@ -24,6 +26,23 @@ const arrowRightCircle = () => (
   </svg>
 );
 
+const arrowRightCircleHover = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1.75rem"
+    height="1.75rem"
+    viewBox="0 0 28 28"
+    fill="none"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M14 27.3334C21.3638 27.3334 27.3333 21.3639 27.3333 14.0001C27.3333 6.63629 21.3638 0.666748 14 0.666748C6.63616 0.666748 0.666626 6.63629 0.666626 14.0001C0.666626 21.3639 6.63616 27.3334 14 27.3334ZM16.0404 9.29297L20.0404 13.293C20.4309 13.6835 20.4309 14.3167 20.0404 14.7072L16.0404 18.7072C15.6499 19.0977 15.0167 19.0977 14.6262 18.7072C14.2357 18.3167 14.2357 17.6835 14.6262 17.293L16.9191 15.0001H8.66662C8.11434 15.0001 7.66662 14.5524 7.66662 14.0001C7.66662 13.4478 8.11434 13.0001 8.66662 13.0001H16.9191L14.6262 10.7072C14.2357 10.3167 14.2357 9.6835 14.6262 9.29297C15.0167 8.90245 15.6499 8.90245 16.0404 9.29297Z"
+      fill="white"
+    />
+  </svg>
+);
+
 const countries: Country[] = [
   { name: "Mỹ", icon: arrowRightCircle },
   { name: "Canada", icon: arrowRightCircle },
@@ -39,17 +58,25 @@ const countries: Country[] = [
 
 interface CountryCardProps {
   name: string;
-  icon: () => React.JSX.Element;
+  icon: string
 }
 
-const CountryCard: React.FC<CountryCardProps> = ({ name, icon: Icon }) => (
-  <div className="relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF]">
+const CountryCard: React.FC<CountryCardProps> = ({ name, icon }) => (
+  <div className="relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF] group cursor-pointer">
     <div className="absolute w-[16.8125rem] h-[11.4375rem] -top-px -left-px bg-white border border-solid border-[#f2f2f2] ">
-      <div className="absolute top-[1.0625rem] left-5 font-PC-heading-title-20b  text-[1.25rem] not-italic font-bold leading-[120%]">
+      <div className="absolute top-[1.0625rem] left-5 font-PC-heading-title-20b  text-[1.25rem] not-italic font-bold leading-[120%] group-hover:text-white">
         {name}
       </div>
+      
+      <ImageV2 alt="" src={icon} width={1000} height={1000} className="hidden group-hover:block" />
+
       <div className="absolute w-8 h-8 top-[8.75rem] left-4">
-        <Icon />
+        {arrowRightCircle()}
+      </div>
+      <div className="w-[16.625rem] h-[3rem] bg-[#38B6FF] flex-shrink-0 absolute bottom-0 items-center group-hover:flex hidden">
+        <div className="ml-auto mr-[0.5rem]">
+          {arrowRightCircleHover()}
+        </div>
       </div>
     </div>
     {/* <img className="absolute top-[-2259px] left-[2311px] w-px h-px" alt="Subtract" src={subtract} /> */}
@@ -60,14 +87,12 @@ const CountryCard: React.FC<CountryCardProps> = ({ name, icon: Icon }) => (
           TÌM HIỂM THÊM
         </div>
       </div>
-      <div className="absolute top-[-2376px] left-[2589px] w-8 h-8">
-        <Icon />
-      </div>
+     
     </div>
   </div>
 );
 
-export const MainContainer: React.FC = () => (
+export const MainContainer = ({sectionCountry}: {sectionCountry: ShippingServiceObject}) => (
   <div className="flex pr-auto h-[33.8125rem] items-start relative rounded-[var(--token-8)] overflow-hidden">
     <div className="flex flex-col items-start relative  pl-[6rem] w-[27.5rem]">
       <div className="relative self-stretch w-full h-[22.5rem] rounded-[var(--token-8)_0px_0px_0px] overflow-hidden">
@@ -82,7 +107,7 @@ export const MainContainer: React.FC = () => (
             />
           </div>
           <p className="absolute w-[16.625rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] not-italic font-bold leading-[130%]">
-            Cung cấp dịch vụ gửi hàng qua nhiều quốc gia
+            {sectionCountry.title}
           </p>
         </div>
       </div>
@@ -92,7 +117,7 @@ export const MainContainer: React.FC = () => (
             <Image width={1000} height={1000}
               className="relative w-[21.5rem] h-[11.25rem] inset-0"
               alt="Container"
-              src={"/homepage/icon/Image-conteiner.png"}
+              src={sectionCountry.background.url}
             />
           
           </div>
@@ -107,24 +132,24 @@ export const MainContainer: React.FC = () => (
             </div>
             <button className="flex mt-[0.75rem] h-12 justify-center text-[#fff] w-[13.5rem] items-center gap-2 rounded-[1.25rem]  
              bg-[var(--Blue-Primary,_#38B6FF)]">
-              (+84) 0976 506 239</button>
+              {sectionCountry.hotline}</button>
         </div>
       </div>
     </div>
     <div className="flex">
       <div className="grid grid-cols-3 w-[50.0625] items-start gap-[0_0] ">
-        {countries.slice(0, 9).map((country, index) => (
-          <CountryCard key={index} name={country.name} icon={country.icon} />
+        {sectionCountry.list_country.map((country, index) => (
+          <CountryCard key={index} name={country.country} icon={country.flag_img.url} />
         ))}
       </div>
       <div className="flex flex-col w-[16.625rem] h-[33.8125rem] items-start ">
-        <CountryCard name="Nhật Bản" icon={arrowRightCircle} />
+        <CountryCard name="Nhật Bản" icon={sectionCountry.list_country[sectionCountry.list_country.length - 1].flag_img.url} />
         <div className="relative flex-1 self-stretch w-full grow">
           <div className="  ">
             <Image
-              className="absolute w-[25.875rem] h-[26.1875rem] top-[-3.8rem] left-[-3.1rem]  object-contain scale-[1.38] overflow-hidden "
+              className="absolute w-[26.1875rem] h-[22.375rem] top-[0.rem] left-[-0rem]  object-contain overflow-hidden "
               alt="Image" width={6200} height={8400}
-              src={"/homepage/icon/Contact-Info-Container1.png"}
+              src={sectionCountry.background2.url}
             />
           </div>
         </div>

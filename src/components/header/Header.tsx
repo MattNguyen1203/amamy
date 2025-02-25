@@ -26,7 +26,8 @@ const Header = (props: Props) => {
   }, []);
 
   return (
-    <div className={`py-[0.625rem] px-[6rem] flex justify-between items-center fixed h-[72px] w-full z-[1000] transition-colors duration-300 ${isScrolled ? 'bg-white text-black' : 'text-white'}`}>
+    <>
+      <div className={`py-[0.625rem] px-[6rem] flex justify-between items-center fixed h-[72px] w-full z-[1000] transition-colors duration-300 xsm:hidden ${isScrolled ? 'bg-white text-black' : 'text-white'}`}>
       {/* <ImageV2 alt='logo' src={'/homepage/replace/logo.svg'} width={1000} height={1000} className='w-[6.89394rem] h-[1.836rem]' /> */}
       {!isScrolled ? <svg xmlns="http://www.w3.org/2000/svg" width="6.89394rem" height="1.836rem" viewBox="0 0 111 30" fill="none">
         <path d="M106.516 7.36202H110.916L102.407 29.5558H98.0722L100.854 22.1794L94.5781 7.36202H98.9781L102.86 17.1325H102.893L106.516 7.36202Z" fill="white"/>
@@ -64,6 +65,16 @@ const Header = (props: Props) => {
         <ButtonCreateOrder><span className={`${'text-white'}`}>Tạo đơn hàng</span></ButtonCreateOrder>
       </div>
     </div>
+    <div className='h-[3.5rem] items-center justify-between hidden xsm:flex'>
+            <div className='w-1/2'></div>
+            <div className='mr-auto'>
+            <svg className='w-[1.28175rem] my-auto h-[1.28175rem] gap-2' xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+            <path d="M9.05602 16.2694C13.0388 16.2694 16.2676 13.0407 16.2676 9.05785C16.2676 5.07503 13.0388 1.84631 9.05602 1.84631C5.0732 1.84631 1.84448 5.07503 1.84448 9.05785C1.84448 13.0407 5.0732 16.2694 9.05602 16.2694Z" stroke="#091E36" stroke-width="1.92308" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14.3445 14.3463L17.2291 17.2309" stroke="#091E36" stroke-width="1.92308" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            </div>
+    </div>
+    </>
   );
 };
 

@@ -1,10 +1,6 @@
-import Footer from '@/components/footer/Footer'
-import ImageV2 from '@/components/image/ImageV2'
-import Pagination from '@/components/pagination/Pagination'
-import getMetadata from '@/fetch/getMetadata'
+import { fetchHomeData } from '@/fetch/fetchHomeData'
 import Homepage from '@/sections/homepage'
-import metadataValues from '@/utils/metadataValues'
-import Image from 'next/image'
+import { IHomePage } from '@/utils/type'
 
 // export async function generateMetadata() {
 //   const res = await getMetadata('/')
@@ -12,9 +8,11 @@ import Image from 'next/image'
 // }
 
 export default async function Home() {
+
+  const res:IHomePage = await fetchHomeData()
   return (
     <div className='w-full bg-white text-black flex flex-col items-center'>
-      <Homepage />
+      <Homepage res={res} />
     </div>
   )
 }
