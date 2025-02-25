@@ -17,6 +17,7 @@
     "array-bracket-spacing": "warn",
     "no-unexpected-multiline": "warn",
     "keyword-spacing": "warn",
-    "comma-spacing": "warn"
+    "comma-spacing": "warn",
+    "noImplicitAny": false
   }
 }
