@@ -3,11 +3,6 @@ import { ShippingServiceObject } from "@/utils/type";
 import Image from "next/image";
 import React from "react";
 
-interface Country {
-  name: string;
-  icon: () => React.JSX.Element;
-}
-
 const arrowRightCircle = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -42,19 +37,6 @@ const arrowRightCircleHover = () => (
     />
   </svg>
 );
-
-const countries: Country[] = [
-  { name: "Mỹ", icon: arrowRightCircle },
-  { name: "Canada", icon: arrowRightCircle },
-  { name: "Hàn Quốc", icon: arrowRightCircle },
-  { name: "Đài Loan", icon: arrowRightCircle },
-  { name: "Úc", icon: arrowRightCircle },
-  { name: "EU", icon: arrowRightCircle },
-  { name: "Đức", icon: arrowRightCircle },
-  { name: "Pháp", icon: arrowRightCircle },
-  { name: "Séc", icon: arrowRightCircle },
-  { name: "Nhật Bản", icon: arrowRightCircle },
-];
 
 interface CountryCardProps {
   name: string;
@@ -93,7 +75,7 @@ const CountryCard: React.FC<CountryCardProps> = ({ name, icon }) => (
 );
 
 export const MainContainer = ({sectionCountry}: {sectionCountry: ShippingServiceObject}) => (
-  <div className="flex pr-auto h-[33.8125rem] items-start relative rounded-[var(--token-8)] overflow-hidden">
+  <div className="flex pr-auto h-[33.8125rem] items-start relative rounded-[var(--token-8)] overflow-hidden xsm:hidden">
     <div className="flex flex-col items-start relative  pl-[6rem] w-[27.5rem]">
       <div className="relative self-stretch w-full h-[22.5rem] rounded-[var(--token-8)_0px_0px_0px] overflow-hidden">
         <div className="relative w-[21.5rem] h-[22.5625rem]">

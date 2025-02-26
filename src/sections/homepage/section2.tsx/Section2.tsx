@@ -7,11 +7,11 @@ import { Card, ImageIcon, ServicesObject } from '@/utils/type';
 
 const Section2 = ({services}: {services: ServicesObject}) => {
   return (
-    <div className="flex flex-col items-start gap-14 px-24 py-[120px] relative">
+    <div className="flex flex-col items-start gap-14 px-24 py-[120px] relative xsm:gap-[1rem] xsm:pl-[1rem]">
       <div className="inline-flex items-end gap-[1.5rem] relative">
-        <div className="flex flex-col w-[63rem]  items-start gap-[1.5rem] relative">
+        <div className="flex flex-col w-[63rem]  items-start gap-[1.5rem] relative xsm:w-[100vw]">
           <div className="flex flex-col items-start gap-[1.5rem] w-full">
-            <div className="flex h-[13.75rem] items-center gap-[1.5rem] w-full">
+            <div className="flex h-[13.75rem] items-center gap-[1.5rem] w-full xsm:w-[98vư] xsm:gap-[1rem]">
               <ServiceCard
                 icon={services.list_service_1[0].icon}
                 title={services.list_service_1[0].title}
@@ -33,7 +33,7 @@ const Section2 = ({services}: {services: ServicesObject}) => {
               />
             </div>
 
-            <div className="inline-flex h-[20.625rem] items-center gap-[1.5rem]">
+            <div className="inline-flex h-[20.625rem] items-center gap-[1.5rem] xsm:w-[100vw] xsm:overflow-scroll">
               <ServiceHighlight
                 backgroundUrl={services.list_service_2[0].image.url}
                 icon={
@@ -73,7 +73,7 @@ const Section2 = ({services}: {services: ServicesObject}) => {
 
 const ServiceCard = ({ icon, title, description, subtitle } : {subtitle: string, icon: ImageIcon, title: string, description: string }) => (
   <div className="flex flex-col items-start gap-5 p-5 flex-1 bg-[#fcfdff] rounded-lg shadow-lg">
-    <div className="flex items-center gap-4 w-full">
+    <div className="flex items-center gap-4 w-full xsm:flex-col">
       <ImageV2 alt={icon.alt} src={icon.url} width={
         icon.width
       } height={icon.height} className="w-[3.25rem] h-[3.25rem]" />
@@ -84,13 +84,13 @@ const ServiceCard = ({ icon, title, description, subtitle } : {subtitle: string,
       </div>
     </div>
     <div className="flex flex-col h-[86px] justify-around gap-2.5 px-3">
-      <p className=" text-sm text-[0.875rem] not-italic font-semibold leading-[150%]">{description}</p>
+      <p className=" text-sm text-[0.875rem] not-italic font-semibold leading-[150%] xsm:hidden">{description}</p>
     </div>
   </div>
 );
 
 const ServiceHighlight = ({ backgroundUrl, icon, title } : { icon: React.JSX.Element, title: string, backgroundUrl: string }) => (
-  <div className="relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden">
+  <div className="relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem]">
     <div className={`h-full bg-cover bg-center`}
      style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
@@ -106,7 +106,7 @@ const ServiceHighlight = ({ backgroundUrl, icon, title } : { icon: React.JSX.Ele
 );
 
 const CustomerSatisfaction = ({card} : {card: Card}) => (
-  <div className="relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden">
+  <div className="relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden">
     <div className="absolute  z-[10]">
       <Image src={'/homepage/icon/BG.png'} alt='' width={1000} height={1000} className='w-full ' />
     </div>

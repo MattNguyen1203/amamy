@@ -119,7 +119,7 @@ interface StrengthItem {
     }[];
 }
 
-interface StrengthsObject {
+export interface StrengthsObject {
     title: string;
     subtitle: string;
     list_strengths: {
@@ -358,12 +358,9 @@ export interface IHomePage {
     banner: IBanner;
     faq: IFaq;
     faqs: IFaqs[];
-    section3: {
-        list_strengths: StrengthsObject;
-        subtitle: string;
-        title: string;
-    },
+    section3: StrengthsObject,
     section_country: ShippingServiceObject,
     services: ServicesObject,
     withDHS: NewsObject
 }
+

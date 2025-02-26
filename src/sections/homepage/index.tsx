@@ -14,14 +14,13 @@ type Props = {
 }
 
 const Homepage = ({ res }: Props) => {
-  console.log(res)
+  console.log(res.section3)
   return (
     <div className='w-full bg-[#EDF5FA]'>
     <AIQuestion />
     <Section1 banner={res.banner} />
     <Section2 services={res.services}  />
-    <Section3 sectionCountry={res.section_country} />
-    
+    <Section3 sectionCountry={res.section_country} section3={res.section3} />
     <Section4 withDHS={res.withDHS} />
     <Section5 faq={res.faq} faqs={res.faqs} />
     <Section6 />

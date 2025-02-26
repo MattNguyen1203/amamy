@@ -9,12 +9,13 @@ type Props = {
 
 const Section5 = ({faq, faqs}: Props) => {
   return (
-    <section className='flex relative flex-row w-[100rem] p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91]'>
-      <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[26.625rem]'>
+    <section className='flex relative flex-row w-[100rem]  xsm:w-[100vw] p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
+    rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'>
+      <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[26.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
         {faq.title}
       </h2>
         <Image src={'/homepage/icon/section-4-background.png'} alt='' width={1000} height={1000} className=' w-[66.25794rem] h-[33.91225rem] 
-        rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden'/>
+        rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden xsm:hidden'/>
       <div className='flex flex-col gap-[1.5rem] static '>
         {
           faqs.map((item, index) => (
@@ -42,20 +43,20 @@ const ItemContent = ({ content, detail, index }: { content: string; detail: stri
           <i className="rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]">
             <QuestionIcon />
           </i>
-          <div className="bg-[#FFF] relative w-[46.25rem] rounded-tl-[0rem] rounded-br-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full">
+          <div className="bg-[#FFF] relative w-[46.25rem] xsm:w-[17.9375rem] rounded-tl-[0rem] rounded-br-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full">
             <i className="absolute top-0 left-0 w-fit z-[0] -translate-x-1/2">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
                 <path d="M11 16L22 0H0L11 16Z" fill="white" />
               </svg>
             </i>
-            <p>{content}</p>
+            <p className='xsm:text-[0.75rem] xsm:font-semibold'>{content}</p>
           </div>
         </label>
   
         {/* Div dưới - Hiển thị khi checkbox được check */}
         <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-300 peer-checked:max-h-[500px] peer-checked:opacity-100">
           <div className="flex items-start gap-[0.4rem] h-full mt-[0.5rem]">
-            <div className="bg-[#FFF] relative w-[46.25rem] rounded-tl-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full">
+            <div className="bg-[#FFF] relative w-[46.25rem]  xsm:w-[17.9375rem] rounded-tl-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full">
               <i className="absolute bottom-0 right-0 w-fit rotate-180 z-[0] translate-x-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
                   <path d="M11 16L22 0H0L11 16Z" fill="white" />

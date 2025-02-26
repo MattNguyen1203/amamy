@@ -6,7 +6,7 @@ const AIQuestion = (props: Props) => {
   return (
     <div className='flex items-center text-white p-[0.75rem] h-[3rem] bg-[var(--Blue-Primary,_#38B6FF)] 
     fixed bottom-0 right-[1.5rem] w-[22.56rem] z-50
- justify-between  gap-2.5 rounded-t-[1.25rem] '>
+ justify-between  gap-2.5 rounded-t-[1.25rem] xsm:hidden'>
     <div className='flex items-center gap-[0.75rem]'>
     <svg
         xmlns='http://www.w3.org/2000/svg'

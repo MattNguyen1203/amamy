@@ -16,7 +16,8 @@ const Section4 = ({ withDHS }: Props) => {
   return (
     <section
       className='w-[100rem] h-[50rem] flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] justify-between items-center
-     rounded-tl-[2.5rem] rounded-br-[0rem] rounded-tr-[2.5rem] rounded-bl-[0rem] [box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] '
+     rounded-tl-[2.5rem] rounded-br-[0rem] rounded-tr-[2.5rem] rounded-bl-[0rem] [box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
+     xsm:flex-col xsm:w-[100vw] xsm:px-[1rem]'
     >
       <div className='max-w-[24.375rem]'>
         <h2 className='text-[2.875rem] not-italic font-bold leading-[120%]'>
@@ -25,7 +26,7 @@ const Section4 = ({ withDHS }: Props) => {
         <p className='text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%]'>
           {withDHS.subtitle}
         </p>
-        <div className='flex mt-[1.91rem]'>
+        <div className='flex mt-[1.91rem] xsm:hidden'>
           <div
             className='flex p-4 items-center gap-2.5 mr-[0.5rem] rounded-[2.5rem] bg-[#E1EAF6] cursor-pointer'
             onClick={() => swiperRef.current?.swiper.slidePrev()}
@@ -53,7 +54,7 @@ const Section4 = ({ withDHS }: Props) => {
           src={'/homepage/icon/section-4Card.png'}
           width={1000}
           height={1000}
-          className='w-[18.75rem] absolute z-[100] top-1/2 -translate-y-[46%] -left-1/2 translate-x-[85%] h-[23.25rem] scale-110 flex-shrink-0'
+          className='w-[18.75rem] absolute z-[100] top-1/2 -translate-y-[46%] -left-1/2 translate-x-[85%] h-[23.25rem] scale-110 flex-shrink-0 xsm:hidden'
         ></Image>
         <div>
           <Swiper
@@ -71,19 +72,19 @@ const Section4 = ({ withDHS }: Props) => {
               },
             }}
             modules={[Pagination]}
-            className=' h-[40.5rem] w-[50.6875rem] flex'
+            className=' h-[40.5rem] w-[50.6875rem] flex xsm:w-[18.75rem] xsm:h-[21.25rem]'
           >
             {withDHS.list_news.map((item, index) => (
               <SwiperSlide
                 key={index}
-                className='w-[50.6875rem] h-[40.5rem] cursor-pointer'
+                className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]' 
               >
                 <Image
                   src={item.thumbnail}
                   alt=''
                   width={1000}
                   height={1000}
-                  className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem]'
+                  className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem]'
                   style={{
                     background:
                       'linear-gradient(180deg, rgba(0, 63, 136, 0.25) 0%, rgba(0, 16, 34, 0.50) 63.29%)',
@@ -91,7 +92,7 @@ const Section4 = ({ withDHS }: Props) => {
                 />
                 <div
                   className='flex w-[42.3125rem] h-[8.625rem] p-10 flex-col items-end gap-4 flex-shrink-0 absolute bottom-0 right-0 bg-[#F1F9FF]
-                  text-[1.375rem] not-italic font-semibold leading-[150%]'
+                  text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem]'
                   dangerouslySetInnerHTML={{ __html: item.excerpt }}
                 ></div>
               </SwiperSlide>

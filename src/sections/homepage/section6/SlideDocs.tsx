@@ -31,7 +31,7 @@ export default function SlideDocs() {
         {[1, 2, 3, 4, 5].map((item) => (
           <SwiperSlide
             key={item}
-            className='bg-white rounded-[20px] !w-[26.8125rem] cursor-pointer'
+            className='bg-white rounded-[20px] !w-[26.8125rem] cursor-pointer xsm:w-[16.875rem]'
           >
             <ItemContent />
           </SwiperSlide>
@@ -46,7 +46,7 @@ export default function SlideDocs() {
 
 const ItemContent = () => {
   return (
-    <div className='w-[26.8125rem]'>
+    <div className='w-[26.8125rem] xsm:w-[16.875rem]'>
       <ImageV2
         src={'/homepage/replace/slideimg.png'}
         alt=''

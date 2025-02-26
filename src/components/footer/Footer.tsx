@@ -2,20 +2,20 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className='flex  px-24 pt-20 pb-[1rem] flex-col items-end gap-[3.4375rem] self-stretch bg-[#0F181D] text-white'>
-        <div className='flex w-full justify-between'>
+    <div className='flex  px-24 pt-20 pb-[1rem] flex-col items-end gap-[3.4375rem] self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-[1rem]'>
+        <div className='flex w-full justify-between xsm:flex-col'>
           <div className='flex gap-[1.5rem] flex-col'>
-              <h2 className='font-[Montserrat] text-[2rem] not-italic font-bold leading-[130%]  max-w-[35.875rem]'>
+              <h2 className='font-[Montserrat] text-[2rem] not-italic font-bold leading-[130%]  max-w-[35.875rem] xsm:text-[1.25rem] xsm:text-center '>
                 Khách hàng là trung tâm, và sự tin cậy, hài lòng của họ là chìa khóa thành công của Amamy.
             </h2>
-            <div className='flex gap-[1.5rem]'>
+            <div className='flex gap-[1.5rem] xsm:hidden'>
                 {IconWrap(<FacebookSvg />)}
                 {IconWrap(<ZaloSvg />)}
                 {IconWrap(<TiktokSvg />)}
             </div>
           </div>
-          <div className='w-[37.4375rem] text-[var(--greyscaletext-0)] gap-[0.77rem] flex flex-col'>
-            <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>Đăng ký nhận ưu đãi</p>
+          <div className='w-[37.4375rem] text-[var(--greyscaletext-0)] gap-[0.77rem] flex flex-col xsm:mt-[1.5rem] xsm:w-full'>
+            <p className='text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-center'>Đăng ký nhận ưu đãi</p>
             <div className='relative w-full'>
                 <input placeholder='Email của bạn' type="text" className='flex w-full h-14 pl-5 pr-3 py-3 items-center gap-2.5 self-stretch
                  text-[#6A6A6A] text-[0.875rem] not-italic font-medium leading-[150%] rounded-[20px]' />

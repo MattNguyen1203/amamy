@@ -53,7 +53,7 @@ const Background = ({background, height = 'h-[25.6874rem]'}: {background: IImage
   return (
     <>
       <ImageV2
-        className={`w-[100rem] ${height} flex-shrink-0 absolute top-0 right-0 z-[10]`}
+        className={`w-[100rem] ${height} h-[49.25rem] flex-shrink-0 absolute top-0 right-0 z-[10]`}
         src={background.url}
         alt={background.alt}
         width={background.width}
