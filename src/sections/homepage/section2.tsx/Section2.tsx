@@ -7,11 +7,11 @@ import { Card, ImageIcon, ServicesObject } from '@/utils/type';
 
 const Section2 = ({services}: {services: ServicesObject}) => {
   return (
-    <div className="flex flex-col items-start gap-14 px-24 py-[120px] relative xsm:gap-[1rem] xsm:pl-[1rem]">
+    <div className="flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:pl-[1rem] xsm:px-[1rem] xsm:py-[2.5rem]">
       <div className="inline-flex items-end gap-[1.5rem] relative">
-        <div className="flex flex-col w-[63rem]  items-start gap-[1.5rem] relative xsm:w-[100vw]">
+        <div className="flex flex-col w-[63rem]  items-start gap-[1.5rem] relative xsm:w-[calc(100vw-2rem)]">
           <div className="flex flex-col items-start gap-[1.5rem] w-full">
-            <div className="flex h-[13.75rem] items-center gap-[1.5rem] w-full xsm:w-[98vư] xsm:gap-[1rem]">
+            <div className="flex h-[13.75rem] items-center gap-[1.5rem] w-full xsm:w-[calc(100vw-2rem)] xsm:gap-[1rem] xsm:h-[7.375rem]">
               <ServiceCard
                 icon={services.list_service_1[0].icon}
                 title={services.list_service_1[0].title}
@@ -33,7 +33,7 @@ const Section2 = ({services}: {services: ServicesObject}) => {
               />
             </div>
 
-            <div className="inline-flex h-[20.625rem] items-center gap-[1.5rem] xsm:w-[100vw] xsm:overflow-scroll">
+            <div className="inline-flex h-[20.625rem] items-center gap-[1.5rem] xsm:gap-[0.75rem] xsm:overflow-auto xsm:w-[calc(100vw-1rem)]">
               <ServiceHighlight
                 backgroundUrl={services.list_service_2[0].image.url}
                 icon={
@@ -72,32 +72,33 @@ const Section2 = ({services}: {services: ServicesObject}) => {
 };
 
 const ServiceCard = ({ icon, title, description, subtitle } : {subtitle: string, icon: ImageIcon, title: string, description: string }) => (
-  <div className="flex flex-col items-start gap-5 p-5 flex-1 bg-[#fcfdff] rounded-lg shadow-lg">
-    <div className="flex items-center gap-4 w-full xsm:flex-col">
+  <div className="flex flex-col items-start gap-5 p-5 flex-1 bg-[#fcfdff] rounded-lg shadow-lg xsm:p-[0.75rem]">
+    <div className="flex items-center gap-4 w-full xsm:flex-col xsm:items-start">
       <ImageV2 alt={icon.alt} src={icon.url} width={
         icon.width
-      } height={icon.height} className="w-[3.25rem] h-[3.25rem]" />
+      } height={icon.height} className="w-[3.25rem] h-[3.25rem] xsm:w-[2rem] xsm:h-[2rem]" />
 
       <div className="flex flex-col gap-2 flex-1">
-        <div className="text-sm text-[rgba(20,_41,_65,_0.60)] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase">{subtitle}</div>
-        <div className="text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%]">{title}</div>
+        <div className="text-sm text-[rgba(20,_41,_65,_0.60)] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase
+        xsm:text-[0.5rem]">{subtitle}</div>
+        <div className="text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-[0.875rem]">{title}</div>
       </div>
     </div>
-    <div className="flex flex-col h-[86px] justify-around gap-2.5 px-3">
-      <p className=" text-sm text-[0.875rem] not-italic font-semibold leading-[150%] xsm:hidden">{description}</p>
+    <div className="flex flex-col h-[86px] justify-around gap-2.5 px-3 xsm:hidden">
+      <p className=" text-sm text-[0.875rem] not-italic font-semibold leading-[150%] ">{description}</p>
     </div>
   </div>
 );
 
 const ServiceHighlight = ({ backgroundUrl, icon, title } : { icon: React.JSX.Element, title: string, backgroundUrl: string }) => (
-  <div className="relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem]">
-    <div className={`h-full bg-cover bg-center`}
+  <div className="relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max">
+    <div className={`h-full bg-cover bg-center xsm:w-[18.75rem]`}
      style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
-      <div className="w-full h-full flex flex-col items-center justify-end p-4 gap-5 bg-opacity-10 bg-white">
-        <div className="flex items-center w-full gap-4 bg-background-elevation5 rounded-lg px-4 py-2.5">
-          {icon}
-          <div className="text-[#38B6FF] font-bold text-[1.375rem] mr-auto">{title}</div>
+      <div className="w-full h-full flex flex-col items-center justify-end p-4 gap-5 bg-opacity-10 bg-white xsm:rounded-full xsm:p-[0.62rem]">
+        <div className="flex items-center w-full gap-4 bg-background-elevation5 rounded-lg px-4 py-2.5 xsm:rounded-full" >
+          <span className='xsm:hidden'>{icon}</span>
+          <div className="text-[#38B6FF] font-bold text-[1.375rem] mr-auto xsm:text-[0.875rem]">{title}</div>
           <ArrowIcon />
         </div>
       </div>

@@ -17,13 +17,13 @@ const Section4 = ({ withDHS }: Props) => {
     <section
       className='w-[100rem] h-[50rem] flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] justify-between items-center
      rounded-tl-[2.5rem] rounded-br-[0rem] rounded-tr-[2.5rem] rounded-bl-[0rem] [box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
-     xsm:flex-col xsm:w-[100vw] xsm:px-[1rem]'
+     xsm:flex-col xsm:w-[100vw] xsm:px-[1rem] xsm:h-fit xsm:gap-[1rem] xsm:pr-0'
     >
       <div className='max-w-[24.375rem]'>
-        <h2 className='text-[2.875rem] not-italic font-bold leading-[120%]'>
+        <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] xsm:text-[1.25rem]'>
           {withDHS.title}
         </h2>
-        <p className='text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%]'>
+        <p className='text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem]'>
           {withDHS.subtitle}
         </p>
         <div className='flex mt-[1.91rem] xsm:hidden'>
@@ -44,10 +44,6 @@ const Section4 = ({ withDHS }: Props) => {
 
       <div
         className='relative rounded-[0.5rem]'
-        style={{
-          background:
-            'linear-gradient(180deg, rgba(0, 63, 136, 0.25) 0%, rgba(0, 16, 34, 0.50) 63.29%)',
-        }}
       >
         <Image
           alt=''
@@ -59,7 +55,6 @@ const Section4 = ({ withDHS }: Props) => {
         <div>
           <Swiper
             ref={swiperRef}
-            spaceBetween={24}
             slidesPerView={'auto'}
             loop={true}
             pagination={{
@@ -72,7 +67,7 @@ const Section4 = ({ withDHS }: Props) => {
               },
             }}
             modules={[Pagination]}
-            className=' h-[40.5rem] w-[50.6875rem] flex xsm:w-[18.75rem] xsm:h-[21.25rem]'
+            className=' h-[40.5rem] w-[50.6875rem] flex xsm:w-[calc(100vw-2rem)] xsm:h-[21.25rem] xsm:gap-[1rem]'
           >
             {withDHS.list_news.map((item, index) => (
               <SwiperSlide
@@ -84,7 +79,7 @@ const Section4 = ({ withDHS }: Props) => {
                   alt=''
                   width={1000}
                   height={1000}
-                  className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem]'
+                  className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
                   style={{
                     background:
                       'linear-gradient(180deg, rgba(0, 63, 136, 0.25) 0%, rgba(0, 16, 34, 0.50) 63.29%)',
@@ -92,7 +87,7 @@ const Section4 = ({ withDHS }: Props) => {
                 />
                 <div
                   className='flex w-[42.3125rem] h-[8.625rem] p-10 flex-col items-end gap-4 flex-shrink-0 absolute bottom-0 right-0 bg-[#F1F9FF]
-                  text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem]'
+                  text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem] xsm:hidden '
                   dangerouslySetInnerHTML={{ __html: item.excerpt }}
                 ></div>
               </SwiperSlide>
