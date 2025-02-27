@@ -2,29 +2,26 @@
 
 
 export default async function sitemap() {
-  
-    return {
-        pages: [
+    return  [
         {
             url: '/',
-            changefreq: 'daily',
+            changeFrequency: 'daily',
             priority: 1,
         },
         {
             url: '/about',
-            changefreq: 'daily',
+            changeFrequency: 'daily',
             priority: 0.9,
         },
         {
             url: '/contact',
-            changefreq: 'daily',
+            changeFrequency: 'daily',
             priority: 0.8,
         },
         {
             url: '/products',
-            changefreq: 'daily',
+            changeFrequency: 'daily',
             priority: 0.7,
         },
-        ],
+        ]
     }
-}
