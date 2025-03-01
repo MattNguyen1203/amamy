@@ -14,7 +14,11 @@ body {
 html {
   font-size: 1vw;
 }
-
+@media (min-width: 1921px) {
+  html {
+    font-size: 19.2px;
+  }
+}
 :root {
   --background: #f8f9fa;
   --blueprimary: #007bff;
@@ -39,7 +43,11 @@ html {
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.8) 32.426%, rgb(56, 182, 255) 100%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 255, 255, 0.8) 32.426%,
+    rgb(56, 182, 255) 100%
+  );
 }
 
 @media (max-width: 639px) {
@@ -74,7 +82,7 @@ html {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --color-blue: #38B6FF;
+    --color-blue: #38b6ff;
     --12: 0.75rem;
     --greyscaletext-0: #fff;
   }
@@ -113,6 +121,10 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+
+  .container {
+    @apply w-[88rem];
+  }
 }
 
 @font-face {
@@ -135,7 +147,6 @@ html {
   font-weight: 300;
   font-style: normal;
 }
-
 
 @font-face {
   font-family: 'montserrat-font';
@@ -181,8 +192,8 @@ html {
 
 .custom-dot {
   border-radius: 0.625rem;
-  background: var(--Blue-blue-800, #1F648C) !important;
-  border-radius: 0.625rem !important; 
+  background: var(--Blue-blue-800, #1f648c) !important;
+  border-radius: 0.625rem !important;
   width: 2.5rem !important; /* 10px = 2.5rem */
   height: 0.25rem !important; /* 1px = 0.25rem */
 }
