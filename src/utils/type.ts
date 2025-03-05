@@ -1,366 +1,528 @@
 interface ImageSize {
-    thumbnail: string;
-    "thumbnail-width": number;
-    "thumbnail-height": number;
-    medium: string;
-    "medium-width": number;
-    "medium-height": number;
-    medium_large: string;
-    "medium_large-width": number;
-    "medium_large-height": number;
-    large: string;
-    "large-width": number;
-    "large-height": number;
-    "1536x1536": string;
-    "1536x1536-width": number;
-    "1536x1536-height": number;
-    "2048x2048": string;
-    "2048x2048-width": number;
-    "2048x2048-height": number;
+  thumbnail: string
+  'thumbnail-width': number
+  'thumbnail-height': number
+  medium: string
+  'medium-width': number
+  'medium-height': number
+  medium_large: string
+  'medium_large-width': number
+  'medium_large-height': number
+  large: string
+  'large-width': number
+  'large-height': number
+  '1536x1536': string
+  '1536x1536-width': number
+  '1536x1536-height': number
+  '2048x2048': string
+  '2048x2048-width': number
+  '2048x2048-height': number
 }
 
 export interface IImage {
-    ID: number;
-    id: number;
-    title: string;
-    filename: string;
-    filesize: number;
-    url: string;
-    link: string;
-    alt: string;
-    author: string;
-    description: string;
-    caption: string;
-    name: string;
-    status: string;
-    uploaded_to: number;
-    date: string;
-    modified: string;
-    menu_order: number;
-    mime_type: string;
-    type: string;
-    subtype: string;
-    icon: string;
-    width: number;
-    height: number;
-    sizes: ImageSize;
+  ID: number
+  id: number
+  title: string
+  filename: string
+  filesize: number
+  url: string
+  link: string
+  alt: string
+  author: string
+  description: string
+  caption: string
+  name: string
+  status: string
+  uploaded_to: number
+  date: string
+  modified: string
+  menu_order: number
+  mime_type: string
+  type: string
+  subtype: string
+  icon: string
+  width: number
+  height: number
+  sizes: ImageSize
 }
 export interface IBanner {
-    background_pc: IImage;
-    background_mobile: IImage;
-    user_list: IImage[];
-    user_number: string;
-    review_title: string;
-    title: string;
+  background_pc: IImage
+  background_mobile: IImage
+  user_list: IImage[]
+  user_number: string
+  review_title: string
+  title: string
 }
 
 export interface IFaq {
-    title: string
+  title: string
 }
 
 export interface IFaqs {
-    answer: string
-    question: string
+  answer: string
+  question: string
 }
 
 interface ImageFlag {
-    ID: number;
-    id: number;
-    title: string;
-    filename: string;
-    filesize: number;
-    url: string;
-    link: string;
-    alt: string;
-    author: string;
-    description: string;
-    caption: string;
-    name: string;
-    status: string;
-    uploaded_to: number;
-    date: string;
-    modified: string;
-    menu_order: number;
-    mime_type: string;
-    type: string;
-    subtype: string;
-    icon: string;
-    width: number;
-    height: number;
-    sizes: {
-        thumbnail: string;
-        'thumbnail-width': number;
-        'thumbnail-height': number;
-        medium: string;
-        'medium-width': number;
-        'medium-height': number;
-        medium_large: string;
-        'medium_large-width': number;
-        'medium_large-height': number;
-        large: string;
-        'large-width': number;
-        'large-height': number;
-        '1536x1536': string;
-        '1536x1536-width': number;
-        '1536x1536-height': number;
-        '2048x2048': string;
-        '2048x2048-width': number;
-        '2048x2048-height': number;
-    };
+  ID: number
+  id: number
+  title: string
+  filename: string
+  filesize: number
+  url: string
+  link: string
+  alt: string
+  author: string
+  description: string
+  caption: string
+  name: string
+  status: string
+  uploaded_to: number
+  date: string
+  modified: string
+  menu_order: number
+  mime_type: string
+  type: string
+  subtype: string
+  icon: string
+  width: number
+  height: number
+  sizes: {
+    thumbnail: string
+    'thumbnail-width': number
+    'thumbnail-height': number
+    medium: string
+    'medium-width': number
+    'medium-height': number
+    medium_large: string
+    'medium_large-width': number
+    'medium_large-height': number
+    large: string
+    'large-width': number
+    'large-height': number
+    '1536x1536': string
+    '1536x1536-width': number
+    '1536x1536-height': number
+    '2048x2048': string
+    '2048x2048-width': number
+    '2048x2048-height': number
+  }
 }
 
 interface StrengthItem {
-    flag: ImageFlag;
-    title?: string;
-    header?: string;
-    subtitle: string;
-    list_des: {
-        description: string;
-    }[];
+  flag: ImageFlag
+  title?: string
+  header?: string
+  subtitle: string
+  list_des: {
+    description: string
+  }[]
 }
 
 export interface StrengthsObject {
-    title: string;
-    subtitle: string;
-    list_strengths: {
-        item_1: StrengthItem;
-        item_2: StrengthItem;
-        item_3: StrengthItem;
-    };
+  title: string
+  subtitle: string
+  list_strengths: {
+    item_1: StrengthItem
+    item_2: StrengthItem
+    item_3: StrengthItem
+  }
 }
 
 interface ImageFlag {
-    ID: number;
-    id: number;
-    title: string;
-    filename: string;
-    filesize: number;
-    url: string;
-    link: string;
-    alt: string;
-    author: string;
-    description: string;
-    caption: string;
-    name: string;
-    status: string;
-    uploaded_to: number;
-    date: string;
-    modified: string;
-    menu_order: number;
-    mime_type: string;
-    type: string;
-    subtype: string;
-    icon: string;
-    width: number;
-    height: number;
-    sizes: {
-        thumbnail: string;
-        'thumbnail-width': number;
-        'thumbnail-height': number;
-        medium: string;
-        'medium-width': number;
-        'medium-height': number;
-        medium_large: string;
-        'medium_large-width': number;
-        'medium_large-height': number;
-        large: string;
-        'large-width': number;
-        'large-height': number;
-        '1536x1536': string;
-        '1536x1536-width': number;
-        '1536x1536-height': number;
-        '2048x2048': string;
-        '2048x2048-width': number;
-        '2048x2048-height': number;
-    };
+  ID: number
+  id: number
+  title: string
+  filename: string
+  filesize: number
+  url: string
+  link: string
+  alt: string
+  author: string
+  description: string
+  caption: string
+  name: string
+  status: string
+  uploaded_to: number
+  date: string
+  modified: string
+  menu_order: number
+  mime_type: string
+  type: string
+  subtype: string
+  icon: string
+  width: number
+  height: number
+  sizes: {
+    thumbnail: string
+    'thumbnail-width': number
+    'thumbnail-height': number
+    medium: string
+    'medium-width': number
+    'medium-height': number
+    medium_large: string
+    'medium_large-width': number
+    'medium_large-height': number
+    large: string
+    'large-width': number
+    'large-height': number
+    '1536x1536': string
+    '1536x1536-width': number
+    '1536x1536-height': number
+    '2048x2048': string
+    '2048x2048-width': number
+    '2048x2048-height': number
+  }
 }
 
 interface Link {
-    ID: number;
-    title: string;
-    slug: string;
-    content: string;
-    excerpt: string;
-    status: string;
-    type: string;
-    author: string;
-    date: string;
-    modified: string;
-    categories: any[];
-    tags: any[];
-    thumbnail: boolean;
-    meta: {
-        _edit_last: string[];
-        _edit_lock: string[];
-        _thumbnail_id?: string[];
-        _cdp_origin?: string[];
-        _cdp_origin_site?: string[];
-        _cdp_origin_title?: string[];
-        _cdp_counter?: string[];
-        _wp_old_slug?: string[];
-    };
+  ID: number
+  title: string
+  slug: string
+  content: string
+  excerpt: string
+  status: string
+  type: string
+  author: string
+  date: string
+  modified: string
+  categories: any[]
+  tags: any[]
+  thumbnail: boolean
+  meta: {
+    _edit_last: string[]
+    _edit_lock: string[]
+    _thumbnail_id?: string[]
+    _cdp_origin?: string[]
+    _cdp_origin_site?: string[]
+    _cdp_origin_title?: string[]
+    _cdp_counter?: string[]
+    _wp_old_slug?: string[]
+  }
 }
 
 interface CountryItem {
-    country: string;
-    flag_img: ImageFlag;
-    link: Link;
+  country: string
+  flag_img: ImageFlag
+  link: Link
 }
 
 export interface ShippingServiceObject {
-    title: string;
-    background: ImageFlag;
-    hotline: string;
-    background2: ImageFlag;
-    list_country: CountryItem[];
+  title: string
+  background: ImageFlag
+  hotline: string
+  background2: ImageFlag
+  list_country: CountryItem[]
 }
 
 export interface ImageIcon {
-    ID: number;
-    id: number;
-    title: string;
-    filename: string;
-    filesize: number;
-    url: string;
-    link: string;
-    alt: string;
-    author: string;
-    description: string;
-    caption: string;
-    name: string;
-    status: string;
-    uploaded_to: number;
-    date: string;
-    modified: string;
-    menu_order: number;
-    mime_type: string;
-    type: string;
-    subtype: string;
-    icon: string;
-    width: number;
-    height: number;
-    sizes: {
-        thumbnail: string;
-        'thumbnail-width': number;
-        'thumbnail-height': number;
-        medium: string;
-        'medium-width': number;
-        'medium-height': number;
-        medium_large: string;
-        'medium_large-width': number;
-        'medium_large-height': number;
-        large: string;
-        'large-width': number;
-        'large-height': number;
-        '1536x1536': string;
-        '1536x1536-width': number;
-        '1536x1536-height': number;
-        '2048x2048': string;
-        '2048x2048-width': number;
-        '2048x2048-height': number;
-    };
+  ID: number
+  id: number
+  title: string
+  filename: string
+  filesize: number
+  url: string
+  link: string
+  alt: string
+  author: string
+  description: string
+  caption: string
+  name: string
+  status: string
+  uploaded_to: number
+  date: string
+  modified: string
+  menu_order: number
+  mime_type: string
+  type: string
+  subtype: string
+  icon: string
+  width: number
+  height: number
+  sizes: {
+    thumbnail: string
+    'thumbnail-width': number
+    'thumbnail-height': number
+    medium: string
+    'medium-width': number
+    'medium-height': number
+    medium_large: string
+    'medium_large-width': number
+    'medium_large-height': number
+    large: string
+    'large-width': number
+    'large-height': number
+    '1536x1536': string
+    '1536x1536-width': number
+    '1536x1536-height': number
+    '2048x2048': string
+    '2048x2048-width': number
+    '2048x2048-height': number
+  }
 }
 
 interface Link {
-    ID: number;
-    title: string;
-    slug: string;
-    content: string;
-    excerpt: string;
-    status: string;
-    type: string;
-    author: string;
-    date: string;
-    modified: string;
-    categories: any[];
-    tags: any[];
-    thumbnail: boolean;
-    meta: {
-        _edit_last: string[];
-        _edit_lock: string[];
-        _thumbnail_id?: string[];
-        _cdp_origin?: string[];
-        _cdp_origin_site?: string[];
-        _cdp_origin_title?: string[];
-        _cdp_counter?: string[];
-        _wp_old_slug?: string[];
-    };
+  ID: number
+  title: string
+  slug: string
+  content: string
+  excerpt: string
+  status: string
+  type: string
+  author: string
+  date: string
+  modified: string
+  categories: any[]
+  tags: any[]
+  thumbnail: boolean
+  meta: {
+    _edit_last: string[]
+    _edit_lock: string[]
+    _thumbnail_id?: string[]
+    _cdp_origin?: string[]
+    _cdp_origin_site?: string[]
+    _cdp_origin_title?: string[]
+    _cdp_counter?: string[]
+    _wp_old_slug?: string[]
+  }
 }
 
 interface ServiceItem1 {
-    icon: ImageIcon;
-    subtitle: string;
-    title: string;
-    description: string;
-    link: Link;
+  icon: ImageIcon
+  subtitle: string
+  title: string
+  description: string
+  link: Link
 }
 
 interface ServiceItem2 {
-    image: ImageIcon;
-    title: string;
-    link: Link;
+  image: ImageIcon
+  title: string
+  link: Link
 }
 
 export interface Card {
-    number: string;
-    unit: string;
-    title: string;
-    subtitle_2: string;
-    number_percent: string;
-    title_2: string;
+  number: string
+  unit: string
+  title: string
+  subtitle_2: string
+  number_percent: string
+  title_2: string
 }
 
 export interface ServicesObject {
-    list_service_1: ServiceItem1[];
-    list_service_2: ServiceItem2[];
-    card: Card;
+  list_service_1: ServiceItem1[]
+  list_service_2: ServiceItem2[]
+  card: Card
 }
 
-
 interface Meta {
-    _edit_last: string[];
-    _edit_lock: string[];
-    _thumbnail_id?: string[];
-    _cdp_origin?: string[];
-    _cdp_origin_site?: string[];
-    _cdp_origin_title?: string[];
-    _cdp_counter?: string[];
-    _wp_old_slug?: string[];
+  _edit_last: string[]
+  _edit_lock: string[]
+  _thumbnail_id?: string[]
+  _cdp_origin?: string[]
+  _cdp_origin_site?: string[]
+  _cdp_origin_title?: string[]
+  _cdp_counter?: string[]
+  _wp_old_slug?: string[]
 }
 
 interface NewsItem {
-    ID: number;
-    title: string;
-    slug: string;
-    content: string;
-    excerpt: string;
-    status: string;
-    type: string;
-    author: string;
-    date: string;
-    modified: string;
-    categories: string[];
-    tags: string[];
-    thumbnail: string;
-    meta: Meta;
+  ID: number
+  title: string
+  slug: string
+  content: string
+  excerpt: string
+  status: string
+  type: string
+  author: string
+  date: string
+  modified: string
+  categories: string[]
+  tags: string[]
+  thumbnail: string
+  meta: Meta
 }
 
 export interface NewsObject {
-    title: string;
-    subtitle: string;
-    tag_title_pc: string;
-    tag_title_mb: string;
-    list_news: NewsItem[];
+  title: string
+  subtitle: string
+  tag_title_pc: string
+  tag_title_mb: string
+  list_news: NewsItem[]
 }
-
 
 export interface IHomePage {
-    banner: IBanner;
-    faq: IFaq;
-    faqs: IFaqs[];
-    section3: StrengthsObject,
-    section_country: ShippingServiceObject,
-    services: ServicesObject,
-    withDHS: NewsObject
+  banner: IBanner
+  faq: IFaq
+  faqs: IFaqs[]
+  section3: StrengthsObject
+  section_country: ShippingServiceObject
+  services: ServicesObject
+  withDHS: NewsObject
 }
 
+export interface Guid {
+  rendered: string
+}
+
+export interface Title {
+  rendered: string
+}
+
+export interface Content {
+  rendered: string
+  protected: boolean
+}
+
+export interface Excerpt {
+  rendered: string
+  protected: boolean
+}
+
+export interface Meta {
+  _acf_changed: boolean
+  footnotes: string
+}
+
+export interface Image {
+  ID: number
+  id: number
+  title: string
+  filename: string
+  filesize: number
+  url: string
+  link: string
+  alt: string
+  author: string
+  description: string
+  caption: string
+  name: string
+  status: string
+  uploaded_to: number
+  date: string
+  modified: string
+  menu_order: number
+  mime_type: string
+  type: string
+  subtype: string
+  icon: string
+  width: number
+  height: number
+  sizes: Record<string, string | number>
+}
+
+export interface ListInformation {
+  number: string
+  title: string
+  description: string
+  label: string
+}
+
+export interface Banner {
+  subtitle: string
+  title: string
+  list_infomation: ListInformation[]
+}
+
+export interface AmamySpecial {
+  title: string
+  description: string
+  image: Image
+}
+
+export interface ListQuality {
+  image: Image
+  subtitle: string
+  title: string
+  description: string
+}
+
+export interface AmamyQuality {
+  title: string
+  description: string
+  list_quality: ListQuality[]
+}
+
+export interface Acf {
+  banner: Banner
+  amamy_special: AmamySpecial
+  amamy_quality: AmamyQuality
+}
+
+export interface WordpressResponse {
+  id: number
+  date: string
+  date_gmt: string
+  guid: Guid
+  modified: string
+  modified_gmt: string
+  slug: string
+  status: string
+  type: string
+  link: string
+  title: Title
+  content: Content
+  excerpt: Excerpt
+  author: number
+  featured_media: number
+  parent: number
+  menu_order: number
+  comment_status: string
+  ping_status: string
+  template: string
+  meta: Meta
+  class_list: string[]
+  acf: Acf
+}
+
+export interface Banner {
+  title: string
+  description: string
+  image: Image
+}
+
+export interface TalkToAi {
+  title: string
+  description: string
+  button_text: string
+  link: string
+}
+
+export interface Service {
+  title: string
+  description: string
+  icon: string
+}
+
+export interface ListServices {
+  title: string
+  services: Service[]
+}
+
+export interface Feedback {
+  customer_name: string
+  feedback_text: string
+  rating: number
+}
+
+export interface FeedbackCustomer {
+  title: string
+  feedbacks: Feedback[]
+}
+
+export interface Image {
+  url: string
+  alt: string
+}
+
+export interface IServiceData {
+  banner: Banner
+  talk_to_ai: TalkToAi
+  list_services: ListServices
+  feedback_customer: FeedbackCustomer
+}
+
+export interface ListServicesData {
+  list_services_data: any | null
+}
