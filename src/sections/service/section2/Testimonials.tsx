@@ -11,53 +11,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import {IServicePage} from '@/utils/type'
 
-const testimonials = [
-  {
-    name: 'Le Van An',
-    avatar: '/service/avatar.svg?height=40&width=40',
-    rating: 5,
-    review:
-      'Mình đã dùng nhiều dịch vụ vận chuyển nhưng Amamy là tốt nhất. Hàng đến đúng lịch, không thất lạc, đóng gói rất chắc chắn. Rất đáng tin tưởng!',
-    route: 'Vận chuyển từ Việt Nam -> Đức',
-  },
-  {
-    name: 'Le An',
-    avatar: '/service/avatar.svg?height=40&width=40',
-    rating: 5,
-    review:
-      'Mình thường gửi hàng từ Việt Nam sang Đức cho gia đình và rất hài lòng với Amamy! Hàng đến đúng hẹn, đóng gói cẩn thận, không hư hỏng. Đội ngũ hỗ trợ nhiệt tình, hướng dẫn rõ ràng về thủ tục hải quan. Giá cả hợp lý so với chất lượng dịch vụ. Mình sẽ tiếp tục sử dụng và giới thiệu cho bạn bè!',
-    route: 'Vận chuyển từ Việt Nam -> Đức',
-  },
-  {
-    name: 'Nguyen Minh',
-    avatar: '/service/avatar.svg?height=40&width=40',
-    rating: 5,
-    review:
-      'Dịch vụ quá tuyệt! Gửi hàng dễ dàng, thủ tục rõ ràng, không lo lắng về hải quan. Giá cả hợp lý, rất đáng tin cậy!',
-    route: 'Vận chuyển từ Việt Nam -> Đức',
-  },
-  {
-    name: 'Pham Quoc Duy',
-    avatar: '/service/avatar.svg?height=40&width=40',
-    rating: 5,
-    review:
-      'Mình gửi quà cho người thân ở Đức qua Amamy và rất hài lòng! Hàng về nhanh, nguyên vẹn, nhân viên hỗ trợ tận tình. Sẽ tiếp tục sử dụng!',
-    route: 'Vận chuyển từ Việt Nam -> Đức',
-  },
-  {
-    name: 'Pham Quoc Duy',
-    avatar: '/service/avatar.svg?height=40&width=40',
-    rating: 5,
-    review:
-      'Mình gửi quà cho người thân ở Đức qua Amamy và rất hài lòng! Hàng về nhanh, nguyên vẹn, nhân viên hỗ trợ tận tình. Sẽ tiếp tục sử dụng!',
-    route: 'Vận chuyển từ Việt Nam -> Đức',
-  },
-]
-
-export default function Testimonials() {
+interface Prop {
+  data: IServicePage
+}
+export default function Testimonials({data}: Prop) {
   const [api, setApi] = React.useState<any>()
   const [current, setCurrent] = React.useState(0)
+  const testimonials = data.feedback_customer.list_feedback
 
   React.useEffect(() => {
     if (!api) {
@@ -74,13 +36,14 @@ export default function Testimonials() {
       <div className='w-full px-4'>
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='mb-4 font-montserrat font-bold text-[2.5rem] leading-[3.25rem] tracking-[-0.03em] text-center'>
-            Khách hàng nói gì về Amamy?
+            {data.feedback_customer.title}
           </h2>
-          <p className='font-montserrat font-medium text-[0.875rem] leading-[1.375rem] tracking-[-0.03em] text-center'>
-            Chúng tôi tự hào mang đến trải nghiệm gửi hàng nhanh chóng, an toàn
-            và đáng tin cậy từ <br /> Việt Nam sang Đức. Hãy cùng xem họ nói gì
-            về chúng tôi!
-          </p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: data.feedback_customer.subtitle,
+            }}
+            className='font-montserrat font-medium text-[0.875rem] leading-[1.375rem] tracking-[-0.03em] text-center'
+          ></p>
         </div>
 
         <div className='relative mt-16'>
@@ -120,24 +83,27 @@ export default function Testimonials() {
                         ))}
                       </div>
 
-                      <p className='mb-[2.1875rem] h-[10.4375rem] overflow-hidden text-ellipsis font-montserrat font-medium text-[0.875rem] leading-[1.3125rem] tracking-[-0.03em]'>
-                        {testimonial.review}
-                      </p>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: testimonial.content,
+                        }}
+                        className='mb-[2.1875rem] h-[10.4375rem] overflow-hidden text-ellipsis font-montserrat font-medium text-[0.875rem] leading-[1.3125rem] tracking-[-0.03em]'
+                      ></p>
 
                       <div className='flex items-center gap-3'>
                         <Image
-                          src={'/service/avatar.svg'}
-                          alt={testimonial.name}
+                          src={testimonial.author.avatar.url}
+                          alt={testimonial.author.avatar.alt}
                           width={40}
                           height={40}
                           className='rounded-full object-cover w-[2.5rem] h-[2.5rem]'
                         />
                         <div>
                           <h4 className='font-montserrat font-semibold text-[1.125rem] leading-[1.4625rem] tracking-normal'>
-                            {testimonial.name}
+                            {testimonial.author.name}
                           </h4>
                           <p className='font-montserrat font-medium text-[0.75rem] leading-[1.125rem] tracking-normal text-[#78858F]'>
-                            {testimonial.route}
+                            {testimonial.author.position}
                           </p>
                         </div>
                       </div>

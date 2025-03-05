@@ -1,7 +1,11 @@
 import type React from 'react'
 import Link from 'next/link'
+import {IServicePage} from '@/utils/type'
 
-const ShippingHero: React.FC = () => {
+interface Prop {
+  data: IServicePage
+}
+const ShippingHero: React.FC<Prop> = ({data}) => {
   return (
     <section className='w-full bg-[#38b6ff] py-16 text-white'>
       <div className='w-full mx-auto px-[6rem]'>
@@ -25,13 +29,9 @@ const ShippingHero: React.FC = () => {
         {/* Main content */}
         <div className='mx-auto max-w-4xl text-center'>
           <h1 className='mb-6 text-4xl font-bold leading-tight md:text-5xl'>
-            Bạn có ý định gửi hàng từ Việt Nam qua Đức?
+            {data.banner.title}
           </h1>
-          <p className='text-lg leading-relaxed'>
-            Chúng tôi cung cấp dịch vụ vận chuyển chuyên nghiệp, tối ưu chi phí
-            với nhiều lựa chọn như đường biển, đường hàng không và dịch vụ
-            door-to-door.
-          </p>
+          <p className='text-lg leading-relaxed'>{data.banner.sub_title}</p>
         </div>
       </div>
     </section>

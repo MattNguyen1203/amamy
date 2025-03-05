@@ -2,7 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export const MainContainer = () => {
+interface Prop {
+  title: string
+  phone: string
+}
+export const MainContainer = ({title, phone}: Prop) => {
   const services = [
     {
       icon: '/icon/shopping-cart.svg',
@@ -37,7 +41,7 @@ export const MainContainer = () => {
               />
             </div>
             <p className='absolute w-[16.625rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] not-italic font-bold leading-[130%]'>
-              Lorem ipsum dolor sit amet
+              {title}
             </p>
 
             <button
@@ -50,7 +54,7 @@ export const MainContainer = () => {
                 width={31}
                 height={31}
               />
-              (+84) 03336666333
+              {phone}
             </button>
           </div>
         </div>

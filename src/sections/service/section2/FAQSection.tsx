@@ -4,36 +4,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import {IServiceFAQ} from '@/utils/type'
 
-const faqs = [
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer:
-      'Bạn có thể nhập mã vận đơn vào công cụ "Theo dõi đơn hàng" trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.',
-  },
-  {
-    question: 'Làm thế nào để theo dõi đơn hàng?',
-    answer:
-      'Bạn có thể theo dõi đơn hàng thông qua mã vận đơn được cung cấp sau khi đặt hàng. Hệ thống sẽ cập nhật trạng thái đơn hàng theo thời gian thực.',
-  },
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer:
-      'Thời gian vận chuyển trung bình từ Việt Nam đến Đức thường mất từ 7-10 ngày làm việc, tùy thuộc vào phương thức vận chuyển bạn chọn.',
-  },
-  {
-    question: 'Làm thế nào để tính phí vận chuyển?',
-    answer:
-      'Phí vận chuyển được tính dựa trên trọng lượng, kích thước gói hàng và phương thức vận chuyển bạn chọn. Bạn có thể sử dụng công cụ tính phí trên website để biết chi phí cụ thể.',
-  },
-  {
-    question: 'Amamy có hỗ trợ thu hộ (COD) không?',
-    answer:
-      'Có, Amamy có hỗ trợ dịch vụ thu hộ COD cho các đơn hàng nội địa. Tuy nhiên, dịch vụ này không áp dụng cho các đơn hàng quốc tế.',
-  },
-]
+interface Prop {
+  faqs: IServiceFAQ[]
+}
 
-export function FAQSection() {
+export function FAQSection({faqs}: Prop) {
   return (
     <div className='w-full max-w-3xl rounded-[1.25rem] bg-[#f5f5f9] p-[1.25rem]'>
       <h2 className='font-montserrat font-bold text-[1.25rem] leading-[1.2] tracking-[-0.04em] text-black mb-[1.25rem]'>
