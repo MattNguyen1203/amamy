@@ -606,3 +606,25 @@ export interface Feedback {
   thumbnail: boolean
   rating: number
 }
+
+export interface ServiceLink {
+  title: string
+  url: string
+  target: string
+}
+
+export interface ServiceData {
+  icons: string
+  subtitle: string
+  title: string
+  description: string
+  link: ServiceLink
+}
+
+export interface IListServiceResponse {
+  data: {
+    list_services_data: ServiceData[]
+  }
+  message: string
+  status: number
+}

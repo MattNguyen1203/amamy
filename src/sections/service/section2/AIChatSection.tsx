@@ -2,12 +2,13 @@
 import Image from 'next/image'
 import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
-import {IServicePage} from '@/utils/type'
+import {IListServiceResponse, IServicePage} from '@/utils/type'
 
 interface Prop {
   data: IServicePage
+  listService: IListServiceResponse
 }
-const AIChatSection = ({data}: Prop) => {
+const AIChatSection = ({data, listService}: Prop) => {
   return (
     <div className='relative mb-[15rem]'>
       <div className='w-full flex xsm:flex-col '>
@@ -66,6 +67,7 @@ const AIChatSection = ({data}: Prop) => {
         <SectionServiceFeature
           title={data.list_services.title}
           phone={data.list_services.phone}
+          listService={listService}
         />
       </div>
     </div>

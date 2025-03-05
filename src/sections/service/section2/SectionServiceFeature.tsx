@@ -1,3 +1,4 @@
+import {IListServiceResponse} from '@/utils/type'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -5,29 +6,10 @@ import React from 'react'
 interface Prop {
   title: string
   phone: string
+  listService: IListServiceResponse
 }
-export const MainContainer = ({title, phone}: Prop) => {
-  const services = [
-    {
-      icon: '/icon/shopping-cart.svg',
-      title: 'Đặt hộ đơn Shopee',
-      description:
-        'Mua sắm dễ dàng trên Shopee từ mọi nơi. Chúng tôi hỗ trợ đặt hộ nhanh chóng, tiết kiệm.',
-    },
-    {
-      icon: '/icon/credit-card.svg',
-      title: 'Hỗ trợ thanh toán',
-      description:
-        'Thanh toán đơn hàng quốc tế thật đơn giản. Bất kể phương thức nào, chúng tôi luôn sẵn sàng.',
-    },
-    {
-      icon: '/icon/package.svg',
-      title: 'Gom nhiều đơn',
-      description:
-        'Giảm thiểu chi phí vận chuyển bằng cách kết hợp nhiều đơn hàng thành một lô hàng.',
-    },
-  ]
-
+export const MainContainer = ({title, phone, listService}: Prop) => {
+  const services = listService.data.list_services_data
   return (
     <div className='flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:hidden'>
       <div className='flex flex-col items-start relative  pl-[6rem] w-[27.5rem]'>
@@ -71,7 +53,7 @@ export const MainContainer = ({title, phone}: Prop) => {
                 <div className='flex items-center space-x-3'>
                   <div className='flex items-center justify-center w-[4rem] h-[4rem]'>
                     <Image
-                      src={service.icon}
+                      src={service.icons}
                       alt='icon'
                       width={64}
                       height={64}
@@ -79,7 +61,7 @@ export const MainContainer = ({title, phone}: Prop) => {
                   </div>
                   <div className='pr-[0.375rem]'>
                     <div className='font-montserrat font-semibold text-[0.875rem] leading-[1.0625rem] flex items-center tracking-[-0.03em] text-black/60'>
-                      Dịch vụ
+                      {service.subtitle}
                     </div>
 
                     <div className='font-montserrat font-bold text-[1.25rem] leading-[1.2] flex items-center tracking-[-0.04em] text-black'>
@@ -93,7 +75,8 @@ export const MainContainer = ({title, phone}: Prop) => {
                 </p>
               </div>
               <Link
-                href='#'
+                href={service.link.url}
+                target={service.link.target}
                 className='inline-flex items-center text-blue-500 hover:text-blue-600w-[6.3125rem] h-[1.25rem] font-montserrat font-semibold text-[0.875rem] leading-[1.25rem] tracking-[-0.03em] text-black/80'
               >
                 <Image
@@ -102,7 +85,7 @@ export const MainContainer = ({title, phone}: Prop) => {
                   width={28}
                   height={28}
                 />
-                <span className='ml-[0.625rem]'>Tìm hiểu thêm</span>
+                <span className='ml-[0.625rem]'>{service.link.title}</span>
               </Link>
             </div>
           ))}
