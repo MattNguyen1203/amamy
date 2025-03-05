@@ -317,6 +317,8 @@ export interface ServicesObject {
 }
 
 interface Meta {
+  _acf_changed: boolean
+  footnotes: string
   _edit_last: string[]
   _edit_lock: string[]
   _thumbnail_id?: string[]
@@ -380,11 +382,6 @@ export interface Excerpt {
   protected: boolean
 }
 
-export interface Meta {
-  _acf_changed: boolean
-  footnotes: string
-}
-
 export interface Image {
   ID: number
   id: number
@@ -444,13 +441,44 @@ export interface AmamyQuality {
   list_quality: ListQuality[]
 }
 
+export interface AmamyServiceItem {
+  title: string
+  description: string
+}
+
+export interface AmamyService {
+  title: string
+  phone: string
+  list_amamy_service: AmamyServiceItem[]
+}
+
+export interface OurJourneyItem {
+  title: string
+  year: string
+  image: Image
+  description: string
+}
+
+export interface OurJourney {
+  title: string
+  description: string
+  our_journey_list: OurJourneyItem[]
+}
+
+export interface AmamyData {
+  amamy_service: AmamyService
+  our_journey: OurJourney
+}
+
 export interface Acf {
   banner: Banner
   amamy_special: AmamySpecial
   amamy_quality: AmamyQuality
+  amamy_service: AmamyService
+  our_journey: OurJourney
 }
 
-export interface WordpressResponse {
+export interface AboutWPResponse {
   id: number
   date: string
   date_gmt: string

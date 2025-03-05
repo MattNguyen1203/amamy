@@ -1,20 +1,13 @@
+import {AmamyService} from '@/utils/type'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export const MainContainer = () => {
-  const services = [
-    {
-      title: 'Áp dụng công nghệ - tối ưu hóa quy trình',
-      description:
-        'Amamy cam kết áp dụng công nghệ tiên tiến để tối ưu hóa quy trình phục vụ khách hàng, đồng thời hỗ trợ cộng đồng du học sinh Việt Nam ở nước ngoài.',
-    },
-    {
-      title: 'Amamy ngày hôm nay',
-      description:
-        'Amamy cam kết mang đến những giá trị tốt đẹp cho khách hàng và hỗ trợ cộng đồng du học sinh Việt Nam ở nước ngoài, giúp họ có những trải nghiệm tuyệt vời và ý nghĩa.',
-    },
-  ]
+interface Prop {
+  data: AmamyService
+}
+export const MainContainer = ({data}: Prop) => {
+  const services = data.list_amamy_service
 
   return (
     <div className='flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:hidden'>
@@ -29,7 +22,7 @@ export const MainContainer = () => {
               />
             </div>
             <p className='absolute w-[16.625rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] not-italic font-bold leading-[130%]'>
-              Lorem ipsum dolor sit amet
+              {data.title}
             </p>
 
             <button
@@ -42,7 +35,7 @@ export const MainContainer = () => {
                 width={31}
                 height={31}
               />
-              (+84) 03336666333
+              {data.phone}
             </button>
           </div>
         </div>
@@ -57,16 +50,14 @@ export const MainContainer = () => {
             >
               <div className='flex flex-col space-y-2'>
                 <div className='flex items-center space-x-3'>
-                  <div className="font-montserrat font-bold text-[1.75rem] leading-[2.275rem] tracking-[-0.04em]"                  >
+                  <div className='font-montserrat font-bold text-[1.75rem] leading-[2.275rem] tracking-[-0.04em]'>
                     {service.title}
                   </div>
                 </div>
-
-               
               </div>
               <p className='text-[#000000CC] font-montserrat font-medium text-base leading-[1.6] tracking-[-0.03em]'>
-                  {service.description}
-                </p>
+                {service.description}
+              </p>
             </div>
           ))}
         </div>
