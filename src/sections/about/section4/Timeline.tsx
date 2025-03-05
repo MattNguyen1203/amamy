@@ -1,12 +1,19 @@
 import Image from 'next/image'
-import React, { useRef } from 'react'
-import { Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import React, {useRef, useState} from 'react'
+import {Pagination} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import {AboutWPResponse} from '@/utils/type'
+import EventCard from './EventCard'
 
-const Timeline = () => {
+interface Prop {
+  data: AboutWPResponse
+}
+const Timeline = ({data}: Prop) => {
   const swiperRef = useRef<any>(null)
+  const ourJourneyList = data?.acf.our_journey.our_journey_list
+  const [activeSlide, setActiveSlide] = useState(0)
 
   return (
     <section
@@ -16,10 +23,10 @@ const Timeline = () => {
     >
       <div className='max-w-[24.375rem]'>
         <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] xsm:text-[1.25rem]'>
-          Lorem ipsum dolor sit amet
+          {data?.acf.our_journey.title}
         </h2>
         <p className='text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem]'>
-          Consectetur adipiscing elit sed do eiusmod tempor
+          {data?.acf.our_journey.description}
         </p>
         <div className='flex mt-[1.91rem] xsm:hidden'>
           <div
@@ -37,16 +44,13 @@ const Timeline = () => {
         </div>
       </div>
 
-      <div
-        className='relative rounded-[0.5rem]'
-      >
-        <Image
-          alt=''
-          src={'/homepage/icon/section-4Card.png'}
-          width={1000}
-          height={1000}
-          className='w-[18.75rem] absolute z-[100] top-1/2 -translate-y-[46%] -left-1/2 translate-x-[85%] h-[23.25rem] scale-110 flex-shrink-0 xsm:hidden'
-        ></Image>
+      <div className='relative rounded-[0.5rem]'>
+        <EventCard
+          title={ourJourneyList[activeSlide]?.title || ''}
+          year={ourJourneyList[activeSlide]?.year || ''}
+          className='rounded-[1.25rem] w-[18.75rem]  absolute z-[100] top-1/2 -translate-y-[46%] -left-1/2 translate-x-[85%] h-[23.25rem] scale-110 flex-shrink-0 xsm:hidden'
+        />
+
         <div>
           <Swiper
             ref={swiperRef}
@@ -62,29 +66,32 @@ const Timeline = () => {
               },
             }}
             modules={[Pagination]}
+            onSlideChange={(swiper) => {
+              setActiveSlide(swiper.realIndex)
+            }}
             className=' h-[40.5rem] w-[50.6875rem] flex xsm:w-[calc(100vw-2rem)] xsm:h-[21.25rem] xsm:gap-[1rem]'
           >
-            {[1, 2, 3].map((index) => (
+            {ourJourneyList.map((item, index) => (
               <SwiperSlide
                 key={index}
-                className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]' 
+                className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]'
               >
                 <Image
-                  src='/homepage/icon/section-4Card.png'
-                  alt=''
+                  src={item.image.url}
+                  alt={item.image.alt}
                   width={1000}
                   height={1000}
-                  className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
+                  className='rounded-[1.25rem] w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0  xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
                   style={{
                     background:
                       'linear-gradient(180deg, rgba(0, 63, 136, 0.25) 0%, rgba(0, 16, 34, 0.50) 63.29%)',
                   }}
                 />
                 <div
-                  className='flex w-[42.3125rem] h-[8.625rem] p-10 flex-col items-end gap-4 flex-shrink-0 absolute bottom-0 right-0 bg-[#F1F9FF]
+                  className='rounded-tl-[1.25rem] flex w-[42.3125rem] h-[8.625rem] p-10 flex-col items-end gap-4 flex-shrink-0 absolute bottom-0 right-0 bg-[#F1F9FF]
                   text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem] xsm:hidden '
                 >
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit
+                  {item.description}
                 </div>
               </SwiperSlide>
             ))}

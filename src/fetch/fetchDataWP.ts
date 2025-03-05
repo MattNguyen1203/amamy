@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type RequestPostGuest = {
-  api: string
-  headers?: any
-  option?: any
-  method?: string
-}
+import {RequestPostGuest} from './fetchData'
 
 export default async function fetchDataWP(request: RequestPostGuest) {
   try {
