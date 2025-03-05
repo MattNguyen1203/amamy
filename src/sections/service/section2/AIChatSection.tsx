@@ -2,8 +2,12 @@
 import Image from 'next/image'
 import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
+import {IServicePage} from '@/utils/type'
 
-const AIChatSection = () => {
+interface Prop {
+  data: IServicePage
+}
+const AIChatSection = ({data}: Prop) => {
   return (
     <div className='relative mb-[15rem]'>
       <div className='w-full flex xsm:flex-col '>
@@ -11,10 +15,10 @@ const AIChatSection = () => {
           <div className='h-[535px] top-[12.5rem] left-[5.9375rem] relative w-[18.5625rem]'>
             <div className='flex flex-col items-start gap-[1.06rem] relative '>
               <p className='text-[2.875rem] not-italic font-bold leading-[120%]'>
-                Lorem ipsum dolor sit amet
+                {data.talk_to_ai.title}
               </p>
               <p className='text-[1rem] not-italic font-medium leading-[150%] w-[18.24512rem]'>
-                Lorem ipsum dolor sit amet
+                {data.talk_to_ai.subtitle}
               </p>
             </div>
           </div>
@@ -22,10 +26,10 @@ const AIChatSection = () => {
         <div className='hidden xsm:block'>
           <div className='flex flex-col items-start gap-[.5rem] relative mx-[1rem]'>
             <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
-              Lorem ipsum dolor sit amet
+              {data.talk_to_ai.title}
             </p>
             <p className='text-[0.875rem] not-italic font-medium leading-[150%]'>
-              Lorem ipsum dolor sit amet
+              {data.talk_to_ai.subtitle}
             </p>
           </div>
         </div>
@@ -54,12 +58,15 @@ const AIChatSection = () => {
             className=' rounded-[1.25rem] w-[29.25rem] flex flex-col h-[34.5625rem] rounded-br-[var(--8,] rounded-tr-[0.5rem)] rounded-bl-[0.5rem)] 
             [box-shadow:0px_4px_23.7px_0px_rgba(0,_0,_0,_0.00)] group xsm:w-[17.5rem] xsm:h-[13.875rem] xsm:min-w-max'
           >
-            <FAQSection />
+            <FAQSection faqs={data.talk_to_ai.list_faq} />
           </div>
         </div>
       </div>
       <div className='absolute bottom-[-15rem] rounded-[20px] bg-white'>
-        <SectionServiceFeature />
+        <SectionServiceFeature
+          title={data.list_services.title}
+          phone={data.list_services.phone}
+        />
       </div>
     </div>
   )

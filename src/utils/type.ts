@@ -554,3 +554,55 @@ export interface IServiceData {
 export interface ListServicesData {
   list_services_data: any | null
 }
+
+export interface IServiceFAQ {
+  question: string
+  answer: string
+}
+
+export interface IServicePage {
+  banner: {
+    title: string
+    sub_title: string
+  }
+  talk_to_ai: {
+    title: string
+    subtitle: string
+    box_chat: {
+      title: string
+      customer_chat: string
+      ai_chat: string
+    }
+    list_faq: IServiceFAQ[]
+  }
+  list_services: {
+    title: string
+    phone: string
+  }
+  feedback_customer: {
+    title: string
+    subtitle: string
+    list_feedback: Feedback[]
+  }
+}
+
+export interface Feedback {
+  ID: number
+  title: string
+  slug: string
+  content: string
+  excerpt: string
+  status: string
+  type: string
+  author: {
+    name: string
+    position: string
+    avatar: Image
+  }
+  date: string
+  modified: string
+  categories: string[]
+  tags: string[]
+  thumbnail: boolean
+  rating: number
+}
