@@ -32,10 +32,10 @@ export default function Testimonials({data}: Prop) {
   }, [api])
 
   return (
-    <section className='py-24'>
-      <div className='w-full px-4'>
+    <section className='py-24 xsm:py-[1.875rem]'>
+      <div className='w-full px-4 xsm:px-[1rem]'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='mb-4 font-montserrat font-bold text-[2.5rem] leading-[3.25rem] tracking-[-0.03em] text-center'>
+          <h2 className='mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] text-center'>
             {data.feedback_customer.title}
           </h2>
           <p
@@ -46,16 +46,16 @@ export default function Testimonials({data}: Prop) {
           ></p>
         </div>
 
-        <div className='relative mt-16'>
+        <div className='relative mt-16 xsm:mt-[1rem]'>
           <Carousel
             setApi={setApi}
             opts={{
               align: 'start',
               loop: true,
             }}
-            className='mx-auto w-full px-[4rem]'
+            className='mx-auto w-full px-[4rem] xsm:px-0'
           >
-            <CarouselContent>
+            <CarouselContent className='xsm:ml-0'>
               {testimonials.map((testimonial, index) => (
                 <CarouselItem
                   key={index}
@@ -112,8 +112,8 @@ export default function Testimonials({data}: Prop) {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className='absolute left-[3rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
-            <CarouselNext className='absolute right-[3.5rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
+            <CarouselPrevious className='absolute xsm:hidden left-[3rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
+            <CarouselNext className='absolute xsm:hidden right-[3.5rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
           </Carousel>
 
           {/* Pagination Dots */}
