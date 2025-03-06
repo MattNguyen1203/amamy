@@ -1,6 +1,6 @@
 'use client'
 
-import {IListServiceResponse, IServicePage} from '@/utils/type'
+import {IBlogResponse, IListServiceResponse, IServicePage} from '@/utils/type'
 import ShippingHero from './section1/ShippingHero'
 import AIChatSection from './section2/AIChatSection'
 import Testimonials from './section2/Testimonials'
@@ -9,8 +9,9 @@ import BlogSection from './section3/BlogSection'
 interface Prop {
   data: IServicePage
   listService: IListServiceResponse
+  listBlog: IBlogResponse
 }
-const ServicePage = ({data, listService}: Prop) => {
+const ServicePage = ({data, listService, listBlog}: Prop) => {
   return (
     <div className='w-full bg-white'>
       <ShippingHero data={data} />
@@ -19,7 +20,7 @@ const ServicePage = ({data, listService}: Prop) => {
         data={data}
       />
       <Testimonials data={data} />
-      <BlogSection />
+      <BlogSection listBlog={listBlog} />
     </div>
   )
 }

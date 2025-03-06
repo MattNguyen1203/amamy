@@ -628,3 +628,17 @@ export interface IListServiceResponse {
   message: string
   status: number
 }
+export interface Post {
+  title: string
+  date: string
+  slug: string
+  image: Image
+  categories: string
+}
+
+export interface IBlogResponse {
+  total_items: number
+  current_paged: number
+  total_paged: number
+  posts: Post[]
+}
