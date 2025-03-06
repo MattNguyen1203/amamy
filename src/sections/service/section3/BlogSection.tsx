@@ -1,7 +1,11 @@
 import React from 'react'
 import SlideDocs from './SlideDocs'
+import {IBlogResponse} from '@/utils/type'
 
-const BlogSection = () => {
+interface Prop {
+  listBlog: IBlogResponse
+}
+const BlogSection = ({listBlog}: Prop) => {
   return (
     <div className='flex pt-24 pl-24 pb-24 flex-col items-start gap-2.5 self-stretch w-full xsm:pl-[1rem] bg-[#EDF5FA]'>
       <div className='flex justify-between w-full flex-col'>
@@ -19,7 +23,7 @@ const BlogSection = () => {
             <ArrowIcon />
           </button>
         </div>
-        <SlideDocs />
+        <SlideDocs posts={listBlog.posts} />
       </div>
     </div>
   )
@@ -46,22 +50,22 @@ const ArrowIcon = () => {
   )
 }
 
-const ArrowRightIcon = () => {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='32'
-      height='32'
-      viewBox='0 0 32 32'
-      fill='none'
-    >
-      <path
-        d='M14.9997 22.9995L8 15.9998M8 15.9998L14.9997 9.00017M8 15.9998L24 15.9998'
-        stroke='black'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-      />
-    </svg>
-  )
-}
+// const ArrowRightIcon = () => {
+//   return (
+//     <svg
+//       xmlns='http://www.w3.org/2000/svg'
+//       width='32'
+//       height='32'
+//       viewBox='0 0 32 32'
+//       fill='none'
+//     >
+//       <path
+//         d='M14.9997 22.9995L8 15.9998M8 15.9998L14.9997 9.00017M8 15.9998L24 15.9998'
+//         stroke='black'
+//         stroke-width='2'
+//         stroke-linecap='round'
+//         stroke-linejoin='round'
+//       />
+//     </svg>
+//   )
+// }

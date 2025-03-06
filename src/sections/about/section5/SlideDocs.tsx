@@ -10,8 +10,15 @@ import 'swiper/css/pagination'
 // import required modules
 import {Pagination} from 'swiper/modules'
 import ImageV2 from '@/components/image/ImageV2'
+import {Post} from '@/utils/type'
 
-export default function SlideDocs() {
+interface Prop {
+  posts: Post[]
+}
+interface PropItem {
+  post: Post
+}
+export default function SlideDocs({posts}: Prop) {
   return (
     <>
       <Swiper
@@ -28,12 +35,12 @@ export default function SlideDocs() {
         modules={[Pagination]}
         className='h-[24.375rem] w-full'
       >
-        {[1, 2, 3, 4, 5].map((item) => (
+        {posts.map((item, index) => (
           <SwiperSlide
-            key={item}
+            key={index}
             className='bg-white rounded-[20px] !w-[26.8125rem] cursor-pointer xsm:w-[16.875rem]'
           >
-            <ItemContent />
+            <ItemContent post={item} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -44,26 +51,25 @@ export default function SlideDocs() {
   )
 }
 
-const ItemContent = () => {
+const ItemContent = ({post}: PropItem) => {
   return (
     <div className='w-[26.8125rem] xsm:w-[16.875rem]'>
       <ImageV2
-        src={'/homepage/replace/slideimg.png'}
-        alt=''
+        src={post.image.url}
+        alt={post.image.alt}
         width={1000}
         height={1000}
         className='h-[15.625rem] rounded-t-[20px]'
       />
       <div className='flex p-6 flex-col items-start gap-3 self-stretch'>
         <p className='text-[1rem] not-italic font-semibold leading-[150%]'>
-          Trong hơn 2 năm Amamy đã gửi hơn 7.500 bưu kiện từ Việt Nam cho du học
-          sinh
+          {post.title}
         </p>
         <div className='flex justify-between w-full items-center'>
           <div className='flex items-center'>
             <CalenderIcon />
             <p className='text-[0.75rem] not-italic font-medium leading-[140%]'>
-              11/12/2024
+              {post.date}
             </p>
           </div>
           <ArrowIcon />
