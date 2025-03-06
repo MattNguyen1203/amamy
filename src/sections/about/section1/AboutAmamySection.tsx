@@ -9,9 +9,9 @@ export default function AboutAmamySection({data}: Prop) {
   const statsData = data.acf.banner.list_infomation
   return (
     <section className='w-full bg-[#38b6ff] py-16 text-white'>
-      <div className='w-full mx-auto px-[6rem]'>
+      <div className='w-full mx-auto px-[6rem] xsm:px-[1rem]'>
         {/* Breadcrumb */}
-        <div className='flex items-center gap-2 mb-12 text-sm md:text-base'>
+        <div className='flex items-center gap-2 mb-12 text-sm md:text-base xsm:hidden'>
           <Link
             href='/'
             className='hover:underline'
