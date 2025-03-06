@@ -1,14 +1,14 @@
-import fetchDataWP, {RequestPostGuest} from './fetchData'
+import {RequestPostGuest} from './fetchData'
+import fetchDataWP from './fetchDataWP'
 
 const request: RequestPostGuest = {
-  api: 'pages/11?_fields=banner,services,section3,section_country,withDHS,faq,faqs',
+  api: 'pages/235?_&acf_format=standard',
   method: 'GET',
 }
-
 export async function fetchDataAbout() {
   try {
-    const data = await fetchData(request)
-    console.log('Fetched data:', data)
+    const data = await fetchDataWP(request)
+    console.log('Fetched data wp:', data)
     return data
   } catch (error) {
     console.error('Error fetching data:', error)

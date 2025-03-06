@@ -1,11 +1,11 @@
 import fetchData, {RequestPostGuest} from './fetchData'
 
 const request: RequestPostGuest = {
-  api: 'pages/11?_fields=banner,services,section3,section_country,withDHS,faq,faqs',
+  api: 'chieu-van-chuyen/gui-hang-viet-duc?_fields=banner,talk_to_ai,list_services,feedback_customer',
   method: 'GET',
 }
 
-export async function fetchHomeData() {
+export async function fetchDataService() {
   try {
     const data = await fetchData(request)
     console.log('Fetched data:', data)
