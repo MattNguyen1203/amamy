@@ -17,11 +17,11 @@ const Timeline = ({data}: Prop) => {
 
   return (
     <section
-      className='w-[100rem] h-[50rem] flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] justify-between items-center
+      className='w-[100rem] xsm:w-full h-[50rem] xsm:h-auto flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] justify-between items-center
      rounded-tl-[2.5rem] rounded-br-[0rem] rounded-tr-[2.5rem] rounded-bl-[0rem] [box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] bg-[#EDF5FA]
-     xsm:flex-col xsm:w-[100vw] xsm:px-[1rem] xsm:h-fit xsm:gap-[1rem] xsm:pr-0'
+     xsm:flex-col xsm:px-[1rem] xsm:h-fit xsm:gap-[1rem] xsm:p-[1rem] xsm:pr-0 xsm:bg-[#f7f7f7] xsm:rounded-none xsm:border-none xsm:shadow-none'
     >
-      <div className='max-w-[24.375rem]'>
+      <div className='max-w-[24.375rem] xsm:max-w-full'>
         <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] xsm:text-[1.25rem]'>
           {data?.acf.our_journey.title}
         </h2>

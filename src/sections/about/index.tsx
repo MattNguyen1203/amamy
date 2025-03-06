@@ -14,7 +14,7 @@ interface Prop {
 
 const AboutPage = ({res, listBlog}: Prop) => {
   return (
-    <div className='w-full bg-white'>
+    <div className='w-full bg-white xsm:bg-[#f7f7f7]'>
       <AboutAmamySection data={res} />
       <WhatMakesSpecial data={res} />
       <QuantitySection data={res} />
