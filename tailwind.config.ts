@@ -21,15 +21,18 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)'],
+      },
       colors: {
         // background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         'color-blue': '--color-blue',
-        'background': '#f8f9fa',
-        'blueprimary': '#007bff',
+        background: '#f8f9fa',
+        blueprimary: '#007bff',
         'background-elevation5': '#ffffff',
         'black-shadows': 'rgba(0, 0, 0, 0.15)',
-        'link': '#007bff',
+        link: '#007bff',
         'greyscale-text60': 'rgba(0, 0, 0, 0.6)',
         'greyscale-text30': 'rgba(0, 0, 0, 0.3)',
         'blueblue-400': '#0056b3',
@@ -90,6 +93,50 @@ const config: Config = {
         },
         '.absolute-center': {
           '@apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2':
+            {},
+        },
+        '.text-pc-heading20b': {
+          '@apply text-[1.25rem] font-bold leading-[1.2] tracking-[-0.05rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub16m': {
+          '@apply text-[1rem] font-medium leading-[1.3] tracking-[-0.03rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub16s': {
+          '@apply text-[1rem] font-semibold leading-[1.5] tracking-[-0.03rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub16b': {
+          '@apply text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub14m': {
+          '@apply text-[0.875rem] font-medium leading-[1.5] tracking-[-0.02625rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub14s': {
+          '@apply text-[0.875rem] font-semibold leading-[1.5] tracking-[-0.02625rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub12m': {
+          '@apply text-[0.75rem] font-medium leading-[1.4] tracking-[-0.0225rem] font-montserrat':
+            {},
+        },
+        '.text-pc-sub12s': {
+          '@apply text-[0.75rem] font-semibold leading-[1.5] tracking-[-0.015rem] font-montserrat':
+            {},
+        },
+        '.text-mb-sub10m': {
+          '@apply text-[0.625rem] font-medium leading-[1.4] tracking-[-0.01875rem] font-montserrat':
+            {},
+        },
+        '.text-pc-h1': {
+          '@apply text-[2.875rem] font-bold leading-[1.2] tracking-[-0.115rem] font-montserrat':
+            {},
+        },
+        '.text-mb-h1': {
+          '@apply text-[1.25rem] font-bold leading-[1.2] tracking-[-0.05rem] font-montserrat':
             {},
         },
       })

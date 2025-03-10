@@ -1,8 +1,7 @@
-import React from 'react'
-import Section35 from './Section3.5'
-import Image from 'next/image'
 import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
+import Image from 'next/image'
 import Link from 'next/link'
+import Section35 from './Section3.5'
 import Section35Mobile from './Section35Mobile'
 
 type Props = {
@@ -27,18 +26,20 @@ const Section3 = ({sectionCountry, section3}: Props) => {
           </div>
         </div>
         <div className='hidden xsm:block'>
-            <div className='flex flex-col items-start gap-[.5rem] relative mx-[1rem]'>
-              <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
-                {section3.title}
-              </p>
-              <p className='text-[0.875rem] not-italic font-medium leading-[150%]'>
-                {section3.subtitle}
-              </p>
-            </div>
+          <div className='flex flex-col items-start gap-[.5rem] relative mx-[1rem]'>
+            <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
+              {section3.title}
+            </p>
+            <p className='text-[0.875rem] not-italic font-medium leading-[150%]'>
+              {section3.subtitle}
+            </p>
+          </div>
         </div>
 
-        <div className=' flex-1 flex gap-[1rem] pt-[9.62rem] bg-[#C1E8FF] pl-[4.5rem] relative xsm:bg-transparent xsm:pt-[1rem] xsm:pl-[1rem] 
-        xsm:w-screen xsm:overflow-x-scroll'>
+        <div
+          className=' flex-1 flex gap-[1rem] pt-[9.62rem] bg-[#C1E8FF] pl-[4.5rem] relative xsm:bg-transparent xsm:pt-[1rem] xsm:pl-[1rem] 
+        xsm:w-screen xsm:overflow-x-scroll'
+        >
           <Image
             src={'/homepage/icon/Isolation_Mode.png'}
             alt='background-image'
@@ -273,8 +274,8 @@ export const ArrowIcon = () => {
       fill='none'
     >
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M14.0001 27.3334C21.3639 27.3334 27.3334 21.3639 27.3334 14.0001C27.3334 6.63629 21.3639 0.666748 14.0001 0.666748C6.63629 0.666748 0.666748 6.63629 0.666748 14.0001C0.666748 21.3639 6.63629 27.3334 14.0001 27.3334ZM16.0405 9.29297L20.0405 13.293C20.431 13.6835 20.431 14.3167 20.0405 14.7072L16.0405 18.7072C15.65 19.0977 15.0168 19.0977 14.6263 18.7072C14.2358 18.3167 14.2358 17.6835 14.6263 17.293L16.9192 15.0001H8.66674C8.11446 15.0001 7.66674 14.5524 7.66674 14.0001C7.66674 13.4478 8.11446 13.0001 8.66674 13.0001H16.9192L14.6263 10.7072C14.2358 10.3167 14.2358 9.6835 14.6263 9.29297C15.0168 8.90245 15.65 8.90245 16.0405 9.29297Z'
         fill='#38B6FF'
       />

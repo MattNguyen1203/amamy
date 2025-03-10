@@ -1,16 +1,16 @@
-import { NewsObject } from '@/utils/type'
+import {NewsObject} from '@/utils/type'
 import Image from 'next/image'
-import React, { useRef } from 'react'
-import { Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import {useRef} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import {Pagination} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
 
 type Props = {
   withDHS: NewsObject
 }
 
-const Section4 = ({ withDHS }: Props) => {
+const Section4 = ({withDHS}: Props) => {
   const swiperRef = useRef<any>(null)
 
   return (
@@ -19,7 +19,7 @@ const Section4 = ({ withDHS }: Props) => {
      rounded-tl-[2.5rem] rounded-br-[0rem] rounded-tr-[2.5rem] rounded-bl-[0rem] [box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
      xsm:flex-col xsm:w-[100vw] xsm:px-[1rem] xsm:h-fit xsm:gap-[1rem] xsm:pr-0'
     >
-      <div className='max-w-[24.375rem]'>
+      <div className='maxW-[24.375rem]'>
         <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] xsm:text-[1.25rem]'>
           {withDHS.title}
         </h2>
@@ -42,15 +42,13 @@ const Section4 = ({ withDHS }: Props) => {
         </div>
       </div>
 
-      <div
-        className='relative rounded-[0.5rem]'
-      >
+      <div className='relative rounded-[0.5rem]'>
         <Image
           alt=''
           src={'/homepage/icon/section-4Card.png'}
           width={1000}
           height={1000}
-          className='w-[18.75rem] absolute z-[100] top-1/2 -translate-y-[46%] -left-1/2 translate-x-[85%] h-[23.25rem] scale-110 flex-shrink-0 xsm:hidden'
+          className='w-[18.75rem] absolute z-[100] top-1/2 -translate-y-[46%] Left-1/2 translate-x-[85%] h-[23.25rem] scale-110 flex-shrink-0 xsm:hidden'
         ></Image>
         <div>
           <Swiper
@@ -72,7 +70,7 @@ const Section4 = ({ withDHS }: Props) => {
             {withDHS.list_news.map((item, index) => (
               <SwiperSlide
                 key={index}
-                className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]' 
+                className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]'
               >
                 <Image
                   src={item.thumbnail}
@@ -88,7 +86,7 @@ const Section4 = ({ withDHS }: Props) => {
                 <div
                   className='flex w-[42.3125rem] h-[8.625rem] p-10 flex-col items-end gap-4 flex-shrink-0 absolute bottom-0 right-0 bg-[#F1F9FF]
                   text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem] xsm:hidden '
-                  dangerouslySetInnerHTML={{ __html: item.excerpt }}
+                  dangerouslySetInnerHTML={{__html: item.excerpt}}
                 ></div>
               </SwiperSlide>
             ))}
@@ -113,9 +111,9 @@ const LeftIcon = () => {
       <path
         d='M14.9997 22.9998L8 16.0001M8 16.0001L14.9997 9.00041M8 16.0001L24 16.0001'
         stroke='black'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )

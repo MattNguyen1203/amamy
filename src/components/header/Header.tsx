@@ -1,8 +1,8 @@
 'use client'
-import React, {useState, useEffect} from 'react'
-import ImageV2 from '../image/ImageV2'
 import Link from 'next/link'
+import {useEffect, useState} from 'react'
 import ButtonCreateOrder from '../button/btn-create-order'
+import ImageV2 from '../image/ImageV2'
 
 type Props = {}
 
@@ -29,7 +29,7 @@ const Header = (props: Props) => {
     <>
       <div
         className={`py-[0.625rem] px-[6rem] flex justify-between items-center fixed h-[72px] w-full z-[1000] transition-colors duration-300 xsm:hidden ${
-          isScrolled ? 'bg-white text-black' : 'text-white'
+          isScrolled ? 'bgWhite text-black' : 'textWhite'
         }`}
       >
         {/* <ImageV2 alt='logo' src={'/homepage/replace/logo.svg'} width={1000} height={1000} className='w-[6.89394rem] h-[1.836rem]' /> */}
@@ -103,7 +103,7 @@ const Header = (props: Props) => {
             </Link>
           ))}
         </div>
-        <div className='flex items-center min-w-[16.425rem] gap-[1rem] h-full'>
+        <div className='flex items-center minW-[16.425rem] gap-[1rem] h-full'>
           <div className='w-[2.5rem] h-full flex'>
             {!isScrolled ? (
               <ImageV2
@@ -125,22 +125,22 @@ const Header = (props: Props) => {
                 <path
                   d='M9.05602 16.2694C13.0388 16.2694 16.2676 13.0407 16.2676 9.05785C16.2676 5.07503 13.0388 1.84631 9.05602 1.84631C5.0732 1.84631 1.84448 5.07503 1.84448 9.05785C1.84448 13.0407 5.0732 16.2694 9.05602 16.2694Z'
                   stroke='#091E36'
-                  stroke-width='1.92308'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='1.92308'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 />
                 <path
                   d='M14.3445 14.3463L17.2291 17.2309'
                   stroke='#091E36'
-                  stroke-width='1.92308'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='1.92308'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 />
               </svg>
             )}
           </div>
           <ButtonCreateOrder>
-            <span className={`${'text-white'}`}>Tạo đơn hàng</span>
+            <span className={`${'textWhite'}`}>Tạo đơn hàng</span>
           </ButtonCreateOrder>
         </div>
       </div>
@@ -158,16 +158,16 @@ const Header = (props: Props) => {
             <path
               d='M9.05602 16.2694C13.0388 16.2694 16.2676 13.0407 16.2676 9.05785C16.2676 5.07503 13.0388 1.84631 9.05602 1.84631C5.0732 1.84631 1.84448 5.07503 1.84448 9.05785C1.84448 13.0407 5.0732 16.2694 9.05602 16.2694Z'
               stroke='#091E36'
-              stroke-width='1.92308'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='1.92308'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
             <path
               d='M14.3445 14.3463L17.2291 17.2309'
               stroke='#091E36'
-              stroke-width='1.92308'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='1.92308'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </svg>
         </div>
