@@ -63,7 +63,7 @@ const QuantityListMB = ({quantities}: Prop) => {
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
-            className={`h-2 w-8 rounded-full transition-all ${current === index ? 'bg-blue-500' : 'bg-gray-200'}`}
+            className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${current === index ? 'bg-[#1F648C]' : 'bg-gray-200'}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

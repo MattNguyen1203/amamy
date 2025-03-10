@@ -44,7 +44,7 @@ const QuantitySection = ({data}: Prop) => {
             width={1000}
             height={1000}
           />
-          <div className='block xsm:hidden'>
+          <div className='flex-1 flex gap-[2.5rem]  xsm:hidden'>
             <QuantityList quantities={quantities} />
           </div>
           <div className='hidden xsm:block'>

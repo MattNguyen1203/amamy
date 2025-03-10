@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, {useRef, useState} from 'react'
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react'
 
@@ -19,6 +19,8 @@ interface PropItem {
   post: Post
 }
 export default function SlideDocs({posts}: Prop) {
+  const swiperRef = useRef<any>(null)
+  const [activeSlide, setActiveSlide] = useState(0)
   return (
     <>
       <Swiper
@@ -33,19 +35,26 @@ export default function SlideDocs({posts}: Prop) {
           },
         }}
         modules={[Pagination]}
-        className='h-[24.375rem] w-full'
+        className='h-[24.375rem] w-full xsm:h-auto'
       >
-        {posts?.map((item, index) => (
+        {posts.map((item, index) => (
           <SwiperSlide
             key={index}
-            className='bg-white rounded-[20px] !w-[26.8125rem] cursor-pointer xsm:w-[16.875rem]'
+            className='bg-white rounded-[1.25rem] !w-[26.8125rem] cursor-pointer xsm:!w-[16.875rem]'
           >
             <ItemContent post={item} />
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className='flex mt-[2.5rem] w-full items-center justify-center'>
-        <div className='custom-pagination flex gap-[0.38rem] mx-auto !w-fit'></div>
+      <div className='mt-[1rem] xsm:flex hidden justify-center gap-2 xsm:mt-[1rem] xsm:mb-[1.25rem]'>
+        {posts.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => swiperRef.current?.swiper.slideTo(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${activeSlide === index ? 'bg-[#1F648C]' : 'bg-gray-200'}`}
+          />
+        ))}
       </div>
     </>
   )
@@ -59,7 +68,7 @@ const ItemContent = ({post}: PropItem) => {
         alt={post.image.alt}
         width={1000}
         height={1000}
-        className='h-[15.625rem] rounded-t-[20px]'
+        className='h-[15.625rem] rounded-t-[1.25rem] xsm:h-[10.1875rem]'
       />
       <div className='flex p-6 flex-col items-start gap-3 self-stretch'>
         <p className='text-[1rem] not-italic font-semibold leading-[150%]'>

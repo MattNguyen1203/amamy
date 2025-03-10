@@ -7,7 +7,7 @@ interface Prop {
 }
 const BlogSection = ({listBlog}: Prop) => {
   return (
-    <div className='flex pt-24 pl-24 pb-24 flex-col items-start gap-2.5 self-stretch w-full xsm:pl-[1rem] bg-[#EDF5FA]'>
+    <div className='flex pt-24 pl-24 pb-24 flex-col items-start gap-2.5 self-stretch w-full xsm:px-[1rem] bg-[#EDF5FA]'>
       <div className='flex justify-between w-full flex-col'>
         <div className='flex  justify-between w-full mb-[2.5rem] xsm:items-center'>
           <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] xsm:text-[1.375rem]'>
