@@ -1,4 +1,4 @@
-import fetchDataWP, {RequestPostGuest} from './fetchDataWP.ts'
+import fetchDataWP, {RequestPostGuest} from '@/fetch/fetchDataWP'
 
 const request: RequestPostGuest = {
   api: '/pages/235?_&acf_format=standard',
