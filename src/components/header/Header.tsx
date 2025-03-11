@@ -28,7 +28,7 @@ const Header = (props: Props) => {
   return (
     <>
       <div
-        className={`py-[0.625rem] px-[6rem] flex justify-between items-center fixed h-[72px] w-full z-[1000] transition-colors duration-300 xsm:hidden ${
+        className={`py-[0.625rem] px-[6rem] flex justify-between items-center fixed h-[72px] w-full z-[50] transition-colors duration-300 xsm:hidden ${
           isScrolled ? 'bgWhite text-black' : 'textWhite'
         }`}
       >

@@ -1,0 +1,124 @@
+'use client'
+import useStore from '@/app/(store)/store'
+import {Button} from '@/components/ui/button'
+import {Checkbox} from '@/components/ui/checkbox'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import {useScrollToTop} from '@/hooks/useScrollToTop'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+export default function OrderStepTime({
+  dataInformation,
+  handleClickcurrentTab,
+  dataFromOrder,
+}: {
+  dataInformation?: IInformationTimeOrder
+  handleClickcurrentTab: (nextTab: string) => void
+  dataFromOrder: IDataFromOrder
+}) {
+  const FormSchema = z.object({
+    policy: z.boolean().refine((value) => value === true, {
+      message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
+    }),
+  })
+  const {stepOrder, setStepOrder} = useStore((state) => state)
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      policy:
+        stepOrder > 2
+          ? true
+          : !dataInformation?.time_content || !dataInformation?.stock,
+    },
+  })
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (stepOrder < 3) {
+      setStepOrder(3)
+    }
+    handleClickcurrentTab('3')
+    useScrollToTop()
+  }
+  return (
+    <div className='space-y-[1.5rem]'>
+      <div className='p-[1rem] rounded-[1.25rem] bg-white'>
+        <p className='mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+          Thời gian gửi hàng
+        </p>
+        <div
+          className='*:text-[rgba(0,0,0,0.90)] *:text-pc-sub14r [&_span]:text-pc-sub12s'
+          dangerouslySetInnerHTML={{
+            __html: dataInformation?.time_content || '',
+          }}
+        ></div>
+      </div>
+      <div className='p-[1rem] rounded-[1.25rem] bg-white'>
+        <p className='mb-[1rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+          Lịch chốt hàng & bay
+        </p>
+        <div
+          className='*:text-[rgba(0,0,0,0.90)] *:text-pc-sub14r [&_ul]:content-ul [&_ul]:!my-0'
+          dangerouslySetInnerHTML={{
+            __html: dataInformation?.stock || '',
+          }}
+        ></div>
+      </div>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className='space-y-[1.59rem]'
+        >
+          <FormField
+            control={form.control}
+            name='policy'
+            render={({field}) => (
+              <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
+                <FormControl>
+                  <Checkbox
+                    className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className='space-y-1 leading-none'>
+                  <FormLabel className='text-pc-sub14m text-black cursor-pointer'>
+                    Tôi đã đọc và chấp nhận chính sách thời gian giao hàng
+                  </FormLabel>
+                </div>
+                <FormMessage className='!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
+              </FormItem>
+            )}
+          />
+          <div className='flex items-center justify-between w-full'>
+            <div
+              onClick={() => handleClickcurrentTab('1')}
+              className='cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+            >
+              <p className='text-pc-sub16m text-black'>Quay lại</p>
+            </div>
+            <Button
+              type='submit'
+              disabled={!form.formState.isValid}
+              className={cn(
+                'hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+                !form.formState.isValid &&
+                  'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+              )}
+            >
+              <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
+  )
+}

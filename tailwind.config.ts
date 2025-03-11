@@ -111,6 +111,10 @@ const config: Config = {
           '@apply text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] font-montserrat':
             {},
         },
+        '.text-pc-sub14r': {
+          '@apply text-[0.875rem] font-normal leading-[1.5] tracking-[-0.02625rem] font-montserrat':
+            {},
+        },
         '.text-pc-sub14m': {
           '@apply text-[0.875rem] font-medium leading-[1.5] tracking-[-0.02625rem] font-montserrat':
             {},
@@ -137,6 +141,10 @@ const config: Config = {
         },
         '.text-mb-h1': {
           '@apply text-[1.25rem] font-bold leading-[1.2] tracking-[-0.05rem] font-montserrat':
+            {},
+        },
+        '.text-pc-tab-title': {
+          '@apply text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] font-montserrat':
             {},
         },
       })
