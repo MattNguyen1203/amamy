@@ -25,12 +25,14 @@ const config: Config = {
         montserrat: ['var(--font-montserrat)'],
       },
       colors: {
-        // background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         'color-blue': '--color-blue',
         background: '#f8f9fa',
         blueprimary: '#007bff',
         'background-elevation5': '#ffffff',
+        'background-elevation20': '#F8F8F8',
+        'background-elevation30': '#F0F0F0',
+        'background-elevation10X': '#F5F5F9',
         'black-shadows': 'rgba(0, 0, 0, 0.15)',
         link: '#007bff',
         'greyscale-text60': 'rgba(0, 0, 0, 0.6)',
@@ -82,6 +84,28 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      keyframes: {
+        'accordion-down': {
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+        },
+        'accordion-up': {
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
     },
   },
   plugins: [
@@ -99,6 +123,10 @@ const config: Config = {
           '@apply text-[1.25rem] font-bold leading-[1.2] tracking-[-0.05rem] font-montserrat':
             {},
         },
+        '.text-pc-sub10m': {
+          '@apply text-[0.625rem] font-medium leading-[1.4] tracking-[-0.01875rem] font-montserrat':
+            {},
+        },
         '.text-pc-sub16m': {
           '@apply text-[1rem] font-medium leading-[1.3] tracking-[-0.03rem] font-montserrat':
             {},
@@ -111,8 +139,8 @@ const config: Config = {
           '@apply text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] font-montserrat':
             {},
         },
-        '.text-pc-sub14r': {
-          '@apply text-[0.875rem] font-normal leading-[1.5] tracking-[-0.02625rem] font-montserrat':
+        '.text-pc-14': {
+          '@apply text-[0.875rem] leading-[1.5] tracking-[-0.02625rem] font-montserrat':
             {},
         },
         '.text-pc-sub14m': {
@@ -135,6 +163,14 @@ const config: Config = {
           '@apply text-[0.625rem] font-medium leading-[1.4] tracking-[-0.01875rem] font-montserrat':
             {},
         },
+        '.text-mb-13M': {
+          '@apply text-[0.8125rem] font-medium leading-[1.23] tracking-[-0.023438rem] font-montserrat':
+            {},
+        },
+        '.text-mb-12': {
+          '@apply text-[0.75rem] leading-[1.5] tracking-[-0.0225rem] font-montserrat':
+            {},
+        },
         '.text-pc-h1': {
           '@apply text-[2.875rem] font-bold leading-[1.2] tracking-[-0.115rem] font-montserrat':
             {},
@@ -145,6 +181,10 @@ const config: Config = {
         },
         '.text-pc-tab-title': {
           '@apply text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] font-montserrat':
+            {},
+        },
+        '.text-mb-h2': {
+          '@apply text-[1.125rem] font-bold leading-[1.2] tracking-[-0.045rem] font-montserrat':
             {},
         },
       })
