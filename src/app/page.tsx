@@ -1,6 +1,6 @@
-import { fetchHomeData } from '@/fetch/fetchHomeData'
+import fetchDataWP from '@/fetch/fetchDataWP'
 import Homepage from '@/sections/homepage'
-import { IHomePage } from '@/utils/type'
+import {IHomePage} from '@/utils/type'
 
 // export async function generateMetadata() {
 //   const res = await getMetadata('/')
@@ -8,11 +8,15 @@ import { IHomePage } from '@/utils/type'
 // }
 
 export default async function Home() {
-
-  const res:IHomePage = await fetchHomeData()
+  const dataACF = await fetchDataWP({
+    api: 'pages/11?_fields=acf&acf_format=standard',
+    option: {
+      next: {revalidate: 0},
+    },
+  })
   return (
     <div className='w-full bg-white text-black flex flex-col items-center'>
-      <Homepage res={res} />
+      <Homepage res={dataACF.acf} />
     </div>
   )
 }
