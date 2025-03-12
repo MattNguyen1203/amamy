@@ -32,10 +32,7 @@ export default function OrderStepTime({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      policy:
-        stepOrder > 2
-          ? true
-          : !dataInformation?.time_content || !dataInformation?.stock,
+      policy: stepOrder > 2 ? true : false,
     },
   })
   function onSubmit(data: z.infer<typeof FormSchema>) {
