@@ -3,6 +3,7 @@ import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
+import Header from '@/components/header/Header'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -72,6 +73,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
+        <Header />
         {children}
 
         <Toaster
