@@ -24,6 +24,10 @@ const Homepage = ({res}: Props) => {
         section3={res.section3}
       />
       <Section4 withDHS={res.withDHS} />
+      <Section5
+        faq={res.faq}
+        faqs={res.faqs}
+      />
       {/* <Section5
         faq={res.faq}
         faqs={res.faqs}
