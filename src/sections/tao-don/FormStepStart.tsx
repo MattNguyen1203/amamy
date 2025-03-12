@@ -25,7 +25,7 @@ import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -70,15 +70,45 @@ export default function FormStepStart({
       customercode: dataFromOrder?.customercode || '',
     },
   })
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    if (sentGoodsAtAmamy) {
+  useEffect(() => {
+    if (sentGoodsAtAmamy && localStorage.getItem('user_email')) {
+      form.setValue('email', String(localStorage.getItem('user_email')))
     }
-    setDataFromOrder({...dataFromOrder, ...values})
+  }, [sentGoodsAtAmamy])
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    localStorage.setItem('user_email', values?.email)
     if (stepOrder < 2) {
       setStepOrder(2)
     }
     onSuccess('2')
     useScrollToTop()
+    if (sentGoodsAtAmamy) {
+      const formData = new FormData()
+      formData.append('user', values?.email)
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ORDER}v1/customer`,
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
+      console.log(response)
+      if (response?.ok) {
+        const preview = await response.text()
+        const previewJson = JSON.parse(preview)
+        console.log(previewJson)
+        setDataFromOrder({
+          ...dataFromOrder,
+          recipientName: previewJson?.name,
+          recipientPhone: previewJson?.sdt,
+          ...values,
+        })
+        return
+      }
+      setDataFromOrder({...dataFromOrder, ...values})
+    } else {
+      setDataFromOrder({...dataFromOrder, ...values})
+    }
   }
   return (
     <Form {...form}>
