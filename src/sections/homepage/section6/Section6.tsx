@@ -11,9 +11,9 @@ const Section6 = (props: Props) => {
             Các tin tức mới nhất
           </h2>
           <button
-            className='flex rounded-[0.5rem] mr-24 xsm:mr-[1rem] xsm:rounded-full xsm:w-[2.66rem] xsm:flex-shrink-0 xsm:h-[2.66rem] xsm:p-0 textWhite h-12 pl-6 pr-4 py-3 
-            justify-center items-center gap-1 rounded-tl-[var(--8,] 
-            rounded-br-[var(--8,] rounded-tr-[0.5rem)] rounded-bl-[0.5rem)] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] 
+            className='flex rounded-[0.5rem] mr-24 xsm:mr-[1rem] xsm:rounded-full xsm:w-[2.66rem] xsm:flex-shrink-0 xsm:h-[2.66rem] xsm:p-0 textWhite h-12 pl-6 pr-4 py-3
+            justify-center items-center gap-1 rounded-tl-[var(--8,]
+            rounded-br-[var(--8,] rounded-tr-[0.5rem)] rounded-bl-[0.5rem)] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)]
             bg-[var(--Blue-Primary,_#38B6FF)]'
           >
             <span className='xsm:hidden'>Tất cả bài viết</span>

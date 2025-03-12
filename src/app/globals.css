@@ -39,6 +39,9 @@ html > body[data-scroll-locked] {
   --font-size-xs: 12px;
   --font-size-l: 16px;
 }
+.lg-container {
+  max-width: 1600px;
+}
 
 .shadow-banner {
   box-shadow: 0px 4px 32px #00266014;

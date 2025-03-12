@@ -135,7 +135,7 @@ export const MainContainer = ({
             HOTLINE
           </div>
           <button
-            className='flex mt-[0.75rem] h-12 justify-center text-[#fff] w-[13.5rem] items-center gap-2 rounded-[1.25rem]  
+            className='flex mt-[0.75rem] h-12 justify-center text-[#fff] w-[13.5rem] items-center gap-2 rounded-[1.25rem]
              bg-[var(--Blue-Primary,_#38B6FF)]'
           >
             {sectionCountry.hotline}
