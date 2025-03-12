@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Footer from '@/components/footer/Footer'
-import Header from '@/components/header/Header'
 import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
@@ -74,7 +72,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
-        <Header />
+        {/* <Header /> */}
         {children}
 
         <Toaster
@@ -85,7 +83,7 @@ export default async function RootLayout({
           duration={4000}
           expand
         />
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   )

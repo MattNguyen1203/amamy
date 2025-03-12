@@ -14,7 +14,6 @@ type Props = {
 }
 
 const Homepage = ({res}: Props) => {
-  console.log(res.section3)
   return (
     <div className='w-full bg-[#EDF5FA]'>
       <AIQuestion />
@@ -29,6 +28,10 @@ const Homepage = ({res}: Props) => {
         faq={res.faq}
         faqs={res.faqs}
       />
+      {/* <Section5
+        faq={res.faq}
+        faqs={res.faqs}
+      /> */}
       <Section6 />
     </div>
   )

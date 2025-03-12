@@ -40,6 +40,7 @@ const config: Config = {
         'blueblue-400': '#0056b3',
         'blueblue-600': '#004085',
         'big-stone-2': '#262626',
+        'Blue-Primary': '#38B6FF',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -163,6 +164,10 @@ const config: Config = {
           '@apply text-[0.625rem] font-medium leading-[1.4] tracking-[-0.01875rem] font-montserrat':
             {},
         },
+        '.text-mb-13': {
+          '@apply text-[0.8125rem] leading-[1.5] tracking-[-0.02438rem] font-montserrat':
+            {},
+        },
         '.text-mb-13M': {
           '@apply text-[0.8125rem] font-medium leading-[1.23] tracking-[-0.023438rem] font-montserrat':
             {},
@@ -177,6 +182,10 @@ const config: Config = {
         },
         '.text-mb-h1': {
           '@apply text-[1.25rem] font-bold leading-[1.2] tracking-[-0.05rem] font-montserrat':
+            {},
+        },
+        '.text-pc-tab-title': {
+          '@apply text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] font-montserrat':
             {},
         },
         '.text-mb-h2': {
