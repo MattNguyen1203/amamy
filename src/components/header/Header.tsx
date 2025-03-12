@@ -1,14 +1,16 @@
 'use client'
+import {cn} from '@/lib/utils'
 import Link from 'next/link'
+import {usePathname} from 'next/navigation'
 import {useEffect, useState} from 'react'
 import ButtonCreateOrder from '../button/btn-create-order'
 import ImageV2 from '../image/ImageV2'
-
 type Props = {}
 
 const Header = (props: Props) => {
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
-
+  const isTaoDonHangPage = pathname === '/tao-don-hang'
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -144,7 +146,12 @@ const Header = (props: Props) => {
           </ButtonCreateOrder>
         </div>
       </div>
-      <div className='h-[3.5rem] items-center justify-between hidden xsm:flex'>
+      <div
+        className={cn(
+          'h-[3.5rem] items-center justify-between hidden xsm:flex',
+          isTaoDonHangPage && 'xsm:hidden',
+        )}
+      >
         <div className=' w-[5.625rem]'></div>
         <div className='w-[5.625rem]'>
           <svg

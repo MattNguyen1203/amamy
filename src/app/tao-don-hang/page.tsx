@@ -10,7 +10,7 @@ export default async function page() {
   })
   const [dataCreateOrder] = await Promise.all([fetchCreateOrder])
   return (
-    <main className='bg-white sm:px-[6rem] pt-[10rem]'>
+    <main className='bg-white sm:px-[6rem] sm:pt-[10rem]'>
       <CreateOrder data={dataCreateOrder} />
     </main>
   )

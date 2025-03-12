@@ -17,9 +17,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import useIsMobile from '@/hooks/useIsMobile'
+import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
+import {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -73,9 +77,15 @@ export default function FormDeliveryInformation({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
 }) {
+  const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const [selectPaymentInformation, setSelectPaymentInformation] =
+    useState<boolean>(false)
+  const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
+    useState<{value: string; title: string}>({value: '', title: ''})
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       recipientName: dataFromOrder?.recipientName || '',
       recipientPhone: dataFromOrder?.recipientPhone || '',
@@ -95,17 +105,18 @@ export default function FormDeliveryInformation({
       setStepOrder(5)
     }
     handleClickcurrentTab('5')
+    useScrollToTop()
   }
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.75rem]'
+        className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem]'>
+        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng
         </p>
-        <div className='flex space-x-[1.5rem]'>
+        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
           <FormField
             control={form.control}
             name='recipientName'
@@ -116,16 +127,16 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
                   Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên
                   chuông cửa để việc giao hàng chính xác.
                 </p>
-                <FormMessage className='!text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -139,12 +150,12 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -159,12 +170,12 @@ export default function FormDeliveryInformation({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Friedrichstraße 23'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!text-[#F00] text-pc-sub12m' />
+              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
             </FormItem>
           )}
         />
@@ -178,13 +189,13 @@ export default function FormDeliveryInformation({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Nail Salon Bella, Restautant, Wohnung, Etage..'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!text-[#F00] text-pc-sub12m' />
-              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
                 Tên công ty, Tiệm Nails, nhà hàng, chung cư, số nhà, số phòng...
                 Giao hàng ở Đức, Châu Âu không gọi trước khi giao nên quý khách
                 vui lòng ghi chi tiết nhất có thể.
@@ -203,12 +214,12 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Nhập tên thành phố'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -222,12 +233,12 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='10117'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -236,7 +247,10 @@ export default function FormDeliveryInformation({
           control={form.control}
           name='recipientPaymentInformation'
           render={({field}) => (
-            <FormItem className='flex-1 space-y-0'>
+            <FormItem
+              onClick={() => setSelectPaymentInformation(true)}
+              className='flex-1 space-y-0'
+            >
               <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Chọn thông tin thanh toán (*)
               </FormLabel>
@@ -244,9 +258,22 @@ export default function FormDeliveryInformation({
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
-                <FormControl className='aria-[invalid=true]:!border-[#F00] bg-white mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                  <SelectTrigger className='h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
-                    <SelectValue placeholder='Chọn thông tin thanh toán' />
+                <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                  <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    {!isMobile && (
+                      <SelectValue placeholder='Chọn thông tin thanh toán' />
+                    )}
+                    {isMobile && !field.value && (
+                      <SelectValue placeholder='Chọn thông tin thanh toán' />
+                    )}
+                    {isMobile && field.value && (
+                      <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
+                        <p className='text-black text-pc-sub14m text-start w-full line-clamp-1'>
+                          {selectPaymentInformationValue?.title ||
+                            dataFromOrder?.recipientPaymentInformation}
+                        </p>
+                      </div>
+                    )}
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
@@ -272,10 +299,10 @@ export default function FormDeliveryInformation({
             </FormItem>
           )}
         />
-        <div className='flex items-center justify-between w-full'>
+        <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[51] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
             onClick={() => handleClickcurrentTab('3')}
-            className='cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+            className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>
           </div>
@@ -283,7 +310,7 @@ export default function FormDeliveryInformation({
             type='submit'
             disabled={!form.formState.isValid}
             className={cn(
-              'hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+              'xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
               !form.formState.isValid &&
                 'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
@@ -291,6 +318,14 @@ export default function FormDeliveryInformation({
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>
           </Button>
         </div>
+        {isMobile && (
+          <PopupPaymentInfor
+            form={form}
+            selectPaymentInformation={selectPaymentInformation}
+            setSelectPaymentInformation={setSelectPaymentInformation}
+            setSelectPaymentInformationValue={setSelectPaymentInformationValue}
+          />
+        )}
       </form>
     </Form>
   )
