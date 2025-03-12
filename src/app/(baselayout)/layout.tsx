@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from '@/components/footer/Footer'
+import Header from '@/components/header/Header'
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -7,6 +8,7 @@ export default async function RootLayout({
 }>) {
   return (
     <>
+      <Header />
       {children}
       <Footer />
     </>

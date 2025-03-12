@@ -1,6 +1,6 @@
 import {cn} from '@/lib/utils'
 
-const Plus = ({className, ...props}: React.SVGProps<SVGSVGElement>) => {
+const Menu = ({className, ...props}: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -14,7 +14,7 @@ const Plus = ({className, ...props}: React.SVGProps<SVGSVGElement>) => {
       {...props}
     >
       <path
-        d='M12 4L11.9988 12M11.9988 20V12M11.9988 12H20H4'
+        d='M5 17H19M5 12H19M5 7H19'
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
@@ -22,4 +22,4 @@ const Plus = ({className, ...props}: React.SVGProps<SVGSVGElement>) => {
     </svg>
   )
 }
-export default Plus
+export default Menu
