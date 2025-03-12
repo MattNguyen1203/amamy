@@ -41,6 +41,7 @@ const config: Config = {
         'blueblue-600': '#004085',
         'big-stone-2': '#262626',
         'Blue-Primary': '#38B6FF',
+        'Blue-400': '#60C5FF',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',

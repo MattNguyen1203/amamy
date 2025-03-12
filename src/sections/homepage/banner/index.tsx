@@ -1,46 +1,46 @@
 'use client'
-import Image from 'next/image'
 import React from 'react'
-import TrackingInterface from './tracking-interface'
+import TrackingInterface from './TrackingOrder'
 import {IBanner, IImage} from '@/utils/type'
 import ImageV2 from '@/components/image/ImageV2'
 
-const Section1 = ({banner}: {banner: IBanner}) => {
+const Banner = ({banner}: {banner: IBanner}) => {
   return (
     <>
-      <div className='relative w-[100rem] h-[49.25rem] flex-shrink-0 text-white xsm:hidden'>
-        <Background background={banner?.background_pc} />
-        <div className='absolute z-[100] pt-[9.12rem] mx-[6rem] flex gap-[1.4rem] '>
-          <div>
-            <div className='mt-[4.27rem] flex gap-[0.75rem] '>
-              <div className='flex relative w-[8.25rem]'>
-                {banner?.user_list.map((item, index) => (
-                  <AvatarIcon
-                    key={index}
-                    item={item}
-                    className={`absolute top-0 left-0 translate-x-[calc(2.25rem*${index}-0.75rem*${index})]`}
-                  />
-                ))}
-              </div>
-              <div className=''>
-                <p className='text-[1.5rem] not-italic font-bold leading-[normal] tracking-[-0.045rem]'>
-                  {banner?.user_number}
-                </p>
-                <p className='text-[0.875rem] not-italic font-semibold leading-[normal] tracking-[-0.02625rem]'>
-                  {banner?.review_title}
-                </p>
+      <div className='relative w-full h-[49.25rem] text-white xsm:hidden'>
+        <ImageV2
+          alt=''
+          className='size-full'
+          src={banner?.background_pc.url}
+          width={3000}
+          height={2000}
+        />
+        <div className='absolute left-[6rem] top-[13.37rem]'>
+          <div className='flex items-center space-x-3'>
+            <div className='flex relative w-[8.25rem] -space-x-3'>
+              {banner?.user_list.map((item, index) => (
+                <AvatarIcon
+                  key={index}
+                  item={item}
+                />
+              ))}
+              <div className='size-9 rounded-full border-[1.5px] border-white bg-Blue-400 flex-center text-[0.75rem] font-semibold text-white leading-none'>
+                7k
               </div>
             </div>
-            <div className='mt-[1.5rem] mb-[1.75rem]'>
-              <p className='text-[2.625rem] not-italic font-bold leading-[120%] w-[40rem]'>
-                {banner?.title}
+            <div className=''>
+              <p className='text-[1.5rem] font-bold tracking-[-0.045rem] uppercase'>
+                {banner?.user_number}
               </p>
-            </div>
-            <div className='mt-[1rem]'>
-              <TrackingInterface />
+              <p className='text-pc-sub14s'>{banner?.review_title}</p>
             </div>
           </div>
-          <div className=''></div>
+          <p className='mt-6 text-[2.625rem] font-bold leading-[120%] w-[44rem] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
+            {banner?.title}
+          </p>
+          <div className='mt-7'>
+            <TrackingInterface />
+          </div>
         </div>
       </div>
       <div className='xsm:flex hidden '>
@@ -53,27 +53,7 @@ const Section1 = ({banner}: {banner: IBanner}) => {
   )
 }
 
-export default Section1
-
-const Background = ({
-  background,
-  height = 'h-[25.6874rem]',
-}: {
-  background: IImage
-  height?: string
-}) => {
-  return (
-    <>
-      <ImageV2
-        className={`w-[100rem] ${height} h-[49.25rem] flex-shrink-0 absolute top-0 right-0 z-[10]`}
-        src={background?.url}
-        alt={background?.alt}
-        width={1000}
-        height={1000}
-      />
-    </>
-  )
-}
+export default Banner
 
 const BackgroundMobile = ({
   banner,
@@ -85,7 +65,7 @@ const BackgroundMobile = ({
   return (
     <div className='flex flex-col'>
       <ImageV2
-        className={`w-[100rem] ${height} flex-shrink-0  top-0 right-0 z-[10]`}
+        className={`w-full ${height} flex-shrink-0  top-0 right-0 z-[10]`}
         src={banner?.background_mobile.url}
         alt={banner?.background_mobile.alt}
         width={1000}
@@ -136,6 +116,6 @@ const AvatarIcon = ({className, item}: {className?: string; item: IImage}) => {
       alt={item.alt}
       width={200}
       height={200}
-    ></ImageV2>
+    />
   )
 }

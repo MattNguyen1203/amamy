@@ -3,15 +3,8 @@ import MobileMenu from '@/components/header/MobileMenu'
 import Amamy from '@/components/svg/Amamy'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Close from '@/components/svg/Close'
-import Menu from '@/components/svg/Menu'
 import Plus from '@/components/svg/Plus'
 import Search from '@/components/svg/Search'
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
 import useClickOutside from '@/hooks/useClickOutside'
 import {cn} from '@/lib/utils'
 import Link from 'next/link'
@@ -60,7 +53,7 @@ const Header = () => {
     if (isOutside && !searchInput) {
       setIsShowSearchInput(false)
     }
-  }, [isOutside])
+  }, [isOutside, searchInput])
 
   const handleOpen = () => {
     setIsShowSearchInput(true)
@@ -110,7 +103,10 @@ const Header = () => {
             !isShowSearchInput && 'hidden',
           )}
         >
-          <ArrowRight className='size-6 stroke-black/60' />
+          <ArrowRight
+            className='size-6 stroke-black/60'
+            onClick={() => setIsShowSearchInput(false)}
+          />
           <input
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
