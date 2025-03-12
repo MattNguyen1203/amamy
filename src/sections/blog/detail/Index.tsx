@@ -19,10 +19,11 @@ export default function DetailCentenBlog({
     dataDetailPost?.post?.content,
   )
   return (
-    <div className='flex space-x-[4rem] sm:px-[6rem]'>
+    <div className='flex sm:space-x-[4rem] sm:px-[6rem] xsm:flex-col'>
       <ContentBlog
         updatedHtml={updatedHtml}
         data={dataDetailPost?.post}
+        headings={headings}
       />
       {updatedHtml && (
         <AsideBlog

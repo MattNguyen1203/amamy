@@ -80,6 +80,9 @@ export default function FormStepStart({
     if (stepOrder < 2) {
       setStepOrder(2)
     }
+    if (dataFromOrder?.shipping !== values?.shipping) {
+      setStepOrder(2)
+    }
     onSuccess('2')
     useScrollToTop()
     if (sentGoodsAtAmamy) {
@@ -92,18 +95,18 @@ export default function FormStepStart({
           body: formData,
         },
       )
-      console.log(response)
       if (response?.ok) {
         const preview = await response.text()
-        const previewJson = JSON.parse(preview)
-        console.log(previewJson)
-        setDataFromOrder({
-          ...dataFromOrder,
-          recipientName: previewJson?.name,
-          recipientPhone: previewJson?.sdt,
-          ...values,
-        })
-        return
+        if (preview) {
+          const previewJson = JSON.parse(preview)
+          setDataFromOrder({
+            ...dataFromOrder,
+            recipientName: previewJson?.name,
+            recipientPhone: previewJson?.sdt,
+            ...values,
+          })
+          return
+        }
       }
       setDataFromOrder({...dataFromOrder, ...values})
     } else {

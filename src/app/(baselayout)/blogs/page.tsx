@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import TabsCategory from '@/sections/blog/TabsCategory'
 import {Suspense} from 'react'
@@ -21,7 +22,8 @@ export default async function page() {
   ])
 
   return (
-    <main className='sm:px-[6rem] pt-[10rem] bg-white'>
+    <main className='sm:px-[6rem] bg-white'>
+      <Breadcrumb data={[{title: 'Hữu ích cho gửi hàng', slug: ''}]} />
       <Suspense>
         <TabsCategory
           dataCategory={dataCategory?.categories}

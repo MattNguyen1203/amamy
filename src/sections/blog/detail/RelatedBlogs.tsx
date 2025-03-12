@@ -4,22 +4,30 @@ import ICArrow from '@/sections/blog/detail/ICArrow'
 import {Swiper, SwiperSlide} from 'swiper/react'
 
 // Import Swiper styles
+import useIsMobile from '@/hooks/useIsMobile'
 import ItemBlog from '@/sections/blog/ItemBlog'
 import {IItemPostBlog} from '@/sections/blog/blogs.interface'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import {Navigation, Pagination} from 'swiper/modules'
+import {FreeMode, Navigation, Pagination} from 'swiper/modules'
 export default function RelatedBlogs({data}: {data: IItemPostBlog[]}) {
+  const isMobile = useIsMobile()
   return (
-    <section className='py-[6rem]'>
-      <div className='sm:px-[6rem] flex items-center w-full justify-between mb-[2.5rem]'>
-        <h3 className='text-black text-pc-h1'>Các bài viết liên quan</h3>
+    <section className='py-[6rem] xsm:py-[2.5rem]'>
+      <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[2.5rem] xsm:mb-[1rem]'>
+        <h3 className='text-black text-pc-h1 xsm:text-mb-h2'>
+          Các bài viết liên quan
+        </h3>
         <BtnBlue
           slug='/'
-          className='space-x-[0.5rem]'
+          className='space-x-[0.5rem] xsm:size-[2rem] xsm:p-0'
         >
-          <p className='text-pc-sub16m text-white'>Tất cả bài viết</p>
-          <ICArrow className='size-[1.5rem]' />
+          {!isMobile && (
+            <p className='xsm:hidden text-pc-sub16m text-white'>
+              Tất cả bài viết
+            </p>
+          )}
+          <ICArrow className='size-[1.5rem] xsm:size-[1.66669rem]' />
         </BtnBlue>
       </div>
       <div className='relative'>
@@ -30,32 +38,33 @@ export default function RelatedBlogs({data}: {data: IItemPostBlog[]}) {
             nextEl: '.swiper-button-custom-next',
             prevEl: '.swiper-button-custom-prev',
           }}
+          freeMode={true}
           pagination={{
             clickable: true,
             el: '.swiper-pagination-custom',
           }}
-          modules={[Pagination, Navigation]}
-          className='[&_.swiper-wrapper]:space-x-[1.5rem] sm:!px-[6rem]'
+          modules={[FreeMode, Pagination, Navigation]}
+          className='[&_.swiper-wrapper]:space-x-[1.5rem] xsm:[&_.swiper-wrapper]:space-x-[0.75rem] sm:!px-[6rem] xsm:!px-[1rem]'
         >
           {Array.isArray(data) &&
             data?.length > 0 &&
             data?.map((item: IItemPostBlog, index: number) => (
               <SwiperSlide
-                className='!w-[27.5rem] !h-[calc(24.375rem+2.5rem)]'
+                className='!w-[27.5rem] !h-[calc(24.375rem+2.5rem)] xsm:!h-[calc(15.51725rem+1.25rem)] xsm:!w-[16.875rem]'
                 key={index}
               >
                 <ItemBlog
                   key={index}
                   item={item}
-                  className='shadow-[-8px_4px_40px_0px_rgba(0,35,93,0.08)] bg-white'
+                  className='shadow-[-8px_4px_40px_0px_rgba(0,35,93,0.08)] bg-white xsm:h-[15.51725rem] xsm:w-[16.875rem] xsm:[&_img]:h-[9.375rem] xsm:[&_.warpper-image]:h-[9.375rem]'
                 />
               </SwiperSlide>
             ))}
         </Swiper>
-        <div className='swiper-button-custom-prev cursor-pointer absolute z-10 left-[6rem] translate-x-[-50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] bg-[rgba(255,255,255,1)] shadow-2xl'>
+        <div className='xsm:hidden swiper-button-custom-prev cursor-pointer absolute z-10 left-[6rem] translate-x-[-50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] bg-[rgba(255,255,255,1)] shadow-2xl'>
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100] rotate-[180deg]' />
         </div>
-        <div className='swiper-button-custom-next cursor-pointer absolute z-10 right-[6rem] translate-x-[50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] bg-[rgba(255,255,255,1)] shadow-2xl'>
+        <div className='xsm:hidden swiper-button-custom-next cursor-pointer absolute z-10 right-[6rem] translate-x-[50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] bg-[rgba(255,255,255,1)] shadow-2xl'>
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100]' />
         </div>
       </div>
