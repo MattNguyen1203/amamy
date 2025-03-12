@@ -246,7 +246,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               setFaq(true)
               setSentGoodsAtAmamy(false)
             }}
-            className='cursor-pointer h-[3rem] flex-1  p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
+            className='cursor-pointer h-[3rem] flex-1 xsm:w-max xsm:whitespace-nowrap p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
           >
             <p className='text-pc-sub16m text-white'>Đây là lần đầu</p>
           </div>
