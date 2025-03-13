@@ -10,10 +10,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function OrderStepTime({
@@ -29,21 +29,28 @@ export default function OrderStepTime({
     }),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      policy:
-        stepOrder > 2
-          ? true
-          : !dataInformation?.time_content || !dataInformation?.stock,
+      policy: stepOrder > 2 ? true : false,
     },
   })
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    if (stepOrder < 3) {
-      setStepOrder(3)
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  useEffect(() => {
+    if (triggerScroll) {
+      scrollToTop()
+      setTriggerScroll(false)
     }
-    handleClickcurrentTab('3')
-    useScrollToTop()
+  }, [triggerScroll])
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (data) {
+      if (stepOrder < 3) {
+        setStepOrder(3)
+      }
+      handleClickcurrentTab('3')
+      setTriggerScroll(true)
+    }
   }
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>

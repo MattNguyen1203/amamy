@@ -19,7 +19,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
@@ -61,6 +60,7 @@ export default function FormStepStart({
   const [selectServiceDimensionValue, setSelectServiceDimensionValue] =
     useState<{img: string; title: string}>({img: '', title: ''})
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -75,13 +75,23 @@ export default function FormStepStart({
       form.setValue('email', String(localStorage.getItem('user_email')))
     }
   }, [sentGoodsAtAmamy])
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  useEffect(() => {
+    if (triggerScroll) {
+      scrollToTop()
+      setTriggerScroll(false)
+    }
+  }, [triggerScroll])
   async function onSubmit(values: z.infer<typeof formSchema>) {
     localStorage.setItem('user_email', values?.email)
     if (stepOrder < 2) {
       setStepOrder(2)
     }
+    if (dataFromOrder?.shipping !== values?.shipping) {
+      setStepOrder(2)
+    }
     onSuccess('2')
-    useScrollToTop()
+    setTriggerScroll(true)
     if (sentGoodsAtAmamy) {
       const formData = new FormData()
       formData.append('user', values?.email)
@@ -92,18 +102,21 @@ export default function FormStepStart({
           body: formData,
         },
       )
-      console.log(response)
       if (response?.ok) {
         const preview = await response.text()
-        const previewJson = JSON.parse(preview)
-        console.log(previewJson)
-        setDataFromOrder({
-          ...dataFromOrder,
-          recipientName: previewJson?.name,
-          recipientPhone: previewJson?.sdt,
-          ...values,
-        })
-        return
+        if (preview) {
+          const previewJson = JSON.parse(preview)
+          setDataFromOrder({
+            ...dataFromOrder,
+            recipientName: previewJson?.ten_nguoi_nhan,
+            recipientPhone: previewJson?.sdt,
+            recipientAddress: previewJson?.dia_chi_nguoi_nhan,
+            recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
+            recipientPaymentInformation: previewJson?.loai_tien_te,
+            ...values,
+          })
+          return
+        }
       }
       setDataFromOrder({...dataFromOrder, ...values})
     } else {

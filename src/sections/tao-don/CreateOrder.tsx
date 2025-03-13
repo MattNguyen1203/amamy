@@ -218,7 +218,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           }}
           className='h-[3rem] w-full p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
         >
-          <p className='text-pc-sub16m text-white'>Xong</p>
+          <p className='text-pc-sub16m text-white cursor-pointer'>Xong</p>
         </div>
       </div>
       <div

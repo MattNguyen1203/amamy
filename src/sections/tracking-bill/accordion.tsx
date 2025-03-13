@@ -1,10 +1,10 @@
 'use client'
 
-import * as React from 'react'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
+import * as React from 'react'
 
-import {cn} from '@/lib/utils'
 import ImageV2 from '@/components/image/ImageV2'
+import {cn} from '@/lib/utils'
 
 const Accordion = AccordionPrimitive.Root
 
@@ -25,10 +25,8 @@ AccordionItem.displayName = 'AccordionItem'
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
-    icon?: React.ReactNode
-  }
->(({className, children, icon, ...props}, ref) => (
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({className, children, ...props}, ref) => (
   <AccordionPrimitive.Header className='flex'>
     <AccordionPrimitive.Trigger
       ref={ref}

@@ -1,13 +1,5 @@
-import React from 'react'
-
-type Props = {}
-
-const Background = (props: Props) => {
-  return (
-    <div>
-        
-    </div>
-  )
+const Background = () => {
+  return <div></div>
 }
 
 export default Background

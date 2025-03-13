@@ -1,6 +1,4 @@
-type Props = {}
-
-const AIQuestion = (props: Props) => {
+const AIQuestion = () => {
   return (
     <div
       className='flex items-center textWhite p-[0.75rem] h-[3rem] bg-[var(--Blue-Primary,_#38B6FF)] 

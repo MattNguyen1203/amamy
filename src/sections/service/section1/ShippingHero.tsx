@@ -1,6 +1,6 @@
-import type React from 'react'
-import Link from 'next/link'
 import {IServicePage} from '@/utils/type'
+import Link from 'next/link'
+import type React from 'react'
 
 interface Prop {
   data: IServicePage
@@ -29,10 +29,10 @@ const ShippingHero: React.FC<Prop> = ({data}) => {
         {/* Main content */}
         <div className='mx-auto max-w-4xl text-center'>
           <h1 className='mb-6 text-[2.625rem] xsm:text-[1.125rem] font-bold leading-tight'>
-            {data.banner.title}
+            {data?.banner?.title || ''}
           </h1>
           <p className='text-[1rem] xsm:text-[0.875rem] leading-relaxed'>
-            {data.banner.sub_title}
+            {data?.banner?.sub_title || ''}
           </p>
         </div>
       </div>

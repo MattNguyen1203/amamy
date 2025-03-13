@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {NewsObject} from '@/utils/type'
 import Image from 'next/image'
 import {useRef} from 'react'

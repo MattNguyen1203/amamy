@@ -10,10 +10,10 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -48,6 +48,7 @@ export default function FormDeliveryInformationVNJapan({
   dataFromOrder: IDataFromOrder
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -57,6 +58,13 @@ export default function FormDeliveryInformationVNJapan({
       recipientAddress: dataFromOrder?.recipientAddress || '',
     },
   })
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  useEffect(() => {
+    if (triggerScroll) {
+      scrollToTop()
+      setTriggerScroll(false)
+    }
+  }, [triggerScroll])
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -65,7 +73,7 @@ export default function FormDeliveryInformationVNJapan({
       setStepOrder(5)
     }
     handleClickcurrentTab('5')
-    useScrollToTop()
+    setTriggerScroll(true)
   }
   return (
     <Form {...form}>

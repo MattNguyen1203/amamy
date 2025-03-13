@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface ImageSize {
   thumbnail: string
   'thumbnail-width': number
