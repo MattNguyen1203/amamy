@@ -81,6 +81,7 @@ export default function Instruct({
       }
     })
   }
+  console.log(dataFromOrder)
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
       <p className='text-black text-pc-sub16b'>

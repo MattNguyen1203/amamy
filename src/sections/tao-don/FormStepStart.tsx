@@ -101,8 +101,11 @@ export default function FormStepStart({
           const previewJson = JSON.parse(preview)
           setDataFromOrder({
             ...dataFromOrder,
-            recipientName: previewJson?.name,
+            recipientName: previewJson?.ten_nguoi_nhan,
             recipientPhone: previewJson?.sdt,
+            recipientAddress: previewJson?.dia_chi_nguoi_nhan,
+            recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
+            recipientPaymentInformation: previewJson?.loai_tien_te,
             ...values,
           })
           return
