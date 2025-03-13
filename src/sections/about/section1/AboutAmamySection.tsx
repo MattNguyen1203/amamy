@@ -6,7 +6,7 @@ interface Prop {
 }
 
 export default function AboutAmamySection({data}: Prop) {
-  const statsData = data.acf.banner.list_infomation
+  const statsData = data?.acf?.banner?.list_infomation
   return (
     <section className='w-full bg-[#38b6ff] py-16 text-white xsm:py-[2rem]'>
       <div className='w-full mx-auto px-[6rem] xsm:px-[1rem]'>
