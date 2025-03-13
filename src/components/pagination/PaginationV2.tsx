@@ -59,14 +59,14 @@ const PaginationV2 = forwardRef(
         previousLabel={
           <button className='xsm:hidden space-x-[0.5rem] px-[1rem] group h-[2.75rem] w-auto rounded-full flex-center lg:hover:bg-[#1A2B49]/20'>
             <ICArrowPagination className='ease-pagination-bezier size-[0.8rem] transition-all duration-300 lg:group-hover:scale-[1.2]' />
-            <p className='font-[SVN-Gilroy] text-[1rem] font-semibold leading-[1.5] text-[#09090B]'>
+            <p className='font-montserrat text-[1rem] font-semibold leading-[1.5] text-[#09090B]'>
               Trước
             </p>
           </button>
         }
         nextLabel={
           <button className='xsm:hidden space-x-[0.5rem] px-[1rem] group h-[2.75rem] w-auto rounded-full flex-center lg:hover:bg-[#1A2B49]/20'>
-            <p className='font-[SVN-Gilroy] text-[1rem] font-semibold leading-[1.5] text-[#09090B]'>
+            <p className='font-montserrat text-[1rem] font-semibold leading-[1.5] text-[#09090B]'>
               Tiếp theo
             </p>
             <ICArrowPagination className='ease-pagination-bezier size-[0.8rem] rotate-180 transition-all duration-300 lg:group-hover:scale-[1.2]' />

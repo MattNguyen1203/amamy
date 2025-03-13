@@ -1,5 +1,5 @@
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import {AboutWPResponse} from '@/utils/type'
-import Link from 'next/link'
 
 interface Prop {
   data: AboutWPResponse
@@ -11,22 +11,11 @@ export default function AboutAmamySection({data}: Prop) {
     <section className='w-full bg-[#38b6ff] py-16 text-white xsm:py-[2rem]'>
       <div className='w-full mx-auto px-[6rem] xsm:px-[1rem]'>
         {/* Breadcrumb */}
-        <div className='flex items-center gap-2 mb-12 text-sm md:text-base xsm:hidden'>
-          <Link
-            href='/'
-            className='hover:underline'
-          >
-            Trang chủ
-          </Link>
-          <span>/</span>
-          <Link
-            href='/about'
-            className='hover:underline'
-          >
-            Về Amamy
-          </Link>
-        </div>
-
+        <Breadcrumb
+          type='blue'
+          data={[{title: 'Về Amamy', slug: ''}]}
+          className='xsm:hidden'
+        />
         {/* Main content */}
         <div className='grid sm:grid-cols-2 gap-8 items-center'>
           {/* Left side - Heading */}

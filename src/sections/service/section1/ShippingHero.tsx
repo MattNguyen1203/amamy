@@ -1,5 +1,5 @@
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import {IServicePage} from '@/utils/type'
-import Link from 'next/link'
 import type React from 'react'
 
 interface Prop {
@@ -10,21 +10,11 @@ const ShippingHero: React.FC<Prop> = ({data}) => {
     <section className='w-full bg-[#38b6ff] py-16 text-white'>
       <div className='w-full mx-auto px-[6rem] xsm:px-[1rem]'>
         {/* Breadcrumbs */}
-        <div className='mb-16 flex items-center text-sm xsm:hidden'>
-          <Link
-            href='/'
-            className='hover:underline'
-          >
-            Trang chủ
-          </Link>
-          <span className='mx-2'>/</span>
-          <Link
-            href='/dich-vu'
-            className='hover:underline'
-          >
-            Dịch vụ
-          </Link>
-        </div>
+        <Breadcrumb
+          type='blue'
+          data={[{title: 'Dịch vụ', slug: ''}]}
+          className='xsm:hidden'
+        />
 
         {/* Main content */}
         <div className='mx-auto max-w-4xl text-center'>

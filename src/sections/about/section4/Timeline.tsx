@@ -17,7 +17,7 @@ const Timeline = ({data}: Prop) => {
   const [activeSlide, setActiveSlide] = useState(0)
   return (
     <section
-      className='w-[100rem] xsm:w-full h-[50rem] xsm:h-auto flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] justify-between items-center
+      className='w-full xsm:w-full h-[50rem] flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] justify-between items-center
      rounded-tl-[2.5rem] rounded-br-[0rem] rounded-tr-[2.5rem] rounded-bl-[0rem] [box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] bg-[#EDF5FA]
      xsm:flex-col xsm:px-[1rem] xsm:h-fit xsm:gap-[1rem] xsm:p-[1rem]  xsm:bg-[#f7f7f7] xsm:rounded-none xsm:border-none xsm:shadow-none'
     >
@@ -142,9 +142,9 @@ const LeftIcon = () => {
       <path
         d='M14.9997 22.9998L8 16.0001M8 16.0001L14.9997 9.00041M8 16.0001L24 16.0001'
         stroke='black'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )
@@ -160,8 +160,8 @@ const ArrowIcon = () => {
       fill='none'
     >
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M18.7058 12.7071C19.0963 12.3166 19.0963 11.6834 18.7058 11.2929L14.7058 7.29289C14.3152 6.90237 13.6821 6.90237 13.2916 7.29289C12.901 7.68342 12.901 8.31658 13.2916 8.70711L15.5844 11L7.33199 11C6.77971 11 6.33199 11.4477 6.33199 12C6.33199 12.5523 6.77971 13 7.33199 13L15.5844 13L13.2916 15.2929C12.901 15.6834 12.901 16.3166 13.2916 16.7071C13.6821 17.0976 14.3152 17.0976 14.7058 16.7071L18.7058 12.7071Z'
         fill='white'
       />

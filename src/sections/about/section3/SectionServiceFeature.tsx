@@ -1,5 +1,6 @@
 import {AmamyService} from '@/utils/type'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Prop {
   data: AmamyService
@@ -25,7 +26,9 @@ export const MainContainer = ({data}: Prop) => {
               {data.title}
             </p>
 
-            <button
+            <Link
+              href={'tel:' + data.phone}
+              target='__blank'
               className='absolute left-7 xsm:left-[50%] xsm:translate-x-[-50%] bottom-[1.75rem] flex mt-[0.75rem] h-12 justify-center text-[#38B6FF] xsm:text-[1rem] w-[15.875rem] xsm:w-[12.813rem] items-center gap-2 rounded-[1.25rem]  
              bg-[var(--Blue-Primary,_#fff)]'
             >
@@ -37,7 +40,7 @@ export const MainContainer = ({data}: Prop) => {
                 className='w-[1.9375rem] h-[1.9375rem] xsm:w-[1.25rem] xsm:h-[1.25rem]'
               />
               {data.phone}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -47,7 +50,11 @@ export const MainContainer = ({data}: Prop) => {
             <div
               key={index}
               className={`flex flex-col justify-between items-start p-8 gap-5 xsm:block w-[33.3125rem] h-[26.9375rem] xsm:h-auto bg-white border border-[#dcdfe4] flex-grow xsm:p-[1.25rem] xsm:h-[14.875rem] xsm:w-full bg-white border border-[#dcdfe4]  
-    ${index !== services.length - 1 ? 'border-r-0' : 'rounded-tr-[20px] rounded-br-[20px]'} xsm:mb-[1rem] xsm:border-none xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_#00276114]`}
+    ${
+      index !== services.length - 1
+        ? 'border-r-0'
+        : 'rounded-tr-[20px] rounded-br-[20px]'
+    } xsm:mb-[1rem] xsm:border-none xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_#00276114]`}
             >
               <div className='flex flex-col space-y-2 xsm:mb-[0.75rem]'>
                 <div className='flex items-center space-x-3'>
