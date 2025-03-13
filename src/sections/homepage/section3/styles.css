@@ -1,0 +1,11 @@
+.swiper-card-pag .swiper-pagination-bullet {
+  width: 1rem;
+  height: 0.25rem;
+  border-radius: 0.625rem;
+  background-color: rgba(31, 100, 140, 0.24);
+  transition: all 0.3s ease;
+}
+
+.swiper-card-pag .swiper-pagination-bullet-active {
+  background-color: #1f648c;
+}

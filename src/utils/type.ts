@@ -110,7 +110,7 @@ interface ImageFlag {
   }
 }
 
-interface StrengthItem {
+export interface StrengthItem {
   flag: ImageFlag
   title?: string
   header?: string
