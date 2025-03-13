@@ -18,7 +18,7 @@ const CoreValueCard = ({
   description,
 }: CoreValueCardProps) => {
   return (
-    <section className='container mx-auto px-4 py-16 xsm:p-0'>
+    <section className='container mx-auto px-0 py-16 xsm:p-0'>
       <div className='max-w-4xl xsm:max-w-[20rem] mx-auto'>
         <div className='rounded-[1.25rem] overflow-hidden bg-white shadow-lg'>
           {/* Image container */}
@@ -39,7 +39,7 @@ const CoreValueCard = ({
               {label}
             </span>
 
-            <h2 className='mb-[0.75rem] font-montserrat font-semibold text-[1.5rem] xsm:text-[1rem] leading-[1.3] tracking-[-0.03em] text-[rgba(0,0,0,0.8)] self-stretch'>
+            <h2 className='line-clamp-2 mb-[0.75rem] font-montserrat font-semibold text-[1.5rem] xsm:text-[1rem] leading-[1.3] tracking-[-0.045rem] text-[rgba(0,0,0,0.8)] self-stretch'>
               {title}
             </h2>
 

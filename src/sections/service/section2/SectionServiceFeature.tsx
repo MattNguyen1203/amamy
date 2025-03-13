@@ -1,7 +1,6 @@
 import {IListServiceResponse} from '@/utils/type'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 
 interface Prop {
   title: string
@@ -12,8 +11,8 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
   const services = listService.data.list_services_data
   return (
     <div className='flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:block xsm:bg-[#fbf8f9]'>
-      <div className='flex flex-col items-start relative  pl-[6rem] w-[27.5rem] xsm:pl-0 xsm:w-full'>
-        <div className='relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden  p-[1rem]'>
+      <div className='flex flex-col items-start relative  pl-[6rem] w-[27.5rem] xsm:w-full xsm:px-[1rem]'>
+        <div className='relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
           <div className='relative w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
             <div className='absolute w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 bg-[#1dacff] xsm:rounded-[1.25rem]'>
               <Image
@@ -50,7 +49,11 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
             <div
               key={index}
               className={`flex flex-col justify-between items-start p-8 xsm:p-[1.25rem] gap-5 w-[22.375rem] h-[26.9375rem] xsm:h-[14.875rem] xsm:w-full bg-white border border-[#dcdfe4] flex-grow 
-    ${index !== services.length - 1 ? 'border-r-0' : 'rounded-tr-[20px] rounded-br-[20px]'} xsm:mb-[1rem] xsm:border-none xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_#00276114]`}
+    ${
+      index !== services.length - 1
+        ? 'border-r-0'
+        : 'rounded-tr-[20px] rounded-br-[20px]'
+    } xsm:mb-[1rem] xsm:border-none xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_#00276114]`}
             >
               <div className='flex flex-col space-y-2'>
                 <div className='flex items-center space-x-3'>
