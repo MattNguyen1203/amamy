@@ -72,7 +72,6 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
-        {/* <Header /> */}
         {children}
 
         <Toaster

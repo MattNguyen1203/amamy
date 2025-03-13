@@ -1,15 +1,16 @@
 import ImageV2 from '@/components/image/ImageV2'
 import {Card, ImageIcon, ServicesObject} from '@/utils/type'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-const Section2 = ({services}: {services: ServicesObject}) => {
+const Services = ({services}: {services: ServicesObject}) => {
   return (
     <div className='flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:pl-[1rem] xsm:px-[1rem] xsm:py-[2.5rem]'>
       <div className='inline-flex items-end gap-[1.5rem] relative'>
-        <div className='flex flex-col w-[63rem]  items-start gap-[1.5rem] relative xsm:w-[calc(100vw-2rem)]'>
-          <div className='flex flex-col items-start gap-[1.5rem] w-full'>
-            <div className='flex h-[13.75rem] items-center gap-[1.5rem] w-full xsm:w-[calc(100vw-2rem)] xsm:gap-[1rem] xsm:h-[7.375rem]'>
+        <div className='flex flex-col w-[63rem] items-start gap-[1.5rem] relative xsm:w-[calc(100vw-2rem)]'>
+          <div className='flex flex-col items-start space-y-6 xsm:space-y-3 w-full'>
+            <div className='flex h-[13.75rem] items-center space-x-6 w-full xsm:w-[calc(100vw-2rem)] xsm:space-x-3 xsm:h-[7.375rem]'>
               <ServiceCard
                 icon={services.list_service_1[0].icon}
                 title={services.list_service_1[0].title}
@@ -31,7 +32,7 @@ const Section2 = ({services}: {services: ServicesObject}) => {
               />
             </div>
 
-            <div className='inline-flex h-[20.625rem] items-center gap-[1.5rem] xsm:gap-[0.75rem] xsm:overflow-auto xsm:w-[calc(100vw-1rem)]'>
+            <div className='inline-flex h-[20.625rem] items-center space-x-6 xsm:space-x-3 xsm:overflow-auto xsm:w-full hidden_scroll'>
               <ServiceHighlight
                 backgroundUrl={services.list_service_2[0].image.url}
                 icon={
@@ -74,52 +75,61 @@ const ServiceCard = ({
   title,
   description,
   subtitle,
+  href,
 }: {
   subtitle: string
   icon: ImageIcon
   title: string
   description: string
+  href?: string
 }) => (
-  <div className='flex flex-col items-start gap-5 p-5 flex-1 bg-[#fcfdff] rounded-lg shadow-lg xsm:p-[0.75rem]'>
-    <div className='flex items-center gap-4 w-full xsm:flex-col xsm:items-start'>
+  <Link
+    href={href || ''}
+    className='gap-5 p-5 flex-1 h-full bg-[#fcfdff] rounded-[1.25rem] shadow-[0px_14px_24px_0px_rgba(0,4,81,0.04)] xsm:p-[0.75rem]'
+  >
+    <div className='flex items-center space-x-4 xsm:space-x-0 xsm:space-y-3 w-full xsm:flex-col xsm:items-start'>
       <ImageV2
         alt={icon.alt}
         src={icon.url}
-        width={icon.width}
-        height={icon.height}
-        className='w-[3.25rem] h-[3.25rem] xsm:w-[2rem] xsm:h-[2rem]'
+        width={200}
+        height={200}
+        className='size-[3.25rem] xsm:size-[2rem]'
       />
-
-      <div className='flex flex-col gap-2 flex-1'>
-        <div
+      <div className='flex flex-col space-y-2 xsm:space-y-1 flex-1'>
+        <p
           className='text-sm text-[rgba(20,_41,_65,_0.60)] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase
         xsm:text-[0.5rem]'
         >
           {subtitle}
-        </div>
-        <div className='text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-[0.875rem]'>
+        </p>
+        <p className='text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-[0.875rem] xsm:leading-[-0.02625rem]'>
           {title}
-        </div>
+        </p>
       </div>
     </div>
-    <div className='flex flex-col h-[86px] justify-around gap-2.5 px-3 xsm:hidden'>
-      <p className=' text-sm text-[0.875rem] not-italic font-semibold leading-[150%] '>
+    <div className='p-3 mt-5 xsm:hidden'>
+      <p className='text-sm text-[0.875rem] not-italic font-semibold leading-[150%] '>
         {description}
       </p>
     </div>
-  </div>
+  </Link>
 )
 
 const ServiceHighlight = ({
   backgroundUrl,
   icon,
   title,
+  href,
 }: {
   icon: React.JSX.Element
   title: string
   backgroundUrl: string
+  href?: string
 }) => (
-  <div className='relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max'>
+  <Link
+    href={href || ''}
+    className='relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max'
+  >
     <div
       className={`h-full bg-cover bg-center xsm:w-[18.75rem]`}
       style={{backgroundImage: `url(${backgroundUrl})`}}
@@ -134,12 +144,15 @@ const ServiceHighlight = ({
         </div>
       </div>
     </div>
-  </div>
+  </Link>
 )
 
-const CustomerSatisfaction = ({card}: {card: Card}) => (
-  <div className='relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'>
-    <div className='absolute  z-[10]'>
+const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
+  <Link
+    href={href || ''}
+    className='relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'
+  >
+    <div className='absolute z-[10]'>
       <Image
         src={'/homepage/icon/BG.png'}
         alt=''
@@ -192,10 +205,10 @@ const CustomerSatisfaction = ({card}: {card: Card}) => (
         {card.title}
       </p>
     </div>
-  </div>
+  </Link>
 )
 
-export default Section2
+export default Services
 
 const ArrowIcon = () => {
   return (

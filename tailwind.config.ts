@@ -41,6 +41,8 @@ const config: Config = {
         'blueblue-600': '#004085',
         'big-stone-2': '#262626',
         'Blue-Primary': '#38B6FF',
+        'Blue-400': '#60C5FF',
+        'Blue-100': '#C1E8FF',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -194,6 +196,10 @@ const config: Config = {
         },
         '.text-mb-h2': {
           '@apply text-[1.125rem] font-bold leading-[1.2] tracking-[-0.045rem] font-montserrat':
+            {},
+        },
+        '.text-pc-h6': {
+          '@apply text-[1.75rem] font-bold leading-[1.3] tracking-[-0.07rem] font-montserrat':
             {},
         },
       })
