@@ -11,13 +11,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {
   IInformationNoteOrder,
   IInformationNoteOrder_NoteMore,
 } from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function CeateNote({
@@ -49,6 +49,7 @@ export default function CeateNote({
     }),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -64,12 +65,21 @@ export default function CeateNote({
       closingPolicy: stepOrder > 3 ? true : !data?.closing_policy,
     },
   })
-  function onSubmit(values: z.infer<typeof FormSchema>) {
-    if (stepOrder < 4) {
-      setStepOrder(4)
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  useEffect(() => {
+    if (triggerScroll) {
+      scrollToTop()
+      setTriggerScroll(false)
     }
-    handleClickcurrentTab('4')
-    useScrollToTop()
+  }, [triggerScroll])
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    if (values) {
+      if (stepOrder < 4) {
+        setStepOrder(4)
+      }
+      handleClickcurrentTab('4')
+      setTriggerScroll(true)
+    }
   }
   return (
     <div className=''>

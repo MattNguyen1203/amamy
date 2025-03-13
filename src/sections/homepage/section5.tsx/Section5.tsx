@@ -1,6 +1,5 @@
-import { IFaq, IFaqs } from '@/utils/type'
+import {IFaq, IFaqs} from '@/utils/type'
 import Image from 'next/image'
-import React from 'react'
 
 type Props = {
   faq: IFaq
@@ -9,22 +8,31 @@ type Props = {
 
 const Section5 = ({faq, faqs}: Props) => {
   return (
-    <section className='flex relative flex-row w-[100rem]  xsm:w-[100vw] p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
-    rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'>
+    <section
+      className='flex relative flex-row w-[100rem]  xsm:w-[100vw] p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
+    rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'
+    >
       <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[26.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
         {faq.title}
       </h2>
-        <Image src={'/homepage/icon/section-4-background.png'} alt='' width={1000} height={1000} className=' w-[66.25794rem] h-[33.91225rem] 
-        rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden xsm:hidden'/>
+      <Image
+        src={'/homepage/icon/section-4-background.png'}
+        alt=''
+        width={1000}
+        height={1000}
+        className=' w-[66.25794rem] h-[33.91225rem] 
+        rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden xsm:hidden'
+      />
       <div className='flex flex-col gap-[1.5rem] static '>
-        {
-          faqs.map((item, index) => (
-            <ItemContent key={index} index={index}
-            content={item.question}
-            detail={item.answer}
-          />
-          ))
-        }
+        {Array.isArray(faqs) &&
+          faqs?.map((item, index) => (
+            <ItemContent
+              key={index}
+              index={index}
+              content={item.question}
+              detail={item.answer}
+            />
+          ))}
       </div>
     </section>
   )
@@ -32,49 +40,90 @@ const Section5 = ({faq, faqs}: Props) => {
 
 export default Section5
 
-const ItemContent = ({ content, detail, index }: { content: string; detail: string, index: number }) => {
-    return (
-      <div className="flex flex-col">
-        {/* Checkbox ẩn để toggle hiển thị nội dung */}
-        <input type="checkbox" id={`toggle-detail${index}`} className="hidden peer" />
-  
-        {/* Div trên - Click để mở div dưới */}
-        <label htmlFor={`toggle-detail${index}`} className="flex items-start gap-[0.4rem] h-full cursor-pointer">
-          <i className="rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]">
-            <QuestionIcon />
+const ItemContent = ({
+  content,
+  detail,
+  index,
+}: {
+  content: string
+  detail: string
+  index: number
+}) => {
+  return (
+    <div className='flex flex-col'>
+      {/* Checkbox ẩn để toggle hiển thị nội dung */}
+      <input
+        type='checkbox'
+        id={`toggle-detail${index}`}
+        className='hidden peer'
+      />
+
+      {/* Div trên - Click để mở div dưới */}
+      <label
+        htmlFor={`toggle-detail${index}`}
+        className='flex items-start gap-[0.4rem] h-full cursor-pointer'
+      >
+        <i className='rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]'>
+          <QuestionIcon />
+        </i>
+        <div className='bg-[#FFF] relative w-[46.25rem] xsm:w-[17.9375rem] rounded-tl-[0rem] rounded-br-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full'>
+          <i className='absolute top-0 left-0 w-fit z-[0] -translate-x-1/2'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='22'
+              height='16'
+              viewBox='0 0 22 16'
+              fill='none'
+            >
+              <path
+                d='M11 16L22 0H0L11 16Z'
+                fill='white'
+              />
+            </svg>
           </i>
-          <div className="bg-[#FFF] relative w-[46.25rem] xsm:w-[17.9375rem] rounded-tl-[0rem] rounded-br-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full">
-            <i className="absolute top-0 left-0 w-fit z-[0] -translate-x-1/2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                <path d="M11 16L22 0H0L11 16Z" fill="white" />
+          <p className='xsm:text-[0.75rem] xsm:font-semibold'>{content}</p>
+        </div>
+      </label>
+
+      {/* Div dưới - Hiển thị khi checkbox được check */}
+      <div className='max-h-0 overflow-hidden opacity-0 transition-all duration-300 peer-checked:max-h-[500px] peer-checked:opacity-100'>
+        <div className='flex items-start gap-[0.4rem] h-full mt-[0.5rem]'>
+          <div className='bg-[#FFF] relative w-[46.25rem]  xsm:w-[17.9375rem] rounded-tl-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full'>
+            <i className='absolute bottom-0 right-0 w-fit rotate-180 z-[0] translate-x-1/2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='22'
+                height='16'
+                viewBox='0 0 22 16'
+                fill='none'
+              >
+                <path
+                  d='M11 16L22 0H0L11 16Z'
+                  fill='white'
+                />
               </svg>
             </i>
-            <p className='xsm:text-[0.75rem] xsm:font-semibold'>{content}</p>
+            <p dangerouslySetInnerHTML={{__html: detail}}></p>
           </div>
-        </label>
-  
-        {/* Div dưới - Hiển thị khi checkbox được check */}
-        <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-300 peer-checked:max-h-[500px] peer-checked:opacity-100">
-          <div className="flex items-start gap-[0.4rem] h-full mt-[0.5rem]">
-            <div className="bg-[#FFF] relative w-[46.25rem]  xsm:w-[17.9375rem] rounded-tl-[1.25rem] rounded-tr-[1.25rem] rounded-bl-[1.25rem] pl-6 pr-5 py-5 items-start gap-6 h-full">
-              <i className="absolute bottom-0 right-0 w-fit rotate-180 z-[0] translate-x-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                  <path d="M11 16L22 0H0L11 16Z" fill="white" />
-                </svg>
-              </i>
-              <p dangerouslySetInnerHTML={{__html: detail}}></p>
-            </div>
-            <i className="rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M5.00005 19.1667C4.99431 21.3665 5.50827 23.5365 6.50005 25.5C7.67599 27.853 9.4838 29.832 11.721 31.2155C13.9581 32.599 16.5363 33.3324 19.1667 33.3334C21.3665 33.3391 23.5365 32.8252 25.5 31.8334L35 35L31.8334 25.5C32.8252 23.5365 33.3391 21.3665 33.3334 19.1667C33.3324 16.5363 32.599 13.9581 31.2155 11.721C29.832 9.4838 27.853 7.67599 25.5 6.50005C23.5365 5.50827 21.3665 4.99431 19.1667 5.00005H18.3334C14.8595 5.1917 11.5783 6.65798 9.11815 9.11815C6.65798 11.5783 5.1917 14.8595 5.00005 18.3334V19.1667Z" fill="#38B6FF"/>
-          </svg>
-            </i>
-          </div>
+          <i className='rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='40'
+              height='40'
+              viewBox='0 0 40 40'
+              fill='none'
+            >
+              <path
+                d='M5.00005 19.1667C4.99431 21.3665 5.50827 23.5365 6.50005 25.5C7.67599 27.853 9.4838 29.832 11.721 31.2155C13.9581 32.599 16.5363 33.3324 19.1667 33.3334C21.3665 33.3391 23.5365 32.8252 25.5 31.8334L35 35L31.8334 25.5C32.8252 23.5365 33.3391 21.3665 33.3334 19.1667C33.3324 16.5363 32.599 13.9581 31.2155 11.721C29.832 9.4838 27.853 7.67599 25.5 6.50005C23.5365 5.50827 21.3665 4.99431 19.1667 5.00005H18.3334C14.8595 5.1917 11.5783 6.65798 9.11815 9.11815C6.65798 11.5783 5.1917 14.8595 5.00005 18.3334V19.1667Z'
+                fill='#38B6FF'
+              />
+            </svg>
+          </i>
         </div>
       </div>
-    );
-  };
-  
+    </div>
+  )
+}
 
 const QuestionIcon = () => {
   return (

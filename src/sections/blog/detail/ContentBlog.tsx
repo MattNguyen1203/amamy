@@ -22,7 +22,6 @@ export default function ContentBlog({
   const isMobile = useIsMobile()
   const pathname = usePathname()
   const [currentUrl, setCurrentUrl] = useState('')
-  const [copyUrl, setCopyUrl] = useState(false)
   const date = new Date(data?.date)
   const day = String(date.getUTCDate()).padStart(2, '0')
   const month = String(date.getUTCMonth() + 1).padStart(2, '0')
@@ -33,12 +32,8 @@ export default function ContentBlog({
     setCurrentUrl(fullUrl)
   }, [])
   const handleCopuUrl = () => {
-    setCopyUrl(true)
     navigator.clipboard.writeText(currentUrl)
     toast.success('Copy Thành Công')
-    setTimeout(() => {
-      setCopyUrl(false)
-    }, 2000)
   }
   const handleShareToFacebook = () => {
     if (typeof window === 'undefined') return

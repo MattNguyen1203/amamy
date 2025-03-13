@@ -1,8 +1,6 @@
 import SlideDocs from './SlideDocs'
 
-type Props = {}
-
-const Section6 = (props: Props) => {
+const Section6 = () => {
   return (
     <div className='flex pt-24 pl-24 pb-24 flex-col items-start gap-2.5 self-stretch w-full xsm:pl-[1rem]'>
       <div className='flex justify-between w-full flex-col'>
@@ -42,26 +40,6 @@ const ArrowIcon = () => {
         clipRule='evenodd'
         d='M18.7058 12.7071C19.0963 12.3166 19.0963 11.6834 18.7058 11.2929L14.7058 7.29289C14.3152 6.90237 13.6821 6.90237 13.2916 7.29289C12.901 7.68342 12.901 8.31658 13.2916 8.70711L15.5844 11L7.33199 11C6.77971 11 6.33199 11.4477 6.33199 12C6.33199 12.5523 6.77971 13 7.33199 13L15.5844 13L13.2916 15.2929C12.901 15.6834 12.901 16.3166 13.2916 16.7071C13.6821 17.0976 14.3152 17.0976 14.7058 16.7071L18.7058 12.7071Z'
         fill='white'
-      />
-    </svg>
-  )
-}
-
-const ArrowRightIcon = () => {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='32'
-      height='32'
-      viewBox='0 0 32 32'
-      fill='none'
-    >
-      <path
-        d='M14.9997 22.9995L8 15.9998M8 15.9998L14.9997 9.00017M8 15.9998L24 15.9998'
-        stroke='black'
-        strokeWidth='2'
-        strokeLinecap='round'
-        strokeLinejoin='round'
       />
     </svg>
   )

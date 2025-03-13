@@ -150,7 +150,9 @@ const CustomerSatisfaction = ({card}: {card: Card}) => (
     </div>
 
     <div className='absolute inset-0 bg-[url(/image.png)] bg-cover bg-center'>
-      <img
+      <Image
+        width={600 * 2}
+        height={600 * 2}
         className='absolute w-[279px] h-[287px] top-[149px] left-[43px] object-cover z-[30]'
         alt='Image'
         src={'/homepage/replace/img-1.png'}

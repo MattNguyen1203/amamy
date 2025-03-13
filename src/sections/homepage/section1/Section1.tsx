@@ -1,9 +1,7 @@
 'use client'
-import Image from 'next/image'
-import React from 'react'
-import TrackingInterface from './tracking-interface'
-import {IBanner, IImage} from '@/utils/type'
 import ImageV2 from '@/components/image/ImageV2'
+import {IBanner, IImage} from '@/utils/type'
+import TrackingInterface from './tracking-interface'
 
 const Section1 = ({banner}: {banner: IBanner}) => {
   return (

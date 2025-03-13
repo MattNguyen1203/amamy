@@ -13,7 +13,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICWarning from '@/sections/tao-don/ICWarning'
@@ -21,7 +20,7 @@ import {
   IInformationInstructOrder,
   IInformationInstructOrder_SelectBranch,
 } from '@/sections/tao-don/oder.interface'
-import {useTransition} from 'react'
+import {useEffect, useState, useTransition} from 'react'
 import {toast} from 'sonner'
 
 export default function Instruct({
@@ -39,6 +38,14 @@ export default function Instruct({
 }) {
   const {setStepOrder} = useStore((state) => state)
   const [isPending, setTransition] = useTransition()
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  useEffect(() => {
+    if (triggerScroll) {
+      scrollToTop()
+      setTriggerScroll(false)
+    }
+  }, [triggerScroll])
   function handleCreateOrder() {
     setTransition(async () => {
       const formData = new FormData()
@@ -50,19 +57,22 @@ export default function Instruct({
         dataFromOrder?.recipientPaymentInformation,
       )
       formData.append('sdt', dataFromOrder?.recipientPhone)
-      dataFromOrder?.recipientAddressDetail &&
+      if (dataFromOrder?.recipientAddressDetail) {
         formData.append(
           'dia_chi_nguoi_nhan_chi_tiet',
           dataFromOrder?.recipientAddressDetail,
         )
+      }
       formData.append('chieu_van_don', dataFromOrder?.shipping)
-      dataFromOrder?.customercode &&
+      if (dataFromOrder?.customercode) {
         formData.append('ma_khach_hang', dataFromOrder?.customercode)
-      dataFromOrder?.recipientCity &&
+      }
+      if (dataFromOrder?.recipientCity) {
         formData.append('thanh_pho', dataFromOrder?.recipientCity)
-      dataFromOrder?.recipientCodeCity &&
+      }
+      if (dataFromOrder?.recipientCodeCity) {
         formData.append('ma_thanh_pho', dataFromOrder?.recipientCodeCity)
-
+      }
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
         {
@@ -75,12 +85,13 @@ export default function Instruct({
         setSubmitting(true)
         setStepOrder(1)
         handleClickcurrentTab('1')
-        useScrollToTop()
+        setTriggerScroll(true)
       } else {
         toast.error('Có lỗi sãy ra')
       }
     })
   }
+  console.log(dataFromOrder)
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
       <p className='text-black text-pc-sub16b'>

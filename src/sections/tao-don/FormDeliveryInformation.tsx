@@ -18,12 +18,11 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -79,6 +78,7 @@ export default function FormDeliveryInformation({
 }) {
   const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const [selectPaymentInformation, setSelectPaymentInformation] =
     useState<boolean>(false)
   const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
@@ -97,6 +97,13 @@ export default function FormDeliveryInformation({
         dataFromOrder?.recipientPaymentInformation || '',
     },
   })
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  useEffect(() => {
+    if (triggerScroll) {
+      scrollToTop()
+      setTriggerScroll(false)
+    }
+  }, [triggerScroll])
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -105,7 +112,7 @@ export default function FormDeliveryInformation({
       setStepOrder(5)
     }
     handleClickcurrentTab('5')
-    useScrollToTop()
+    setTriggerScroll(true)
   }
   return (
     <Form {...form}>
