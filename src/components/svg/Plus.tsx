@@ -15,9 +15,9 @@ const Plus = ({className, ...props}: React.SVGProps<SVGSVGElement>) => {
     >
       <path
         d='M12 4L11.9988 12M11.9988 20V12M11.9988 12H20H4'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )

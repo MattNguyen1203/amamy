@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Footer = () => {
   return (
-    <div className='flex  px-24 pt-20 pb-[1rem] flex-col items-end gap-[3.4375rem] self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-[1rem]'>
-      <div className='flex w-full justify-between xsm:flex-col'>
+    <div className='flex px-24 pt-20 pb-[1rem] flex-col sm:items-end sm:gap-[3.4375rem] sm:self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-0 xsm:pb-0'>
+      <div className='xsm:px-[1rem] flex w-full justify-between xsm:flex-col'>
         <div className='flex gap-[1.5rem] flex-col'>
-          <h2 className='font-[Montserrat] text-[2rem] not-italic font-bold leading-[130%]  max-w-[35.875rem] xsm:text-[1.25rem] xsm:text-center '>
+          <h2 className='font-montserrat text-[2rem] not-italic font-bold xsm:font-semibold leading-[130%] xsm:tracking-[-0.025rem] max-w-[35.875rem] xsm:text-[1.25rem] xsm:text-center '>
             Khách hàng là trung tâm, và sự tin cậy, hài lòng của họ là chìa khóa
             thành công của Amamy.
           </h2>
@@ -15,7 +15,7 @@ const Footer = () => {
           </div>
         </div>
         <div className='w-[37.4375rem] text-[var(--greyscaletext-0)] gap-[0.77rem] flex flex-col xsm:mt-[1.5rem] xsm:w-full'>
-          <p className='text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-center'>
+          <p className='text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-center xsm:text-pc-sub14b'>
             Đăng ký nhận ưu đãi
           </p>
           <div className='relative w-full'>
@@ -31,12 +31,12 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='bg-[rgba(255,_255,_255,_0.20)] my-[3.44rem] h-[1px] w-full'>
+      <div className='xsm:hidden xsm:px-[1rem] bg-[rgba(255,_255,_255,_0.20)] sm:my-[3.44rem] h-[1px] w-full'>
         <p className='opacity-0'>1</p>
       </div>
-      <div className='flex justify-between w-full mb-[6.25rem]'>
-        <div className='flex gap-[1.5rem] flex-col'>
-          <h3 className='text-[1.25rem] not-italic font-bold leading-[120%]'>
+      <div className='xsm:p-[1rem] xsm:mt-[2rem] xsm:mb-0 xsm:pb-[2rem] xsm:bg-[rgba(255,255,255,0.03)] xsm:rounded-t-[1.25rem] flex xsm:flex-col sm:justify-between w-full mb-[6.25rem]'>
+        <div className='flex gap-[1.5rem] xsm:gap-[1rem] flex-col'>
+          <h3 className='text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-pc-sub14s'>
             Liên hệ với chúng tôi
           </h3>
           <div className='flex flex-col gap-[1rem]'>
@@ -62,66 +62,72 @@ const Footer = () => {
             />
           </div>
         </div>
-        <div className='max-w-[35.875rem] flex-1 flex justify-between'>
+        <div className='max-w-[35.875rem] xsm:space-y-[2.5rem] flex-1 flex xsm:flex-col sm:justify-between xsm:mt-[2.5rem]'>
           <div>
-            <h3 className='text-[1.25rem] mb-[1.5rem] not-italic font-bold leading-[120%]'>
+            <h3 className='text-[1.25rem] mb-[1.5rem] xsm:mb-[0.75rem] not-italic font-bold leading-[120%] xsm:text-pc-sub14s'>
               Dịch vụ
             </h3>
-            <div className='flex flex-col gap-[0.75rem]'>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+            <div className='sm:flex sm:flex-col gap-[0.75rem] xsm:grid xsm:grid-cols-2 xsm:gap-[1rem]'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Theo dõi bưu kiện
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Tính giá vận chuyển
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Quản trị hệ thống CNTT
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Hữu ích cho gửi hàng
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Dịch vụ khác
               </p>
             </div>
           </div>
           <div>
-            <h3 className='text-[1.25rem] mb-[1.5rem] not-italic font-bold leading-[120%]'>
+            <h3 className='text-[1.25rem] mb-[1.5rem] xsm:mb-[0.75rem] not-italic font-bold leading-[120%] xsm:text-pc-sub14s'>
               Giải pháp
             </h3>
-            <div className='flex flex-col gap-[0.75rem]'>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+            <div className='sm:flex sm:flex-col sm:gap-[0.75rem] xsm:grid xsm:grid-cols-2 gap-[1rem]'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Về Amamy
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Retail
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 ETO
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Edu
               </p>
-              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80'>
+              <p className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'>
                 Media
               </p>
             </div>
           </div>
         </div>
       </div>
-
-      <div className='flex w-[88rem] p-6 justify-between relative items-center gap-2.5 stroke-[0.93px] opacity-20'>
-        <div className='border-t-[1px] borderR border-l absolute top-0 right-0 left-0 rounded-t-[20px] h-3/4 w-full'></div>
-        <p className='text-[#D6D6D6] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
-          Tất cả quyền được bảo lưu. Bản quyền © 2024 Ltd.
-        </p>
-        <div className='flex gap-[2.2rem]'>
-          <p className='text-[#D6D6D6] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
-            Chính sách bảo mật
+      <div className='xsm:px-[1rem] xsm:bg-[rgba(255,255,255,0.03)]'>
+        <div className='xsm:p-[1rem_1.5rem_1.5rem_1.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-t-[rgba(241,249,255,0.20)] xsm:rounded-t-[1.25rem] xsm:space-y-[1rem] flex xsm:flex-col xsm:items-center w-[88rem] xsm:w-full p-6 justify-between sm:relative items-center gap-2.5 stroke-[0.93px] sm:opacity-20'>
+          <div className='sm:hidden flex w-full justify-center space-x-[1rem]'>
+            {IconWrap(<FacebookSvg className='rounded-[100%]' />)}
+            {IconWrap(<ZaloSvg className='rounded-[100%]' />)}
+            {IconWrap(<TiktokSvg className='rounded-[100%]' />)}
+          </div>
+          <div className='xsm:hidden border-t-[1px] borderR border-l absolute top-0 right-0 left-0 rounded-t-[20px] h-3/4 w-full'></div>
+          <p className='xsm:w-[13.1875rem] xsm:text-center text-[#D6D6D6] xsm:text-[#F8F8F8] xsm:text-pc-sub14s text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
+            Tất cả quyền được bảo lưu. Bản quyền © 2024 Ltd.
           </p>
-          <p className='text-[#D6D6D6] text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
-            Điều khoản & Điều kiện
-          </p>
+          <div className='flex sm:gap-[2.2rem] xsm:gap-[2rem]'>
+            <p className='xsm:text-[rgba(255,255,255,0.80)] text-[#D6D6D6] text-[0.75rem] not-italic font-semibold xsm:font-medium leading-[normal] xsm:leading-[1.8] xsm:tracking-[-0.0075rem] tracking-[-0.015rem] sm:uppercase'>
+              Chính sách bảo mật
+            </p>
+            <p className='xsm:text-[rgba(255,255,255,0.80)] text-[#D6D6D6] text-[0.75rem] not-italic font-semibold xsm:font-medium leading-[normal] xsm:leading-[1.8] xsm:tracking-[-0.0075rem] tracking-[-0.015rem] sm:uppercase'>
+              Điều khoản & Điều kiện
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -134,7 +140,9 @@ const Address = ({icon, content}: {icon: any; content: string}) => {
   return (
     <div className='flex gap-[0.5rem] items-center'>
       {icon}
-      <p>{content}</p>
+      <p className='xsm:text-pc-sub14m xsm:opacity-[0.8] xsm:text-white'>
+        {content}
+      </p>
     </div>
   )
 }
@@ -172,7 +180,7 @@ const IconWrap = (icon: any) => {
   )
 }
 
-const FacebookSvg = () => {
+const FacebookSvg = ({className}: {className?: string}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -180,6 +188,7 @@ const FacebookSvg = () => {
       height='24'
       viewBox='0 0 24 24'
       fill='none'
+      className={className}
     >
       <path
         d='M4.38226 0C1.95468 0 0 1.95468 0 4.38225V19.6177C0 22.0453 1.95468 24 4.38226 24H12.6398V14.6175H10.1588V11.2395H12.6398V8.35349C12.6398 6.0861 14.1057 4.00425 17.4825 4.00425C18.8497 4.00425 19.8608 4.1355 19.8608 4.1355L19.7813 7.29001C19.7813 7.29001 18.7501 7.28027 17.625 7.28027C16.4073 7.28027 16.212 7.84134 16.212 8.77277V11.2395H19.878L19.7183 14.6175H16.212V24H19.6177C22.0453 24 24 22.0453 24 19.6178V4.38227C24 1.9547 22.0453 2.4e-05 19.6177 2.4e-05H4.38223L4.38226 0Z'
@@ -190,7 +199,7 @@ const FacebookSvg = () => {
   )
 }
 
-const ZaloSvg = () => {
+const ZaloSvg = ({className}: {className?: string}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -198,6 +207,7 @@ const ZaloSvg = () => {
       height='26'
       viewBox='0 0 26 26'
       fill='none'
+      className={className}
     >
       <path
         fillRule='evenodd'
@@ -210,7 +220,7 @@ const ZaloSvg = () => {
   )
 }
 
-const TiktokSvg = () => {
+const TiktokSvg = ({className}: {className?: string}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -218,6 +228,7 @@ const TiktokSvg = () => {
       height='24'
       viewBox='0 0 24 24'
       fill='none'
+      className={className}
     >
       <path
         fillRule='evenodd'
@@ -230,7 +241,7 @@ const TiktokSvg = () => {
   )
 }
 
-const ArrowRightCircle = () => {
+const ArrowRightCircle = ({className}: {className?: string}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -238,6 +249,7 @@ const ArrowRightCircle = () => {
       height='28'
       viewBox='0 0 28 28'
       fill='none'
+      className={className}
     >
       <path
         fillRule='evenodd'

@@ -152,6 +152,10 @@ const config: Config = {
           '@apply text-[0.875rem] font-semibold leading-[1.5] tracking-[-0.02625rem] font-montserrat':
             {},
         },
+        '.text-pc-sub14b': {
+          '@apply text-[0.875rem] font-bold leading-[1.3] tracking-[-0.02625rem] font-montserrat':
+            {},
+        },
         '.text-pc-sub12m': {
           '@apply text-[0.75rem] font-medium leading-[1.4] tracking-[-0.0225rem] font-montserrat':
             {},
