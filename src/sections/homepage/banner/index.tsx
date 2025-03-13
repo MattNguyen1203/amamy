@@ -14,6 +14,7 @@ const Banner = ({banner}: {banner: IBanner}) => {
           src={banner?.background_pc.url}
           width={3000}
           height={2000}
+          quality={100}
         />
         <div className='absolute left-[6rem] top-[13.37rem]'>
           <div className='flex items-center space-x-3'>
@@ -65,42 +66,38 @@ const BackgroundMobile = ({
   return (
     <div className='flex flex-col'>
       <ImageV2
-        className={`w-full ${height} flex-shrink-0  top-0 right-0 z-[10]`}
+        className={`w-full ${height} flex-shrink-0 top-0 right-0 z-[10]`}
         src={banner?.background_mobile.url}
         alt={banner?.background_mobile.alt}
         width={1000}
         height={1000}
       />
-      <div className='px-[1rem]'>
-        <div className='mt-[4.27rem] flex gap-[0.75rem] '>
-          <div className='flex relative w-[7rem]'>
+      <div className='px-[1rem] pt-5 -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] relative z-[20]'>
+        <div className='flex space-x-[0.75rem] items-center'>
+          <div className='flex relative -space-x-2.5'>
             {banner?.user_list.map((item, index) => (
-              <div
+              <AvatarIcon
+                item={item}
                 key={index}
-                style={{
-                  transform: `translateX(${index * 2.25 - index * 0.75}rem)`,
-                }}
-                className='absolute top-0 left-0'
-              >
-                <AvatarIcon item={item} />
-              </div>
+              />
             ))}
+            <div className='size-7 rounded-full border-[1.5px] border-white bg-Blue-400 flex-center text-[0.75rem] xsm:text-[0.58331rem] font-semibold text-white leading-none'>
+              7k
+            </div>
           </div>
-          <div className='w-[13.32rem]'>
-            <p className='font-[Montserrat] text-[1rem] not-italic font-bold leading-[normal] tracking-[-0.03rem]'>
+          <div className='flex-1'>
+            <p className='font-[Montserrat] text-[1rem] font-bold leading-[normal] tracking-[-0.03rem]'>
               {banner?.user_number}
             </p>
-            <p className='text-[0.625rem] not-italic font-medium leading-[140%]'>
+            <p className='text-[0.625rem] font-medium leading-[140%]'>
               {banner?.review_title}
             </p>
           </div>
         </div>
-        <div className='mt-[.75rem] mb-[1rem]'>
-          <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
-            {banner?.title}
-          </p>
-        </div>
-        <div className='mt-[1rem]'>
+        <p className='mt-3 text-[1.25rem] font-bold leading-[120%]'>
+          {banner?.title}
+        </p>
+        <div className='mt-5'>
           <TrackingInterface />
         </div>
       </div>
@@ -111,7 +108,7 @@ const BackgroundMobile = ({
 const AvatarIcon = ({className, item}: {className?: string; item: IImage}) => {
   return (
     <ImageV2
-      className={`rounded-[2.25rem] border-[1.5px] border-solid object-contain border-[#FFF] bg-[#C8B1B1] w-9 h-9 ${className}`}
+      className={`rounded-[2.25rem] border-[1.5px] border-solid object-contain border-[#FFF] bg-[#C8B1B1] size-9 xsm:size-7 ${className}`}
       src={item.url}
       alt={item.alt}
       width={200}

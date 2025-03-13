@@ -1,6 +1,5 @@
 import fetchDataWP from '@/fetch/fetchDataWP'
 import Homepage from '@/sections/homepage'
-import {IHomePage} from '@/utils/type'
 
 // export async function generateMetadata() {
 //   const res = await getMetadata('/')
