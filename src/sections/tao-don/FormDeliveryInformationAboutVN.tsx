@@ -18,7 +18,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
@@ -80,9 +79,10 @@ export default function FormDeliveryInformationAboutVN({
         dataFromOrder?.recipientPaymentInformation || '',
     },
   })
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
-      useScrollToTop()
+      scrollToTop()
       setTriggerScroll(false)
     }
   }, [triggerScroll])

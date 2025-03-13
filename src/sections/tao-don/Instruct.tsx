@@ -13,7 +13,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICWarning from '@/sections/tao-don/ICWarning'
@@ -40,9 +39,10 @@ export default function Instruct({
   const {setStepOrder} = useStore((state) => state)
   const [isPending, setTransition] = useTransition()
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
-      useScrollToTop()
+      scrollToTop()
       setTriggerScroll(false)
     }
   }, [triggerScroll])

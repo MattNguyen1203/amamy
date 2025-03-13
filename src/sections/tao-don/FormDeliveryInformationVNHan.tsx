@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -56,9 +55,10 @@ export default function FormDeliveryInformationVNHan({
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
-      useScrollToTop()
+      scrollToTop()
       setTriggerScroll(false)
     }
   }, [triggerScroll])

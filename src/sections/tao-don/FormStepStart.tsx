@@ -19,7 +19,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
@@ -76,9 +75,10 @@ export default function FormStepStart({
       form.setValue('email', String(localStorage.getItem('user_email')))
     }
   }, [sentGoodsAtAmamy])
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
-      useScrollToTop()
+      scrollToTop()
       setTriggerScroll(false)
     }
   }, [triggerScroll])

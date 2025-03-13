@@ -11,7 +11,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {
   IInformationNoteOrder,
@@ -66,9 +65,10 @@ export default function CeateNote({
       closingPolicy: stepOrder > 3 ? true : !data?.closing_policy,
     },
   })
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
-      useScrollToTop()
+      scrollToTop()
       setTriggerScroll(false)
     }
   }, [triggerScroll])
