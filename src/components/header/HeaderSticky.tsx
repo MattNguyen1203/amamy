@@ -1,12 +1,10 @@
 'use client'
-import React, {useState, useEffect} from 'react'
-import ImageV2 from '../image/ImageV2'
 import Link from 'next/link'
+import {useEffect, useState} from 'react'
 import ButtonCreateOrder from '../button/btn-create-order'
+import ImageV2 from '../image/ImageV2'
 
-type Props = {}
-
-const HeaderSticky = (props: Props) => {
+const HeaderSticky = () => {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {

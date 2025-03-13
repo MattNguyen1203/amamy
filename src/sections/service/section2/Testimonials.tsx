@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import * as React from 'react'
 import Image from 'next/image'
+import * as React from 'react'
 
 import {Card, CardContent} from '@/components/ui/card'
 import {
@@ -62,7 +63,9 @@ export default function Testimonials({data}: Prop) {
                   className='md:basis-1/2 lg:basis-1/4 p-0 flex justify-center'
                 >
                   <Card
-                    className={`h-[20.5625rem] w-[20.875rem] border-none ${index % 2 === 0 ? 'bg-[#DBF5FF]' : 'bg-[#F2F2F2]'}`}
+                    className={`h-[20.5625rem] w-[20.875rem] border-none ${
+                      index % 2 === 0 ? 'bg-[#DBF5FF]' : 'bg-[#F2F2F2]'
+                    }`}
                   >
                     <CardContent className='p-[1.5rem]'>
                       <div className='mb-4 flex gap-1'>
@@ -122,7 +125,9 @@ export default function Testimonials({data}: Prop) {
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
-                className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${current === index ? 'bg-[#1F648C]' : 'bg-gray-200'}`}
+                className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${
+                  current === index ? 'bg-[#1F648C]' : 'bg-gray-200'
+                }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

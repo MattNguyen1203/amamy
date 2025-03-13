@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type {Metadata} from 'next'
-import '../globals.css'
-import {Toaster} from 'sonner'
-import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 import HeaderSticky from '@/components/header/HeaderSticky'
+import type {Metadata} from 'next'
+import {Toaster} from 'sonner'
+import '../globals.css'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,9 +19,8 @@ export default async function RootLayout({
 }>) {
   return (
     <html>
-      <body
-      >
-        <HeaderSticky/>
+      <body>
+        <HeaderSticky />
         {children}
 
         <Toaster

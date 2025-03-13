@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {AboutWPResponse} from '@/utils/type'
 import Image from 'next/image'
-import React, {useRef, useState} from 'react'
-import {Pagination} from 'swiper/modules'
-import {Swiper, SwiperSlide} from 'swiper/react'
+import {useRef, useState} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import {AboutWPResponse} from '@/utils/type'
+import {Pagination} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import EventCard from './EventCard'
 
 interface Prop {
@@ -115,7 +116,9 @@ const Timeline = ({data}: Prop) => {
                 key={index}
                 onClick={() => swiperRef.current?.swiper.slideTo(index)}
                 aria-label={`Go to slide ${index + 1}`}
-                className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${activeSlide === index ? 'bg-[#1F648C]' : 'bg-gray-200'}`}
+                className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${
+                  activeSlide === index ? 'bg-[#1F648C]' : 'bg-gray-200'
+                }`}
               />
             ))}
           </div>

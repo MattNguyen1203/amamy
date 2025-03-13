@@ -10,12 +10,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
-import useIsMobile from '@/hooks/useIsMobile'
 import {useScrollToTop} from '@/hooks/useScrollToTop'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -55,12 +54,14 @@ export default function FormDeliveryInformationVNHan({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
 }) {
-  const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
-  const [selectPaymentInformation, setSelectPaymentInformation] =
-    useState<boolean>(false)
-  const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
-    useState<{value: string; title: string}>({value: '', title: ''})
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  useEffect(() => {
+    if (triggerScroll) {
+      useScrollToTop()
+      setTriggerScroll(false)
+    }
+  }, [triggerScroll])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -80,7 +81,7 @@ export default function FormDeliveryInformationVNHan({
       setStepOrder(5)
     }
     handleClickcurrentTab('5')
-    useScrollToTop()
+    setTriggerScroll(true)
   }
   return (
     <Form {...form}>

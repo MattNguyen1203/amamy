@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const Footer = () => {
   return (
     <div className='flex  px-24 pt-20 pb-[1rem] flex-col items-end gap-[3.4375rem] self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-[1rem]'>

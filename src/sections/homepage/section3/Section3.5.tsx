@@ -87,7 +87,9 @@ export const MainContainer = ({
       <div className='relative self-stretch w-full h-[22.5rem] rounded-[var(--token-8)_0px_0px_0px] overflow-hidden'>
         <div className='relative w-[21.5rem] h-[22.5625rem]'>
           <div className='absolute w-[21.5rem] h-[22.5625rem] top-0 left-0 bg-[#1dacff]'>
-            <img
+            <Image
+              width={600 * 2}
+              height={600 * 2}
               className='absolute w-[21.5rem] h-[22.5rem] top-0 left-0'
               alt='Mask group'
               src={'/homepage/icon/Service-Item-Mask-Group.png'}

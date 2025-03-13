@@ -1,13 +1,14 @@
-import {ListQuality} from '@/utils/type'
-import CoreValueCard from './CoreValueCard'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Carousel,
   CarouselContent,
-  CarouselPrevious,
-  CarouselNext,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/carousel'
+import {ListQuality} from '@/utils/type'
 import React from 'react'
+import CoreValueCard from './CoreValueCard'
 
 interface Prop {
   quantities: ListQuality[]
@@ -63,7 +64,9 @@ const QuantityListMB = ({quantities}: Prop) => {
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
-            className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${current === index ? 'bg-[#1F648C]' : 'bg-gray-200'}`}
+            className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${
+              current === index ? 'bg-[#1F648C]' : 'bg-gray-200'
+            }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

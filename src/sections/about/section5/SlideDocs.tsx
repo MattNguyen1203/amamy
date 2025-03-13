@@ -1,5 +1,5 @@
 'use client'
-import React, {useRef, useState} from 'react'
+import {useRef} from 'react'
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react'
 
@@ -8,9 +8,9 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 // import required modules
-import {Pagination} from 'swiper/modules'
 import ImageV2 from '@/components/image/ImageV2'
 import {Post} from '@/utils/type'
+import {Pagination} from 'swiper/modules'
 
 interface Prop {
   posts: Post[]
@@ -20,7 +20,6 @@ interface PropItem {
 }
 export default function SlideDocs({posts}: Prop) {
   const swiperRef = useRef<any>(null)
-  const [activeSlide, setActiveSlide] = useState(0)
   return (
     <>
       <Swiper
@@ -31,7 +30,9 @@ export default function SlideDocs({posts}: Prop) {
           clickable: true,
           el: '.custom-pagination',
           renderBullet: (index, className = '!') => {
-            return `<span class="${className} ${index > 3 && '!hidden'} custom-dot"></span>`
+            return `<span class="${className} ${
+              index > 3 && '!hidden'
+            } custom-dot"></span>`
           },
         }}
         modules={[Pagination]}
@@ -52,7 +53,9 @@ export default function SlideDocs({posts}: Prop) {
             key={index}
             onClick={() => swiperRef.current?.swiper.slideTo(index)}
             aria-label={`Go to slide ${index + 1}`}
-            className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${activeSlide === index ? 'bg-[#1F648C]' : 'bg-gray-200'}`}
+            className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${
+              0 === index ? 'bg-[#1F648C]' : 'bg-gray-200'
+            }`}
           />
         ))}
       </div>
