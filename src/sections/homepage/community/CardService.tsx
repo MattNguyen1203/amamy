@@ -17,6 +17,7 @@ export const ArrowIcon = () => {
       height='28'
       viewBox='0 0 28 28'
       fill='none'
+      className='size-8'
     >
       <path
         fillRule='evenodd'
@@ -113,7 +114,7 @@ const CardService = ({
         </div>
       </div>
 
-      <div className='w-full h-[8rem] flex flex-col space-y-5 justify-between transform translate-y-[4.5rem] group-hover:translate-y-0 transition-all duration-300'>
+      <div className='w-full h-[8rem] flex flex-col space-y-5 justify-between transform translate-y-[4.8rem] group-hover:translate-y-0 transition-all duration-300'>
         <div className='flex items-center space-x-3 w-full px-4'>
           <ArrowIcon />
           <p className='text-[0.875rem] not-italic font-semibold leading-[140%]'>

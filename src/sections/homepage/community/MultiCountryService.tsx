@@ -1,83 +1,9 @@
-import ImageV2 from '@/components/image/ImageV2'
+import CountryCard from '@/sections/homepage/community/CountryCard'
 import {ShippingServiceObject} from '@/utils/type'
 import Image from 'next/image'
 import React from 'react'
 
-const arrowRightCircle = () => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width='1.75rem'
-    height='1.75rem'
-    viewBox='0 0 28 28'
-    fill='none'
-  >
-    <path
-      fillRule='evenodd'
-      clipRule='evenodd'
-      d='M14 27.3334C21.3638 27.3334 27.3333 21.3639 27.3333 14.0001C27.3333 6.63629 21.3638 0.666748 14 0.666748C6.63616 0.666748 0.666626 6.63629 0.666626 14.0001C0.666626 21.3639 6.63616 27.3334 14 27.3334ZM16.0404 9.29297L20.0404 13.293C20.4309 13.6835 20.4309 14.3167 20.0404 14.7072L16.0404 18.7072C15.6499 19.0977 15.0167 19.0977 14.6262 18.7072C14.2357 18.3167 14.2357 17.6835 14.6262 17.293L16.9191 15.0001H8.66662C8.11434 15.0001 7.66662 14.5524 7.66662 14.0001C7.66662 13.4478 8.11434 13.0001 8.66662 13.0001H16.9191L14.6262 10.7072C14.2357 10.3167 14.2357 9.6835 14.6262 9.29297C15.0167 8.90245 15.6499 8.90245 16.0404 9.29297Z'
-      fill='#BFD0E3'
-      fillOpacity='0.6'
-    />
-  </svg>
-)
-
-const arrowRightCircleHover = () => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width='1.75rem'
-    height='1.75rem'
-    viewBox='0 0 28 28'
-    fill='none'
-  >
-    <path
-      fillRule='evenodd'
-      clipRule='evenodd'
-      d='M14 27.3334C21.3638 27.3334 27.3333 21.3639 27.3333 14.0001C27.3333 6.63629 21.3638 0.666748 14 0.666748C6.63616 0.666748 0.666626 6.63629 0.666626 14.0001C0.666626 21.3639 6.63616 27.3334 14 27.3334ZM16.0404 9.29297L20.0404 13.293C20.4309 13.6835 20.4309 14.3167 20.0404 14.7072L16.0404 18.7072C15.6499 19.0977 15.0167 19.0977 14.6262 18.7072C14.2357 18.3167 14.2357 17.6835 14.6262 17.293L16.9191 15.0001H8.66662C8.11434 15.0001 7.66662 14.5524 7.66662 14.0001C7.66662 13.4478 8.11434 13.0001 8.66662 13.0001H16.9191L14.6262 10.7072C14.2357 10.3167 14.2357 9.6835 14.6262 9.29297C15.0167 8.90245 15.6499 8.90245 16.0404 9.29297Z'
-      fill='white'
-    />
-  </svg>
-)
-
-interface CountryCardProps {
-  name: string
-  icon: string
-}
-
-const CountryCard: React.FC<CountryCardProps> = ({name, icon}) => (
-  <div className='relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF] group cursor-pointer'>
-    <div className='absolute w-[16.8125rem] h-[11.4375rem] -top-px -left-px bg-white border border-solid border-[#f2f2f2] '>
-      <div className='absolute top-[1.0625rem] left-5 font-PC-heading-title-20b  text-[1.25rem] not-italic font-bold leading-[120%] group-hover:text-white'>
-        {name}
-      </div>
-
-      <ImageV2
-        alt=''
-        src={icon}
-        width={1000}
-        height={1000}
-        className='hidden group-hover:block'
-      />
-
-      <div className='absolute w-8 h-8 top-[8.75rem] left-4'>
-        {arrowRightCircle()}
-      </div>
-      <div className='w-[16.625rem] h-[3rem] bg-[#38B6FF] flex-shrink-0 absolute bottom-0 items-center group-hover:flex hidden'>
-        <div className='ml-auto mr-[0.5rem]'>{arrowRightCircleHover()}</div>
-      </div>
-    </div>
-    {/* <img className="absolute top-[-2259px] left-[2311px] w-px h-px" alt="Subtract" src={subtract} /> */}
-    <div className='absolute w-[0.9375rem] h-[3.9375rem] top-[8.25rem] left-[-1.4375rem] overflow-hidden'>
-      <div className='absolute w-[17.0625rem] h-[2.9375rem] top-px left-4'>
-        <div className='absolute w-[16.625rem] h-[2.9375rem] top-0 left-[0.4375rem] bg-blueprimary' />
-        <div className='absolute h-5 top-3 left-0 font-PC-button-button-14s text-white'>
-          TÌM HIỂM THÊM
-        </div>
-      </div>
-    </div>
-  </div>
-)
-
-export const MainContainer = ({
+const MultiCountryService = ({
   sectionCountry,
 }: {
   sectionCountry: ShippingServiceObject
@@ -179,4 +105,4 @@ export const MainContainer = ({
   </div>
 )
 
-export default MainContainer
+export default MultiCountryService

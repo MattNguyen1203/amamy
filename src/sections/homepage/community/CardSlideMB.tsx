@@ -1,4 +1,4 @@
-import {CardServiceMB} from '@/sections/homepage/section3/CardService'
+import {CardServiceMB} from '@/sections/homepage/community/CardService'
 import {StrengthItem} from '@/utils/type'
 import {Swiper, SwiperSlide} from 'swiper/react'
 

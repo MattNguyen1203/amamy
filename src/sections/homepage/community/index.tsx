@@ -1,16 +1,15 @@
 import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
-import Section35 from './Section3.5'
-import Section35Mobile from './Section35Mobile'
 import ImageV2 from '@/components/image/ImageV2'
-import CardService from '@/sections/homepage/section3/CardService'
-import CardSlideMB from '@/sections/homepage/section3/CardSlideMB'
+import CardService from '@/sections/homepage/community/CardService'
+import CardSlideMB from '@/sections/homepage/community/CardSlideMB'
+import MultiCountryService from '@/sections/homepage/community/MultiCountryService'
 
 type Props = {
   sectionCountry: ShippingServiceObject
   section3: StrengthsObject
 }
 
-const Section3 = ({sectionCountry, section3}: Props) => {
+const Community = ({sectionCountry, section3}: Props) => {
   return (
     <div>
       <div className='w-full flex xsm:flex-col'>
@@ -34,7 +33,7 @@ const Section3 = ({sectionCountry, section3}: Props) => {
         </div>
 
         {/* pc */}
-        <div className='flex-1 pt-[9.62rem] bg-Blue-100 pl-[4.5rem] relative xsm:bg-transparent xsm:pt-[1rem] xsm:pl-[1rem] xsm:hidden'>
+        <div className='flex-1 pt-[9.62rem] h-[53.9375rem] bg-Blue-100 pl-[4.5rem] relative xsm:hidden'>
           <ImageV2
             alt=''
             width={1000}
@@ -75,10 +74,9 @@ const Section3 = ({sectionCountry, section3}: Props) => {
           />
         </div>
       </div>
-      <Section35 sectionCountry={sectionCountry} />
-      <Section35Mobile sectionCountry={sectionCountry} />
+      <MultiCountryService sectionCountry={sectionCountry} />
     </div>
   )
 }
 
-export default Section3
+export default Community

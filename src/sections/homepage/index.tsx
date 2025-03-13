@@ -1,13 +1,13 @@
 'use client'
 import React from 'react'
 import Section4 from './section4.tsx'
-import Section3 from './section3/Section3'
 import Section6 from './section6/Section6'
 import Section5 from './section5.tsx/Section5'
 import AIQuestion from './AIQuestion'
 import {IHomePage} from '@/utils/type'
 import Banner from '@/sections/homepage/banner'
 import Services from '@/sections/homepage/services'
+import Community from '@/sections/homepage/community'
 
 type Props = {
   res: IHomePage
@@ -19,7 +19,7 @@ const Homepage = ({res}: Props) => {
       <AIQuestion />
       <Banner banner={res.banner} />
       <Services services={res.services} />
-      <Section3
+      <Community
         sectionCountry={res.section_country}
         section3={res.section3}
       />
