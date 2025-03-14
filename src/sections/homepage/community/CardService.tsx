@@ -4,6 +4,7 @@ import Link from 'next/link'
 type CardServiceProps = {
   flag: string
   title: string
+  header?: string
   subtitle: string
   list_des: {description: string}[]
   href?: string
@@ -17,6 +18,7 @@ export const ArrowIcon = () => {
       height='28'
       viewBox='0 0 28 28'
       fill='none'
+      className='size-8'
     >
       <path
         fillRule='evenodd'
@@ -71,6 +73,7 @@ const CardService = ({
   subtitle,
   title,
   href,
+  header,
 }: CardServiceProps) => {
   return (
     <Link
@@ -88,10 +91,21 @@ const CardService = ({
       <div className='mx-6 flex-1 overflow-hidden'>
         <div className='h-[200%] group-hover:transform group-hover:-translate-y-1/2 transition-all duration-300'>
           <div className='h-1/2'>
-            <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] mb-[0.5rem] mt-[1.75rem] xsm:text-[1.75rem]'>
-              {title}
-            </h2>
-            <p className='text-[0.875rem] not-italic font-semibold leading-[150%]'>
+            {header ? (
+              <div className='mt-[1.75rem] text-black'>
+                <h2 className='text-[1rem] font-semibold leading-[1.3] tracking-[-0.02rem]'>
+                  {header}
+                </h2>
+                <p className='text-[1.25rem] font-bold leading-[1.3] tracking-[-0.025rem]'>
+                  {title}
+                </p>
+              </div>
+            ) : (
+              <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] mt-[1.75rem] xsm:text-[1.75rem]'>
+                {title}
+              </h2>
+            )}
+            <p className='text-[0.875rem] not-italic font-semibold leading-[150%] mt-2'>
               {subtitle}
             </p>
           </div>
@@ -113,7 +127,7 @@ const CardService = ({
         </div>
       </div>
 
-      <div className='w-full h-[8rem] flex flex-col space-y-5 justify-between transform translate-y-[4.5rem] group-hover:translate-y-0 transition-all duration-300'>
+      <div className='w-full h-[8rem] flex flex-col space-y-5 justify-between transform translate-y-[4.8rem] group-hover:translate-y-0 transition-all duration-300'>
         <div className='flex items-center space-x-3 w-full px-4'>
           <ArrowIcon />
           <p className='text-[0.875rem] not-italic font-semibold leading-[140%]'>
@@ -143,6 +157,7 @@ export const CardServiceMB = ({
   subtitle,
   title,
   href,
+  header,
 }: CardServiceProps) => {
   return (
     <Link
@@ -151,13 +166,20 @@ export const CardServiceMB = ({
     >
       <ImageV2
         src={flag}
-        className='w-[3.7285rem] h-[2.36144rem] mt-6 ml-6 xsm:mt-3 xsm:ml-3 xsm:w-[3.125rem] xsm:h-[2rem]'
+        className='w-[3.7285rem] h-[2.36144rem] rounded-[0.5rem] border border-[rgba(210,233,232,0.82)] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] mt-6 ml-6 xsm:mt-3 xsm:ml-3 xsm:w-[3.125rem] xsm:h-[2rem]'
         alt=''
         width={100}
         height={60}
       />
       <div className='mt-3 px-3'>
-        <h2 className='text-pc-h6 text-black'>{title}</h2>
+        {header ? (
+          <div className='text-black'>
+            <h2 className='text-pc-sub12s'>{header}</h2>
+            <p className='text-pc-sub16b'>{title}</p>
+          </div>
+        ) : (
+          <h2 className='text-pc-h6 text-black'>{title}</h2>
+        )}
         <p className='text-pc-sub12s text-black/80'>{subtitle}</p>
       </div>
       <div className='flex flex-col mt-3 px-3 space-y-1'>

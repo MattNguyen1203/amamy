@@ -26,7 +26,7 @@ const Banner = ({banner}: {banner: IBanner}) => {
                 />
               ))}
               <div className='size-9 rounded-full border-[1.5px] border-white bg-Blue-400 flex-center text-[0.75rem] font-semibold text-white leading-none'>
-                7k
+                {banner?.user_number}
               </div>
             </div>
             <div className=''>
@@ -82,7 +82,7 @@ const BackgroundMobile = ({
               />
             ))}
             <div className='size-7 rounded-full border-[1.5px] border-white bg-Blue-400 flex-center text-[0.75rem] xsm:text-[0.58331rem] font-semibold text-white leading-none'>
-              7k
+              {banner?.user_number}
             </div>
           </div>
           <div className='flex-1'>
