@@ -2,7 +2,9 @@ import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
 import ImageV2 from '@/components/image/ImageV2'
 import CardService from '@/sections/homepage/community/CardService'
 import CardSlideMB from '@/sections/homepage/community/CardSlideMB'
-import MultiCountryService from '@/sections/homepage/community/MultiCountryService'
+import MultiCountryService, {
+  MultiCountryServiceMB,
+} from '@/sections/homepage/community/MultiCountryService'
 
 type Props = {
   sectionCountry: ShippingServiceObject
@@ -75,6 +77,7 @@ const Community = ({sectionCountry, section3}: Props) => {
         </div>
       </div>
       <MultiCountryService sectionCountry={sectionCountry} />
+      <MultiCountryServiceMB sectionCountry={sectionCountry} />
     </div>
   )
 }

@@ -202,6 +202,10 @@ const config: Config = {
           '@apply text-[1.75rem] font-bold leading-[1.3] tracking-[-0.07rem] font-montserrat':
             {},
         },
+        '.text-pc-h5': {
+          '@apply text-[2rem] font-bold leading-[1.3] tracking-[-0.06rem] font-montserrat':
+            {},
+        },
       })
     }),
   ],

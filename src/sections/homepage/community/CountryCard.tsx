@@ -59,7 +59,7 @@ const CountryCard: React.FC<CountryCardProps> = ({name, icon}) => {
         </p>
         <ArrowRightCircle />
 
-        <div className='country-card h-12 px-4 w-full bg-Blue-Primary flex items-center justify-between absolute bottom-0 left-0 transform -translate-x-full group-hover:translate-x-0  transition-all duration-[600ms] ease-in-out'>
+        <div className='country-card h-12 px-4 w-full bg-Blue-Primary flex items-center justify-between absolute bottom-0 left-0 transform -translate-x-[101%] group-hover:translate-x-0  transition-all duration-[800ms] ease-in-out'>
           <p className='text-pc-sub14s text-white'>TÌM HIỂM THÊM</p>
           <ArrowRightCircleHover />
         </div>
