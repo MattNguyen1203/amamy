@@ -56,12 +56,13 @@ export interface IBanner {
 }
 
 export interface IFaq {
-  title: string
+  answer: string
+  question: string
 }
 
 export interface IFaqs {
-  answer: string
-  question: string
+  title: string
+  faqs: IFaq[]
 }
 
 interface ImageFlag {
@@ -357,8 +358,7 @@ export interface NewsObject {
 
 export interface IHomePage {
   banner: IBanner
-  faq: IFaq
-  faqs: IFaqs[]
+  faq: IFaqs
   section3: StrengthsObject
   section_country: ShippingServiceObject
   services: ServicesObject
