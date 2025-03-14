@@ -48,8 +48,6 @@ export default function Breadcrumb({
               href={items?.slug}
               className={cn(
                 'transition-all duration-500 p-[0.25rem_0.75rem] rounded-[1.25rem] text-pc-sub14m',
-                index + 1 === data?.length &&
-                  'bg-[rgba(96,96,96,0.08)] text-black active',
                 type === 'white' &&
                   'hover:bg-[rgba(96,96,96,0.08)] hover:text-[#38B6FF] text-[rgba(0,0,0,0.30)]',
                 type === 'blue' &&
@@ -57,6 +55,9 @@ export default function Breadcrumb({
                 index + 1 === data?.length &&
                   type === 'blue' &&
                   'bg-[rgba(255,255,255,0.08)]',
+                index + 1 === data?.length &&
+                  type === 'white' &&
+                  'bg-[rgba(96,96,96,0.08)] text-black active',
               )}
             >
               {items?.title}

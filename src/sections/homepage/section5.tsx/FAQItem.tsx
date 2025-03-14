@@ -48,12 +48,14 @@ const FAQItem = ({content, detail}: {content: string; detail: string}) => {
             className='size-10 object-contain xsm:size-8'
           />
         </div>
-        <div className='relative flex items-center space-x-3 p-5 pl-6 xsm:p-4 bg-white rounded-[1.25rem] w-full rounded-tl-none'>
+        <div
+          onClick={() => setOpen(!open)}
+          className='cursor-pointer relative flex items-center space-x-3 p-5 pl-6 xsm:p-4 bg-white rounded-[1.25rem] w-full rounded-tl-none'
+        >
           <p className='flex-1 text-[1.25rem] xsm:text-pc-sub12s font-semibold leading-[1.4] tracking-[-0.05rem] text-black'>
             {content}
           </p>
           <Plus
-            onClick={() => setOpen(!open)}
             className={cn(
               'size-6 stroke-black/80 cursor-pointer',
               open && 'transform rotate-45',

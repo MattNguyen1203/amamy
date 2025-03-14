@@ -33,7 +33,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
   const [submitting, setSubmitting] = useState(false)
-  const [faq, setFaq] = useState(false)
+  const [faq, setFaq] = useState(true)
   const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
   const [dataInformation, setDataInformation] = useState<
@@ -51,6 +51,11 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     }
     setStepOrder(2)
   }, [dataFromOrder?.shipping])
+  useEffect(() => {
+    setTimeout(() => {
+      setFaq(false)
+    }, 1000)
+  }, [])
   return (
     <>
       <Tabs

@@ -203,6 +203,10 @@ const config: Config = {
           '@apply text-[1.125rem] font-bold leading-[1.2] tracking-[-0.045rem] font-montserrat':
             {},
         },
+        '.text-heading-h3': {
+          '@apply text-[2.5rem] font-bold leading-[1.3] tracking-[-0.075rem] font-montserrat':
+            {},
+        },
         '.text-pc-h6': {
           '@apply text-[1.75rem] font-bold leading-[1.3] tracking-[-0.07rem] font-montserrat':
             {},

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import ChatBot from '@/components/chat-bot'
+import Header from '@/components/header/Header'
 import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
-import ChatBot from '@/components/chat-bot'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -73,6 +74,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
+        <Header />
         <ChatBot
           dataMessage={[
             {message: 'test', role: 'user', time: '02:13 PM'},

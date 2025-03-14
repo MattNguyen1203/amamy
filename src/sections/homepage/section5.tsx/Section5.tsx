@@ -7,15 +7,13 @@ type Props = {
 }
 
 const Section5 = ({faqs}: Props) => {
-  console.log('🚀 ~ faqs:', faqs)
-
   return (
     <section
       className='flex relative flex-row w-full p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
     rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'
     >
       <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[28.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
-        {faqs.title}
+        {faqs?.title}
       </h2>
       <Image
         src={'/homepage/icon/section-4-background.png'}
@@ -30,8 +28,8 @@ const Section5 = ({faqs}: Props) => {
           faqs?.faqs?.map((item: IFaq, index: number) => (
             <FAQItem
               key={index}
-              content={item.question}
-              detail={item.answer}
+              content={item?.question}
+              detail={item?.answer}
             />
           ))}
       </div>

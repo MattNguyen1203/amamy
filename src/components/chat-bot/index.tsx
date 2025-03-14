@@ -41,7 +41,7 @@ const ChatBot = ({dataMessage}: ChatBotProps) => {
   return (
     <div
       className={cn(
-        'fixed z-50 bottom-0 right-6 w-[22.5625rem] rounded-t-[1.25rem] bg-Blue-Primary transition-all duration-500 ease-in-out',
+        'xsm:hidden fixed z-50 bottom-0 right-6 w-[22.5625rem] rounded-t-[1.25rem] bg-Blue-Primary transition-all duration-500 ease-in-out',
         !open && '-bottom-[20.375rem]',
       )}
     >
