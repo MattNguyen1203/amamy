@@ -1,0 +1,70 @@
+'use client'
+import BtnBlue from '@/components/button/BtnBlue'
+import ICArrow from '@/sections/blog/detail/ICArrow'
+import {ListNewsObject, NewsObject} from '@/utils/type'
+import Image from 'next/image'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+import 'swiper/css/navigation'
+import {EffectFade, Navigation} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
+export default function SliderPC({
+  setActiveSlider,
+  withDHS,
+}: {
+  setActiveSlider: React.Dispatch<React.SetStateAction<number>>
+  withDHS: NewsObject
+}) {
+  return (
+    <Swiper
+      onSlideChange={(swiper) => {
+        setActiveSlider(swiper.realIndex)
+      }}
+      slidesPerView={'auto'}
+      effect={'fade'}
+      loop={true}
+      navigation={{
+        nextEl: '.swiper-companion-next',
+        prevEl: '.swiper-companion-prev',
+      }}
+      modules={[EffectFade, Navigation]}
+      className='mySwiper h-[40.5rem] w-[50.6875rem] flex xsm:w-[calc(100vw-2rem)] xsm:h-[21.25rem] xsm:gap-[1rem]'
+    >
+      {Array.isArray(withDHS?.list_news_event) &&
+        withDHS?.list_news_event?.map((item: ListNewsObject, index) => (
+          <SwiperSlide
+            key={index}
+            className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]'
+          >
+            <Image
+              src={item?.post?.[0]?.thumbnail}
+              alt={item?.post?.[0]?.slug}
+              width={1000}
+              height={1000}
+              className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover bg-[linear-gradient(180deg,rgba(0,63,136,0.25)_0%,rgba(0,16,34,0.50)_63.29%)]'
+            />
+            <div className='xsm:hidden sm:group-hover:h-[19.25rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white'>
+              <div
+                className='mb-[0.75rem] text-start text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem] xsm:hidden '
+                dangerouslySetInnerHTML={{
+                  __html: item?.post?.[0]?.title,
+                }}
+              ></div>
+              <div className='sm:pointer-events-none sm:group-hover:pointer-events-auto sm:group-hover:opacity-[1] transition-all duration-700 overflow-hidden opacity-0'>
+                <p className='text-pc-sub16 text-[rgba(0,0,0,0.80)] line-clamp-4'>
+                  {item?.post?.[0]?.excerpt}
+                </p>
+                <BtnBlue
+                  slug={'/blogs/' + item?.post?.[0]?.slug}
+                  className='space-x-[0.75rem] w-max ml-auto mt-[1rem]'
+                >
+                  <p className='text-pc-sub16m text-white'>Xem chi tiết</p>
+                  <ICArrow className='size-[1.5rem] xsm:size-[1.66669rem]' />
+                </BtnBlue>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+    </Swiper>
+  )
+}

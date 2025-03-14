@@ -1,4 +1,3 @@
-'use client'
 import {IItemPostBlog} from '@/sections/blog/blogs.interface'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
 import Banner from '@/sections/homepage/banner'

@@ -169,7 +169,10 @@ const Header = () => {
                 isShowSearchInput && 'hidden',
               )}
             />
-            <button className='flex-center space-x-2 p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-white/80 bg-Blue-Primary'>
+            <Link
+              href={'/tao-don-hang'}
+              className='flex-center space-x-2 p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-white/80 bg-Blue-Primary'
+            >
               <span className='text-pc-sub16m text-white'>Tạo đơn hàng</span>
               <Plus
                 className={cn(
@@ -177,7 +180,7 @@ const Header = () => {
                   isScrollTop && 'stroke-white',
                 )}
               />
-            </button>
+            </Link>
           </div>
         </div>
 

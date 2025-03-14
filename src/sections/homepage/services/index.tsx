@@ -1,3 +1,4 @@
+'use client'
 import ImageV2 from '@/components/image/ImageV2'
 import {Card, ImageIcon, ServicesObject} from '@/utils/type'
 import Image from 'next/image'

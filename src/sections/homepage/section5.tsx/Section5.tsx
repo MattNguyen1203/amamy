@@ -1,3 +1,4 @@
+'use client'
 import {IFaq, IFaqs} from '@/utils/type'
 import Image from 'next/image'
 
@@ -12,7 +13,7 @@ const Section5 = ({faqs}: Props) => {
     rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'
     >
       <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[28.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
-        {faqs.title}
+        {faqs?.title}
       </h2>
       <Image
         src={'/homepage/icon/section-4-background.png'}
@@ -28,8 +29,8 @@ const Section5 = ({faqs}: Props) => {
             <ItemContent
               key={index}
               index={index}
-              content={item.question}
-              detail={item.answer}
+              content={item?.question}
+              detail={item?.answer}
             />
           ))}
       </div>
@@ -107,10 +108,10 @@ const ItemContent = ({
                 />
               </svg>
             </i>
-            <p
+            <div
               className='text-[#292F36] text-pc-sub16'
-              dangerouslySetInnerHTML={{__html: detail}}
-            ></p>
+              dangerouslySetInnerHTML={{__html: detail || ''}}
+            ></div>
           </div>
           <i className='rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem] mt-auto'>
             <svg

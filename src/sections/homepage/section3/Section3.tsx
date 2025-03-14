@@ -1,9 +1,10 @@
-import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
-import Section35 from './Section3.5'
-import Section35Mobile from './Section35Mobile'
+'use client'
 import ImageV2 from '@/components/image/ImageV2'
 import CardService from '@/sections/homepage/section3/CardService'
 import CardSlideMB from '@/sections/homepage/section3/CardSlideMB'
+import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
+import Section35 from './Section3.5'
+import Section35Mobile from './Section35Mobile'
 
 type Props = {
   sectionCountry: ShippingServiceObject

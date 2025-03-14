@@ -347,13 +347,17 @@ interface NewsItem {
   thumbnail: string
   meta: Meta
 }
-
+export interface ListNewsObject {
+  post: NewsItem[]
+  year: string
+  name_event: string
+}
 export interface NewsObject {
   title: string
   subtitle: string
   tag_title_pc: string
   tag_title_mb: string
-  list_news: NewsItem[]
+  list_news_event: ListNewsObject
 }
 
 export interface IHomePage {
