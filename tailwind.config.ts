@@ -130,6 +130,10 @@ const config: Config = {
           '@apply text-[0.625rem] font-medium leading-[1.4] tracking-[-0.01875rem] font-montserrat':
             {},
         },
+        '.text-pc-sub16': {
+          '@apply text-[1rem] font-normal leading-[1.5] tracking-[-0.03rem] font-montserrat':
+            {},
+        },
         '.text-pc-sub16m': {
           '@apply text-[1rem] font-medium leading-[1.3] tracking-[-0.03rem] font-montserrat':
             {},

@@ -28,7 +28,7 @@ export default function RelatedBlogs({
           {title || 'Các bài viết liên quan'}
         </h3>
         <BtnBlue
-          slug='/'
+          slug='/blogs'
           className='space-x-[0.5rem] xsm:size-[2rem] xsm:p-0'
         >
           {!isMobile && (

@@ -1,4 +1,4 @@
-import fetchDataWP from '@/fetch/fetchDataWP'
+import fetchData from '@/fetch/fetchData'
 import Homepage from '@/sections/homepage'
 
 // export async function generateMetadata() {
@@ -7,15 +7,25 @@ import Homepage from '@/sections/homepage'
 // }
 
 export default async function Home() {
-  const dataACF = await fetchDataWP({
-    api: 'pages/11?_fields=acf&acf_format=standard',
+  const fetchDataACF = fetchData({
+    api: 'pages/11',
     option: {
-      next: {revalidate: 0},
+      next: {revalidate: 60},
     },
   })
+  const fetchDataBlogs = fetchData({
+    api: 'blogs?paged=1&limit=10',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+  const [dataACF, dataBlogs] = await Promise.all([fetchDataACF, fetchDataBlogs])
   return (
     <div className='w-full bg-white text-black flex flex-col items-center'>
-      <Homepage res={dataACF.acf} />
+      <Homepage
+        res={dataACF}
+        dataBlog={dataBlogs?.posts}
+      />
     </div>
   )
 }

@@ -2,30 +2,29 @@ import {IFaq, IFaqs} from '@/utils/type'
 import Image from 'next/image'
 
 type Props = {
-  faq: IFaq
-  faqs: IFaqs[]
+  faqs: IFaqs
 }
 
-const Section5 = ({faq, faqs}: Props) => {
+const Section5 = ({faqs}: Props) => {
   return (
     <section
-      className='flex relative flex-row w-[100rem]  xsm:w-[100vw] p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
+      className='flex relative flex-row w-full p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
     rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'
     >
-      <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[26.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
-        {faq.title}
+      <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[28.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
+        {faqs.title}
       </h2>
       <Image
         src={'/homepage/icon/section-4-background.png'}
         alt=''
         width={1000}
         height={1000}
-        className=' w-[66.25794rem] h-[33.91225rem] 
+        className='opacity-[0.06] w-[66.25794rem] h-[33.91225rem] 
         rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden xsm:hidden'
       />
       <div className='flex flex-col gap-[1.5rem] static '>
-        {Array.isArray(faqs) &&
-          faqs?.map((item, index) => (
+        {Array.isArray(faqs?.faqs) &&
+          faqs?.faqs?.map((item: IFaq, index: number) => (
             <ItemContent
               key={index}
               index={index}
@@ -53,9 +52,12 @@ const ItemContent = ({
     <div className='flex flex-col'>
       {/* Checkbox ẩn để toggle hiển thị nội dung */}
       <input
-        type='checkbox'
+        type='radio'
         id={`toggle-detail${index}`}
+        value={`toggle-detail${index}`}
         className='hidden peer'
+        name='faq-radio'
+        defaultChecked={index === 0}
       />
 
       {/* Div trên - Click để mở div dưới */}
@@ -81,7 +83,9 @@ const ItemContent = ({
               />
             </svg>
           </i>
-          <p className='xsm:text-[0.75rem] xsm:font-semibold'>{content}</p>
+          <p className='xsm:text-[0.75rem] xsm:font-semibold text-[#292F36] text-pc-heading20b'>
+            {content}
+          </p>
         </div>
       </label>
 
@@ -103,9 +107,12 @@ const ItemContent = ({
                 />
               </svg>
             </i>
-            <p dangerouslySetInnerHTML={{__html: detail}}></p>
+            <p
+              className='text-[#292F36] text-pc-sub16'
+              dangerouslySetInnerHTML={{__html: detail}}
+            ></p>
           </div>
-          <i className='rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem]'>
+          <i className='rounded-full bg-[#FFF] h-full w-auto p-[0.8125rem] mt-auto'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='40'
