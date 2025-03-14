@@ -56,10 +56,10 @@ const CountryCard: React.FC<CountryCardProps> = ({name, icon, href}) => {
         src={icon}
         width={300}
         height={300}
-        className='w-full h-full object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-all duration-[600ms] ease-in-out'
+        className='w-full h-full object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out'
       />
       <div className='size-full relative z-10 p-5 pb-2 flex flex-col justify-between'>
-        <p className='text-pc-heading20b text-black group-hover:text-white transition-all duration-[600ms] ease-in-out '>
+        <p className='text-pc-heading20b text-black group-hover:text-white transition-all duration-500 ease-in-out '>
           {name}
         </p>
         <ArrowRightCircle />
