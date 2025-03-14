@@ -1,5 +1,6 @@
 'use client'
 
+import useStore from '@/app/(store)/store'
 import ImageV2 from '@/components/image/ImageV2'
 import Search from '@/components/svg/Search'
 import SendMessage from '@/components/svg/SendMessage'
@@ -14,6 +15,19 @@ import {useState} from 'react'
 
 const TrackingOrder = () => {
   const [value, setValue] = useState('search-order')
+  const [inputAI, setInputAI] = useState('')
+  const [inputSearch, setInputSearch] = useState('')
+  const {setChatBotMessage} = useStore((state) => state)
+
+  // toggle chat bot
+  const handleChatAI = () => {
+    setChatBotMessage(inputAI)
+    setInputAI('')
+  }
+
+  const handleTrackingOrder = () => {
+    // handle tracking order
+  }
 
   return (
     <Tabs
@@ -52,11 +66,16 @@ const TrackingOrder = () => {
         className='relative z-10'
       >
         <input
+          value={inputSearch}
+          onChange={(e) => setInputSearch(e.target.value)}
           type='text'
           placeholder='Nhập mã vận đơn'
           className='w-full p-4 xsm:p-3 border border-[#CFD0D5] outline-none rounded-[1.25rem] text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'
         />
-        <button className='mt-4 xsm:mt-2 h-12 xsm:h-10 flex-center w-full space-x-3 p-3 bg-Blue-Primary rounded-[1.25rem]'>
+        <button
+          onClick={handleTrackingOrder}
+          className='mt-4 xsm:mt-2 h-12 xsm:h-10 flex-center w-full space-x-3 p-3 bg-Blue-Primary rounded-[1.25rem]'
+        >
           <span className='text-pc-sub16m xsm:text-pc-sub14m text-white'>
             Tra cứu đơn hàng
           </span>
@@ -80,12 +99,17 @@ const TrackingOrder = () => {
               className='size-9 xsm:size-5 object-cover'
             />
             <input
+              value={inputAI}
+              onChange={(e) => setInputAI(e.target.value)}
               type='text'
               placeholder='VD: Gửi 10kg hàng từ Việt Nam đến Mỹ'
               className='flex-1 border-none outline-none text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'
             />
           </div>
-          <button className='flex-center p-4 pr-[1.3125rem] xsm:p-3 xsm:pl-[0.375rem]'>
+          <button
+            onClick={handleChatAI}
+            className='flex-center p-4 pr-[1.3125rem] xsm:p-3 xsm:pl-[0.375rem]'
+          >
             <SendMessage className='size-6 xsm:size-5' />
           </button>
         </div>

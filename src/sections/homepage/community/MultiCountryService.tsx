@@ -48,6 +48,7 @@ const MultiCountryService = ({
             key={index}
             name={country.country}
             icon={country.flag_img.url}
+            href={`/${country.link.slug}`}
           />
         ))}
       </div>
@@ -61,6 +62,7 @@ const MultiCountryService = ({
             sectionCountry.list_country[sectionCountry.list_country.length - 1]
               .flag_img.url
           }
+          href={`/${sectionCountry.list_country[sectionCountry.list_country.length - 1].link.slug}`}
         />
         <div className='relative flex-1 self-stretch w-full grow'>
           <div className='  '>
@@ -92,7 +94,8 @@ export const MultiCountryServiceMB = ({
       </p>
       <div className='mt-4 grid grid-cols-2 gap-3'>
         {sectionCountry.list_country.map((country, index) => (
-          <div
+          <Link
+            href={`/${country.link.slug}`}
             key={index}
             className='flex items-center space-x-3 h-[3.5rem] p-[0.5rem_1rem_0.5rem_0.5rem] rounded-[1.25rem] bg-white'
           >
@@ -104,7 +107,7 @@ export const MultiCountryServiceMB = ({
               className='size-10 object-cover rounded-full'
             />
             <p className='text-pc-sub14s text-black'>{country.country}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

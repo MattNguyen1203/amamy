@@ -1,5 +1,6 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
+import Link from 'next/link'
 
 const ArrowRightCircle = () => (
   <svg
@@ -41,11 +42,15 @@ const ArrowRightCircleHover = () => (
 interface CountryCardProps {
   name: string
   icon: string
+  href?: string
 }
 
-const CountryCard: React.FC<CountryCardProps> = ({name, icon}) => {
+const CountryCard: React.FC<CountryCardProps> = ({name, icon, href}) => {
   return (
-    <div className='relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF] group cursor-pointer'>
+    <Link
+      href={href || ''}
+      className='relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF] group cursor-pointer'
+    >
       <ImageV2
         alt=''
         src={icon}
@@ -64,7 +69,7 @@ const CountryCard: React.FC<CountryCardProps> = ({name, icon}) => {
           <ArrowRightCircleHover />
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

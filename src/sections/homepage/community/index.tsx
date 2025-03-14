@@ -47,20 +47,26 @@ const Community = ({sectionCountry, section3}: Props) => {
             <CardService
               flag={section3.list_strengths.item_1.flag.url}
               title={section3.list_strengths.item_1.title || ''}
+              header={section3.list_strengths.item_1.header || ''}
               subtitle={section3.list_strengths.item_1.subtitle || ''}
               list_des={section3.list_strengths.item_1.list_des || []}
+              href={section3.list_strengths.item_1.link_group_fb}
             />
             <CardService
-              flag={section3.list_strengths.item_1.flag.url}
-              title={section3.list_strengths.item_1.title || ''}
-              subtitle={section3.list_strengths.item_1.subtitle || ''}
-              list_des={section3.list_strengths.item_1.list_des || []}
+              flag={section3.list_strengths.item_2.flag.url}
+              title={section3.list_strengths.item_2.title || ''}
+              header={section3.list_strengths.item_2.header || ''}
+              subtitle={section3.list_strengths.item_2.subtitle || ''}
+              list_des={section3.list_strengths.item_2.list_des || []}
+              href={section3.list_strengths.item_2.link_group_fb}
             />
             <CardService
-              flag={section3.list_strengths.item_1.flag.url}
-              title={section3.list_strengths.item_1.title || ''}
-              subtitle={section3.list_strengths.item_1.subtitle || ''}
-              list_des={section3.list_strengths.item_1.list_des || []}
+              flag={section3.list_strengths.item_3.flag.url}
+              title={section3.list_strengths.item_3.title || ''}
+              header={section3.list_strengths.item_3.header || ''}
+              subtitle={section3.list_strengths.item_3.subtitle || ''}
+              list_des={section3.list_strengths.item_3.list_des || []}
+              href={section3.list_strengths.item_3.link_group_fb}
             />
           </div>
         </div>
@@ -70,8 +76,8 @@ const Community = ({sectionCountry, section3}: Props) => {
           <CardSlideMB
             list={[
               section3.list_strengths.item_1,
-              section3.list_strengths.item_1,
-              section3.list_strengths.item_1,
+              section3.list_strengths.item_2,
+              section3.list_strengths.item_3,
             ]}
           />
         </div>

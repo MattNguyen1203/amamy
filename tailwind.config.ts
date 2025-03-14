@@ -43,6 +43,7 @@ const config: Config = {
         'Blue-Primary': '#38B6FF',
         'Blue-400': '#60C5FF',
         'Blue-100': '#C1E8FF',
+        'Blue-50': '#D9F1FF',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',

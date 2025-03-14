@@ -32,8 +32,10 @@ const CardSlideMB = ({list}: CardSlideMBProps) => {
             <CardServiceMB
               flag={item.flag.url}
               title={item.title || ''}
+              header={item.header || ''}
               subtitle={item.subtitle || ''}
               list_des={item.list_des || []}
+              href={item.link_group_fb}
             />
           </SwiperSlide>
         ))}
