@@ -17,12 +17,14 @@ const Services = ({services}: {services: ServicesObject}) => {
                 title={services.list_service_1[0].title}
                 description={services.list_service_1[0].description}
                 subtitle={services.list_service_1[0].subtitle}
+                href={`/blogs/${services.list_service_1[0].link.slug}`}
               />
               <ServiceCard
                 icon={services.list_service_1[1].icon}
                 title={services.list_service_1[1].title}
                 description={services.list_service_1[1].description}
                 subtitle={services.list_service_1[1].subtitle}
+                href={`/blogs/${services.list_service_1[1].link.slug}`}
               />
 
               <ServiceCard
@@ -30,6 +32,7 @@ const Services = ({services}: {services: ServicesObject}) => {
                 subtitle={services.list_service_1[2].subtitle}
                 title={services.list_service_1[2].title}
                 description={services.list_service_1[2].description}
+                href={`/blogs/${services.list_service_1[2].link.slug}`}
               />
             </div>
 
@@ -45,7 +48,8 @@ const Services = ({services}: {services: ServicesObject}) => {
                     className='w-[2.3rem] h-[2.2rem]'
                   />
                 }
-                title='Đóng gói miễn phí'
+                title={services.list_service_2[0].title}
+                href={`/blogs/${services.list_service_2[0].link.slug}`}
               />
 
               <ServiceHighlight
@@ -60,6 +64,7 @@ const Services = ({services}: {services: ServicesObject}) => {
                   />
                 }
                 title={services.list_service_2[1].title}
+                href={`/blogs/${services.list_service_2[1].link.slug}`}
               />
             </div>
           </div>
@@ -132,7 +137,7 @@ const ServiceHighlight = ({
     className='relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max'
   >
     <div
-      className={`h-full bg-cover bg-center xsm:w-[18.75rem]`}
+      className='h-full bg-cover bg-center xsm:w-[18.75rem]'
       style={{backgroundImage: `url(${backgroundUrl})`}}
     >
       <div className='w-full h-full flex flex-col items-center justify-end p-4 gap-5 bg-opacity-10 bg-white xsm:rounded-full xsm:p-[0.62rem]'>
@@ -188,10 +193,10 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
         </p>
       </div>
     </div>
-    <div className='flex flex-col items-start gap-2 p-7 absolute top-0 left-0 z-[60]'>
+    <div className='flex flex-col items-start gap-2 p-7 absolute top-0 left-0 z-10'>
       <div className='flex items-end w-full gap-2.5'>
         <div className='text-[#38B6FF]   text-[2.875rem] not-italic font-bold h-[3.4rem] leading-[120%]'>
-          12.000
+          {card.number}
         </div>
         <div className='relative'>
           <div className='text-[#38B6FF] top-[-3rem] left-[-0.5rem] absolute text-[2.875rem] font-bold'>

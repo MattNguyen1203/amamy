@@ -119,6 +119,7 @@ export interface StrengthItem {
   list_des: {
     description: string
   }[]
+  link_group_fb?: string
 }
 
 export interface StrengthsObject {

@@ -11,8 +11,11 @@ const page = async () => {
   })
 
   return (
-    <main className='pt-40 bg-background-elevation5'>
-      <Breadcrumb data={[{title: 'Theo dõi vận đơn', slug: ''}]} />
+    <main className='bg-background-elevation5'>
+      <Breadcrumb
+        data={[{title: 'Theo dõi vận đơn', slug: ''}]}
+        className='sm:px-[5rem] xsm:hidden'
+      />
       <TrackingBill dataAcf={dataAcf?.acf} />
     </main>
   )

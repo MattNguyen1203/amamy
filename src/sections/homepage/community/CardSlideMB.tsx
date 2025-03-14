@@ -1,4 +1,4 @@
-import {CardServiceMB} from '@/sections/homepage/section3/CardService'
+import {CardServiceMB} from '@/sections/homepage/community/CardService'
 import {StrengthItem} from '@/utils/type'
 import {Swiper, SwiperSlide} from 'swiper/react'
 
@@ -32,8 +32,10 @@ const CardSlideMB = ({list}: CardSlideMBProps) => {
             <CardServiceMB
               flag={item.flag.url}
               title={item.title || ''}
+              header={item.header || ''}
               subtitle={item.subtitle || ''}
               list_des={item.list_des || []}
+              href={item.link_group_fb}
             />
           </SwiperSlide>
         ))}

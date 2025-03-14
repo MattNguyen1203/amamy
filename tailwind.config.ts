@@ -43,6 +43,7 @@ const config: Config = {
         'Blue-Primary': '#38B6FF',
         'Blue-400': '#60C5FF',
         'Blue-100': '#C1E8FF',
+        'Blue-50': '#D9F1FF',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -208,6 +209,10 @@ const config: Config = {
         },
         '.text-pc-h6': {
           '@apply text-[1.75rem] font-bold leading-[1.3] tracking-[-0.07rem] font-montserrat':
+            {},
+        },
+        '.text-pc-h5': {
+          '@apply text-[2rem] font-bold leading-[1.3] tracking-[-0.06rem] font-montserrat':
             {},
         },
       })

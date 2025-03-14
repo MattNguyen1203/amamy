@@ -1,17 +1,18 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
-import CardService from '@/sections/homepage/section3/CardService'
-import CardSlideMB from '@/sections/homepage/section3/CardSlideMB'
+import CardService from '@/sections/homepage/community/CardService'
+import CardSlideMB from '@/sections/homepage/community/CardSlideMB'
+import MultiCountryService, {
+  MultiCountryServiceMB,
+} from '@/sections/homepage/community/MultiCountryService'
 import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
-import Section35 from './Section3.5'
-import Section35Mobile from './Section35Mobile'
 
 type Props = {
   sectionCountry: ShippingServiceObject
   section3: StrengthsObject
 }
 
-const Section3 = ({sectionCountry, section3}: Props) => {
+const Community = ({sectionCountry, section3}: Props) => {
   return (
     <div>
       <div className='w-full flex xsm:flex-col'>
@@ -35,7 +36,7 @@ const Section3 = ({sectionCountry, section3}: Props) => {
         </div>
 
         {/* pc */}
-        <div className='flex-1 pt-[9.62rem] bg-Blue-100 pl-[4.5rem] relative xsm:bg-transparent xsm:pt-[1rem] xsm:pl-[1rem] xsm:hidden'>
+        <div className='flex-1 pt-[9.62rem] h-[53.9375rem] bg-Blue-100 pl-[4.5rem] relative xsm:hidden'>
           <ImageV2
             alt=''
             width={1000}
@@ -47,20 +48,26 @@ const Section3 = ({sectionCountry, section3}: Props) => {
             <CardService
               flag={section3.list_strengths.item_1.flag.url}
               title={section3.list_strengths.item_1.title || ''}
+              header={section3.list_strengths.item_1.header || ''}
               subtitle={section3.list_strengths.item_1.subtitle || ''}
               list_des={section3.list_strengths.item_1.list_des || []}
+              href={section3.list_strengths.item_1.link_group_fb}
             />
             <CardService
-              flag={section3.list_strengths.item_1.flag.url}
-              title={section3.list_strengths.item_1.title || ''}
-              subtitle={section3.list_strengths.item_1.subtitle || ''}
-              list_des={section3.list_strengths.item_1.list_des || []}
+              flag={section3.list_strengths.item_2.flag.url}
+              title={section3.list_strengths.item_2.title || ''}
+              header={section3.list_strengths.item_2.header || ''}
+              subtitle={section3.list_strengths.item_2.subtitle || ''}
+              list_des={section3.list_strengths.item_2.list_des || []}
+              href={section3.list_strengths.item_2.link_group_fb}
             />
             <CardService
-              flag={section3.list_strengths.item_1.flag.url}
-              title={section3.list_strengths.item_1.title || ''}
-              subtitle={section3.list_strengths.item_1.subtitle || ''}
-              list_des={section3.list_strengths.item_1.list_des || []}
+              flag={section3.list_strengths.item_3.flag.url}
+              title={section3.list_strengths.item_3.title || ''}
+              header={section3.list_strengths.item_3.header || ''}
+              subtitle={section3.list_strengths.item_3.subtitle || ''}
+              list_des={section3.list_strengths.item_3.list_des || []}
+              href={section3.list_strengths.item_3.link_group_fb}
             />
           </div>
         </div>
@@ -70,16 +77,16 @@ const Section3 = ({sectionCountry, section3}: Props) => {
           <CardSlideMB
             list={[
               section3.list_strengths.item_1,
-              section3.list_strengths.item_1,
-              section3.list_strengths.item_1,
+              section3.list_strengths.item_2,
+              section3.list_strengths.item_3,
             ]}
           />
         </div>
       </div>
-      <Section35 sectionCountry={sectionCountry} />
-      <Section35Mobile sectionCountry={sectionCountry} />
+      <MultiCountryService sectionCountry={sectionCountry} />
+      <MultiCountryServiceMB sectionCountry={sectionCountry} />
     </div>
   )
 }
 
-export default Section3
+export default Community

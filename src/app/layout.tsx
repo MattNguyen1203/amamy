@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import ChatBot from '@/components/chat-bot'
 import Header from '@/components/header/Header'
 import type {Metadata} from 'next'
 import localFont from 'next/font/local'
@@ -74,6 +75,12 @@ export default async function RootLayout({
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
         <Header />
+        <ChatBot
+          dataMessage={[
+            {message: 'test', role: 'user', time: '02:13 PM'},
+            {message: 'test', role: 'bot', time: '02:13 PM'},
+          ]}
+        />
         {children}
 
         <Toaster
