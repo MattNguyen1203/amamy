@@ -458,16 +458,17 @@ export interface AmamyService {
 }
 
 export interface OurJourneyItem {
-  title: string
+  post: string
   year: string
-  image: Image
-  description: string
+  name_event: string
 }
 
 export interface OurJourney {
   title: string
-  description: string
-  our_journey_list: OurJourneyItem[]
+  subtitle: string
+  tag_title_pc: string
+  tag_title_mb: string
+  list_news_event: OurJourneyItem[]
 }
 
 export interface AmamyData {
@@ -484,29 +485,11 @@ export interface Acf {
 }
 
 export interface AboutWPResponse {
-  id: number
-  date: string
-  date_gmt: string
-  guid: Guid
-  modified: string
-  modified_gmt: string
-  slug: string
-  status: string
-  type: string
-  link: string
-  title: Title
-  content: Content
-  excerpt: Excerpt
-  author: number
-  featured_media: number
-  parent: number
-  menu_order: number
-  comment_status: string
-  ping_status: string
-  template: string
-  meta: Meta
-  class_list: string[]
-  acf: Acf
+  banner: Banner
+  amamy_special: AmamySpecial
+  amamy_quality: AmamyQuality
+  amamy_service: AmamyService
+  withDHS: NewsObject
 }
 
 export interface Banner {

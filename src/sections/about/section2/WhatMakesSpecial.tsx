@@ -1,8 +1,8 @@
-import {AboutWPResponse} from '@/utils/type'
+import {IAmamySpecialAbout} from '@/sections/about/about.interface'
 import Image from 'next/image'
 
 interface Prop {
-  data: AboutWPResponse
+  data: IAmamySpecialAbout
 }
 export default function WhatMakesSpecial({data}: Prop) {
   return (
@@ -12,14 +12,14 @@ export default function WhatMakesSpecial({data}: Prop) {
           {/* Left content */}
           <div className='px-[2.0625rem] py-[2.25rem] xsm:p-[1rem]'>
             <h2 className='font-montserrat font-bold text-[2.875rem] xsm:text-[1.25rem] xsm:leading-[1.25rem] leading-[3.45rem] tracking-[-0.04em] text-white mb-[7.375rem] xsm:mb-[1rem]'>
-              {data?.acf.amamy_special.title}
+              {data?.title}
             </h2>
 
             <div className='space-y-6 text-white'>
               <div
                 className='font-montserrat font-medium text-[1rem] xsm:text-[0.875rem] xsm:leading-[1.25rem] leading-[1.5rem] tracking-[-0.01em]'
                 dangerouslySetInnerHTML={{
-                  __html: data?.acf.amamy_special.description,
+                  __html: data?.description,
                 }}
               ></div>
             </div>
@@ -28,8 +28,8 @@ export default function WhatMakesSpecial({data}: Prop) {
           {/* Right image */}
           <div className='relative rounded-[1.25rem] h-full w-[49.625rem] xsm:w-full xsm:min-h-[14.25rem] min-h-[28.875rem] md:min-h-[28.875rem]'>
             <Image
-              src={data?.acf.amamy_special.image.url}
-              alt={data?.acf.amamy_special.image.alt}
+              src={data?.image.url}
+              alt={data?.image.alt}
               fill
               className='object-cover rounded-[1.25rem]'
               sizes='(max-width: 49.625rem) 100vw, 28.875rem'

@@ -8,14 +8,14 @@ import Search from '@/components/svg/Search'
 import useClickOutside from '@/hooks/useClickOutside'
 import {cn} from '@/lib/utils'
 import Link from 'next/link'
-import {usePathname} from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 import {useEffect, useRef, useState} from 'react'
 
 const navItems = [
-  {name: 'Theo dõi vận đơn', href: '#'},
-  {name: 'Về Amamy', href: '#'},
-  {name: 'Dịch vụ', href: '#'},
-  {name: 'Hữu ích cho gửi hàng', href: '#'},
+  {name: 'Theo dõi vận đơn', href: '/theo-doi-van-don'},
+  {name: 'Về Amamy', href: '/about'},
+  {name: 'Dịch vụ', href: '/gui-hang-viet-duc-chau-au'},
+  {name: 'Hữu ích cho gửi hàng', href: '/blogs'},
 ]
 
 const Header = () => {
@@ -68,8 +68,11 @@ const Header = () => {
     }
   }
 
+  const router = useRouter()
   const handleSearch = () => {
-    console.log('search', searchInput)
+    if (!searchInput.trim()) return
+    router.push(`/blogs/search?key=${encodeURIComponent(searchInput)}`)
+    setIsShowSearchInput(false)
   }
 
   return (
@@ -185,16 +188,14 @@ const Header = () => {
         </div>
 
         <div
+          ref={ref}
           className={cn(
             'absolute bottom-0 left-0 w-full h-[6.875rem] flex-center bg-white transition-all duration-200',
             isShowSearchInput && 'translate-y-full',
             isScrollTop && 'opacity-0 duration-0',
           )}
         >
-          <div
-            ref={ref}
-            className='w-[62.5rem] h-[1.875rem] border-b-[0.125rem] border-[#DCDFE4] flex items-center space-x-3'
-          >
+          <div className='w-[62.5rem] h-[1.875rem] border-b-[0.125rem] border-[#DCDFE4] flex items-center space-x-3'>
             <Search
               className='size-[1.08175rem] stroke-black cursor-pointer'
               onClick={handleSearch}
@@ -203,6 +204,7 @@ const Header = () => {
               ref={inputRef}
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               type='text'
               placeholder='Nhập từ khoá...'
               className='flex-1 text-[1.25rem] border-none outline-none bg-transparent text-black placeholder:text-black/30 font-medium font-montserrat leading-[1.3] tracking-[-0.0375rem]'

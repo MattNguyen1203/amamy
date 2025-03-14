@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Header from '@/components/header/Header'
 import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
@@ -72,6 +73,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
+        <Header />
         {children}
 
         <Toaster
