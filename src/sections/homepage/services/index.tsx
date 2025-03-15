@@ -7,11 +7,11 @@ import React from 'react'
 
 const Services = ({services}: {services: ServicesObject}) => {
   return (
-    <div className='flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:pl-[1rem] xsm:px-[1rem] xsm:py-[2.5rem]'>
+    <div className='flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:px-0 xsm:py-[2.5rem]'>
       <div className='inline-flex items-end gap-[1.5rem] relative'>
-        <div className='flex flex-col w-[63rem] items-start gap-[1.5rem] relative xsm:w-[calc(100vw-2rem)]'>
+        <div className='flex flex-col w-[63rem] items-start gap-[1.5rem] relative xsm:w-[calc(100vw)]'>
           <div className='flex flex-col items-start space-y-6 xsm:space-y-3 w-full'>
-            <div className='flex h-[13.75rem] items-center space-x-6 w-full xsm:w-[calc(100vw-2rem)] xsm:space-x-3 xsm:h-[7.375rem]'>
+            <div className='flex h-[13.75rem] items-center space-x-6 w-full xsm:w-[calc(100vw)] xsm:px-4 xsm:space-x-3 xsm:h-[7.375rem]'>
               <ServiceCard
                 icon={services.list_service_1[0].icon}
                 title={services.list_service_1[0].title}
@@ -36,7 +36,7 @@ const Services = ({services}: {services: ServicesObject}) => {
               />
             </div>
 
-            <div className='inline-flex h-[20.625rem] items-center space-x-6 xsm:space-x-3 xsm:overflow-auto xsm:w-full hidden_scroll'>
+            <div className='inline-flex h-[20.625rem] items-center space-x-6 xsm:space-x-3 xsm:px-4 xsm:overflow-auto xsm:w-full hidden_scroll'>
               <ServiceHighlight
                 backgroundUrl={services.list_service_2[0].image.url}
                 icon={

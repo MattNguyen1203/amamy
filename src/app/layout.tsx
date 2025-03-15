@@ -5,6 +5,7 @@ import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
+import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -81,6 +82,7 @@ export default async function RootLayout({
             {message: 'test', role: 'bot', time: '02:13 PM'},
           ]}
         />
+        <ChatButtonMobile />
         {children}
 
         <Toaster
