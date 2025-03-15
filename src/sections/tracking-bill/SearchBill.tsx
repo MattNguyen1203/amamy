@@ -1,22 +1,24 @@
 'use client'
+import useStore from '@/app/(store)/store'
 import ImageV2 from '@/components/image/ImageV2'
 import useClickOutside from '@/hooks/useClickOutside'
 import {cn} from '@/lib/utils'
-import {Dispatch, SetStateAction, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 
 type SearchBillProps = {
-  searchValue: string
-  setSearchValue: Dispatch<SetStateAction<string>>
   onSearch: () => void
   className?: string
+  setIsSearchValue: React.Dispatch<React.SetStateAction<string>>
+  issearchValue: string
 }
 
 const SearchBill = ({
-  searchValue,
-  setSearchValue,
   onSearch,
   className,
+  setIsSearchValue,
+  issearchValue,
 }: SearchBillProps) => {
+  const {searchValue} = useStore((state) => state)
   const [isShowPaste, setIsShowPaste] = useState(false)
   const {ref, isOutside} = useClickOutside<HTMLDivElement>()
 
@@ -28,7 +30,7 @@ const SearchBill = ({
 
   const handlePaste = () => {
     navigator.clipboard.readText().then((text) => {
-      setSearchValue(text)
+      setIsSearchValue(text)
     })
   }
 
@@ -47,8 +49,8 @@ const SearchBill = ({
           <input
             type='text'
             onFocus={() => setIsShowPaste(true)}
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            value={issearchValue}
+            onChange={(e) => setIsSearchValue(e.target.value)}
             placeholder='Nhập mã vận đơn'
             className='flex-1 text-pc-sub14m border-none bg-transparent outline-none text-black placeholder:text-black/30'
           />
@@ -66,7 +68,7 @@ const SearchBill = ({
             width={40}
             height={40}
             alt=''
-            onClick={() => setSearchValue('')}
+            onClick={() => setIsSearchValue('')}
             className={cn(
               'size-6 cursor-pointer object-contain',
               searchValue ? 'block' : 'hidden',
@@ -107,8 +109,8 @@ const SearchBill = ({
         />
         <input
           type='text'
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={issearchValue}
+          onChange={(e) => setIsSearchValue(e.target.value)}
           placeholder='Nhập mã vận đơn'
           className='flex-1 text-pc-sub14m xsm:text-mb-13M border-none bg-transparent outline-none text-black placeholder:text-black/30'
         />
@@ -117,7 +119,7 @@ const SearchBill = ({
           width={40}
           height={40}
           alt=''
-          onClick={() => setSearchValue('')}
+          onClick={() => setIsSearchValue('')}
           className={cn(
             'size-6 cursor-pointer object-contain',
             searchValue ? 'block' : 'hidden',

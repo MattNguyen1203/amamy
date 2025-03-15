@@ -11,9 +11,11 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/sections/homepage/banner/tabs-custom'
+import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
 const TrackingOrder = () => {
+  const {setSearchValue} = useStore((state) => state)
   const [value, setValue] = useState('search-order')
   const [inputAI, setInputAI] = useState('')
   const [inputSearch, setInputSearch] = useState('')
@@ -25,8 +27,12 @@ const TrackingOrder = () => {
     setInputAI('')
   }
 
+  const router = useRouter()
   const handleTrackingOrder = () => {
     // handle tracking order
+    setSearchValue(inputSearch)
+    // Chuyển hướng đến trang theo dõi vận đơn
+    router.push('/theo-doi-van-don')
   }
 
   return (

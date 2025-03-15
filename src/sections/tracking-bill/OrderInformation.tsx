@@ -4,7 +4,11 @@ import ImageV2 from '@/components/image/ImageV2'
 import BillStatus from '@/sections/tracking-bill/BillStatus'
 import InformationList from '@/sections/tracking-bill/InformationList'
 import LocationTag from '@/sections/tracking-bill/LocationTag'
-
+export type IProgress = {
+  title: string
+  desc: string
+  day: string
+}
 export type OrderInformationProps = {
   searched: boolean
   data: {
@@ -13,15 +17,15 @@ export type OrderInformationProps = {
     ten_nguoi_nhan: string
     dia_chi_nguoi_gui: string
     dia_chi_nguoi_nhan: string
-    trang_thai_don_hang: string
+    tien_trinh_giao_hang: IProgress[]
+    trang_thai_don_hang: 'pending' | 'delivered' | 'shipping'
   } | null
 }
 
 const OrderInformation = ({searched, data}: OrderInformationProps) => {
   const handleCopy = () => {
-    navigator.clipboard.writeText('C345D678')
+    navigator.clipboard.writeText(data?.ma_don || '')
   }
-
   if (!searched) {
     return null
   }
@@ -62,14 +66,14 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
                 alt=''
                 className='size-5 object-contain cursor-pointer'
               />
-              <p className='font-semibold text-black'>{data.ma_don}</p>
+              <p className='font-semibold text-black'>{data?.ma_don}</p>
             </div>
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-center'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>
               Trạng thái đơn hàng:
             </p>
-            <BillStatus type='pending' />
+            <BillStatus type={data?.trang_thai_don_hang || 'pending'} />
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-start'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Người gửi:</p>
@@ -97,30 +101,7 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
           </div>
         </div>
         <div className='h-[1px] w-full bg-[#DCDFE4] hidden xsm:block' />
-        <InformationList
-          data={[
-            {
-              date: '03/03/2025',
-              title: 'Đã tạo đơn hàng',
-              content: 'Đơn hàng đã được tạo thành công',
-            },
-            {
-              date: '03/03/2025',
-              title: 'Đã tạo đơn hàng',
-              content: 'Đơn hàng đã được tạo thành công',
-            },
-            {
-              date: '03/03/2025',
-              title: 'Đã tạo đơn hàng',
-              content: 'Đơn hàng đã được tạo thành công',
-            },
-            {
-              date: '03/03/2025',
-              title: 'Đã tạo đơn hàng',
-              content: 'Đơn hàng đã được tạo thành công',
-            },
-          ]}
-        />
+        <InformationList data={data?.tien_trinh_giao_hang} />
       </div>
     </div>
   )

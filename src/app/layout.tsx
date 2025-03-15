@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ChatBot from '@/components/chat-bot'
 import Header from '@/components/header/Header'
+import fetchData from '@/fetch/fetchData'
 import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
@@ -69,12 +70,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const fetchCreateOrder = fetchData({
+    api: `chieu-van-chuyen-header`,
+    option: {
+      next: {revalidate: 10},
+    },
+  })
+  const [dataCreateOrder] = await Promise.all([fetchCreateOrder])
   return (
     <html>
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
-        <Header />
+        <Header dataCreateOrder={dataCreateOrder} />
         <ChatBot
           dataMessage={[
             {message: 'test', role: 'user', time: '02:13 PM'},
