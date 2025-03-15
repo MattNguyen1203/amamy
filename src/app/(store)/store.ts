@@ -4,6 +4,8 @@ import {create} from 'zustand'
 type Store = {
   stepOrder: number
   setStepOrder: (stepOrderNew: number) => void
+  searchValue: string
+  setSearchValue: (searchValueNew: string) => void
   chatBotMessage: string
   setChatBotMessage: (chatBotMessageNew: string) => void
 }
@@ -11,6 +13,8 @@ type Store = {
 const useStore = create<Store>()((set) => ({
   stepOrder: 1,
   setStepOrder: (stepOrderNew) => set({stepOrder: stepOrderNew}),
+  searchValue: '',
+  setSearchValue: (searchValueNew) => set({searchValue: searchValueNew}),
   chatBotMessage: '',
   setChatBotMessage: (chatBotMessageNew) =>
     set({chatBotMessage: chatBotMessageNew}),

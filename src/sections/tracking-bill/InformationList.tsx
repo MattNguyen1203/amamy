@@ -1,33 +1,31 @@
 import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
+import {IProgress} from '@/sections/tracking-bill/OrderInformation'
 
-type InformationItemProps = {
-  date: string
-  title: string
-  content: string
-}
-
-const InformationItem = ({date, title, content}: InformationItemProps) => {
+const InformationItem = ({day, title, desc}: IProgress) => {
   return (
     <div className='text-pc-14 xsm:text-mb-12'>
       <div className='flex items-center'>
-        <p className='text-black/60 xsm:font-medium'>{date}</p>
+        <p className='text-black/60 xsm:font-medium'>{day}</p>
         <div className='size-2 rounded-full bg-[#38B6FF] ml-4 mr-3' />
         <p className='font-semibold text-black'>{title}</p>
       </div>
-      <p className='mt-2 text-black'>{content}</p>
+      <div
+        className='mt-2 *:text-black *:text-pc-14 [&_strong]:text-pc-sub14s'
+        dangerouslySetInnerHTML={{__html: desc}}
+      ></div>
     </div>
   )
 }
 
 type InformationListProps = {
-  data: InformationItemProps[]
+  data: IProgress[]
 }
 
 const InformationList = ({data}: InformationListProps) => {
   return (
     <div className='flex flex-col space-y-10 xsm:space-y-6'>
-      {data.map((item, index) => (
+      {data.map((item: IProgress, index: number) => (
         <div
           key={index}
           className='flex items-start relative'

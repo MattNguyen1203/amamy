@@ -1,3 +1,5 @@
+'use client'
+import ICDrop from '@/components/header/ICDrop'
 import {
   Sheet,
   SheetClose,
@@ -8,9 +10,24 @@ import {
 import ImageV2 from '@/components/image/ImageV2'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Menu from '@/components/svg/Menu'
+import {cn} from '@/lib/utils'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
+import {useState} from 'react'
 
-const MobileMenu = () => {
+interface INavItems {
+  name: string
+  href?: string
+}
+
+const MobileMenu = ({
+  navItems,
+  dataCreateOrder,
+}: {
+  navItems: INavItems[]
+  dataCreateOrder: ICreateOder[]
+}) => {
+  const [toggle, setToggle] = useState<boolean>(false)
   return (
     <Sheet>
       <SheetTrigger>
@@ -23,14 +40,14 @@ const MobileMenu = () => {
         </SheetClose>
         <div className='px-4 bg-white rounded-[1.25rem]'>
           <Link
-            href='#'
+            href={navItems?.[0]?.href || '#'}
             className='text-mb-13M text-black py-4 block'
           >
-            Theo dõi bưu kiện
+            {navItems?.[0]?.name}
           </Link>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
           <Link
-            href='#'
+            href='/tao-don-hang'
             className='text-mb-13M text-black py-4 block'
           >
             Tạo đơn hàng
@@ -39,25 +56,57 @@ const MobileMenu = () => {
 
         <div className='mt-6 px-4 bg-white rounded-[1.25rem]'>
           <Link
-            href='#'
+            href={navItems?.[1]?.href || '#'}
             className='text-mb-13M text-black py-4 block'
           >
-            Về chúng tôi
+            {navItems?.[1]?.name}
           </Link>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
           <Link
-            href='#'
+            href={navItems?.[3]?.href || '#'}
             className='text-mb-13M text-black py-4 block'
           >
-            Hữu ích cho gửi hàng
+            {navItems?.[3]?.name}
           </Link>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <Link
-            href='#'
-            className='text-mb-13M text-black py-4 block'
+          <div
+            onClick={() => {
+              setToggle(!toggle)
+            }}
+            className='text-mb-13M text-black py-4 flex w-full justify-between'
           >
-            Dịch vụ
-          </Link>
+            <p className='text-mb-13M text-black'>Dịch vụ</p>
+            <ICDrop className='size-[1.5rem]' />
+          </div>
+          <div
+            style={{
+              height: toggle
+                ? `calc(2.5rem*${dataCreateOrder?.length + 1})`
+                : '0',
+            }}
+            className={cn(
+              'space-y-[1rem] h-0 transition-all duration-500 overflow-hidden',
+              toggle && 'pb-[1rem]',
+            )}
+          >
+            {Array.isArray(dataCreateOrder) &&
+              dataCreateOrder?.map((item: ICreateOder, index: number) => (
+                <Link
+                  href={item?.slug || ''}
+                  key={index}
+                  className='flex w-full justify-between space-x-[1rem] py-[0.5rem]'
+                >
+                  <ImageV2
+                    src={item?.thumbnail}
+                    alt=''
+                    width={50 * 2}
+                    height={50 * 2}
+                    className='size-[1rem]'
+                  />
+                  <p className='flex-1 text-mb-13M text-black'>{item?.title}</p>
+                </Link>
+              ))}
+          </div>
         </div>
 
         <p className='mt-6 text-pc-sub12s text-black/80'>Dịch vụ khác</p>
