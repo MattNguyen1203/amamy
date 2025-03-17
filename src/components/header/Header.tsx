@@ -126,6 +126,7 @@ const Header = ({dataCreateOrder}: {dataCreateOrder: ICreateOder[]}) => {
             <input
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               type='text'
               placeholder='Nhập từ khoá...'
               className='flex-1 border-none outline-none bg-transparent text-mb-13M text-black placeholder:text-black/30'
