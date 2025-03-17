@@ -32,15 +32,18 @@ const Header = ({dataCreateOrder}: {dataCreateOrder: ICreateOder[]}) => {
   const isMobile = useIsMobile()
   const [searchInput, setSearchInput] = useState('')
   const [isScrollTop, setIsScrollTop] = useState(false)
+  const [isHomePage, setIsHomePage] = useState(false)
   const [isShowSearchInput, setIsShowSearchInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const {isOutside, ref} = useClickOutside<HTMLDivElement>()
 
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
+  useEffect(() => {
+    setIsHomePage(pathname === '/')
+  }, [pathname])
 
   useEffect(() => {
-    if (isShowSearchInput) {
+    if (isShowSearchInput || !isHomePage) {
       setIsScrollTop(false)
       return
     }

@@ -1,4 +1,5 @@
 import ImageV2 from '@/components/image/ImageV2'
+import {cn} from '@/lib/utils'
 import Link from 'next/link'
 
 type CardServiceProps = {
@@ -8,6 +9,7 @@ type CardServiceProps = {
   subtitle: string
   list_des: {description: string}[]
   href?: string
+  className?: string
 }
 
 export const ArrowIcon = () => {
@@ -74,11 +76,15 @@ const CardService = ({
   title,
   href,
   header,
+  className,
 }: CardServiceProps) => {
   return (
     <Link
       href={href || ''}
-      className='overflow-hidden group w-[20rem] h-[23.0625rem] flex flex-col rounded-[1.25rem] bg-white shadow-[0px_4px_23.7px_0px_rgba(0,0,0,0.00)]'
+      className={cn(
+        'overflow-hidden group w-[20rem] h-[23.0625rem] flex flex-col rounded-[1.25rem] bg-white shadow-[0px_4px_23.7px_0px_rgba(0,0,0,0.00)]',
+        className,
+      )}
     >
       <ImageV2
         src={flag}
@@ -158,11 +164,15 @@ export const CardServiceMB = ({
   title,
   href,
   header,
+  className,
 }: CardServiceProps) => {
   return (
     <Link
       href={href || ''}
-      className='overflow-hidden group w-[17.5rem] flex flex-col rounded-[1.25rem] bg-white shadow-[0px_4px_23.7px_0px_rgba(0,0,0,0.00)]'
+      className={cn(
+        'overflow-hidden group w-[17.5rem] flex flex-col rounded-[1.25rem] bg-white shadow-[0px_4px_23.7px_0px_rgba(0,0,0,0.00)]',
+        className,
+      )}
     >
       <ImageV2
         src={flag}

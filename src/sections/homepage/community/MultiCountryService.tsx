@@ -10,7 +10,7 @@ const MultiCountryService = ({
 }: {
   sectionCountry: ShippingServiceObject
 }) => (
-  <div className='flex h-[33.8125rem] -mt-[11.25rem] w-[88rem] ml-[6rem] items-start relative rounded-[1.25rem] overflow-hidden xsm:hidden'>
+  <div className='fade-in-box flex h-[33.8125rem] -mt-[11.25rem] w-[88rem] ml-[6rem] items-start relative rounded-[1.25rem] overflow-hidden xsm:hidden'>
     <div className='flex flex-col items-start relative w-[21.5rem]'>
       <div className='relative self-stretch w-full h-[33.8125rem] rounded-[var(--token-8)_0px_0px_0px] bg-[#1dacff] overflow-hidden'>
         <Image

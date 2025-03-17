@@ -3,8 +3,30 @@ import React from 'react'
 import TrackingInterface from './TrackingOrder'
 import {IBanner, IImage} from '@/utils/type'
 import ImageV2 from '@/components/image/ImageV2'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 
 const Banner = ({banner}: {banner: IBanner}) => {
+  useGSAP(() => {
+    gsap.from('.fade-image', {
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '.fade-image',
+        start: 'top bottom',
+      },
+    })
+    gsap.from('.fade-box', {
+      duration: 1,
+      delay: 0.5,
+      y: 50,
+      scrollTrigger: {
+        trigger: '.fade-box',
+        start: 'top bottom',
+      },
+    })
+  })
+
   return (
     <>
       <div className='relative w-full h-[49.25rem] text-white xsm:hidden'>
@@ -16,7 +38,40 @@ const Banner = ({banner}: {banner: IBanner}) => {
           height={2000}
           quality={100}
         />
-        <div className='absolute left-[6rem] top-[13.37rem]'>
+        <div className='absolute top-[11rem] left-[47rem] flex items-center space-x-4'>
+          <ImageV2
+            alt=''
+            width={300}
+            height={300}
+            src={banner?.image_1.url}
+            className='fade-image w-[14.45088rem] h-[13.61225rem] object-cover border-[0.125rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem] transform -skew-y-[4deg]'
+          />
+          <ImageV2
+            alt=''
+            width={300}
+            height={300}
+            src={banner?.image_2.url}
+            className='fade-image w-[14.45088rem] h-[13.61225rem] -mt-14 object-cover border-[0.125rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem]'
+          />
+          <ImageV2
+            alt=''
+            width={300}
+            height={300}
+            src={banner?.image_3.url}
+            className='fade-image w-[14.45088rem] h-[13.61225rem] object-cover border-[0.125rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem] transform skew-y-[4deg]'
+          />
+        </div>
+
+        {/* box */}
+        <ImageV2
+          alt=''
+          width={300}
+          height={300}
+          src='/homepage/box.webp'
+          className='fade-box w-[34.95956rem] h-[31.5rem] object-cover absolute left-[54rem] top-[14rem]'
+        />
+
+        <div className='fade-in-box absolute left-[6rem] top-[13.37rem]'>
           <div className='flex items-center space-x-3'>
             <div className='flex relative w-[8.25rem] -space-x-3'>
               {banner?.user_list.map((item, index) => (
@@ -64,14 +119,47 @@ const BackgroundMobile = ({
   height?: string
 }) => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col relative'>
       <ImageV2
-        className={`w-full ${height} flex-shrink-0 top-0 right-0 z-[10]`}
+        className={`w-full ${height} flex-shrink-0`}
         src={banner?.background_mobile.url}
         alt={banner?.background_mobile.alt}
         width={1000}
         height={1000}
       />
+      <div className='absolute top-[7rem] left-[0.5rem] flex items-center space-x-4'>
+        <ImageV2
+          alt=''
+          width={300}
+          height={300}
+          src={banner?.image_1.url}
+          className='w-[6.49513rem] h-[6.13581rem] object-cover border-[0.0625rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem] transform -skew-y-[4deg]'
+        />
+        <ImageV2
+          alt=''
+          width={300}
+          height={300}
+          src={banner?.image_2.url}
+          className='w-[6.49513rem] h-[6.13581rem] -mt-6 object-cover border-[0.0625rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem]'
+        />
+        <ImageV2
+          alt=''
+          width={300}
+          height={300}
+          src={banner?.image_3.url}
+          className='w-[6.49513rem] h-[6.13581rem] object-cover border-[0.0625rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem] transform skew-y-[4deg]'
+        />
+      </div>
+
+      {/* box */}
+      <ImageV2
+        alt=''
+        width={300}
+        height={300}
+        src='/homepage/box.webp'
+        className='w-[16.9375rem] h-[15.25rem] object-cover absolute left-[4rem] top-[7rem]'
+      />
+
       <div className='px-[1rem] pt-5 -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] relative z-[20]'>
         <div className='flex space-x-[0.75rem] items-center'>
           <div className='flex relative -space-x-2.5'>

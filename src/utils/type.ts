@@ -49,6 +49,9 @@ export interface IImage {
 export interface IBanner {
   background_pc: IImage
   background_mobile: IImage
+  image_1: IImage
+  image_2: IImage
+  image_3: IImage
   user_list: IImage[]
   user_number: string
   review_title: string
