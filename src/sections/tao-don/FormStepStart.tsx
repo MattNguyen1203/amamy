@@ -18,7 +18,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
@@ -120,6 +119,13 @@ export default function FormStepStart({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+  useEffect(() => {
+    if (selectServiceDimension || howToContactAmamy) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [selectServiceDimension, howToContactAmamy])
   async function onSubmit(values: z.infer<typeof formSchema>) {
     localStorage.setItem('user_email', values?.email)
     if (stepOrder < 2) {
@@ -200,7 +206,6 @@ export default function FormStepStart({
               <FormItem
                 onClick={() => {
                   setHowToContactAmamy(true)
-                  useBodyScrollLock(true)
                 }}
                 className='flex-1 space-y-0'
               >
@@ -305,7 +310,6 @@ export default function FormStepStart({
               <FormItem
                 onClick={() => {
                   setSelectServiceDimension(true)
-                  useBodyScrollLock(true)
                 }}
                 className='flex-1 space-y-0'
               >
@@ -425,7 +429,6 @@ export default function FormStepStart({
               onClick={() => {
                 setSelectServiceDimension(false)
                 setHowToContactAmamy(false)
-                useBodyScrollLock(false)
               }}
               className={cn(
                 'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden',
@@ -446,7 +449,6 @@ export default function FormStepStart({
                 <div
                   onClick={() => {
                     setSelectServiceDimension(false)
-                    useBodyScrollLock(false)
                   }}
                   className='absolute top-[0.5rem] right-[0.5rem]'
                 >
@@ -466,7 +468,6 @@ export default function FormStepStart({
                           title: item?.title,
                         })
                         setSelectServiceDimension(false)
-                        useBodyScrollLock(false)
                       }}
                       className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
                     >
@@ -497,7 +498,6 @@ export default function FormStepStart({
                 <div
                   onClick={() => {
                     setHowToContactAmamy(false)
-                    useBodyScrollLock(false)
                   }}
                   className='absolute top-[0.5rem] right-[0.5rem]'
                 >
@@ -524,7 +524,6 @@ export default function FormStepStart({
                             title: item?.title,
                           })
                           setHowToContactAmamy(false)
-                          useBodyScrollLock(false)
                         }}
                         className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
                       >

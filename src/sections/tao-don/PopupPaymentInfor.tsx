@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import {cn} from '@/lib/utils'
 import ICX from '@/sections/tao-don/ICX'
 
@@ -23,7 +22,6 @@ export default function PopupPaymentInfor({
       <div
         onClick={() => {
           setSelectPaymentInformation(false)
-          useBodyScrollLock(false)
         }}
         className={cn(
           'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
@@ -43,7 +41,6 @@ export default function PopupPaymentInfor({
           <div
             onClick={() => {
               setSelectPaymentInformation(false)
-              useBodyScrollLock(false)
             }}
             className='absolute top-[0.5rem] right-[0.5rem]'
           >
@@ -59,7 +56,6 @@ export default function PopupPaymentInfor({
               })
               form.setValue('recipientPaymentInformation', 'VND')
               setSelectPaymentInformation(false)
-              useBodyScrollLock(false)
             }}
             className='p-[0.75rem_1rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
           >

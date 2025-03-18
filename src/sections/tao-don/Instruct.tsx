@@ -28,7 +28,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
@@ -120,6 +119,13 @@ export default function Instruct({
       }
     }
   }, [form?.getValues('branch')])
+  useEffect(() => {
+    if (selectBranch || selectPaymentInformation) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [selectBranch, selectPaymentInformation])
   function handleCreateOrder() {
     setTransition(async () => {
       const formData = new FormData()
@@ -189,7 +195,6 @@ export default function Instruct({
                       onClick={() => {
                         if (isMobile) {
                           setSelectBranch(true)
-                          useBodyScrollLock(true)
                         }
                       }}
                       className={cn(
@@ -352,7 +357,6 @@ export default function Instruct({
                 onClick={() => {
                   if (isMobile) {
                     setSelectPaymentInformation(true)
-                    useBodyScrollLock(true)
                   }
                 }}
                 className='flex-1 space-y-0'
@@ -542,7 +546,6 @@ export default function Instruct({
                   <div
                     onClick={() => {
                       setSelectBranch(false)
-                      useBodyScrollLock(false)
                     }}
                     className={cn(
                       'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
@@ -562,7 +565,6 @@ export default function Instruct({
                       <div
                         onClick={() => {
                           setSelectBranch(false)
-                          useBodyScrollLock(false)
                         }}
                         className='absolute top-[0.5rem] right-[0.5rem]'
                       >
@@ -582,7 +584,6 @@ export default function Instruct({
                                 form.setValue('branch', String(item?.title))
                                 setSelectBranchValue(item?.title)
                                 setSelectBranch(false)
-                                useBodyScrollLock(false)
                               }}
                               className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
                             >
