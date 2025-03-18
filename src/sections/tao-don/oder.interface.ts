@@ -9,22 +9,18 @@ export interface ICreateOder {
 export interface IInformationTimeOrder {
   time_content?: string
   stock?: string
-}
-export interface IInformationNoteOrder_NoteMore {
-  text?: string
-  agree_with?: string
+  clause?: string
 }
 export interface IInformationNoteOrder {
-  Item_that_can_be_sent?: string
-  note_more?: IInformationNoteOrder_NoteMore[]
-  unable_to_send?: string
-  delivery_in_germany_must_read?: string
-  cargo_insurance?: string
-  closing_policy?: string[]
+  title: string
+  text: string
+  agree_with: string
 }
 export interface IInformationInstructOrder_SelectBranch {
   title: string
-  content: string
+  address: string
+  time: string
+  phone: string
 }
 export interface IInformationInstructOrder {
   packing_instructions?: string
@@ -33,8 +29,29 @@ export interface IInformationInstructOrder {
   note_more?: string
   shipping_instructions_image?: string[]
 }
+export interface IInformationInsurance_policy {
+  content: string
+  clause: string
+}
+export interface IInformationInsurance_CargoInsuranceJapanvn {
+  title: string
+  content: string
+  image?: string
+  clause: string
+}
+export interface IInformationInsurance {
+  compensation: {
+    title: string
+    desc: string
+    policy: IInformationInsurance_policy[]
+  }
+  cargo_insurance_japanvn: IInformationInsurance_CargoInsuranceJapanvn[]
+}
 export interface IInformationOrder {
-  time?: IInformationTimeOrder
-  note?: IInformationNoteOrder
+  time?: IInformationTimeOrder[]
+  note?: IInformationNoteOrder[]
   instruct?: IInformationInstructOrder
+  insurance?: IInformationInsurance
+  shipping_cost?: string
+  important_note?: string
 }

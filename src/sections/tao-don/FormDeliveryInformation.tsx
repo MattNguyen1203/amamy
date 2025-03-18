@@ -10,17 +10,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
@@ -45,11 +36,6 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận',
     })
     .min(1, 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận'),
-  recipientAddressDetail: z
-    .string({
-      required_error: 'Vui lòng nhập địa chỉ chi tiết người nhận',
-    })
-    .min(1, 'Vui lòng nhập địa chỉ chi tiết người nhận'),
   recipientCity: z
     .string({
       required_error: 'Vui lòng nhập thành phố người nhận',
@@ -60,11 +46,16 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập mã thành phố người nhận',
     })
     .min(1, 'Vui lòng nhập mã thành phố người nhận'),
-  recipientPaymentInformation: z
+  housingNumber: z
     .string({
-      required_error: 'Vui lòng nhập thông tin thanh toán ',
+      required_error: 'Vui lòng nhập thông tin số nhà',
     })
-    .min(1, 'Vui lòng nhập thông tin thanh toán '),
+    .min(1, 'Vui lòng nhập thông tin số nhà'),
+  roadName: z
+    .string({
+      required_error: 'Vui lòng nhập thông tin tên đường',
+    })
+    .min(1, 'Vui lòng nhập thông tin tên đường'),
 })
 
 export default function FormDeliveryInformation({
@@ -76,13 +67,8 @@ export default function FormDeliveryInformation({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
 }) {
-  const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
-  const [selectPaymentInformation, setSelectPaymentInformation] =
-    useState<boolean>(false)
-  const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
-    useState<{value: string; title: string}>({value: '', title: ''})
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -90,11 +76,10 @@ export default function FormDeliveryInformation({
       recipientName: dataFromOrder?.recipientName || '',
       recipientPhone: dataFromOrder?.recipientPhone || '',
       recipientAddress: dataFromOrder?.recipientAddress || '',
-      recipientAddressDetail: dataFromOrder?.recipientAddressDetail || '',
       recipientCity: dataFromOrder?.recipientCity || '',
-      recipientCodeCity: dataFromOrder?.recipientCodeCity || '',
-      recipientPaymentInformation:
-        dataFromOrder?.recipientPaymentInformation || '',
+      recipientCodeCity: dataFromOrder?.housingNumber || '',
+      housingNumber: dataFromOrder?.recipientCodeCity || '',
+      roadName: dataFromOrder?.roadName || '',
     },
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
@@ -134,14 +119,14 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
                 <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
-                  Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên
-                  chuông cửa để việc giao hàng chính xác.
+                  *Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc
+                  đúng tên Auswei.
                 </p>
                 <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
@@ -153,11 +138,11 @@ export default function FormDeliveryInformation({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số điện thoại(*)
+                  Số điện thoại người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />
@@ -173,43 +158,63 @@ export default function FormDeliveryInformation({
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ (Tên đường, số nhà)(*)
+                Địa chỉ (*)
               </FormLabel>
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                  placeholder='Friedrichstraße 23'
+                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  placeholder='Etage 4, Ha Restaurant, Hotel A, Nails B...'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='recipientAddressDetail'
-          render={({field}) => (
-            <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ chi tiết(*)
-              </FormLabel>
-              <FormControl>
-                <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                  placeholder='Nail Salon Bella, Restautant, Wohnung, Etage..'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
-                Tên công ty, Tiệm Nails, nhà hàng, chung cư, số nhà, số phòng...
-                Giao hàng ở Đức, Châu Âu không gọi trước khi giao nên quý khách
-                vui lòng ghi chi tiết nhất có thể.
+              <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số tầng,
+                số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
               </p>
+              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
             </FormItem>
           )}
         />
+        <div className='flex space-x-[1.5rem]'>
+          <FormField
+            control={form.control}
+            name='housingNumber'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Tên đường(*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Marien Strasse'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='roadName'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Số nhà (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='15'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className='flex space-x-[1.5rem]'>
           <FormField
             control={form.control}
@@ -221,7 +226,7 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Nhập tên thành phố'
                     {...field}
                   />
@@ -240,7 +245,7 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='10117'
                     {...field}
                   />
@@ -250,62 +255,6 @@ export default function FormDeliveryInformation({
             )}
           />
         </div>
-        <FormField
-          control={form.control}
-          name='recipientPaymentInformation'
-          render={({field}) => (
-            <FormItem
-              onClick={() => setSelectPaymentInformation(true)}
-              className='flex-1 space-y-0'
-            >
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Chọn thông tin thanh toán (*)
-              </FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                  <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
-                    {!isMobile && (
-                      <SelectValue placeholder='Chọn thông tin thanh toán' />
-                    )}
-                    {isMobile && !field.value && (
-                      <SelectValue placeholder='Chọn thông tin thanh toán' />
-                    )}
-                    {isMobile && field.value && (
-                      <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
-                        <p className='text-black text-pc-sub14m text-start w-full line-clamp-1'>
-                          {selectPaymentInformationValue?.title ||
-                            dataFromOrder?.recipientPaymentInformation}
-                        </p>
-                      </div>
-                    )}
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
-                  <SelectItem
-                    className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                    value={'VND'}
-                  >
-                    <p className='text-black text-pc-sub14m'>
-                      Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)
-                    </p>
-                  </SelectItem>
-                  <SelectItem
-                    className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                    value={'Euro'}
-                  >
-                    <p className='text-black text-pc-sub14m'>
-                      Thanh toán bằng Euro
-                    </p>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className='!text-[#F00] text-pc-sub12m' />
-            </FormItem>
-          )}
-        />
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[51] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
             onClick={() => handleClickcurrentTab('3')}
@@ -325,14 +274,6 @@ export default function FormDeliveryInformation({
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>
           </Button>
         </div>
-        {isMobile && (
-          <PopupPaymentInfor
-            form={form}
-            selectPaymentInformation={selectPaymentInformation}
-            setSelectPaymentInformation={setSelectPaymentInformation}
-            setSelectPaymentInformationValue={setSelectPaymentInformationValue}
-          />
-        )}
       </form>
     </Form>
   )

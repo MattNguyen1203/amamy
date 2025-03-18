@@ -9,6 +9,7 @@ const variants = cva(
         pending: 'bg-[#A6502C]',
         shipping: 'bg-[#FCB07E]',
         delivered: 'bg-[#40C466]',
+        completed: 'bg-[#40C466]',
       },
     },
   },

@@ -42,10 +42,12 @@ export default function FormDeliveryInformationVNJapan({
   handleClickcurrentTab,
   setDataFromOrder,
   dataFromOrder,
+  type,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
+  type: string
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -91,20 +93,25 @@ export default function FormDeliveryInformationVNJapan({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận(*)
+                  Tên người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='Tên người nhận'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder={
+                      type === 'vietnhat'
+                        ? 'Bich Ngoc (ビック ゴック)'
+                        : 'Tên người nhận'
+                    }
                     {...field}
                   />
                 </FormControl>
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
-                  Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên
-                  chuông cửa để việc giao hàng chính xác.
-                </p>
-                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                {type === 'vietnhat' && (
+                  <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                    *Điền chữ tiếng Anh và Kanji hoặc Romanji.
+                  </p>
+                )}
               </FormItem>
             )}
           />
@@ -118,12 +125,12 @@ export default function FormDeliveryInformationVNJapan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -134,16 +141,41 @@ export default function FormDeliveryInformationVNJapan({
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ (*)
+                {type === 'vietnhat'
+                  ? 'Địa chỉ chi tiết'
+                  : 'Địa chỉ nhận hàng tại Việt Nam (*)'}
               </FormLabel>
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                  placeholder='Nhập địa chỉ nhận hàng tại Nhật Bản'
+                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  placeholder={
+                    type === 'vietnhat'
+                      ? 'Nhập địa chỉ nhận hàng'
+                      : 'Nhập địa chỉ nhận hàng tại Việt Nam'
+                  }
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              {type === 'vietnhat' ? (
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                  *Điền chữ tiếng Anh và Kanji hoặc Romanji.
+                  <br />
+                  *Quý khách vui lòng cung cấp thông tin chi tiết: số phòng, toà
+                  nhà nếu có <br />
+                  <span></span>
+                  <br />
+                  <span className='italic'>
+                    Ví dụ: 富⼭県富⼭市 婦中町下管⽥137番地⼯ ⼘婦中305号
+                    (Excellent Funauchi 444, 137 Shimo-Kutsuta, Funauchi cho,
+                    Toyama-shi, Toyama Prefecture) 939-2716
+                  </span>
+                </p>
+              ) : (
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                  *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
+                </p>
+              )}
             </FormItem>
           )}
         />

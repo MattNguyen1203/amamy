@@ -1,8 +1,7 @@
 'use client'
-import React from 'react'
-import TrackingInterface from './TrackingOrder'
-import {IBanner, IImage} from '@/utils/type'
 import ImageV2 from '@/components/image/ImageV2'
+import {IBanner, IImage} from '@/utils/type'
+import TrackingInterface from './TrackingOrder'
 
 const Banner = ({banner}: {banner: IBanner}) => {
   return (
@@ -86,7 +85,7 @@ const BackgroundMobile = ({
             </div>
           </div>
           <div className='flex-1'>
-            <p className='font-[Montserrat] text-[1rem] font-bold leading-[normal] tracking-[-0.03rem]'>
+            <p className='font-montserrat text-[1rem] font-bold leading-[normal] tracking-[-0.03rem]'>
               {banner?.user_number}
             </p>
             <p className='text-[0.625rem] font-medium leading-[140%]'>

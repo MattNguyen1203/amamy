@@ -18,7 +18,7 @@ export type OrderInformationProps = {
     dia_chi_nguoi_gui: string
     dia_chi_nguoi_nhan: string
     tien_trinh_giao_hang: IProgress[]
-    trang_thai_don_hang: 'pending' | 'delivered' | 'shipping'
+    trang_thai_don_hang: 'pending' | 'delivered' | 'shipping' | 'completed'
   } | null
 }
 

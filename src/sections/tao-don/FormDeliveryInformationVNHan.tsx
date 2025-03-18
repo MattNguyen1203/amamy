@@ -36,22 +36,39 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận',
     })
     .min(1, 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận'),
-  passportNumber: z.string().optional(),
-  personalClearanceCode: z
+  passportNumber: z
     .string({
-      required_error: 'Vui lòng nhập mã số thông quan cá nhân',
+      required_error: 'Vui lòng nhập mã thông quan, ID hoặc CMT người nhận',
     })
-    .min(1, 'Vui lòng nhập mã số thông quan cá nhân'),
+    .min(1, 'Vui lòng nhập mã thông quan, ID hoặc CMT người nhận'),
+  recipientCodeCity: z
+    .string({
+      required_error: 'Vui lòng nhập mã thành phố người nhận',
+    })
+    .min(1, 'Vui lòng nhập mã thành phố người nhận'),
+  housingNumber: z
+    .string({
+      required_error: 'Vui lòng nhập thông tin số nhà',
+    })
+    .min(1, 'Vui lòng nhập thông tin số nhà'),
+  roadName: z
+    .string({
+      required_error: 'Vui lòng nhập thông tin tên đường',
+    })
+    .min(1, 'Vui lòng nhập thông tin tên đường'),
+  district: z.string().optional(),
 })
 
 export default function FormDeliveryInformationVNHan({
   handleClickcurrentTab,
   setDataFromOrder,
   dataFromOrder,
+  shippingCost,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
+  shippingCost?: string
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -70,7 +87,10 @@ export default function FormDeliveryInformationVNHan({
       recipientPhone: dataFromOrder?.recipientPhone || '',
       recipientAddress: dataFromOrder?.recipientAddress || '',
       passportNumber: dataFromOrder?.passportNumber || '',
-      personalClearanceCode: dataFromOrder?.personalClearanceCode || '',
+      recipientCodeCity: dataFromOrder?.housingNumber || '',
+      housingNumber: dataFromOrder?.recipientCodeCity || '',
+      roadName: dataFromOrder?.roadName || '',
+      district: dataFromOrder?.district || '',
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -103,31 +123,88 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
-                  Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên
-                  chuông cửa để việc giao hàng chính xác.
-                </p>
                 <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+          <FormField
+            control={form.control}
+            name='recipientCodeCity'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Thành phố (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='전주시'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name='recipientPhone'
+            name='district'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số điện thoại(*)
+                  Quận (nếu có)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='0987654321'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='덕진구'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+          <FormField
+            control={form.control}
+            name='roadName'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Tên đường (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='명륜 4길'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='housingNumber'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Số nhà (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='4 - 12'
                     {...field}
                   />
                 </FormControl>
@@ -142,16 +219,19 @@ export default function FormDeliveryInformationVNHan({
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ(*)
+                Địa chỉ chi tiết (*)
               </FormLabel>
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                  placeholder='Nhập địa chỉ nhận hàng tại Hàn Quốc'
+                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  placeholder='영스빌 3층 301호'
                   {...field}
                 />
               </FormControl>
               <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                *Số phòng, toà nhà nếu có
+              </p>
             </FormItem>
           )}
         />
@@ -162,35 +242,43 @@ export default function FormDeliveryInformationVNHan({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số hộ chiếu hoặc CMT (nếu có)
+                  Mã thông quan, ID hoặc CMT
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='C8488999'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='personalClearanceCode'
-            render={({field}) => (
-              <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Mã số thông quan cá nhân(*)
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='P12345****012'
                     {...field}
                   />
                 </FormControl>
                 <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                  *Mã thông quan: P828*****888, <br />
+                  *CMT: 96*********27: *ID:***213 <br />
+                  <span className='text-[#F00]'>
+                    *Lưu ý: Mã thông quan, ID hoặc CMT phải trùng địa chỉ giao
+                    hàng, nếu không sẽ giao sai. Phí giao lại {shippingCost}.
+                  </span>
+                </p>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='recipientPhone'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Số điện thoại người nhận(*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='0987654321'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -218,3 +306,7 @@ export default function FormDeliveryInformationVNHan({
     </Form>
   )
 }
+// <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+//   Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên chuông cửa để việc
+//   giao hàng chính xác.
+// </p>
