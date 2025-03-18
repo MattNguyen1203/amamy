@@ -51,15 +51,15 @@ const formSchema = z.object({
 
 const dataContactMethod = [
   {
-    img: '/order/like.webp',
+    img: '/order/like.svg',
     title: 'Facebook Fanpage Amamy',
   },
   {
-    img: '/order/facebook.webp',
+    img: '/order/fb.svg',
     title: 'Facebook Amamy vận chuyển',
   },
   {
-    img: '/order/zalo.webp',
+    img: '/order/zalo.svg',
     title: 'Zalo Amamy',
   },
   {
