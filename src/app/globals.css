@@ -147,7 +147,7 @@ html > body[data-scroll-locked] {
     @apply italic text-[1rem] text-[rgba(0,0,0,0.60)] font-medium leading-[1.6] tracking-[-0.03rem];
   }
   .content-ul {
-    @apply my-[0.5rem] list-disc pl-[1.5rem];
+    @apply my-[0.25rem] list-disc pl-[1.5rem];
   }
   .content-ol {
     @apply my-[0.5rem] list-decimal pl-[1.5rem];

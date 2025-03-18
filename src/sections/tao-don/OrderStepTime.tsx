@@ -13,27 +13,31 @@ import {
 import {cn} from '@/lib/utils'
 import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function OrderStepTime({
   dataInformation,
   handleClickcurrentTab,
 }: {
-  dataInformation?: IInformationTimeOrder
+  dataInformation?: IInformationTimeOrder[]
   handleClickcurrentTab: (nextTab: string) => void
 }) {
   const FormSchema = z.object({
-    policy: z.boolean().refine((value) => value === true, {
-      message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
-    }),
+    policy: z.array(
+      z.boolean().refine((value) => value === true, {
+        message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
+      }),
+    ),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      policy: stepOrder > 2 ? true : false,
+      policy: Array.isArray(dataInformation)
+        ? dataInformation?.map(() => (stepOrder > 2 ? true : false))
+        : [],
     },
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
@@ -54,55 +58,52 @@ export default function OrderStepTime({
   }
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-      <p className='text-pc-sub16b text-black'>Thời gian gửi hàng</p>
-      <div className='p-[1rem] rounded-[1.25rem] bg-white'>
-        <p className='xsm:text-pc-sub14s mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
-          Thời gian gửi hàng
-        </p>
-        <div
-          className='[&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-14 *:xsm:text-mb-13 [&_span]:text-pc-sub12s [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
-          dangerouslySetInnerHTML={{
-            __html: dataInformation?.time_content || '',
-          }}
-        ></div>
-      </div>
-      <div className='p-[1rem] rounded-[1.25rem] bg-white'>
-        <p className='xsm:text-pc-sub14s mb-[1rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
-          Lịch chốt hàng & bay
-        </p>
-        <div
-          className='[&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-14 *:xsm:text-mb-13 [&_span]:text-pc-sub12s [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
-          dangerouslySetInnerHTML={{
-            __html: dataInformation?.stock || '',
-          }}
-        ></div>
-      </div>
+      <p className='sm:hidden text-pc-sub16b text-black'>Thời gian gửi hàng</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className='space-y-[1.59rem]'
         >
-          <FormField
-            control={form.control}
-            name='policy'
-            render={({field}) => (
-              <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
-                <FormControl>
-                  <Checkbox
-                    className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className='space-y-1 leading-none'>
-                  <FormLabel className='text-pc-sub14m xsm:text-mb-13M xsm:line-clamp-2 text-black cursor-pointer'>
-                    Tôi đã đọc và chấp nhận chính sách thời gian giao hàng
-                  </FormLabel>
-                </div>
-                <FormMessage className='!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
-              </FormItem>
+          {Array.isArray(dataInformation) &&
+            dataInformation?.map(
+              (item: IInformationTimeOrder, index: number) => (
+                <Fragment key={index}>
+                  <div className='p-[1rem] rounded-[1.25rem] bg-white border-[1px] border-solid border-[#DCDFE4]'>
+                    <p className='xsm:text-pc-sub14s mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+                      {item?.time_content}
+                    </p>
+                    <div
+                      className='mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_span]:text-pc-sub12s [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      dangerouslySetInnerHTML={{
+                        __html: item?.stock || '',
+                      }}
+                    ></div>
+                    <FormField
+                      control={form.control}
+                      name={`policy.${index}`}
+                      render={({field}) => (
+                        <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
+                          <FormControl>
+                            <Checkbox
+                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className='space-y-1 leading-none'>
+                            <FormLabel className='text-pc-sub14s xsm:text-mb-13M xsm:line-clamp-2 text-black cursor-pointer'>
+                              {item?.clause ||
+                                'Tôi đồng ý với điều khoản của Amamy'}
+                            </FormLabel>
+                          </div>
+                          <FormMessage className='!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </Fragment>
+              ),
             )}
-          />
           <div className='xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[51] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg flex items-center justify-between sm:w-full'>
             <div
               onClick={() => handleClickcurrentTab('1')}

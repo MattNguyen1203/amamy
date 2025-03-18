@@ -118,7 +118,7 @@ const CardService = ({
                 <div className='flex-shrink-0 w-[1.25rem] h-[1.25rem]'>
                   <StartIcon />
                 </div>
-                <p className='font-[SVN-Gilroy] text-[0.875rem] not-italic font-medium leading-[150%]'>
+                <p className='font-montserrat text-[0.875rem] not-italic font-medium leading-[150%]'>
                   {item.description}
                 </p>
               </div>
