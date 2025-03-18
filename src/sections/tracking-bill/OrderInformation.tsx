@@ -18,6 +18,7 @@ export type OrderInformationProps = {
     dia_chi_nguoi_gui: string
     dia_chi_nguoi_nhan: string
     tien_trinh_giao_hang: IProgress[]
+    date: string
     trang_thai_don_hang: 'pending' | 'delivered' | 'shipping' | 'completed'
   } | null
 }
@@ -91,13 +92,13 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-center'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Ngày tạo đơn:</p>
-            <p className='font-semibold text-black'>03/03/2025</p>
+            <p className='font-semibold text-black'>{data?.date}</p>
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-center'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>
               Ngày nhận dự kiến:
             </p>
-            <p className='font-semibold text-black'>03/03/2025</p>
+            <p className='font-semibold text-black'></p>
           </div>
         </div>
         <div className='h-[1px] w-full bg-[#DCDFE4] hidden xsm:block' />

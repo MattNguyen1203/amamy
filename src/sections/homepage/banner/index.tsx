@@ -1,8 +1,8 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
+import {IBanner, IImage} from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {IBanner, IImage} from '@/utils/type'
 import TrackingInterface from './TrackingOrder'
 
 const Banner = ({banner}: {banner: IBanner}) => {
@@ -118,7 +118,7 @@ const BackgroundMobile = ({
   height?: string
 }) => {
   return (
-    <div className='flex flex-col relative'>
+    <div className='flex flex-col relative xsm:w-full'>
       <ImageV2
         className={`w-full ${height} flex-shrink-0`}
         src={banner?.background_mobile.url}

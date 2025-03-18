@@ -39,7 +39,7 @@ const TrackingBill = ({dataAcf}: TrackingBillProps) => {
     })
     setIsLoading(false)
     if (data.ok) {
-      setData(data.order)
+      setData(data?.order)
     } else {
       setData(null)
     }
