@@ -24,6 +24,7 @@ const BillStatus = ({type, className}: BillStatusProps) => {
     pending: 'Đang chờ lấy hàng',
     shipping: 'Đang vận chuyển',
     delivered: 'Đã gửi hàng',
+    completed: 'Đã hoàn thành',
   }
 
   return (

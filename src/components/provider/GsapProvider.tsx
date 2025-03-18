@@ -1,21 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import {gsap} from 'gsap'
-import {ScrollTrigger} from 'gsap/dist/ScrollTrigger'
-import {ScrollToPlugin} from 'gsap/dist/ScrollToPlugin'
-import {ScrollSmoother} from 'gsap/dist/ScrollSmoother'
-import {CustomEase} from 'gsap/dist/CustomEase'
-import {useGSAP} from '@gsap/react'
 import useIsMobile from '@/hooks/useIsMobile'
+import {useGSAP} from '@gsap/react'
+import {gsap} from 'gsap'
+import {CustomEase} from 'gsap/dist/CustomEase'
+import {ScrollToPlugin} from 'gsap/dist/ScrollToPlugin'
+import {ScrollTrigger} from 'gsap/dist/ScrollTrigger'
 
-gsap.registerPlugin(
-  useGSAP,
-  ScrollTrigger,
-  ScrollSmoother,
-  CustomEase,
-  ScrollToPlugin,
-)
+gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase, ScrollToPlugin)
 
 export default function GsapProvider({children}: {children: React.ReactNode}) {
   const isMobile = useIsMobile()
@@ -30,10 +23,6 @@ export default function GsapProvider({children}: {children: React.ReactNode}) {
       toggleActions: 'play play play none',
       start: 'top top+=100%',
       end: 'bottom top',
-    })
-    ScrollSmoother.create({
-      smooth: isMobile ? 0.1 : 1,
-      effects: true,
     })
     const elements = gsap.utils.toArray('.fade-in-box')
     elements.forEach((el: any) =>
