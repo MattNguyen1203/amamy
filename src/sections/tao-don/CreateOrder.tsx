@@ -15,6 +15,7 @@ import ICCheck from '@/sections/tao-don/ICCheck'
 import ICFAQ from '@/sections/tao-don/ICFAQ'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
+import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {useEffect, useState} from 'react'
@@ -23,7 +24,8 @@ const StepForm = [
   {title: 'Thời gian gửi hàng', value: '2'},
   {title: 'Lưu ý quan trọng', value: '3'},
   {title: 'Thông tin nhận hàng', value: '4'},
-  {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '5'},
+  {title: 'Bảo hiểm hàng hóa', value: '5'},
+  {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '6'},
 ]
 export interface IDataFromOrder {
   [key: string]: any
@@ -99,10 +101,11 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             className={cn(
               'sm:absolute xsm:relative sm:top-[1.25rem] sm:bottom-[1.25rem] sm:left-[1.25rem] w-[0.25rem] xsm:w-full xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 before:bg-[#38B6FF] before:sm:w-full before:xsm:h-full before:transition-all before:duration-500',
               currentTab === '1' && 'before:sm:h-[5%] before:xsm:w-[5%]',
-              currentTab === '2' && 'before:sm:h-[28%] before:xsm:w-[28%]',
-              currentTab === '3' && 'before:sm:h-[50%] before:xsm:w-[50%]',
-              currentTab === '4' && 'before:sm:h-[73%] before:xsm:w-[73%]',
-              currentTab === '5' && 'before:sm:h-[100%] before:xsm:w-[100%]',
+              currentTab === '2' && 'before:sm:h-[23.5%] before:xsm:w-[23.5%]',
+              currentTab === '3' && 'before:sm:h-[42%] before:xsm:w-[42%]',
+              currentTab === '4' && 'before:sm:h-[61%] before:xsm:w-[61%]',
+              currentTab === '5' && 'before:sm:h-[79%] before:xsm:w-[79%]',
+              currentTab === '6' && 'before:sm:h-[100%] before:xsm:w-[100%]',
             )}
           ></div>
         </TabsList>
@@ -162,6 +165,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
+                    shippingCost={dataInformation?.information?.shipping_cost}
                   />
                 )}
                 {(dataInformation?.type === 'vietnhat' ||
@@ -170,6 +174,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
+                    type={dataInformation?.type}
                   />
                 )}
                 {dataInformation?.type === 'vietduc' && (
@@ -184,12 +189,23 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 value='5'
                 className='mt-0'
               >
+                <Insurance
+                  data={dataInformation?.information?.insurance}
+                  handleClickcurrentTab={handleClickcurrentTab}
+                />
+              </TabsContent>
+              <TabsContent
+                value='6'
+                className='mt-0'
+              >
                 <Instruct
                   data={dataInformation?.information?.instruct}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataFromOrder={dataFromOrder}
                   setSubmitting={setSubmitting}
                   setDataFromOrder={setDataFromOrder}
+                  type={dataInformation?.type}
+                  importantNote={dataInformation?.information?.important_note}
                 />
               </TabsContent>
             </>

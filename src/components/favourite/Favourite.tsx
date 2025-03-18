@@ -17,7 +17,7 @@ export default function Favourite({
         className,
       )}
     >
-      <h2 className='text-[#000] font-[Montserrat] text-pc-heading20b xsm:text-pc-sub16b pb-[1rem] xsm:pb-[0.75rem] border-b-[1px] border-b-[#DCDFE4]'>
+      <h2 className='text-[#000] font-montserrat text-pc-heading20b xsm:text-pc-sub16b pb-[1rem] xsm:pb-[0.75rem] border-b-[1px] border-b-[#DCDFE4]'>
         Có thể bạn sẽ thích
       </h2>
       <div className='warpper-content sm:h-[80vh] sm:overflow-auto sm:overflow-y-auto'>

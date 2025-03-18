@@ -12,7 +12,10 @@ export default async function page() {
   const [dataCreateOrder] = await Promise.all([fetchCreateOrder])
   return (
     <main className='bg-white sm:px-[6rem] sm:pt-0 min-h-[calc(100vh-5.75rem)]'>
-      <Breadcrumb data={[{title: 'Tạo đơn hàng', slug: ''}]} />
+      <Breadcrumb
+        data={[{title: 'Tạo đơn hàng', slug: ''}]}
+        className='xsm:hidden'
+      />
       <CreateOrder data={dataCreateOrder} />
     </main>
   )
