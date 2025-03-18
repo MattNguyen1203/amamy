@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import {IServicePage} from '@/utils/type'
+import ImageV2 from '@/components/image/ImageV2'
 
 interface Prop {
   data: IServicePage
@@ -33,7 +34,7 @@ export default function Testimonials({data}: Prop) {
   }, [api])
 
   return (
-    <section className='py-24 xsm:py-[1.875rem]'>
+    <section className='py-24 xsm:py-[1.5rem] mt-[3.75rem] xsm:mt-5'>
       <div className='w-full px-4 xsm:px-[1rem]'>
         <div className='mx-auto max-w-2xl text-center'>
           <h2 className='mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] text-center'>
@@ -64,27 +65,36 @@ export default function Testimonials({data}: Prop) {
                     className='md:basis-1/2 lg:basis-1/4 p-0 flex justify-center'
                   >
                     <Card
-                      className={`h-[20.5625rem] w-[20.875rem] border-none ${
+                      className={`h-[20.5625rem] w-[20.875rem] border-none relative ${
                         index % 2 === 0 ? 'bg-[#DBF5FF]' : 'bg-[#F2F2F2]'
                       }`}
                     >
-                      <CardContent className='p-[1.5rem]'>
+                      <ImageV2
+                        alt=''
+                        width={200}
+                        height={200}
+                        src='/homepage/review-mask.webp'
+                        className='absolute top-0 left-0 size-full sm:hidden object-cover'
+                      />
+                      <CardContent className='p-[1.5rem] relative z-10'>
                         <div className='mb-4 flex gap-1'>
-                          {[...Array(testimonial.rating)].map((_, i) => (
-                            <svg
-                              width='22'
-                              key={i}
-                              height='22'
-                              viewBox='0 0 22 22'
-                              fill='none'
-                              xmlns='http://www.w3.org/2000/svg'
-                            >
-                              <path
-                                d='M10.6326 0.853098C10.7715 0.530712 11.2285 0.530712 11.3674 0.853097L14.1506 7.31608C14.2085 7.45055 14.3353 7.54264 14.4811 7.55616L21.4878 8.20602C21.8373 8.23843 21.9786 8.67316 21.7149 8.90482L16.4283 13.549C16.3183 13.6456 16.2699 13.7946 16.3021 13.9375L17.8492 20.8021C17.9264 21.1445 17.5566 21.4132 17.2548 21.234L11.2042 17.6413C11.0783 17.5665 10.9217 17.5665 10.7958 17.6413L4.74523 21.234C4.44342 21.4132 4.07362 21.1445 4.1508 20.8021L5.69795 13.9375C5.73014 13.7946 5.68172 13.6456 5.57173 13.549L0.285139 8.90482C0.0214342 8.67316 0.162684 8.23843 0.512193 8.20602L7.51893 7.55616C7.66471 7.54264 7.79146 7.45055 7.84937 7.31608L10.6326 0.853098Z'
-                                fill='#FFC669'
-                              />
-                            </svg>
-                          ))}
+                          {Array.from({length: Number(testimonial.rating)}).map(
+                            (_, i) => (
+                              <svg
+                                width='22'
+                                key={i}
+                                height='22'
+                                viewBox='0 0 22 22'
+                                fill='none'
+                                xmlns='http://www.w3.org/2000/svg'
+                              >
+                                <path
+                                  d='M10.6326 0.853098C10.7715 0.530712 11.2285 0.530712 11.3674 0.853097L14.1506 7.31608C14.2085 7.45055 14.3353 7.54264 14.4811 7.55616L21.4878 8.20602C21.8373 8.23843 21.9786 8.67316 21.7149 8.90482L16.4283 13.549C16.3183 13.6456 16.2699 13.7946 16.3021 13.9375L17.8492 20.8021C17.9264 21.1445 17.5566 21.4132 17.2548 21.234L11.2042 17.6413C11.0783 17.5665 10.9217 17.5665 10.7958 17.6413L4.74523 21.234C4.44342 21.4132 4.07362 21.1445 4.1508 20.8021L5.69795 13.9375C5.73014 13.7946 5.68172 13.6456 5.57173 13.549L0.285139 8.90482C0.0214342 8.67316 0.162684 8.23843 0.512193 8.20602L7.51893 7.55616C7.66471 7.54264 7.79146 7.45055 7.84937 7.31608L10.6326 0.853098Z'
+                                  fill='#FFC669'
+                                />
+                              </svg>
+                            ),
+                          )}
                         </div>
 
                         <p
@@ -121,13 +131,13 @@ export default function Testimonials({data}: Prop) {
           </Carousel>
 
           {/* Pagination Dots */}
-          <div className='mt-8 flex justify-center gap-2'>
+          <div className='mt-10 flex justify-center space-x-[0.375rem] xsm:space-x-2'>
             {Array.isArray(testimonials) &&
               testimonials?.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => api?.scrollTo(index)}
-                  className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${
+                  className={`h-[0.25rem] w-10 xsm:w-4 rounded-full transition-all ${
                     current === index ? 'bg-[#1F648C]' : 'bg-gray-200'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}

@@ -1,11 +1,26 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
 import {Card, ImageIcon, ServicesObject} from '@/utils/type'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const Services = ({services}: {services: ServicesObject}) => {
+  useGSAP(() => {
+    gsap.from('.fade-in-box-card-service-2', {
+      scrollTrigger: {
+        trigger: '.fade-in-box-card-service-2',
+        start: 'top 80%',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+    })
+  }, [])
+
   return (
     <div className='flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:px-0 xsm:py-[2.5rem]'>
       <div className='inline-flex items-end gap-[1.5rem] relative'>
@@ -91,7 +106,7 @@ const ServiceCard = ({
 }) => (
   <Link
     href={href || ''}
-    className='gap-5 p-5 flex-1 h-full bg-[#fcfdff] rounded-[1.25rem] shadow-[0px_14px_24px_0px_rgba(0,4,81,0.04)] xsm:p-[0.75rem]'
+    className='fade-in-box-card-service-2 gap-5 p-5 flex-1 h-full bg-[#fcfdff] rounded-[1.25rem] shadow-[0px_14px_24px_0px_rgba(0,4,81,0.04)] xsm:p-[0.75rem]'
   >
     <div className='flex items-center space-x-4 xsm:space-x-0 xsm:space-y-3 w-full xsm:flex-col xsm:items-start'>
       <ImageV2
@@ -134,7 +149,7 @@ const ServiceHighlight = ({
 }) => (
   <Link
     href={href || ''}
-    className='relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max'
+    className='fade-in-box-card-service-2 relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max'
   >
     <div
       className='h-full bg-cover bg-center xsm:w-[18.75rem]'
@@ -156,7 +171,7 @@ const ServiceHighlight = ({
 const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
   <Link
     href={href || ''}
-    className='relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'
+    className='fade-in-box-card-service-2 relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'
   >
     <div className='absolute z-[10]'>
       <Image

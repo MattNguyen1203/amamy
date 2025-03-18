@@ -11,12 +11,12 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
   const services = listService.data.list_services_data
   return (
     <div className='flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:block xsm:bg-[#fbf8f9]'>
-      <div className='flex flex-col items-start relative  pl-[6rem] w-[27.5rem] xsm:w-full xsm:px-[1rem]'>
+      <div className='flex flex-col items-start relative  pl-[6rem] w-[26.875rem] xsm:w-full xsm:px-[1rem]'>
         <div className='relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
-          <div className='relative w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
-            <div className='absolute w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 bg-[#1dacff] xsm:rounded-[1.25rem]'>
+          <div className='relative w-[20.875rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
+            <div className='absolute w-[20.875rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 bg-[#1dacff] xsm:rounded-[1.25rem]'>
               <Image
-                className='absolute w-[21.5rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
+                className='absolute w-[20.875rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
                 alt='Mask group'
                 src={'/homepage/icon/Service-Item-Mask-Group.png'}
                 width={1000}
@@ -27,7 +27,8 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
               {title}
             </p>
 
-            <button
+            <Link
+              href={`tel:${phone}`}
               className='absolute left-7 xsm:left-[4.313rem] bottom-[1.75rem] flex mt-[0.75rem] h-12 justify-center text-[#38B6FF] xsm:text-[1rem] w-[15.875rem] xsm:w-[12.813rem] items-center gap-2 rounded-[1.25rem]  
              bg-[var(--Blue-Primary,_#fff)]'
             >
@@ -39,7 +40,7 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
                 className='w-[1.9375rem] h-[1.9375rem] xsm:w-[1.25rem] xsm:h-[1.25rem]'
               />
               {phone}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

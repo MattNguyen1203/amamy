@@ -52,15 +52,18 @@ const Header = ({
   const isMobile = useIsMobile()
   const [searchInput, setSearchInput] = useState('')
   const [isScrollTop, setIsScrollTop] = useState(false)
+  const [isHomePage, setIsHomePage] = useState(false)
   const [isShowSearchInput, setIsShowSearchInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const {isOutside, ref} = useClickOutside<HTMLDivElement>()
 
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
+  useEffect(() => {
+    setIsHomePage(pathname === '/')
+  }, [pathname])
 
   useEffect(() => {
-    if (isShowSearchInput) {
+    if (isShowSearchInput || !isHomePage) {
       setIsScrollTop(false)
       return
     }
@@ -148,6 +151,7 @@ const Header = ({
             <input
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               type='text'
               placeholder='Nhập từ khoá...'
               className='flex-1 border-none outline-none bg-transparent text-mb-13M text-black placeholder:text-black/30'

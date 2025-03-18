@@ -6,6 +6,8 @@ import MultiCountryService, {
   MultiCountryServiceMB,
 } from '@/sections/homepage/community/MultiCountryService'
 import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 
 type Props = {
   sectionCountry: ShippingServiceObject
@@ -13,6 +15,19 @@ type Props = {
 }
 
 const Community = ({sectionCountry, section3}: Props) => {
+  useGSAP(() => {
+    gsap.from('.fade-in-box-card-service-1', {
+      scrollTrigger: {
+        trigger: '.fade-in-box-card-service-1',
+        start: 'top 80%',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+    })
+  }, [])
+
   return (
     <div>
       <div className='w-full flex xsm:flex-col'>
@@ -52,6 +67,7 @@ const Community = ({sectionCountry, section3}: Props) => {
               subtitle={section3.list_strengths.item_1.subtitle || ''}
               list_des={section3.list_strengths.item_1.list_des || []}
               href={section3.list_strengths.item_1.link_group_fb}
+              className='fade-in-box-card-service-1'
             />
             <CardService
               flag={section3.list_strengths.item_2.flag.url}
@@ -60,6 +76,7 @@ const Community = ({sectionCountry, section3}: Props) => {
               subtitle={section3.list_strengths.item_2.subtitle || ''}
               list_des={section3.list_strengths.item_2.list_des || []}
               href={section3.list_strengths.item_2.link_group_fb}
+              className='fade-in-box-card-service-1'
             />
             <CardService
               flag={section3.list_strengths.item_3.flag.url}
@@ -68,6 +85,7 @@ const Community = ({sectionCountry, section3}: Props) => {
               subtitle={section3.list_strengths.item_3.subtitle || ''}
               list_des={section3.list_strengths.item_3.list_des || []}
               href={section3.list_strengths.item_3.link_group_fb}
+              className='fade-in-box-card-service-1'
             />
           </div>
         </div>

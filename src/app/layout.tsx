@@ -7,6 +7,7 @@ import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
+import GsapProvider from '@/components/provider/GsapProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -104,7 +105,7 @@ export default async function RootLayout({
           ]}
         />
         <ChatButtonMobile />
-        {children}
+        <GsapProvider>{children}</GsapProvider>
 
         <Toaster
           theme='light'

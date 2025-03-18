@@ -30,12 +30,12 @@ export function FAQSection({faqs}: Prop) {
               className='border-none bg-white rounded-2xl  overflow-hidden p-[1.25rem] xsm:p-[1rem]'
             >
               <AccordionTrigger className='flex w-full items-center p-0 justify-between text-left hover:no-underline [&[data-state=open]>svg]:rotate-180 [&>svg]:text-[#38B6FF] font-montserrat font-semibold text-[1rem] leading-[1.625rem] tracking-[-0.03em] text-black flex-grow'>
-                <span className='leading-[1.625rem] font-normal xsm:text-[0.75rem]'>
+                <span className='text-pc-tab-title xsm:text-pc-sub12s text-black'>
                   {faq.question}
                 </span>
               </AccordionTrigger>
-              <AccordionContent className='mt-[1.25rem]  text-[#000000CC] text-[0.875rem] p-0'>
-                <p className='leading-[1.315rem] xsm:text-[0.75rem]'>
+              <AccordionContent className='mt-[1.25rem] pb-0'>
+                <p className=' text-black/80 text-pc-14 xsm:text-mb-12'>
                   {faq.answer}
                 </p>
               </AccordionContent>
