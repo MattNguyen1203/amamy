@@ -1,4 +1,5 @@
 'use client'
+import {IDataHeader, Isocial} from '@/components/header/Header'
 import ICDrop from '@/components/header/ICDrop'
 import {
   Sheet,
@@ -13,7 +14,7 @@ import Menu from '@/components/svg/Menu'
 import {cn} from '@/lib/utils'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
-import {useState} from 'react'
+import {Fragment, useState} from 'react'
 
 interface INavItems {
   name: string
@@ -23,9 +24,13 @@ interface INavItems {
 const MobileMenu = ({
   navItems,
   dataCreateOrder,
+  social,
+  dataHeader,
 }: {
   navItems: INavItems[]
   dataCreateOrder: ICreateOder[]
+  social: Isocial[]
+  dataHeader: IDataHeader
 }) => {
   const [toggle, setToggle] = useState<boolean>(false)
   return (
@@ -39,35 +44,43 @@ const MobileMenu = ({
           <ArrowRight className='size-6 stroke-black' />
         </SheetClose>
         <div className='px-4 bg-white rounded-[1.25rem]'>
-          <Link
-            href={navItems?.[0]?.href || '#'}
-            className='text-mb-13M text-black py-4 block'
-          >
-            {navItems?.[0]?.name}
-          </Link>
+          <SheetClose asChild>
+            <Link
+              href={navItems?.[0]?.href || '#'}
+              className='text-mb-13M text-black py-4 block'
+            >
+              {navItems?.[0]?.name}
+            </Link>
+          </SheetClose>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <Link
-            href='/tao-don-hang'
-            className='text-mb-13M text-black py-4 block'
-          >
-            Tạo đơn hàng
-          </Link>
+          <SheetClose asChild>
+            <Link
+              href='/tao-don-hang'
+              className='text-mb-13M text-black py-4 block'
+            >
+              Tạo đơn hàng
+            </Link>
+          </SheetClose>
         </div>
 
         <div className='mt-6 px-4 bg-white rounded-[1.25rem]'>
-          <Link
-            href={navItems?.[1]?.href || '#'}
-            className='text-mb-13M text-black py-4 block'
-          >
-            {navItems?.[1]?.name}
-          </Link>
+          <SheetClose asChild>
+            <Link
+              href={navItems?.[1]?.href || '#'}
+              className='text-mb-13M text-black py-4 block'
+            >
+              {navItems?.[1]?.name}
+            </Link>
+          </SheetClose>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <Link
-            href={navItems?.[3]?.href || '#'}
-            className='text-mb-13M text-black py-4 block'
-          >
-            {navItems?.[3]?.name}
-          </Link>
+          <SheetClose asChild>
+            <Link
+              href={navItems?.[3]?.href || '#'}
+              className='text-mb-13M text-black py-4 block'
+            >
+              {navItems?.[3]?.name}
+            </Link>
+          </SheetClose>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
           <div
             onClick={() => {
@@ -91,50 +104,65 @@ const MobileMenu = ({
           >
             {Array.isArray(dataCreateOrder) &&
               dataCreateOrder?.map((item: ICreateOder, index: number) => (
-                <Link
-                  href={item?.slug || ''}
-                  key={index}
-                  className='flex w-full justify-between space-x-[1rem] py-[0.5rem]'
-                >
-                  <ImageV2
-                    src={item?.thumbnail}
-                    alt=''
-                    width={50 * 2}
-                    height={50 * 2}
-                    className='size-[1rem]'
-                  />
-                  <p className='flex-1 text-mb-13M text-black'>{item?.title}</p>
-                </Link>
+                <Fragment key={index}>
+                  <SheetClose asChild>
+                    <Link
+                      href={item?.slug || ''}
+                      className='flex w-full justify-between space-x-[1rem] py-[0.5rem]'
+                    >
+                      <ImageV2
+                        src={item?.thumbnail}
+                        alt=''
+                        width={50 * 2}
+                        height={50 * 2}
+                        className='size-[1rem]'
+                      />
+                      <p className='flex-1 text-mb-13M text-black'>
+                        {item?.title}
+                      </p>
+                    </Link>
+                  </SheetClose>
+                </Fragment>
               ))}
           </div>
         </div>
 
         <p className='mt-6 text-pc-sub12s text-black/80'>Dịch vụ khác</p>
         <div className='mt-2 px-4 bg-white rounded-[1.25rem]'>
-          <Link
-            href='#'
-            className='text-mb-13M text-black py-4 block'
-          >
-            Đặt hộ shopee
-          </Link>
-          <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <Link
-            href='#'
-            className='text-mb-13M text-black py-4 block'
-          >
-            Hỗ trợ thanh toán
-          </Link>
-          <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <Link
-            href='#'
-            className='text-mb-13M text-black py-4 block'
-          >
-            Gom nhiều đơn
-          </Link>
+          {Array.isArray(dataHeader?.other_services) &&
+            dataHeader?.other_services?.map(
+              (
+                item: {
+                  title: string
+                  link: string
+                },
+                index: number,
+              ) => (
+                <Fragment key={index}>
+                  <Link
+                    href={item?.link || ''}
+                    target='__blank'
+                    className='text-mb-13M text-black py-4 block'
+                  >
+                    {item?.title}
+                  </Link>
+                  <div
+                    className={cn(
+                      'w-full bg-[#DCDFE4] h-[1px]',
+                      index + 1 === dataHeader?.other_services?.length &&
+                        'hidden',
+                    )}
+                  />
+                </Fragment>
+              ),
+            )}
         </div>
 
         <div className='mt-[4.31rem] flex-center space-x-4'>
-          <Link href='#'>
+          <Link
+            href={social?.[0]?.link}
+            target='__blank'
+          >
             <ImageV2
               alt=''
               src='/header/icon-facebook.webp'
@@ -143,7 +171,10 @@ const MobileMenu = ({
               className='size-10 object-cover rounded-full'
             />
           </Link>
-          <Link href='#'>
+          <Link
+            href={social?.[1]?.link}
+            target='__blank'
+          >
             <ImageV2
               alt=''
               src='/header/icon-zalo.webp'
@@ -152,7 +183,10 @@ const MobileMenu = ({
               className='size-10 object-cover rounded-full'
             />
           </Link>
-          <Link href='#'>
+          <Link
+            href={social?.[2]?.link}
+            target='__blank'
+          >
             <ImageV2
               alt=''
               src='/header/icon-tiktok.webp'
@@ -171,13 +205,15 @@ const MobileMenu = ({
           </p>
           <div className='mt-4 flex-center space-x-8'>
             <Link
-              href='#'
+              href={dataHeader?.clause || '/'}
+              target='__blank'
               className='text-pc-sub12m text-black/80'
             >
               Điều khoản & Điều kiện
             </Link>
             <Link
-              href='#'
+              href={dataHeader?.privacy_policy || '/'}
+              target='__blank'
               className='text-pc-sub12m text-black/80'
             >
               Chính sách bảo mật

@@ -9,11 +9,16 @@ import {
 import ImageV2 from '@/components/image/ImageV2'
 import Plus from '@/components/svg/Plus'
 import {cn} from '@/lib/utils'
+import {usePathname} from 'next/navigation'
 import {useState} from 'react'
 
 const ChatButtonMobile = () => {
+  const pathname = usePathname()
   const [openContact, setOpenContact] = useState(false)
-
+  const isCreatingOrderPage = pathname === '/tao-don-hang'
+  if (isCreatingOrderPage) {
+    return <div className='hidden'></div>
+  }
   return (
     <div className='fixed right-4 bottom-[3.125rem] z-50 flex flex-col space-y-2 sm:hidden'>
       <div className='relative size-12 flex-center'>

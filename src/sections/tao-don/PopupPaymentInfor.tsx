@@ -20,7 +20,9 @@ export default function PopupPaymentInfor({
   return (
     <>
       <div
-        onClick={() => setSelectPaymentInformation(false)}
+        onClick={() => {
+          setSelectPaymentInformation(false)
+        }}
         className={cn(
           'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
           selectPaymentInformation && 'block',
@@ -37,7 +39,9 @@ export default function PopupPaymentInfor({
             Thông tin thanh toán
           </p>
           <div
-            onClick={() => setSelectPaymentInformation(false)}
+            onClick={() => {
+              setSelectPaymentInformation(false)
+            }}
             className='absolute top-[0.5rem] right-[0.5rem]'
           >
             <ICX className='size-[1.5rem]' />

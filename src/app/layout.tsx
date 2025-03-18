@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ChatBot from '@/components/chat-bot'
+import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
 import Header from '@/components/header/Header'
 import fetchData from '@/fetch/fetchData'
 import type {Metadata} from 'next'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
-import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -77,13 +77,26 @@ export default async function RootLayout({
       next: {revalidate: 10},
     },
   })
-  const [dataCreateOrder] = await Promise.all([fetchCreateOrder])
+  const fetchFooter = await fetchData({
+    api: 'options?fields=footer_site,header_site',
+    option: {
+      next: {revalidate: 10},
+    },
+  })
+  const [dataCreateOrder, dataFooter] = await Promise.all([
+    fetchCreateOrder,
+    fetchFooter,
+  ])
   return (
     <html>
       <body
         className={`${montserrat.variable} ${montserrat.className} antialiased`}
       >
-        <Header dataCreateOrder={dataCreateOrder} />
+        <Header
+          social={dataFooter?.data?.footer_site?.social}
+          dataHeader={dataFooter?.data?.header_site}
+          dataCreateOrder={dataCreateOrder}
+        />
         <ChatBot
           dataMessage={[
             {message: 'test', role: 'user', time: '02:13 PM'},
