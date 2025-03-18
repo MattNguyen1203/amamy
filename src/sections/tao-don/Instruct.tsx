@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
@@ -188,6 +189,7 @@ export default function Instruct({
                       onClick={() => {
                         if (isMobile) {
                           setSelectBranch(true)
+                          useBodyScrollLock(true)
                         }
                       }}
                       className={cn(
@@ -350,6 +352,7 @@ export default function Instruct({
                 onClick={() => {
                   if (isMobile) {
                     setSelectPaymentInformation(true)
+                    useBodyScrollLock(true)
                   }
                 }}
                 className='flex-1 space-y-0'
@@ -403,7 +406,7 @@ export default function Instruct({
             )}
           />
 
-          <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[50] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+          <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
             <div
               onClick={() => handleClickcurrentTab('5')}
               className='xsm:flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
@@ -534,10 +537,13 @@ export default function Instruct({
             />
             {Array.isArray(data?.select_branch) &&
               data?.select_branch &&
-              data?.select_branch?.length > 2 && (
+              data?.select_branch?.length > 1 && (
                 <>
                   <div
-                    onClick={() => setSelectBranch(false)}
+                    onClick={() => {
+                      setSelectBranch(false)
+                      useBodyScrollLock(false)
+                    }}
                     className={cn(
                       'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
                       selectBranch && 'block',
@@ -554,7 +560,10 @@ export default function Instruct({
                         Chọn chi nhánh Amamy Post
                       </p>
                       <div
-                        onClick={() => setSelectBranch(false)}
+                        onClick={() => {
+                          setSelectBranch(false)
+                          useBodyScrollLock(false)
+                        }}
                         className='absolute top-[0.5rem] right-[0.5rem]'
                       >
                         <ICX className='size-[1.5rem]' />
@@ -573,6 +582,7 @@ export default function Instruct({
                                 form.setValue('branch', String(item?.title))
                                 setSelectBranchValue(item?.title)
                                 setSelectBranch(false)
+                                useBodyScrollLock(false)
                               }}
                               className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
                             >

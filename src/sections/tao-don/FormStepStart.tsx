@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
@@ -197,7 +198,10 @@ export default function FormStepStart({
             name='whereToContact'
             render={({field}) => (
               <FormItem
-                onClick={() => setHowToContactAmamy(true)}
+                onClick={() => {
+                  setHowToContactAmamy(true)
+                  useBodyScrollLock(true)
+                }}
                 className='flex-1 space-y-0'
               >
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
@@ -212,28 +216,28 @@ export default function FormStepStart({
                       {!isMobile && (
                         <SelectValue placeholder='Chọn chiều dịch vụ' />
                       )}
-                      {isMobile && !howToContactAmamy && (
-                        <SelectValue placeholder='Chọn chiều dịch vụ' />
-                      )}
-                      {isMobile && field.value && howToContactAmamy && (
-                        <div className='space-x-[0.75rem] flex items-center flex-1'>
-                          <ImageV2
-                            src={
-                              howToContactAmamyValue?.img ||
-                              dataFromOrder?.whereToContact ||
-                              ''
-                            }
-                            alt=''
-                            height={50 * 2}
-                            width={50 * 2}
-                            className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                          />
-                          <p className='text-black text-pc-sub14m'>
-                            {howToContactAmamyValue?.title ||
-                              dataInformation?.title}
-                          </p>
-                        </div>
-                      )}
+                      {isMobile &&
+                        field.value &&
+                        !howToContactAmamyValue?.title && (
+                          <SelectValue placeholder='Chọn chiều dịch vụ' />
+                        )}
+                      {isMobile &&
+                        field.value &&
+                        howToContactAmamyValue?.title && (
+                          <div className='space-x-[0.75rem] flex items-center flex-1'>
+                            <ImageV2
+                              src={howToContactAmamyValue?.img || ''}
+                              alt=''
+                              height={50 * 2}
+                              width={50 * 2}
+                              className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                            />
+                            <p className='text-black text-pc-sub14m'>
+                              {howToContactAmamyValue?.title ||
+                                dataInformation?.title}
+                            </p>
+                          </div>
+                        )}
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
@@ -299,7 +303,10 @@ export default function FormStepStart({
             name='shipping'
             render={({field}) => (
               <FormItem
-                onClick={() => setSelectServiceDimension(true)}
+                onClick={() => {
+                  setSelectServiceDimension(true)
+                  useBodyScrollLock(true)
+                }}
                 className='flex-1 space-y-0'
               >
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
@@ -397,25 +404,28 @@ export default function FormStepStart({
             </FormItem>
           )}
         />
-        <Button
-          type='submit'
-          disabled={isMobile ? false : !form.formState.isValid}
-          className={cn(
-            'xsm:fixed xsm:bottom-[1rem] xsm:z-[51] disabled:xsm:opacity-[1] xsm:left-[1rem] xsm:right-[1rem] hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
-            !form.formState.isValid &&
-              'sm:bg-[#F0F0F0] [&_p]:sm:text-[rgba(0,0,0,0.30)]',
-          )}
-        >
-          <p className='text-white text-pc-sub16m xsm:text-pc-sub14m'>
-            Tiếp tục
-          </p>
-        </Button>
+        <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0'>
+          <Button
+            type='submit'
+            disabled={isMobile ? false : !form.formState.isValid}
+            className={cn(
+              'xsm:w-full hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+              !form.formState.isValid &&
+                'sm:bg-[#F0F0F0] [&_p]:sm:text-[rgba(0,0,0,0.30)]',
+            )}
+          >
+            <p className='text-white text-pc-sub16m xsm:text-pc-sub14m'>
+              Tiếp tục
+            </p>
+          </Button>
+        </div>
         {isMobile && (
           <>
             <div
               onClick={() => {
                 setSelectServiceDimension(false)
                 setHowToContactAmamy(false)
+                useBodyScrollLock(false)
               }}
               className={cn(
                 'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden',
@@ -434,7 +444,10 @@ export default function FormStepStart({
                   Chọn chiều dịch vụ
                 </p>
                 <div
-                  onClick={() => setSelectServiceDimension(false)}
+                  onClick={() => {
+                    setSelectServiceDimension(false)
+                    useBodyScrollLock(false)
+                  }}
                   className='absolute top-[0.5rem] right-[0.5rem]'
                 >
                   <ICX className='size-[1.5rem]' />
@@ -453,6 +466,7 @@ export default function FormStepStart({
                           title: item?.title,
                         })
                         setSelectServiceDimension(false)
+                        useBodyScrollLock(false)
                       }}
                       className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
                     >
@@ -481,7 +495,10 @@ export default function FormStepStart({
                   Chọn phương thức liên hệ
                 </p>
                 <div
-                  onClick={() => setHowToContactAmamy(false)}
+                  onClick={() => {
+                    setHowToContactAmamy(false)
+                    useBodyScrollLock(false)
+                  }}
                   className='absolute top-[0.5rem] right-[0.5rem]'
                 >
                   <ICX className='size-[1.5rem]' />
@@ -507,11 +524,12 @@ export default function FormStepStart({
                             title: item?.title,
                           })
                           setHowToContactAmamy(false)
+                          useBodyScrollLock(false)
                         }}
                         className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
                       >
                         <ImageV2
-                          src={item?.img || '/order/flag-germany.webp'}
+                          src={item?.img || ''}
                           alt=''
                           height={24 * 2}
                           width={24 * 2}

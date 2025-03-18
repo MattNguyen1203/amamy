@@ -1,6 +1,5 @@
 'use client'
 import MobileMenu from '@/components/header/MobileMenu'
-import ImageV2 from '@/components/image/ImageV2'
 import Amamy from '@/components/svg/Amamy'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Close from '@/components/svg/Close'
@@ -28,7 +27,28 @@ const navItems = [
   {name: 'Hữu ích cho gửi hàng', href: '/blogs'},
 ]
 
-const Header = ({dataCreateOrder}: {dataCreateOrder: ICreateOder[]}) => {
+export interface Isocial {
+  icon: string
+  link: string
+}
+export interface IDataHeader {
+  other_services: {
+    title: string
+    link: string
+  }[]
+  clause: string
+  privacy_policy: string
+}
+
+const Header = ({
+  dataCreateOrder,
+  social,
+  dataHeader,
+}: {
+  dataCreateOrder: ICreateOder[]
+  social: Isocial[]
+  dataHeader: IDataHeader
+}) => {
   const isMobile = useIsMobile()
   const [searchInput, setSearchInput] = useState('')
   const [isScrollTop, setIsScrollTop] = useState(false)
@@ -108,6 +128,8 @@ const Header = ({dataCreateOrder}: {dataCreateOrder: ICreateOder[]}) => {
                 onClick={() => setIsShowSearchInput(true)}
               />
               <MobileMenu
+                dataHeader={dataHeader}
+                social={social}
                 dataCreateOrder={dataCreateOrder}
                 navItems={navItems}
               />
@@ -199,13 +221,13 @@ const Header = ({dataCreateOrder}: {dataCreateOrder: ICreateOder[]}) => {
                                           'flex items-center space-x-[0.5rem] select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
                                         )}
                                       >
-                                        <ImageV2
+                                        {/* <ImageV2
                                           alt=''
                                           src={component?.thumbnail}
                                           width={50 * 2}
                                           height={50 * 2}
                                           className='size-[1rem]'
-                                        />
+                                        /> */}
                                         <div className='line-clamp-1 text-sm font-medium leading-none'>
                                           {component?.title}
                                         </div>
