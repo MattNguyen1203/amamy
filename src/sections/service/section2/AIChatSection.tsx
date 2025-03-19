@@ -1,10 +1,10 @@
 'use client'
+import MessageItem, {MessageItemProps} from '@/components/chat-bot/MessageItem'
+import ImageV2 from '@/components/image/ImageV2'
+import SendMessage from '@/components/svg/SendMessage'
 import {IListServiceResponse, IServicePage} from '@/utils/type'
 import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
-import ImageV2 from '@/components/image/ImageV2'
-import SendMessage from '@/components/svg/SendMessage'
-import MessageItem, {MessageItemProps} from '@/components/chat-bot/MessageItem'
 
 interface Prop {
   data: IServicePage
@@ -26,11 +26,11 @@ const AIChatSection = ({data, listService}: Prop) => {
   ]
 
   return (
-    <div className='relative xsm:bg-[#fafafa]'>
+    <div className='fade-section relative xsm:bg-[#fafafa]'>
       <div className='w-full flex xsm:flex-col  '>
         <div className='w-[26.875rem] h-[69.6875rem] bg-background-elevation5 shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
           <div className='mt-[12.5rem] ml-[5.8rem] w-[18.5625rem]'>
-            <div className='flex flex-col items-start gap-[1.06rem] relative '>
+            <div className='fade-item flex flex-col items-start gap-[1.06rem] relative '>
               <p className='text-pc-h1 text-black'>
                 {data?.talk_to_ai?.title || ''}
               </p>
@@ -60,7 +60,7 @@ const AIChatSection = ({data, listService}: Prop) => {
             className='size-full object-cover absolute top-0 left-0 xsm:hidden'
           />
 
-          <div className='flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto'>
+          <div className='fade-item flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto'>
             <div className='p-3 flex items-center space-x-3 justify-center cursor-pointer'>
               <ImageV2
                 alt=''
@@ -96,7 +96,7 @@ const AIChatSection = ({data, listService}: Prop) => {
           </div>
           {/*  */}
           <div
-            className='relative z-10 rounded-[1.25rem] xsm:rounded-none flex-1 flex flex-col rounded-br-[var(--8,] rounded-tr-[0.5rem)] rounded-bl-[0.5rem)] 
+            className='fade-item relative z-10 rounded-[1.25rem] xsm:rounded-none flex-1 flex flex-col rounded-br-[var(--8,] rounded-tr-[0.5rem)] rounded-bl-[0.5rem)] 
             [box-shadow:0px_4px_23.7px_0px_rgba(0,_0,_0,_0.00)] group xsm:w-full xsm:mt-[1rem]'
           >
             <FAQSection faqs={data?.talk_to_ai?.list_faq} />
