@@ -8,9 +8,8 @@ interface Prop {
 
 export default function AboutAmamySection({data}: Prop) {
   const statsData = data?.list_infomation
-  console.log(data)
   return (
-    <section className='w-full bg-[#38b6ff] py-16 text-white xsm:py-[2rem]'>
+    <section className='fade-section w-full bg-[#38b6ff] py-16 text-white xsm:py-[2rem]'>
       <div className='w-full mx-auto px-[6rem] xsm:px-[1rem]'>
         {/* Breadcrumb */}
         <Breadcrumb
@@ -22,10 +21,10 @@ export default function AboutAmamySection({data}: Prop) {
         <div className='grid sm:grid-cols-2 gap-8 items-center'>
           {/* Left side - Heading */}
           <div>
-            <h1 className='font-montserrat font-semibold text-[2.5rem]  xsm:text-[1.125rem] leading-[120%] tracking-tight'>
+            <h1 className='fade-item font-montserrat font-semibold text-[2.5rem]  xsm:text-[1.125rem] leading-[120%] tracking-tight'>
               {data?.subtitle}
             </h1>
-            <h2 className='font-montserrat font-bold text-[3rem] xsm:text-[1rem] xsm:leading-[1.25rem] leading-[3.9rem] tracking-[-0.02em]'>
+            <h2 className='fade-item font-montserrat font-bold text-[3rem] xsm:text-[1rem] xsm:leading-[1.25rem] leading-[3.9rem] tracking-[-0.02em]'>
               {data?.title}
             </h2>
           </div>
@@ -36,7 +35,7 @@ export default function AboutAmamySection({data}: Prop) {
               statsData.map((stat, index) => (
                 <div
                   key={index}
-                  className='text-start'
+                  className='fade-item text-start'
                 >
                   <p className='font-montserrat font-bold text-[4rem] xsm:text-[1.125rem] leading-[4.8rem] xsm:leading-[1.315rem] tracking-[-0.04em]'>
                     {stat?.number} {stat?.label}

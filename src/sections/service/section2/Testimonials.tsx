@@ -4,6 +4,7 @@
 import Image from 'next/image'
 import * as React from 'react'
 
+import ImageV2 from '@/components/image/ImageV2'
 import {Card, CardContent} from '@/components/ui/card'
 import {
   Carousel,
@@ -13,7 +14,6 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import {IServicePage} from '@/utils/type'
-import ImageV2 from '@/components/image/ImageV2'
 
 interface Prop {
   data: IServicePage
@@ -36,19 +36,19 @@ export default function Testimonials({data}: Prop) {
   return (
     <section className='py-24 xsm:py-[1.5rem] mt-[3.75rem] xsm:mt-5'>
       <div className='w-full px-4 xsm:px-[1rem]'>
-        <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] text-center'>
+        <div className='fade-section mx-auto max-w-2xl text-center'>
+          <h2 className='fade-item mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] text-center'>
             {data?.feedback_customer?.title}
           </h2>
           <p
             dangerouslySetInnerHTML={{
               __html: data?.feedback_customer?.subtitle,
             }}
-            className='font-montserrat font-medium text-[0.875rem] leading-[1.375rem] tracking-[-0.03em] text-center'
+            className='fade-item font-montserrat font-medium text-[0.875rem] leading-[1.375rem] tracking-[-0.03em] text-center'
           ></p>
         </div>
 
-        <div className='relative mt-16 xsm:mt-[1rem]'>
+        <div className='relative mt-16 xsm:mt-[1rem] fade-section'>
           <Carousel
             setApi={setApi}
             opts={{
@@ -62,7 +62,7 @@ export default function Testimonials({data}: Prop) {
                 testimonials?.map((testimonial, index) => (
                   <CarouselItem
                     key={index}
-                    className='md:basis-1/2 lg:basis-1/4 p-0 flex justify-center'
+                    className='fade-item md:basis-1/2 lg:basis-1/4 p-0 flex justify-center'
                   >
                     <Card
                       className={`h-[20.5625rem] w-[20.875rem] border-none relative ${

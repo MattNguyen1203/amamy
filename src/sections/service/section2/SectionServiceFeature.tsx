@@ -10,9 +10,9 @@ interface Prop {
 export const MainContainer = ({title, phone, listService}: Prop) => {
   const services = listService.data.list_services_data
   return (
-    <div className='flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:block xsm:bg-[#fbf8f9]'>
+    <div className='fade-section flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:block xsm:bg-[#fbf8f9]'>
       <div className='flex flex-col items-start relative  pl-[6rem] w-[26.875rem] xsm:w-full xsm:px-[1rem]'>
-        <div className='relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
+        <div className='fade-item relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
           <div className='relative w-[20.875rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
             <div className='absolute w-[20.875rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 bg-[#1dacff] xsm:rounded-[1.25rem]'>
               <Image
@@ -46,58 +46,59 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
       </div>
       <div className='flex xsm:block'>
         <div className='grid grid-cols-3 w-[50.0625] xsm:w-full xsm:block items-start gap-[0_0] xsm:p-[1rem]'>
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className={`flex flex-col justify-between items-start p-8 xsm:p-[1.25rem] gap-5 w-[22.375rem] h-[26.9375rem] xsm:h-[14.875rem] xsm:w-full bg-white border border-[#dcdfe4] flex-grow 
+          {Array.isArray(services) &&
+            services.map((service, index) => (
+              <div
+                key={index}
+                className={`fade-item flex flex-col justify-between items-start p-8 xsm:p-[1.25rem] gap-5 w-[22.375rem] h-[26.9375rem] xsm:h-[14.875rem] xsm:w-full bg-white border border-[#dcdfe4] flex-grow 
     ${
       index !== services.length - 1
         ? 'border-r-0'
         : 'rounded-tr-[20px] rounded-br-[20px]'
     } xsm:mb-[1rem] xsm:border-none xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_#00276114]`}
-            >
-              <div className='flex flex-col space-y-2'>
-                <div className='flex items-center space-x-3'>
-                  <div className='flex items-center justify-center w-[4rem] h-[4rem]'>
-                    <Image
-                      src={service.icons}
-                      alt='icon'
-                      width={64}
-                      height={64}
-                      className='w-[2.5rem] h-[2.5rem] xsm:w-[3rem] xsm:h-[3rem]'
-                    />
-                  </div>
-                  <div className='pr-[0.375rem]'>
-                    <div className='font-montserrat font-semibold text-[0.875rem] leading-[1.0625rem] flex items-center tracking-[-0.03em] text-black/60'>
-                      {service.subtitle}
-                    </div>
-
-                    <div className='font-montserrat font-bold text-[1.25rem] xsm:text-[1.125rem] leading-[1.2] flex items-center tracking-[-0.04em] text-black'>
-                      {service.title}
-                    </div>
-                  </div>
-                </div>
-
-                <p className='w-[18.375rem] h-[3.9375rem] mt-[1rem] font-montserrat font-semibold text-[0.875rem] leading-[1.3125rem] tracking-[-0.03em] text-black/80'>
-                  {service.description}
-                </p>
-              </div>
-              <Link
-                href={service.link.url}
-                target={service.link.target}
-                className='inline-flex items-center text-blue-500 hover:text-blue-600w-[6.3125rem] h-[1.25rem] font-montserrat font-semibold text-[0.875rem] leading-[1.25rem] tracking-[-0.03em] text-black/80'
               >
-                <Image
-                  src={'icon/arrow-right-circle.svg'}
-                  alt='icon'
-                  className='w-[1.75rem] h-[1.75rem] xsm:w-[1.5rem] xsm:h-[1.5rem]'
-                  width={28}
-                  height={28}
-                />
-                <span className='ml-[0.625rem]'>{service.link.title}</span>
-              </Link>
-            </div>
-          ))}
+                <div className='flex flex-col space-y-2'>
+                  <div className='flex items-center space-x-3'>
+                    <div className='flex items-center justify-center w-[4rem] h-[4rem]'>
+                      <Image
+                        src={service.icons}
+                        alt='icon'
+                        width={64}
+                        height={64}
+                        className='w-[2.5rem] h-[2.5rem] xsm:w-[3rem] xsm:h-[3rem]'
+                      />
+                    </div>
+                    <div className='pr-[0.375rem]'>
+                      <div className='font-montserrat font-semibold text-[0.875rem] leading-[1.0625rem] flex items-center tracking-[-0.03em] text-black/60'>
+                        {service.subtitle}
+                      </div>
+
+                      <div className='font-montserrat font-bold text-[1.25rem] xsm:text-[1.125rem] leading-[1.2] flex items-center tracking-[-0.04em] text-black'>
+                        {service.title}
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className='w-[18.375rem] h-[3.9375rem] mt-[1rem] font-montserrat font-semibold text-[0.875rem] leading-[1.3125rem] tracking-[-0.03em] text-black/80'>
+                    {service.description}
+                  </p>
+                </div>
+                <Link
+                  href={service.link.url}
+                  target={service.link.target}
+                  className='inline-flex items-center text-blue-500 hover:text-blue-600w-[6.3125rem] h-[1.25rem] font-montserrat font-semibold text-[0.875rem] leading-[1.25rem] tracking-[-0.03em] text-black/80'
+                >
+                  <Image
+                    src={'icon/arrow-right-circle.svg'}
+                    alt='icon'
+                    className='w-[1.75rem] h-[1.75rem] xsm:w-[1.5rem] xsm:h-[1.5rem]'
+                    width={28}
+                    height={28}
+                  />
+                  <span className='ml-[0.625rem]'>{service.link.title}</span>
+                </Link>
+              </div>
+            ))}
         </div>
       </div>
     </div>

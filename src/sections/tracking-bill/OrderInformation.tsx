@@ -19,7 +19,10 @@ export type OrderInformationProps = {
     dia_chi_nguoi_nhan: string
     tien_trinh_giao_hang: IProgress[]
     date: string
-    trang_thai_don_hang: 'pending' | 'delivered' | 'shipping' | 'completed'
+    trang_thai_don_hang: {
+      value: 'pending' | 'delivered' | 'shipping' | 'completed'
+      label: string
+    }
   } | null
 }
 
@@ -74,7 +77,10 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>
               Trạng thái đơn hàng:
             </p>
-            <BillStatus type={data?.trang_thai_don_hang || 'pending'} />
+            <BillStatus
+              label={data?.trang_thai_don_hang?.label}
+              type={data?.trang_thai_don_hang?.value || 'pending'}
+            />
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-start'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Người gửi:</p>

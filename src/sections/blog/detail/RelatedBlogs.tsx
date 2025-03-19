@@ -22,9 +22,11 @@ export default function RelatedBlogs({
 }) {
   const isMobile = useIsMobile()
   return (
-    <section className={cn('py-[6rem] xsm:py-[2.5rem]', className)}>
+    <section
+      className={cn('fade-section py-[6rem] xsm:py-[2.5rem]', className)}
+    >
       <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[2.5rem] xsm:mb-[1rem]'>
-        <h3 className='text-black text-pc-h1 xsm:text-mb-h2'>
+        <h3 className='fade-item text-black text-pc-h1 xsm:text-mb-h2'>
           {title || 'Các bài viết liên quan'}
         </h3>
         <BtnBlue

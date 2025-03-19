@@ -17,20 +17,14 @@ const variants = cva(
 
 type BillStatusProps = VariantProps<typeof variants> & {
   className?: string
+  label: string
 }
 
-const BillStatus = ({type, className}: BillStatusProps) => {
-  const status = {
-    pending: 'Đang chờ lấy hàng',
-    shipping: 'Đang vận chuyển',
-    delivered: 'Đã gửi hàng',
-    completed: 'Đã hoàn thành',
-  }
-
+const BillStatus = ({type, label, className}: BillStatusProps) => {
   return (
     <div className={cn(variants({type}), className)}>
       <p className='text-[0.6875rem] font-semibold tracking-[-0.01375rem] text-background-elevation5'>
-        {status[type || 'pending']}
+        {label}
       </p>
     </div>
   )
