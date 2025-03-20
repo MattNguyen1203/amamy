@@ -153,11 +153,12 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               dataInformation={dataInformation}
               sentGoodsAtAmamy={sentGoodsAtAmamy}
               nextStep={
-                dataInformation?.information?.time
-                  ? '2'
-                  : dataInformation?.information?.note
-                  ? '3'
-                  : '4'
+                '2'
+                // dataInformation?.information?.time
+                //   ? '2'
+                //   : dataInformation?.information?.note
+                //     ? '3'
+                //     : '4'
               }
             />
           </TabsContent>
@@ -197,8 +198,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -220,8 +221,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -244,8 +245,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -266,8 +267,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -297,8 +298,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   data={dataInformation?.information?.instruct}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataFromOrder={dataFromOrder}
-                  // setSubmitting={setSubmitting}
-                  // setDataFromOrder={setDataFromOrder}
+                  setSubmitting={setSubmitting}
+                  setDataFromOrder={setDataFromOrder}
                   type={dataInformation?.type}
                   importantNote={dataInformation?.information?.important_note}
                 />
