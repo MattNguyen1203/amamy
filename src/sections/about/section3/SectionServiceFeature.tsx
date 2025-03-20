@@ -10,12 +10,12 @@ export const MainContainer = ({data}: Prop) => {
 
   return (
     <div className='flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:block xsm:bg-[#fbf8f9]'>
-      <div className='flex flex-col items-start relative  pl-[6rem] w-[27.5rem] xsm:pl-0 xsm:w-full xsm:mb-[1rem]'>
+      <div className='xsm:px-[1rem] flex flex-col items-start relative pl-[6rem] w-[27.5rem] xsm:w-full xsm:mb-[1rem]'>
         <div className='fade-item relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
           <div className='relative w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
             <div className='absolute w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 bg-[#1dacff] xsm:rounded-[1.25rem]'>
               <Image
-                className='absolute w-[21.5rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
+                className='absolute w-[21.5rem] h-[26.9375rem] top-0 left-[1rem] right-[1rem] xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
                 alt='Mask group'
                 src={'/homepage/icon/Service-Item-Mask-Group.png'}
                 width={1000}
@@ -45,7 +45,7 @@ export const MainContainer = ({data}: Prop) => {
         </div>
       </div>
       <div className='flex xsm:block'>
-        <div className='grid grid-cols-2 w-[50.0625] xsm:w-full xsm:block items-start gap-[0_0]'>
+        <div className='xsm:px-[1rem] grid grid-cols-2 w-[50.0625] xsm:w-full xsm:block items-start gap-[0_0]'>
           {Array.isArray(services) &&
             services.map((service, index) => (
               <div

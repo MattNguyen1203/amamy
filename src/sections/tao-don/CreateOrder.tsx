@@ -19,7 +19,7 @@ import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {useEffect, useState} from 'react'
-const StepForm = [
+let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
   {title: 'Thời gian gửi hàng', value: '2'},
   {title: 'Lưu ý quan trọng', value: '3'},
@@ -50,8 +50,34 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         (item) => item.id === Number(dataFromOrder?.shipping),
       )
       setDataInformation(foundItem)
+      setStepOrder(2)
+      StepForm = [{title: 'Thông tin gửi hàng', value: '1'}]
+      if (foundItem?.information?.time) {
+        StepForm = [...StepForm, {title: 'Thời gian gửi hàng', value: '2'}]
+      }
+      if (foundItem?.information?.note) {
+        StepForm = [...StepForm, {title: 'Lưu ý quan trọng', value: '3'}]
+      }
+      StepForm = [...StepForm, {title: 'Thông tin nhận hàng', value: '4'}]
+      if (
+        (foundItem?.type === 'vietduc' &&
+          (foundItem?.information?.insurance?.compensation?.title ||
+            foundItem?.information?.insurance?.compensation?.desc)) ||
+        foundItem?.information?.insurance?.compensation?.policy
+      ) {
+        StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
+      }
+      if (
+        foundItem?.type !== 'vietduc' &&
+        foundItem?.information?.insurance?.cargo_insurance_japanvn
+      ) {
+        StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
+      }
+      StepForm = [
+        ...StepForm,
+        {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '6'},
+      ]
     }
-    setStepOrder(2)
   }, [dataFromOrder?.shipping])
   useEffect(() => {
     setTimeout(() => {
@@ -126,6 +152,13 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               dataFromOrder={dataFromOrder}
               dataInformation={dataInformation}
               sentGoodsAtAmamy={sentGoodsAtAmamy}
+              nextStep={
+                dataInformation?.information?.time
+                  ? '2'
+                  : dataInformation?.information?.note
+                  ? '3'
+                  : '4'
+              }
             />
           </TabsContent>
           {dataInformation && (
@@ -137,6 +170,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 <OrderStepTime
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataInformation={dataInformation?.information?.time}
+                  nextStep={dataInformation?.information?.note ? '3' : '4'}
                 />
               </TabsContent>
               <TabsContent
@@ -147,6 +181,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   handleClickcurrentTab={handleClickcurrentTab}
                   data={dataInformation?.information?.note}
                   type={dataInformation?.type}
+                  prevStep={dataInformation?.information?.time ? '2' : '1'}
                 />
               </TabsContent>
               <TabsContent
@@ -158,6 +193,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
+                    prevStep={
+                      dataInformation?.information?.note
+                        ? '3'
+                        : dataInformation?.information?.time
+                        ? '2'
+                        : '1'
+                    }
+                    nextStep={
+                      dataInformation?.information?.insurance?.compensation
+                        ?.policy ||
+                      dataInformation?.information?.insurance
+                        ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '6'
+                    }
                   />
                 )}
                 {dataInformation?.type === 'viethan' && (
@@ -166,6 +216,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
                     shippingCost={dataInformation?.information?.shipping_cost}
+                    prevStep={
+                      dataInformation?.information?.note
+                        ? '3'
+                        : dataInformation?.information?.time
+                        ? '2'
+                        : '1'
+                    }
+                    nextStep={
+                      dataInformation?.information?.insurance?.compensation
+                        ?.policy ||
+                      dataInformation?.information?.insurance
+                        ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '6'
+                    }
                   />
                 )}
                 {(dataInformation?.type === 'vietnhat' ||
@@ -175,6 +240,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
                     type={dataInformation?.type}
+                    prevStep={
+                      dataInformation?.information?.note
+                        ? '3'
+                        : dataInformation?.information?.time
+                        ? '2'
+                        : '1'
+                    }
+                    nextStep={
+                      dataInformation?.information?.insurance?.compensation
+                        ?.policy ||
+                      dataInformation?.information?.insurance
+                        ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '6'
+                    }
                   />
                 )}
                 {dataInformation?.type === 'vietduc' && (
@@ -182,6 +262,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
+                    prevStep={
+                      dataInformation?.information?.note
+                        ? '3'
+                        : dataInformation?.information?.time
+                        ? '2'
+                        : '1'
+                    }
+                    nextStep={
+                      dataInformation?.information?.insurance?.compensation
+                        ?.policy ||
+                      dataInformation?.information?.insurance
+                        ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '6'
+                    }
                   />
                 )}
               </TabsContent>

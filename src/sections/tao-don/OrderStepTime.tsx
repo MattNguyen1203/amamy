@@ -19,9 +19,11 @@ import {z} from 'zod'
 export default function OrderStepTime({
   dataInformation,
   handleClickcurrentTab,
+  nextStep,
 }: {
   dataInformation?: IInformationTimeOrder[]
   handleClickcurrentTab: (nextTab: string) => void
+  nextStep: string
 }) {
   const FormSchema = z.object({
     policy: z.array(
@@ -50,9 +52,9 @@ export default function OrderStepTime({
   function onSubmit(data: z.infer<typeof FormSchema>) {
     if (data) {
       if (stepOrder < 3) {
-        setStepOrder(3)
+        setStepOrder(Number(nextStep))
       }
-      handleClickcurrentTab('3')
+      handleClickcurrentTab(nextStep)
       setTriggerScroll(true)
     }
   }
@@ -73,7 +75,7 @@ export default function OrderStepTime({
                       {item?.time_content}
                     </p>
                     <div
-                      className='mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_span]:text-pc-sub12s [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      className='mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                       dangerouslySetInnerHTML={{
                         __html: item?.stock || '',
                       }}

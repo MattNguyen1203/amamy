@@ -44,7 +44,6 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import {useEffect, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
-import {toast} from 'sonner'
 import {z} from 'zod'
 const formSchema = z.object({
   branch: z
@@ -128,47 +127,64 @@ export default function Instruct({
   }, [selectBranch, selectPaymentInformation])
   function handleCreateOrder() {
     setTransition(async () => {
-      const formData = new FormData()
-      formData.append('ten_nguoi_nhan', dataFromOrder?.recipientName || '')
-      formData.append('ten_nguoi_gui', dataFromOrder?.name || '')
-      formData.append(
-        'dia_chi_nguoi_nhan',
-        dataFromOrder?.recipientAddress || '',
-      )
-      formData.append('user', dataFromOrder?.email || '')
-      formData.append(
-        'loai_tien_te',
-        form?.getValues('recipientPaymentInformation') || '',
-      )
-      formData.append('sdt', dataFromOrder?.recipientPhone)
-      formData.append('chieu_van_don', dataFromOrder?.shipping)
-      if (dataFromOrder?.customercode) {
-        formData.append('ma_khach_hang', dataFromOrder?.customercode)
+      const formData = {
+        ma_don: 'Tesst1',
+        trang_thai_don_hang: 'pending',
+
+        tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCity || '',
+        ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity || '',
+        quan_huyen_nguoi_nhan: dataFromOrder?.district || '',
+        phuong_xa_nguoi_nhan: 'Phúc Xá',
+        so_nha_nguoi_nhan: dataFromOrder?.housingNumber || '',
+        ten_duong_nguoi_nhan: dataFromOrder?.roadName || '',
+        id_hoac_cmt: dataFromOrder?.passportNumber || '',
+
+        nguoi_gui_lien_he: 'Nguyễn Văn A',
+        ten_nguoi_gui: 'Nguyễn Văn A',
+        ten_nguoi_nhan: 'Trần Thị B',
+        dia_chi_nguoi_gui: '123 Nguyễn Trãi, Thanh Xuân, Hà Nội',
+        dia_chi_nguoi_nhan: '456 Cầu Giấy, Hà Nội',
+
+        tien_trinh_giao_hang: 'Đã giao đến kho',
+        text_tracking_thu_ba: 'Đang giao',
+        link_tracking_thu_ba: 'https://trackinglink.com/ORDER123456',
+        ma_van_don_thu_ba: 'VAN123456',
+        user: 'mynd.1902@gmail.com',
+        gia_don_hang: '500000',
+        khoi_luong_don_hang: '3kg',
+        loai_tien_te: 'VND',
+        date: '2025-03-19',
+        sdt: '0901234567',
+        dia_chi_nguoi_nhan_chi_tiet: 'Tầng 3, Tòa nhà ABC, Hà Nội',
+        chieu_van_don: 'Chiều đi',
+        expected_date: '2025-03-25',
       }
-      if (dataFromOrder?.recipientCity) {
-        formData.append('thanh_pho', dataFromOrder?.recipientCity)
-      }
-      if (dataFromOrder?.recipientCodeCity) {
-        formData.append('ma_thanh_pho', dataFromOrder?.recipientCodeCity)
-      }
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
-        {
-          method: 'POST',
-          body: formData,
-        },
-      )
-      if (response?.ok) {
-        setDataFromOrder({})
-        setSubmitting(true)
-        setStepOrder(1)
-        handleClickcurrentTab('1')
-        setTriggerScroll(true)
-      } else {
-        toast.error('Có lỗi sãy ra')
+      if (formData) {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          },
+        )
+        console.log(response)
+        console.log(response.json())
+        // if (response?.ok) {
+        //   setDataFromOrder({})
+        //   setSubmitting(true)
+        //   setStepOrder(1)
+        //   handleClickcurrentTab('1')
+        //   setTriggerScroll(true)
+        // } else {
+        //   toast.error('Có lỗi sãy ra')
+        // }
       }
     })
   }
+  console.log(dataFromOrder)
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -211,7 +227,14 @@ export default function Instruct({
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
-                        <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                        <FormControl
+                          className={cn(
+                            'xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                            data?.select_branch &&
+                              data?.select_branch?.length < 2 &&
+                              '[&_svg]:hidden',
+                          )}
+                        >
                           <SelectTrigger className='[&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-time]:hidden [&_.select-phone]:hidden xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                             {!isMobile && (
                               <SelectValue placeholder='Chọn chi nhánh' />

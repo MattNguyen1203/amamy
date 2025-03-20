@@ -43,11 +43,15 @@ export default function FormDeliveryInformationVNJapan({
   setDataFromOrder,
   dataFromOrder,
   type,
+  prevStep,
+  nextStep,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
   type: string
+  prevStep: string
+  nextStep: string
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -72,9 +76,9 @@ export default function FormDeliveryInformationVNJapan({
     // ✅ This will be type-safe and validated.
     setDataFromOrder({...dataFromOrder, ...values})
     if (stepOrder < 5) {
-      setStepOrder(5)
+      setStepOrder(Number(nextStep))
     }
-    handleClickcurrentTab('5')
+    handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
   return (
@@ -106,9 +110,9 @@ export default function FormDeliveryInformationVNJapan({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 {type === 'vietnhat' && (
-                  <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                  <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                     *Điền chữ tiếng Anh và Kanji hoặc Romanji.
                   </p>
                 )}
@@ -156,9 +160,9 @@ export default function FormDeliveryInformationVNJapan({
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               {type === 'vietnhat' ? (
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Điền chữ tiếng Anh và Kanji hoặc Romanji.
                   <br />
                   *Quý khách vui lòng cung cấp thông tin chi tiết: số phòng, toà
@@ -172,7 +176,7 @@ export default function FormDeliveryInformationVNJapan({
                   </span>
                 </p>
               ) : (
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
                 </p>
               )}
@@ -181,7 +185,7 @@ export default function FormDeliveryInformationVNJapan({
         />
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
-            onClick={() => handleClickcurrentTab('3')}
+            onClick={() => handleClickcurrentTab(prevStep)}
             className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>

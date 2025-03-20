@@ -56,10 +56,14 @@ export default function FormDeliveryInformationAboutVN({
   handleClickcurrentTab,
   setDataFromOrder,
   dataFromOrder,
+  prevStep,
+  nextStep,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
+  prevStep: string
+  nextStep: string
 }) {
   const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
@@ -91,9 +95,9 @@ export default function FormDeliveryInformationAboutVN({
     // ✅ This will be type-safe and validated.
     setDataFromOrder({...dataFromOrder, ...values})
     if (stepOrder < 5) {
-      setStepOrder(5)
+      setStepOrder(Number(nextStep))
     }
-    handleClickcurrentTab('5')
+    handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
   return (
@@ -226,7 +230,7 @@ export default function FormDeliveryInformationAboutVN({
         />
         <div className='flex items-center justify-between w-full'>
           <div
-            onClick={() => handleClickcurrentTab('3')}
+            onClick={() => handleClickcurrentTab(prevStep)}
             className='cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>

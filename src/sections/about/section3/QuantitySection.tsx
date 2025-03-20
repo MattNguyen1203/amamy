@@ -11,8 +11,8 @@ interface Prop {
 const QuantitySection = ({data}: Prop) => {
   const quantities = data?.amamy_quality?.list_quality
   return (
-    <section className='relative mb-[16rem] xsm:bg-[#f7f7f7] xsm:px-[1rem] xsm:pt-[2.5rem] xsm:pb-0  xsm:mb-[1rem]'>
-      <div className='fade-section w-full flex xsm:flex-col '>
+    <section className='relative mb-[16rem] xsm:bg-[#f7f7f7] xsm:px-0 xsm:pt-[2.5rem] xsm:pb-0  xsm:mb-[1rem]'>
+      <div className='fade-section w-full flex xsm:flex-col'>
         <div className='w-[27.5rem] h-[62.9375rem] bg-background-elevation5 shadow-[0px_14px_24px_#0004500a] xsm:shadow-none xsm:hidden'>
           <div className='h-[535px] top-[12.5rem] left-[5.9375rem] relative w-[18.5625rem]'>
             <div className='flex flex-col items-start gap-[1.06rem] relative '>
@@ -25,7 +25,7 @@ const QuantitySection = ({data}: Prop) => {
             </div>
           </div>
         </div>
-        <div className='hidden xsm:block'>
+        <div className='hidden xsm:block xsm:px-[1rem]'>
           <div className='flex flex-col items-start gap-[.5rem] relative mx-0'>
             <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
               {data?.amamy_quality?.title}

@@ -75,6 +75,7 @@ export default function FormStepStart({
   dataFromOrder,
   dataInformation,
   sentGoodsAtAmamy,
+  nextStep,
 }: {
   data: ICreateOder[]
   onSuccess: (nextTab: string) => void
@@ -82,6 +83,7 @@ export default function FormStepStart({
   dataFromOrder: IDataFromOrder
   dataInformation?: ICreateOder
   sentGoodsAtAmamy: boolean
+  nextStep: string
 }) {
   const isMobile = useIsMobile()
   const [selectServiceDimension, setSelectServiceDimension] =
@@ -129,12 +131,12 @@ export default function FormStepStart({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     localStorage.setItem('user_email', values?.email)
     if (stepOrder < 2) {
-      setStepOrder(2)
+      setStepOrder(Number(nextStep))
     }
     if (dataFromOrder?.shipping !== values?.shipping) {
-      setStepOrder(2)
+      setStepOrder(Number(nextStep))
     }
-    onSuccess('2')
+    onSuccess(nextStep)
     setTriggerScroll(true)
     if (sentGoodsAtAmamy) {
       const formData = new FormData()
