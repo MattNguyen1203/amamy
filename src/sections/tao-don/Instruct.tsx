@@ -1,5 +1,5 @@
 'use client'
-import useStore from '@/app/(store)/store'
+// import useStore from '@/app/(store)/store'
 import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
@@ -61,21 +61,21 @@ export default function Instruct({
   data,
   handleClickcurrentTab,
   dataFromOrder,
-  setSubmitting,
-  setDataFromOrder,
+  // setSubmitting,
+  // setDataFromOrder,
   type,
   importantNote,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
   dataFromOrder?: IDataFromOrder
-  setSubmitting: React.Dispatch<React.SetStateAction<boolean>>
-  setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
+  // setSubmitting: React.Dispatch<React.SetStateAction<boolean>>
+  // setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   type?: string
   importantNote?: string
 }) {
   const isMobile = useIsMobile()
-  const {setStepOrder} = useStore((state) => state)
+  // const {setStepOrder} = useStore((state) => state)
   const [isPending, setTransition] = useTransition()
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const [selectPaymentInformation, setSelectPaymentInformation] =
