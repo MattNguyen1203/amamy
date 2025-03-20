@@ -297,8 +297,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   data={dataInformation?.information?.instruct}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataFromOrder={dataFromOrder}
-                  setSubmitting={setSubmitting}
-                  setDataFromOrder={setDataFromOrder}
+                  // setSubmitting={setSubmitting}
+                  // setDataFromOrder={setDataFromOrder}
                   type={dataInformation?.type}
                   importantNote={dataInformation?.information?.important_note}
                 />
