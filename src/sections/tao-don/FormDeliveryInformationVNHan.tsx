@@ -64,11 +64,15 @@ export default function FormDeliveryInformationVNHan({
   setDataFromOrder,
   dataFromOrder,
   shippingCost,
+  prevStep,
+  nextStep,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
   shippingCost?: string
+  prevStep: string
+  nextStep: string
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -87,8 +91,8 @@ export default function FormDeliveryInformationVNHan({
       recipientPhone: dataFromOrder?.recipientPhone || '',
       recipientAddress: dataFromOrder?.recipientAddress || '',
       passportNumber: dataFromOrder?.passportNumber || '',
-      recipientCodeCity: dataFromOrder?.housingNumber || '',
-      housingNumber: dataFromOrder?.recipientCodeCity || '',
+      recipientCodeCity: dataFromOrder?.recipientCodeCity || '',
+      housingNumber: dataFromOrder?.housingNumber || '',
       roadName: dataFromOrder?.roadName || '',
       district: dataFromOrder?.district || '',
     },
@@ -98,9 +102,9 @@ export default function FormDeliveryInformationVNHan({
     // ✅ This will be type-safe and validated.
     setDataFromOrder({...dataFromOrder, ...values})
     if (stepOrder < 5) {
-      setStepOrder(5)
+      setStepOrder(Number(nextStep))
     }
-    handleClickcurrentTab('5')
+    handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
   return (
@@ -228,8 +232,8 @@ export default function FormDeliveryInformationVNHan({
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+              <FormMessage className='xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Số phòng, toà nhà nếu có
               </p>
             </FormItem>
@@ -251,8 +255,8 @@ export default function FormDeliveryInformationVNHan({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] !text-[#F00] text-pc-sub12m' />
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Mã thông quan: P828*****888, <br />
                   *CMT: 96*********27: *ID:***213 <br />
                   <span className='text-[#F00]'>
@@ -285,7 +289,7 @@ export default function FormDeliveryInformationVNHan({
         </div>
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
-            onClick={() => handleClickcurrentTab('3')}
+            onClick={() => handleClickcurrentTab(prevStep)}
             className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>
@@ -306,7 +310,3 @@ export default function FormDeliveryInformationVNHan({
     </Form>
   )
 }
-// <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
-//   Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên chuông cửa để việc
-//   giao hàng chính xác.
-// </p>

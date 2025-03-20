@@ -11,7 +11,7 @@ export default async function page() {
   })
   const [dataCategory] = await Promise.all([fetchDataCategory])
   return (
-    <main className='pt-[10rem] bg-white'>
+    <main className='pt-[5rem] xsm:pt-[1rem] bg-white'>
       <Suspense>
         <MenuSearch dataCategory={dataCategory?.categories} />
       </Suspense>

@@ -62,10 +62,14 @@ export default function FormDeliveryInformation({
   handleClickcurrentTab,
   setDataFromOrder,
   dataFromOrder,
+  prevStep,
+  nextStep,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
+  prevStep: string
+  nextStep: string
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -94,9 +98,9 @@ export default function FormDeliveryInformation({
     // ✅ This will be type-safe and validated.
     setDataFromOrder({...dataFromOrder, ...values})
     if (stepOrder < 5) {
-      setStepOrder(5)
+      setStepOrder(Number(nextStep))
     }
-    handleClickcurrentTab('5')
+    handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
   return (
@@ -124,11 +128,11 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:text-pc-sub10m'>
+                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc
                   đúng tên Auswei.
                 </p>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -257,7 +261,7 @@ export default function FormDeliveryInformation({
         </div>
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
-            onClick={() => handleClickcurrentTab('3')}
+            onClick={() => handleClickcurrentTab(prevStep)}
             className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>
