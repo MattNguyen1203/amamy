@@ -54,6 +54,7 @@ export default function OrderStepTime({
       if (stepOrder < 3) {
         setStepOrder(Number(nextStep))
       }
+      form.reset()
       handleClickcurrentTab(nextStep)
       setTriggerScroll(true)
     }
