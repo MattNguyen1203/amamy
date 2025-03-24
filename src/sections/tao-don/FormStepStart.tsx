@@ -159,6 +159,10 @@ export default function FormStepStart({
             recipientAddress: previewJson?.dia_chi_nguoi_nhan,
             recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
             recipientPaymentInformation: previewJson?.loai_tien_te,
+            recipientCity: previewJson?.tinh_thanh_nguoi_nhan,
+            recipientCodeCity: previewJson?.ma_tinh_thanh_nguoi_nhan,
+            district: previewJson?.ma_tinh_thanh_nguoi_nhan,
+            housingNumber: previewJson?.so_nha_nguoi_nhan,
             ...values,
           })
           return

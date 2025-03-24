@@ -22,10 +22,13 @@ const Footer = async () => {
   } = dataFooter.data.footer_site
 
   return (
-    <div className='flex px-24 pt-20 pb-[1rem] flex-col sm:items-end sm:gap-[3.4375rem] sm:self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-0 xsm:pb-0'>
+    <footer
+      id='footer-section'
+      className='flex px-24 pt-20 pb-[1rem] flex-col sm:items-end sm:gap-[3.4375rem] sm:self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-0 xsm:pb-0'
+    >
       <div className='xsm:px-[1rem] flex w-full justify-between xsm:flex-col'>
         <div className='flex gap-[1.5rem] flex-col'>
-          <h2 className='font-montserrat text-[2rem] not-italic font-bold xsm:font-semibold leading-[130%] xsm:tracking-[-0.025rem] max-w-[35.875rem] xsm:text-[1.25rem] xsm:text-center '>
+          <h2 className='font-montserrat text-[2rem] not-italic font-bold xsm:font-semibold leading-[130%] tracking-[-0.06rem] xsm:tracking-[-0.025rem] max-w-[38.875rem] xsm:text-[1.25rem] xsm:text-center '>
             {title}
           </h2>
           <div className='flex gap-[1.5rem] xsm:hidden'>
@@ -147,7 +150,7 @@ const Footer = async () => {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
@@ -179,8 +182,8 @@ const Address = ({
       <ImageV2
         alt=''
         src={icon}
-        width={80}
-        height={80}
+        width={80 * 2}
+        height={80 * 2}
         className='size-5 object-contain'
       />
       <span className='xsm:text-pc-sub14m xsm:opacity-[0.8] xsm:text-white'>

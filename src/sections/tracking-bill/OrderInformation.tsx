@@ -22,6 +22,7 @@ export type OrderInformationProps = {
     trang_thai_don_hang: {
       value: 'pending' | 'delivered' | 'shipping' | 'completed'
       label: string
+      post_title: string
     }
   } | null
 }
@@ -50,7 +51,7 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
       </div>
     )
   }
-
+  console.log(data)
   return (
     <div className='size-full p-5 rounded-[1.25rem] bg-background-elevation20'>
       <h4 className='text-pc-heading20b xsm:text-mb-h2 text-black'>
@@ -77,22 +78,30 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>
               Trạng thái đơn hàng:
             </p>
-            <BillStatus
-              label={data?.trang_thai_don_hang?.label}
-              type={data?.trang_thai_don_hang?.value || 'pending'}
-            />
+            {data?.trang_thai_don_hang?.post_title && (
+              <BillStatus
+                label={data?.trang_thai_don_hang?.post_title}
+                type={data?.trang_thai_don_hang?.value || 'pending'}
+              />
+            )}
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-start'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Người gửi:</p>
-            <div className='flex items-center space-x-2'>
-              <p className='font-semibold text-black'>{data.ten_nguoi_gui}</p>
-              <LocationTag location={data.dia_chi_nguoi_gui} />
+            <div className='flex flex-1 items-center flex-wrap'>
+              <p className='font-semibold text-black mr-[0.5rem] sm:mb-[0.25rem]'>
+                {data.ten_nguoi_gui}
+              </p>
+              {data.dia_chi_nguoi_gui && (
+                <LocationTag location={data.dia_chi_nguoi_gui} />
+              )}
             </div>
           </div>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-start'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Người nhận:</p>
-            <div className='flex items-center space-x-2'>
-              <p className='font-semibold text-black'>{data.ten_nguoi_nhan}</p>
+            <div className='flex flex-1 items-center flex-wrap'>
+              <p className='font-semibold text-black mr-[0.5rem] sm:mb-[0.25rem]'>
+                {data.ten_nguoi_nhan}
+              </p>
               <LocationTag location={data.dia_chi_nguoi_nhan} />
             </div>
           </div>
