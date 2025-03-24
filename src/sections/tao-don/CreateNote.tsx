@@ -56,6 +56,7 @@ export default function CeateNote({
       if (stepOrder < 4) {
         setStepOrder(4)
       }
+      form.reset()
       handleClickcurrentTab('4')
       setTriggerScroll(true)
     }

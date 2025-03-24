@@ -37,6 +37,7 @@ import ICTime from '@/sections/tao-don/ICTime'
 import ICX from '@/sections/tao-don/ICX'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {
+  ICreateOder,
   IInformationInstructOrder,
   IInformationInstructOrder_SelectBranch,
 } from '@/sections/tao-don/oder.interface'
@@ -67,6 +68,7 @@ export default function Instruct({
   type,
   importantNote,
   prevStep,
+  setDataInformation,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -76,6 +78,9 @@ export default function Instruct({
   type?: string
   importantNote?: string
   prevStep: string
+  setDataInformation: React.Dispatch<
+    React.SetStateAction<ICreateOder | undefined>
+  >
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
@@ -180,6 +185,7 @@ export default function Instruct({
           setStepOrder(1)
           handleClickcurrentTab('1')
           setTriggerScroll(true)
+          setDataInformation(undefined)
         } else {
           toast.error('Có lỗi sãy ra')
         }

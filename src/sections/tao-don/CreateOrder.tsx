@@ -314,6 +314,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       ? '5'
                       : '4'
                   }
+                  setDataInformation={setDataInformation}
                 />
               </TabsContent>
             </>
