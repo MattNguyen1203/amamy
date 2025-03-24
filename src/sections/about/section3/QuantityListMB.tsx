@@ -60,7 +60,7 @@ const QuantityListMB = ({quantities}: Prop) => {
         <CarouselNext className='absolute xsm:hidden right-[3.5rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
       </Carousel>
 
-      <div className='mt-8 flex justify-center gap-2 xsm:mt-[1rem] xsm:mb-[2.5rem]'>
+      <div className='mt-8 flex justify-center gap-2 xsm:mt-0 xsm:mb-[2.5rem]'>
         {Array.isArray(quantities) &&
           quantities.map((_, index) => (
             <button
