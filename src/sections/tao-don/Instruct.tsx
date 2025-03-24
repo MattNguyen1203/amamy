@@ -44,6 +44,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import {useEffect, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
 import {z} from 'zod'
 const formSchema = z.object({
   branch: z
@@ -128,34 +129,34 @@ export default function Instruct({
   function handleCreateOrder() {
     setTransition(async () => {
       const formData = {
-        ma_don: 'Tesst1',
+        ma_don: '',
         trang_thai_don_hang: 'pending',
 
         tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCity || '',
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity || '',
         quan_huyen_nguoi_nhan: dataFromOrder?.district || '',
-        phuong_xa_nguoi_nhan: 'Phúc Xá',
+        phuong_xa_nguoi_nhan: '',
         so_nha_nguoi_nhan: dataFromOrder?.housingNumber || '',
         ten_duong_nguoi_nhan: dataFromOrder?.roadName || '',
         id_hoac_cmt: dataFromOrder?.passportNumber || '',
 
-        nguoi_gui_lien_he: 'Nguyễn Văn A',
-        ten_nguoi_gui: 'Nguyễn Văn A',
-        ten_nguoi_nhan: 'Trần Thị B',
-        dia_chi_nguoi_gui: '123 Nguyễn Trãi, Thanh Xuân, Hà Nội',
-        dia_chi_nguoi_nhan: '456 Cầu Giấy, Hà Nội',
+        nguoi_gui_lien_he: dataFromOrder?.whereToContact || '',
+        ten_nguoi_gui: dataFromOrder?.name || '',
+        ten_nguoi_nhan: dataFromOrder?.recipientName || '',
+        dia_chi_nguoi_gui: '',
+        dia_chi_nguoi_nhan: dataFromOrder?.recipientAddress || '',
 
         tien_trinh_giao_hang: 'Đã giao đến kho',
         text_tracking_thu_ba: 'Đang giao',
         link_tracking_thu_ba: 'https://trackinglink.com/ORDER123456',
-        ma_van_don_thu_ba: 'VAN123456',
+        ma_van_don_thu_ba: '',
         user: 'mynd.1902@gmail.com',
-        gia_don_hang: '500000',
-        khoi_luong_don_hang: '3kg',
-        loai_tien_te: 'VND',
+        gia_don_hang: '',
+        khoi_luong_don_hang: '',
+        loai_tien_te: dataFromOrder?.recipientPaymentInformation || 'VND',
         date: '2025-03-19',
-        sdt: '0901234567',
-        dia_chi_nguoi_nhan_chi_tiet: 'Tầng 3, Tòa nhà ABC, Hà Nội',
+        sdt: dataFromOrder?.recipientPhone || '',
+        dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress || '',
         chieu_van_don: 'Chiều đi',
         expected_date: '2025-03-25',
       }
@@ -170,25 +171,25 @@ export default function Instruct({
             body: JSON.stringify(formData),
           },
         )
-        console.log(response)
-        console.log(response.json())
-        // if (response?.ok) {
-        //   setDataFromOrder({})
-        //   setSubmitting(true)
-        //   setStepOrder(1)
-        //   handleClickcurrentTab('1')
-        //   setTriggerScroll(true)
-        // } else {
-        //   toast.error('Có lỗi sãy ra')
-        // }
+        console.log('🚀 ~ response:', response)
+
+        if (response?.ok) {
+          setDataFromOrder({})
+          setSubmitting(true)
+          setStepOrder(1)
+          handleClickcurrentTab('1')
+          setTriggerScroll(true)
+        } else {
+          toast.error('Có lỗi sãy ra')
+        }
       }
     })
   }
-  console.log(dataFromOrder)
+  console.log('🚀 ~ dataFromOrder:', dataFromOrder)
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log('🚀 ~ onSubmit values:', values)
   }
   return (
     <Form {...form}>
