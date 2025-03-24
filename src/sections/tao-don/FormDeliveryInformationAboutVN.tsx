@@ -10,17 +10,9 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import useIsMobile from '@/hooks/useIsMobile'
+import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
@@ -45,11 +37,9 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận',
     })
     .min(1, 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận'),
-  recipientPaymentInformation: z
-    .string({
-      required_error: 'Vui lòng nhập thông tin thanh toán',
-    })
-    .min(1, 'Vui lòng nhập thông tin thanh toán'),
+  recipientAddressType: z.enum(['atAmamyStore', 'registeredAddress'], {
+    required_error: 'Vui lòng chọn nơi nhận hàng',
+  }),
 })
 
 export default function FormDeliveryInformationAboutVN({
@@ -65,13 +55,9 @@ export default function FormDeliveryInformationAboutVN({
   prevStep: string
   nextStep: string
 }) {
-  const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
-  const [selectPaymentInformation, setSelectPaymentInformation] =
-    useState<boolean>(false)
-  const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
-    useState<{value: string; title: string}>({value: '', title: ''})
+  const [recipientAddressType, setRecipientAddressType] = useState<string>('')
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -79,8 +65,8 @@ export default function FormDeliveryInformationAboutVN({
       recipientName: dataFromOrder?.recipientName || '',
       recipientPhone: dataFromOrder?.recipientPhone || '',
       recipientAddress: dataFromOrder?.recipientAddress || '',
-      recipientPaymentInformation:
-        dataFromOrder?.recipientPaymentInformation || '',
+      recipientAddressType:
+        dataFromOrder?.recipientAddressType || 'registeredAddress',
     },
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
@@ -100,6 +86,15 @@ export default function FormDeliveryInformationAboutVN({
     handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
+  useEffect(() => {
+    form.setValue(
+      'recipientAddress',
+      recipientAddressType === 'atAmamyStore'
+        ? 'Nhận tại cửa hàng Amamy'
+        : dataFromOrder?.recipientAddress || '',
+      {shouldValidate: true},
+    )
+  }, [recipientAddressType, form])
   return (
     <Form {...form}>
       <form
@@ -125,10 +120,6 @@ export default function FormDeliveryInformationAboutVN({
                     {...field}
                   />
                 </FormControl>
-                <p className='xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
-                  Cung cấp tên nhận đầy đủ trên giấy tờ tùy thân, tên trên
-                  chuông cửa để việc giao hàng chính xác.
-                </p>
                 <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
@@ -155,76 +146,74 @@ export default function FormDeliveryInformationAboutVN({
         </div>
         <FormField
           control={form.control}
-          name='recipientAddress'
+          name='recipientAddressType'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ (*)
+                Địa chỉ nhận hàng tại Việt Nam
               </FormLabel>
               <FormControl>
-                <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                  placeholder='Địa chỉ nhận hàng tại Việt Nam'
-                  {...field}
-                />
+                <RadioGroup
+                  defaultValue={field.value || 'registeredAddress'}
+                  onValueChange={(value) => {
+                    field.onChange(value)
+                    setRecipientAddressType(value)
+                  }}
+                  className='flex !my-[0.75rem] space-x-[4rem]'
+                >
+                  <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
+                    <FormControl>
+                      <RadioGroupItem
+                        id='r1'
+                        value='registeredAddress'
+                      />
+                    </FormControl>
+                    <FormLabel
+                      htmlFor='r1'
+                      className='font-normal cursor-pointer'
+                    >
+                      Nhận tại địa chỉ đăng ký
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
+                    <FormControl>
+                      <RadioGroupItem
+                        id='r2'
+                        value='atAmamyStore'
+                      />
+                    </FormControl>
+                    <FormLabel
+                      htmlFor='r2'
+                      className='font-normal cursor-pointer'
+                    >
+                      Nhận tại cửa hàng Amamy
+                    </FormLabel>
+                  </FormItem>
+                </RadioGroup>
               </FormControl>
-              <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name='recipientPaymentInformation'
+          name='recipientAddress'
           render={({field}) => (
-            <FormItem
-              onClick={() => setSelectPaymentInformation(true)}
-              className='flex-1 space-y-0'
-            >
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Chọn thông tin thanh toán (*)
-              </FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                  <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
-                    {!isMobile && (
-                      <SelectValue placeholder='Chọn thông tin thanh toán' />
-                    )}
-                    {isMobile && !field.value && (
-                      <SelectValue placeholder='Chọn thông tin thanh toán' />
-                    )}
-                    {isMobile && field.value && (
-                      <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
-                        <p className='text-black text-pc-sub14m text-start w-full line-clamp-1'>
-                          {selectPaymentInformationValue?.title ||
-                            dataFromOrder?.recipientPaymentInformation}
-                        </p>
-                      </div>
-                    )}
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
-                  <SelectItem
-                    className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                    value={'VND'}
-                  >
-                    <p className='text-black text-pc-sub14m'>
-                      Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)
-                    </p>
-                  </SelectItem>
-                  <SelectItem
-                    className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                    value={'Euro'}
-                  >
-                    <p className='text-black text-pc-sub14m'>
-                      Thanh toán bằng Euro
-                    </p>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className='!text-[#F00] text-pc-sub12m' />
+            <FormItem className='flex-1 space-y-0 !mt-0'>
+              <FormControl>
+                <Input
+                  disabled={
+                    recipientAddressType === 'atAmamyStore' ? true : false
+                  }
+                  className='disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  placeholder='Địa chỉ nhận hàng tại Việt Nam'
+                  {...field}
+                />
+              </FormControl>
+              <p className='xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
+                *Địa chỉ chi tiết, số nhà, tên đường,...
+              </p>
+              <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
             </FormItem>
           )}
         />
@@ -247,14 +236,6 @@ export default function FormDeliveryInformationAboutVN({
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>
           </Button>
         </div>
-        {isMobile && (
-          <PopupPaymentInfor
-            form={form}
-            selectPaymentInformation={selectPaymentInformation}
-            setSelectPaymentInformation={setSelectPaymentInformation}
-            setSelectPaymentInformationValue={setSelectPaymentInformationValue}
-          />
-        )}
       </form>
     </Form>
   )

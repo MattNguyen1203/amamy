@@ -153,11 +153,13 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               dataInformation={dataInformation}
               sentGoodsAtAmamy={sentGoodsAtAmamy}
               nextStep={
-                dataInformation?.information?.time
-                  ? '2'
-                  : dataInformation?.information?.note
-                  ? '3'
-                  : '4'
+                dataInformation
+                  ? dataInformation?.information?.time
+                    ? '2'
+                    : dataInformation?.information?.note
+                    ? '3'
+                    : '4'
+                  : '2'
               }
             />
           </TabsContent>
