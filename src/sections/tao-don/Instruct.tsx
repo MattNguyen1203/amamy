@@ -66,6 +66,7 @@ export default function Instruct({
   setDataFromOrder,
   type,
   importantNote,
+  prevStep,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -74,6 +75,7 @@ export default function Instruct({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   type?: string
   importantNote?: string
+  prevStep: string
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
@@ -128,37 +130,38 @@ export default function Instruct({
   }, [selectBranch, selectPaymentInformation])
   function handleCreateOrder() {
     setTransition(async () => {
+      const currentDate = new Date()
       const formData = {
         ma_don: '',
-        trang_thai_don_hang: 'pending',
+        trang_thai_don_hang: '',
 
-        tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCity || '',
-        ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity || '',
-        quan_huyen_nguoi_nhan: dataFromOrder?.district || '',
+        tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCity ?? '',
+        ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
+        quan_huyen_nguoi_nhan: dataFromOrder?.district ?? '',
         phuong_xa_nguoi_nhan: '',
-        so_nha_nguoi_nhan: dataFromOrder?.housingNumber || '',
-        ten_duong_nguoi_nhan: dataFromOrder?.roadName || '',
-        id_hoac_cmt: dataFromOrder?.passportNumber || '',
+        so_nha_nguoi_nhan: dataFromOrder?.housingNumber ?? '',
+        ten_duong_nguoi_nhan: dataFromOrder?.roadName ?? '',
+        id_hoac_cmt: dataFromOrder?.passportNumber ?? '',
 
-        nguoi_gui_lien_he: dataFromOrder?.whereToContact || '',
-        ten_nguoi_gui: dataFromOrder?.name || '',
-        ten_nguoi_nhan: dataFromOrder?.recipientName || '',
+        nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
+        ten_nguoi_gui: dataFromOrder?.name ?? '',
+        ten_nguoi_nhan: dataFromOrder?.recipientName ?? '',
         dia_chi_nguoi_gui: '',
-        dia_chi_nguoi_nhan: dataFromOrder?.recipientAddress || '',
+        dia_chi_nguoi_nhan: dataFromOrder?.recipientAddress ?? '',
 
-        tien_trinh_giao_hang: 'Đã giao đến kho',
-        text_tracking_thu_ba: 'Đang giao',
-        link_tracking_thu_ba: 'https://trackinglink.com/ORDER123456',
+        tien_trinh_giao_hang: '',
+        text_tracking_thu_ba: '',
+        link_tracking_thu_ba: '',
         ma_van_don_thu_ba: '',
-        user: 'mynd.1902@gmail.com',
+        user: dataFromOrder?.email,
         gia_don_hang: '',
         khoi_luong_don_hang: '',
-        loai_tien_te: dataFromOrder?.recipientPaymentInformation || 'VND',
-        date: '2025-03-19',
-        sdt: dataFromOrder?.recipientPhone || '',
-        dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress || '',
-        chieu_van_don: 'Chiều đi',
-        expected_date: '2025-03-25',
+        loai_tien_te: dataFromOrder?.recipientPaymentInformation ?? 'VND',
+        date: currentDate.toISOString().slice(0, 10),
+        sdt: dataFromOrder?.recipientPhone ?? '',
+        dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
+        chieu_van_don: dataFromOrder?.shipping,
+        expected_date: '',
       }
       if (formData) {
         const response = await fetch(
@@ -168,11 +171,9 @@ export default function Instruct({
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData, null, 2),
           },
         )
-        console.log('🚀 ~ response:', response)
-
         if (response?.ok) {
           setDataFromOrder({})
           setSubmitting(true)
@@ -185,7 +186,6 @@ export default function Instruct({
       }
     })
   }
-  console.log('🚀 ~ dataFromOrder:', dataFromOrder)
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -436,7 +436,7 @@ export default function Instruct({
 
           <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
             <div
-              onClick={() => handleClickcurrentTab('5')}
+              onClick={() => handleClickcurrentTab(prevStep)}
               className='xsm:flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
             >
               <p className='text-pc-sub16m text-black'>Quay lại</p>

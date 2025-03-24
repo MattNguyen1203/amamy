@@ -20,8 +20,8 @@ const Section4 = ({withDHS}: Props) => {
   const [activeSlider, setActiveSlider] = useState<number>(0)
   return (
     <section
-      className='fade-section xsm:pt-[1rem] xsm:pb-[2,5rem] xsm:px-0 w-full sm:h-[50rem] sm:flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] sm:justify-between sm:items-center
-     sm:rounded-tl-[2.5rem] sm:rounded-br-[0rem] sm:rounded-tr-[2.5rem] sm:rounded-bl-[0rem] sm:[box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
+      className='sm:bg-[#EDF5FA] sm:rounded-none fade-section xsm:pt-[1rem] xsm:pb-0 xsm:px-0 w-full sm:h-[50rem] sm:flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] sm:justify-between sm:items-center
+      sm:[box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
      xsm:flex-col xsm:h-fit xsm:gap-[1rem] xsm:pr-0'
     >
       <div className='max-w-[24.375rem] h-full flex flex-col justify-between'>
@@ -29,9 +29,10 @@ const Section4 = ({withDHS}: Props) => {
           <h2 className='fade-item font-montserrat sm:mb-[2.06rem] text-[2.875rem] tracking-[-0.115rem] font-bold leading-[120%] xsm:text-[1.25rem] text-black xsm:text-mb-h1'>
             {withDHS?.title}
           </h2>
-          <p className='fade-item xsm:text-mb-12 font-montserrat text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'>
-            {withDHS?.subtitle}
-          </p>
+          <p
+            dangerouslySetInnerHTML={{__html: withDHS?.subtitle}}
+            className='fade-item xsm:text-mb-12 font-montserrat text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'
+          ></p>
         </div>
         {Array.isArray(withDHS?.list_news_event) && !isMobile && (
           <div className='flex mt-[1.91rem] xsm:hidden'>
@@ -45,7 +46,7 @@ const Section4 = ({withDHS}: Props) => {
         )}
       </div>
       {Array.isArray(withDHS?.list_news_event) && (
-        <div className='fade-item group sm:relative rounded-[0.5rem]'>
+        <div className='fade-item group sm:relative rounded-[0.5rem] sm:shadow-[0px_14px_24px_0px_rgba(0,4,81,0.04)]'>
           {!isMobile && (
             <div className='xsm:hidden p-[1.75rem] pr-0 sm:group-hover:top-[65%] transition-all duration-500 absolute pointer-events-none top-[50%] translate-y-[-50%] left-0 translate-x-[-50%] z-10 bg-[#38B6FF] rounded-[1.25rem] w-[18.75rem] h-[23.25rem]'>
               <div className='absolute top-0 left-0 size-[9.375rem] z-[11] bg-[#60C5FF] rounded-br-[100%] rounded-tl-[1.25rem]'></div>
@@ -109,7 +110,7 @@ const Section4 = ({withDHS}: Props) => {
                                 alt={item?.post?.[0]?.slug}
                                 width={1000}
                                 height={1000}
-                                className='xsm:rounded-[1.25rem] w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[17.6875rem] xsm:object-cover bg-[linear-gradient(180deg,rgba(0,63,136,0.25)_0%,rgba(0,16,34,0.50)_63.29%)]'
+                                className='bg-[#EDF5FA] xsm:rounded-[1.25rem] w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[17.6875rem] xsm:object-cover bg-[linear-gradient(180deg,rgba(0,63,136,0.25)_0%,rgba(0,16,34,0.50)_63.29%)]'
                               />
                             </div>
                           </Link>

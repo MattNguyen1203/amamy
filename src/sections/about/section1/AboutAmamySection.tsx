@@ -40,11 +40,14 @@ export default function AboutAmamySection({data}: Prop) {
                   <p className='font-montserrat font-bold text-[4rem] xsm:text-[1.125rem] leading-[4.8rem] xsm:leading-[1.315rem] tracking-[-0.04em]'>
                     {stat?.number} {stat?.label}
                   </p>
-                  <p className='font-montserrat font-bold text-[1.25rem] xsm:text-[0.6875rem] xsm:leading-[0.8125rem] leading-[1.5rem] tracking-[-0.04em] xsm:mb-[0.5rem]'>
+                  <p className='font-montserrat uppercase font-bold text-[1.25rem] xsm:text-[0.6875rem] xsm:tracking-[-0.01375rem] xsm:leading-[0.8125rem] leading-[1.5rem] tracking-[-0.04em] xsm:mb-[0.5rem]'>
                     {stat?.title}
                   </p>
-                  <p className='font-montserrat font-medium text-[1rem] leading-[1.3rem] xsm:text-[0.75rem] xsm:leading-[1.125rem] tracking-[-0.03em]'>
-                    {stat?.description}
+                  <p className='xsm:hidden font-montserrat font-medium text-[1rem] leading-[1.3rem] xsm:text-[0.75rem] xsm:leading-[1.5] tracking-[-0.03em] xsm:tracking-[-0.0225rem] xsm:opacity-[0.9] xsm:font-normal'>
+                    {stat?.description_mb}
+                  </p>
+                  <p className='sm:hidden font-montserrat font-medium text-[1rem] leading-[1.3rem] xsm:text-[0.75rem] xsm:leading-[1.5] tracking-[-0.03em] xsm:tracking-[-0.0225rem] xsm:opacity-[0.9] xsm:font-normal'>
+                    {stat?.description_mb}
                   </p>
                 </div>
               ))}

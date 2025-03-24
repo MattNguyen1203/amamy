@@ -24,7 +24,7 @@ export default function Breadcrumb({
       <Link
         href={'/'}
         className={cn(
-          ' transition-all duration-500 p-[0.25rem_0.75rem] rounded-[1.25rem] text-pc-sub14m',
+          ' transition-all duration-500 sm:p-[0.25rem_0.75rem] rounded-[1.25rem] !text-pc-sub14m',
           type === 'white' &&
             'hover:bg-[rgba(96,96,96,0.08)] hover:text-[#38B6FF] text-[rgba(0,0,0,0.30)]',
           type === 'blue' &&
@@ -47,7 +47,7 @@ export default function Breadcrumb({
             <Link
               href={items?.slug}
               className={cn(
-                'transition-all duration-500 p-[0.25rem_0.75rem] rounded-[1.25rem] text-pc-sub14m',
+                'transition-all duration-500 sm:p-[0.25rem_0.75rem] rounded-[1.25rem] !text-pc-sub14m',
                 type === 'white' &&
                   'hover:bg-[rgba(96,96,96,0.08)] hover:text-[#38B6FF] text-[rgba(0,0,0,0.30)]',
                 type === 'blue' &&

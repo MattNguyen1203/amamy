@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
+import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -36,6 +37,9 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận',
     })
     .min(1, 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận'),
+  recipientAddressType: z.enum(['atAmamyStore', 'registeredAddress'], {
+    required_error: 'Vui lòng chọn nơi nhận hàng',
+  }),
 })
 
 export default function FormDeliveryInformationVNJapan({
@@ -55,6 +59,7 @@ export default function FormDeliveryInformationVNJapan({
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const [recipientAddressType, setRecipientAddressType] = useState<string>('')
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -62,6 +67,8 @@ export default function FormDeliveryInformationVNJapan({
       recipientName: dataFromOrder?.recipientName || '',
       recipientPhone: dataFromOrder?.recipientPhone || '',
       recipientAddress: dataFromOrder?.recipientAddress || '',
+      recipientAddressType:
+        dataFromOrder?.recipientAddressType || 'registeredAddress',
     },
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
@@ -71,6 +78,15 @@ export default function FormDeliveryInformationVNJapan({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+  useEffect(() => {
+    form.setValue(
+      'recipientAddress',
+      recipientAddressType === 'atAmamyStore'
+        ? 'Nhận tại cửa hàng Amamy'
+        : dataFromOrder?.recipientAddress || '',
+      {shouldValidate: true},
+    )
+  }, [recipientAddressType, form])
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -139,19 +155,79 @@ export default function FormDeliveryInformationVNJapan({
             )}
           />
         </div>
+        {type === 'nhatviet' && (
+          <FormField
+            control={form.control}
+            name='recipientAddressType'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Địa chỉ nhận hàng tại Việt Nam (*)
+                </FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    defaultValue={field.value || 'registeredAddress'}
+                    onValueChange={(value) => {
+                      field.onChange(value)
+                      setRecipientAddressType(value)
+                    }}
+                    className='flex !my-[0.75rem] space-x-[4rem]'
+                  >
+                    <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
+                      <FormControl>
+                        <RadioGroupItem
+                          id='r1'
+                          value='registeredAddress'
+                        />
+                      </FormControl>
+                      <FormLabel
+                        htmlFor='r1'
+                        className='font-normal cursor-pointer'
+                      >
+                        Nhận tại địa chỉ đăng ký
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
+                      <FormControl>
+                        <RadioGroupItem
+                          id='r2'
+                          value='atAmamyStore'
+                        />
+                      </FormControl>
+                      <FormLabel
+                        htmlFor='r2'
+                        className='font-normal cursor-pointer'
+                      >
+                        Nhận tại cửa hàng Amamy
+                      </FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
           name='recipientAddress'
           render={({field}) => (
-            <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                {type === 'vietnhat'
-                  ? 'Địa chỉ chi tiết'
-                  : 'Địa chỉ nhận hàng tại Việt Nam (*)'}
-              </FormLabel>
+            <FormItem
+              className={cn('flex-1 space-y-0', type === 'nhatviet' && '!mt-0')}
+            >
+              {type === 'vietnhat' && (
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  {type === 'vietnhat'
+                    ? 'Địa chỉ chi tiết'
+                    : 'Địa chỉ nhận hàng tại Việt Nam (*)'}
+                </FormLabel>
+              )}
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  disabled={
+                    recipientAddressType === 'atAmamyStore' ? true : false
+                  }
+                  className='disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder={
                     type === 'vietnhat'
                       ? 'Nhập địa chỉ nhận hàng'

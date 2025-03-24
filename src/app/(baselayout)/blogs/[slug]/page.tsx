@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import DetailCentenBlog from '@/sections/blog/detail/Index'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
@@ -22,6 +23,13 @@ export default async function page({params}: {params: {slug: string}}) {
   return (
     <main>
       <div className='bg-white'>
+        <Breadcrumb
+          data={[
+            {title: 'Hữu ích cho gửi hàng', slug: '/blogs'},
+            {title: 'Bài viết', slug: ''},
+          ]}
+          className='sm:px-[5rem] xsm:px-[1rem]'
+        />
         <DetailCentenBlog
           dataDetailPost={dataDetailPost}
           dataFavourite={dataFavourite?.data?.you_might_like_it}

@@ -127,9 +127,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             className={cn(
               'sm:absolute xsm:relative sm:top-[1.25rem] sm:bottom-[1.25rem] sm:left-[1.25rem] w-[0.25rem] xsm:w-full xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 before:bg-[#38B6FF] before:sm:w-full before:xsm:h-full before:transition-all before:duration-500',
               currentTab === '1' && 'before:sm:h-[5%] before:xsm:w-[5%]',
-              currentTab === '2' && 'before:sm:h-[23.5%] before:xsm:w-[23.5%]',
+              currentTab === '2' && 'before:sm:h-[25%] before:xsm:w-[25%]',
               currentTab === '3' && 'before:sm:h-[42%] before:xsm:w-[42%]',
-              currentTab === '4' && 'before:sm:h-[61%] before:xsm:w-[61%]',
+              currentTab === '4' && 'before:sm:h-[57%] before:xsm:w-[57%]',
               currentTab === '5' && 'before:sm:h-[79%] before:xsm:w-[79%]',
               currentTab === '6' && 'before:sm:h-[100%] before:xsm:w-[100%]',
             )}
@@ -303,6 +303,17 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   setDataFromOrder={setDataFromOrder}
                   type={dataInformation?.type}
                   importantNote={dataInformation?.information?.important_note}
+                  prevStep={
+                    dataInformation?.type === 'vietduc'
+                      ? dataInformation?.information?.insurance?.compensation
+                          ?.policy
+                        ? '5'
+                        : '4'
+                      : dataInformation?.information?.insurance
+                          ?.cargo_insurance_japanvn
+                      ? '5'
+                      : '4'
+                  }
                 />
               </TabsContent>
             </>
