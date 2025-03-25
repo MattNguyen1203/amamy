@@ -34,8 +34,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
   const [submitting, setSubmitting] = useState(false)
-  const [faq, setFaq] = useState(true)
-  const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
+  // const [faq, setFaq] = useState(true)
+  // const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
   const [dataInformation, setDataInformation] = useState<
     ICreateOder | undefined
@@ -150,7 +150,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               setDataFromOrder={setDataFromOrder}
               dataFromOrder={dataFromOrder}
               dataInformation={dataInformation}
-              sentGoodsAtAmamy={sentGoodsAtAmamy}
+              // sentGoodsAtAmamy={sentGoodsAtAmamy}
               nextStep={
                 dataInformation
                   ? dataInformation?.information?.time
@@ -324,7 +324,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         className={cn(
           'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
           submitting && 'block',
-          !faq && 'block',
+          // !faq && 'block',
         )}
       ></div>
       <div
