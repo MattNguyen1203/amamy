@@ -21,6 +21,7 @@ export type OrderInformationProps = {
     date: string
     trang_thai_don_hang: {
       value: 'pending' | 'delivered' | 'shipping' | 'completed'
+      bg_color: string
       label: string
       post_title: string
     }
@@ -81,7 +82,7 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
             {data?.trang_thai_don_hang?.post_title && (
               <BillStatus
                 label={data?.trang_thai_don_hang?.post_title}
-                type={data?.trang_thai_don_hang?.value || 'pending'}
+                type={data?.trang_thai_don_hang?.bg_color}
               />
             )}
           </div>
