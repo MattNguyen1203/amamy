@@ -45,6 +45,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   }
   useEffect(() => {
     if (dataFromOrder?.shipping && data) {
+      setDataInformation(undefined)
       const foundItem = data?.find(
         (item) => item.id === Number(dataFromOrder?.shipping),
       )
