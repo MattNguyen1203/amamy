@@ -12,7 +12,6 @@ import FormDeliveryInformationVNHan from '@/sections/tao-don/FormDeliveryInforma
 import FormDeliveryInformationVNJapan from '@/sections/tao-don/FormDeliveryInformationVNJapan'
 import FormStepStart from '@/sections/tao-don/FormStepStart'
 import ICCheck from '@/sections/tao-don/ICCheck'
-import ICFAQ from '@/sections/tao-don/ICFAQ'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
@@ -35,8 +34,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
   const [submitting, setSubmitting] = useState(false)
-  const [faq, setFaq] = useState(true)
-  const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
+  // const [faq, setFaq] = useState(true)
+  // const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
   const [dataInformation, setDataInformation] = useState<
     ICreateOder | undefined
@@ -79,11 +78,11 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       ]
     }
   }, [dataFromOrder?.shipping])
-  useEffect(() => {
-    setTimeout(() => {
-      setFaq(false)
-    }, 1000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setFaq(false)
+  //   }, 1000)
+  // }, [])
   return (
     <>
       <Tabs
@@ -151,7 +150,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               setDataFromOrder={setDataFromOrder}
               dataFromOrder={dataFromOrder}
               dataInformation={dataInformation}
-              sentGoodsAtAmamy={sentGoodsAtAmamy}
+              // sentGoodsAtAmamy={sentGoodsAtAmamy}
               nextStep={
                 dataInformation
                   ? dataInformation?.information?.time
@@ -325,7 +324,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         className={cn(
           'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
           submitting && 'block',
-          !faq && 'block',
+          // !faq && 'block',
         )}
       ></div>
       <div
@@ -351,7 +350,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           <p className='text-pc-sub16m text-white cursor-pointer'>Xong</p>
         </div>
       </div>
-      <div
+      {/* <div
         className={cn(
           'top-[50%] opacity-[1] pointer-events-auto xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] visible transition-all duration-500 flex-center flex-col fixed z-[51] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] rounded-[1.25rem] bg-white',
           faq && 'pointer-events-none opacity-0 top-[75%]',
@@ -381,7 +380,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             <p className='text-pc-sub16m text-white'>Đây là lần đầu</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
