@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function metadataValues(res: any) {
-  if (!res || !res?.yoast_head_json) {
+  if (!res) {
     return {
       metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN!),
       title: 'NEXTJS14-OKHUB',
@@ -11,43 +11,42 @@ export default function metadataValues(res: any) {
       author: 'DEV OKHUB',
     }
   }
-  const result = res?.yoast_head_json
-
+  const result = res
   const meta = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN!),
     title: result?.title,
-    description: result?.description,
+    description: result?.description === '' ? 'Amamy' : result?.description,
     alternates: {
       canonical: './',
     },
-    author: 'DEV OKHUB',
+    author: 'Amamy',
     openGraph: {
-      title: result?.og_site_name,
-      description: result?.og_description,
+      title: result?.openGraph?.title || result?.title,
+      description: result?.openGraph?.description || result?.description,
       url: './',
-      siteName: result?.og_site_name,
+      siteName: result?.openGraph?.siteName || 'Amamy',
       images: Array.isArray(result?.og_image)
-        ? [...result?.og_image]
-        : result?.og_image
-        ? result?.og_image
+        ? [...result?.openGraph?.imagae?.url]
+        : result?.openGraph?.imagae?.url
+        ? result?.openGraph?.imagae?.url
         : [],
-      locale: result?.og_locale,
-      type: result?.og_type,
+      locale: result?.openGraph?.locale,
+      type: result?.openGraph?.type,
     },
     twitter: {
-      card: result?.twitter_card || 'summary_large_image',
-      title: result?.title,
-      description: result?.description,
-      creator: 'jenho',
+      card: result?.twitter || 'summary_large_image',
+      title: result?.twitter?.title || result?.title,
+      description: result?.twitter?.description || result?.description,
+      creator: 'Amamy',
       images: Array.isArray(result?.og_image)
-        ? [...result?.og_image]
-        : result?.og_image
-        ? result?.og_image
+        ? [...result?.twitter?.image]
+        : result?.twitter?.image
+        ? result?.twitter?.image
         : [],
       misc: result?.twitter_misc,
     },
   }
-  if (!result?.og_image || result?.og_image?.length <= 0) {
+  if (!result?.openGraph?.image?.url) {
     meta.openGraph.images.push({
       url: '/images/home/stories/background-left-story-mb.jpg',
       width: 1200,

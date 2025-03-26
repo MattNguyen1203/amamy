@@ -46,7 +46,11 @@ const formSchema = z.object({
       required_error: 'Vui lòng chọn chiều dịch vụ',
     })
     .min(1, 'Vui lòng chọn chiều dịch vụ'),
-  customercode: z.string().optional(),
+  customercode: z
+    .string({
+      required_error: 'Vui lòng chọn Mã khách hàng',
+    })
+    .min(1, 'Vui lòng chọn Mã khách hàng'),
 })
 
 const dataContactMethod = [
@@ -162,6 +166,7 @@ export default function FormStepStart({
           recipientCodeCity: previewJson?.ma_tinh_thanh_nguoi_nhan,
           district: previewJson?.ma_tinh_thanh_nguoi_nhan,
           housingNumber: previewJson?.so_nha_nguoi_nhan,
+          nation: previewJson?.nation,
           ...values,
         })
         return
