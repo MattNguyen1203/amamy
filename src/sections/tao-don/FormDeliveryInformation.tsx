@@ -1,5 +1,6 @@
 'use client'
 import useStore from '@/app/(store)/store'
+import ImageV2 from '@/components/image/ImageV2'
 import {Button} from '@/components/ui/button'
 import {
   Form,
@@ -10,11 +11,21 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import ICX from '@/sections/tao-don/ICX'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
 import {z} from 'zod'
 const formSchema = z.object({
   recipientName: z
@@ -56,6 +67,11 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập thông tin tên đường',
     })
     .min(1, 'Vui lòng nhập thông tin tên đường'),
+  nation: z
+    .string({
+      required_error: 'Vui lòng chọn quốc gia',
+    })
+    .min(1, 'Vui lòng chọn quốc gia'),
 })
 
 export default function FormDeliveryInformation({
@@ -64,15 +80,29 @@ export default function FormDeliveryInformation({
   dataFromOrder,
   prevStep,
   nextStep,
+  european,
+  title,
+  setSelectNationValue,
+  selectNationValue,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
   prevStep: string
   nextStep: string
+  european?: string
+  title: string
+  setSelectNationValue: React.Dispatch<
+    React.SetStateAction<{img: string; title: string}>
+  >
+  selectNationValue: {img: string; title: string}
 }) {
+  const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const [europeanCountries, setEuropeanCountries] = useState([])
+  const [selectNation, setSelectNation] = useState<boolean>(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -84,8 +114,28 @@ export default function FormDeliveryInformation({
       recipientCodeCity: dataFromOrder?.housingNumber || '',
       housingNumber: dataFromOrder?.recipientCodeCity || '',
       roadName: dataFromOrder?.roadName || '',
+      nation: european === 'vnEu' ? dataFromOrder?.nation ?? '' : title,
     },
   })
+  useEffect(() => {
+    if (european === 'vnEu') {
+      const fetchCountries = async () => {
+        try {
+          const response = await fetch(
+            'https://restcountries.com/v3.1/region/europe',
+          )
+          if (!response.ok) {
+            throw new Error('Lỗi khi lấy dữ liệu')
+          }
+          const data = await response.json()
+          setEuropeanCountries(data)
+        } catch (error) {
+          toast.error('Thất bại, Lấy thông tin quốc gia thất bại')
+        }
+      }
+      fetchCountries()
+    }
+  }, [european])
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -156,6 +206,90 @@ export default function FormDeliveryInformation({
             )}
           />
         </div>
+        {european === 'vnEu' && (
+          <FormField
+            control={form.control}
+            name='nation'
+            render={({field}) => (
+              <FormItem
+                onClick={() => {
+                  setSelectNation(true)
+                }}
+                className='flex-1 space-y-0'
+              >
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Chọn quốc gia (*)
+                </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                    <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                      {!isMobile && <SelectValue placeholder='Chọn quốc gia' />}
+                      {isMobile && !field.value && (
+                        <SelectValue placeholder='Chọn quốc gia' />
+                      )}
+                      {isMobile && field.value && (
+                        <div className='space-x-[0.75rem] flex items-center flex-1'>
+                          <ImageV2
+                            src={selectNationValue?.img || ''}
+                            alt=''
+                            height={24 * 2}
+                            width={24 * 2}
+                            className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                          />
+                          <p className='text-black text-pc-sub14m'>
+                            {selectNationValue?.title}
+                          </p>
+                        </div>
+                      )}
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                    {Array.isArray(europeanCountries) &&
+                      europeanCountries?.length > 0 &&
+                      europeanCountries?.map(
+                        (
+                          item: {
+                            flags: {
+                              svg: string
+                            }
+                            name: {
+                              common: string
+                            }
+                          },
+                          index: number,
+                        ) => (
+                          <SelectItem
+                            key={index}
+                            className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                            value={String(item?.name?.common)}
+                          >
+                            <div className='space-x-[0.75rem] flex items-center flex-1'>
+                              <ImageV2
+                                src={
+                                  item?.flags?.svg || '/order/flag-germany.webp'
+                                }
+                                alt=''
+                                height={24 * 2}
+                                width={24 * 2}
+                                className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                              />
+                              <p className='text-black text-pc-sub14m'>
+                                {item?.name?.common}
+                              </p>
+                            </div>
+                          </SelectItem>
+                        ),
+                      )}
+                  </SelectContent>
+                </Select>
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
           name='recipientAddress'
@@ -278,6 +412,82 @@ export default function FormDeliveryInformation({
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>
           </Button>
         </div>
+        {isMobile && european === 'vnEu' ? (
+          <>
+            <div
+              onClick={() => {
+                setSelectNation(false)
+              }}
+              className={cn(
+                '!mt-0 fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden',
+                selectNation && 'block',
+              )}
+            ></div>
+            <div
+              className={cn(
+                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                selectNation && 'bottom-0',
+              )}
+            >
+              <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
+                <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+                  Chọn chiều dịch vụ
+                </p>
+                <div
+                  onClick={() => {
+                    setSelectNation(false)
+                  }}
+                  className='absolute top-[0.5rem] right-[0.5rem]'
+                >
+                  <ICX className='size-[1.5rem]' />
+                </div>
+              </div>
+              <div className='max-h-[70vh] overflow-hidden overflow-y-auto pb-[2rem]'>
+                {Array.isArray(europeanCountries) &&
+                  europeanCountries?.length > 0 &&
+                  europeanCountries?.map(
+                    (
+                      item: {
+                        flags: {
+                          svg: string
+                        }
+                        name: {
+                          common: string
+                        }
+                      },
+                      index: number,
+                    ) => (
+                      <div
+                        key={index}
+                        onClick={() => {
+                          form.setValue('nation', String(item?.name?.common))
+                          setSelectNationValue({
+                            img: item?.flags?.svg,
+                            title: item?.name?.common,
+                          })
+                          setSelectNation(false)
+                        }}
+                        className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
+                      >
+                        <ImageV2
+                          src={item?.flags?.svg || '/order/flag-germany.webp'}
+                          alt=''
+                          height={24 * 2}
+                          width={24 * 2}
+                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                        />
+                        <p className='text-black text-pc-sub14m line-clamp-1'>
+                          {item?.name?.common}
+                        </p>
+                      </div>
+                    ),
+                  )}
+              </div>
+            </div>
+          </>
+        ) : (
+          ''
+        )}
       </form>
     </Form>
   )

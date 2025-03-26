@@ -26,7 +26,7 @@ export default async function page({params}: {params: {slug: string}}) {
         <Breadcrumb
           data={[
             {title: 'Hữu ích cho gửi hàng', slug: '/blogs'},
-            {title: 'Bài viết', slug: ''},
+            {title: dataDetailPost?.post?.title ?? 'Bài Viết', slug: ''},
           ]}
           className='sm:px-[5rem] xsm:px-[1rem]'
         />

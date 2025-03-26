@@ -5,6 +5,7 @@ export interface ICreateOder {
   id: number
   information?: IInformationOrder
   slug?: string
+  european?: string
 }
 export interface IInformationTimeOrder {
   time_content?: string

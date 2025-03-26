@@ -40,6 +40,10 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const [dataInformation, setDataInformation] = useState<
     ICreateOder | undefined
   >()
+  const [selectNationValue, setSelectNationValue] = useState<{
+    img: string
+    title: string
+  }>({img: '', title: ''})
   const handleClickcurrentTab = (nextTab: string) => {
     setCurrentTab(nextTab)
   }
@@ -264,6 +268,10 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
+                    title={dataInformation?.title}
+                    european={dataInformation?.european}
+                    selectNationValue={selectNationValue}
+                    setSelectNationValue={setSelectNationValue}
                     prevStep={
                       dataInformation?.information?.note
                         ? '3'

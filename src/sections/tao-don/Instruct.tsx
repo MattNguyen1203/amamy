@@ -167,26 +167,31 @@ export default function Instruct({
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
+        nation: dataFromOrder?.nation,
       }
       if (formData) {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData, null, 2),
             },
-            body: JSON.stringify(formData, null, 2),
-          },
-        )
-        if (response?.ok) {
-          setDataFromOrder({})
-          setSubmitting(true)
-          setStepOrder(1)
-          handleClickcurrentTab('1')
-          setTriggerScroll(true)
-          setDataInformation(undefined)
-        } else {
+          )
+          if (response?.ok) {
+            setDataFromOrder({})
+            setSubmitting(true)
+            setStepOrder(1)
+            handleClickcurrentTab('1')
+            setTriggerScroll(true)
+            setDataInformation(undefined)
+          } else {
+            toast.error('Có lỗi sãy ra')
+          }
+        } catch (error) {
           toast.error('Có lỗi sãy ra')
         }
       }
