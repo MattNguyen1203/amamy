@@ -138,29 +138,36 @@ const Header = ({
               />
             </div>
           </div>
-          <div
-            className={cn(
-              'w-full h-10 p-2 rounded-[1.25rem] bg-[#F5F5F9] flex items-center space-x-3',
-              !isShowSearchInput && 'hidden',
-            )}
+          <form
+            className={cn('w-full', !isShowSearchInput && 'hidden')}
+            onSubmit={(e) => {
+              e.preventDefault() // Ngăn form reload trang
+              handleSearch()
+            }}
           >
-            <ArrowRight
-              className='size-6 stroke-black/60'
-              onClick={() => setIsShowSearchInput(false)}
-            />
-            <input
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              type='text'
-              placeholder='Nhập từ khoá...'
-              className='flex-1 border-none outline-none bg-transparent text-mb-13M text-black placeholder:text-black/30'
-            />
-            <Search
-              className='size-4 stroke-[#797F87]'
-              onClick={handleSearch}
-            />
-          </div>
+            <div
+              className={cn(
+                'w-full h-10 p-2 rounded-[1.25rem] bg-[#F5F5F9] flex items-center space-x-3',
+              )}
+            >
+              <ArrowRight
+                className='size-6 stroke-black/60'
+                onClick={() => setIsShowSearchInput(false)}
+              />
+              <input
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                type='text'
+                placeholder='Nhập từ khoá...'
+                className='flex-1 border-none outline-none bg-transparent text-mb-13M text-black placeholder:text-black/30'
+              />
+              <Search
+                className='size-4 stroke-[#797F87]'
+                onClick={handleSearch}
+              />
+            </div>
+          </form>
         </div>
       ) : (
         <div
@@ -275,8 +282,8 @@ const Header = ({
           <div
             ref={ref}
             className={cn(
-              'absolute bottom-0 left-0 w-full h-[6.875rem] flex-center bg-white transition-all duration-200',
-              isShowSearchInput && 'translate-y-full',
+              'opacity-0 absolute bottom-0 left-0 w-full h-[6.875rem] flex-center bg-white transition-all duration-200',
+              isShowSearchInput && 'translate-y-full opacity-[1]',
               isScrollTop && 'opacity-0 duration-0',
             )}
           >

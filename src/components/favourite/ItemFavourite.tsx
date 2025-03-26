@@ -14,7 +14,7 @@ export default function ItemFavourite({item}: {item: IFavouriteBlog}) {
       <div className='flex w-full justify-between items-center'>
         <div className='p-[0.5rem_0.75rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4]'>
           <p className='text-greyscale-text60 text-pc-sub12s xsm:text-[0.6875rem] xsm:font-semibold xsm:tracking-[-0.01375rem] xsm:leading-[1.5] uppercase'>
-            {item?.slug}
+            {item?.category}
           </p>
         </div>
         <ICArraw className='size-[2rem] xsm:size-[1.5rem] object-contain' />

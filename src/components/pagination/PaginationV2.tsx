@@ -3,10 +3,13 @@
 'use client'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
+import {gsap} from 'gsap'
+import EaselPlugin from 'gsap/EaselPlugin'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
 import {forwardRef, useEffect} from 'react'
 import ReactPaginate from 'react-paginate'
-
+gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 type TProps = {
   pageCurrent: number
   pageCount: number
@@ -47,8 +50,11 @@ const PaginationV2 = forwardRef(
         scroll: false,
       })
       if (ref && ref.current) {
-        ref.current.scrollIntoView({behavior: 'smooth', block: 'start'})
-        window.scrollBy({top: -200, behavior: 'smooth'})
+        gsap.to(window, {
+          duration: 0.5,
+          scrollTo: {y: ref.current.offsetTop - 20},
+          ease: 'power2.out',
+        })
       }
     }
 

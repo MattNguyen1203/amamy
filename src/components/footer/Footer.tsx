@@ -109,7 +109,7 @@ const Footer = async () => {
         </div>
       </div>
       <div className='xsm:px-[1rem] xsm:bg-[rgba(255,255,255,0.03)]'>
-        <div className='xsm:p-[1rem_1.5rem_1.5rem_1.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-t-[rgba(241,249,255,0.20)] xsm:rounded-t-[1.25rem] xsm:space-y-[1rem] flex xsm:flex-col xsm:items-center w-[88rem] xsm:w-full p-6 justify-between sm:relative items-center gap-2.5 stroke-[0.93px] sm:opacity-20'>
+        <div className='xsm:p-[1rem_1.5rem_1.5rem_1.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-t-[rgba(241,249,255,0.20)] xsm:rounded-t-[1.25rem] xsm:space-y-[1rem] flex xsm:flex-col xsm:items-center w-[88rem] xsm:w-full p-6 justify-between sm:relative items-center gap-2.5 stroke-[0.93px]'>
           <div className='sm:hidden flex w-full justify-center space-x-[1rem]'>
             {social.map((item: any, index: number) => (
               <Link
@@ -128,22 +128,22 @@ const Footer = async () => {
               </Link>
             ))}
           </div>
-          <div className='xsm:hidden border-t-[1px] borderR border-l absolute top-0 right-0 left-0 rounded-t-[20px] h-3/4 w-full'></div>
-          <p className='xsm:w-[13.1875rem] xsm:text-center text-[#D6D6D6] xsm:text-[#F8F8F8] xsm:text-pc-sub14s text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
+          <div className='xsm:hidden border-t-[1px] border-r border-l absolute top-0 right-0 left-0 rounded-t-[20px] h-3/4 w-full border-[#f1f9ff33]'></div>
+          <p className='xsm:w-[13.1875rem] xsm:text-center text-[rgb(214,214,214,0.6)] xsm:text-[#F8F8F8] xsm:text-pc-sub14s text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
             Tất cả quyền được bảo lưu. Bản quyền © 2024 Ltd.
           </p>
           <div className='flex sm:gap-[2.2rem] xsm:gap-[2rem] relative z-10'>
             <Link
               href={privacy_policy.url}
               target={privacy_policy.target}
-              className='xsm:text-[rgba(255,255,255,0.80)] text-[#D6D6D6] text-[0.75rem] not-italic font-semibold xsm:font-medium leading-[normal] xsm:leading-[1.8] xsm:tracking-[-0.0075rem] tracking-[-0.015rem] sm:uppercase'
+              className='xsm:text-[rgba(255,255,255,0.80)] text-[rgb(214,214,214,0.6)] text-[0.75rem] not-italic font-semibold xsm:font-medium leading-[normal] xsm:leading-[1.8] xsm:tracking-[-0.0075rem] tracking-[-0.015rem] sm:uppercase'
             >
               {privacy_policy.title}
             </Link>
             <Link
               target={terms_conditions.target}
               href={terms_conditions.url}
-              className='xsm:text-[rgba(255,255,255,0.80)] text-[#D6D6D6] text-[0.75rem] not-italic font-semibold xsm:font-medium leading-[normal] xsm:leading-[1.8] xsm:tracking-[-0.0075rem] tracking-[-0.015rem] sm:uppercase'
+              className='xsm:text-[rgba(255,255,255,0.80)] text-[rgb(214,214,214,0.6)] text-[0.75rem] not-italic font-semibold xsm:font-medium leading-[normal] xsm:leading-[1.8] xsm:tracking-[-0.0075rem] tracking-[-0.015rem] sm:uppercase'
             >
               {terms_conditions.title}
             </Link>

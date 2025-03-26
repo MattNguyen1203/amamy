@@ -4,6 +4,7 @@ import ImageV2 from '@/components/image/ImageV2'
 import BillStatus from '@/sections/tracking-bill/BillStatus'
 import InformationList from '@/sections/tracking-bill/InformationList'
 import LocationTag from '@/sections/tracking-bill/LocationTag'
+import { toast } from 'sonner'
 export type IProgress = {
   title: string
   desc: string
@@ -31,6 +32,7 @@ export type OrderInformationProps = {
 const OrderInformation = ({searched, data}: OrderInformationProps) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(data?.ma_don || '')
+    toast.success('Copy Thành Công')
   }
   if (!searched) {
     return null

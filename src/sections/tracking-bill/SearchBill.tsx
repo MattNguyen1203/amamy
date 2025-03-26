@@ -1,15 +1,17 @@
 'use client'
 import useStore from '@/app/(store)/store'
+import { ICLoading } from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import useClickOutside from '@/hooks/useClickOutside'
-import {cn} from '@/lib/utils'
-import {useEffect, useState} from 'react'
+import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 
 type SearchBillProps = {
   onSearch: () => void
   className?: string
   setIsSearchValue: React.Dispatch<React.SetStateAction<string>>
   issearchValue: string
+  isLoading: boolean
 }
 
 const SearchBill = ({
@@ -17,6 +19,7 @@ const SearchBill = ({
   className,
   setIsSearchValue,
   issearchValue,
+  isLoading,
 }: SearchBillProps) => {
   const {searchValue} = useStore((state) => state)
   const [isShowPaste, setIsShowPaste] = useState(false)
@@ -89,6 +92,7 @@ const SearchBill = ({
             alt=''
             className='size-[1.125rem] object-contain'
           />
+          {isLoading && <ICLoading className='size-[1.125rem]' />}
         </button>
       </div>
       <div

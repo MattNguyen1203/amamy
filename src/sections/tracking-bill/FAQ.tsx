@@ -27,9 +27,14 @@ const FAQ = ({dataFAQ}: FAQProps) => {
           <AccordionItem
             key={index}
             value={`faq-${index}`}
+            className='bg-white rounded-[1.25rem]'
           >
-            <AccordionTrigger>{item.Title}</AccordionTrigger>
-            <AccordionContent>{item.content}</AccordionContent>
+            <AccordionTrigger className='p-[1.25rem_1.25rem_1.25rem_1.5rem] bg-white rounded-[1.25rem]'>
+              {item.Title}
+            </AccordionTrigger>
+            <AccordionContent className='p-[1.25rem_1.25rem_1.25rem_1.5rem]'>
+              {item.content}
+            </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

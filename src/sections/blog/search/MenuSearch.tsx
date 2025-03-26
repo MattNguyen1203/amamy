@@ -13,9 +13,13 @@ import {fetcher} from '@/lib/swr'
 import {cn} from '@/lib/utils'
 import ItemBlog from '@/sections/blog/ItemBlog'
 import {ICategoryBlog, IItemPostBlog} from '@/sections/blog/blogs.interface'
+import {gsap} from 'gsap'
+import EaselPlugin from 'gsap/EaselPlugin'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
 import {useMemo, useRef, useState} from 'react'
 import useSWR from 'swr'
+gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 export default function MenuSearch({
   dataCategory,
 }: {
@@ -46,21 +50,32 @@ export default function MenuSearch({
     revalidateOnReconnect: false,
   })
   const handleValueChange = (value: string) => {
+    console.log(value)
+    setPage(1)
     setSelectedValue(value)
     const paramNew = new URLSearchParams(searchParams ?? '')
     if (value !== 'all') {
+      paramNew.delete('page')
       paramNew.set('category', value)
-      paramNew.delete('page')
     } else {
-      paramNew.delete('category')
       paramNew.delete('page')
+      paramNew.delete('category')
     }
     router.push(pathName + paramNew.toString() && '?' + paramNew.toString(), {
       scroll: false,
     })
     if (sectionRef.current instanceof HTMLElement) {
-      sectionRef.current.scrollIntoView({behavior: 'smooth'})
+      gsap.to(window, {
+        duration: 0.5,
+        scrollTo: {y: sectionRef.current.offsetTop - 20},
+        ease: 'power2.out',
+      })
     }
+    console.log(
+      `search?${search ? 'keywords=' + search + '&' : ''}limit=9&page=${
+        slugpage ? slugpage : page
+      }${slugCategory ? '&categories=' + slugCategory : ''}`,
+    )
   }
   return (
     <>
