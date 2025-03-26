@@ -101,7 +101,7 @@ const Section4 = ({withDHS}: Props) => {
                               </p>
                             </div>
                             <div className='relative'>
-                              <p className='z-[11] absolute top-[1rem] left-[1rem] w-full line-clamp-3 text-[1.125rem] font-semibold leading-[1.3] tracking-[-0.045rem] text-white'>
+                              <p className='z-[11] absolute top-[1rem] left-[1rem] sm:w-full xsm:right-[1rem] line-clamp-3 text-[1.125rem] font-semibold leading-[1.3] tracking-[-0.045rem] text-white'>
                                 {item?.post?.[0]?.title}
                               </p>
                               <div className='absolute xsm:rounded-[1.25rem] inset-0 z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.40)_0%,rgba(0,0,0,0.00)_100%)]'></div>
