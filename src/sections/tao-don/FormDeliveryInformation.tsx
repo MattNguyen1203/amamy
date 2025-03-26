@@ -129,7 +129,7 @@ export default function FormDeliveryInformation({
           }
           const data = await response.json()
           setEuropeanCountries(data)
-        } catch (error) {
+        } catch {
           toast.error('Thất bại, Lấy thông tin quốc gia thất bại')
         }
       }

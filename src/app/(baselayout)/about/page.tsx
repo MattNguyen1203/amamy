@@ -3,7 +3,7 @@ import {fetchDataBlog} from '@/fetch/fetchDataBlog'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import AboutPage from '@/sections/about'
 import metadataValues from '@/utils/metadataValues'
-export async function generateMetadata({params}: {params: {locale: string}}) {
+export async function generateMetadata() {
   const res = await getMetaDataRankMath(`ve-chung-toi`)
   return metadataValues(res)
 }

@@ -191,7 +191,7 @@ export default function Instruct({
           } else {
             toast.error('Có lỗi sãy ra')
           }
-        } catch (error) {
+        } catch {
           toast.error('Có lỗi sãy ra')
         }
       }
