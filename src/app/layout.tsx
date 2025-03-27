@@ -75,13 +75,13 @@ export default async function RootLayout({
   const fetchCreateOrder = fetchData({
     api: `chieu-van-chuyen-header`,
     option: {
-      next: {revalidate: 10},
+      next: {revalidate: 60},
     },
   })
   const fetchFooter = await fetchData({
     api: 'options?fields=footer_site,header_site',
     option: {
-      next: {revalidate: 10},
+      next: {revalidate: 60},
     },
   })
   const [dataCreateOrder, dataFooter] = await Promise.all([

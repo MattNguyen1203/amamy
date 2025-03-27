@@ -1,10 +1,10 @@
 import fetchData from '@/fetch/fetchData'
 import Homepage from '@/sections/homepage'
+import metadataValues from '@/utils/metadataValues'
 
-// export async function generateMetadata() {
-//   const res = await getMetadata('/')
-//   return metadataValues(res)
-// }
+export async function generateMetadata() {
+  return metadataValues('')
+}
 
 export default async function Home() {
   const fetchDataACF = fetchData({
