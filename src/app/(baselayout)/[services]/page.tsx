@@ -6,7 +6,7 @@ import ServicePage from '@/sections/service'
 import metadataValues from '@/utils/metadataValues'
 import {notFound} from 'next/navigation'
 export async function generateMetadata({params}: {params: {services: string}}) {
-  const res = await getMetaDataRankMath(params?.services)
+  const res = await getMetaDataRankMath('/chieu-van-chuyen/' + params?.services)
   return metadataValues(res)
 }
 export default async function Service({params}: {params: {services: string}}) {
