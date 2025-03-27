@@ -40,6 +40,26 @@ const formSchema = z.object({
   recipientAddressType: z.enum(['atAmamyStore', 'registeredAddress'], {
     required_error: 'Vui lòng chọn nơi nhận hàng',
   }),
+  recipientCity: z
+    .string({
+      required_error: 'Vui lòng nhập thành phố người nhận',
+    })
+    .min(1, 'Vui lòng nhập thành phố người nhận'),
+  district: z
+    .string({
+      required_error: 'Vui lòng nhập Quận người nhận',
+    })
+    .min(1, 'Vui lòng nhập Quận người nhận'),
+  recipientConscious: z
+    .string({
+      required_error: 'Vui lòng nhập Tỉnh người nhận',
+    })
+    .min(1, 'Vui lòng nhập Tỉnh người nhận'),
+  recipientWardsandcommunes: z
+    .string({
+      required_error: 'Vui lòng nhập Phường xã người nhận',
+    })
+    .min(1, 'Vui lòng nhập Phường xã người nhận'),
 })
 
 export default function FormDeliveryInformationAboutVN({
@@ -115,7 +135,7 @@ export default function FormDeliveryInformationAboutVN({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
@@ -134,7 +154,7 @@ export default function FormDeliveryInformationAboutVN({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />
@@ -205,7 +225,7 @@ export default function FormDeliveryInformationAboutVN({
                   disabled={
                     recipientAddressType === 'atAmamyStore' ? true : false
                   }
-                  className='disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Địa chỉ nhận hàng tại Việt Nam'
                   {...field}
                 />
@@ -217,6 +237,86 @@ export default function FormDeliveryInformationAboutVN({
             </FormItem>
           )}
         />
+        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+          <FormField
+            control={form.control}
+            name='recipientCity'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Thành phố (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Thành Phố người nhận'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='district'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Quận (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Quận người nhận'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+          <FormField
+            control={form.control}
+            name='recipientConscious'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Tỉnh (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Tỉnh người nhận'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='recipientWardsandcommunes'
+            render={({field}) => (
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Phường xã (*)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Phường xã người nhận'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className='flex items-center justify-between w-full'>
           <div
             onClick={() => handleClickcurrentTab(prevStep)}

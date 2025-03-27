@@ -55,4 +55,8 @@ export interface IInformationOrder {
   insurance?: IInformationInsurance
   shipping_cost?: string
   important_note?: string
+  payment_method?: {
+    value: string
+    title: string
+  }[]
 }

@@ -9,6 +9,7 @@ export default function PopupPaymentInfor({
   setSelectPaymentInformation,
   selectPaymentInformation,
   setSelectPaymentInformationValue,
+  paymentMethod,
 }: {
   form: any
   setSelectPaymentInformation: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,6 +17,10 @@ export default function PopupPaymentInfor({
   setSelectPaymentInformationValue: React.Dispatch<
     React.SetStateAction<{value: string; title: string}>
   >
+  paymentMethod?: {
+    value: string
+    title: string
+  }[]
 }) {
   return (
     <>
@@ -48,34 +53,31 @@ export default function PopupPaymentInfor({
           </div>
         </div>
         <div className=''>
-          <div
-            onClick={() => {
-              setSelectPaymentInformationValue({
-                title: 'Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)',
-                value: 'VND',
-              })
-              form.setValue('recipientPaymentInformation', 'VND')
-              setSelectPaymentInformation(false)
-            }}
-            className='p-[0.75rem_1rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-          >
-            <p className='text-mb-13M text-black'>
-              Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)
-            </p>
-          </div>
-          <div
-            onClick={() => {
-              setSelectPaymentInformationValue({
-                title: 'Thanh toán bằng Euro',
-                value: 'Euro',
-              })
-              form.setValue('recipientPaymentInformation', 'Euro')
-              setSelectPaymentInformation(false)
-            }}
-            className='p-[0.75rem_1rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-          >
-            <p className='text-mb-13M text-black'>Thanh toán bằng Euro</p>
-          </div>
+          {Array.isArray(paymentMethod) &&
+            paymentMethod?.map(
+              (
+                item: {
+                  value: string
+                  title: string
+                },
+                index: number,
+              ) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setSelectPaymentInformationValue({
+                      title: item?.title,
+                      value: item?.value ?? item?.title,
+                    })
+                    form.setValue('recipientPaymentInformation', item?.value)
+                    setSelectPaymentInformation(false)
+                  }}
+                  className='p-[0.75rem_1rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
+                >
+                  <p className='text-mb-13M text-black'>{item?.title}</p>
+                </div>
+              ),
+            )}
         </div>
       </div>
     </>

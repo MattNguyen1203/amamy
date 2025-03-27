@@ -42,7 +42,7 @@ const QuantitySection = ({data}: Prop) => {
           <Image
             src={'/homepage/icon/Isolation_Mode.png'}
             alt='background-image'
-            className='absolute inset-0 left-[20] z-[-1] bottom-0 w-[89.4375rem] h-[35.50475rem] flex-shrink-0 xsm:w-0 xsm:h-fit'
+            className='absolute left-0 z-0 bottom-0 w-[89.4375rem] h-[35.50475rem] flex-shrink-0 xsm:w-0 xsm:h-fit'
             width={1000}
             height={1000}
           />
