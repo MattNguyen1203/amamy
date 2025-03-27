@@ -194,7 +194,7 @@ export default function FormStepStart({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Email@email'
                     {...field}
                   />
@@ -224,7 +224,7 @@ export default function FormStepStart({
                   defaultValue={field.value}
                 >
                   <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                    <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn chiều dịch vụ' />
                       )}
@@ -301,7 +301,7 @@ export default function FormStepStart({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Nhập tên người gửi'
                     {...field}
                   />
@@ -328,7 +328,7 @@ export default function FormStepStart({
                   defaultValue={field.value}
                 >
                   <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                    <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn chiều dịch vụ' />
                       )}
@@ -398,7 +398,7 @@ export default function FormStepStart({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Nhập mã khách hàng'
                   {...field}
                 />

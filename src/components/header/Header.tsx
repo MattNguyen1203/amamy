@@ -213,7 +213,7 @@ const Header = ({
                       <NavigationMenuItem>
                         <NavigationMenuTrigger
                           className={cn(
-                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent',
+                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent hover:text-white hover:bg-transparent [state=open]:focus:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-white',
                             isScrollTop && 'text-white',
                           )}
                         >

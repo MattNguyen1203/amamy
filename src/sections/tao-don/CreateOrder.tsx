@@ -82,7 +82,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '6'},
       ]
     }
-  }, [dataFromOrder?.shipping])
+  }, [dataFromOrder?.shipping, data])
   // useEffect(() => {
   //   setTimeout(() => {
   //     setFaq(false)
@@ -114,7 +114,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   )}
                 >
                   {index + 1 < Number(currentTab) ? (
-                    <ICCheck className='size-[2.0125rem] xsm:size-[1.45rem]' />
+                    <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
                   ) : (
                     <div className='box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] xsm:text-[0.89231rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]'>
                       {index + 1}
@@ -129,7 +129,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </div>
           <div
             className={cn(
-              'sm:absolute xsm:relative sm:top-[1.25rem] sm:bottom-[1.25rem] sm:left-[1.25rem] w-[0.25rem] xsm:w-full xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 before:bg-[#38B6FF] before:sm:w-full before:xsm:h-full before:transition-all before:duration-500',
+              'absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.6rem] xsm:z-[-1] sm:top-[1.25rem] sm:bottom-[1.25rem] sm:left-[1.25rem] w-[0.25rem] xsm:w-auto xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 before:bg-[#38B6FF] before:sm:w-full before:xsm:h-full before:transition-all before:duration-500',
               currentTab === '1' && 'before:sm:h-[5%] before:xsm:w-[5%]',
               currentTab === '2' && 'before:sm:h-[25%] before:xsm:w-[25%]',
               currentTab === '3' && 'before:sm:h-[42%] before:xsm:w-[42%]',
@@ -305,6 +305,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               >
                 <Instruct
                   data={dataInformation?.information?.instruct}
+                  paymentMethod={dataInformation?.information?.payment_method}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataFromOrder={dataFromOrder}
                   setSubmitting={setSubmitting}

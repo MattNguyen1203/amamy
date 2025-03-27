@@ -41,11 +41,11 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập mã thông quan, ID hoặc CMT người nhận',
     })
     .min(1, 'Vui lòng nhập mã thông quan, ID hoặc CMT người nhận'),
-  recipientCodeCity: z
+  recipientCity: z
     .string({
-      required_error: 'Vui lòng nhập mã thành phố người nhận',
+      required_error: 'Vui lòng nhập thành phố người nhận',
     })
-    .min(1, 'Vui lòng nhập mã thành phố người nhận'),
+    .min(1, 'Vui lòng nhập thành phố người nhận'),
   housingNumber: z
     .string({
       required_error: 'Vui lòng nhập thông tin số nhà',
@@ -91,7 +91,7 @@ export default function FormDeliveryInformationVNHan({
       recipientPhone: dataFromOrder?.recipientPhone || '',
       recipientAddress: dataFromOrder?.recipientAddress || '',
       passportNumber: dataFromOrder?.passportNumber || '',
-      recipientCodeCity: dataFromOrder?.recipientCodeCity || '',
+      recipientCity: dataFromOrder?.recipientCity || '',
       housingNumber: dataFromOrder?.housingNumber || '',
       roadName: dataFromOrder?.roadName || '',
       district: dataFromOrder?.district || '',
@@ -127,7 +127,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
@@ -140,7 +140,7 @@ export default function FormDeliveryInformationVNHan({
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
           <FormField
             control={form.control}
-            name='recipientCodeCity'
+            name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
@@ -148,7 +148,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='전주시'
                     {...field}
                   />
@@ -167,7 +167,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='덕진구'
                     {...field}
                   />
@@ -188,7 +188,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='명륜 4길'
                     {...field}
                   />
@@ -207,7 +207,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='4 - 12'
                     {...field}
                   />
@@ -227,7 +227,7 @@ export default function FormDeliveryInformationVNHan({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='영스빌 3층 301호'
                   {...field}
                 />
@@ -250,7 +250,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='P12345****012'
                     {...field}
                   />
@@ -277,7 +277,7 @@ export default function FormDeliveryInformationVNHan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />

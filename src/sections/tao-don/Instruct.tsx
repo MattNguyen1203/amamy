@@ -69,6 +69,7 @@ export default function Instruct({
   importantNote,
   prevStep,
   setDataInformation,
+  paymentMethod,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -81,6 +82,10 @@ export default function Instruct({
   setDataInformation: React.Dispatch<
     React.SetStateAction<ICreateOder | undefined>
   >
+  paymentMethod?: {
+    value: string
+    title: string
+  }[]
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
@@ -140,10 +145,13 @@ export default function Instruct({
         ma_don: '',
         trang_thai_don_hang: '',
 
-        tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCity ?? '',
+        tinh_thanh_nguoi_nhan:
+          dataFromOrder?.recipientCity ??
+          dataFromOrder?.recipientConscious ??
+          '',
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
         quan_huyen_nguoi_nhan: dataFromOrder?.district ?? '',
-        phuong_xa_nguoi_nhan: '',
+        phuong_xa_nguoi_nhan: dataFromOrder?.recipientWardsandcommunes ?? '',
         so_nha_nguoi_nhan: dataFromOrder?.housingNumber ?? '',
         ten_duong_nguoi_nhan: dataFromOrder?.roadName ?? '',
         id_hoac_cmt: dataFromOrder?.passportNumber ?? '',
@@ -168,6 +176,7 @@ export default function Instruct({
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
         nation: dataFromOrder?.nation,
+        ma_khach_hang: dataFromOrder?.customercode ?? '',
       }
       if (formData) {
         try {
@@ -202,6 +211,7 @@ export default function Instruct({
     // ✅ This will be type-safe and validated.
     console.log('🚀 ~ onSubmit values:', values)
   }
+  console.log(dataFromOrder)
   return (
     <Form {...form}>
       <form
@@ -422,22 +432,26 @@ export default function Instruct({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
-                    <SelectItem
-                      className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                      value={'VND'}
-                    >
-                      <p className='text-black text-pc-sub14m'>
-                        Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)
-                      </p>
-                    </SelectItem>
-                    <SelectItem
-                      className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                      value={'Euro'}
-                    >
-                      <p className='text-black text-pc-sub14m'>
-                        Thanh toán bằng Euro
-                      </p>
-                    </SelectItem>
+                    {Array.isArray(paymentMethod) &&
+                      paymentMethod?.map(
+                        (
+                          item: {
+                            value: string
+                            title: string
+                          },
+                          index: number,
+                        ) => (
+                          <SelectItem
+                            key={index}
+                            className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                            value={item?.value ?? item?.title}
+                          >
+                            <p className='text-black text-pc-sub14m'>
+                              {item?.title}
+                            </p>
+                          </SelectItem>
+                        ),
+                      )}
                   </SelectContent>
                 </Select>
                 <FormMessage className='!text-[#F00] text-pc-sub12m' />
@@ -484,82 +498,98 @@ export default function Instruct({
                   type === 'nhatviet' && 'w-[52.5rem] xsm:w-full max-w-max',
                 )}
               >
-                <AlertDialogHeader className='flex-center flex-col'>
-                  <ImageV2
-                    src={'/order/error.png'}
-                    alt=''
-                    width={50 * 2}
-                    height={50 * 2}
-                    className='size-[2.5rem] xsm:size-[3rem] mb-[1.5rem]'
-                  />
-                  <AlertDialogTitle className='!mt-0 xsm:text-pc-sub16b xsm:mb-[0.5rem]'>
-                    Xác nhận đơn hàng & địa chỉ giao
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className='w-full'>
-                    <p className='w-full xsm:text-start my-[0.75rem] rounded-[1.25rem] p-[1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'>
-                      <p className='text-pc-tab-title text-black mb-[0.75rem]'>
-                        Thông tin nhận hàng
-                      </p>
-                      {dataFromOrder?.recipientName && (
-                        <p className='mb-[0.37rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
-                          <strong className='text-[rgba(0,0,0,0.80)]'>
-                            Tên người nhận:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.recipientName}</span>
+                <AlertDialogTitle className='!mt-0 xsm:text-pc-sub16b xsm:mb-[0.5rem]'>
+                  Xác nhận đơn hàng & địa chỉ giao
+                </AlertDialogTitle>
+                <div className='rounded-[1.25rem] p-[1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'>
+                  <AlertDialogHeader className='flex-center flex-col'>
+                    <AlertDialogDescription className='w-full'>
+                      <p className='w-full xsm:text-start my-[0.75rem]'>
+                        <p className='text-[0.875rem] text-black mb-[1rem] font-semibold leading-[1rem] tracking-[-0.02625rem] sm:w-full'>
+                          Bưu kiện sẽ được giao theo thông tin sau:
                         </p>
-                      )}
-                      {dataFromOrder?.recipientAddress && (
-                        <p className='mb-[0.37rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
-                          <strong className='text-[rgba(0,0,0,0.80)]'>
-                            Địa chỉ:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.recipientAddress}</span>
-                        </p>
-                      )}
-                      {dataFromOrder?.recipientPhone && (
-                        <p className='mb-[0.37rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
-                          <strong className='text-[rgba(0,0,0,0.80)]'>
-                            Số điện thoại:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.recipientPhone}</span>
-                        </p>
-                      )}
-                      {/* <p className='mb-[0.37rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                        {dataFromOrder?.recipientName && (
+                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                            <strong className='font-semibold'>
+                              Tên người nhận:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.recipientName}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.recipientAddress && (
+                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                            <strong className='font-semibold'>Địa chỉ: </strong>
+                            <span>{dataFromOrder?.recipientAddress}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.recipientCity && (
+                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                            <strong className='font-semibold'>
+                              Thành Phố:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.recipientCity}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.recipientCodeCity && (
+                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                            <strong className='font-semibold'>
+                              Mã Thành Phố:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.recipientCodeCity}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.recipientPhone && (
+                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                            <strong className='font-semibold'>
+                              Số điện thoại:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.recipientPhone}</span>
+                          </p>
+                        )}
+                        {/* <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
                         <strong className='text-[rgba(0,0,0,0.80)]'>
                           Email:{' '}
                         </strong>
                         <span>{dataFromOrder?.recipientName}</span>
                       </p> */}
-                    </p>
-                    {type === 'nhatviet' && (
-                      <div className='w-full xsm:text-start my-[0.75rem] rounded-[1.25rem] p-[1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'>
-                        <p className='text-pc-tab-title text-black mb-[0.75rem]'>
-                          Lưu ý quan trọng về mã bưu điện nội địa Nhật
+                        <p className='my-[1.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                          Vui lòng kiểm tra kỹ và xác nhận địa chỉ giao hàng
                         </p>
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: importantNote || '',
-                          }}
-                          className='text-pc-sub14m text-[rgba(0,0,0,0.80)] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
-                        ></p>
-                      </div>
-                    )}
-                    <p className='text-[#F00] text-pc-sub12s w-full text-start'>
-                      *Sau khi xác nhận, bạn sẽ không thể chỉnh sửa đơn hàng.
-                    </p>
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter className='flex !mt-[3rem] space-x-[1rem]'>
-                  <AlertDialogCancel className='flex-1 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'>
-                    Hủy
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={handleCreateOrder}
-                    className='flex-1 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
-                  >
-                    Xác nhận
-                  </AlertDialogAction>
-                </AlertDialogFooter>
+                        <p className='text-[#F00] text-pc-sub12s w-full text-start'>
+                          *mỗi một mã khách hàng sẽ 1 địa chỉ giao
+                        </p>
+                        <p className='text-[#F00] text-pc-sub12s w-full text-start'>
+                          *Sau khi xác nhận, bạn sẽ không thể chỉnh sửa đơn
+                          hàng.
+                        </p>
+                      </p>
+                      {type === 'nhatviet' && (
+                        <div className='w-full xsm:text-start my-[0.75rem] rounded-[1.25rem] p-[1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'>
+                          <p className='text-pc-tab-title text-black mb-[0.75rem]'>
+                            Lưu ý quan trọng về mã bưu điện nội địa Nhật
+                          </p>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: importantNote || '',
+                            }}
+                            className='text-pc-sub14m text-[rgba(0,0,0,0.80)] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          ></p>
+                        </div>
+                      )}
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter className='flex !mt-[1rem] space-x-[1rem]'>
+                    <AlertDialogCancel className='flex-1 text-white xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#848484] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'>
+                      Hủy
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleCreateOrder}
+                      className='flex-1 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'
+                    >
+                      Xác nhận
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </div>
               </AlertDialogContent>
             </AlertDialog>
           </div>
@@ -573,6 +603,7 @@ export default function Instruct({
               setSelectPaymentInformationValue={
                 setSelectPaymentInformationValue
               }
+              paymentMethod={paymentMethod}
             />
             {Array.isArray(data?.select_branch) &&
               data?.select_branch &&
