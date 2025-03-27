@@ -212,7 +212,6 @@ export default function Instruct({
     // ✅ This will be type-safe and validated.
     console.log('🚀 ~ onSubmit values:', values)
   }
-  console.log(dataFromOrder)
   return (
     <Form {...form}>
       <form
@@ -252,13 +251,13 @@ export default function Instruct({
                       >
                         <FormControl
                           className={cn(
-                            'xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                            '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
                             data?.select_branch &&
                               data?.select_branch?.length < 2 &&
                               '[&_svg]:hidden',
                           )}
                         >
-                          <SelectTrigger className='[&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-time]:hidden [&_.select-phone]:hidden xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                          <SelectTrigger className='!shadow-none [&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-time]:hidden [&_.select-phone]:hidden xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                             {!isMobile && (
                               <SelectValue placeholder='Chọn chi nhánh' />
                             )}
@@ -414,8 +413,8 @@ export default function Instruct({
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                    <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                  <FormControl className='!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn thông tin thanh toán' />
                       )}
@@ -472,7 +471,7 @@ export default function Instruct({
                 <AlertDialogTrigger className='xsm:flex-1'>
                   <div
                     className={cn(
-                      'xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+                      '!shadow-none xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
                     )}
                   >
                     {isPending ? (
@@ -487,7 +486,7 @@ export default function Instruct({
                   type='submit'
                   disabled={!form.formState.isValid}
                   className={cn(
-                    'border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]  h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem]',
+                    '!shadow-none border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]  h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem]',
                   )}
                 >
                   <p className='text-white text-pc-sub16m'>Xác nhận</p>
@@ -499,18 +498,18 @@ export default function Instruct({
                   type === 'nhatviet' && 'w-[52.5rem] xsm:w-full max-w-max',
                 )}
               >
-                <AlertDialogTitle className='!mt-0 xsm:text-pc-sub16b xsm:mb-[0.5rem]'>
-                  Xác nhận đơn hàng & địa chỉ giao
-                </AlertDialogTitle>
-                <div className='rounded-[1.25rem] p-[1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'>
+                <div className='rounded-[1.25rem] p-[1rem] bg-white'>
                   <AlertDialogHeader className='flex-center flex-col'>
+                    <AlertDialogTitle className='!mt-0 xsm:text-pc-sub16b xsm:mb-[0.5rem]'>
+                      Xác nhận đơn hàng và địa chỉ giao
+                    </AlertDialogTitle>
                     <AlertDialogDescription className='w-full'>
                       <p className='w-full xsm:text-start my-[0.75rem]'>
                         <p className='text-[0.875rem] text-black mb-[1rem] font-semibold leading-[1rem] tracking-[-0.02625rem] sm:w-full'>
                           Bưu kiện sẽ được giao theo thông tin sau:
                         </p>
                         {dataFromOrder?.recipientName && (
-                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                          <p className='text-black mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
                             <strong className='font-semibold'>
                               Tên người nhận:{' '}
                             </strong>
@@ -518,21 +517,23 @@ export default function Instruct({
                           </p>
                         )}
                         {dataFromOrder?.recipientAddress && (
-                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                          <p className='text-black mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
                             <strong className='font-semibold'>Địa chỉ: </strong>
                             <span>{dataFromOrder?.recipientAddress}</span>
                           </p>
                         )}
-                        {dataFromOrder?.recipientCity && (
-                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
-                            <strong className='font-semibold'>
-                              Thành Phố:{' '}
-                            </strong>
-                            <span>{dataFromOrder?.recipientCity}</span>
-                          </p>
-                        )}
+                        {dataFromOrder?.recipientCity &&
+                          dataFromOrder?.recipientCity !==
+                            'chưa có thông tin' && (
+                            <p className='text-black mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                              <strong className='font-semibold'>
+                                Thành Phố:{' '}
+                              </strong>
+                              <span>{dataFromOrder?.recipientCity}</span>
+                            </p>
+                          )}
                         {dataFromOrder?.recipientCodeCity && (
-                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                          <p className='text-black mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
                             <strong className='font-semibold'>
                               Mã Thành Phố:{' '}
                             </strong>
@@ -540,7 +541,7 @@ export default function Instruct({
                           </p>
                         )}
                         {dataFromOrder?.recipientPhone && (
-                          <p className='mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                          <p className='text-black mb-[0.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
                             <strong className='font-semibold'>
                               Số điện thoại:{' '}
                             </strong>
@@ -553,7 +554,7 @@ export default function Instruct({
                         </strong>
                         <span>{dataFromOrder?.recipientName}</span>
                       </p> */}
-                        <p className='my-[1.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
+                        <p className='text-black my-[1.5rem] text-[0.875rem] font-semibold leading-[1rem] tracking-[-0.02625rem]'>
                           Vui lòng kiểm tra kỹ và xác nhận địa chỉ giao hàng
                         </p>
                         <p className='text-[#F00] text-pc-sub12s w-full text-start'>
