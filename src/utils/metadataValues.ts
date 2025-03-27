@@ -3,8 +3,8 @@ export default function metadataValues(res: any) {
   if (!res) {
     return {
       metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN!),
-      title: 'NEXTJS14-OKHUB',
-      description: 'NEXTJS14-OKHUB',
+      title: 'Amamy',
+      description: 'Amamy',
       alternates: {
         canonical: './',
       },

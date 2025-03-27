@@ -1,19 +1,24 @@
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
+import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import DetailCentenBlog from '@/sections/blog/detail/Index'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
-
+import metadataValues from '@/utils/metadataValues'
+export async function generateMetadata({params}: {params: {slug: string}}) {
+  const res = await getMetaDataRankMath(params?.slug)
+  return metadataValues(res)
+}
 export default async function page({params}: {params: {slug: string}}) {
   const fetchDataDetailPost = fetchData({
     api: `post-detail-slug/${params?.slug}`,
     option: {
-      next: {revalidate: 10},
+      next: {revalidate: 60},
     },
   })
   const fetchDataFavourite = fetchData({
     api: `options?fields=you_might_like_it`,
     option: {
-      next: {revalidate: 10},
+      next: {revalidate: 60},
     },
   })
   const [dataDetailPost, dataFavourite] = await Promise.all([

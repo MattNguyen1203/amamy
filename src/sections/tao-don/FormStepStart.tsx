@@ -51,6 +51,11 @@ const formSchema = z.object({
       required_error: 'Vui lòng chọn Mã khách hàng',
     })
     .min(1, 'Vui lòng chọn Mã khách hàng'),
+  nameFacebook: z
+    .string({
+      required_error: 'Vui lòng điền thông tin',
+    })
+    .min(1, 'Vui lòng chọn điền thông tin'),
 })
 
 const dataContactMethod = [
@@ -312,82 +317,99 @@ export default function FormStepStart({
           />
           <FormField
             control={form.control}
-            name='shipping'
+            name='nameFacebook'
             render={({field}) => (
-              <FormItem
-                onClick={() => {
-                  setSelectServiceDimension(true)
-                }}
-                className='flex-1 space-y-0'
-              >
+              <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Chọn chiều dịch vụ (*)
+                  Tên đã liên hệ (*)
                 </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
-                      {!isMobile && (
-                        <SelectValue placeholder='Chọn chiều dịch vụ' />
-                      )}
-                      {isMobile && !field.value && (
-                        <SelectValue placeholder='Chọn chiều dịch vụ' />
-                      )}
-                      {isMobile && field.value && (
+                <FormControl>
+                  <Input
+                    className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Nhập tên đã liên hệ'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={form.control}
+          name='shipping'
+          render={({field}) => (
+            <FormItem
+              onClick={() => {
+                setSelectServiceDimension(true)
+              }}
+              className='flex-1 space-y-0 !mb-[1.25rem]'
+            >
+              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                Chọn chiều dịch vụ (*)
+              </FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                  <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    {!isMobile && (
+                      <SelectValue placeholder='Chọn chiều dịch vụ' />
+                    )}
+                    {isMobile && !field.value && (
+                      <SelectValue placeholder='Chọn chiều dịch vụ' />
+                    )}
+                    {isMobile && field.value && (
+                      <div className='space-x-[0.75rem] flex items-center flex-1'>
+                        <ImageV2
+                          src={
+                            selectServiceDimensionValue?.img ||
+                            dataInformation?.thumbnail ||
+                            ''
+                          }
+                          alt=''
+                          height={24 * 2}
+                          width={24 * 2}
+                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                        />
+                        <p className='text-black text-pc-sub14m'>
+                          {selectServiceDimensionValue?.title ||
+                            dataInformation?.title}
+                        </p>
+                      </div>
+                    )}
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                  {Array.isArray(data) &&
+                    data?.length > 0 &&
+                    data?.map((item: ICreateOder, index: number) => (
+                      <SelectItem
+                        key={index}
+                        className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                        value={String(item?.id)}
+                      >
                         <div className='space-x-[0.75rem] flex items-center flex-1'>
                           <ImageV2
-                            src={
-                              selectServiceDimensionValue?.img ||
-                              dataInformation?.thumbnail ||
-                              ''
-                            }
+                            src={item?.thumbnail || '/order/flag-germany.webp'}
                             alt=''
                             height={24 * 2}
                             width={24 * 2}
                             className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                           />
                           <p className='text-black text-pc-sub14m'>
-                            {selectServiceDimensionValue?.title ||
-                              dataInformation?.title}
+                            {item?.title}
                           </p>
                         </div>
-                      )}
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
-                    {Array.isArray(data) &&
-                      data?.length > 0 &&
-                      data?.map((item: ICreateOder, index: number) => (
-                        <SelectItem
-                          key={index}
-                          className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                          value={String(item?.id)}
-                        >
-                          <div className='space-x-[0.75rem] flex items-center flex-1'>
-                            <ImageV2
-                              src={
-                                item?.thumbnail || '/order/flag-germany.webp'
-                              }
-                              alt=''
-                              height={24 * 2}
-                              width={24 * 2}
-                              className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                            />
-                            <p className='text-black text-pc-sub14m'>
-                              {item?.title}
-                            </p>
-                          </div>
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              </FormItem>
-            )}
-          />
-        </div>
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name='customercode'

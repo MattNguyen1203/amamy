@@ -175,8 +175,9 @@ export default function Instruct({
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
-        nation: dataFromOrder?.nation,
+        nation: dataFromOrder?.nation ?? '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
+        nameFacebook: dataFromOrder?.nameFacebook ?? '',
       }
       if (formData) {
         try {
