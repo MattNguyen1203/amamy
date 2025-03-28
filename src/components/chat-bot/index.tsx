@@ -49,13 +49,14 @@ const ChatBot = ({dataMessage}: ChatBotProps) => {
       {
         opacity: 0,
         y: '100%',
-        duration: 1.5,
+        duration: 1,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '#footer-section',
           start: 'top bottom',
           end: 'bottom center',
           toggleActions: 'play none none reverse',
+          // markers: true,
         },
       },
     )
