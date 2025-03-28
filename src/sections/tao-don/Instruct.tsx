@@ -494,7 +494,7 @@ export default function Instruct({
               )}
               <AlertDialogContent
                 className={cn(
-                  'space-y-0 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] z-[55]',
+                  'xsm:max-h-[80vh] xsm:overflow-hidden xsm:overflow-y-auto space-y-0 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] z-[55]',
                   type === 'nhatviet' && 'w-[52.5rem] xsm:w-full max-w-max',
                 )}
               >
@@ -580,7 +580,7 @@ export default function Instruct({
                       )}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
-                  <AlertDialogFooter className='flex !mt-[1rem] space-x-[1rem]'>
+                  <AlertDialogFooter className='flex !mt-[1rem] space-x-[1rem] xsm:space-x-0'>
                     <AlertDialogCancel className='flex-1 text-white xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#848484] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'>
                       Hủy
                     </AlertDialogCancel>
