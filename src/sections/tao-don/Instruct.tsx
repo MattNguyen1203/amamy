@@ -70,6 +70,8 @@ export default function Instruct({
   prevStep,
   setDataInformation,
   paymentMethod,
+  setIndexTab,
+  indexTab,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -86,6 +88,8 @@ export default function Instruct({
     value: string
     title: string
   }[]
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
@@ -111,9 +115,9 @@ export default function Instruct({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      branch: dataFromOrder?.branch || data?.select_branch?.[0]?.title,
+      branch: dataFromOrder?.branch ?? data?.select_branch?.[0]?.title,
       recipientPaymentInformation:
-        dataFromOrder?.recipientPaymentInformation || '',
+        dataFromOrder?.recipientPaymentInformation ?? '',
     },
   })
   useEffect(() => {
@@ -192,6 +196,7 @@ export default function Instruct({
             },
           )
           if (response?.ok) {
+            setIndexTab(1)
             setDataFromOrder({})
             setSubmitting(true)
             setStepOrder(1)
@@ -261,10 +266,10 @@ export default function Instruct({
                             {!isMobile && (
                               <SelectValue placeholder='Chọn chi nhánh' />
                             )}
-                            {isMobile && !selectBranch && (
+                            {isMobile && !selectBranchValue && (
                               <SelectValue placeholder='Chọn chi nhánh' />
                             )}
-                            {isMobile && field.value && selectBranch && (
+                            {isMobile && field.value && selectBranchValue && (
                               <div className='space-x-[0.75rem] flex items-center flex-1'>
                                 <p className='text-black text-pc-sub14m'>
                                   {selectBranchValue}
@@ -461,7 +466,10 @@ export default function Instruct({
 
           <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
             <div
-              onClick={() => handleClickcurrentTab(prevStep)}
+              onClick={() => {
+                setIndexTab(indexTab - 1)
+                handleClickcurrentTab(prevStep)
+              }}
               className='xsm:flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
             >
               <p className='text-pc-sub16m text-black'>Quay lại</p>
@@ -486,7 +494,7 @@ export default function Instruct({
                   type='submit'
                   disabled={!form.formState.isValid}
                   className={cn(
-                    '!shadow-none border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]  h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem]',
+                    '!shadow-none xsm:flex-1 border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
                   )}
                 >
                   <p className='text-white text-pc-sub16m'>Xác nhận</p>
@@ -580,13 +588,13 @@ export default function Instruct({
                       )}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
-                  <AlertDialogFooter className='flex !mt-[1rem] space-x-[1rem] xsm:space-x-0'>
-                    <AlertDialogCancel className='flex-1 text-white xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#848484] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'>
+                  <AlertDialogFooter className='flex xsm:flex-row !mt-[1rem] space-x-[1rem] xsm:space-x-[0.75rem] xsm:space-y-0'>
+                    <AlertDialogCancel className='xsm:p-0 xsm:mt-0 flex-1 text-white xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[2.625rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#848484] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'>
                       Hủy
                     </AlertDialogCancel>
                     <AlertDialogAction
                       onClick={handleCreateOrder}
-                      className='flex-1 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[3rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'
+                      className='flex-1 xsm:p-0 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[2.625rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white'
                     >
                       Xác nhận
                     </AlertDialogAction>
@@ -622,11 +630,11 @@ export default function Instruct({
                   ></div>
                   <div
                     className={cn(
-                      'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white pb-[4rem] overflow-hidden overflow-y-auto max-h-[70vh]',
+                      'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem]',
                       selectBranch && 'bottom-0',
                     )}
                   >
-                    <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
+                    <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] rounded-t-[1.25rem] relative p-[0.5rem] flex-center '>
                       <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
                         Chọn chi nhánh Amamy Post
                       </p>
@@ -639,7 +647,7 @@ export default function Instruct({
                         <ICX className='size-[1.5rem]' />
                       </div>
                     </div>
-                    <div className=''>
+                    <div className='p-[1rem] bg-[#F6F6F6] space-y-[1rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
                       {Array.isArray(data?.select_branch) &&
                         data?.select_branch?.map(
                           (
@@ -649,11 +657,13 @@ export default function Instruct({
                             <div
                               key={index}
                               onClick={() => {
-                                form.setValue('branch', String(item?.title))
+                                form.setValue('branch', String(item?.title), {
+                                  shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                                })
                                 setSelectBranchValue(item?.title)
                                 setSelectBranch(false)
                               }}
-                              className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
+                              className='bg-white rounded-[1.25rem] space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8]'
                             >
                               <div className='flex-1 space-y-[0.75rem]'>
                                 <p className='text-pc-tab-title text-black xsm:text-pc-sub14s'>
