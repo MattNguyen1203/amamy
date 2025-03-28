@@ -18,7 +18,7 @@ const useProcessHeadings = (
     const doc = parser.parseFromString(htmlString, 'text/html')
 
     // Tìm tất cả các thẻ từ h2 đến h6, h3, h4, h5, h6
-    const headingElements = doc.querySelectorAll('h2')
+    const headingElements = doc.querySelectorAll('h2, h3, h4, h5, h6')
 
     headingElements.forEach((headingElement, index) => {
       const text = headingElement.textContent || ''
