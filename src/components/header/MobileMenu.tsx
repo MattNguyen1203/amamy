@@ -115,7 +115,7 @@ const MobileMenu = ({
                         alt=''
                         width={50 * 2}
                         height={50 * 2}
-                        className='size-[1rem]'
+                        className='size-[1rem] rounded-[100%]'
                       />
                       <p className='flex-1 text-mb-13M text-black'>
                         {item?.title}

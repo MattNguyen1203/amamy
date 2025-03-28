@@ -35,8 +35,8 @@ export default function Testimonials({data}: Prop) {
 
   return (
     <section className='py-24 xsm:py-[1.5rem] mt-[3.75rem] xsm:mt-5'>
-      <div className='w-full px-4 xsm:px-[1rem]'>
-        <div className='fade-section mx-auto max-w-2xl text-center'>
+      <div className='w-full px-4 xsm:px-0'>
+        <div className='fade-section xsm:px-[1rem] mx-auto max-w-2xl text-center'>
           <h2 className='fade-item mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] text-center'>
             {data?.feedback_customer?.title}
           </h2>
