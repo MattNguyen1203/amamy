@@ -24,9 +24,13 @@ import {z} from 'zod'
 export default function Insurance({
   data,
   handleClickcurrentTab,
+  setIndexTab,
+  indexTab,
 }: {
   data?: IInformationInsurance
   handleClickcurrentTab: (nextTab: string) => void
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -63,6 +67,7 @@ export default function Insurance({
       }
       handleClickcurrentTab('6')
       setTriggerScroll(true)
+      setIndexTab(indexTab + 1)
     }
   }
   return (
@@ -89,7 +94,7 @@ export default function Insurance({
                     className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1rem]'
                   >
                     <div
-                      className='[&_img]:rounded-[0.5rem] [&_img]:mb-[0.5rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      className='[&_a]:text-[#0084FF] [&_img]:rounded-[0.5rem] [&_img]:mb-[0.5rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14m *:font-normal *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
                       dangerouslySetInnerHTML={{
                         __html: item?.content || '',
                       }}
@@ -136,7 +141,7 @@ export default function Insurance({
                 </p>
                 <div className='flex xsm:flex-col-reverse sm:space-x-[1rem] bg-white'>
                   <div
-                    className='[&_img]:rounded-[0.5rem] [&_img]:mb-[0.5rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                    className='[&_img]:rounded-[0.5rem] [&_img]:mb-[0.5rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14m *:font-normal *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                     dangerouslySetInnerHTML={{
                       __html: item?.content || '',
                     }}
@@ -178,7 +183,10 @@ export default function Insurance({
           )}
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
-            onClick={() => handleClickcurrentTab('4')}
+            onClick={() => {
+              setIndexTab(indexTab - 1)
+              handleClickcurrentTab('4')
+            }}
             className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>

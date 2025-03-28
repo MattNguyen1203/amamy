@@ -84,6 +84,8 @@ export default function FormDeliveryInformation({
   title,
   setSelectNationValue,
   selectNationValue,
+  setIndexTab,
+  indexTab,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
@@ -96,6 +98,8 @@ export default function FormDeliveryInformation({
     React.SetStateAction<{img: string; title: string}>
   >
   selectNationValue: {img: string; title: string}
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
@@ -150,6 +154,7 @@ export default function FormDeliveryInformation({
     if (stepOrder < 5) {
       setStepOrder(Number(nextStep))
     }
+    setIndexTab(indexTab + 1)
     handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
@@ -395,7 +400,10 @@ export default function FormDeliveryInformation({
         </div>
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
-            onClick={() => handleClickcurrentTab(prevStep)}
+            onClick={() => {
+              setIndexTab(indexTab - 1)
+              handleClickcurrentTab(prevStep)
+            }}
             className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>
@@ -442,7 +450,7 @@ export default function FormDeliveryInformation({
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className='max-h-[70vh] overflow-hidden overflow-y-auto pb-[2rem]'>
+              <div className='max-h-[70vh] overflow-hidden space-y-[0.5rem] overflow-y-auto pb-[2rem]'>
                 {Array.isArray(europeanCountries) &&
                   europeanCountries?.length > 0 &&
                   europeanCountries?.map(
@@ -460,7 +468,9 @@ export default function FormDeliveryInformation({
                       <div
                         key={index}
                         onClick={() => {
-                          form.setValue('nation', String(item?.name?.common))
+                          form.setValue('nation', String(item?.name?.common), {
+                            shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                          })
                           setSelectNationValue({
                             img: item?.flags?.svg,
                             title: item?.name?.common,

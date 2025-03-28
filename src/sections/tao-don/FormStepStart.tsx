@@ -24,7 +24,7 @@ import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -85,6 +85,8 @@ export default function FormStepStart({
   dataInformation,
   // sentGoodsAtAmamy,
   nextStep,
+  setIndexTab,
+  indexTab,
 }: {
   data: ICreateOder[]
   onSuccess: (nextTab: string) => void
@@ -93,6 +95,8 @@ export default function FormStepStart({
   dataInformation?: ICreateOder
   // sentGoodsAtAmamy: boolean
   nextStep: string
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const isMobile = useIsMobile()
   const [selectServiceDimension, setSelectServiceDimension] =
@@ -146,6 +150,7 @@ export default function FormStepStart({
     if (dataFromOrder?.shipping !== values?.shipping) {
       setStepOrder(Number(nextStep))
     }
+    setIndexTab(indexTab + 1)
     onSuccess(nextStep)
     setTriggerScroll(true)
     const formData = new FormData()
@@ -468,7 +473,7 @@ export default function FormStepStart({
             ></div>
             <div
               className={cn(
-                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white pb-[4rem] overflow-hidden',
+                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
                 selectServiceDimension && 'bottom-0',
               )}
             >
@@ -485,39 +490,43 @@ export default function FormStepStart({
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className=''>
+              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
                 {Array.isArray(data) &&
                   data?.length > 0 &&
                   data?.map((item: ICreateOder, index: number) => (
-                    <div
-                      key={index}
-                      onClick={() => {
-                        form.setValue('shipping', String(item?.id))
-                        setSelectServiceDimensionValue({
-                          img: item?.thumbnail,
-                          title: item?.title,
-                        })
-                        setSelectServiceDimension(false)
-                      }}
-                      className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-                    >
-                      <ImageV2
-                        src={item?.thumbnail || '/order/flag-germany.webp'}
-                        alt=''
-                        height={24 * 2}
-                        width={24 * 2}
-                        className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                      />
-                      <p className='text-black text-pc-sub14m line-clamp-1'>
-                        {item?.title}
-                      </p>
-                    </div>
+                    <Fragment key={index}>
+                      <div
+                        onClick={() => {
+                          form.setValue('shipping', String(item?.id), {
+                            shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                          })
+                          setSelectServiceDimensionValue({
+                            img: item?.thumbnail,
+                            title: item?.title,
+                          })
+                          setSelectServiceDimension(false)
+                        }}
+                        className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                      >
+                        <ImageV2
+                          src={item?.thumbnail || '/order/flag-germany.webp'}
+                          alt=''
+                          height={24 * 2}
+                          width={24 * 2}
+                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                        />
+                        <p className='text-black text-pc-sub14m line-clamp-1'>
+                          {item?.title}
+                        </p>
+                      </div>
+                      <div className='h-[1px] w-full bg-[#F8F8F8]'></div>
+                    </Fragment>
                   ))}
               </div>
             </div>
             <div
               className={cn(
-                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white pb-[4rem] overflow-hidden',
+                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
                 howToContactAmamy && 'bottom-0',
               )}
             >
@@ -534,7 +543,7 @@ export default function FormStepStart({
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className=''>
+              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
                 {Array.isArray(dataContactMethod) &&
                   dataContactMethod?.length > 0 &&
                   dataContactMethod?.map(
@@ -545,29 +554,37 @@ export default function FormStepStart({
                       },
                       index: number,
                     ) => (
-                      <div
-                        key={index}
-                        onClick={() => {
-                          form.setValue('whereToContact', String(item?.title))
-                          setHowToContactAmamyValue({
-                            img: item?.img,
-                            title: item?.title,
-                          })
-                          setHowToContactAmamy(false)
-                        }}
-                        className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-                      >
-                        <ImageV2
-                          src={item?.img || ''}
-                          alt=''
-                          height={24 * 2}
-                          width={24 * 2}
-                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                        />
-                        <p className='text-black text-pc-sub14m line-clamp-1'>
-                          {item?.title}
-                        </p>
-                      </div>
+                      <Fragment key={index}>
+                        <div
+                          onClick={() => {
+                            form.setValue(
+                              'whereToContact',
+                              String(item?.title),
+                              {
+                                shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                              },
+                            )
+                            setHowToContactAmamyValue({
+                              img: item?.img,
+                              title: item?.title,
+                            })
+                            setHowToContactAmamy(false)
+                          }}
+                          className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                        >
+                          <ImageV2
+                            src={item?.img || ''}
+                            alt=''
+                            height={24 * 2}
+                            width={24 * 2}
+                            className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                          />
+                          <p className='text-black text-pc-sub14m line-clamp-1'>
+                            {item?.title}
+                          </p>
+                        </div>
+                        <div className='h-[1px] w-full bg-[#F8F8F8]'></div>
+                      </Fragment>
                     ),
                   )}
               </div>

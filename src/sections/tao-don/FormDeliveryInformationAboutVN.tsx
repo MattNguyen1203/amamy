@@ -68,12 +68,16 @@ export default function FormDeliveryInformationAboutVN({
   dataFromOrder,
   prevStep,
   nextStep,
+  setIndexTab,
+  indexTab,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
   prevStep: string
   nextStep: string
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -103,6 +107,7 @@ export default function FormDeliveryInformationAboutVN({
     if (stepOrder < 5) {
       setStepOrder(Number(nextStep))
     }
+    setIndexTab(indexTab + 1)
     handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
@@ -179,7 +184,7 @@ export default function FormDeliveryInformationAboutVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='flex !my-[0.75rem] space-x-[4rem]'
+                  className='flex !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                     <FormControl>
@@ -319,7 +324,10 @@ export default function FormDeliveryInformationAboutVN({
         </div>
         <div className='flex items-center justify-between w-full'>
           <div
-            onClick={() => handleClickcurrentTab(prevStep)}
+            onClick={() => {
+              setIndexTab(indexTab - 1)
+              handleClickcurrentTab(prevStep)
+            }}
             className='cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>
