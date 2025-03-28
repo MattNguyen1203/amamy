@@ -58,7 +58,7 @@ export default function Breadcrumb({
                 index + 1 === data?.length &&
                   type === 'white' &&
                   'bg-[rgba(96,96,96,0.08)] text-black active',
-                index + 1 === data?.length && 'flex-1 px-[0.25rem]',
+                index + 1 === data?.length && 'xsm:px-[0.25rem]',
                 index === 0 && 'whitespace-nowrap',
               )}
             >
