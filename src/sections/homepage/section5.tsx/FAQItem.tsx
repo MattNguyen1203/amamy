@@ -2,18 +2,12 @@
 
 import ImageV2 from '@/components/image/ImageV2'
 import Plus from '@/components/svg/Plus'
+import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {useEffect, useRef, useState} from 'react'
 
-const FAQItem = ({
-  content,
-  detail,
-  index,
-}: {
-  content: string
-  detail: string
-  index: number
-}) => {
+const FAQItem = ({content, detail}: {content: string; detail: string}) => {
+  const isMobile = useIsMobile()
   const [open, setOpen] = useState(false)
   const [heightQ, setHeightQ] = useState(0)
   const [heightA, setHeightA] = useState(0)
@@ -39,21 +33,19 @@ const FAQItem = ({
   return (
     <div
       className={cn(
-        'w-full relative transition-all duration-100 overflow-hidden',
+        'w-full p-[1rem] xsm:pt-0 xsm:pb-[0.75rem] relative transition-all duration-100 overflow-hidden',
       )}
       style={{
         height: open
-          ? `${heightQ + heightA + 8}px`
-          : index === 0
-          ? `${heightQ + heightA + 8}px`
-          : `${heightQ}px`,
+          ? `${isMobile ? heightQ + heightA + 24 : heightQ + heightA + 40}px`
+          : `${isMobile ? heightQ + 12 : heightQ + 32}px`,
       }}
     >
       <div
         ref={refQuestion}
         className='flex space-x-2 items-start w-full'
       >
-        <div className='flex-center size-[4.125rem] xsm:size-12 bg-white rounded-full'>
+        <div className='flex-center size-[4.125rem] xsm:size-12 bg-white rounded-full shadow-[0px_4px_19.3px_0px_rgba(0,39,97,0.06)]'>
           <ImageV2
             alt=''
             width={40}
@@ -64,7 +56,7 @@ const FAQItem = ({
         </div>
         <div
           onClick={() => setOpen(!open)}
-          className='cursor-pointer relative flex items-center space-x-3 p-5 pl-6 xsm:p-4 bg-white rounded-[1.25rem] w-full rounded-tl-none'
+          className='cursor-pointer xsm:flex-1 relative flex items-center space-x-3 p-5 pl-6 xsm:p-4 bg-white rounded-[1.25rem] w-full rounded-tl-none shadow-[0px_2px_7.3px_0px_rgba(0,39,97,0.06)]'
         >
           <p className='flex-1 text-[1.25rem] xsm:text-pc-sub12s font-semibold leading-[1.4] tracking-[-0.05rem] text-black'>
             {content}
@@ -81,11 +73,11 @@ const FAQItem = ({
       <div
         ref={refAnswer}
         className={cn(
-          'flex space-x-2 items-end w-full mt-2 transition-all left-0 duration-500 relative',
+          'flex space-x-2 items-end w-full mt-2 xsm:mt-[0.75rem] transition-all left-0 duration-500 relative',
           !open && 'left-[5rem]',
         )}
       >
-        <div className='relative flex items-center space-x-3 p-5 pl-6 bg-white rounded-[1.25rem] w-full rounded-br-none'>
+        <div className='relative flex xsm:flex-1 items-center space-x-3 p-5 pl-6 bg-white rounded-[1.25rem] w-full rounded-br-none shadow-[0px_4px_19.3px_0px_rgba(0,39,97,0.06)]'>
           <div
             dangerouslySetInnerHTML={{__html: detail}}
             className='flex-1 text-pc-sub16 xsm:text-mb-12 text-black'
@@ -94,7 +86,7 @@ const FAQItem = ({
         </div>
         <div
           className={cn(
-            'flex-center size-[4.125rem] xsm:size-12 bg-white rounded-full transform transition-all duration-500 rotate-0',
+            'flex-center size-[4.125rem] xsm:size-12 bg-white rounded-full transform transition-all duration-500 rotate-0 xsm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]',
             !open && '-rotate-180',
           )}
         >

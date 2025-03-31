@@ -26,9 +26,9 @@ const AIChatSection = ({data, listService}: Prop) => {
   ]
 
   return (
-    <div className='fade-section relative xsm:bg-[#fafafa]'>
-      <div className='w-full flex xsm:flex-col  '>
-        <div className='w-[26.875rem] h-[69.6875rem] bg-background-elevation5 shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
+    <div className='relative bg-[#FDFDFD] xsm:bg-[#fafafa]'>
+      <div className='fade-section w-full flex xsm:flex-col xsm:bg-[#fafafa]'>
+        <div className='w-[26.875rem] h-[69.6875rem] bg-background-elevation5 xsm:bg-[#fafafa] xsm:shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
           <div className='mt-[12.5rem] ml-[5.8rem] w-[18.5625rem]'>
             <div className='fade-item flex flex-col items-start gap-[1.06rem] relative '>
               <p className='text-pc-h1 text-black'>
@@ -40,7 +40,7 @@ const AIChatSection = ({data, listService}: Prop) => {
             </div>
           </div>
         </div>
-        <div className='text-center hidden xsm:block xsm:mt-[4rem]'>
+        <div className='text-center hidden xsm:block xsm:mt-[4rem] xsm:bg-[#fafafa]'>
           <div className='flex flex-col items-center justify-center gap-[.5rem] relative mx-[1rem]'>
             <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
               {data?.talk_to_ai?.title || ''}
@@ -51,13 +51,13 @@ const AIChatSection = ({data, listService}: Prop) => {
           </div>
         </div>
 
-        <div className='flex-1 flex gap-[2.5rem] xsm:block pt-[7.315rem] h-[62.9375rem] bg-[#C1E8FF] px-[6rem] relative xsm:bg-transparent xsm:pt-[2rem] xsm:px-0 xsm:w-screen '>
+        <div className='flex-1 flex gap-[2.5rem] xsm:block pt-[7.315rem] h-[62.9375rem] bg-[#C1E8FF] xsm:bg-[#fafafa] px-[6rem] relative xsm:bg-transparent xsm:pt-[2rem] xsm:px-0 xsm:w-screen '>
           <ImageV2
             alt=''
             width={1000}
             height={1000}
             src='/homepage/map.webp'
-            className='size-full object-cover absolute top-0 left-0 xsm:hidden'
+            className='w-full h-[35.50475rem] xsm:h-full object-cover absolute xsm:top-0 sm:bottom-[-3rem] left-0 xsm:hidden'
           />
 
           <div className='fade-item flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto'>
@@ -73,7 +73,7 @@ const AIChatSection = ({data, listService}: Prop) => {
                 {data?.talk_to_ai?.box_chat?.title || 'Trợ lý AI Amamy'}
               </p>
             </div>
-            <div className='bg-white rounded-[1.25rem] px-4 py-5 flex flex-col flex-1 justify-end'>
+            <div className='bg-white rounded-[1.25rem] px-4 py-5 xsm:p-[0.75rem] flex flex-col flex-1 justify-end'>
               <div className='flex-1 overflow-auto flex flex-col justify-end space-y-3 hidden_scroll'>
                 {dataMessage.map((item, index) => (
                   <MessageItem
@@ -84,11 +84,12 @@ const AIChatSection = ({data, listService}: Prop) => {
               </div>
               <div className='flex mt-8 items-center rounded-[1.25rem] bg-Blue-Primary'>
                 <input
+                  disabled
                   type='text'
                   placeholder='Nhập yêu cầu của bạn...'
-                  className='flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
+                  className='disabled:bg-white flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
                 />
-                <button className='flex-center pr-[0.875rem]'>
+                <button className='flex-center cursor-default pr-[0.875rem]'>
                   <SendMessage className='size-6' />
                 </button>
               </div>
@@ -103,7 +104,7 @@ const AIChatSection = ({data, listService}: Prop) => {
           </div>
         </div>
       </div>
-      <div className='rounded-[1.25rem] -mt-[15rem] xsm:mt-[4rem] bg-white'>
+      <div className='rounded-[1.25rem] -mt-[22rem] xsm:pt-[2.5rem] xsm:mt-[1.5rem] bg-white'>
         <SectionServiceFeature
           title={data?.list_services?.title}
           phone={data?.list_services?.phone}

@@ -8,9 +8,11 @@ import Link from 'next/link'
 export default function ItemBlog({
   item,
   className,
+  type = 'unhover',
 }: {
   item: IItemPostBlog
   className?: string
+  type?: 'unhover' | 'hover'
 }) {
   const date = new Date(item?.date)
 
@@ -37,7 +39,13 @@ export default function ItemBlog({
           height={258}
           className='size-full object-cover rounded-t-[1.25rem] xsm:rounded-t-[0.5rem] sm:group-hover:scale-[1.2] transition-all duration-500'
         />
-        <div className='absolute top-[0.5rem] left-[0.5rem] '>
+        <div
+          className={cn(
+            'absolute top-[0.5rem] left-[0.5rem]',
+            type === 'hover' &&
+              'sm:opacity-0 sm:group-hover:opacity-[100] transition-all duration-500',
+          )}
+        >
           <p className='text-white text-pc-sub12s xsm:text-[0.5rem] xsm:font-semibold xsm:tracking-[-0.01rem] uppercase p-[0.75rem_1rem] xsm:p-[0.5rem] rounded-[1.25rem] bg-[rgba(19,37,82,0.50)] xsm:bg-[rgba(4,24,77,0.50)]'>
             {item?.categories}
           </p>

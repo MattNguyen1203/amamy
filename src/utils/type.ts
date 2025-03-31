@@ -361,6 +361,7 @@ export interface ListNewsObject {
 export interface NewsObject {
   title: string
   subtitle: string
+  subtitle_mb: string
   tag_title_pc: string
   tag_title_mb: string
   list_news_event: ListNewsObject

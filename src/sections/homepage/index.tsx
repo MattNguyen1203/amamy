@@ -14,7 +14,7 @@ type Props = {
 
 const Homepage = ({res, dataBlog}: Props) => {
   return (
-    <div className='w-full bg-[#EDF5FA]'>
+    <div className='w-full bg-[#EDF5FA] xsm:bg-[#F8F8FB]'>
       <Banner banner={res.banner} />
       <Services services={res.services} />
       <Community

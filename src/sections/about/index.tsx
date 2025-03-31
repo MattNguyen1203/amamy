@@ -55,7 +55,7 @@ const AboutPage = ({res, listBlog}: Prop) => {
       {Array.isArray(listBlog?.posts) && (
         <RelatedBlogs
           data={listBlog?.posts}
-          title='Các tin tức mới nhất'
+          title='Đồng hành cùng du học sinh'
           className='[&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
         />
       )}

@@ -20,18 +20,22 @@ const Section4 = ({withDHS}: Props) => {
   const [activeSlider, setActiveSlider] = useState<number>(0)
   return (
     <section
-      className='sm:bg-[#EDF5FA] sm:rounded-none fade-section xsm:pt-[1rem] xsm:pb-0 xsm:px-0 w-full sm:h-[50rem] sm:flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] sm:justify-between sm:items-center
+      className='xsm:pb-[2rem] xsm:bg-[#F8F8FB] sm:bg-[#EDF5FA] sm:rounded-none fade-section xsm:pt-[1rem] xsm:px-0 w-full sm:h-[50rem] sm:flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] sm:justify-between sm:items-center
       sm:[box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
-     xsm:flex-col xsm:h-fit xsm:gap-[1rem] xsm:pr-0'
+     xsm:flex-col xsm:h-fit xsm:gap-[0] xsm:pr-0'
     >
       <div className='max-w-[24.375rem] h-full flex flex-col justify-between'>
-        <div className='xsm:px-[1rem] xsm:space-y-[0.5rem] xsm:pb-[1rem]'>
+        <div className='xsm:px-[1rem] xsm:space-y-[0.5rem]'>
           <h2 className='fade-item font-montserrat sm:mb-[2.06rem] text-[2.875rem] tracking-[-0.115rem] font-bold leading-[120%] xsm:text-[1.25rem] text-black xsm:text-mb-h1'>
             {withDHS?.title}
           </h2>
           <p
             dangerouslySetInnerHTML={{__html: withDHS?.subtitle}}
-            className='fade-item xsm:text-mb-12 font-montserrat text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'
+            className='xsm:hidden fade-item xsm:text-mb-12 font-montserrat text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'
+          ></p>
+          <p
+            dangerouslySetInnerHTML={{__html: withDHS?.subtitle_mb}}
+            className='sm:hidden fade-item xsm:text-mb-12 font-montserrat text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'
           ></p>
         </div>
         {Array.isArray(withDHS?.list_news_event) && !isMobile && (
@@ -79,7 +83,7 @@ const Section4 = ({withDHS}: Props) => {
                     el: '.swiper-pagination-custom-home',
                   }}
                   modules={[Pagination]}
-                  className='!px-[1rem] mySwiper-mb w-full [&_.swiper-wrapper]:space-x-[0.75rem] h-[40.5rem] flex xsm:h-[22.75rem] xsm:gap-[1rem]'
+                  className='!px-[1rem] !pt-[1rem] mySwiper-mb w-full [&_.swiper-wrapper]:space-x-[0.75rem] h-[40.5rem] flex xsm:h-[23.75rem] xsm:gap-[1rem]'
                 >
                   {Array.isArray(withDHS?.list_news_event) &&
                     withDHS?.list_news_event?.map(

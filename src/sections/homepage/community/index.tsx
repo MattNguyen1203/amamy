@@ -32,7 +32,7 @@ const Community = ({sectionCountry, section3}: Props) => {
   }, [])
 
   return (
-    <div>
+    <div className='xsm:bg-[#F8F8FB] pb-[1.5rem]'>
       <div className='w-full flex xsm:flex-col'>
         {!isMobile && (
           <div className='sm:absolute sm:z-[1] sm:left-0 w-[27.5rem] h-[65.1875rem] bg-background-elevation5 shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
@@ -45,9 +45,10 @@ const Community = ({sectionCountry, section3}: Props) => {
         {isMobile && (
           <div className='hidden xsm:block'>
             <div className='flex flex-col items-start gap-[.5rem] relative mx-[1rem]'>
-              <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
-                {section3.title}
-              </p>
+              <p
+                dangerouslySetInnerHTML={{__html: section3.title}}
+                className='text-[1.25rem] not-italic font-bold leading-[120%] sm:[&_br]:hidden'
+              ></p>
               <p className='text-[0.875rem] not-italic font-medium leading-[150%]'>
                 {section3.subtitle}
               </p>
