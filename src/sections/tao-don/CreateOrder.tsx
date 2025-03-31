@@ -8,6 +8,7 @@ import CeateNote from '@/sections/tao-don/CreateNote'
 import CustomBack from '@/sections/tao-don/CustomBack'
 import FormDeliveryInformation from '@/sections/tao-don/FormDeliveryInformation'
 import FormDeliveryInformationAboutVN from '@/sections/tao-don/FormDeliveryInformationAboutVN'
+import FormDeliveryInformationJapanVN from '@/sections/tao-don/FormDeliveryInformationJapanVN'
 import FormDeliveryInformationVNHan from '@/sections/tao-don/FormDeliveryInformationVNHan'
 import FormDeliveryInformationVNJapan from '@/sections/tao-don/FormDeliveryInformationVNJapan'
 import FormStepStart from '@/sections/tao-don/FormStepStart'
@@ -93,10 +94,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     <>
       <Tabs
         value={currentTab}
-        onValueChange={(value) => {
-          setCurrentTab(value)
-          setIndexTab(Number(value) - 1)
-        }}
         className='flex xsm:flex-col sm:space-x-[1.5rem] pb-[5rem] bg-white xsm:bg-[#FAFAFA]'
       >
         <TabsList className='xsm:space-y-[0.5rem] sticky z-[50] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
@@ -110,14 +107,22 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             {StepForm?.map(
               (item: {title: string; value: string}, index: number) => (
                 <TabsTrigger
+                  onClick={() => {
+                    setCurrentTab(item?.value)
+                    setIndexTab(index)
+                    if (item?.value === '1') {
+                      setDataInformation(undefined)
+                      setDataFromOrder({...dataFromOrder, shipping: null})
+                    }
+                  }}
                   key={index}
                   value={item?.value}
                   className={cn(
                     'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none [&_.box-index]:data-[state=active]:bg-[#38B6FF] [&_.box-text]:data-[state=active]:text-black',
-                    index + 1 > Number(currentTab) && 'pointer-events-none',
+                    index > Number(indexTab) && 'pointer-events-none',
                   )}
                 >
-                  {index + 1 < Number(currentTab) ? (
+                  {index < Number(indexTab) ? (
                     <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
                   ) : (
                     <div className='box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] xsm:text-[0.89231rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]'>
@@ -192,6 +197,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataInformation={dataInformation?.information?.time}
                   nextStep={dataInformation?.information?.note ? '3' : '4'}
+                  setDataInformation={setDataInformation}
+                  setDataFromOrder={setDataFromOrder}
+                  dataFromOrder={dataFromOrder}
                 />
               </TabsContent>
               <TabsContent
@@ -259,15 +267,37 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     }
                   />
                 )}
-                {(dataInformation?.type === 'vietnhat' ||
-                  dataInformation?.type === 'nhatviet') && (
+                {dataInformation?.type === 'vietnhat' && (
                   <FormDeliveryInformationVNJapan
                     setIndexTab={setIndexTab}
                     indexTab={indexTab}
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
-                    type={dataInformation?.type}
+                    prevStep={
+                      dataInformation?.information?.note
+                        ? '3'
+                        : dataInformation?.information?.time
+                        ? '2'
+                        : '1'
+                    }
+                    nextStep={
+                      dataInformation?.information?.insurance?.compensation
+                        ?.policy ||
+                      dataInformation?.information?.insurance
+                        ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '6'
+                    }
+                  />
+                )}
+                {dataInformation?.type === 'nhatviet' && (
+                  <FormDeliveryInformationJapanVN
+                    setIndexTab={setIndexTab}
+                    indexTab={indexTab}
+                    handleClickcurrentTab={handleClickcurrentTab}
+                    setDataFromOrder={setDataFromOrder}
+                    dataFromOrder={dataFromOrder}
                     prevStep={
                       dataInformation?.information?.note
                         ? '3'

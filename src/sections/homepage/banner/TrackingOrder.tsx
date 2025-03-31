@@ -106,10 +106,11 @@ const TrackingOrder = () => {
             />
             <input
               value={inputAI}
+              disabled
               onChange={(e) => setInputAI(e.target.value)}
               type='text'
               placeholder='VD: Gửi 10kg hàng từ Việt Nam đến Mỹ'
-              className='flex-1 border-none outline-none text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'
+              className='disabled:bg-transparent flex-1 border-none outline-none text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'
             />
           </div>
           <button

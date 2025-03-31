@@ -46,6 +46,15 @@ export default function CeateNote({
         : [],
     },
   })
+  useEffect(() => {
+    if (!data) {
+      if (stepOrder < 4) {
+        setStepOrder(4)
+      }
+      handleClickcurrentTab('4')
+      setTriggerScroll(true)
+    }
+  }, [])
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {

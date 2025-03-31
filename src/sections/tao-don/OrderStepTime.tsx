@@ -11,7 +11,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {cn} from '@/lib/utils'
-import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {
+  ICreateOder,
+  IInformationTimeOrder,
+} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Fragment, useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
@@ -22,12 +26,20 @@ export default function OrderStepTime({
   nextStep,
   setIndexTab,
   indexTab,
+  setDataInformation,
+  setDataFromOrder,
+  dataFromOrder,
 }: {
   dataInformation?: IInformationTimeOrder[]
   handleClickcurrentTab: (nextTab: string) => void
   nextStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  setDataInformation: React.Dispatch<
+    React.SetStateAction<ICreateOder | undefined>
+  >
+  setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
+  dataFromOrder: IDataFromOrder
 }) {
   const FormSchema = z.object({
     policy: z.array(
@@ -46,6 +58,15 @@ export default function OrderStepTime({
         : [],
     },
   })
+  useEffect(() => {
+    if (!dataInformation) {
+      if (stepOrder < 3) {
+        setStepOrder(3)
+      }
+      handleClickcurrentTab('3')
+      setTriggerScroll(true)
+    }
+  }, [])
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -117,6 +138,8 @@ export default function OrderStepTime({
               onClick={() => {
                 handleClickcurrentTab('1')
                 setIndexTab(indexTab - 1)
+                setDataInformation(undefined)
+                setDataFromOrder({...dataFromOrder, shipping: null})
               }}
               className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
             >

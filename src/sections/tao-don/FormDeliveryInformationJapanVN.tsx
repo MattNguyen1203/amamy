@@ -79,7 +79,7 @@ interface IDistrict {
 interface IWard {
   WardName: string
 }
-export default function FormDeliveryInformationAboutVN({
+export default function FormDeliveryInformationJapanVN({
   handleClickcurrentTab,
   setDataFromOrder,
   dataFromOrder,
@@ -107,15 +107,16 @@ export default function FormDeliveryInformationAboutVN({
   const [isWard, setIsWard] = useState<boolean>(false)
   const [recipientAddressType, setRecipientAddressType] = useState<string>('')
   const [pending, setPending] = useState<boolean>(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      recipientName: dataFromOrder?.recipientName || '',
-      recipientPhone: dataFromOrder?.recipientPhone || '',
-      recipientAddress: dataFromOrder?.recipientAddress || '',
+      recipientName: dataFromOrder?.recipientName ?? '',
+      recipientPhone: dataFromOrder?.recipientPhone ?? '',
+      recipientAddress: dataFromOrder?.recipientAddress ?? '',
       recipientAddressType:
-        dataFromOrder?.recipientAddressType || 'registeredAddress',
+        dataFromOrder?.recipientAddressType ?? 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
           ? dataFromOrder?.recipientCity ?? ''
@@ -137,17 +138,6 @@ export default function FormDeliveryInformationAboutVN({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    setDataFromOrder({...dataFromOrder, ...values})
-    if (stepOrder < 5) {
-      setStepOrder(Number(nextStep))
-    }
-    setIndexTab(indexTab + 1)
-    handleClickcurrentTab(nextStep)
-    setTriggerScroll(true)
-  }
   useEffect(() => {
     if (pending) {
       form.setValue(
@@ -180,6 +170,7 @@ export default function FormDeliveryInformationAboutVN({
       )
     }
   }, [recipientAddressType, form])
+
   useEffect(() => {
     async function fetchProvinces() {
       try {
@@ -275,6 +266,19 @@ export default function FormDeliveryInformationAboutVN({
       fetchProvinces()
     }
   }, [dataFromOrder?.DistrictID])
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    setDataFromOrder({...dataFromOrder, ...values})
+    if (stepOrder < 5) {
+      setStepOrder(Number(nextStep))
+    }
+    setIndexTab(indexTab + 1)
+    handleClickcurrentTab(nextStep)
+    setTriggerScroll(true)
+  }
+
   return (
     <Form {...form}>
       <form
@@ -282,7 +286,7 @@ export default function FormDeliveryInformationAboutVN({
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
         <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
-          Thông tin nhận hàng tại Việt Nam
+          Thông tin nhận hàng
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
           <FormField
@@ -291,16 +295,16 @@ export default function FormDeliveryInformationAboutVN({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận(*)
+                  Tên người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
                     className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='Tên người nhận'
+                    placeholder={'Tên người nhận'}
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -319,7 +323,7 @@ export default function FormDeliveryInformationAboutVN({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -330,7 +334,7 @@ export default function FormDeliveryInformationAboutVN({
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ nhận hàng tại Việt Nam
+                Địa chỉ nhận hàng tại Việt Nam (*)
               </FormLabel>
               <FormControl>
                 <RadioGroup
@@ -379,21 +383,21 @@ export default function FormDeliveryInformationAboutVN({
           control={form.control}
           name='recipientAddress'
           render={({field}) => (
-            <FormItem className='flex-1 space-y-0 !mt-0'>
+            <FormItem className={cn('flex-1 space-y-0 !mt-0')}>
               <FormControl>
                 <Input
                   disabled={
                     recipientAddressType === 'atAmamyStore' ? true : false
                   }
                   className='shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                  placeholder='Địa chỉ nhận hàng tại Việt Nam'
+                  placeholder={'Nhập địa chỉ nhận hàng tại Việt Nam'}
                   {...field}
                 />
               </FormControl>
-              <p className='xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
-                *Địa chỉ chi tiết, số nhà, tên đường,...
+              <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>
-              <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
             </FormItem>
           )}
         />
@@ -645,6 +649,7 @@ export default function FormDeliveryInformationAboutVN({
             />
           </div>
         )}
+
         <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
             onClick={() => {
@@ -659,7 +664,7 @@ export default function FormDeliveryInformationAboutVN({
             type='submit'
             disabled={!form.formState.isValid}
             className={cn(
-              'xsm:flex-1 !shadow-none hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+              '!shadow-none xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
               !form.formState.isValid &&
                 'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
@@ -727,7 +732,6 @@ export default function FormDeliveryInformationAboutVN({
                               setDataFromOrder({
                                 ...dataFromOrder,
                                 ProvinceID: city?.ProvinceID,
-                                DistrictID: 0,
                               })
                               setWard([])
                             }}
