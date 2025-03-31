@@ -39,7 +39,7 @@ const TrackingOrder = () => {
     <Tabs
       onValueChange={setValue}
       defaultValue='search-order'
-      className='w-[38.1875rem] xsm:w-full'
+      className='w-[38.1875rem] xsm:w-full xsm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] xsm:rounded-[1.25rem]'
     >
       <TabsList className='relative xsm:w-full'>
         <TabsTrigger

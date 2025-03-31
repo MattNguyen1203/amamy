@@ -24,7 +24,7 @@ const Footer = async () => {
   return (
     <footer
       id='footer-section'
-      className='flex px-24 pt-20 pb-[1rem] flex-col sm:items-end sm:gap-[3.4375rem] sm:self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-0 xsm:pb-0'
+      className='flex px-24 pt-20 pb-[1rem] flex-col sm:items-end sm:self-stretch bg-[#0F181D] text-white xsm:pt-[2rem] xsm:px-0 xsm:pb-0'
     >
       <div className='xsm:px-[1rem] flex w-full justify-between xsm:flex-col'>
         <div className='flex gap-[1.5rem] flex-col'>
