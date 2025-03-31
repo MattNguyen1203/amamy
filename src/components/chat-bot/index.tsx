@@ -16,7 +16,7 @@ type ChatBotProps = {
 const ChatBot = ({dataMessage}: ChatBotProps) => {
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
-  const {chatBotMessage, setChatBotMessage} = useStore((state) => state)
+  const {chatBotMessage} = useStore((state) => state)
   const boxRef = useRef(null)
   // nhận message từ section TrackingOrder ở homepage
   useEffect(() => {
