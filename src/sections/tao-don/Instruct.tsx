@@ -115,13 +115,16 @@ export default function Instruct({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      branch: dataFromOrder?.branch ?? data?.select_branch?.[0]?.title,
+      branch:
+        dataFromOrder?.branch ??
+        data?.select_branch?.[0]?.title ??
+        'chưa có thông tin',
       recipientPaymentInformation:
         dataFromOrder?.recipientPaymentInformation ?? '',
     },
   })
   useEffect(() => {
-    if (form?.getValues('branch')) {
+    if (form?.getValues('branch') && dataFromOrder?.branch) {
       const foundItem = data?.select_branch?.find(
         (item) => item?.title === form?.getValues('branch'),
       )
@@ -134,7 +137,7 @@ export default function Instruct({
         })
       }
     }
-  }, [form?.getValues('branch')])
+  }, [form?.getValues('branch'), dataFromOrder?.branch])
   useEffect(() => {
     if (selectBranch || selectPaymentInformation) {
       document.body.style.overflow = 'hidden'
@@ -181,7 +184,7 @@ export default function Instruct({
         expected_date: '',
         nation: dataFromOrder?.nation ?? '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
-        nameFacebook: dataFromOrder?.nameFacebook ?? '',
+        name_facebook: dataFromOrder?.nameFacebook ?? '',
       }
       if (formData) {
         try {
@@ -382,23 +385,25 @@ export default function Instruct({
               )}
             </>
           )}
-          <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
-            <div
-              className='flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
-              dangerouslySetInnerHTML={{
-                __html: data?.packing_instructions || '',
-              }}
-            ></div>
-            {data?.images && (
-              <ImageV2
-                src={data?.images}
-                alt=''
-                width={300 * 2}
-                height={200 * 2}
-                className='rounded-[0.5rem] w-[18.75rem] xsm:w-full h-[12.5rem] xsm:h-[12.95831rem] object-cover'
-              />
-            )}
-          </div>
+          {data?.packing_instructions && (
+            <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
+              <div
+                className='flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                dangerouslySetInnerHTML={{
+                  __html: data?.packing_instructions || '',
+                }}
+              ></div>
+              {data?.images && (
+                <ImageV2
+                  src={data?.images}
+                  alt=''
+                  width={300 * 2}
+                  height={200 * 2}
+                  className='rounded-[0.5rem] w-[18.75rem] xsm:w-full h-[12.5rem] xsm:h-[12.95831rem] object-cover'
+                />
+              )}
+            </div>
+          )}
           <FormField
             control={form.control}
             name='recipientPaymentInformation'
@@ -494,7 +499,7 @@ export default function Instruct({
                   type='submit'
                   disabled={!form.formState.isValid}
                   className={cn(
-                    '!shadow-none xsm:flex-1 border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
+                    '!shadow-none xsm:flex-1 sm:p-[0.75rem_1.5rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
                   )}
                 >
                   <p className='text-white text-pc-sub16m'>Xác nhận</p>

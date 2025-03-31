@@ -56,6 +56,7 @@ export interface IBanner {
   user_number: string
   review_title: string
   title: string
+  box_image: string
 }
 
 export interface IFaq {
@@ -219,6 +220,7 @@ export interface ShippingServiceObject {
   hotline: string
   background2: ImageFlag
   list_country: CountryItem[]
+  background2_people: string
 }
 
 export interface ImageIcon {

@@ -22,7 +22,7 @@ const Services = ({services}: {services: ServicesObject}) => {
   }, [])
 
   return (
-    <div className='flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:px-0 xsm:py-[2.5rem]'>
+    <div className='bg-[#EDF5FA] flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:px-0 xsm:py-[2.5rem]'>
       <div className='inline-flex items-end gap-[1.5rem] relative'>
         <div className='flex flex-col w-[63rem] items-start gap-[1.5rem] relative xsm:w-[calc(100vw)]'>
           <div className='flex flex-col items-start space-y-6 xsm:space-y-3 w-full'>
@@ -173,9 +173,9 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
     href={href || ''}
     className='fade-in-box-card-service-2 relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'
   >
-    <div className='absolute z-[10]'>
+    <div className='absolute z-[10] left-0 right-0'>
       <Image
-        src={'/homepage/icon/BG.png'}
+        src={'/homepage/icon/BG_3.webp'}
         alt=''
         width={1000}
         height={1000}

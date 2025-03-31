@@ -16,7 +16,7 @@ type ChatBotProps = {
 const ChatBot = ({dataMessage}: ChatBotProps) => {
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
-  const {chatBotMessage, setChatBotMessage} = useStore((state) => state)
+  const {chatBotMessage} = useStore((state) => state)
   const boxRef = useRef(null)
   // nhận message từ section TrackingOrder ở homepage
   useEffect(() => {
@@ -33,10 +33,10 @@ const ChatBot = ({dataMessage}: ChatBotProps) => {
 
   const handleToggle = () => {
     if (open) {
-      setOpen(false)
-      setChatBotMessage('')
+      // setOpen(false)
+      // setChatBotMessage('')
     } else {
-      setOpen(true)
+      // setOpen(true)
     }
   }
   useEffect(() => {
@@ -104,9 +104,10 @@ const ChatBot = ({dataMessage}: ChatBotProps) => {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            disabled
             type='text'
             placeholder='Nhập yêu cầu của bạn...'
-            className='flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
+            className='disabled:bg-transparent flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
           />
           <button
             onClick={handleSendMessage}

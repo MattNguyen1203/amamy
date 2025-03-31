@@ -202,7 +202,7 @@ const Header = ({
                     href={item?.href}
                     className={cn(
                       'p-[0.25rem_0.375rem] text-black',
-                      isScrollTop && 'text-white',
+                      isScrollTop ? 'text-white' : 'hover:text-[#38B6FF]',
                     )}
                   >
                     {item?.name}
@@ -213,8 +213,10 @@ const Header = ({
                       <NavigationMenuItem>
                         <NavigationMenuTrigger
                           className={cn(
-                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent hover:text-white hover:bg-transparent [state=open]:focus:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-white',
-                            isScrollTop && 'text-white',
+                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent hover:bg-transparent [state=open]:focus:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:bg-transparent',
+                            isScrollTop
+                              ? 'text-white data-[state=open]:text-white hover:text-white'
+                              : 'data-[state=open]:text-[#38B6FF] hover:text-[#38B6FF]',
                           )}
                         >
                           {item?.name}

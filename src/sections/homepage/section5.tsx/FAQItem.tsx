@@ -5,7 +5,15 @@ import Plus from '@/components/svg/Plus'
 import {cn} from '@/lib/utils'
 import {useEffect, useRef, useState} from 'react'
 
-const FAQItem = ({content, detail}: {content: string; detail: string}) => {
+const FAQItem = ({
+  content,
+  detail,
+  index,
+}: {
+  content: string
+  detail: string
+  index: number
+}) => {
   const [open, setOpen] = useState(false)
   const [heightQ, setHeightQ] = useState(0)
   const [heightA, setHeightA] = useState(0)
@@ -33,7 +41,13 @@ const FAQItem = ({content, detail}: {content: string; detail: string}) => {
       className={cn(
         'w-full relative transition-all duration-100 overflow-hidden',
       )}
-      style={{height: open ? `${heightQ + heightA + 8}px` : `${heightQ}px`}}
+      style={{
+        height: open
+          ? `${heightQ + heightA + 8}px`
+          : index === 0
+          ? `${heightQ + heightA + 8}px`
+          : `${heightQ}px`,
+      }}
     >
       <div
         ref={refQuestion}
