@@ -294,7 +294,7 @@ export default function FormDeliveryInformationJapanVN({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người nhận (*)
                 </FormLabel>
                 <FormControl>
@@ -313,7 +313,7 @@ export default function FormDeliveryInformationJapanVN({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại(*)
                 </FormLabel>
                 <FormControl>
@@ -333,7 +333,7 @@ export default function FormDeliveryInformationJapanVN({
           name='recipientAddressType'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ nhận hàng tại Việt Nam (*)
               </FormLabel>
               <FormControl>
@@ -395,7 +395,7 @@ export default function FormDeliveryInformationJapanVN({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>
             </FormItem>
@@ -413,7 +413,7 @@ export default function FormDeliveryInformationJapanVN({
                   }}
                   className='flex flex-col flex-1 space-y-0'
                 >
-                  <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Tỉnh/Thành phố (*)
                   </FormLabel>
                   <Popover>
@@ -499,7 +499,7 @@ export default function FormDeliveryInformationJapanVN({
                   }}
                   className='flex flex-col flex-1 space-y-0'
                 >
-                  <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Quận Huyện (*)
                   </FormLabel>
                   <Popover>
@@ -583,7 +583,7 @@ export default function FormDeliveryInformationJapanVN({
                   }}
                   className='flex flex-col flex-1 space-y-0'
                 >
-                  <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Phường Xã (*)
                   </FormLabel>
                   <Popover>

@@ -173,7 +173,7 @@ export default function FormDeliveryInformation({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người nhận(*)
                 </FormLabel>
                 <FormControl>
@@ -183,7 +183,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <p className='text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <p className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc
                   đúng tên Auswei.
                 </p>
@@ -196,7 +196,7 @@ export default function FormDeliveryInformation({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại người nhận (*)
                 </FormLabel>
                 <FormControl>
@@ -222,7 +222,7 @@ export default function FormDeliveryInformation({
                 }}
                 className='flex-1 space-y-0'
               >
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Chọn quốc gia (*)
                 </FormLabel>
                 <Select
@@ -300,7 +300,7 @@ export default function FormDeliveryInformation({
           name='recipientAddress'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ (*)
               </FormLabel>
               <FormControl>
@@ -310,7 +310,7 @@ export default function FormDeliveryInformation({
                   {...field}
                 />
               </FormControl>
-              <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                 *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số tầng,
                 số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
               </p>
@@ -324,7 +324,7 @@ export default function FormDeliveryInformation({
             name='housingNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên đường(*)
                 </FormLabel>
                 <FormControl>
@@ -343,7 +343,7 @@ export default function FormDeliveryInformation({
             name='roadName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số nhà (*)
                 </FormLabel>
                 <FormControl>
@@ -364,7 +364,7 @@ export default function FormDeliveryInformation({
             name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Thành phố(*)
                 </FormLabel>
                 <FormControl>
@@ -383,7 +383,7 @@ export default function FormDeliveryInformation({
             name='recipientCodeCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Mã thành phố(*)
                 </FormLabel>
                 <FormControl>
