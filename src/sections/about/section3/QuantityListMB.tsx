@@ -1,78 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
 import {IAmamyQualityAbout_ListQuality} from '@/sections/about/about.interface'
-import React from 'react'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import CoreValueCard from './CoreValueCard'
 
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+
+// import required modules
+import {Pagination} from 'swiper/modules'
 interface Prop {
   quantities: IAmamyQualityAbout_ListQuality[]
 }
 
 const QuantityListMB = ({quantities}: Prop) => {
-  const [api, setApi] = React.useState<any>()
-
-  const [current, setCurrent] = React.useState(0)
-
-  React.useEffect(() => {
-    if (!api) {
-      return
-    }
-
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap())
-    })
-  }, [api])
-
   return (
     <>
-      <Carousel
-        setApi={setApi}
-        opts={{
-          align: 'start',
-          loop: true,
-        }}
-        className='mx-auto w-full xsm:px-0'
+      <Swiper
+        slidesPerView={'auto'}
+        pagination={true}
+        modules={[Pagination]}
+        className='mySwiper [&_.swiper-wrapper]:space-x-[0.75rem] w-full !px-[1rem] !pb-[3rem] [&_.swiper-pagination-bullet]:w-[1rem] [&_.swiper-pagination-bullet]:h-[0.25rem] [&_.swiper-pagination-bullet]:rounded-[0.625rem] [&_.swiper-pagination-bullet]:bg-[rgba(31,100,140,0.24)] [&_.swiper-pagination-bullet]:opacity-[1] [&_.swiper-pagination-bullet-active]:!bg-[#1F648C] [&_.swiper-pagination]:space-x-[0.25rem]'
       >
-        <CarouselContent className='xsm:ml-0'>
-          {Array.isArray(quantities) &&
-            quantities?.map((quantity, index) => (
-              <CarouselItem
-                key={index}
-                className='md:basis-1/2 p-0 flex justify-center'
-              >
-                <CoreValueCard
-                  imageSrc={quantity.image.url}
-                  imageAlt={quantity.image.alt}
-                  label={quantity.subtitle}
-                  title={quantity.title}
-                  description={quantity.description}
-                />
-              </CarouselItem>
-            ))}
-        </CarouselContent>
-        <CarouselPrevious className='absolute xsm:hidden left-[3rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
-        <CarouselNext className='absolute xsm:hidden right-[3.5rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
-      </Carousel>
-
-      <div className='mt-8 flex justify-center gap-2 xsm:mt-[1rem] xsm:mb-[2.5rem]'>
         {Array.isArray(quantities) &&
-          quantities.map((_, index) => (
-            <button
+          quantities?.map((quantity, index) => (
+            <SwiperSlide
               key={index}
-              onClick={() => api?.scrollTo(index)}
-              className={`h-[0.25rem] w-[1rem] rounded-full transition-all ${
-                current === index ? 'bg-[#1F648C]' : 'bg-gray-200'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+              className='!h-[25.5625rem] !w-[20rem]'
+            >
+              <div className='rounded-[1.25rem] flex flex-col rounded-br-[var(--8,] rounded-tr-[0.5rem)] rounded-bl-[0.5rem)] [box-shadow:0px_4px_23.7px_0px_rgba(0,_0,_0,_0.00)] group'>
+                <CoreValueCard
+                  imageSrc={quantity?.image.url}
+                  imageAlt={quantity?.image.alt}
+                  label={quantity?.subtitle}
+                  title={quantity?.title}
+                  description={quantity?.description}
+                />
+              </div>
+            </SwiperSlide>
           ))}
-      </div>
+      </Swiper>
     </>
   )
 }

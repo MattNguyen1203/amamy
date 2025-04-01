@@ -61,6 +61,7 @@ const TrackingBill = ({dataAcf}: TrackingBillProps) => {
           issearchValue={issearchValue}
           onSearch={handleSearch}
           setIsSearchValue={setIsSearchValue}
+          isLoading={isLoading}
         />
       </div>
       <div className='row-span-2 col-start-2 xsm:col-start-1 xsm:row-span-1'>

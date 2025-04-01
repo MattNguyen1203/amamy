@@ -1,13 +1,15 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
-import {Card, ImageIcon, ServicesObject} from '@/utils/type'
-import {useGSAP} from '@gsap/react'
+import useIsMobile from '@/hooks/useIsMobile'
+import { Card, ImageIcon, ServicesObject } from '@/utils/type'
+import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const Services = ({services}: {services: ServicesObject}) => {
+  const isMobile = useIsMobile()
   useGSAP(() => {
     gsap.from('.fade-in-box-card-service-2', {
       scrollTrigger: {
@@ -20,13 +22,12 @@ const Services = ({services}: {services: ServicesObject}) => {
       stagger: 0.2,
     })
   }, [])
-
   return (
-    <div className='flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:px-0 xsm:py-[2.5rem]'>
+    <div className='bg-[#EDF5FA] xsm:bg-[#F8F8FB] flex flex-col items-start gap-14 px-24 py-[7.5rem] relative xsm:gap-[1rem] xsm:px-0 xsm:py-[2.5rem]'>
       <div className='inline-flex items-end gap-[1.5rem] relative'>
         <div className='flex flex-col w-[63rem] items-start gap-[1.5rem] relative xsm:w-[calc(100vw)]'>
           <div className='flex flex-col items-start space-y-6 xsm:space-y-3 w-full'>
-            <div className='flex h-[13.75rem] items-center space-x-6 w-full xsm:w-[calc(100vw)] xsm:px-4 xsm:space-x-3 xsm:h-[7.375rem]'>
+            <div className='flex h-[13.75rem] items-center space-x-6 w-full xsm:w-[calc(100vw)] xsm:px-4 xsm:space-x-3 xsm:h-auto'>
               <ServiceCard
                 icon={services.list_service_1[0].icon}
                 title={services.list_service_1[0].title}
@@ -51,7 +52,7 @@ const Services = ({services}: {services: ServicesObject}) => {
               />
             </div>
 
-            <div className='inline-flex h-[20.625rem] items-center space-x-6 xsm:space-x-3 xsm:px-4 xsm:overflow-auto xsm:w-full hidden_scroll'>
+            <div className='inline-flex h-[20.625rem] xsm:h-[15.40181rem] items-center space-x-6 xsm:space-x-3 xsm:px-4 xsm:overflow-auto xsm:w-full hidden_scroll'>
               <ServiceHighlight
                 backgroundUrl={services.list_service_2[0].image.url}
                 icon={
@@ -84,8 +85,7 @@ const Services = ({services}: {services: ServicesObject}) => {
             </div>
           </div>
         </div>
-
-        <CustomerSatisfaction card={services.card} />
+        {!isMobile && <CustomerSatisfaction card={services.card} />}
       </div>
     </div>
   )
@@ -123,7 +123,7 @@ const ServiceCard = ({
         >
           {subtitle}
         </p>
-        <p className='text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-[0.875rem] xsm:leading-[-0.02625rem]'>
+        <p className='text-[rgba(18,_36,_56,_0.80)] text-[1.25rem] not-italic font-bold leading-[120%] xsm:text-[0.875rem] xsm:leading-[1.3] xsm:font-semibold xsm:tracking-[-0.02625rem]'>
           {title}
         </p>
       </div>
@@ -149,7 +149,7 @@ const ServiceHighlight = ({
 }) => (
   <Link
     href={href || ''}
-    className='fade-in-box-card-service-2 relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:min-w-max'
+    className='fade-in-box-card-service-2 relative w-[30.75rem] h-[20.625rem] bg-white rounded-[1.25rem] overflow-hidden xsm:w-[18.75rem] xsm:h-[15.40181rem] xsm:min-w-max'
   >
     <div
       className='h-full bg-cover bg-center xsm:w-[18.75rem]'
@@ -171,11 +171,11 @@ const ServiceHighlight = ({
 const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
   <Link
     href={href || ''}
-    className='fade-in-box-card-service-2 relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'
+    className='fade-in-box-card-service-2 relative w-[23.5rem] h-[35.875rem] bg-white rounded-[1.25rem] shadow-lg overflow-hidden xsm:hidden'
   >
-    <div className='absolute z-[10]'>
+    <div className='absolute z-[10] left-0 right-0'>
       <Image
-        src={'/homepage/icon/BG.png'}
+        src={'/homepage/icon/BG_3.webp'}
         alt=''
         width={1000}
         height={1000}
@@ -183,11 +183,11 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
       />
     </div>
 
-    <div className='absolute inset-0 bg-[url(/image.png)] bg-cover bg-center'>
+    <div className='absolute inset-0 bg-cover bg-center'>
       <Image
         width={600 * 2}
         height={600 * 2}
-        className='absolute w-[279px] h-[287px] top-[149px] left-[43px] object-cover z-[30]'
+        className='absolute w-[17.4375rem] h-[17.9375rem] left-[2.69rem] bottom-[8.32rem] object-cover z-[30]'
         alt='Image'
         src={'/homepage/replace/img-1.png'}
       />

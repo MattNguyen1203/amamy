@@ -34,16 +34,16 @@ export default function SliderPC({
         withDHS?.list_news_event?.map((item: ListNewsObject, index) => (
           <SwiperSlide
             key={index}
-            className='w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]'
+            className='opacity-0 [&.swiper-slide-active]:opacity-[1] w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]'
           >
             <Image
               src={item?.post?.[0]?.thumbnail}
               alt={item?.post?.[0]?.slug}
               width={1000}
               height={1000}
-              className='w-[50.6875rem] h-[40.5rem] object-contain flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover bg-[linear-gradient(180deg,rgba(0,63,136,0.25)_0%,rgba(0,16,34,0.50)_63.29%)]'
+              className='bg-[#EDF5FA] w-[50.6875rem] h-[40.5rem] object-cover flex-shrink-0 rounded-[0.5rem] sm:rounded-[1.25rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
             />
-            <div className='xsm:hidden sm:group-hover:h-[19.25rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white'>
+            <div className='xsm:hidden sm:group-hover:h-[25.75rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white'>
               <div
                 className='mb-[0.75rem] text-start text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem] xsm:hidden '
                 dangerouslySetInnerHTML={{
@@ -51,9 +51,10 @@ export default function SliderPC({
                 }}
               ></div>
               <div className='sm:pointer-events-none sm:group-hover:pointer-events-auto sm:group-hover:opacity-[1] transition-all duration-700 overflow-hidden opacity-0'>
-                <p className='text-pc-sub16 text-[rgba(0,0,0,0.80)] line-clamp-4'>
-                  {item?.post?.[0]?.excerpt}
-                </p>
+                <p
+                  dangerouslySetInnerHTML={{__html: item?.post?.[0]?.excerpt}}
+                  className='text-pc-sub16 text-[rgba(0,0,0,0.80)] line-clamp-[9]'
+                ></p>
                 <BtnBlue
                   slug={'/blogs/' + item?.post?.[0]?.slug}
                   className='space-x-[0.75rem] w-max ml-auto mt-[1rem]'

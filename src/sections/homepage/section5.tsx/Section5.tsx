@@ -25,10 +25,10 @@ const Section5 = ({faqs}: Props) => {
 
   return (
     <section
-      className='faq-wrap flex relative flex-row w-full p-24 items-start justify-between overflow-hidden gap-2.5 self-stretch 
-    rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-[#ffffff91] xsm:flex-col xsm:p-[1rem]'
+      className='faq-wrap flex relative flex-row w-full p-24 items-start justify-between overflow-hidden gap-1.5 self-stretch 
+    rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-white xsm:flex-col xsm:py-[1rem] xsm:px-0 xsm:rounded-t-[1.25rem]'
     >
-      <h2 className='text-[2.875rem] not-italic font-bold leading-[120%] max-w-[28.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[2.5rem]'>
+      <h2 className='text-[2.875rem] xsm:px-[1rem] not-italic font-bold leading-[120%] max-w-[28.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[1.5rem]'>
         {faqs?.title}
       </h2>
       <Image
@@ -36,10 +36,10 @@ const Section5 = ({faqs}: Props) => {
         alt=''
         width={1000}
         height={1000}
-        className='opacity-[0.06] w-[66.25794rem] h-[33.91225rem] 
+        className='opacity-[0.16] w-[66.25794rem] h-[33.91225rem] 
         rotate-[2.828deg] absolute left-[-6rem] -bottom-[2rem] overflow-hidden xsm:hidden'
       />
-      <div className='flex flex-col gap-[1.5rem] static '>
+      <div className='flex flex-col static'>
         {Array.isArray(faqs?.faqs) &&
           faqs?.faqs?.map((item: IFaq, index: number) => (
             <div

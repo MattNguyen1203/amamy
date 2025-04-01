@@ -1,12 +1,17 @@
 import fetchData from '@/fetch/fetchData'
 import {fetchDataBlog} from '@/fetch/fetchDataBlog'
 import {fetchDataListService} from '@/fetch/fetchDataListService'
+import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import ServicePage from '@/sections/service'
+import metadataValues from '@/utils/metadataValues'
 import {notFound} from 'next/navigation'
-
-export default async function Service({params}: {params: {services: string}}) {
+export async function generateMetadata() {
+  const res = await getMetaDataRankMath('/chieu-van-chuyen/gui-hang-viet-duc')
+  return metadataValues(res)
+}
+export default async function Service() {
   const fetchDataServices = fetchData({
-    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer`,
+    api: `chieu-van-chuyen/gui-hang-viet-duc?_fields=banner,talk_to_ai,list_services,feedback_customer`,
     option: {
       next: {revalidate: 60},
     },

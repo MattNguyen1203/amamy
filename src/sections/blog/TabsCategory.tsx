@@ -10,10 +10,13 @@ import {
   IFavouriteBlog,
   IItemPostBlog,
 } from '@/sections/blog/blogs.interface'
+import {gsap} from 'gsap'
+import EaselPlugin from 'gsap/EaselPlugin'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
 import {useMemo, useRef, useState} from 'react'
 import useSWR from 'swr'
-
+gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 export default function TabsCategory({
   dataCategory,
   dataFavourite,
@@ -59,7 +62,11 @@ export default function TabsCategory({
       scroll: false,
     })
     if (sectionRef.current instanceof HTMLElement) {
-      sectionRef.current.scrollIntoView({behavior: 'smooth'})
+      gsap.to(window, {
+        duration: 0.5,
+        scrollTo: {y: sectionRef.current.offsetTop - 80},
+        ease: 'power2.out',
+      })
     }
   }
   return (
@@ -82,7 +89,7 @@ export default function TabsCategory({
             }}
             className={cn(
               (slugCategory === 'all' || slugCategory === null) && 'active',
-              '[&.active_p]:text-white hover:bg-greyscale-text60 cursor-pointer transition-all duration-500 flex-center rounded-[1.25rem] [&.active]:bg-greyscale-text60 p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4]',
+              'mt-[0.25rem] [&.active_p]:text-white hover:bg-greyscale-text60 cursor-pointer transition-all duration-500 flex-center rounded-[1.25rem] [&.active]:bg-greyscale-text60 p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4]',
             )}
           >
             <p className='text-pc-sub14s group-hover:text-white text-greyscale-text60 transition-all duration-500'>
@@ -96,7 +103,7 @@ export default function TabsCategory({
                 onClick={() => handleSelectSortOption(e)}
                 className={cn(
                   slugCategory === e?.slug && 'active',
-                  '[&.active_p]:text-white group hover:bg-greyscale-text60 [&.active]:bg-greyscale-text60 transition-all duration-500 cursor-pointer flex-center rounded-[1.25rem] p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4]',
+                  'mt-[0.25rem] [&.active_p]:text-white group hover:bg-greyscale-text60 [&.active]:bg-greyscale-text60 transition-all duration-500 cursor-pointer flex-center rounded-[1.25rem] p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4]',
                 )}
               >
                 <p className='text-pc-sub14s group-hover:text-white text-greyscale-text60 transition-all duration-500'>
@@ -128,6 +135,7 @@ export default function TabsCategory({
             ) : Array.isArray(data?.posts) && data?.posts?.length > 0 ? (
               data?.posts?.map((item: IItemPostBlog, index: number) => (
                 <ItemBlog
+                  className='[&_.itembox-content]:bg-[#F8F8F8] [&_.itembox-content]:rounded-b-[1.25rem] shadow-none'
                   key={index}
                   item={item}
                 />

@@ -21,7 +21,7 @@ export default function AsideBlog({
   const [activeSection, setActiveSection] = useState<string>('')
   useEffect(() => {
     if (!isMobile) {
-      const sections = document.querySelectorAll('h2')
+      const sections = document.querySelectorAll('h2, h3, h4, h5, h6')
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -50,7 +50,7 @@ export default function AsideBlog({
     }
   }
   return (
-    <section className='w-[24.5625rem] xsm:w-full h-max sticky top-0 space-y-[1rem]'>
+    <section className='w-[24.5625rem] xsm:w-full h-max sticky top-[6.875rem] sm:h-[calc(100vh-6.875rem)] sm:overflow-hidden sm:overflow-y-auto space-y-[1rem]'>
       {!isMobile && (
         <div className='rounded-[1.25rem] bg-[#EDF5FA] p-[1.5rem]'>
           <p className='text-black text-pc-heading20b mb-[1.5rem]'>
@@ -78,7 +78,7 @@ export default function AsideBlog({
         </div>
       )}
       <Favourite
-        className='sm:[&_.warpper-content]:h-[70vh] px-[1rem]'
+        className='sm:[&_.warpper-content]:max-h-max sm:[&_.warpper-content]:h-max sm:[&_.warpper-content]:overflow-hidden px-[1rem]'
         dataFavourite={dataFavourite}
       />
     </section>

@@ -9,6 +9,7 @@ export default function PopupPaymentInfor({
   setSelectPaymentInformation,
   selectPaymentInformation,
   setSelectPaymentInformationValue,
+  paymentMethod,
 }: {
   form: any
   setSelectPaymentInformation: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,6 +17,10 @@ export default function PopupPaymentInfor({
   setSelectPaymentInformationValue: React.Dispatch<
     React.SetStateAction<{value: string; title: string}>
   >
+  paymentMethod?: {
+    value: string
+    title: string
+  }[]
 }) {
   return (
     <>
@@ -30,11 +35,11 @@ export default function PopupPaymentInfor({
       ></div>
       <div
         className={cn(
-          'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white pb-[4rem] overflow-hidden',
+          'bg-[#F6F6F6] fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] overflow-hidden',
           selectPaymentInformation && 'bottom-0',
         )}
       >
-        <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
+        <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
           <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
             Thông tin thanh toán
           </p>
@@ -47,35 +52,34 @@ export default function PopupPaymentInfor({
             <ICX className='size-[1.5rem]' />
           </div>
         </div>
-        <div className=''>
-          <div
-            onClick={() => {
-              setSelectPaymentInformationValue({
-                title: 'Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)',
-                value: 'VND',
-              })
-              form.setValue('recipientPaymentInformation', 'VND')
-              setSelectPaymentInformation(false)
-            }}
-            className='p-[0.75rem_1rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-          >
-            <p className='text-mb-13M text-black'>
-              Thanh toán bằng VNĐ (theo tỷ giá bán ra Vietcombank)
-            </p>
-          </div>
-          <div
-            onClick={() => {
-              setSelectPaymentInformationValue({
-                title: 'Thanh toán bằng Euro',
-                value: 'Euro',
-              })
-              form.setValue('recipientPaymentInformation', 'Euro')
-              setSelectPaymentInformation(false)
-            }}
-            className='p-[0.75rem_1rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-          >
-            <p className='text-mb-13M text-black'>Thanh toán bằng Euro</p>
-          </div>
+        <div className='bg-[#F6F6F6] space-y-[1rem] p-[1rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+          {Array.isArray(paymentMethod) &&
+            paymentMethod?.map(
+              (
+                item: {
+                  value: string
+                  title: string
+                },
+                index: number,
+              ) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setSelectPaymentInformationValue({
+                      title: item?.title,
+                      value: item?.value ?? item?.title,
+                    })
+                    form.setValue('recipientPaymentInformation', item?.value, {
+                      shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                    })
+                    setSelectPaymentInformation(false)
+                  }}
+                  className='p-[0.75rem_1rem] rounded-[1.25rem] bg-white'
+                >
+                  <p className='text-mb-13M text-black'>{item?.title}</p>
+                </div>
+              ),
+            )}
         </div>
       </div>
     </>

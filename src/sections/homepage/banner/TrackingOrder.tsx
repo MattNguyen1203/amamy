@@ -39,7 +39,7 @@ const TrackingOrder = () => {
     <Tabs
       onValueChange={setValue}
       defaultValue='search-order'
-      className='w-[38.1875rem] xsm:w-full'
+      className='w-[38.1875rem] xsm:w-full xsm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] xsm:rounded-[1.25rem]'
     >
       <TabsList className='relative xsm:w-full'>
         <TabsTrigger
@@ -106,10 +106,11 @@ const TrackingOrder = () => {
             />
             <input
               value={inputAI}
+              disabled
               onChange={(e) => setInputAI(e.target.value)}
               type='text'
               placeholder='VD: Gửi 10kg hàng từ Việt Nam đến Mỹ'
-              className='flex-1 border-none outline-none text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'
+              className='disabled:bg-transparent flex-1 border-none outline-none text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'
             />
           </div>
           <button

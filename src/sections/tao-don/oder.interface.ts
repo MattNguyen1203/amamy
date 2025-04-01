@@ -5,6 +5,7 @@ export interface ICreateOder {
   id: number
   information?: IInformationOrder
   slug?: string
+  european?: string
 }
 export interface IInformationTimeOrder {
   time_content?: string
@@ -54,4 +55,8 @@ export interface IInformationOrder {
   insurance?: IInformationInsurance
   shipping_cost?: string
   important_note?: string
+  payment_method?: {
+    value: string
+    title: string
+  }[]
 }

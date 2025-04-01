@@ -5,7 +5,9 @@ import ImageV2 from '@/components/image/ImageV2'
 import Plus from '@/components/svg/Plus'
 import SendMessage from '@/components/svg/SendMessage'
 import {cn} from '@/lib/utils'
-import {useEffect, useState} from 'react'
+import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {useEffect, useRef, useState} from 'react'
 
 type ChatBotProps = {
   dataMessage?: MessageItemProps[]
@@ -14,8 +16,8 @@ type ChatBotProps = {
 const ChatBot = ({dataMessage}: ChatBotProps) => {
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
-  const {chatBotMessage, setChatBotMessage} = useStore((state) => state)
-
+  const {chatBotMessage} = useStore((state) => state)
+  const boxRef = useRef(null)
   // nhận message từ section TrackingOrder ở homepage
   useEffect(() => {
     if (chatBotMessage) {
@@ -31,15 +33,37 @@ const ChatBot = ({dataMessage}: ChatBotProps) => {
 
   const handleToggle = () => {
     if (open) {
-      setOpen(false)
-      setChatBotMessage('')
+      // setOpen(false)
+      // setChatBotMessage('')
     } else {
-      setOpen(true)
+      // setOpen(true)
     }
   }
+  useEffect(() => {
+    if (!boxRef.current) return
 
+    gsap.registerPlugin(ScrollTrigger)
+    gsap.fromTo(
+      boxRef?.current,
+      {opacity: 1, y: 0},
+      {
+        opacity: 0,
+        y: '100%',
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#footer-section',
+          start: 'top bottom',
+          end: 'bottom center',
+          toggleActions: 'play none none reverse',
+          // markers: true,
+        },
+      },
+    )
+  }, [])
   return (
     <div
+      ref={boxRef}
       className={cn(
         'xsm:hidden fixed z-50 bottom-0 right-6 w-[22.5625rem] rounded-t-[1.25rem] bg-Blue-Primary transition-all duration-500 ease-in-out',
         !open && '-bottom-[20.375rem]',
@@ -80,9 +104,10 @@ const ChatBot = ({dataMessage}: ChatBotProps) => {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            disabled
             type='text'
             placeholder='Nhập yêu cầu của bạn...'
-            className='flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
+            className='disabled:bg-transparent flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
           />
           <button
             onClick={handleSendMessage}

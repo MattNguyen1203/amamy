@@ -6,9 +6,9 @@ const InformationItem = ({day, title, desc}: IProgress) => {
   return (
     <div className='text-pc-14 xsm:text-mb-12'>
       <div className='flex items-center'>
-        <p className='text-black/60 xsm:font-medium'>{day}</p>
-        <div className='size-2 rounded-full bg-[#38B6FF] ml-4 mr-3' />
-        <p className='font-semibold text-black'>{title}</p>
+        <p className='text-black/60 xsm:font-medium sm:w-[5rem]'>{day}</p>
+        <div className='size-2 rounded-[100%] bg-[#38B6FF] ml-4 mr-3 xsm:my-auto' />
+        <p className='flex-1 font-semibold text-black'>{title}</p>
       </div>
       <div
         className='mt-2 *:text-black *:text-pc-14 [&_strong]:text-pc-sub14s'

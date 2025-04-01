@@ -8,11 +8,11 @@ import CeateNote from '@/sections/tao-don/CreateNote'
 import CustomBack from '@/sections/tao-don/CustomBack'
 import FormDeliveryInformation from '@/sections/tao-don/FormDeliveryInformation'
 import FormDeliveryInformationAboutVN from '@/sections/tao-don/FormDeliveryInformationAboutVN'
+import FormDeliveryInformationJapanVN from '@/sections/tao-don/FormDeliveryInformationJapanVN'
 import FormDeliveryInformationVNHan from '@/sections/tao-don/FormDeliveryInformationVNHan'
 import FormDeliveryInformationVNJapan from '@/sections/tao-don/FormDeliveryInformationVNJapan'
 import FormStepStart from '@/sections/tao-don/FormStepStart'
 import ICCheck from '@/sections/tao-don/ICCheck'
-import ICFAQ from '@/sections/tao-don/ICFAQ'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
@@ -34,18 +34,24 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
+  const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
-  const [faq, setFaq] = useState(true)
-  const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
+  // const [faq, setFaq] = useState(true)
+  // const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
   const [dataInformation, setDataInformation] = useState<
     ICreateOder | undefined
   >()
+  const [selectNationValue, setSelectNationValue] = useState<{
+    img: string
+    title: string
+  }>({img: '', title: ''})
   const handleClickcurrentTab = (nextTab: string) => {
     setCurrentTab(nextTab)
   }
   useEffect(() => {
     if (dataFromOrder?.shipping && data) {
+      setDataInformation(undefined)
       const foundItem = data?.find(
         (item) => item.id === Number(dataFromOrder?.shipping),
       )
@@ -78,17 +84,16 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '6'},
       ]
     }
-  }, [dataFromOrder?.shipping])
-  useEffect(() => {
-    setTimeout(() => {
-      setFaq(false)
-    }, 1000)
-  }, [])
+  }, [dataFromOrder?.shipping, data])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setFaq(false)
+  //   }, 1000)
+  // }, [])
   return (
     <>
       <Tabs
         value={currentTab}
-        onValueChange={setCurrentTab}
         className='flex xsm:flex-col sm:space-x-[1.5rem] pb-[5rem] bg-white xsm:bg-[#FAFAFA]'
       >
         <TabsList className='xsm:space-y-[0.5rem] sticky z-[50] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
@@ -98,19 +103,27 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               <CustomBack />
             </div>
           )}
-          <div className='xsm:w-full xsm:justify-between sm:space-y-[2.5rem] flex sm:flex-col flex-1 sm:ml-[0.84rem]'>
+          <div className='xsm:w-full xsm:justify-between sm:space-y-[2.5rem] flex sm:flex-col flex-1'>
             {StepForm?.map(
               (item: {title: string; value: string}, index: number) => (
                 <TabsTrigger
+                  onClick={() => {
+                    setCurrentTab(item?.value)
+                    setIndexTab(index)
+                    if (item?.value === '1') {
+                      setDataInformation(undefined)
+                      setDataFromOrder({...dataFromOrder, shipping: null})
+                    }
+                  }}
                   key={index}
                   value={item?.value}
                   className={cn(
                     'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none [&_.box-index]:data-[state=active]:bg-[#38B6FF] [&_.box-text]:data-[state=active]:text-black',
-                    index + 1 > Number(currentTab) && 'pointer-events-none',
+                    index > Number(indexTab) && 'pointer-events-none',
                   )}
                 >
-                  {index + 1 < Number(currentTab) ? (
-                    <ICCheck className='size-[2.0125rem] xsm:size-[1.45rem]' />
+                  {index < Number(indexTab) ? (
+                    <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
                   ) : (
                     <div className='box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] xsm:text-[0.89231rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]'>
                       {index + 1}
@@ -125,15 +138,22 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </div>
           <div
             className={cn(
-              'sm:absolute xsm:relative sm:top-[1.25rem] sm:bottom-[1.25rem] sm:left-[1.25rem] w-[0.25rem] xsm:w-full xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 before:bg-[#38B6FF] before:sm:w-full before:xsm:h-full before:transition-all before:duration-500',
-              currentTab === '1' && 'before:sm:h-[5%] before:xsm:w-[5%]',
-              currentTab === '2' && 'before:sm:h-[23.5%] before:xsm:w-[23.5%]',
-              currentTab === '3' && 'before:sm:h-[42%] before:xsm:w-[42%]',
-              currentTab === '4' && 'before:sm:h-[61%] before:xsm:w-[61%]',
-              currentTab === '5' && 'before:sm:h-[79%] before:xsm:w-[79%]',
-              currentTab === '6' && 'before:sm:h-[100%] before:xsm:w-[100%]',
+              'z-[-1] absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.6rem] xsm:z-[-1] sm:top-[1.5rem] sm:bottom-[1.5rem] sm:left-[2.1rem] w-[0.25rem] xsm:w-auto xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
             )}
-          ></div>
+          >
+            <div
+              style={
+                isMobile
+                  ? {
+                      width: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
+                    }
+                  : {
+                      height: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
+                    }
+              }
+              className='bg-[#38B6FF] xsm:h-[0.25rem] transition-all duration-1000'
+            ></div>
+          </div>
         </TabsList>
         <div className='flex-1 p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8] xsm:bg-[#FAFAFA]'>
           {!isMobile && (
@@ -147,18 +167,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           >
             <FormStepStart
               data={data}
+              setIndexTab={setIndexTab}
+              indexTab={indexTab}
               onSuccess={handleClickcurrentTab}
               setDataFromOrder={setDataFromOrder}
               dataFromOrder={dataFromOrder}
               dataInformation={dataInformation}
-              sentGoodsAtAmamy={sentGoodsAtAmamy}
+              // sentGoodsAtAmamy={sentGoodsAtAmamy}
               nextStep={
-                '2'
-                // dataInformation?.information?.time
-                //   ? '2'
-                //   : dataInformation?.information?.note
-                //     ? '3'
-                //     : '4'
+                dataInformation
+                  ? dataInformation?.information?.time
+                    ? '2'
+                    : dataInformation?.information?.note
+                    ? '3'
+                    : '4'
+                  : '2'
               }
             />
           </TabsContent>
@@ -169,9 +192,14 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <OrderStepTime
+                  setIndexTab={setIndexTab}
+                  indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataInformation={dataInformation?.information?.time}
                   nextStep={dataInformation?.information?.note ? '3' : '4'}
+                  setDataInformation={setDataInformation}
+                  setDataFromOrder={setDataFromOrder}
+                  dataFromOrder={dataFromOrder}
                 />
               </TabsContent>
               <TabsContent
@@ -179,9 +207,10 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <CeateNote
+                  setIndexTab={setIndexTab}
+                  indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
                   data={dataInformation?.information?.note}
-                  type={dataInformation?.type}
                   prevStep={dataInformation?.information?.time ? '2' : '1'}
                 />
               </TabsContent>
@@ -191,6 +220,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               >
                 {dataInformation?.type === 'ducvn' && (
                   <FormDeliveryInformationAboutVN
+                    setIndexTab={setIndexTab}
+                    indexTab={indexTab}
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
@@ -198,8 +229,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                          ? '2'
-                          : '1'
+                        ? '2'
+                        : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -213,6 +244,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 )}
                 {dataInformation?.type === 'viethan' && (
                   <FormDeliveryInformationVNHan
+                    setIndexTab={setIndexTab}
+                    indexTab={indexTab}
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
@@ -221,8 +254,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                          ? '2'
-                          : '1'
+                        ? '2'
+                        : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -234,19 +267,43 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     }
                   />
                 )}
-                {(dataInformation?.type === 'vietnhat' ||
-                  dataInformation?.type === 'nhatviet') && (
+                {dataInformation?.type === 'vietnhat' && (
                   <FormDeliveryInformationVNJapan
+                    setIndexTab={setIndexTab}
+                    indexTab={indexTab}
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
-                    type={dataInformation?.type}
                     prevStep={
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                          ? '2'
-                          : '1'
+                        ? '2'
+                        : '1'
+                    }
+                    nextStep={
+                      dataInformation?.information?.insurance?.compensation
+                        ?.policy ||
+                      dataInformation?.information?.insurance
+                        ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '6'
+                    }
+                  />
+                )}
+                {dataInformation?.type === 'nhatviet' && (
+                  <FormDeliveryInformationJapanVN
+                    setIndexTab={setIndexTab}
+                    indexTab={indexTab}
+                    handleClickcurrentTab={handleClickcurrentTab}
+                    setDataFromOrder={setDataFromOrder}
+                    dataFromOrder={dataFromOrder}
+                    prevStep={
+                      dataInformation?.information?.note
+                        ? '3'
+                        : dataInformation?.information?.time
+                        ? '2'
+                        : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -260,15 +317,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 )}
                 {dataInformation?.type === 'vietduc' && (
                   <FormDeliveryInformation
+                    setIndexTab={setIndexTab}
+                    indexTab={indexTab}
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
+                    title={dataInformation?.title}
+                    european={dataInformation?.european}
+                    selectNationValue={selectNationValue}
+                    setSelectNationValue={setSelectNationValue}
                     prevStep={
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                          ? '2'
-                          : '1'
+                        ? '2'
+                        : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -286,6 +349,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Insurance
+                  setIndexTab={setIndexTab}
+                  indexTab={indexTab}
                   data={dataInformation?.information?.insurance}
                   handleClickcurrentTab={handleClickcurrentTab}
                 />
@@ -295,13 +360,28 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Instruct
+                  setIndexTab={setIndexTab}
+                  indexTab={indexTab}
                   data={dataInformation?.information?.instruct}
+                  paymentMethod={dataInformation?.information?.payment_method}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataFromOrder={dataFromOrder}
                   setSubmitting={setSubmitting}
                   setDataFromOrder={setDataFromOrder}
                   type={dataInformation?.type}
                   importantNote={dataInformation?.information?.important_note}
+                  prevStep={
+                    dataInformation?.type === 'vietduc'
+                      ? dataInformation?.information?.insurance?.compensation
+                          ?.policy
+                        ? '5'
+                        : '4'
+                      : dataInformation?.information?.insurance
+                          ?.cargo_insurance_japanvn
+                      ? '5'
+                      : '4'
+                  }
+                  setDataInformation={setDataInformation}
                 />
               </TabsContent>
             </>
@@ -312,7 +392,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         className={cn(
           'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
           submitting && 'block',
-          !faq && 'block',
+          // !faq && 'block',
         )}
       ></div>
       <div
@@ -338,7 +418,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           <p className='text-pc-sub16m text-white cursor-pointer'>Xong</p>
         </div>
       </div>
-      <div
+      {/* <div
         className={cn(
           'top-[50%] opacity-[1] pointer-events-auto xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] visible transition-all duration-500 flex-center flex-col fixed z-[51] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] rounded-[1.25rem] bg-white',
           faq && 'pointer-events-none opacity-0 top-[75%]',
@@ -368,7 +448,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             <p className='text-pc-sub16m text-white'>Đây là lần đầu</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

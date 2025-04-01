@@ -13,14 +13,14 @@ export default function Favourite({
   return (
     <aside
       className={cn(
-        'xsm:pt-[2rem] w-full sm:p-[1rem] rounded-[1.25rem] sm:bg-[#F8F8F8]',
+        'xsm:pt-[2rem] w-full sm:p-[1rem] sm:pr-0 rounded-[1.25rem] sm:bg-[#F8F8F8]',
         className,
       )}
     >
       <h2 className='text-[#000] font-montserrat text-pc-heading20b xsm:text-pc-sub16b pb-[1rem] xsm:pb-[0.75rem] border-b-[1px] border-b-[#DCDFE4]'>
         Có thể bạn sẽ thích
       </h2>
-      <div className='warpper-content sm:h-[80vh] sm:overflow-auto sm:overflow-y-auto'>
+      <div className='warpper-content sm:max-h-[80vh] sm:overflow-auto sm:overflow-y-auto sm:pr-[1rem]'>
         {Array.isArray(dataFavourite) &&
           dataFavourite?.map((e: IFavouriteBlog, index: number) => (
             <Fragment key={index}>

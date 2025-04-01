@@ -24,7 +24,7 @@ import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -46,12 +46,21 @@ const formSchema = z.object({
       required_error: 'Vui lòng chọn chiều dịch vụ',
     })
     .min(1, 'Vui lòng chọn chiều dịch vụ'),
-  customercode: z.string().optional(),
+  customercode: z
+    .string({
+      required_error: 'Vui lòng chọn Mã khách hàng',
+    })
+    .min(1, 'Vui lòng chọn Mã khách hàng'),
+  nameFacebook: z
+    .string({
+      required_error: 'Vui lòng điền thông tin',
+    })
+    .min(1, 'Vui lòng chọn điền thông tin'),
 })
 
 const dataContactMethod = [
   {
-    img: '/order/like.svg',
+    img: '/order/likev2.svg',
     title: 'Facebook Fanpage Amamy',
   },
   {
@@ -74,16 +83,20 @@ export default function FormStepStart({
   setDataFromOrder,
   dataFromOrder,
   dataInformation,
-  sentGoodsAtAmamy,
+  // sentGoodsAtAmamy,
   nextStep,
+  setIndexTab,
+  indexTab,
 }: {
   data: ICreateOder[]
   onSuccess: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
   dataInformation?: ICreateOder
-  sentGoodsAtAmamy: boolean
+  // sentGoodsAtAmamy: boolean
   nextStep: string
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const isMobile = useIsMobile()
   const [selectServiceDimension, setSelectServiceDimension] =
@@ -101,19 +114,20 @@ export default function FormStepStart({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
     defaultValues: {
-      email: dataFromOrder?.email || '',
-      name: dataFromOrder?.name || '',
-      shipping: dataFromOrder?.shipping || '',
-      customercode: dataFromOrder?.customercode || '',
+      email: dataFromOrder?.email ?? '',
+      name: dataFromOrder?.name ?? '',
+      shipping: dataFromOrder?.shipping ?? '',
+      customercode: dataFromOrder?.customercode ?? '',
       whereToContact:
-        dataFromOrder?.whereToContact || dataContactMethod?.[0]?.title,
+        dataFromOrder?.whereToContact ?? dataContactMethod?.[0]?.title,
+      nameFacebook: dataFromOrder?.nameFacebook ?? '',
     },
   })
-  useEffect(() => {
-    if (sentGoodsAtAmamy && localStorage.getItem('user_email')) {
-      form.setValue('email', String(localStorage.getItem('user_email')))
-    }
-  }, [sentGoodsAtAmamy])
+  // useEffect(() => {
+  //   if (sentGoodsAtAmamy && localStorage.getItem('user_email')) {
+  //     form.setValue('email', String(localStorage.getItem('user_email')))
+  //   }
+  // }, [sentGoodsAtAmamy])
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -136,38 +150,40 @@ export default function FormStepStart({
     if (dataFromOrder?.shipping !== values?.shipping) {
       setStepOrder(Number(nextStep))
     }
+    setIndexTab(indexTab + 1)
     onSuccess(nextStep)
     setTriggerScroll(true)
-    if (sentGoodsAtAmamy) {
-      const formData = new FormData()
-      formData.append('user', values?.email)
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ORDER}v1/customer`,
-        {
-          method: 'POST',
-          body: formData,
-        },
-      )
-      if (response?.ok) {
-        const preview = await response.text()
-        if (preview) {
-          const previewJson = JSON.parse(preview)
-          setDataFromOrder({
-            ...dataFromOrder,
-            recipientName: previewJson?.ten_nguoi_nhan,
-            recipientPhone: previewJson?.sdt,
-            recipientAddress: previewJson?.dia_chi_nguoi_nhan,
-            recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
-            recipientPaymentInformation: previewJson?.loai_tien_te,
-            ...values,
-          })
-          return
-        }
+    const formData = new FormData()
+    formData.append('user', values?.email)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ORDER}v1/customer`,
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+    if (response?.ok) {
+      const preview = await response.text()
+      if (preview) {
+        const previewJson = JSON.parse(preview)
+        setDataFromOrder({
+          ...dataFromOrder,
+          recipientName: previewJson?.ten_nguoi_nhan,
+          recipientPhone: previewJson?.sdt,
+          recipientAddress: previewJson?.dia_chi_nguoi_nhan,
+          recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
+          recipientPaymentInformation: previewJson?.loai_tien_te,
+          recipientCity: previewJson?.tinh_thanh_nguoi_nhan,
+          recipientCodeCity: previewJson?.ma_tinh_thanh_nguoi_nhan,
+          district: previewJson?.ma_tinh_thanh_nguoi_nhan,
+          housingNumber: previewJson?.so_nha_nguoi_nhan,
+          nation: previewJson?.nation,
+          ...values,
+        })
+        return
       }
-      setDataFromOrder({...dataFromOrder, ...values})
-    } else {
-      setDataFromOrder({...dataFromOrder, ...values})
     }
+    setDataFromOrder({...dataFromOrder, ...values})
   }
   return (
     <Form {...form}>
@@ -184,18 +200,18 @@ export default function FormStepStart({
             name='email'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Email của bạn(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Email@email'
                     {...field}
                   />
                 </FormControl>
                 <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -211,7 +227,7 @@ export default function FormStepStart({
                 }}
                 className='flex-1 space-y-0'
               >
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Bạn đã liên hệ Amamy qua đâu? (*)
                 </FormLabel>
                 <Select
@@ -219,7 +235,7 @@ export default function FormStepStart({
                   defaultValue={field.value}
                 >
                   <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                    <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn chiều dịch vụ' />
                       )}
@@ -291,12 +307,12 @@ export default function FormStepStart({
             name='name'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người gửi (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Nhập tên người gửi'
                     {...field}
                   />
@@ -307,77 +323,19 @@ export default function FormStepStart({
           />
           <FormField
             control={form.control}
-            name='shipping'
+            name='nameFacebook'
             render={({field}) => (
-              <FormItem
-                onClick={() => {
-                  setSelectServiceDimension(true)
-                }}
-                className='flex-1 space-y-0'
-              >
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Chọn chiều dịch vụ (*)
+              <FormItem className='flex-1 space-y-0'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Tên FaceBook (*)
                 </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                    <SelectTrigger className='xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
-                      {!isMobile && (
-                        <SelectValue placeholder='Chọn chiều dịch vụ' />
-                      )}
-                      {isMobile && !field.value && (
-                        <SelectValue placeholder='Chọn chiều dịch vụ' />
-                      )}
-                      {isMobile && field.value && (
-                        <div className='space-x-[0.75rem] flex items-center flex-1'>
-                          <ImageV2
-                            src={
-                              selectServiceDimensionValue?.img ||
-                              dataInformation?.thumbnail ||
-                              ''
-                            }
-                            alt=''
-                            height={24 * 2}
-                            width={24 * 2}
-                            className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                          />
-                          <p className='text-black text-pc-sub14m'>
-                            {selectServiceDimensionValue?.title ||
-                              dataInformation?.title}
-                          </p>
-                        </div>
-                      )}
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
-                    {Array.isArray(data) &&
-                      data?.length > 0 &&
-                      data?.map((item: ICreateOder, index: number) => (
-                        <SelectItem
-                          key={index}
-                          className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                          value={String(item?.id)}
-                        >
-                          <div className='space-x-[0.75rem] flex items-center flex-1'>
-                            <ImageV2
-                              src={
-                                item?.thumbnail || '/order/flag-germany.webp'
-                              }
-                              alt=''
-                              height={24 * 2}
-                              width={24 * 2}
-                              className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                            />
-                            <p className='text-black text-pc-sub14m'>
-                              {item?.title}
-                            </p>
-                          </div>
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <Input
+                    className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    placeholder='Nhập tên FaceBook'
+                    {...field}
+                  />
+                </FormControl>
                 <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
@@ -385,25 +343,100 @@ export default function FormStepStart({
         </div>
         <FormField
           control={form.control}
+          name='shipping'
+          render={({field}) => (
+            <FormItem
+              onClick={() => {
+                setSelectServiceDimension(true)
+              }}
+              className='flex-1 space-y-0 !mb-[1.25rem]'
+            >
+              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                Chọn chiều dịch vụ (*)
+              </FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                  <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    {!isMobile && (
+                      <SelectValue placeholder='Chọn chiều dịch vụ' />
+                    )}
+                    {isMobile && !field.value && (
+                      <SelectValue placeholder='Chọn chiều dịch vụ' />
+                    )}
+                    {isMobile && field.value && (
+                      <div className='space-x-[0.75rem] flex items-center flex-1'>
+                        <ImageV2
+                          src={
+                            selectServiceDimensionValue?.img ||
+                            dataInformation?.thumbnail ||
+                            ''
+                          }
+                          alt=''
+                          height={24 * 2}
+                          width={24 * 2}
+                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                        />
+                        <p className='text-black text-pc-sub14m'>
+                          {selectServiceDimensionValue?.title ||
+                            dataInformation?.title}
+                        </p>
+                      </div>
+                    )}
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                  {Array.isArray(data) &&
+                    data?.length > 0 &&
+                    data?.map((item: ICreateOder, index: number) => (
+                      <SelectItem
+                        key={index}
+                        className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                        value={String(item?.id)}
+                      >
+                        <div className='space-x-[0.75rem] flex items-center flex-1'>
+                          <ImageV2
+                            src={item?.thumbnail || '/order/flag-germany.webp'}
+                            alt=''
+                            height={24 * 2}
+                            width={24 * 2}
+                            className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                          />
+                          <p className='text-black text-pc-sub14m'>
+                            {item?.title}
+                          </p>
+                        </div>
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name='customercode'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Mã khách hàng
               </FormLabel>
               <FormControl>
                 <Input
-                  className='xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Nhập mã khách hàng'
                   {...field}
                 />
               </FormControl>
               <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)]'>
+              <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khách nhau sẽ giao sai.
               </p>
@@ -415,7 +448,7 @@ export default function FormStepStart({
             type='submit'
             disabled={isMobile ? false : !form.formState.isValid}
             className={cn(
-              'xsm:w-full hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+              '!shadow-none xsm:w-full hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
               !form.formState.isValid &&
                 'sm:bg-[#F0F0F0] [&_p]:sm:text-[rgba(0,0,0,0.30)]',
             )}
@@ -440,7 +473,7 @@ export default function FormStepStart({
             ></div>
             <div
               className={cn(
-                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white pb-[4rem] overflow-hidden',
+                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
                 selectServiceDimension && 'bottom-0',
               )}
             >
@@ -457,39 +490,43 @@ export default function FormStepStart({
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className=''>
+              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
                 {Array.isArray(data) &&
                   data?.length > 0 &&
                   data?.map((item: ICreateOder, index: number) => (
-                    <div
-                      key={index}
-                      onClick={() => {
-                        form.setValue('shipping', String(item?.id))
-                        setSelectServiceDimensionValue({
-                          img: item?.thumbnail,
-                          title: item?.title,
-                        })
-                        setSelectServiceDimension(false)
-                      }}
-                      className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-                    >
-                      <ImageV2
-                        src={item?.thumbnail || '/order/flag-germany.webp'}
-                        alt=''
-                        height={24 * 2}
-                        width={24 * 2}
-                        className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                      />
-                      <p className='text-black text-pc-sub14m line-clamp-1'>
-                        {item?.title}
-                      </p>
-                    </div>
+                    <Fragment key={index}>
+                      <div
+                        onClick={() => {
+                          form.setValue('shipping', String(item?.id), {
+                            shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                          })
+                          setSelectServiceDimensionValue({
+                            img: item?.thumbnail,
+                            title: item?.title,
+                          })
+                          setSelectServiceDimension(false)
+                        }}
+                        className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                      >
+                        <ImageV2
+                          src={item?.thumbnail || '/order/flag-germany.webp'}
+                          alt=''
+                          height={24 * 2}
+                          width={24 * 2}
+                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                        />
+                        <p className='text-black text-pc-sub14m line-clamp-1'>
+                          {item?.title}
+                        </p>
+                      </div>
+                      <div className='h-[1px] w-full bg-[#F8F8F8]'></div>
+                    </Fragment>
                   ))}
               </div>
             </div>
             <div
               className={cn(
-                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white pb-[4rem] overflow-hidden',
+                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
                 howToContactAmamy && 'bottom-0',
               )}
             >
@@ -506,7 +543,7 @@ export default function FormStepStart({
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className=''>
+              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
                 {Array.isArray(dataContactMethod) &&
                   dataContactMethod?.length > 0 &&
                   dataContactMethod?.map(
@@ -517,29 +554,37 @@ export default function FormStepStart({
                       },
                       index: number,
                     ) => (
-                      <div
-                        key={index}
-                        onClick={() => {
-                          form.setValue('whereToContact', String(item?.title))
-                          setHowToContactAmamyValue({
-                            img: item?.img,
-                            title: item?.title,
-                          })
-                          setHowToContactAmamy(false)
-                        }}
-                        className='space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8] bg-white'
-                      >
-                        <ImageV2
-                          src={item?.img || ''}
-                          alt=''
-                          height={24 * 2}
-                          width={24 * 2}
-                          className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                        />
-                        <p className='text-black text-pc-sub14m line-clamp-1'>
-                          {item?.title}
-                        </p>
-                      </div>
+                      <Fragment key={index}>
+                        <div
+                          onClick={() => {
+                            form.setValue(
+                              'whereToContact',
+                              String(item?.title),
+                              {
+                                shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                              },
+                            )
+                            setHowToContactAmamyValue({
+                              img: item?.img,
+                              title: item?.title,
+                            })
+                            setHowToContactAmamy(false)
+                          }}
+                          className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                        >
+                          <ImageV2
+                            src={item?.img || ''}
+                            alt=''
+                            height={24 * 2}
+                            width={24 * 2}
+                            className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                          />
+                          <p className='text-black text-pc-sub14m line-clamp-1'>
+                            {item?.title}
+                          </p>
+                        </div>
+                        <div className='h-[1px] w-full bg-[#F8F8F8]'></div>
+                      </Fragment>
                     ),
                   )}
               </div>

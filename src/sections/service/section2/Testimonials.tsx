@@ -34,17 +34,17 @@ export default function Testimonials({data}: Prop) {
   }, [api])
 
   return (
-    <section className='py-24 xsm:py-[1.5rem] mt-[3.75rem] xsm:mt-5'>
-      <div className='w-full px-4 xsm:px-[1rem]'>
-        <div className='fade-section mx-auto max-w-2xl text-center'>
-          <h2 className='fade-item mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] text-center'>
+    <section className='py-24 xsm:py-[1.5rem] mt-[2.75rem] xsm:mt-5'>
+      <div className='w-full px-4 xsm:px-0'>
+        <div className='fade-section xsm:px-[1rem] mx-auto max-w-2xl sm:text-center'>
+          <h2 className='fade-item mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] sm:text-center'>
             {data?.feedback_customer?.title}
           </h2>
           <p
             dangerouslySetInnerHTML={{
               __html: data?.feedback_customer?.subtitle,
             }}
-            className='fade-item font-montserrat font-medium text-[0.875rem] leading-[1.375rem] tracking-[-0.03em] text-center'
+            className='fade-item text-[rgba(0,0,0,0.60)] xsm:text-[rgba(0,0,0,0.80)] font-montserrat font-medium text-[0.875rem] leading-[1.375rem] xsm:leading-[1.5] xsm:tracking-[-0.02625rem] tracking-[-0.03em] sm:text-center'
           ></p>
         </div>
 
@@ -126,8 +126,8 @@ export default function Testimonials({data}: Prop) {
                   </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious className='absolute xsm:hidden left-[3rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
-            <CarouselNext className='absolute xsm:hidden right-[3.5rem] top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-none bg-white shadow-lg' />
+            <CarouselPrevious className='absolute xsm:hidden left-[2.5rem] top-1/2 h-10 w-10 sm:size-[3rem] -translate-y-1/2 rounded-full border-none bg-white shadow-lg [&_svg]:sm:size-[1.25rem]' />
+            <CarouselNext className='absolute xsm:hidden right-[3.5rem] top-1/2 h-10 w-10 sm:size-[3rem] -translate-y-1/2 rounded-full border-none bg-white shadow-lg [&_svg]:sm:size-[1.25rem]' />
           </Carousel>
 
           {/* Pagination Dots */}

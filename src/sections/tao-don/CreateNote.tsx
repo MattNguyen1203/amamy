@@ -19,13 +19,15 @@ import {z} from 'zod'
 export default function CeateNote({
   data,
   handleClickcurrentTab,
-  type,
   prevStep,
+  setIndexTab,
+  indexTab,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (nextTab: string) => void
-  type: string
   prevStep: string
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
 }) {
   const FormSchema = z.object({
     note: z.array(
@@ -44,6 +46,15 @@ export default function CeateNote({
         : [],
     },
   })
+  useEffect(() => {
+    if (!data) {
+      if (stepOrder < 4) {
+        setStepOrder(4)
+      }
+      handleClickcurrentTab('4')
+      setTriggerScroll(true)
+    }
+  }, [])
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -56,6 +67,8 @@ export default function CeateNote({
       if (stepOrder < 4) {
         setStepOrder(4)
       }
+      setIndexTab(indexTab + 1)
+      form.reset()
       handleClickcurrentTab('4')
       setTriggerScroll(true)
     }
@@ -74,16 +87,13 @@ export default function CeateNote({
             data?.map((item: IInformationNoteOrder, index: number) => (
               <div
                 key={index}
-                className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1rem] border-[1px] border-solid border-[#DCDFE4]'
+                className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1rem]'
               >
                 <p className='xsm:text-pc-sub14s mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
                   {item?.title}
                 </p>
                 <div
-                  className={cn(
-                    '[&_img]:w-full [&_img]:max-h-[50vh] [&_img]:h-auto [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]',
-                    type === 'viethan' && 'marker:[&_ul_li]:text-[#f00]',
-                  )}
+                  className='[&_a]:text-[#0084FF] [&_img]:w-full [&_img]:max-h-[50vh] [&_img]:h-auto [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14m *:font-normal *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
@@ -114,7 +124,10 @@ export default function CeateNote({
             ))}
           <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
             <div
-              onClick={() => handleClickcurrentTab(prevStep)}
+              onClick={() => {
+                handleClickcurrentTab(prevStep)
+                setIndexTab(indexTab - 1)
+              }}
               className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
             >
               <p className='text-pc-sub16m text-black'>Quay lại</p>
@@ -123,7 +136,7 @@ export default function CeateNote({
               type='submit'
               disabled={!form.formState.isValid}
               className={cn(
-                'xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+                '!shadow-none xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
                 !form.formState.isValid &&
                   'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
               )}

@@ -25,7 +25,7 @@ export default function RelatedBlogs({
     <section
       className={cn('fade-section py-[6rem] xsm:py-[2.5rem]', className)}
     >
-      <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[2.5rem] xsm:mb-[1rem]'>
+      <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[0.5rem] xsm:mb-[1rem]'>
         <h3 className='fade-item text-black text-pc-h1 xsm:text-mb-h2'>
           {title || 'Các bài viết liên quan'}
         </h3>
@@ -56,7 +56,7 @@ export default function RelatedBlogs({
             el: '.swiper-pagination-custom',
           }}
           modules={[FreeMode, Pagination, Navigation]}
-          className='[&_.swiper-wrapper]:space-x-[1.5rem] xsm:[&_.swiper-wrapper]:space-x-[0.75rem] sm:!px-[6rem] xsm:!px-[1rem]'
+          className='sm:!pt-[2rem] [&_.swiper-wrapper]:space-x-[1.5rem] xsm:[&_.swiper-wrapper]:space-x-[0.75rem] sm:!px-[6rem] xsm:!px-[1rem]'
         >
           {Array.isArray(data) &&
             data?.length > 0 &&
@@ -66,6 +66,7 @@ export default function RelatedBlogs({
                 key={index}
               >
                 <ItemBlog
+                  type='hover'
                   key={index}
                   item={item}
                   className='shadow-[-8px_4px_40px_0px_rgba(0,35,93,0.08)] bg-white xsm:h-[15.51725rem] xsm:w-[16.875rem] xsm:[&_img]:h-[9.375rem] xsm:[&_.warpper-image]:h-[9.375rem]'
@@ -80,7 +81,7 @@ export default function RelatedBlogs({
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100]' />
         </div>
       </div>
-      <div className='swiper-pagination-custom xsm:relative xsm:!w-[11.125rem] xsm:!left-[50%] xsm:!-translate-x-[50%] flex-center space-x-[0.375rem] [&_.swiper-pagination-bullet]:w-[2.5rem] [&_.swiper-pagination-bullet]:h-[0.25rem] [&_.swiper-pagination-bullet]:rounded-[0.625rem] [&_.swiper-pagination-bullet]:opacity-[1] [&_.swiper-pagination-bullet]:bg-[rgba(31,100,140,0.24)] [&_.swiper-pagination-bullet-active]:!bg-[#1F648C]'></div>
+      <div className='swiper-pagination-custom xsm:relative xsm:!w-[11.125rem] xsm:!left-[50%] xsm:!-translate-x-[50%] flex-center space-x-[0.375rem] [&_.swiper-pagination-bullet]:cursor-pointer [&_.swiper-pagination-bullet]:w-[2.5rem] [&_.swiper-pagination-bullet]:h-[0.25rem] [&_.swiper-pagination-bullet]:rounded-[0.625rem] [&_.swiper-pagination-bullet]:opacity-[1] [&_.swiper-pagination-bullet]:bg-[rgba(31,100,140,0.24)] [&_.swiper-pagination-bullet-active]:!bg-[#1F648C]'></div>
     </section>
   )
 }

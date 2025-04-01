@@ -1,6 +1,5 @@
 'use client'
 import {IDataHeader, Isocial} from '@/components/header/Header'
-import ICDrop from '@/components/header/ICDrop'
 import {
   Sheet,
   SheetClose,
@@ -12,9 +11,8 @@ import ImageV2 from '@/components/image/ImageV2'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Menu from '@/components/svg/Menu'
 import {cn} from '@/lib/utils'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
-import {Fragment, useState} from 'react'
+import {Fragment} from 'react'
 
 interface INavItems {
   name: string
@@ -23,16 +21,13 @@ interface INavItems {
 
 const MobileMenu = ({
   navItems,
-  dataCreateOrder,
   social,
   dataHeader,
 }: {
   navItems: INavItems[]
-  dataCreateOrder: ICreateOder[]
   social: Isocial[]
   dataHeader: IDataHeader
 }) => {
-  const [toggle, setToggle] = useState<boolean>(false)
   return (
     <Sheet>
       <SheetTrigger>
@@ -40,7 +35,7 @@ const MobileMenu = ({
       </SheetTrigger>
       <SheetContent className='w-full overflow-auto p-4 pt-0 bg-[#F6F8FA]'>
         <SheetTitle className='hidden' />
-        <SheetClose className='sticky top-0 py-4 bg-[#F6F8FA] w-full'>
+        <SheetClose className='sticky top-0 py-4 bg-[#F6F8FA]'>
           <ArrowRight className='size-6 stroke-black' />
         </SheetClose>
         <div className='px-4 bg-white rounded-[1.25rem]'>
@@ -82,51 +77,15 @@ const MobileMenu = ({
             </Link>
           </SheetClose>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <div
-            onClick={() => {
-              setToggle(!toggle)
-            }}
-            className='text-mb-13M text-black py-4 flex w-full justify-between'
-          >
-            <p className='text-mb-13M text-black'>Dịch vụ</p>
-            <ICDrop className='size-[1.5rem]' />
-          </div>
-          <div
-            style={{
-              height: toggle
-                ? `calc(2.5rem*${dataCreateOrder?.length + 1})`
-                : '0',
-            }}
-            className={cn(
-              'space-y-[1rem] h-0 transition-all duration-500 overflow-hidden',
-              toggle && 'pb-[1rem]',
-            )}
-          >
-            {Array.isArray(dataCreateOrder) &&
-              dataCreateOrder?.map((item: ICreateOder, index: number) => (
-                <Fragment key={index}>
-                  <SheetClose asChild>
-                    <Link
-                      href={item?.slug || ''}
-                      className='flex w-full justify-between space-x-[1rem] py-[0.5rem]'
-                    >
-                      <ImageV2
-                        src={item?.thumbnail}
-                        alt=''
-                        width={50 * 2}
-                        height={50 * 2}
-                        className='size-[1rem]'
-                      />
-                      <p className='flex-1 text-mb-13M text-black'>
-                        {item?.title}
-                      </p>
-                    </Link>
-                  </SheetClose>
-                </Fragment>
-              ))}
-          </div>
+          <SheetClose asChild>
+            <Link
+              href={navItems?.[2]?.href || '#'}
+              className='text-mb-13M text-black py-4 block'
+            >
+              {navItems?.[2]?.name}
+            </Link>
+          </SheetClose>
         </div>
-
         <p className='mt-6 text-pc-sub12s text-black/80'>Dịch vụ khác</p>
         <div className='mt-2 px-4 bg-white rounded-[1.25rem]'>
           {Array.isArray(dataHeader?.other_services) &&

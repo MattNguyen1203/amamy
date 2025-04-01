@@ -25,7 +25,6 @@ const Banner = ({banner}: {banner: IBanner}) => {
       },
     })
   })
-
   return (
     <>
       <div className='relative w-full h-[49.25rem] text-white xsm:hidden'>
@@ -64,9 +63,9 @@ const Banner = ({banner}: {banner: IBanner}) => {
         {/* box */}
         <ImageV2
           alt=''
-          width={300}
-          height={300}
-          src='/homepage/box.webp'
+          width={300 * 2}
+          height={300 * 2}
+          src={banner?.box_image}
           className='fade-box w-[34.95956rem] h-[31.5rem] object-cover absolute left-[54rem] top-[14rem]'
         />
 

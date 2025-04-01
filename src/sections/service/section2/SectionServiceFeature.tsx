@@ -1,3 +1,5 @@
+'use client'
+import useIsMobile from '@/hooks/useIsMobile'
 import {IListServiceResponse} from '@/utils/type'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,28 +10,38 @@ interface Prop {
   listService: IListServiceResponse
 }
 export const MainContainer = ({title, phone, listService}: Prop) => {
-  const services = listService.data.list_services_data
+  const isMobile = useIsMobile()
   return (
-    <div className='fade-section flex pr-auto items-start relative rounded-[var(--token-8)] overflow-hidden xsm:block xsm:bg-[#fbf8f9]'>
-      <div className='flex flex-col items-start relative  pl-[6rem] w-[26.875rem] xsm:w-full xsm:px-[1rem]'>
+    <div className='fade-section sm:rounded-[1.25rem] sm:w-fit sm:ml-[6rem] flex pr-auto items-start relative overflow-hidden xsm:block xsm:bg-white shadow-[0px_4px_45px_0px_rgba(0,0,0,0.05)]'>
+      <div className='flex flex-col items-start relative w-[20.875rem] xsm:w-full xsm:px-[1rem]'>
         <div className='fade-item relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
           <div className='relative w-[20.875rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
             <div className='absolute w-[20.875rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 bg-[#1dacff] xsm:rounded-[1.25rem]'>
-              <Image
-                className='absolute w-[20.875rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
-                alt='Mask group'
-                src={'/homepage/icon/Service-Item-Mask-Group.png'}
-                width={1000}
-                height={1000}
-              />
+              {isMobile ? (
+                <Image
+                  className='absolute w-[20.875rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
+                  alt='Mask group'
+                  src={'/homepage/icon/Service-Item-Mask-GroupV6.png'}
+                  width={1000}
+                  height={1000}
+                />
+              ) : (
+                <Image
+                  className='absolute w-[20.875rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
+                  alt='Mask group'
+                  src={'/homepage/icon/Service-Item-Mask-GroupV5.png'}
+                  width={1000}
+                  height={1000}
+                />
+              )}
             </div>
-            <p className='absolute w-[16.625rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] xsm:text-[1.25rem] xsm:text-center not-italic font-bold leading-[130%]'>
+            <p className='absolute w-[15.825rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] xsm:text-[1.25rem] xsm:text-center not-italic font-bold leading-[130%]'>
               {title}
             </p>
 
             <Link
               href={`tel:${phone}`}
-              className='absolute left-7 xsm:left-[4.313rem] bottom-[1.75rem] flex mt-[0.75rem] h-12 justify-center text-[#38B6FF] xsm:text-[1rem] w-[15.875rem] xsm:w-[12.813rem] items-center gap-2 rounded-[1.25rem]  
+              className='xsm:text-[1rem] text-[1.25rem] leading-[1.3] font-semibold xsm:leading-[1.3] xsm:tracking-[-0.04rem] absolute left-7 xsm:left-[4.313rem] bottom-[1.75rem] flex mt-[0.75rem] h-12 justify-center text-[#38B6FF] w-[15.875rem] xsm:w-[12.813rem] items-center gap-2 rounded-[1.25rem]  
              bg-[var(--Blue-Primary,_#fff)]'
             >
               <Image
@@ -46,15 +58,17 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
       </div>
       <div className='flex xsm:block'>
         <div className='grid grid-cols-3 w-[50.0625] xsm:w-full xsm:block items-start gap-[0_0] xsm:p-[1rem]'>
-          {Array.isArray(services) &&
-            services.map((service, index) => (
+          {Array.isArray(listService?.data?.list_services_data) &&
+            listService?.data?.list_services_data?.map((service, index) => (
               <div
                 key={index}
+                data-delay={0.5 * (index + 1)}
+                data-duration='1.5'
                 className={`fade-item flex flex-col justify-between items-start p-8 xsm:p-[1.25rem] gap-5 w-[22.375rem] h-[26.9375rem] xsm:h-[14.875rem] xsm:w-full bg-white border border-[#dcdfe4] flex-grow 
     ${
-      index !== services.length - 1
+      index !== listService?.data?.list_services_data?.length - 1
         ? 'border-r-0'
-        : 'rounded-tr-[20px] rounded-br-[20px]'
+        : 'rounded-tr-[1.25rem] rounded-br-[1.25rem]'
     } xsm:mb-[1rem] xsm:border-none xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_#00276114]`}
               >
                 <div className='flex flex-col space-y-2'>

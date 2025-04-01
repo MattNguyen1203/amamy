@@ -16,6 +16,7 @@ export interface IBannerAbout_ListInfomation {
   number: string
   title: string
   description: string
+  description_mb: string
   label: string
 }
 export interface IAmamySpecialAbout {
