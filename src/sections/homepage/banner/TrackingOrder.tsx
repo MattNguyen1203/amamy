@@ -43,13 +43,13 @@ const TrackingOrder = () => {
     >
       <TabsList className='relative xsm:w-full'>
         <TabsTrigger
-          className='relative z-10 xsm:flex-1'
+          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.60)] opacity-[0.5] data-[state=active]:opacity-[1] data-[state=active]:text-black'
           value='search-order'
         >
           Theo dõi bưu kiện
         </TabsTrigger>
         <TabsTrigger
-          className='relative z-10 xsm:flex-1'
+          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.60)] opacity-[0.5] data-[state=active]:opacity-[1] data-[state=active]:text-black'
           value='estimate-price'
         >
           Dự tính giá vận chuyển
@@ -69,7 +69,7 @@ const TrackingOrder = () => {
       </TabsList>
       <TabsContent
         value='search-order'
-        className='relative z-10'
+        className='relative z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] '
       >
         <input
           value={inputSearch}
@@ -90,7 +90,7 @@ const TrackingOrder = () => {
       </TabsContent>
       <TabsContent
         value='estimate-price'
-        className='relative z-10'
+        className='relative z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] '
       >
         <p className='text-pc-sub12s text-black/80 xsm:uppercase xsm:text-pc-sub10m xsm:!font-semibold'>
           Trò chuyện với trợ lý AI Amamy
