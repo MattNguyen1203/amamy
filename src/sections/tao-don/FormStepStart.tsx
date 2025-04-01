@@ -327,12 +327,12 @@ export default function FormStepStart({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên FaceBook (*)
+                  Tên Facebook (*)
                 </FormLabel>
                 <FormControl>
                   <Input
                     className='shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='Nhập tên FaceBook'
+                    placeholder='Nhập tên Facebook'
                     {...field}
                   />
                 </FormControl>
@@ -422,7 +422,7 @@ export default function FormStepStart({
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Mã khách hàng
+                Mã khách hàng (*)
               </FormLabel>
               <FormControl>
                 <Input
@@ -448,7 +448,7 @@ export default function FormStepStart({
             type='submit'
             disabled={isMobile ? false : !form.formState.isValid}
             className={cn(
-              '!shadow-none xsm:w-full hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+              '!shadow-none xsm:w-full hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
               !form.formState.isValid &&
                 'sm:bg-[#F0F0F0] [&_p]:sm:text-[rgba(0,0,0,0.30)]',
             )}

@@ -213,7 +213,7 @@ const Header = ({
                       <NavigationMenuItem>
                         <NavigationMenuTrigger
                           className={cn(
-                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent hover:bg-transparent [state=open]:focus:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:bg-transparent',
+                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent hover:bg-transparent [state=open]:focus:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:bg-transparent focus:bg-transparent focus:text-black',
                             isScrollTop
                               ? 'text-white data-[state=open]:text-white hover:text-white'
                               : 'data-[state=open]:text-[#38B6FF] hover:text-[#38B6FF]',
@@ -268,7 +268,7 @@ const Header = ({
               />
               <Link
                 href={'/tao-don-hang'}
-                className='flex-center space-x-2 p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-white/20 bg-Blue-Primary'
+                className='flex-center space-x-2 p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] bg-Blue-Primary'
               >
                 <span className='text-pc-sub16m text-white'>Tạo đơn hàng</span>
                 <Plus
