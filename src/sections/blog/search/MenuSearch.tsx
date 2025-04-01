@@ -50,7 +50,6 @@ export default function MenuSearch({
     revalidateOnReconnect: false,
   })
   const handleValueChange = (value: string) => {
-    console.log(value)
     setPage(1)
     setSelectedValue(value)
     const paramNew = new URLSearchParams(searchParams ?? '')
@@ -71,11 +70,6 @@ export default function MenuSearch({
         ease: 'power2.out',
       })
     }
-    console.log(
-      `search?${search ? 'keywords=' + search + '&' : ''}limit=9&page=${
-        slugpage ? slugpage : page
-      }${slugCategory ? '&categories=' + slugCategory : ''}`,
-    )
   }
   return (
     <>
@@ -84,7 +78,7 @@ export default function MenuSearch({
         className='flex xsm:flex-col sm:justify-between w-full px-[5.91rem] xsm:px-[1rem]'
       >
         <p className='flex-1 text-black text-[1.75rem] font-medium leading-[1.2] tracking-[-0.035rem] xsm:text-[0.875rem] xsm:font-medium xsm:leading-[1.2] xsm:tracking-[-0.0175rem] xsm:text-[rgba(0,0,0,0.60)]'>
-          Tìm thấy 24 kết quả cho ”
+          Tìm thấy {data?.total} kết quả cho ”
           <span className='font-bold tracking-[-0.07rem] leading-[1.3] xsm:text-[0.875rem] xsm:text-black xsm:tracking-[-0.035rem]'>
             {search}
           </span>

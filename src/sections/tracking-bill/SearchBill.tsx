@@ -1,10 +1,10 @@
 'use client'
 import useStore from '@/app/(store)/store'
-import { ICLoading } from '@/components/icon/ICLoading'
+import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import useClickOutside from '@/hooks/useClickOutside'
-import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
+import {cn} from '@/lib/utils'
+import {useEffect, useState} from 'react'
 
 type SearchBillProps = {
   onSearch: () => void
@@ -80,7 +80,7 @@ const SearchBill = ({
         </div>
         <button
           onClick={onSearch}
-          className='mt-3 p-[0.75rem_1.5rem] flex items-center justify-center w-full space-x-3 rounded-[1.25rem] bg-[#38B6FF] border-[1.5px] border-white/80 hover:opacity-80 transition-all duration-300'
+          className='mt-3 p-[0.75rem_1.5rem] flex items-center justify-center w-full space-x-3 rounded-[1.25rem] bg-[#38B6FF] hover:opacity-80 transition-all duration-300'
         >
           <span className='text-background-elevation5 text-pc-sub16m'>
             Tra cứu

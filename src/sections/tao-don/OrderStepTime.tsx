@@ -149,7 +149,7 @@ export default function OrderStepTime({
               type='submit'
               disabled={!form.formState.isValid}
               className={cn(
-                '!shadow-none xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]',
+                '!shadow-none xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
                 !form.formState.isValid &&
                   'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
               )}
