@@ -65,7 +65,7 @@ const Community = ({sectionCountry, section3}: Props) => {
               width={1000}
               height={1000}
               src='/homepage/map.webp'
-              className='size-full object-cover absolute top-0 left-0'
+              className='size-full object-cover absolute top-0 right-0 w-[72.5rem]'
             />
             <div className='flex sm:justify-end sm:pr-[5rem] space-x-4 relative z-10'>
               <CardService
