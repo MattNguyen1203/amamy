@@ -51,7 +51,7 @@ const Section4 = ({withDHS}: Props) => {
       {Array.isArray(withDHS?.list_news_event) && (
         <div className='fade-item group sm:relative rounded-[0.5rem] sm:shadow-[0px_14px_24px_0px_rgba(0,4,81,0.04)]'>
           {!isMobile && (
-            <div className='xsm:hidden p-[1.75rem] pr-0 sm:group-hover:top-[65%] transition-all duration-500 absolute pointer-events-none top-[50%] translate-y-[-50%] left-0 translate-x-[-50%] z-10 bg-[#38B6FF] rounded-[1.25rem] w-[18.75rem] h-[23.25rem]'>
+            <div className='xsm:hidden p-[1.75rem] sm:group-hover:top-[65%] transition-all duration-500 absolute pointer-events-none top-[50%] translate-y-[-50%] left-0 translate-x-[-50%] z-10 bg-[#38B6FF] rounded-[1.25rem] w-[18.75rem] h-[23.25rem]'>
               <div className='absolute top-0 left-0 size-[9.375rem] z-[11] bg-[#60C5FF] rounded-br-[100%] rounded-tl-[1.25rem]'></div>
               <div className='flex flex-col justify-between h-full relative z-[12]'>
                 <div className='flex items-center space-x-[1.12rem]'>
@@ -127,6 +127,7 @@ const Section4 = ({withDHS}: Props) => {
               <SliderPC
                 setActiveSlider={setActiveSlider}
                 withDHS={withDHS}
+                variant='about-us'
               />
             )}
           </div>
