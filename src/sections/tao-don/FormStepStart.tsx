@@ -60,7 +60,7 @@ const formSchema = z.object({
 
 const dataContactMethod = [
   {
-    img: '/order/like.svg',
+    img: '/order/likev2.svg',
     title: 'Facebook Fanpage Amamy',
   },
   {
@@ -200,7 +200,7 @@ export default function FormStepStart({
             name='email'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Email của bạn(*)
                 </FormLabel>
                 <FormControl>
@@ -211,7 +211,7 @@ export default function FormStepStart({
                   />
                 </FormControl>
                 <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -227,7 +227,7 @@ export default function FormStepStart({
                 }}
                 className='flex-1 space-y-0'
               >
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Bạn đã liên hệ Amamy qua đâu? (*)
                 </FormLabel>
                 <Select
@@ -307,7 +307,7 @@ export default function FormStepStart({
             name='name'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người gửi (*)
                 </FormLabel>
                 <FormControl>
@@ -326,7 +326,7 @@ export default function FormStepStart({
             name='nameFacebook'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên FaceBook (*)
                 </FormLabel>
                 <FormControl>
@@ -351,7 +351,7 @@ export default function FormStepStart({
               }}
               className='flex-1 space-y-0 !mb-[1.25rem]'
             >
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Chọn chiều dịch vụ (*)
               </FormLabel>
               <Select
@@ -421,7 +421,7 @@ export default function FormStepStart({
           name='customercode'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Mã khách hàng
               </FormLabel>
               <FormControl>
@@ -432,11 +432,11 @@ export default function FormStepStart({
                 />
               </FormControl>
               <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='text-pc-sub12m text-[rgba(0,0,0,0.60)]'>
+              <p className='xsm:pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khách nhau sẽ giao sai.
               </p>

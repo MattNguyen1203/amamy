@@ -40,7 +40,7 @@ const MobileMenu = ({
       </SheetTrigger>
       <SheetContent className='w-full overflow-auto p-4 pt-0 bg-[#F6F8FA]'>
         <SheetTitle className='hidden' />
-        <SheetClose className='sticky top-0 py-4 bg-[#F6F8FA] w-full'>
+        <SheetClose className='sticky top-0 py-4 bg-[#F6F8FA]'>
           <ArrowRight className='size-6 stroke-black' />
         </SheetClose>
         <div className='px-4 bg-white rounded-[1.25rem]'>
