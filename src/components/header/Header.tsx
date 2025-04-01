@@ -8,7 +8,6 @@ import Search from '@/components/svg/Search'
 import useClickOutside from '@/hooks/useClickOutside'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
 import {usePathname, useRouter} from 'next/navigation'
 import {useEffect, useRef, useState} from 'react'
@@ -33,11 +32,9 @@ export interface IDataHeader {
 }
 
 const Header = ({
-  dataCreateOrder,
   social,
   dataHeader,
 }: {
-  dataCreateOrder: ICreateOder[]
   social: Isocial[]
   dataHeader: IDataHeader
 }) => {
@@ -125,7 +122,6 @@ const Header = ({
               <MobileMenu
                 dataHeader={dataHeader}
                 social={social}
-                dataCreateOrder={dataCreateOrder}
                 navItems={navItems}
               />
             </div>

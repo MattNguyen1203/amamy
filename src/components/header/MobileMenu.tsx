@@ -11,9 +11,8 @@ import ImageV2 from '@/components/image/ImageV2'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Menu from '@/components/svg/Menu'
 import {cn} from '@/lib/utils'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
-import {Fragment, useState} from 'react'
+import {Fragment} from 'react'
 
 interface INavItems {
   name: string
@@ -22,16 +21,13 @@ interface INavItems {
 
 const MobileMenu = ({
   navItems,
-  dataCreateOrder,
   social,
   dataHeader,
 }: {
   navItems: INavItems[]
-  dataCreateOrder: ICreateOder[]
   social: Isocial[]
   dataHeader: IDataHeader
 }) => {
-  const [toggle, setToggle] = useState<boolean>(false)
   return (
     <Sheet>
       <SheetTrigger>

@@ -121,24 +121,3 @@ const ICArrowPagination = ({className}: {className?: string}) => {
     </svg>
   )
 }
-
-const ICBreakPagination = ({className}: {className?: string}) => {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='5'
-      height='4'
-      viewBox='0 0 5 4'
-      fill='none'
-      className={className}
-    >
-      <ellipse
-        cx='2.33351'
-        cy='2'
-        rx='2.00002'
-        ry='2'
-        fill='#292929'
-      />
-    </svg>
-  )
-}
