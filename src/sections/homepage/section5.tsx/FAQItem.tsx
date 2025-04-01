@@ -6,7 +6,17 @@ import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {useEffect, useRef, useState} from 'react'
 
-const FAQItem = ({content, detail}: {content: string; detail: string}) => {
+const FAQItem = ({
+  content,
+  detail,
+  length,
+  index,
+}: {
+  content: string
+  detail: string
+  length: number
+  index: number
+}) => {
   const isMobile = useIsMobile()
   const [open, setOpen] = useState(false)
   const [heightQ, setHeightQ] = useState(0)
@@ -33,12 +43,18 @@ const FAQItem = ({content, detail}: {content: string; detail: string}) => {
   return (
     <div
       className={cn(
-        'w-full p-[1rem] xsm:pt-0 xsm:pb-[0.75rem] relative transition-all duration-100 overflow-hidden',
+        'FAQItem w-full p-[1rem] xsm:pt-0 xsm:pb-[0.75rem] relative transition-all duration-100 overflow-hidden',
       )}
       style={{
         height: open
           ? `${isMobile ? heightQ + heightA + 24 : heightQ + heightA + 40}px`
-          : `${isMobile ? heightQ + 12 : heightQ + 32}px`,
+          : `${
+              isMobile
+                ? index + 1 === length
+                  ? heightQ + 24
+                  : heightQ + 12
+                : heightQ + 32
+            }px`,
       }}
     >
       <div
@@ -46,13 +62,23 @@ const FAQItem = ({content, detail}: {content: string; detail: string}) => {
         className='flex space-x-2 items-start w-full'
       >
         <div className='flex-center size-[4.125rem] xsm:size-12 bg-white rounded-full shadow-[0px_4px_19.3px_0px_rgba(0,39,97,0.06)]'>
-          <ImageV2
-            alt=''
-            width={40}
-            height={40}
-            src='/homepage/icon/Question.svg'
-            className='size-10 object-contain xsm:size-8'
-          />
+          {!isMobile ? (
+            <ImageV2
+              alt=''
+              width={40}
+              height={40}
+              src='/homepage/icon/Question.svg'
+              className='size-10 object-contain xsm:size-8'
+            />
+          ) : (
+            <ImageV2
+              alt=''
+              width={40}
+              height={40}
+              src='/homepage/icon/QuestionMb.svg'
+              className='size-10 object-contain xsm:size-8'
+            />
+          )}
         </div>
         <div
           onClick={() => setOpen(!open)}

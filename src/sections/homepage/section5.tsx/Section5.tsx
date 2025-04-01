@@ -25,7 +25,7 @@ const Section5 = ({faqs}: Props) => {
 
   return (
     <section
-      className='faq-wrap flex relative flex-row w-full p-24 items-start justify-between overflow-hidden gap-1.5 self-stretch 
+      className='xsm:pb-[2rem] faq-wrap flex relative flex-row w-full p-24 items-start justify-between overflow-hidden gap-1.5 self-stretch 
     rounded-tl-[3rem] rounded-br-[0rem] rounded-tr-[3rem] rounded-bl-[0rem] bg-white xsm:flex-col xsm:py-[1rem] xsm:px-0 xsm:rounded-t-[1.25rem]'
     >
       <h2 className='text-[2.875rem] xsm:px-[1rem] not-italic font-bold leading-[120%] max-w-[28.625rem] xsm:text-[1.375rem] xsm:mb-[1rem] xsm:mt-[1.5rem]'>
@@ -49,6 +49,8 @@ const Section5 = ({faqs}: Props) => {
               <FAQItem
                 content={item?.question}
                 detail={item?.answer}
+                index={index}
+                length={faqs?.faqs?.length}
               />
             </div>
           ))}

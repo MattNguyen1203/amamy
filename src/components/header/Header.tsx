@@ -207,7 +207,7 @@ const Header = ({
               />
               <Link
                 href={'/tao-don-hang'}
-                className='flex-center space-x-2 p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-white/80 bg-Blue-Primary'
+                className='flex-center space-x-2 p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] border-[1.5px] border-solid border-white/20 bg-Blue-Primary'
               >
                 <span className='text-pc-sub16m text-white'>Tạo đơn hàng</span>
                 <Plus
@@ -223,7 +223,7 @@ const Header = ({
           <div
             ref={ref}
             className={cn(
-              'opacity-0 absolute bottom-0 left-0 w-full h-[6.875rem] flex-center bg-white transition-all duration-200',
+              'opacity-0 absolute bottom-0 left-0 w-full h-[6.875rem] flex-center bg-white transition-all duration-200 sm:shadow-[0px_0px_1px_0px_rgba(0,0,0,0.05)]',
               isShowSearchInput && 'translate-y-full opacity-[1]',
               isScrollTop && 'opacity-0 duration-0',
             )}
