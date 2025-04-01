@@ -34,7 +34,7 @@ export default function Testimonials({data}: Prop) {
   }, [api])
 
   return (
-    <section className='py-24 xsm:py-[1.5rem] mt-[2.75rem] xsm:mt-5'>
+    <section className='py-20 bg-[#FDFDFD] xsm:py-[1.5rem] mt-[2.75rem] xsm:mt-5'>
       <div className='w-full px-4 xsm:px-0'>
         <div className='fade-section xsm:px-[1rem] mx-auto max-w-2xl sm:text-center'>
           <h2 className='fade-item mb-4 xsm:mb-[1rem] font-montserrat font-bold text-[2.5rem] xsm:text-[1.25rem] leading-[120%] tracking-[-0.03em] sm:text-center'>
@@ -65,7 +65,7 @@ export default function Testimonials({data}: Prop) {
                     className='fade-item md:basis-1/2 lg:basis-1/4 p-0 flex justify-center'
                   >
                     <Card
-                      className={`h-[20.5625rem] w-[20.875rem] border-none relative ${
+                      className={`h-[20.5625rem] w-[20.875rem] border-none rounded-[1.25rem] xsm:rounded-[0.5rem] relative ${
                         index % 2 === 0 ? 'bg-[#DBF5FF]' : 'bg-[#F2F2F2]'
                       }`}
                     >
@@ -126,8 +126,8 @@ export default function Testimonials({data}: Prop) {
                   </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious className='absolute xsm:hidden left-[2.5rem] top-1/2 h-10 w-10 sm:size-[3rem] -translate-y-1/2 rounded-full border-none bg-white shadow-lg [&_svg]:sm:size-[1.25rem]' />
-            <CarouselNext className='absolute xsm:hidden right-[3.5rem] top-1/2 h-10 w-10 sm:size-[3rem] -translate-y-1/2 rounded-full border-none bg-white shadow-lg [&_svg]:sm:size-[1.25rem]' />
+            <CarouselPrevious className='absolute xsm:hidden left-0 top-1/2 sm:size-[4rem] -translate-y-1/2 translate-x-1/2 rounded-full border-none bg-white shadow-[1px_1px_25.4px_0px_rgba(84,84,84,0.07)] [&_svg]:sm:size-[2rem] hover:bg-white' />
+            <CarouselNext className='absolute xsm:hidden right-0 top-1/2 sm:size-[4rem] -translate-y-1/2 -translate-x-1/2 rounded-full border-none bg-white shadow-[1px_1px_25.4px_0px_rgba(84,84,84,0.07)] [&_svg]:sm:size-[2rem] hover:bg-white' />
           </Carousel>
 
           {/* Pagination Dots */}

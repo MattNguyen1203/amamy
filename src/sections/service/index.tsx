@@ -54,7 +54,7 @@ const ServicePage = ({data, listService, listBlog}: Prop) => {
         <RelatedBlogs
           data={listBlog?.posts}
           title='Các tin tức mới nhất'
-          className='bg-[#EDF5FA] xsm:bg-[#F8F8FB] [&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
+          className='bg-[#EDF5FA] [&_.ItemBlog]:shadow-none xsm:bg-[#F8F8FB] [&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
         />
       )}
     </div>

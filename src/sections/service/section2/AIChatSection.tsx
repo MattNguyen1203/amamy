@@ -60,7 +60,7 @@ const AIChatSection = ({data, listService}: Prop) => {
             className='w-full h-[35.50475rem] xsm:h-full object-cover absolute xsm:top-0 sm:bottom-[-3rem] left-0 xsm:hidden'
           />
 
-          <div className='fade-item flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto'>
+          <div className='fade-item flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto shadow-card-s'>
             <div className='p-3 flex items-center space-x-3 justify-center cursor-pointer'>
               <ImageV2
                 alt=''
