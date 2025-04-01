@@ -72,13 +72,22 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const fetchCreateOrder = fetchData({
+    api: `chieu-van-chuyen-header`,
+    option: {
+      next: {revalidate: 60},
+    },
+  })
   const fetchFooter = await fetchData({
     api: 'options?fields=footer_site,header_site',
     option: {
       next: {revalidate: 60},
     },
   })
-  const [dataFooter] = await Promise.all([fetchFooter])
+  const [dataCreateOrder, dataFooter] = await Promise.all([
+    fetchCreateOrder,
+    fetchFooter,
+  ])
   return (
     <html>
       <body
@@ -87,6 +96,7 @@ export default async function RootLayout({
         <Header
           social={dataFooter?.data?.footer_site?.social}
           dataHeader={dataFooter?.data?.header_site}
+          dataCreateOrder={dataCreateOrder}
         />
         <ChatBot
           dataMessage={[
