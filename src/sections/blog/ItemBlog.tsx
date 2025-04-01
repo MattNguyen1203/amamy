@@ -27,7 +27,7 @@ export default function ItemBlog({
     <Link
       href={'/blogs/' + item?.slug}
       className={cn(
-        'fade-item group w-full flex flex-col h-[24.375rem] xsm:h-[18.19181rem] rounded-[1.25rem] bg-[#F8F8F8] shadow-[4px_4px_40px_20px_rgba(0,35,93,0.08)]',
+        'fade-item ItemBlog group w-full flex flex-col h-[24.375rem] xsm:h-[18.19181rem] rounded-[1.25rem] bg-[#F8F8F8] shadow-[4px_4px_40px_20px_rgba(0,35,93,0.08)]',
         className,
       )}
     >
@@ -46,12 +46,13 @@ export default function ItemBlog({
               'sm:opacity-0 sm:group-hover:opacity-[100] transition-all duration-500',
           )}
         >
-          <p className='text-white text-pc-sub12s xsm:text-[0.5rem] xsm:font-semibold xsm:tracking-[-0.01rem] uppercase p-[0.75rem_1rem] xsm:p-[0.5rem] rounded-[1.25rem] bg-[rgba(19,37,82,0.50)] xsm:bg-[rgba(4,24,77,0.50)]'>
+          <div className='absolute inset-0 bg-[rgba(19,37,82,0.50)] xsm:bg-[rgba(4,24,77,0.50)] backdrop-blur-[6.449999809265137px] rounded-[1.25rem]'></div>
+          <p className='relative z-10 text-white text-pc-sub12s xsm:text-[0.5rem] xsm:font-semibold xsm:tracking-[-0.01rem] uppercase p-[0.75rem_1rem] xsm:p-[0.5rem] rounded-[1.25rem]'>
             {item?.categories}
           </p>
         </div>
       </div>
-      <div className='p-[1.5rem] xsm:p-[0.75rem] flex-1 flex-col flex justify-between items-start'>
+      <div className='itembox-content p-[1.5rem] xsm:p-[0.75rem] flex-1 flex-col flex justify-between items-start'>
         <h3 className='line-clamp-2 text-pc-sub16s xsm:text-pc-sub12s text-[#000]'>
           {item?.title}
         </h3>

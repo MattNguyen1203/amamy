@@ -21,7 +21,6 @@ const Section4 = ({withDHS}: Props) => {
   return (
     <section
       className='xsm:pb-[2rem] xsm:bg-[#F8F8FB] sm:bg-[#EDF5FA] sm:rounded-none fade-section xsm:pt-[1rem] xsm:px-0 w-full sm:h-[50rem] sm:flex-shrink-0 flex pl-[6rem] pr-[6rem] pt-[5.5rem] pb-[4rem] sm:justify-between sm:items-center
-      sm:[box-shadow:0px_-8px_16px_0px_rgba(6,_0,_94,_0.02)] 
      xsm:flex-col xsm:h-fit xsm:gap-[0] xsm:pr-0'
     >
       <div className='max-w-[24.375rem] h-full flex flex-col justify-between'>

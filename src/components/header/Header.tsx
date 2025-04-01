@@ -5,25 +5,16 @@ import ArrowRight from '@/components/svg/ArrowRight'
 import Close from '@/components/svg/Close'
 import Plus from '@/components/svg/Plus'
 import Search from '@/components/svg/Search'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
 import useClickOutside from '@/hooks/useClickOutside'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
 import {usePathname, useRouter} from 'next/navigation'
 import {useEffect, useRef, useState} from 'react'
 const navItems = [
   {name: 'Theo dõi vận đơn', href: '/theo-doi-van-don'},
   {name: 'Về Amamy', href: '/about'},
-  {name: 'Dịch vụ', href: ''},
+  {name: 'Dịch vụ', href: '/gui-hang-viet-duc'},
   {name: 'Hữu ích cho gửi hàng', href: '/blogs'},
 ]
 
@@ -41,11 +32,9 @@ export interface IDataHeader {
 }
 
 const Header = ({
-  dataCreateOrder,
   social,
   dataHeader,
 }: {
-  dataCreateOrder: ICreateOder[]
   social: Isocial[]
   dataHeader: IDataHeader
 }) => {
@@ -133,7 +122,6 @@ const Header = ({
               <MobileMenu
                 dataHeader={dataHeader}
                 social={social}
-                dataCreateOrder={dataCreateOrder}
                 navItems={navItems}
               />
             </div>
@@ -195,67 +183,18 @@ const Header = ({
               </Link>
             </div>
             <nav className='flex items-center space-x-8 text-pc-sub16s'>
-              {navItems.map((item, index) =>
-                item?.href ? (
-                  <Link
-                    key={index}
-                    href={item?.href}
-                    className={cn(
-                      'p-[0.25rem_0.375rem] text-black',
-                      isScrollTop ? 'text-white' : 'hover:text-[#38B6FF]',
-                    )}
-                  >
-                    {item?.name}
-                  </Link>
-                ) : (
-                  <NavigationMenu key={index}>
-                    <NavigationMenuList>
-                      <NavigationMenuItem>
-                        <NavigationMenuTrigger
-                          className={cn(
-                            '!text-pc-sub16s p-[0.25rem_0.375rem] text-black bg-transparent hover:bg-transparent [state=open]:focus:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:bg-transparent',
-                            isScrollTop
-                              ? 'text-white data-[state=open]:text-white hover:text-white'
-                              : 'data-[state=open]:text-[#38B6FF] hover:text-[#38B6FF]',
-                          )}
-                        >
-                          {item?.name}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <ul className='grid w-[40rem] grid-cols-2 gap-3 p-4'>
-                            {Array.isArray(dataCreateOrder) &&
-                              dataCreateOrder.map(
-                                (component: ICreateOder, index: number) => (
-                                  <li key={index}>
-                                    <NavigationMenuLink asChild>
-                                      <Link
-                                        href={'/' + component?.slug || ''}
-                                        className={cn(
-                                          'flex items-center space-x-[0.5rem] select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-                                        )}
-                                      >
-                                        {/* <ImageV2
-                                          alt=''
-                                          src={component?.thumbnail}
-                                          width={50 * 2}
-                                          height={50 * 2}
-                                          className='size-[1rem]'
-                                        /> */}
-                                        <div className='line-clamp-1 text-sm font-medium leading-none'>
-                                          {component?.title}
-                                        </div>
-                                      </Link>
-                                    </NavigationMenuLink>
-                                  </li>
-                                ),
-                              )}
-                          </ul>
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    </NavigationMenuList>
-                  </NavigationMenu>
-                ),
-              )}
+              {navItems?.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item?.href}
+                  className={cn(
+                    'p-[0.25rem_0.375rem] text-black',
+                    isScrollTop ? 'text-white' : 'hover:text-[#38B6FF]',
+                  )}
+                >
+                  {item?.name}
+                </Link>
+              ))}
             </nav>
             <div className='flex items-center space-x-4'>
               <Search

@@ -135,6 +135,7 @@ export default function TabsCategory({
             ) : Array.isArray(data?.posts) && data?.posts?.length > 0 ? (
               data?.posts?.map((item: IItemPostBlog, index: number) => (
                 <ItemBlog
+                  className='[&_.itembox-content]:bg-[#F8F8F8] [&_.itembox-content]:rounded-b-[1.25rem] shadow-none'
                   key={index}
                   item={item}
                 />

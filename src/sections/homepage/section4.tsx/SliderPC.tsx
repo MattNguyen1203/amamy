@@ -41,7 +41,7 @@ export default function SliderPC({
               alt={item?.post?.[0]?.slug}
               width={1000}
               height={1000}
-              className='bg-[#EDF5FA] w-[50.6875rem] h-[40.5rem] object-cover flex-shrink-0 rounded-[0.5rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
+              className='bg-[#EDF5FA] w-[50.6875rem] h-[40.5rem] object-cover flex-shrink-0 rounded-[0.5rem] sm:rounded-[1.25rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
             />
             <div className='xsm:hidden sm:group-hover:h-[25.75rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white'>
               <div

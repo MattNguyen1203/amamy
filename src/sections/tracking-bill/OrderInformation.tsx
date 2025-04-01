@@ -2,9 +2,9 @@
 
 import ImageV2 from '@/components/image/ImageV2'
 import BillStatus from '@/sections/tracking-bill/BillStatus'
-import InformationList from '@/sections/tracking-bill/InformationList'
 import LocationTag from '@/sections/tracking-bill/LocationTag'
-import { toast } from 'sonner'
+import {toast} from 'sonner'
+import './style.css'
 export type IProgress = {
   title: string
   desc: string
@@ -54,7 +54,6 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
       </div>
     )
   }
-  console.log(data)
   return (
     <div className='size-full p-5 rounded-[1.25rem] bg-background-elevation20'>
       <h4 className='text-pc-heading20b xsm:text-mb-h2 text-black'>
@@ -62,7 +61,7 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
       </h4>
       <div className='h-[1px] w-full bg-[#DCDFE4] my-6 xsm:my-4' />
       <div className='flex space-x-3 xsm:flex-col xsm:space-x-0 xsm:space-y-4'>
-        <div className='w-[25rem] xsm:w-full flex flex-col space-y-3'>
+        <div className='flex-1 xsm:w-full flex flex-col space-y-3'>
           <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-center'>
             <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Mã đơn hàng:</p>
             <div className='flex items-center space-x-[0.375rem]'>
@@ -120,7 +119,11 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
           </div>
         </div>
         <div className='h-[1px] w-full bg-[#DCDFE4] hidden xsm:block' />
-        <InformationList data={data?.tien_trinh_giao_hang} />
+        {/* <InformationList data={data?.tien_trinh_giao_hang} /> */}
+        <div
+          dangerouslySetInnerHTML={{__html: data?.tien_trinh_giao_hang}}
+          className='progress-order flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
+        ></div>
       </div>
     </div>
   )

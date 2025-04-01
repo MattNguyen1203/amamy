@@ -21,7 +21,7 @@ export default function AsideBlog({
   const [activeSection, setActiveSection] = useState<string>('')
   useEffect(() => {
     if (!isMobile) {
-      const sections = document.querySelectorAll('h2')
+      const sections = document.querySelectorAll('h2, h3, h4, h5, h6')
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {

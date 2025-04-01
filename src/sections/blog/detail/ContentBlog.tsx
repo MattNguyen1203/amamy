@@ -54,9 +54,10 @@ export default function ContentBlog({
   }
   return (
     <section className='w-[60rem] xsm:w-full xsm:p-[1rem]'>
-      <h1 className='mb-[0.81rem] xsm:mb-[1rem] text-[2.625rem] font-bold leading-[1.55] tracking-[-0.105rem] text-black xsm:text-mb-h2'>
-        {data?.title}
-      </h1>
+      <h1
+        dangerouslySetInnerHTML={{__html: data?.title}}
+        className='mb-[0.81rem] xsm:mb-[1rem] text-[2.625rem] font-bold leading-[1.55] tracking-[-0.105rem] text-black xsm:text-mb-h2'
+      ></h1>
       <div className='xsm:mb-[1rem] xsm:pb-[1rem] xsm:border-b-[1px] xsm:border-solid xsm:border-[#DCDFE4] font-montserrat opacity-[0.72] text-black text-[1rem] font-semibold leading-[1.5] xsm:text-pc-sub14s'>
         {formattedDate}
       </div>

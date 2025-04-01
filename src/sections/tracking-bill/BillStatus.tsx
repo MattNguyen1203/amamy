@@ -11,11 +11,11 @@ const BillStatus = ({type, label, className}: BillStatusProps) => {
     <div
       style={{backgroundColor: type}}
       className={cn(
-        'inline-flex justify-center items-center p-[0.25rem_0.5rem] rounded-full',
+        'inline-flex justify-center items-center p-[0.5rem] rounded-full',
         className,
       )}
     >
-      <p className='text-[0.6875rem] font-semibold tracking-[-0.01375rem] text-background-elevation5'>
+      <p className='text-center text-[0.6875rem] font-semibold tracking-[-0.01375rem] text-background-elevation5'>
         {label}
       </p>
     </div>
