@@ -88,6 +88,9 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        'card-s': '0px 2px 10px 0px rgba(0, 34, 85, 0.04)',
+      },
       keyframes: {
         'accordion-down': {
           from: {

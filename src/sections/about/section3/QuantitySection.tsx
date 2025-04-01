@@ -13,7 +13,7 @@ const QuantitySection = ({data}: Prop) => {
   return (
     <section className='relative mb-[18rem] xsm:bg-[#f7f7f7] xsm:px-0 xsm:pt-[2.5rem] xsm:pb-0  xsm:mb-[1rem]'>
       <div className='fade-section w-full flex xsm:flex-col'>
-        <div className='w-[27.5rem] h-[62.9375rem] bg-background-elevation5 shadow-[0px_14px_24px_#0004500a] xsm:shadow-none xsm:hidden'>
+        <div className='w-[27.5rem] h-[62.9375rem] bg-background-elevation5 xsm:hidden'>
           <div className='h-[535px] top-[12.5rem] left-[5.9375rem] relative w-[18.5625rem]'>
             <div className='flex flex-col items-start gap-[1.06rem] relative '>
               <div
