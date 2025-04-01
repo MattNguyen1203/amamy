@@ -39,7 +39,10 @@ export default async function page({params}: {params: {slug: string}}) {
           dataDetailPost={dataDetailPost}
           dataFavourite={dataFavourite?.data?.you_might_like_it}
         />
-        <RelatedBlogs data={dataDetailPost?.related_posts} />
+        <RelatedBlogs
+          data={dataDetailPost?.related_posts}
+          className='[&_.ItemBlog]:!shadow-none'
+        />
       </div>
     </main>
   )

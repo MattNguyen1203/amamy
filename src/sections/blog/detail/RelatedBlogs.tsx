@@ -81,7 +81,7 @@ export default function RelatedBlogs({
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100]' />
         </div>
       </div>
-      <div className='swiper-pagination-custom xsm:relative xsm:!w-[11.125rem] xsm:!left-[50%] xsm:!-translate-x-[50%] flex-center space-x-[0.375rem] [&_.swiper-pagination-bullet]:w-[2.5rem] [&_.swiper-pagination-bullet]:h-[0.25rem] [&_.swiper-pagination-bullet]:rounded-[0.625rem] [&_.swiper-pagination-bullet]:opacity-[1] [&_.swiper-pagination-bullet]:bg-[rgba(31,100,140,0.24)] [&_.swiper-pagination-bullet-active]:!bg-[#1F648C]'></div>
+      <div className='swiper-pagination-custom xsm:relative xsm:!w-[11.125rem] xsm:!left-[50%] xsm:!-translate-x-[50%] flex-center space-x-[0.375rem] [&_.swiper-pagination-bullet]:cursor-pointer [&_.swiper-pagination-bullet]:w-[2.5rem] [&_.swiper-pagination-bullet]:h-[0.25rem] [&_.swiper-pagination-bullet]:rounded-[0.625rem] [&_.swiper-pagination-bullet]:opacity-[1] [&_.swiper-pagination-bullet]:bg-[rgba(31,100,140,0.24)] [&_.swiper-pagination-bullet-active]:!bg-[#1F648C]'></div>
     </section>
   )
 }

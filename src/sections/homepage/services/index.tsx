@@ -1,8 +1,8 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
 import useIsMobile from '@/hooks/useIsMobile'
-import {Card, ImageIcon, ServicesObject} from '@/utils/type'
-import {useGSAP} from '@gsap/react'
+import { Card, ImageIcon, ServicesObject } from '@/utils/type'
+import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -149,7 +149,7 @@ const ServiceHighlight = ({
 }) => (
   <Link
     href={href || ''}
-    className='fade-in-box-card-service-2 relative  w-[30.75rem] h-[20.625rem] bg-white rounded-lg overflow-hidden xsm:w-[18.75rem] xsm:h-[15.40181rem] xsm:min-w-max'
+    className='fade-in-box-card-service-2 relative w-[30.75rem] h-[20.625rem] bg-white rounded-[1.25rem] overflow-hidden xsm:w-[18.75rem] xsm:h-[15.40181rem] xsm:min-w-max'
   >
     <div
       className='h-full bg-cover bg-center xsm:w-[18.75rem]'
@@ -171,7 +171,7 @@ const ServiceHighlight = ({
 const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
   <Link
     href={href || ''}
-    className='fade-in-box-card-service-2 relative w-[23.5rem] h-[35.875rem] bg-white rounded-lg shadow-lg overflow-hidden xsm:hidden'
+    className='fade-in-box-card-service-2 relative w-[23.5rem] h-[35.875rem] bg-white rounded-[1.25rem] shadow-lg overflow-hidden xsm:hidden'
   >
     <div className='absolute z-[10] left-0 right-0'>
       <Image
@@ -183,11 +183,11 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
       />
     </div>
 
-    <div className='absolute inset-0 bg-[url(/image.png)] bg-cover bg-center'>
+    <div className='absolute inset-0 bg-cover bg-center'>
       <Image
         width={600 * 2}
         height={600 * 2}
-        className='absolute w-[279px] h-[287px] top-[149px] left-[43px] object-cover z-[30]'
+        className='absolute w-[17.4375rem] h-[17.9375rem] left-[2.69rem] bottom-[8.32rem] object-cover z-[30]'
         alt='Image'
         src={'/homepage/replace/img-1.png'}
       />

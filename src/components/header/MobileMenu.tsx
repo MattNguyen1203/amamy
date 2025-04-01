@@ -1,6 +1,5 @@
 'use client'
 import {IDataHeader, Isocial} from '@/components/header/Header'
-import ICDrop from '@/components/header/ICDrop'
 import {
   Sheet,
   SheetClose,
@@ -82,51 +81,15 @@ const MobileMenu = ({
             </Link>
           </SheetClose>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
-          <div
-            onClick={() => {
-              setToggle(!toggle)
-            }}
-            className='text-mb-13M text-black py-4 flex w-full justify-between'
-          >
-            <p className='text-mb-13M text-black'>Dịch vụ</p>
-            <ICDrop className='size-[1.5rem]' />
-          </div>
-          <div
-            style={{
-              height: toggle
-                ? `calc(2.5rem*${dataCreateOrder?.length + 1})`
-                : '0',
-            }}
-            className={cn(
-              'space-y-[1rem] h-0 transition-all duration-500 overflow-hidden',
-              toggle && 'pb-[1rem]',
-            )}
-          >
-            {Array.isArray(dataCreateOrder) &&
-              dataCreateOrder?.map((item: ICreateOder, index: number) => (
-                <Fragment key={index}>
-                  <SheetClose asChild>
-                    <Link
-                      href={item?.slug || ''}
-                      className='flex w-full justify-between space-x-[1rem] py-[0.5rem]'
-                    >
-                      <ImageV2
-                        src={item?.thumbnail}
-                        alt=''
-                        width={50 * 2}
-                        height={50 * 2}
-                        className='size-[1rem] rounded-[100%]'
-                      />
-                      <p className='flex-1 text-mb-13M text-black'>
-                        {item?.title}
-                      </p>
-                    </Link>
-                  </SheetClose>
-                </Fragment>
-              ))}
-          </div>
+          <SheetClose asChild>
+            <Link
+              href={navItems?.[2]?.href || '#'}
+              className='text-mb-13M text-black py-4 block'
+            >
+              {navItems?.[2]?.name}
+            </Link>
+          </SheetClose>
         </div>
-
         <p className='mt-6 text-pc-sub12s text-black/80'>Dịch vụ khác</p>
         <div className='mt-2 px-4 bg-white rounded-[1.25rem]'>
           {Array.isArray(dataHeader?.other_services) &&

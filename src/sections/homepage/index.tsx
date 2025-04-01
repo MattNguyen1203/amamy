@@ -28,7 +28,7 @@ const Homepage = ({res, dataBlog}: Props) => {
         <RelatedBlogs
           data={dataBlog}
           title='Các tin tức mới nhất'
-          className='[&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
+          className='[&_.ItemBlog]:shadow-none [&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
         />
       )}
     </div>

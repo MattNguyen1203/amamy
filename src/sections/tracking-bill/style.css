@@ -1,0 +1,47 @@
+.progress-order ul li {
+  position: relative;
+  padding-left: 3rem;
+}
+.progress-order ul li:after {
+  width: 1.5rem;
+  height: 1.5rem;
+  left: 0rem;
+  position: absolute;
+  top: 0.25rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.progress-order ul li::before {
+  content: '';
+  width: 0.125rem;
+  height: 100%;
+  left: 0.7rem;
+  position: absolute;
+  top: 0.5rem;
+  background-color: #dcdfe4;
+}
+.progress-order ul li:last-of-type::before {
+  display: none;
+}
+.progress-order ul li {
+  padding-bottom: 2.5rem;
+}
+.progress-order ul li:last-of-type {
+  padding-bottom: 0;
+}
+.progress-order ul li > strong {
+  position: relative;
+  padding-right: 2rem;
+}
+.progress-order ul li > strong::after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  right: 0.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #38b6ff;
+  border-radius: 100%;
+}
