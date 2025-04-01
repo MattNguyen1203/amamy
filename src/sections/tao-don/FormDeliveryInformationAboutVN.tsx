@@ -290,7 +290,7 @@ export default function FormDeliveryInformationAboutVN({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người nhận(*)
                 </FormLabel>
                 <FormControl>
@@ -309,7 +309,7 @@ export default function FormDeliveryInformationAboutVN({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại(*)
                 </FormLabel>
                 <FormControl>
@@ -329,7 +329,7 @@ export default function FormDeliveryInformationAboutVN({
           name='recipientAddressType'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ nhận hàng tại Việt Nam
               </FormLabel>
               <FormControl>
@@ -390,7 +390,7 @@ export default function FormDeliveryInformationAboutVN({
                   {...field}
                 />
               </FormControl>
-              <p className='xsm:pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
+              <p className='pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
                 *Địa chỉ chi tiết, số nhà, tên đường,...
               </p>
               <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
@@ -409,7 +409,7 @@ export default function FormDeliveryInformationAboutVN({
                   }}
                   className='flex flex-col flex-1 space-y-0'
                 >
-                  <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Tỉnh/Thành phố (*)
                   </FormLabel>
                   <Popover>
@@ -495,7 +495,7 @@ export default function FormDeliveryInformationAboutVN({
                   }}
                   className='flex flex-col flex-1 space-y-0'
                 >
-                  <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Quận Huyện (*)
                   </FormLabel>
                   <Popover>
@@ -579,7 +579,7 @@ export default function FormDeliveryInformationAboutVN({
                   }}
                   className='flex flex-col flex-1 space-y-0'
                 >
-                  <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Phường Xã (*)
                   </FormLabel>
                   <Popover>

@@ -127,7 +127,7 @@ export default function FormDeliveryInformationVNHan({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người nhận(*)
                 </FormLabel>
                 <FormControl>
@@ -148,7 +148,7 @@ export default function FormDeliveryInformationVNHan({
             name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Thành phố (*)
                 </FormLabel>
                 <FormControl>
@@ -167,7 +167,7 @@ export default function FormDeliveryInformationVNHan({
             name='district'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Quận (nếu có)
                 </FormLabel>
                 <FormControl>
@@ -188,7 +188,7 @@ export default function FormDeliveryInformationVNHan({
             name='roadName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên đường (*)
                 </FormLabel>
                 <FormControl>
@@ -207,7 +207,7 @@ export default function FormDeliveryInformationVNHan({
             name='housingNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số nhà (*)
                 </FormLabel>
                 <FormControl>
@@ -227,7 +227,7 @@ export default function FormDeliveryInformationVNHan({
           name='recipientAddress'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ chi tiết (*)
               </FormLabel>
               <FormControl>
@@ -238,7 +238,7 @@ export default function FormDeliveryInformationVNHan({
                 />
               </FormControl>
               <FormMessage className='xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Số phòng, toà nhà nếu có
               </p>
             </FormItem>
@@ -250,7 +250,7 @@ export default function FormDeliveryInformationVNHan({
             name='passportNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Mã thông quan, ID hoặc CMT
                 </FormLabel>
                 <FormControl>
@@ -261,7 +261,7 @@ export default function FormDeliveryInformationVNHan({
                   />
                 </FormControl>
                 <FormMessage className='xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] !text-[#F00] text-pc-sub12m' />
-                <p className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Mã thông quan: P828*****888, <br />
                   *CMT: 96*********27: *ID:***213 <br />
                   <span className='text-[#F00]'>
@@ -277,7 +277,7 @@ export default function FormDeliveryInformationVNHan({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại người nhận(*)
                 </FormLabel>
                 <FormControl>

@@ -95,7 +95,7 @@ export default function FormDeliveryInformationVNJapan({
           name='recipientName'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Tên người nhận (*)
               </FormLabel>
               <FormControl>
@@ -106,7 +106,7 @@ export default function FormDeliveryInformationVNJapan({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Điền chữ tiếng Anh và Kanji hoặc Romanji.
               </p>
             </FormItem>
@@ -118,7 +118,7 @@ export default function FormDeliveryInformationVNJapan({
             name='zipCode'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Mã bưu điện (*)
                 </FormLabel>
                 <FormControl>
@@ -137,7 +137,7 @@ export default function FormDeliveryInformationVNJapan({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại (nếu có)
                 </FormLabel>
                 <FormControl>
@@ -157,7 +157,7 @@ export default function FormDeliveryInformationVNJapan({
           name='recipientAddress'
           render={({field}) => (
             <FormItem className={cn('flex-1 space-y-0')}>
-              <FormLabel className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ chi tiết
               </FormLabel>
               <FormControl>
@@ -168,7 +168,7 @@ export default function FormDeliveryInformationVNJapan({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='xsm:pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Điền chữ tiếng Anh và Kanji hoặc Romanji.
                 <br />
                 *Quý khách vui lòng cung cấp thông tin chi tiết: số phòng, toà
