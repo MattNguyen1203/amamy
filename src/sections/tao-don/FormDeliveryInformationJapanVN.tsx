@@ -733,6 +733,7 @@ export default function FormDeliveryInformationJapanVN({
                                 ...dataFromOrder,
                                 ProvinceID: city?.ProvinceID,
                               })
+                              setIsCity(false)
                               setWard([])
                             }}
                           >

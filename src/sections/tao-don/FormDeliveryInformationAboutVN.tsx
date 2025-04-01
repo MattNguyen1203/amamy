@@ -729,6 +729,7 @@ export default function FormDeliveryInformationAboutVN({
                                 ProvinceID: city?.ProvinceID,
                                 DistrictID: 0,
                               })
+                              setIsCity(false)
                               setWard([])
                             }}
                           >
