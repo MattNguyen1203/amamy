@@ -187,7 +187,7 @@ export default function FormDeliveryInformation({
                   *Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc
                   đúng tên Auswei.
                 </p>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -206,7 +206,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -290,7 +290,7 @@ export default function FormDeliveryInformation({
                       )}
                   </SelectContent>
                 </Select>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -314,7 +314,7 @@ export default function FormDeliveryInformation({
                 *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số tầng,
                 số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
               </p>
-              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
             </FormItem>
           )}
         />
@@ -334,7 +334,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -353,7 +353,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -374,7 +374,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -393,7 +393,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />

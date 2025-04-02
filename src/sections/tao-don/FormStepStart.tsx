@@ -1,7 +1,7 @@
 'use client'
 import useStore from '@/app/(store)/store'
 import ImageV2 from '@/components/image/ImageV2'
-import {Button} from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {Input} from '@/components/ui/input'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -19,14 +19,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {Fragment, useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
+import { ICreateOder } from '@/sections/tao-don/oder.interface'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Fragment, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 const formSchema = z.object({
   email: z.string().email({
     message: 'Địa chỉ email không đúng!',
@@ -210,7 +210,7 @@ export default function FormStepStart({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
                 <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
@@ -296,7 +296,7 @@ export default function FormStepStart({
                       )}
                   </SelectContent>
                 </Select>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -317,7 +317,7 @@ export default function FormStepStart({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -336,7 +336,7 @@ export default function FormStepStart({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -347,7 +347,9 @@ export default function FormStepStart({
           render={({field}) => (
             <FormItem
               onClick={() => {
-                setSelectServiceDimension(true)
+                if (isMobile) {
+                  setSelectServiceDimension(true)
+                }
               }}
               className='flex-1 space-y-0 !mb-[1.25rem]'
             >
@@ -412,7 +414,7 @@ export default function FormStepStart({
                     ))}
                 </SelectContent>
               </Select>
-              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
             </FormItem>
           )}
         />
@@ -431,8 +433,8 @@ export default function FormStepStart({
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              <p className='pl-[0.75rem] !mb-[0.5rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>

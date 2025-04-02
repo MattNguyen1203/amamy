@@ -405,7 +405,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         <p className='text-center w-full text-pc-heading20b xsm:text-pc-sub16b text-black mb-[0.5rem]'>
           Tạo đơn hàng thành công!
         </p>
-        <p className='text-center text-pc-14 text-[rgba(0,0,0,0.80)] mb-[4rem] xsm:mb-[1.5rem]'>
+        <p className='text-center text-pc-14 text-[rgba(0,0,0,0.80)] mb-[2rem] xsm:mb-[1.5rem]'>
           Đơn hàng của bạn đã được tạo thành công. Chúng tôi đã gửi thông tin
           xác nhận qua email của bạn.
         </p>
@@ -413,9 +413,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           onClick={() => {
             setSubmitting(false)
           }}
-          className='h-[3rem] w-full p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
+          className='cursor-pointer h-[3rem] w-full p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
         >
-          <p className='text-pc-sub16m text-white cursor-pointer'>Xong</p>
+          <p className='text-pc-sub16m text-white'>Xong</p>
         </div>
       </div>
       {/* <div

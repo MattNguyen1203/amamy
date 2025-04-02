@@ -67,7 +67,7 @@ export default function AsideBlog({
                   }}
                   className={cn(
                     activeSection === item?.id && 'active',
-                    'text-pc-sub14s text-[rgba(0,0,0,0.80)] [&.active]:text-[#09A5FF] hover:text-[#09A5FF] transition-all duration-500',
+                    'text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] [&.active]:text-[#09A5FF] hover:text-[#09A5FF] transition-all duration-500',
                   )}
                 >
                   {item?.text}
