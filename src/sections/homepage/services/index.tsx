@@ -222,7 +222,7 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
           </div>
         </div>
       </div>
-      <p className=' text-[1.375rem] not-italic font-medium leading-[130%]'>
+      <p className=' text-[1.375rem] font-medium leading-[130%] tracking-[-0.04125rem]'>
         {card.title}
       </p>
     </div>

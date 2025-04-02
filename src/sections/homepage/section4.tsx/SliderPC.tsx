@@ -4,6 +4,7 @@ import {cn} from '@/lib/utils'
 import ICArrow from '@/sections/blog/detail/ICArrow'
 import {ListNewsObject, NewsObject} from '@/utils/type'
 import Image from 'next/image'
+import {usePathname} from 'next/navigation'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
@@ -12,12 +13,11 @@ import {Swiper, SwiperSlide} from 'swiper/react'
 export default function SliderPC({
   setActiveSlider,
   withDHS,
-  variant = 'default',
 }: {
   setActiveSlider: React.Dispatch<React.SetStateAction<number>>
   withDHS: NewsObject
-  variant?: 'default' | 'about-us'
 }) {
+  const pathname = usePathname()
   return (
     <Swiper
       onSlideChange={(swiper) => {
@@ -49,7 +49,7 @@ export default function SliderPC({
             <div
               className={cn(
                 'xsm:hidden sm:group-hover:h-[25.75rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white',
-                variant === 'about-us' && 'rounded-br-[1.25rem] bg-[#F1F9FF]',
+                pathname === '/about' && 'rounded-br-[1.25rem] bg-[#F1F9FF]',
               )}
             >
               <div

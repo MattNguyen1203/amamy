@@ -74,10 +74,10 @@ export default function RelatedBlogs({
               </SwiperSlide>
             ))}
         </Swiper>
-        <div className='xsm:hidden swiper-button-custom-prev cursor-pointer absolute z-10 left-[6rem] translate-x-[-50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
+        <div className='xsm:hidden swiper-button-custom-prev cursor-pointer absolute z-10 left-[6rem] translate-x-[-50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] backdrop-blur-[10px] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100] rotate-[180deg]' />
         </div>
-        <div className='xsm:hidden swiper-button-custom-next cursor-pointer absolute z-10 right-[6rem] translate-x-[50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
+        <div className='xsm:hidden swiper-button-custom-next cursor-pointer absolute z-10 right-[6rem] translate-x-[50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] backdrop-blur-[10px] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100]' />
         </div>
       </div>
