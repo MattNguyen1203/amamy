@@ -1,7 +1,7 @@
 'use client'
 import useStore from '@/app/(store)/store'
 import ImageV2 from '@/components/image/ImageV2'
-import { Button } from '@/components/ui/button'
+import {Button} from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import {Input} from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -19,14 +19,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
-import { ICreateOder } from '@/sections/tao-don/oder.interface'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Fragment, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Fragment, useEffect, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
 const formSchema = z.object({
   email: z.string().email({
     message: 'Địa chỉ email không đúng!',
@@ -60,19 +60,19 @@ const formSchema = z.object({
 
 const dataContactMethod = [
   {
-    img: '/order/likev2.svg',
+    img: '/order/like.png',
     title: 'Facebook Fanpage Amamy',
   },
   {
-    img: '/order/fb.svg',
+    img: '/order/fb.png',
     title: 'Facebook Amamy vận chuyển',
   },
   {
-    img: '/order/zalo.svg',
+    img: '/order/zalo.png',
     title: 'Zalo Amamy',
   },
   {
-    img: '/order/infor.svg',
+    img: '/order/kh.png',
     title: 'Trang cá nhân của nhân viên',
   },
 ]
@@ -87,6 +87,7 @@ export default function FormStepStart({
   nextStep,
   setIndexTab,
   indexTab,
+  handlesetDataInformation,
 }: {
   data: ICreateOder[]
   onSuccess: (nextTab: string) => void
@@ -97,6 +98,7 @@ export default function FormStepStart({
   nextStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  handlesetDataInformation: (shipping: string) => void
 }) {
   const isMobile = useIsMobile()
   const [selectServiceDimension, setSelectServiceDimension] =
@@ -143,7 +145,8 @@ export default function FormStepStart({
     }
   }, [selectServiceDimension, howToContactAmamy])
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    localStorage.setItem('user_email', values?.email)
+    handlesetDataInformation(values?.shipping)
+    // localStorage.setItem('user_email', values?.email)
     if (stepOrder < 2) {
       setStepOrder(Number(nextStep))
     }
@@ -251,8 +254,8 @@ export default function FormStepStart({
                             <ImageV2
                               src={howToContactAmamyValue?.img || ''}
                               alt=''
-                              height={50 * 2}
-                              width={50 * 2}
+                              height={100 * 2}
+                              width={100 * 2}
                               className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                             />
                             <p className='text-black text-pc-sub14m'>
@@ -377,8 +380,8 @@ export default function FormStepStart({
                             ''
                           }
                           alt=''
-                          height={24 * 2}
-                          width={24 * 2}
+                          height={100 * 2}
+                          width={100 * 2}
                           className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                         />
                         <p className='text-black text-pc-sub14m'>
@@ -402,8 +405,8 @@ export default function FormStepStart({
                           <ImageV2
                             src={item?.thumbnail || '/order/flag-germany.webp'}
                             alt=''
-                            height={24 * 2}
-                            width={24 * 2}
+                            height={100 * 2}
+                            width={100 * 2}
                             className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                           />
                           <p className='text-black text-pc-sub14m'>
@@ -513,8 +516,8 @@ export default function FormStepStart({
                         <ImageV2
                           src={item?.thumbnail || '/order/flag-germany.webp'}
                           alt=''
-                          height={24 * 2}
-                          width={24 * 2}
+                          height={50 * 2}
+                          width={50 * 2}
                           className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                         />
                         <p className='text-black text-pc-sub14m line-clamp-1'>

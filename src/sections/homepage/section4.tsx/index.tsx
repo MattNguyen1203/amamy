@@ -30,7 +30,7 @@ const Section4 = ({withDHS}: Props) => {
           </h2>
           <p
             dangerouslySetInnerHTML={{__html: withDHS?.subtitle}}
-            className='xsm:hidden fade-item xsm:text-mb-12 font-montserrat text-[rgba(41,_47,_54,_0.60)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'
+            className='xsm:hidden fade-item xsm:text-mb-12 font-montserrat text-[rgba(0,0,0,0.80)] text-[1rem] not-italic font-medium leading-[150%] xsm:text-[0.75rem] tracking-[-0.03rem]'
           ></p>
           <p
             dangerouslySetInnerHTML={{__html: withDHS?.subtitle_mb}}
@@ -127,7 +127,6 @@ const Section4 = ({withDHS}: Props) => {
               <SliderPC
                 setActiveSlider={setActiveSlider}
                 withDHS={withDHS}
-                variant='about-us'
               />
             )}
           </div>

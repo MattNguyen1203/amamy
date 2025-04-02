@@ -47,7 +47,7 @@ const SearchBill = ({
       >
         <div
           ref={ref}
-          className='p-[0.5rem_0.5rem_0.5rem_1rem] h-[3rem] rounded-[1.25rem] bg-background-elevation5 flex space-x-[0.625rem] items-center'
+          className='group p-[0.5rem_0.5rem_0.5rem_1rem] h-[3rem] rounded-[1.25rem] bg-background-elevation5 flex space-x-[0.625rem] items-center'
         >
           <input
             type='text'
@@ -60,8 +60,8 @@ const SearchBill = ({
           <button
             onClick={handlePaste}
             className={cn(
-              'h-8 px-3 rounded-[1.25rem] bg-background-elevation30 flex-center text-pc-sub12s text-black/30 transition-all duration-300',
-              isShowPaste ? 'opacity-100' : 'opacity-0 pointer-events-none',
+              'group-hover:opacity-100 h-8 px-3 rounded-[1.25rem] bg-background-elevation30 flex-center text-pc-sub12s text-black/30 transition-all duration-300',
+              isShowPaste ? 'opacity-100' : 'opacity-0',
             )}
           >
             Dán

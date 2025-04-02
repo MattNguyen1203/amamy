@@ -92,7 +92,7 @@ const TrackingOrder = () => {
         value='estimate-price'
         className='relative z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] '
       >
-        <p className='text-pc-sub12s text-black/80 xsm:uppercase xsm:text-pc-sub10m xsm:!font-semibold'>
+        <p className='text-pc-sub12s text-black/80 uppercase xsm:text-pc-sub10m xsm:!font-semibold'>
           Trò chuyện với trợ lý AI Amamy
         </p>
         <div className='flex items-center mt-4 xsm:mt-3 rounded-[1.25rem] bg-Blue-Primary'>

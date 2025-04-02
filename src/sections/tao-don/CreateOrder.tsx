@@ -18,7 +18,7 @@ import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
   {title: 'Thời gian gửi hàng', value: '2'},
@@ -49,42 +49,38 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const handleClickcurrentTab = (nextTab: string) => {
     setCurrentTab(nextTab)
   }
-  useEffect(() => {
-    if (dataFromOrder?.shipping && data) {
-      setDataInformation(undefined)
-      const foundItem = data?.find(
-        (item) => item.id === Number(dataFromOrder?.shipping),
-      )
-      setDataInformation(foundItem)
-      setStepOrder(2)
-      StepForm = [{title: 'Thông tin gửi hàng', value: '1'}]
-      if (foundItem?.information?.time) {
-        StepForm = [...StepForm, {title: 'Thời gian gửi hàng', value: '2'}]
-      }
-      if (foundItem?.information?.note) {
-        StepForm = [...StepForm, {title: 'Lưu ý quan trọng', value: '3'}]
-      }
-      StepForm = [...StepForm, {title: 'Thông tin nhận hàng', value: '4'}]
-      if (
-        (foundItem?.type === 'vietduc' &&
-          (foundItem?.information?.insurance?.compensation?.title ||
-            foundItem?.information?.insurance?.compensation?.desc)) ||
-        foundItem?.information?.insurance?.compensation?.policy
-      ) {
-        StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
-      }
-      if (
-        foundItem?.type !== 'vietduc' &&
-        foundItem?.information?.insurance?.cargo_insurance_japanvn
-      ) {
-        StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
-      }
-      StepForm = [
-        ...StepForm,
-        {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '6'},
-      ]
+  const handlesetDataInformation = (shipping: string) => {
+    setDataInformation(undefined)
+    const foundItem = data?.find((item) => item.id === Number(shipping))
+    setDataInformation(foundItem)
+    setStepOrder(2)
+    StepForm = [{title: 'Thông tin gửi hàng', value: '1'}]
+    if (foundItem?.information?.time) {
+      StepForm = [...StepForm, {title: 'Thời gian gửi hàng', value: '2'}]
     }
-  }, [dataFromOrder?.shipping, data])
+    if (foundItem?.information?.note) {
+      StepForm = [...StepForm, {title: 'Lưu ý quan trọng', value: '3'}]
+    }
+    StepForm = [...StepForm, {title: 'Thông tin nhận hàng', value: '4'}]
+    if (
+      (foundItem?.type === 'vietduc' &&
+        (foundItem?.information?.insurance?.compensation?.title ||
+          foundItem?.information?.insurance?.compensation?.desc)) ||
+      foundItem?.information?.insurance?.compensation?.policy
+    ) {
+      StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
+    }
+    if (
+      foundItem?.type !== 'vietduc' &&
+      foundItem?.information?.insurance?.cargo_insurance_japanvn
+    ) {
+      StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
+    }
+    StepForm = [
+      ...StepForm,
+      {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '6'},
+    ]
+  }
   // useEffect(() => {
   //   setTimeout(() => {
   //     setFaq(false)
@@ -112,7 +108,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     setIndexTab(index)
                     if (item?.value === '1') {
                       setDataInformation(undefined)
-                      setDataFromOrder({...dataFromOrder, shipping: null})
+                      setDataFromOrder({...dataFromOrder})
                     }
                   }}
                   key={index}
@@ -166,6 +162,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             className='mt-0'
           >
             <FormStepStart
+              handlesetDataInformation={handlesetDataInformation}
               data={data}
               setIndexTab={setIndexTab}
               indexTab={indexTab}
