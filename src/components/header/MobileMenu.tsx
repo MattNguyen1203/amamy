@@ -109,7 +109,7 @@ const MobileMenu = ({
                 <Fragment key={index}>
                   <SheetClose asChild>
                     <Link
-                      href={item?.slug || ''}
+                      href={'/' + item?.slug || ''}
                       className='flex w-full justify-between space-x-[1rem] py-[0.5rem]'
                     >
                       <ImageV2
