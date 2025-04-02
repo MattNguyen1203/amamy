@@ -140,7 +140,7 @@ html > body[data-scroll-locked] {
     @apply w-[88rem];
   }
   .content-p {
-    @apply text-[1rem] text-[rgba(0,0,0,0.80)] font-medium leading-[1.6] tracking-[-0.03rem] xsm:text-pc-sub14m;
+    @apply text-[1rem] text-[rgba(0,0,0,0.80)] font-medium leading-[1.6] tracking-[-0.03rem] xsm:text-pc-sub14m xsm:leading-[1.7];
   }
   .content-span {
     @apply text-[1rem] text-[rgba(0,0,0,0.80)] font-medium leading-[1.6] tracking-[-0.03rem] xsm:text-pc-sub14m;

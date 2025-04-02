@@ -131,7 +131,7 @@ const SearchBill = ({
         />
         <button
           onClick={onSearch}
-          className='p-3 flex items-center justify-center rounded-[1.25rem] bg-[#38B6FF] border-[0.5px] border-white/80'
+          className='p-3 flex items-center justify-center rounded-[1.25rem] bg-[#38B6FF]'
         >
           <span className='text-background-elevation5 text-pc-sub12s tracking-[-0.03rem] leading-[1.4]'>
             Tra cứu
