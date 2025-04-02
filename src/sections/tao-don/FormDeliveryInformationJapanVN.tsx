@@ -199,6 +199,9 @@ export default function FormDeliveryInformationJapanVN({
       }
     }
     fetchProvinces()
+    if (dataFromOrder?.recipientAddressType) {
+      setRecipientAddressType(dataFromOrder?.recipientAddressType)
+    }
     setTimeout(() => {
       setPending(true)
     }, 3000)
@@ -304,7 +307,7 @@ export default function FormDeliveryInformationJapanVN({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -323,7 +326,7 @@ export default function FormDeliveryInformationJapanVN({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -394,7 +397,7 @@ export default function FormDeliveryInformationJapanVN({
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>

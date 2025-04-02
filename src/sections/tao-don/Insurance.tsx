@@ -117,7 +117,7 @@ export default function Insurance({
                                 'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                             </FormLabel>
                           </div>
-                          <FormMessage className='!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
+                          <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
                         </FormItem>
                       )}
                     />
@@ -174,7 +174,7 @@ export default function Insurance({
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>
                       </div>
-                      <FormMessage className='!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
+                      <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
                     </FormItem>
                   )}
                 />

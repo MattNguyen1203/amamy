@@ -105,7 +105,7 @@ export default function FormDeliveryInformationVNJapan({
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Điền chữ tiếng Anh và Kanji hoặc Romanji.
               </p>
@@ -128,7 +128,7 @@ export default function FormDeliveryInformationVNJapan({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -147,7 +147,7 @@ export default function FormDeliveryInformationVNJapan({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -167,7 +167,7 @@ export default function FormDeliveryInformationVNJapan({
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Điền chữ tiếng Anh và Kanji hoặc Romanji.
                 <br />

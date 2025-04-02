@@ -208,6 +208,9 @@ export default function FormDeliveryInformationAboutVN({
       }
     }
     fetchProvinces()
+    if (dataFromOrder?.recipientAddressType) {
+      setRecipientAddressType(dataFromOrder?.recipientAddressType)
+    }
     setTimeout(() => {
       setPending(true)
     }, 3000)
@@ -300,7 +303,7 @@ export default function FormDeliveryInformationAboutVN({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -319,7 +322,7 @@ export default function FormDeliveryInformationAboutVN({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -393,7 +396,7 @@ export default function FormDeliveryInformationAboutVN({
               <p className='pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
                 *Địa chỉ chi tiết, số nhà, tên đường,...
               </p>
-              <FormMessage className='xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
             </FormItem>
           )}
         />

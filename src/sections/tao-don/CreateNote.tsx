@@ -93,7 +93,7 @@ export default function CeateNote({
                   {item?.title}
                 </p>
                 <div
-                  className='[&_a]:text-[#0084FF] [&_img]:w-full [&_img]:max-h-[50vh] [&_img]:h-auto [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14m *:font-normal *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul_li_span]:font-medium [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
@@ -116,7 +116,7 @@ export default function CeateNote({
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>
                       </div>
-                      <FormMessage className='!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
+                      <FormMessage className='pl-[0.75rem] first-letter:!text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
                     </FormItem>
                   )}
                 />

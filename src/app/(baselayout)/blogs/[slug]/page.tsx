@@ -33,7 +33,7 @@ export default async function page({params}: {params: {slug: string}}) {
             {title: 'Hữu ích cho gửi hàng', slug: '/blogs'},
             {title: dataDetailPost?.post?.title ?? 'Bài Viết', slug: ''},
           ]}
-          className='sm:px-[5rem] xsm:px-[1rem]'
+          className='sm:px-[5rem] xsm:px-[1rem] xsm:pb-[1.5rem]'
         />
         <DetailCentenBlog
           dataDetailPost={dataDetailPost}
