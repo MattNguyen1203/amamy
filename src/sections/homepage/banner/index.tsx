@@ -36,7 +36,7 @@ const Banner = ({banner}: {banner: IBanner}) => {
           height={2000}
           quality={100}
         />
-        <div className='absolute top-[11rem] left-[47rem] flex items-center space-x-4'>
+        {/* <div className='absolute top-[11rem] left-[47rem] flex items-center space-x-4'>
           <ImageV2
             alt=''
             width={300}
@@ -58,16 +58,16 @@ const Banner = ({banner}: {banner: IBanner}) => {
             src={banner?.image_3.url}
             className='fade-image w-[14.45088rem] h-[13.61225rem] object-cover border-[0.125rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem] transform skew-y-[4deg]'
           />
-        </div>
+        </div> */}
 
         {/* box */}
-        <ImageV2
+        {/* <ImageV2
           alt=''
           width={300 * 2}
           height={300 * 2}
           src={banner?.box_image}
           className='fade-box w-[34.95956rem] h-[31.5rem] object-cover absolute left-[54rem] top-[14rem]'
-        />
+        /> */}
 
         <div className='fade-in-box absolute left-[6rem] top-[13.37rem]'>
           <div className='flex items-center space-x-3'>
@@ -194,7 +194,7 @@ const BackgroundMobile = ({
 const AvatarIcon = ({className, item}: {className?: string; item: IImage}) => {
   return (
     <ImageV2
-      className={`rounded-[2.25rem] border-[1.5px] border-solid object-contain border-[#FFF] bg-[#C8B1B1] size-9 xsm:size-7 ${className}`}
+      className={`rounded-[2.25rem] border-[1.5px] border-solid object-cover border-[#FFF] bg-[#C8B1B1] size-9 xsm:size-7 ${className}`}
       src={item.url}
       alt={item.alt}
       width={200}

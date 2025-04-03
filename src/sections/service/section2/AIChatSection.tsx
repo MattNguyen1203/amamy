@@ -1,9 +1,9 @@
 'use client'
-import MessageItem, { MessageItemProps } from '@/components/chat-bot/MessageItem'
+import MessageItem, {MessageItemProps} from '@/components/chat-bot/MessageItem'
 import ImageV2 from '@/components/image/ImageV2'
 import SendMessage from '@/components/svg/SendMessage'
-import { IListServiceResponse, IServicePage } from '@/utils/type'
-import { FAQSection } from './FAQSection'
+import {IListServiceResponse, IServicePage} from '@/utils/type'
+import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
 
 interface Prop {
@@ -48,9 +48,10 @@ const AIChatSection = ({data, listService}: Prop) => {
             <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
               {data?.talk_to_ai?.title || ''}
             </p>
-            <p className='text-[0.875rem] not-italic font-medium leading-[150%]'>
-              {data?.talk_to_ai?.subtitle || ''}
-            </p>
+            <p
+              dangerouslySetInnerHTML={{__html: data?.talk_to_ai?.subtitle}}
+              className='text-[0.875rem] not-italic font-medium leading-[150%]'
+            ></p>
           </div>
         </div>
 

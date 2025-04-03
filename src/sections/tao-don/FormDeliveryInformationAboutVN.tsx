@@ -648,13 +648,13 @@ export default function FormDeliveryInformationAboutVN({
             />
           </div>
         )}
-        <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)
               handleClickcurrentTab(prevStep)
             }}
-            className='xsm:flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+            className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
           >
             <p className='text-pc-sub16m text-black'>Quay lại</p>
           </div>
@@ -662,7 +662,7 @@ export default function FormDeliveryInformationAboutVN({
             type='submit'
             disabled={!form.formState.isValid}
             className={cn(
-              'xsm:flex-1 !shadow-none hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+              'flex-1 !shadow-none hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
               !form.formState.isValid &&
                 'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
@@ -679,10 +679,10 @@ export default function FormDeliveryInformationAboutVN({
                 setIsWard(false)
               }}
               className={cn(
-                '!mt-0 fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden',
-                isCity && 'block',
-                isDistrict && 'block',
-                isWard && 'block',
+                '!mt-0 fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none',
+                isCity && 'bg-black/70 pointer-events-auto',
+                isDistrict && 'bg-black/70 pointer-events-auto',
+                isWard && 'bg-black/70 pointer-events-auto',
               )}
             ></div>
             <div

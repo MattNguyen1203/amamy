@@ -366,6 +366,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   setSubmitting={setSubmitting}
                   setDataFromOrder={setDataFromOrder}
                   type={dataInformation?.type}
+                  european={dataInformation?.european}
                   importantNote={dataInformation?.information?.important_note}
                   prevStep={
                     dataInformation?.type === 'vietduc'

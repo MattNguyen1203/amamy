@@ -1,8 +1,8 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
 import useIsMobile from '@/hooks/useIsMobile'
-import { Card, ImageIcon, ServicesObject } from '@/utils/type'
-import { useGSAP } from '@gsap/react'
+import {Card, ImageIcon, ServicesObject} from '@/utils/type'
+import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -151,10 +151,7 @@ const ServiceHighlight = ({
     href={href || ''}
     className='fade-in-box-card-service-2 relative w-[30.75rem] h-[20.625rem] bg-white rounded-[1.25rem] overflow-hidden xsm:w-[18.75rem] xsm:h-[15.40181rem] xsm:min-w-max'
   >
-    <div
-      className='h-full bg-cover bg-center xsm:w-[18.75rem]'
-      style={{backgroundImage: `url(${backgroundUrl})`}}
-    >
+    <div className='h-full bg-cover relative bg-center xsm:w-[18.75rem]'>
       <div className='w-full h-full flex flex-col items-center justify-end p-4 gap-5 bg-opacity-10 bg-white xsm:rounded-full xsm:p-[0.62rem]'>
         <div className='flex items-center w-full gap-4 bg-background-elevation5 rounded-lg px-4 py-2.5 xsm:rounded-full'>
           <span className='xsm:hidden'>{icon}</span>
@@ -164,6 +161,13 @@ const ServiceHighlight = ({
           <ArrowIcon />
         </div>
       </div>
+      <ImageV2
+        alt=''
+        width={519}
+        height={336}
+        src={backgroundUrl}
+        className='size-full absolute z-[-1] inset-0 object-cover'
+      />
     </div>
   </Link>
 )
@@ -175,7 +179,7 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
   >
     <div className='absolute z-[10] left-0 right-0'>
       <Image
-        src={'/homepage/icon/BG_3.webp'}
+        src={card?.backgroud ?? '/homepage/icon/BG_3.webp'}
         alt=''
         width={1000}
         height={1000}
@@ -189,7 +193,7 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
         height={600 * 2}
         className='absolute w-[17.4375rem] h-[17.9375rem] left-[2.69rem] bottom-[8.32rem] object-cover z-[30]'
         alt='Image'
-        src={'/homepage/replace/img-1.png'}
+        src={card?.image ?? '/homepage/replace/img-1.png'}
       />
     </div>
     <div className='flex flex-col items-start gap-4 p-4 absolute bottom-0 left-0 z-[40]'>
