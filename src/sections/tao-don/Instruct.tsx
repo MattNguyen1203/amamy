@@ -405,7 +405,7 @@ export default function Instruct({
           {data?.packing_instructions && (
             <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
               <div
-                className='flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                className='flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -546,7 +546,7 @@ export default function Instruct({
                     </div>
                     <div className='space-y-[0.25rem]'>
                       {dataFromOrder?.recipientName && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Tên người nhận:{' '}
                           </strong>
@@ -554,19 +554,37 @@ export default function Instruct({
                         </p>
                       )}
                       {dataFromOrder?.recipientAddress && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize after:text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Địa chỉ chi tiết:{' '}
                           </strong>
-                          <span>{dataFromOrder?.recipientAddress}</span>
+                          <span>
+                            {dataFromOrder?.recipientAddress}
+                            {(type === 'ducvn' || type === 'nhatviet') &&
+                              dataFromOrder?.recipientAddressType ===
+                                'registeredAddress' &&
+                              ' - ' +
+                                dataFromOrder?.recipientWardsandcommunes +
+                                ' - ' +
+                                dataFromOrder?.district +
+                                ' - ' +
+                                dataFromOrder?.recipientCity}
+                            {(type === 'vietduc' || type === 'viethan') &&
+                              ' - ' +
+                                dataFromOrder?.housingNumber +
+                                ' - ' +
+                                dataFromOrder?.roadName +
+                                ' - ' +
+                                dataFromOrder?.recipientCity}
+                          </span>
                         </p>
                       )}
-                      {dataFromOrder?.recipientAddressType ===
+                      {/* {dataFromOrder?.recipientAddressType ===
                         'registeredAddress' &&
                         (type === 'ducvn' || type === 'nhatviet') && (
-                          <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                          <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                             <strong className='font-semibold sm:leading-[1.14]'>
-                              địa chỉ:{' '}
+                              Địa chỉ:{' '}
                             </strong>
                             <span>
                               {dataFromOrder?.recipientWardsandcommunes} -{' '}
@@ -576,9 +594,9 @@ export default function Instruct({
                           </p>
                         )}
                       {(type === 'vietduc' || type === 'viethan') && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
-                            địa chỉ:{' '}
+                            Địa chỉ:{' '}
                           </strong>
                           <span>
                             {dataFromOrder?.housingNumber} -{' '}
@@ -588,9 +606,9 @@ export default function Instruct({
                               '- ' + dataFromOrder?.recipientCodeCity}
                           </span>
                         </p>
-                      )}
+                      )} */}
                       {type === 'viethan' && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Mã thông quan, ID hoặc CMT:{' '}
                           </strong>
@@ -598,7 +616,7 @@ export default function Instruct({
                         </p>
                       )}
                       {type === 'vietnhat' && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Mã bưu điện:{' '}
                           </strong>
@@ -606,7 +624,7 @@ export default function Instruct({
                         </p>
                       )}
                       {european === 'vnEu' && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Quốc gia:{' '}
                           </strong>
@@ -614,7 +632,7 @@ export default function Instruct({
                         </p>
                       )}
                       {dataFromOrder?.recipientPhone && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Số điện thoại:{' '}
                           </strong>
@@ -622,14 +640,14 @@ export default function Instruct({
                         </p>
                       )}
                       {dataFromOrder?.email && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Email:{' '}
                           </strong>
                           <span>{dataFromOrder?.email}</span>
                         </p>
                       )}
-                      <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                      <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                         <strong className='font-semibold sm:leading-[1.14]'>
                           Loại tiền tệ thanh toán:{' '}
                         </strong>

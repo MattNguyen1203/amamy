@@ -89,7 +89,7 @@ export default function ContentBlog({
       <div className='mt-[5rem] xsm:mt-[1.5rem]'>
         <div
           dangerouslySetInnerHTML={{__html: updatedHtml || data?.content}}
-          className='content-detail-blog [&_div]:!w-full *:font-montserrat [&_em]:content-em [&_h2]:content-h2 [&_h3]:content-h3 [&_img]:content-img [&>p]:content-p [&>span]:content-span [&_strong]:content-strong [&_ol_li]:content-ol--li [&_ul_li]:content-ul--li [&>ul]:content-ul [&>ol]:content-ol [&_p_img]:inline-block'
+          className='content-detail-blog [&>p]:mb-[1rem] [&_div]:!w-full *:font-montserrat [&_em]:content-em [&_h2]:content-h2 [&_h3]:content-h3 [&_img]:content-img [&>p]:content-p [&>span]:content-span [&_strong]:content-strong [&_ol_li]:content-ol--li [&_ul_li]:content-ul--li [&>ul]:content-ul [&>ol]:content-ol [&_p_img]:inline-block'
         ></div>
         <div className='flex xsm:flex-col xsm:space-y-[0.5rem] sm:items-center mt-[2rem] xsm:pt-[1rem] xsm:mt-[1rem] xsm:border-t-[0.0625rem] xsm:border-t-solid xsm:border-t-[#DCDFE4]'>
           <p className='text-black font-montserrat xsm:text-pc-sub14s sm:mr-[1.25rem]'>
