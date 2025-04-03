@@ -153,7 +153,7 @@ const ServiceHighlight = ({
   >
     <div className='h-full bg-cover relative bg-center xsm:w-[18.75rem]'>
       <div className='w-full h-full flex flex-col items-center justify-end p-4 gap-5 bg-opacity-10 bg-white xsm:rounded-full xsm:p-[0.62rem]'>
-        <div className='flex items-center w-full gap-4 bg-background-elevation5 rounded-lg px-4 py-2.5 xsm:rounded-full'>
+        <div className='flex items-center w-full gap-4 bg-background-elevation5 rounded-[1.25rem] px-4 py-2.5 xsm:rounded-full'>
           <span className='xsm:hidden'>{icon}</span>
           <div className='text-[#38B6FF] font-bold text-[1.375rem] mr-auto xsm:text-[0.875rem]'>
             {title}
@@ -197,7 +197,7 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
       />
     </div>
     <div className='flex flex-col items-start gap-4 p-4 absolute bottom-0 left-0 z-[40]'>
-      <div className='flex flex-col items-start bg-background-elevation5 rounded-lg p-4 w-full'>
+      <div className='flex flex-col items-start bg-background-elevation5 rounded-[1.25rem] p-4 w-full'>
         <div className='flex justify-between w-full'>
           <p className='text-transparent text-[28px] font-bold'>
             <span className='text-black font-bold'>{card.subtitle_2} </span>

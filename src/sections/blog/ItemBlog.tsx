@@ -1,5 +1,4 @@
 import ICArraw from '@/components/icon/ICArraw'
-import ICCalendar from '@/components/icon/ICCalendar'
 import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
 import {IItemPostBlog} from '@/sections/blog/blogs.interface'
@@ -58,7 +57,7 @@ export default function ItemBlog({
         </h3>
         <div className='flex justify-between w-full items-center'>
           <div className='flex space-x-[0.5rem]'>
-            <ICCalendar className='size-[1.25rem] object-contain xsm:size-[1rem]' />
+            {/* <ICCalendar className='size-[1.25rem] object-contain xsm:size-[1rem]' /> */}
             <p className='text-pc-sub12m text-greyscale-text60 xsm:text-mb-sub10m'>
               {formattedDate}
             </p>

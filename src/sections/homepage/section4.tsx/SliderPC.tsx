@@ -1,10 +1,8 @@
 'use client'
 import BtnBlue from '@/components/button/BtnBlue'
-import {cn} from '@/lib/utils'
 import ICArrow from '@/sections/blog/detail/ICArrow'
 import {ListNewsObject, NewsObject} from '@/utils/type'
 import Image from 'next/image'
-import {usePathname} from 'next/navigation'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
@@ -17,7 +15,6 @@ export default function SliderPC({
   setActiveSlider: React.Dispatch<React.SetStateAction<number>>
   withDHS: NewsObject
 }) {
-  const pathname = usePathname()
   return (
     <Swiper
       onSlideChange={(swiper) => {
@@ -46,12 +43,7 @@ export default function SliderPC({
               height={1000}
               className='bg-[#EDF5FA] w-[50.6875rem] h-[40.5rem] object-cover flex-shrink-0 rounded-[0.5rem] sm:rounded-[1.25rem] xsm:w-[18.75rem] xsm:h-[21.25rem] xsm:object-cover'
             />
-            <div
-              className={cn(
-                'xsm:hidden sm:group-hover:h-[25.75rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white',
-                pathname === '/about' && 'rounded-br-[1.25rem] bg-[#F1F9FF]',
-              )}
-            >
+            <div className='xsm:hidden sm:group-hover:h-[25.75rem] transition-all duration-500 h-[8.625rem] overflow-hidden rounded-t-[1.25rem] w-[41.3125rem] p-[2.5rem] absolute bottom-0 right-0 bg-white'>
               <div
                 className='mb-[0.75rem] text-start text-[1.375rem] not-italic font-semibold leading-[150%] xsm:w-[18.75rem] xsm:hidden '
                 dangerouslySetInnerHTML={{
