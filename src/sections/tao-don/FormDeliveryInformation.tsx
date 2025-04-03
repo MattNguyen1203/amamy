@@ -106,7 +106,7 @@ export default function FormDeliveryInformation({
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const [europeanCountries, setEuropeanCountries] = useState([])
   const [selectNation, setSelectNation] = useState<boolean>(false)
-
+  console.log(dataFromOrder)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -310,10 +310,12 @@ export default function FormDeliveryInformation({
                   {...field}
                 />
               </FormControl>
-              <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
-                *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số tầng,
-                số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
-              </p>
+              {dataFromOrder?.shipping === '326' && (
+                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                  *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số
+                  tầng, số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
+                </p>
+              )}
               <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
             </FormItem>
           )}
