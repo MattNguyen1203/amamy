@@ -7,7 +7,7 @@
   height: 1.5rem;
   left: 0rem;
   position: absolute;
-  top: 0.25rem;
+  top: 0rem;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -44,4 +44,12 @@
   transform: translateY(-50%);
   background-color: #38b6ff;
   border-radius: 100%;
+}
+@media (max-width: 639px) {
+  .progress-order ul li {
+    padding-bottom: 1.5rem;
+  }
+  .progress-order ul li {
+    padding-left: 2.25rem;
+  }
 }

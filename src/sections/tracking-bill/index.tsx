@@ -8,6 +8,7 @@ import OrderInformation, {
 } from '@/sections/tracking-bill/OrderInformation'
 import SearchBill from '@/sections/tracking-bill/SearchBill'
 import {useEffect, useState} from 'react'
+import {toast} from 'sonner'
 
 type TrackingBillProps = {
   dataAcf?: {
@@ -28,22 +29,30 @@ const TrackingBill = ({dataAcf}: TrackingBillProps) => {
   const handleSearch = async () => {
     if (isLoading) return
     setIsLoading(true)
-    const data = await fetchDataOrder({
-      api: 'get',
-      method: 'POST',
-      option: {
-        body: JSON.stringify({
-          ma_don: issearchValue,
-        }),
-      },
-    })
-    setIsLoading(false)
-    if (data.ok) {
-      setData(data?.order)
-    } else {
-      setData(null)
+    try {
+      const data = await fetchDataOrder({
+        api: 'get',
+        method: 'POST',
+        option: {
+          body: JSON.stringify({
+            ma_don: issearchValue,
+          }),
+        },
+      })
+
+      if (data.ok) {
+        setData(data?.order)
+      } else {
+        setData(null)
+      }
+
+      setSearched(true)
+    } catch (error) {
+      toast.error('Đã có lỗi sảy ra, vui lòng thử lại')
+      console.error('Error fetching data:', error)
+    } finally {
+      setIsLoading(false)
     }
-    setSearched(true)
   }
   useEffect(() => {
     if (searchValue) {
