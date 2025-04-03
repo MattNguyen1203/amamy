@@ -488,7 +488,7 @@ export default function FormDeliveryInformationJapanVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage />
+                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />
@@ -572,7 +572,7 @@ export default function FormDeliveryInformationJapanVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage />
+                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />
@@ -646,7 +646,7 @@ export default function FormDeliveryInformationJapanVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage />
+                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />

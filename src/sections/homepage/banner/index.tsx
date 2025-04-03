@@ -125,7 +125,7 @@ const BackgroundMobile = ({
         width={1000}
         height={1000}
       />
-      <div className='absolute top-[7rem] left-[0.5rem] flex items-center space-x-4'>
+      {/* <div className='absolute top-[7rem] left-[0.5rem] flex items-center space-x-4'>
         <ImageV2
           alt=''
           width={300}
@@ -147,16 +147,16 @@ const BackgroundMobile = ({
           src={banner?.image_3.url}
           className='w-[6.49513rem] h-[6.13581rem] object-cover border-[0.0625rem] border-white/80 shadow-[0px_0px_35.235px_rgba(255,255,255,0.40),0px_0px_11.745px_rgba(255,255,255,0.25)] rounded-[0.5rem] transform skew-y-[4deg]'
         />
-      </div>
+      </div> */}
 
       {/* box */}
-      <ImageV2
+      {/* <ImageV2
         alt=''
         width={300}
         height={300}
         src='/homepage/box.webp'
         className='w-[16.9375rem] h-[15.25rem] object-cover absolute left-[4rem] top-[7rem]'
-      />
+      /> */}
 
       <div className='px-[1rem] pt-5 -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] relative z-[20]'>
         <div className='flex space-x-[0.75rem] items-center'>
