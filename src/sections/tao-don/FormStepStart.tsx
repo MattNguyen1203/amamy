@@ -169,24 +169,44 @@ export default function FormStepStart({
       const preview = await response.text()
       if (preview) {
         const previewJson = JSON.parse(preview)
-        setDataFromOrder({
-          ...dataFromOrder,
-          recipientName: previewJson?.ten_nguoi_nhan,
-          recipientPhone: previewJson?.sdt,
-          recipientAddress: previewJson?.dia_chi_nguoi_nhan,
-          recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
-          recipientPaymentInformation: previewJson?.loai_tien_te,
-          recipientCity: previewJson?.tinh_thanh_nguoi_nhan,
-          recipientCodeCity: previewJson?.ma_tinh_thanh_nguoi_nhan,
-          district: previewJson?.ma_tinh_thanh_nguoi_nhan,
-          housingNumber: previewJson?.so_nha_nguoi_nhan,
-          nation: previewJson?.nation,
-          ...values,
-        })
+        if (dataInformation?.id !== Number(values?.shipping)) {
+          setDataFromOrder({
+            recipientName: previewJson?.ten_nguoi_nhan,
+            recipientPhone: previewJson?.sdt,
+            recipientAddress: previewJson?.dia_chi_nguoi_nhan,
+            recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
+            recipientPaymentInformation: previewJson?.loai_tien_te,
+            recipientCity: previewJson?.tinh_thanh_nguoi_nhan,
+            recipientCodeCity: previewJson?.ma_tinh_thanh_nguoi_nhan,
+            district: previewJson?.ma_tinh_thanh_nguoi_nhan,
+            housingNumber: previewJson?.so_nha_nguoi_nhan,
+            nation: previewJson?.nation,
+            ...values,
+          })
+        } else {
+          setDataFromOrder({
+            ...dataFromOrder,
+            recipientName: previewJson?.ten_nguoi_nhan,
+            recipientPhone: previewJson?.sdt,
+            recipientAddress: previewJson?.dia_chi_nguoi_nhan,
+            recipientAddressDetail: previewJson?.dia_chi_nguoi_nhan_chi_tiet,
+            recipientPaymentInformation: previewJson?.loai_tien_te,
+            recipientCity: previewJson?.tinh_thanh_nguoi_nhan,
+            recipientCodeCity: previewJson?.ma_tinh_thanh_nguoi_nhan,
+            district: previewJson?.ma_tinh_thanh_nguoi_nhan,
+            housingNumber: previewJson?.so_nha_nguoi_nhan,
+            nation: previewJson?.nation,
+            ...values,
+          })
+        }
         return
       }
     }
-    setDataFromOrder({...dataFromOrder, ...values})
+    if (dataInformation?.id !== Number(values?.shipping)) {
+      setDataFromOrder({...values})
+    } else {
+      setDataFromOrder({...dataFromOrder, ...values})
+    }
   }
   return (
     <Form {...form}>
@@ -448,12 +468,12 @@ export default function FormStepStart({
             </FormItem>
           )}
         />
-        <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0'>
+        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0'>
           <Button
             type='submit'
             disabled={isMobile ? false : !form.formState.isValid}
             className={cn(
-              '!shadow-none xsm:w-full hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+              '!shadow-none xsm:w-full sm:w-[50%] hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
               !form.formState.isValid &&
                 'sm:bg-[#F0F0F0] [&_p]:sm:text-[rgba(0,0,0,0.30)]',
             )}
@@ -471,9 +491,9 @@ export default function FormStepStart({
                 setHowToContactAmamy(false)
               }}
               className={cn(
-                'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden',
-                selectServiceDimension && 'block',
-                howToContactAmamy && 'block',
+                'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none',
+                selectServiceDimension && 'bg-black/70 pointer-events-auto',
+                howToContactAmamy && 'bg-black/70 pointer-events-auto',
               )}
             ></div>
             <div

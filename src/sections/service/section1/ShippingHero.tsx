@@ -21,7 +21,7 @@ const ShippingHero: React.FC<Prop> = ({data}) => {
         <div className='text-center'>
           <h1
             dangerouslySetInnerHTML={{__html: data?.banner?.title || ''}}
-            className='fade-item sm:[&_br]:hidden text-[2.625rem] xsm:text-[1.125rem] font-bold leading-[1.2] tracking-[-0.105rem]'
+            className='fade-item sm:[&_br]:hidden text-[2.625rem] xsm:text-[1.125rem] font-bold leading-[1.2] tracking-[-0.105rem] xsm:tracking-[-0.045rem]'
           ></h1>
           <p className='fade-item mt-4 mx-auto max-w-[41.25rem] text-[1rem] xsm:text-[0.875rem] leading-relaxed'>
             {data?.banner?.sub_title || ''}

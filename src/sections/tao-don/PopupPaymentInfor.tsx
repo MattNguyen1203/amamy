@@ -29,8 +29,8 @@ export default function PopupPaymentInfor({
           setSelectPaymentInformation(false)
         }}
         className={cn(
-          'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
-          selectPaymentInformation && 'block',
+          'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none !mt-0',
+          selectPaymentInformation && 'bg-black/70 pointer-events-auto',
         )}
       ></div>
       <div

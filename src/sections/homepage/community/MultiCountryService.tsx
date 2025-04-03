@@ -108,7 +108,7 @@ export const MultiCountryServiceMB = ({
           >
             <ImageV2
               alt=''
-              src={country.flag_img.url}
+              src={country.flag_mb}
               width={100}
               height={100}
               className='size-10 object-cover rounded-full'

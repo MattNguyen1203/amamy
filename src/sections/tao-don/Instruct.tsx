@@ -70,6 +70,7 @@ export default function Instruct({
   paymentMethod,
   setIndexTab,
   indexTab,
+  european,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -88,6 +89,7 @@ export default function Instruct({
   }[]
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  european?: string
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
@@ -151,15 +153,31 @@ export default function Instruct({
         trang_thai_don_hang: '',
 
         tinh_thanh_nguoi_nhan:
-          dataFromOrder?.recipientCity ??
-          dataFromOrder?.recipientConscious ??
-          '',
+          dataFromOrder?.recipientAddressType === 'registeredAddress' &&
+          (type === 'ducvn' || type === 'nhatviet')
+            ? dataFromOrder?.recipientCity
+            : '',
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
-        quan_huyen_nguoi_nhan: dataFromOrder?.district ?? '',
-        phuong_xa_nguoi_nhan: dataFromOrder?.recipientWardsandcommunes ?? '',
-        so_nha_nguoi_nhan: dataFromOrder?.housingNumber ?? '',
-        ten_duong_nguoi_nhan: dataFromOrder?.roadName ?? '',
-        id_hoac_cmt: dataFromOrder?.passportNumber ?? '',
+        quan_huyen_nguoi_nhan:
+          dataFromOrder?.recipientAddressType === 'registeredAddress' &&
+          (type === 'ducvn' || type === 'nhatviet')
+            ? dataFromOrder?.district ?? ''
+            : '',
+        phuong_xa_nguoi_nhan:
+          dataFromOrder?.recipientAddressType === 'registeredAddress' &&
+          (type === 'ducvn' || type === 'nhatviet')
+            ? dataFromOrder?.recipientWardsandcommunes ?? ''
+            : '',
+        so_nha_nguoi_nhan:
+          type === 'vietduc' || type === 'viethan'
+            ? dataFromOrder?.housingNumber ?? ''
+            : '',
+        ten_duong_nguoi_nhan:
+          type === 'vietduc' || type === 'viethan'
+            ? dataFromOrder?.roadName ?? ''
+            : '',
+        id_hoac_cmt:
+          type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
 
         nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
         ten_nguoi_gui: dataFromOrder?.name ?? '',
@@ -174,13 +192,13 @@ export default function Instruct({
         user: dataFromOrder?.email,
         gia_don_hang: '',
         khoi_luong_don_hang: '',
-        loai_tien_te: dataFromOrder?.recipientPaymentInformation ?? 'VND',
+        loai_tien_te: form?.getValues('recipientPaymentInformation') ?? 'VND',
         date: currentDate.toISOString().slice(0, 10),
         sdt: dataFromOrder?.recipientPhone ?? '',
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
-        nation: dataFromOrder?.nation ?? '',
+        nation: european === 'vnEu' ? dataFromOrder?.nation : '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
       }
@@ -467,22 +485,22 @@ export default function Instruct({
             )}
           />
 
-          <div className='xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:shadow-lg xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+          <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
             <div
               onClick={() => {
                 setIndexTab(indexTab - 1)
                 handleClickcurrentTab(prevStep)
               }}
-              className='xsm:flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+              className='flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
             >
               <p className='text-pc-sub16m text-black'>Quay lại</p>
             </div>
             <AlertDialog>
               {form.formState.isValid ? (
-                <AlertDialogTrigger className='xsm:flex-1'>
+                <AlertDialogTrigger className='flex-1'>
                   <div
                     className={cn(
-                      '!shadow-none xsm:flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+                      '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
                     )}
                   >
                     {isPending ? (
@@ -497,7 +515,7 @@ export default function Instruct({
                   type='submit'
                   disabled={!form.formState.isValid}
                   className={cn(
-                    '!shadow-none xsm:flex-1 sm:p-[0.75rem_1.5rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
+                    '!shadow-none flex-1 sm:p-[0.75rem_1.5rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
                   )}
                 >
                   <p className='text-white text-pc-sub16m'>Xác nhận</p>
@@ -537,9 +555,61 @@ export default function Instruct({
                       {dataFromOrder?.recipientAddress && (
                         <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                           <strong className='font-semibold sm:leading-[1.14]'>
-                            Địa chỉ:{' '}
+                            Địa chỉ chi tiết:{' '}
                           </strong>
                           <span>{dataFromOrder?.recipientAddress}</span>
+                        </p>
+                      )}
+                      {dataFromOrder?.recipientAddressType ===
+                        'registeredAddress' &&
+                        (type === 'ducvn' || type === 'nhatviet') && (
+                          <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              địa chỉ:{' '}
+                            </strong>
+                            <span>
+                              {dataFromOrder?.recipientWardsandcommunes} -{' '}
+                              {dataFromOrder?.district} -{' '}
+                              {dataFromOrder?.recipientCity}
+                            </span>
+                          </p>
+                        )}
+                      {(type === 'vietduc' || type === 'viethan') && (
+                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                          <strong className='font-semibold sm:leading-[1.14]'>
+                            địa chỉ:{' '}
+                          </strong>
+                          <span>
+                            {dataFromOrder?.housingNumber} -{' '}
+                            {dataFromOrder?.roadName} -{' '}
+                            {dataFromOrder?.recipientCity}{' '}
+                            {dataFromOrder?.recipientCodeCity &&
+                              '- ' + dataFromOrder?.recipientCodeCity}
+                          </span>
+                        </p>
+                      )}
+                      {type === 'viethan' && (
+                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                          <strong className='font-semibold sm:leading-[1.14]'>
+                            Mã thông quan, ID hoặc CMT:{' '}
+                          </strong>
+                          <span>{dataFromOrder?.passportNumber}</span>
+                        </p>
+                      )}
+                      {type === 'vietnhat' && (
+                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                          <strong className='font-semibold sm:leading-[1.14]'>
+                            Mã bưu điện:{' '}
+                          </strong>
+                          <span>{dataFromOrder?.zipCode}</span>
+                        </p>
+                      )}
+                      {european === 'vnEu' && (
+                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                          <strong className='font-semibold sm:leading-[1.14]'>
+                            Quốc gia:{' '}
+                          </strong>
+                          <span>{dataFromOrder?.nation}</span>
                         </p>
                       )}
                       {dataFromOrder?.recipientPhone && (
@@ -558,6 +628,14 @@ export default function Instruct({
                           <span>{dataFromOrder?.email}</span>
                         </p>
                       )}
+                      <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <strong className='font-semibold sm:leading-[1.14]'>
+                          Loại tiền tệ thanh toán:{' '}
+                        </strong>
+                        <span>
+                          {form?.getValues('recipientPaymentInformation')}
+                        </span>
+                      </p>
                     </div>
                     {type === 'nhatviet' && (
                       <div className='mt-[1.75rem]'>
@@ -618,8 +696,8 @@ export default function Instruct({
                       setSelectBranch(false)
                     }}
                     className={cn(
-                      'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
-                      selectBranch && 'block',
+                      'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none !mt-0',
+                      selectBranch && 'bg-black/70 pointer-events-auto',
                     )}
                   ></div>
                   <div

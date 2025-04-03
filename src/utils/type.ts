@@ -212,6 +212,7 @@ interface CountryItem {
   country: string
   flag_img: ImageFlag
   link: Link
+  flag_mb: string
 }
 
 export interface ShippingServiceObject {
@@ -316,6 +317,8 @@ export interface Card {
   subtitle_2: string
   number_percent: string
   title_2: string
+  image: string
+  backgroud: string
 }
 
 export interface ServicesObject {
