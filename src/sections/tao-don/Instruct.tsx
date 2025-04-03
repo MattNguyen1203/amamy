@@ -201,6 +201,7 @@ export default function Instruct({
         nation: european === 'vnEu' ? dataFromOrder?.nation : '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
+        ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
       }
       if (formData) {
         try {
