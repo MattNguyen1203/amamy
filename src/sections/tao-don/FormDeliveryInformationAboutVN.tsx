@@ -393,7 +393,7 @@ export default function FormDeliveryInformationAboutVN({
                   {...field}
                 />
               </FormControl>
-              <p className='pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
+              <p className='!font-roboto pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
                 *Địa chỉ chi tiết, số nhà, tên đường,...
               </p>
               <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />

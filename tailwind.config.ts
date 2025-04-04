@@ -22,6 +22,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
+        roboto: ['var(--font-roboto)'],
         montserrat: ['var(--font-montserrat)'],
       },
       colors: {

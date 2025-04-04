@@ -238,7 +238,7 @@ export default function FormDeliveryInformationVNHan({
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Số phòng, toà nhà nếu có
               </p>
             </FormItem>
@@ -261,10 +261,10 @@ export default function FormDeliveryInformationVNHan({
                   />
                 </FormControl>
                 <FormMessage className='pl-[0.75rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] !text-[#F00] text-pc-sub12m' />
-                <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Mã thông quan: P828*****888, <br />
                   *CMT: 96*********27: *ID:***213 <br />
-                  <span className='text-[#F00]'>
+                  <span className='text-[#F00] !font-roboto'>
                     *Lưu ý: Mã thông quan, ID hoặc CMT phải trùng địa chỉ giao
                     hàng, nếu không sẽ giao sai. Phí giao lại {shippingCost}.
                   </span>

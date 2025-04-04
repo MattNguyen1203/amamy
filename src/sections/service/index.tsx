@@ -1,6 +1,6 @@
 'use client'
-import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
-import {IBlogResponse, IListServiceResponse, IServicePage} from '@/utils/type'
+import RelatedBlogsV2 from '@/sections/blog/detail/RelatedBlogsV2'
+import {IListServiceResponse, IServicePage} from '@/utils/type'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {useEffect} from 'react'
@@ -11,9 +11,8 @@ gsap.registerPlugin(ScrollTrigger)
 interface Prop {
   data: IServicePage
   listService: IListServiceResponse
-  listBlog: IBlogResponse
 }
-const ServicePage = ({data, listService, listBlog}: Prop) => {
+const ServicePage = ({data, listService}: Prop) => {
   useEffect(() => {
     gsap.utils.toArray<HTMLElement>('.fade-section').forEach((section) => {
       const items = section.querySelectorAll<HTMLElement>('.fade-item')
@@ -50,10 +49,13 @@ const ServicePage = ({data, listService, listBlog}: Prop) => {
         data={data}
       />
       <Testimonials data={data} />
-      {Array.isArray(listBlog?.posts) && (
-        <RelatedBlogs
-          data={listBlog?.posts}
-          title='Các tin tức mới nhất'
+      {Array.isArray(data?.suggested_reading_articles_about_shipping?.post) && (
+        <RelatedBlogsV2
+          data={data?.suggested_reading_articles_about_shipping?.post}
+          title={
+            data?.suggested_reading_articles_about_shipping?.title ??
+            'Nên đọc cho gửi hàng'
+          }
           className='bg-[#EDF5FA] [&_.ItemBlog]:shadow-none xsm:bg-[#F8F8FB] [&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
         />
       )}
