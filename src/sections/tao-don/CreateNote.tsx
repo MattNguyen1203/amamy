@@ -13,7 +13,7 @@ import {
 import {cn} from '@/lib/utils'
 import {IInformationNoteOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function CeateNote({
@@ -22,12 +22,14 @@ export default function CeateNote({
   prevStep,
   setIndexTab,
   indexTab,
+  setSelectedImage,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (nextTab: string) => void
   prevStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const FormSchema = z.object({
     note: z.array(
@@ -37,6 +39,7 @@ export default function CeateNote({
     ),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -45,6 +48,18 @@ export default function CeateNote({
         ? data?.map(() => (stepOrder > 3 ? true : false))
         : [],
     },
+  })
+  useEffect(() => {
+    containerRefs.current.forEach((container) => {
+      if (!container) return
+      const images = container.querySelectorAll('img')
+      images.forEach((img) => {
+        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
+        img.onclick = () => {
+          setSelectedImage(img.src)
+        } // Khi click, mở ảnh lên
+      })
+    })
   })
   useEffect(() => {
     if (!data) {
@@ -93,6 +108,9 @@ export default function CeateNote({
                   {item?.title}
                 </p>
                 <div
+                  ref={(el) => {
+                    containerRefs.current[index] = el
+                  }}
                   className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:font-semibold *:xsm:text-mb-13 [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',

@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/(store)/store'
-import { ICLoading } from '@/components/icon/ICLoading'
+import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
   AlertDialog,
@@ -27,8 +27,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICAddress from '@/sections/tao-don/ICAddress'
 import ICPhone from '@/sections/tao-don/ICPhone'
 import ICTime from '@/sections/tao-don/ICTime'
@@ -39,12 +39,12 @@ import {
   IInformationInstructOrder,
   IInformationInstructOrder_SelectBranch,
 } from '@/sections/tao-don/oder.interface'
-import { zodResolver } from '@hookform/resolvers/zod'
+import {zodResolver} from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useEffect, useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import {useEffect, useRef, useState, useTransition} from 'react'
+import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
+import {z} from 'zod'
 const formSchema = z.object({
   branch: z
     .string({
@@ -71,6 +71,7 @@ export default function Instruct({
   setIndexTab,
   indexTab,
   european,
+  setSelectedImage,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -90,11 +91,13 @@ export default function Instruct({
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
   european?: string
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [isPending, setTransition] = useTransition()
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [selectPaymentInformation, setSelectPaymentInformation] =
     useState<boolean>(false)
   const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
@@ -120,11 +123,26 @@ export default function Instruct({
         data?.select_branch?.[0]?.title ??
         'chưa có thông tin',
       recipientPaymentInformation:
-        dataFromOrder?.recipientPaymentInformation ?? '',
+        dataFromOrder?.recipientPaymentInformation ?? paymentMethod?.[0]?.value,
     },
   })
   useEffect(() => {
-    if (form?.getValues('branch') || dataFromOrder?.branch) {
+    containerRefs.current.forEach((container) => {
+      if (!container) return
+      const images = container.querySelectorAll('img')
+      images.forEach((img) => {
+        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
+        img.onclick = () => {
+          setSelectedImage(img.src)
+        } // Khi click, mở ảnh lên
+      })
+    })
+  })
+  useEffect(() => {
+    if (
+      (form?.getValues('branch') || dataFromOrder?.branch) &&
+      Array.isArray(data?.select_branch)
+    ) {
       const foundItem = data?.select_branch?.find(
         (item) => item?.title === form?.getValues('branch'),
       )
@@ -224,10 +242,10 @@ export default function Instruct({
             setTriggerScroll(true)
             setDataInformation(undefined)
           } else {
-            toast.error('Có lỗi sãy ra')
+            toast.error('Có lỗi xãy ra')
           }
         } catch {
-          toast.error('Có lỗi sãy ra')
+          toast.error('Có lỗi xãy ra')
         }
       }
     })
@@ -411,13 +429,19 @@ export default function Instruct({
                 }}
               ></div>
               {data?.images && (
-                <ImageV2
-                  src={data?.images}
-                  alt=''
-                  width={300 * 2}
-                  height={200 * 2}
-                  className='rounded-[0.5rem] w-[18.75rem] xsm:w-full h-[12.5rem] xsm:h-[12.95831rem] object-cover'
-                />
+                <div
+                  ref={(el) => {
+                    containerRefs.current[0] = el
+                  }}
+                >
+                  <ImageV2
+                    src={data?.images}
+                    alt=''
+                    width={300 * 2}
+                    height={200 * 2}
+                    className='rounded-[0.5rem] w-[18.75rem] xsm:w-full h-[12.5rem] xsm:h-[12.95831rem] object-cover'
+                  />
+                </div>
               )}
             </div>
           )}
@@ -431,7 +455,12 @@ export default function Instruct({
                     setSelectPaymentInformation(true)
                   }
                 }}
-                className='flex-1 space-y-0'
+                className={cn(
+                  'flex-1 space-y-0',
+                  Array.isArray(paymentMethod) &&
+                    paymentMethod?.length < 2 &&
+                    'pointer-events-none',
+                )}
               >
                 <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Chọn thông tin thanh toán (*)
@@ -440,7 +469,14 @@ export default function Instruct({
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl className='!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
+                  <FormControl
+                    className={cn(
+                      '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                      Array.isArray(paymentMethod) &&
+                        paymentMethod?.length < 2 &&
+                        '[&_svg]:hidden',
+                    )}
+                  >
                     <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn thông tin thanh toán' />

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import useStore from '@/app/(store)/store'
+import ImageV2 from '@/components/image/ImageV2'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
@@ -36,6 +37,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const [currentTab, setCurrentTab] = useState('1')
   const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   // const [faq, setFaq] = useState(true)
   // const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
@@ -106,10 +108,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   onClick={() => {
                     setCurrentTab(item?.value)
                     setIndexTab(index)
-                    if (item?.value === '1') {
-                      setDataInformation(undefined)
-                      setDataFromOrder({...dataFromOrder})
-                    }
                   }}
                   key={index}
                   value={item?.value}
@@ -189,14 +187,12 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <OrderStepTime
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataInformation={dataInformation?.information?.time}
                   nextStep={dataInformation?.information?.note ? '3' : '4'}
-                  setDataInformation={setDataInformation}
-                  setDataFromOrder={setDataFromOrder}
-                  dataFromOrder={dataFromOrder}
                 />
               </TabsContent>
               <TabsContent
@@ -204,6 +200,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <CeateNote
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
@@ -346,6 +343,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Insurance
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   data={dataInformation?.information?.insurance}
@@ -357,6 +355,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Instruct
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   data={dataInformation?.information?.instruct}
@@ -416,6 +415,31 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           <p className='text-pc-sub16m text-white'>Xong</p>
         </div>
       </div>
+      {selectedImage && (
+        <div
+          className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className='absolute top-[3rem] right-[3rem] text-black bg-gray-200 px-2 py-1 rounded'
+            onClick={() => setSelectedImage(null)}
+          >
+            ✕
+          </button>
+          <div className='relative overflow-hidden bg-white p-4 rounded-lg max-w-[90vw] max-h-[90vh] flex flex-col items-center'>
+            <ImageV2
+              width={1000 * 2}
+              height={800 * 2}
+              src={selectedImage}
+              alt='Zoomed Image'
+              className='rounded-[1.25rem] w-auto h-auto max-w-[70vw] max-h-[80vh] min-w-[50vw] min-h-[50vh] object-contain transition-transform duration-300 bg-white'
+              onClick={(e) => {
+                e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
+              }}
+            />
+          </div>
+        </div>
+      )}
       {/* <div
         className={cn(
           'top-[50%] opacity-[1] pointer-events-auto xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] visible transition-all duration-500 flex-center flex-col fixed z-[51] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] rounded-[1.25rem] bg-white',
