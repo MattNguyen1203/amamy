@@ -5,7 +5,7 @@ import Header from '@/components/header/Header'
 import GsapProvider from '@/components/provider/GsapProvider'
 import fetchData from '@/fetch/fetchData'
 import type {Metadata} from 'next'
-import {Roboto} from 'next/font/google'
+import {Open_Sans, Roboto} from 'next/font/google'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
@@ -75,6 +75,12 @@ const roboto = Roboto({
   variable: '--font-roboto',
   display: 'swap',
 })
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-open-sans',
+  display: 'swap',
+})
 // export function generateStaticParams() {}
 
 export default async function RootLayout({
@@ -101,7 +107,7 @@ export default async function RootLayout({
   return (
     <html>
       <body
-        className={`${montserrat.variable} ${roboto.variable} ${montserrat.className} antialiased`}
+        className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >
         <Header
           social={dataFooter?.data?.footer_site?.social}

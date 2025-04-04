@@ -54,7 +54,7 @@ const QuantitySection = ({data}: Prop) => {
           </div>
         </div>
       </div>
-      <div className='fade-section absolute xsm:relative bottom-[-15rem] xsm:bottom-0 rounded-[20px] bg-white xsm:mt-[1rem]'>
+      <div className='fade-section absolute xsm:relative bottom-[-15rem] xsm:bottom-0 rounded-[1.25rem] bg-white xsm:mt-[1rem]'>
         <MainContainer data={data?.amamy_service} />
       </div>
     </section>
