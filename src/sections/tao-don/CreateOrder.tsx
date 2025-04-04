@@ -438,7 +438,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               initialPositionX={200}
               initialPositionY={100}
             >
-              {({zoomIn, zoomOut, resetTransform, ...rest}) => (
+              {() => (
                 <>
                   <TransformComponent>
                     <ImageV2
