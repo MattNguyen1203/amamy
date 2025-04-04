@@ -242,10 +242,10 @@ export default function Instruct({
             setTriggerScroll(true)
             setDataInformation(undefined)
           } else {
-            toast.error('Có lỗi xãy ra')
+            toast.error('Có lỗi xảy ra')
           }
         } catch {
-          toast.error('Có lỗi xãy ra')
+          toast.error('Có lỗi xảy ra')
         }
       }
     })

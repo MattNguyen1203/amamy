@@ -23,6 +23,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         roboto: ['var(--font-roboto)'],
+        openSans: ['var(--font-open-sans)'],
         montserrat: ['var(--font-montserrat)'],
       },
       colors: {

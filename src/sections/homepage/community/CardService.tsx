@@ -88,10 +88,10 @@ const CardService = ({
     >
       <ImageV2
         src={flag}
-        className='w-[3.7285rem] h-[2.36144rem] mt-6 ml-6 xsm:w-[3.125rem] xsm:h-[2rem]'
+        className='rounded-[0.5rem] border-[0.25px] border-solid border-[rgba(210,233,232,0.82)] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] w-[3.7285rem] h-[2.36144rem] mt-6 ml-6 xsm:w-[3.125rem] xsm:h-[2rem] object-cover'
         alt=''
-        width={100}
-        height={60}
+        width={100 * 2}
+        height={60 * 2}
       />
 
       <div className='mx-6 flex-1 overflow-hidden'>

@@ -19,6 +19,7 @@ export default function AsideBlog({
 }) {
   const isMobile = useIsMobile()
   const [activeSection, setActiveSection] = useState<string>('')
+  const [smallestHeading, setSmallestHeading] = useState<number>(2)
   useEffect(() => {
     if (!isMobile) {
       const sections = document.querySelectorAll('h2, h3, h4, h5, h6')
@@ -49,6 +50,11 @@ export default function AsideBlog({
       })
     }
   }
+  useEffect(() => {
+    if (headings) {
+      setSmallestHeading(Math.min(...headings.map((item) => item.heading)))
+    }
+  }, [headings])
   return (
     <section className='w-[24.5625rem] xsm:w-full h-max sticky top-[6.875rem] sm:h-[calc(100vh-6.875rem)] sm:overflow-hidden sm:overflow-y-auto space-y-[1rem]'>
       {!isMobile && (
@@ -68,10 +74,10 @@ export default function AsideBlog({
                   className={cn(
                     activeSection === item?.id && 'active',
                     'text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] [&.active]:text-[#09A5FF] hover:text-[#09A5FF] transition-all duration-500',
-                    item?.heading === 3 && 'pl-[1rem]',
-                    item?.heading === 4 && 'pl-[1.5rem]',
-                    item?.heading === 5 && 'pl-[2rem]',
-                    item?.heading === 6 && 'pl-[2.5rem]',
+                    smallestHeading < 3 && item?.heading === 3 && 'pl-[1rem]',
+                    smallestHeading < 4 && item?.heading === 4 && 'pl-[1.5rem]',
+                    smallestHeading < 5 && item?.heading === 5 && 'pl-[2rem]',
+                    smallestHeading < 6 && item?.heading === 6 && 'pl-[2.5rem]',
                   )}
                 >
                   {item?.text}
