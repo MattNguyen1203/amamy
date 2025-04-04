@@ -18,7 +18,7 @@ import {
   IInformationInsurance_policy,
 } from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function Insurance({
@@ -26,13 +26,16 @@ export default function Insurance({
   handleClickcurrentTab,
   setIndexTab,
   indexTab,
+  setSelectedImage,
 }: {
   data?: IInformationInsurance
   handleClickcurrentTab: (nextTab: string) => void
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const FormSchema = z.object({
     order: z.array(
@@ -52,6 +55,18 @@ export default function Insurance({
           )
         : [],
     },
+  })
+  useEffect(() => {
+    containerRefs.current.forEach((container) => {
+      if (!container) return
+      const images = container.querySelectorAll('img')
+      images.forEach((img) => {
+        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
+        img.onclick = () => {
+          setSelectedImage(img.src)
+        } // Khi click, mở ảnh lên
+      })
+    })
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
@@ -94,6 +109,9 @@ export default function Insurance({
                     className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1.2rem]'
                   >
                     <div
+                      ref={(el) => {
+                        containerRefs.current[index] = el
+                      }}
                       className='[&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
                       dangerouslySetInnerHTML={{
                         __html: item?.content || '',
@@ -141,19 +159,29 @@ export default function Insurance({
                 </p>
                 <div className='flex xsm:flex-col-reverse sm:space-x-[1rem] bg-white'>
                   <div
+                    ref={(el) => {
+                      containerRefs.current[index] = el
+                    }}
                     className='[&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                     dangerouslySetInnerHTML={{
                       __html: item?.content || '',
                     }}
                   ></div>
                   {item?.image && (
-                    <ImageV2
-                      src={item?.image}
-                      alt=''
-                      width={500 * 2}
-                      height={300 * 2}
-                      className='flex-1 rounded-[0.5rem] xsm:mb-[0.5rem] xsm:w-full h-[14.81838rem] xsm:h-[12.95831rem] object-cover'
-                    />
+                    <div
+                      className='flex-1'
+                      ref={(el) => {
+                        containerRefs.current[index] = el
+                      }}
+                    >
+                      <ImageV2
+                        src={item?.image}
+                        alt=''
+                        width={500 * 2}
+                        height={300 * 2}
+                        className=' rounded-[0.5rem] xsm:mb-[0.5rem] xsm:w-full h-[14.81838rem] xsm:h-[12.95831rem] object-cover'
+                      />
+                    </div>
                   )}
                 </div>
                 <FormField

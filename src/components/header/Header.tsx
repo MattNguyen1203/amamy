@@ -60,6 +60,7 @@ const Header = ({
   const pathname = usePathname()
   useEffect(() => {
     setIsHomePage(pathname === '/')
+    setIsShowSearchInput(false)
   }, [pathname])
 
   useEffect(() => {

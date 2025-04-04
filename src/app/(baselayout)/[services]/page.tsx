@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fetchData from '@/fetch/fetchData'
 import {fetchDataBlog} from '@/fetch/fetchDataBlog'
 import {fetchDataListService} from '@/fetch/fetchDataListService'
@@ -5,6 +6,15 @@ import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import ServicePage from '@/sections/service'
 import metadataValues from '@/utils/metadataValues'
 import {notFound} from 'next/navigation'
+export async function generateStaticParams() {
+  const posts = await fetchData({
+    api: 'all-slug-transport',
+  })
+
+  return posts.map((post: any) => ({
+    services: post.slug,
+  }))
+}
 export async function generateMetadata({params}: {params: {services: string}}) {
   const res = await getMetaDataRankMath('/chieu-van-chuyen/' + params?.services)
   return metadataValues(res)

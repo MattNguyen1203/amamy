@@ -346,7 +346,7 @@ export default function FormDeliveryInformationJapanVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='flex !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
+                  className='flex pl-[0.75rem] !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                     <FormControl>

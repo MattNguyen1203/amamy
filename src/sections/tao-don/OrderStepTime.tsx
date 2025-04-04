@@ -11,13 +11,9 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import {
-  ICreateOder,
-  IInformationTimeOrder,
-} from '@/sections/tao-don/oder.interface'
+import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {Fragment, useEffect, useState} from 'react'
+import {Fragment, useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function OrderStepTime({
@@ -26,20 +22,14 @@ export default function OrderStepTime({
   nextStep,
   setIndexTab,
   indexTab,
-  setDataInformation,
-  setDataFromOrder,
-  dataFromOrder,
+  setSelectedImage,
 }: {
   dataInformation?: IInformationTimeOrder[]
   handleClickcurrentTab: (nextTab: string) => void
   nextStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
-  setDataInformation: React.Dispatch<
-    React.SetStateAction<ICreateOder | undefined>
-  >
-  setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
-  dataFromOrder: IDataFromOrder
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const FormSchema = z.object({
     policy: z.array(
@@ -49,6 +39,7 @@ export default function OrderStepTime({
     ),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -57,6 +48,18 @@ export default function OrderStepTime({
         ? dataInformation?.map(() => (stepOrder > 2 ? true : false))
         : [],
     },
+  })
+  useEffect(() => {
+    containerRefs.current.forEach((container) => {
+      if (!container) return
+      const images = container.querySelectorAll('img')
+      images.forEach((img) => {
+        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
+        img.onclick = () => {
+          setSelectedImage(img.src)
+        } // Khi click, mở ảnh lên
+      })
+    })
   })
   useEffect(() => {
     if (!dataInformation) {
@@ -102,6 +105,9 @@ export default function OrderStepTime({
                       {item?.time_content}
                     </p>
                     <div
+                      ref={(el) => {
+                        containerRefs.current[index] = el
+                      }}
                       className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:font-semibold *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
                       dangerouslySetInnerHTML={{
                         __html: item?.stock || '',
@@ -138,8 +144,8 @@ export default function OrderStepTime({
               onClick={() => {
                 handleClickcurrentTab('1')
                 setIndexTab(indexTab - 1)
-                setDataInformation(undefined)
-                setDataFromOrder({...dataFromOrder})
+                // setDataInformation(undefined)
+                // setDataFromOrder({...dataFromOrder})
               }}
               className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
             >

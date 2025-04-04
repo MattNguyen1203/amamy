@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/(store)/store'
-import { Button } from '@/components/ui/button'
+import {Button} from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -17,18 +17,18 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import {Input} from '@/components/ui/input'
+import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
+import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Check, ChevronDown } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Check, ChevronDown} from 'lucide-react'
+import {useEffect, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -342,7 +342,7 @@ export default function FormDeliveryInformationAboutVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='flex !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
+                  className='flex pl-[0.75rem] !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                     <FormControl>

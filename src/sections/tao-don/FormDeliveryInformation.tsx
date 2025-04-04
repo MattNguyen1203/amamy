@@ -105,7 +105,6 @@ export default function FormDeliveryInformation({
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const [selectNation, setSelectNation] = useState<boolean>(false)
-  console.log(dataFromOrder)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -130,6 +129,7 @@ export default function FormDeliveryInformation({
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    console.log('lot')
     setDataFromOrder({...dataFromOrder, ...values})
     if (stepOrder < 5) {
       setStepOrder(Number(nextStep))
