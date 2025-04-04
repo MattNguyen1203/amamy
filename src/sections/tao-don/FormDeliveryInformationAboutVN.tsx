@@ -150,6 +150,7 @@ export default function FormDeliveryInformationAboutVN({
   }
   useEffect(() => {
     if (pending) {
+      console.log(recipientAddressType)
       form.setValue(
         'recipientAddress',
         recipientAddressType === 'atAmamyStore'
@@ -160,22 +161,26 @@ export default function FormDeliveryInformationAboutVN({
       form.setValue(
         'recipientCity',
         recipientAddressType === 'atAmamyStore'
-          ? 'un'
-          : dataFromOrder?.recipientCity || '',
+          ? form?.getValues('recipientCity') ?? 'un'
+          : form?.getValues('recipientCity') ??
+              dataFromOrder?.recipientCity ??
+              '',
         {shouldValidate: true},
       )
       form.setValue(
         'district',
         recipientAddressType === 'atAmamyStore'
-          ? 'un'
-          : dataFromOrder?.district || '',
+          ? form?.getValues('district') ?? 'un'
+          : form?.getValues('district') ?? dataFromOrder?.district ?? '',
         {shouldValidate: true},
       )
       form.setValue(
         'recipientWardsandcommunes',
         recipientAddressType === 'atAmamyStore'
-          ? 'un'
-          : dataFromOrder?.recipientWardsandcommunes || '',
+          ? form?.getValues('recipientWardsandcommunes') ?? 'un'
+          : form?.getValues('recipientWardsandcommunes') ??
+              dataFromOrder?.recipientWardsandcommunes ??
+              '',
         {shouldValidate: true},
       )
     }
@@ -213,7 +218,7 @@ export default function FormDeliveryInformationAboutVN({
     }
     setTimeout(() => {
       setPending(true)
-    }, 3000)
+    }, 1500)
   }, [])
   useEffect(() => {
     async function fetchProvinces() {
