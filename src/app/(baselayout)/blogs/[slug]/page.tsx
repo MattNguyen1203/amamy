@@ -9,7 +9,6 @@ export async function generateStaticParams() {
   const posts = await fetchData({
     api: 'all-slug-post',
   })
-
   return posts.map((post: any) => ({
     slug: post.slug,
   }))
