@@ -168,7 +168,7 @@ html > body[data-scroll-locked] {
     @apply block mx-auto mb-[1.25rem] mt-[1.5rem];
   }
   .content-h2 {
-    @apply mb-[1.5rem] xsm:mb-[1.5rem] xsm:mt-[1.5rem] sm:mt-[2.5rem] text-[1.5rem] font-bold leading-[1.3] tracking-[-0.045rem] text-black xsm:text-pc-sub16b;
+    @apply mb-[1.5rem] xsm:mb-[1.5rem] xsm:mt-[1.5rem] sm:mt-[1.5rem] text-[1.5rem] font-bold leading-[1.3] tracking-[-0.045rem] text-black xsm:text-pc-sub16b;
   }
   .content-h3 {
     @apply my-[0.5rem] text-[1.25rem] xsm:text-[0.875rem] font-bold leading-[1.3] tracking-[-0.015rem] text-black;
