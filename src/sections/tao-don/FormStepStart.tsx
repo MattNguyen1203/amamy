@@ -234,7 +234,7 @@ export default function FormStepStart({
                   />
                 </FormControl>
                 <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem] !font-roboto'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -457,11 +457,11 @@ export default function FormStepStart({
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='pl-[0.75rem] !mb-[0.5rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <p className='!font-roboto pl-[0.75rem] !mb-[0.5rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)]'>
+              <p className='!font-roboto pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khách nhau sẽ giao sai.
               </p>

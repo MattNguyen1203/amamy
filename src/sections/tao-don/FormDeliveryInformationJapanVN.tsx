@@ -398,7 +398,7 @@ export default function FormDeliveryInformationJapanVN({
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>
             </FormItem>

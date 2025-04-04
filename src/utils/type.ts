@@ -582,8 +582,18 @@ export interface IServicePage {
     subtitle: string
     list_feedback: Feedback[]
   }
+  suggested_reading_articles_about_shipping: {
+    title: string
+    post: suggested_reading_articles_about_shipping_post[]
+  }
 }
-
+export interface suggested_reading_articles_about_shipping_post {
+  title: string
+  date: string
+  slug: string
+  thumbnail: string
+  categories: string
+}
 export interface Feedback {
   ID: number
   title: string

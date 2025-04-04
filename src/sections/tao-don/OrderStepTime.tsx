@@ -108,7 +108,7 @@ export default function OrderStepTime({
                       ref={(el) => {
                         containerRefs.current[index] = el
                       }}
-                      className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:font-semibold *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
+                      className='[&_a]:!font-roboto [&_li]:!font-roboto [&_span]:!font-roboto [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:!font-roboto [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:!font-roboto [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:font-semibold *:!font-roboto *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
                       dangerouslySetInnerHTML={{
                         __html: item?.stock || '',
                       }}

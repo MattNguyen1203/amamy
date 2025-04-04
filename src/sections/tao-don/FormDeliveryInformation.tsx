@@ -163,7 +163,7 @@ export default function FormDeliveryInformation({
                     {...field}
                   />
                 </FormControl>
-                <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc
                   đúng tên Auswei.
                 </p>
@@ -263,7 +263,7 @@ export default function FormDeliveryInformation({
                         ),
                       )
                     ) : (
-                      <div className='text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]'>
+                      <div className='!font-roboto text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]'>
                         Đã có lỗi về lấy thông tin quốc gia châu âu
                       </div>
                     )}
@@ -290,7 +290,7 @@ export default function FormDeliveryInformation({
                 />
               </FormControl>
               {dataFromOrder?.shipping === '326' && (
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                <p className='!font-roboto pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                   *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số
                   tầng, số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
                 </p>

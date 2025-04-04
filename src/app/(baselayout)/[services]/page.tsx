@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetchData from '@/fetch/fetchData'
-import {fetchDataBlog} from '@/fetch/fetchDataBlog'
 import {fetchDataListService} from '@/fetch/fetchDataListService'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import ServicePage from '@/sections/service'
@@ -21,15 +20,14 @@ export async function generateMetadata({params}: {params: {services: string}}) {
 }
 export default async function Service({params}: {params: {services: string}}) {
   const fetchDataServices = fetchData({
-    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer`,
+    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping`,
     option: {
       next: {revalidate: 60},
     },
   })
-  const [resService, resListService, resListBlog] = await Promise.all([
+  const [resService, resListService] = await Promise.all([
     fetchDataServices,
     fetchDataListService(),
-    fetchDataBlog(),
   ])
   if (resService?.data?.status === 404) {
     return notFound()
@@ -39,7 +37,6 @@ export default async function Service({params}: {params: {services: string}}) {
       <ServicePage
         data={resService}
         listService={resListService}
-        listBlog={resListBlog}
       />
     </div>
   )
