@@ -120,10 +120,13 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
         </div>
         <div className='h-[1px] w-full bg-[#DCDFE4] hidden xsm:block' />
         {/* <InformationList data={data?.tien_trinh_giao_hang} /> */}
-        <div
-          dangerouslySetInnerHTML={{__html: data?.tien_trinh_giao_hang}}
-          className='progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
-        ></div>
+        {data?.tien_trinh_giao_hang &&
+          !Array.isArray(data?.tien_trinh_giao_hang) && (
+            <div
+              dangerouslySetInnerHTML={{__html: data?.tien_trinh_giao_hang}}
+              className='progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
+            ></div>
+          )}
       </div>
     </div>
   )

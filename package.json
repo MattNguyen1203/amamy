@@ -33,6 +33,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.53.2",
     "react-paginate": "^8.2.0",
+    "react-zoom-pan-pinch": "^3.7.0",
     "sonner": "^1.7.0",
     "swiper": "^11.2.4",
     "swr": "^2.3.3",

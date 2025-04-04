@@ -20,6 +20,7 @@ import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {useState} from 'react'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
   {title: 'Thời gian gửi hàng', value: '2'},
@@ -426,17 +427,31 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           >
             ✕
           </button>
-          <div className='relative overflow-hidden bg-white p-4 rounded-lg max-w-[90vw] max-h-[90vh] flex flex-col items-center'>
-            <ImageV2
-              width={1000 * 2}
-              height={800 * 2}
-              src={selectedImage}
-              alt='Zoomed Image'
-              className='rounded-[1.25rem] w-auto h-auto max-w-[70vw] max-h-[80vh] min-w-[50vw] min-h-[50vh] object-contain transition-transform duration-300 bg-white'
-              onClick={(e) => {
-                e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
-              }}
-            />
+          <div
+            onClick={(e) => {
+              e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
+            }}
+            className='relative xsm:overflow-x-auto overflow-hidden bg-white p-4 rounded-lg max-w-[90vw] max-h-[90vh] flex flex-col items-center'
+          >
+            <TransformWrapper
+              initialScale={1}
+              initialPositionX={200}
+              initialPositionY={100}
+            >
+              {({zoomIn, zoomOut, resetTransform, ...rest}) => (
+                <>
+                  <TransformComponent>
+                    <ImageV2
+                      width={1000 * 2}
+                      height={800 * 2}
+                      src={selectedImage}
+                      alt='Zoomed Image'
+                      className='rounded-[1.25rem] w-auto h-auto sm:max-w-[70vw] sm:max-h-[80vh] min-w-[50vw] min-h-[50vh] object-contain transition-transform duration-300 bg-white'
+                    />
+                  </TransformComponent>
+                </>
+              )}
+            </TransformWrapper>
           </div>
         </div>
       )}
