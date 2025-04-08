@@ -13,7 +13,6 @@ export default function ItemBlogV2({
   className?: string
   type?: 'unhover' | 'hover'
 }) {
-  console.log('🚀 ~ item:', item)
   const date = new Date(item?.date)
 
   // Lấy ngày, tháng và năm
