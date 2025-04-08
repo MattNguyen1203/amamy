@@ -214,7 +214,7 @@ export default function FormStepStart({
         onSubmit={form.handleSubmit(onSubmit)}
         className=''
       >
-        <p className='text-black text-pc-sub16b mb-[1.5rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b mb-[1.5rem]'>
           Thông tin gửi hàng
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem] mb-[1.75rem] xsm:mb-[1.25rem]'>
@@ -228,13 +228,13 @@ export default function FormStepStart({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!font-roboto shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Email@email'
                     {...field}
                   />
                 </FormControl>
                 <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem] !font-roboto'>
+                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -310,7 +310,7 @@ export default function FormStepStart({
                                 width={50 * 2}
                                 className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                               />
-                              <p className='text-black text-pc-sub14m !font-roboto'>
+                              <p className='text-black text-pc-sub14m '>
                                 {item?.title}
                               </p>
                             </div>
@@ -335,7 +335,7 @@ export default function FormStepStart({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!font-roboto shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Nhập tên người gửi'
                     {...field}
                   />
@@ -354,7 +354,7 @@ export default function FormStepStart({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!font-roboto shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Nhập tên Facebook'
                     {...field}
                   />
@@ -404,7 +404,7 @@ export default function FormStepStart({
                           width={100 * 2}
                           className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                         />
-                        <p className='!font-roboto text-black text-pc-sub14m'>
+                        <p className=' text-black text-pc-sub14m'>
                           {selectServiceDimensionValue?.title ||
                             dataInformation?.title}
                         </p>
@@ -451,17 +451,17 @@ export default function FormStepStart({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='!font-roboto shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Nhập mã khách hàng'
                   {...field}
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m  xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='!font-roboto pl-[0.75rem] !mb-[0.5rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] !mb-[0.5rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='!font-roboto pl-[0.75rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)]'>
+              <p className='pl-[0.75rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khách nhau sẽ giao sai.
               </p>

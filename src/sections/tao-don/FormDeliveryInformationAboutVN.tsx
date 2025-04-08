@@ -289,7 +289,7 @@ export default function FormDeliveryInformationAboutVN({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng tại Việt Nam
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
@@ -303,12 +303,12 @@ export default function FormDeliveryInformationAboutVN({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!font-roboto shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!font-roboto pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -322,12 +322,12 @@ export default function FormDeliveryInformationAboutVN({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!font-roboto shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!font-roboto pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -358,7 +358,7 @@ export default function FormDeliveryInformationAboutVN({
                     </FormControl>
                     <FormLabel
                       htmlFor='r1'
-                      className='font-normal cursor-pointer !font-roboto'
+                      className='font-normal cursor-pointer '
                     >
                       Nhận tại địa chỉ đăng ký
                     </FormLabel>
@@ -372,7 +372,7 @@ export default function FormDeliveryInformationAboutVN({
                     </FormControl>
                     <FormLabel
                       htmlFor='r2'
-                      className='font-normal cursor-pointer !font-roboto'
+                      className='font-normal cursor-pointer '
                     >
                       Nhận tại cửa hàng Amamy
                     </FormLabel>
@@ -393,15 +393,15 @@ export default function FormDeliveryInformationAboutVN({
                   disabled={
                     recipientAddressType === 'atAmamyStore' ? true : false
                   }
-                  className='!font-roboto shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className=' shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Địa chỉ nhận hàng tại Việt Nam'
                   {...field}
                 />
               </FormControl>
-              <p className='!font-roboto pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
+              <p className=' pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
                 *Địa chỉ chi tiết, số nhà, tên đường,...
               </p>
-              <FormMessage className='!font-roboto pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
             </FormItem>
           )}
         />
@@ -427,7 +427,7 @@ export default function FormDeliveryInformationAboutVN({
                           variant='outline'
                           role='combobox'
                           className={cn(
-                            'justify-between !font-roboto',
+                            'justify-between ',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -489,7 +489,7 @@ export default function FormDeliveryInformationAboutVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='!font-roboto pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />
@@ -513,7 +513,7 @@ export default function FormDeliveryInformationAboutVN({
                           variant='outline'
                           role='combobox'
                           className={cn(
-                            'justify-between !font-roboto',
+                            'justify-between ',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -573,7 +573,7 @@ export default function FormDeliveryInformationAboutVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='!font-roboto pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />
@@ -597,7 +597,7 @@ export default function FormDeliveryInformationAboutVN({
                           variant='outline'
                           role='combobox'
                           className={cn(
-                            'justify-between !font-roboto',
+                            'justify-between ',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -647,7 +647,7 @@ export default function FormDeliveryInformationAboutVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='!font-roboto pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />

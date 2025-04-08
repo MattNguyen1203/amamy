@@ -309,7 +309,7 @@ export default function Instruct({
                             )}
                             {isMobile && field.value && selectBranchValue && (
                               <div className='space-x-[0.75rem] flex items-center flex-1'>
-                                <p className='text-black text-pc-sub14m !font-roboto'>
+                                <p className='text-black text-pc-sub14m '>
                                   {selectBranchValue}
                                 </p>
                               </div>
@@ -342,7 +342,7 @@ export default function Instruct({
                                         dangerouslySetInnerHTML={{
                                           __html: item?.address,
                                         }}
-                                        className='text-black text-pc-sub14m !font-roboto'
+                                        className='text-black text-pc-sub14m '
                                       ></p>
                                     </div>
                                     <div className='select-time flex space-x-[0.5rem] items-start'>
@@ -351,7 +351,7 @@ export default function Instruct({
                                         dangerouslySetInnerHTML={{
                                           __html: item?.time,
                                         }}
-                                        className='text-black text-pc-sub14m !font-roboto'
+                                        className='text-black text-pc-sub14m '
                                       ></p>
                                     </div>
                                     <div className='select-phone flex space-x-[0.5rem] items-start'>
@@ -360,7 +360,7 @@ export default function Instruct({
                                         dangerouslySetInnerHTML={{
                                           __html: item?.phone,
                                         }}
-                                        className='text-black text-pc-sub14m !font-roboto'
+                                        className='text-black text-pc-sub14m '
                                       ></p>
                                     </div>
                                   </div>
@@ -387,7 +387,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.address || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m !font-roboto'
+                        className='flex-1 text-black text-pc-sub14m '
                       ></p>
                     </div>
                   )}
@@ -398,7 +398,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.time || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m !font-roboto'
+                        className='flex-1 text-black text-pc-sub14m '
                       ></p>
                     </div>
                   )}
@@ -412,7 +412,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.phone || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m !font-roboto'
+                        className='flex-1 text-black text-pc-sub14m '
                       ></p>
                     </Link>
                   )}
@@ -423,7 +423,7 @@ export default function Instruct({
           {data?.packing_instructions && (
             <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
               <div
-                className='[&_a]:!font-roboto [&_li]:!font-roboto [&_span]:!font-roboto flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:!font-roboto [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:!font-roboto [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *:!font-roboto [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                className='[&_a]: [&_li]: [&_span]: flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]: [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]: [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *: [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -486,7 +486,7 @@ export default function Instruct({
                       )}
                       {isMobile && field.value && (
                         <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
-                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 !font-roboto'>
+                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 '>
                             {selectPaymentInformationValue?.title ||
                               dataFromOrder?.recipientPaymentInformation}
                           </p>
@@ -805,7 +805,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.address,
                                     }}
-                                    className='!font-roboto flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
                                   ></p>
                                 </div>
                                 <div className='select-time flex space-x-[0.5rem] items-start'>
@@ -814,7 +814,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.time,
                                     }}
-                                    className='!font-roboto flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
                                   ></p>
                                 </div>
                                 <div className='select-phone flex space-x-[0.5rem] items-start'>
@@ -823,7 +823,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.phone,
                                     }}
-                                    className='!font-roboto flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
                                   ></p>
                                 </div>
                               </div>

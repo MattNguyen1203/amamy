@@ -25,7 +25,7 @@ const Section4 = ({withDHS}: Props) => {
     >
       <div className='max-w-[24.375rem] h-full flex flex-col justify-between'>
         <div className='xsm:px-[1rem] xsm:space-y-[0.5rem]'>
-          <h2 className='fade-item font-montserrat sm:mb-[2.06rem] text-[2.875rem] tracking-[-0.115rem] font-bold leading-[120%] xsm:text-[1.25rem] text-black xsm:text-mb-h1'>
+          <h2 className='fade-item font-montserrat sm:mb-[2.06rem] text-[2.5rem] leading-[1.3] tracking-[-0.075rem] font-bold xsm:text-[1.25rem] text-black xsm:text-mb-h1'>
             {withDHS?.title}
           </h2>
           <p

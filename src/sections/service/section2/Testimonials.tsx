@@ -21,7 +21,13 @@ interface Prop {
 export default function Testimonials({data}: Prop) {
   const [api, setApi] = React.useState<any>()
   const [current, setCurrent] = React.useState(0)
-  const testimonials = data?.feedback_customer?.list_feedback
+  const testimonials =
+    (data?.feedback_customer?.list_feedback.length ? 2 : 0) === 0
+      ? data?.feedback_customer?.list_feedback
+      : [
+          ...data?.feedback_customer?.list_feedback,
+          data?.feedback_customer?.list_feedback[0],
+        ]
 
   React.useEffect(() => {
     if (!api) {
