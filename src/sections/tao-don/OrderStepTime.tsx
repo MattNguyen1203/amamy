@@ -128,7 +128,7 @@ export default function OrderStepTime({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='text-pc-sub14s xsm:text-mb-13M xsm:!font-semibold xsm:line-clamp-2 text-black cursor-pointer'>
+                            <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13M xsm:!font-semibold xsm:line-clamp-2 text-black cursor-pointer'>
                               {item?.clause ||
                                 'Tôi đồng ý với điều khoản của Amamy'}
                             </FormLabel>

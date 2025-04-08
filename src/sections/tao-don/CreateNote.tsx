@@ -129,7 +129,7 @@ export default function CeateNote({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className='cursor-pointer text-pc-sub14m !font-semibold text-black xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.agree_with ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>

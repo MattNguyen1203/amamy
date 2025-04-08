@@ -130,7 +130,7 @@ export default function Insurance({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className=' cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                            <FormLabel className=' cursor-pointer text-pc-sub14m !font-semibold text-black xsm:text-mb-13M xsm:line-clamp-2'>
                               {item?.clause ||
                                 'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                             </FormLabel>
@@ -197,7 +197,7 @@ export default function Insurance({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className=' cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className=' cursor-pointer text-pc-sub14m !font-semibold text-black xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.clause ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>
