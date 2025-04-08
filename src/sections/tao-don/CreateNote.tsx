@@ -90,7 +90,7 @@ export default function CeateNote({
   }
   return (
     <div className=''>
-      <p className='text-black text-pc-sub16b mb-[1.5rem] xsm:mb-[0.75rem]'>
+      <p className='text-[#33A6E8] text-pc-sub16b mb-[1.5rem] xsm:mb-[0.75rem]'>
         Lưu ý quan trọng khi gửi hàng
       </p>
       <Form {...form}>
@@ -111,7 +111,7 @@ export default function CeateNote({
                   ref={(el) => {
                     containerRefs.current[index] = el
                   }}
-                  className='[&_a]:!font-roboto [&_li]:!font-roboto [&_span]:!font-roboto [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:!font-roboto [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:!font-roboto [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:!font-roboto *:font-semibold *:xsm:text-mb-13 [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-black *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
@@ -129,7 +129,7 @@ export default function CeateNote({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer text-pc-sub14m !font-roboto text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className='cursor-pointer text-pc-sub14m !font-semibold text-black xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.agree_with ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>

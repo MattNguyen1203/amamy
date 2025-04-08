@@ -88,7 +88,7 @@ export default function FormDeliveryInformationVNJapan({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng
         </p>
         <FormField
@@ -107,7 +107,7 @@ export default function FormDeliveryInformationVNJapan({
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Điền chữ tiếng Anh và Kanji hoặc Romanji.
               </p>
             </FormItem>
@@ -169,14 +169,14 @@ export default function FormDeliveryInformationVNJapan({
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Điền chữ tiếng Anh và Kanji hoặc Romanji.
                 <br />
                 *Quý khách vui lòng cung cấp thông tin chi tiết: số phòng, toà
                 nhà nếu có <br />
-                <span className='!font-roboto'></span>
+                <span className=''></span>
                 <br />
-                <span className='italic !font-roboto'>
+                <span className='italic'>
                   Ví dụ: 富⼭県富⼭市 婦中町下管⽥137番地⼯ ⼘婦中305号
                   (Excellent Funauchi 444, 137 Shimo-Kutsuta, Funauchi cho,
                   Toyama-shi, Toyama Prefecture) 939-2716

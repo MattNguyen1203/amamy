@@ -97,7 +97,7 @@ export default function Insurance({
               <p className='text-black text-pc-tab-title'>
                 {data?.compensation?.title}
               </p>
-              <p className='text-pc-sub14m !font-roboto text-[rgba(0,0,0,0.80)]'>
+              <p className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'>
                 {data?.compensation?.desc}
               </p>
             </div>
@@ -112,7 +112,7 @@ export default function Insurance({
                       ref={(el) => {
                         containerRefs.current[index] = el
                       }}
-                      className='[&_a]:!font-roboto [&_li]:!font-roboto [&_span]:!font-roboto [&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:!font-roboto [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:!font-roboto [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:!font-roboto *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      className=' [&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-black *:text-pc-sub14s *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-black [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
                       dangerouslySetInnerHTML={{
                         __html: item?.content || '',
                       }}
@@ -130,7 +130,7 @@ export default function Insurance({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='!font-roboto cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                            <FormLabel className=' cursor-pointer text-pc-sub14m !font-semibold text-black xsm:text-mb-13M xsm:line-clamp-2'>
                               {item?.clause ||
                                 'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                             </FormLabel>
@@ -162,7 +162,7 @@ export default function Insurance({
                     ref={(el) => {
                       containerRefs.current[index] = el
                     }}
-                    className='[&_a]:!font-roboto [&_li]:!font-roboto [&_span]:!font-roboto [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:!font-roboto [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:!font-roboto [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *:!font-roboto [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                    className='[&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]: [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]: [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *: [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                     dangerouslySetInnerHTML={{
                       __html: item?.content || '',
                     }}
@@ -197,7 +197,7 @@ export default function Insurance({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='!font-roboto cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className=' cursor-pointer text-pc-sub14m !font-semibold text-black xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.clause ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>

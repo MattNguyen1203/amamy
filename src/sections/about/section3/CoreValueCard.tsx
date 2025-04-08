@@ -39,9 +39,9 @@ const CoreValueCard = ({
               {label}
             </span>
 
-            <h2 className='line-clamp-2 mb-[0.75rem] font-montserrat font-semibold text-[1.5rem] xsm:text-[1rem] leading-[1.3] tracking-[-0.045rem] text-[rgba(0,0,0,0.8)] self-stretch'>
+            <h4 className='line-clamp-2 mb-[0.75rem] font-montserrat font-semibold text-[1.375rem] xsm:text-[1rem] leading-[1.3] tracking-[-0.0275rem] text-[rgba(0,0,0,0.8)] self-stretch'>
               {title}
-            </h2>
+            </h4>
 
             <p className='font-montserrat font-normal text-[0.875rem] leading-[1.5] xsm:text-[0.75rem] tracking-[-0.03em] text-[rgba(0,0,0,0.8)] self-stretch max-h-[6.5625rem] line-clamp-5 xsm:line-clamp-4 xsm:max-h-[5rem]'>
               {description}

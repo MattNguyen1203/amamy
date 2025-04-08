@@ -22,9 +22,9 @@ export const MainContainer = ({data}: Prop) => {
                 height={1000}
               />
             </div>
-            <p className='absolute w-[16.625rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] xsm:text-[1.25rem] xsm:text-center not-italic font-bold leading-[130%]'>
+            <h2 className='absolute w-[16.625rem] top-[1.6875rem] left-7 font-PC-heading-h5  text-[#FFF] text-[2rem] xsm:text-[1.25rem] xsm:text-center not-italic font-bold leading-[130%]'>
               {data?.title}
-            </p>
+            </h2>
 
             <Link
               href={'tel:' + data?.phone}

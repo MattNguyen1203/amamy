@@ -90,7 +90,9 @@ export default function OrderStepTime({
   }
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-      <p className='sm:hidden text-pc-sub16b text-black'>Thời gian gửi hàng</p>
+      <p className='sm:hidden text-pc-sub16b text-[#33A6E8]'>
+        Thời gian gửi hàng
+      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -101,14 +103,14 @@ export default function OrderStepTime({
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
                   <div className='p-[1rem] rounded-[1.25rem] bg-white'>
-                    <p className='xsm:text-pc-sub14s mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+                    <p className='xsm:text-pc-sub14s mb-[0.75rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
                       {item?.time_content}
                     </p>
                     <div
                       ref={(el) => {
                         containerRefs.current[index] = el
                       }}
-                      className='[&_a]:!font-roboto [&_li]:!font-roboto [&_span]:!font-roboto [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:!font-roboto [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:!font-roboto [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:font-semibold *:!font-roboto *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
+                      className=' [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-black *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul marker:[&_ul_li]:text-black [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
                       dangerouslySetInnerHTML={{
                         __html: item?.stock || '',
                       }}
@@ -126,7 +128,7 @@ export default function OrderStepTime({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='!font-roboto text-pc-sub14s xsm:text-mb-13M xsm:line-clamp-2 text-black cursor-pointer'>
+                            <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13M xsm:!font-semibold xsm:line-clamp-2 text-black cursor-pointer'>
                               {item?.clause ||
                                 'Tôi đồng ý với điều khoản của Amamy'}
                             </FormLabel>

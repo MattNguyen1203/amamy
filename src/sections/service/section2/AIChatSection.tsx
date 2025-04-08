@@ -1,10 +1,10 @@
 'use client'
 import MessageItem, {MessageItemProps} from '@/components/chat-bot/MessageItem'
 import ImageV2 from '@/components/image/ImageV2'
-import SendMessage from '@/components/svg/SendMessage'
 import {IListServiceResponse, IServicePage} from '@/utils/type'
 import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
+import AIInput from '@/sections/service/section2/AIInput'
 
 interface Prop {
   data: IServicePage
@@ -31,7 +31,7 @@ const AIChatSection = ({data, listService}: Prop) => {
         <div className='w-[26.875rem] h-[69.6875rem] bg-background-elevation5 xsm:bg-[#fafafa] xsm:shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
           <div className='mt-[12.5rem] ml-[5.8rem] w-[18.5625rem]'>
             <div className='fade-item flex flex-col items-start gap-[1.06rem] relative '>
-              <p className='text-pc-h1 text-black'>
+              <p className='text-pc-h1 bg-clip-text text-transparent bg-[linear-gradient(109deg,#5383E9_1.71%,#B36DA1_47.44%,#D17682_84.93%)]'>
                 {data?.talk_to_ai?.title || ''}
               </p>
               <p
@@ -45,7 +45,7 @@ const AIChatSection = ({data, listService}: Prop) => {
         </div>
         <div className='text-center hidden xsm:block xsm:mt-[4rem] xsm:bg-[#fafafa]'>
           <div className='flex flex-col items-center justify-center gap-[.5rem] relative mx-[1rem]'>
-            <p className='text-[1.25rem] not-italic font-bold leading-[120%]'>
+            <p className='text-[1.25rem] not-italic font-bold leading-[120%] bg-clip-text text-transparent bg-[linear-gradient(109deg,#5383E9_1.71%,#B36DA1_47.44%,#D17682_84.93%)]'>
               {data?.talk_to_ai?.title || ''}
             </p>
             <p
@@ -64,7 +64,7 @@ const AIChatSection = ({data, listService}: Prop) => {
             className='w-full h-[35.50475rem] xsm:h-full object-cover absolute xsm:top-0 sm:bottom-[-3rem] left-0 xsm:hidden'
           />
 
-          <div className='fade-item flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto shadow-card-s'>
+          <div className='fade-item flex-1 flex flex-col relative z-10 h-[34.5625rem] xsm:w-[calc(100%-2rem)] xsm:h-[28.125rem] rounded-[1.25rem] bg-Blue-Primary xsm:mx-auto shadow-card-s overflow-hidden'>
             <div className='p-3 flex items-center space-x-3 justify-center cursor-pointer'>
               <ImageV2
                 alt=''
@@ -86,17 +86,10 @@ const AIChatSection = ({data, listService}: Prop) => {
                   />
                 ))}
               </div>
-              <div className='flex mt-8 items-center rounded-[1.25rem] bg-Blue-Primary'>
-                <input
-                  disabled
-                  type='text'
-                  placeholder='Nhập yêu cầu của bạn...'
-                  className='disabled:bg-white flex-1 p-4 border border-Blue-100 outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
-                />
-                <button className='flex-center cursor-default pr-[0.875rem]'>
-                  <SendMessage className='size-6' />
-                </button>
-              </div>
+              <AIInput
+                className='mt-8'
+                disabled
+              />
             </div>
           </div>
           {/*  */}

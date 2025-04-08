@@ -119,15 +119,15 @@ export default function FormDeliveryInformationJapanVN({
         dataFromOrder?.recipientAddressType ?? 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCity ?? ''
+          ? (dataFromOrder?.recipientCity ?? '')
           : 'un',
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.district ?? ''
+          ? (dataFromOrder?.district ?? '')
           : 'un',
       recipientWardsandcommunes:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientWardsandcommunes ?? ''
+          ? (dataFromOrder?.recipientWardsandcommunes ?? '')
           : 'un',
     },
   })
@@ -288,7 +288,7 @@ export default function FormDeliveryInformationJapanVN({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
@@ -398,7 +398,7 @@ export default function FormDeliveryInformationJapanVN({
                 />
               </FormControl>
               <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='!font-roboto pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                 *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>
             </FormItem>

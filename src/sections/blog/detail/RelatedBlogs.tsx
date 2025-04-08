@@ -26,9 +26,9 @@ export default function RelatedBlogs({
       className={cn('fade-section py-[6rem] xsm:py-[2.5rem]', className)}
     >
       <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[0.5rem] xsm:mb-[1rem]'>
-        <h3 className='fade-item text-black text-pc-h1 xsm:text-mb-h2'>
+        <h2 className='fade-item text-black font-bold text-[2.5rem] leading-[1.3] tracking-[-0.075rem] xsm:text-mb-h2'>
           {title || 'Các bài viết liên quan'}
-        </h3>
+        </h2>
         <BtnBlue
           slug='/blogs'
           className='space-x-[0.5rem] xsm:size-[2rem] xsm:p-0'
