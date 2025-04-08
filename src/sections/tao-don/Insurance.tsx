@@ -50,10 +50,10 @@ export default function Insurance({
       order: Array.isArray(data?.compensation?.policy)
         ? data?.compensation?.policy?.map(() => (stepOrder > 5 ? true : false))
         : Array.isArray(data?.cargo_insurance_japanvn)
-        ? data?.cargo_insurance_japanvn?.map(() =>
-            stepOrder > 5 ? true : false,
-          )
-        : [],
+          ? data?.cargo_insurance_japanvn?.map(() =>
+              stepOrder > 5 ? true : false,
+            )
+          : [],
     },
   })
   useEffect(() => {
@@ -130,7 +130,7 @@ export default function Insurance({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                            <FormLabel className='!font-roboto cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
                               {item?.clause ||
                                 'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                             </FormLabel>
@@ -197,7 +197,7 @@ export default function Insurance({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className='!font-roboto cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.clause ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>

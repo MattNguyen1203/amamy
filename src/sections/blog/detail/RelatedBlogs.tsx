@@ -69,7 +69,7 @@ export default function RelatedBlogs({
                   type='hover'
                   key={index}
                   item={item}
-                  className='shadow-card-s bg-white xsm:h-[15.51725rem] xsm:w-[16.875rem] xsm:[&_img]:h-[9.375rem] xsm:[&_.warpper-image]:h-[9.375rem]'
+                  className='bg-white xsm:h-[15.51725rem] xsm:w-[16.875rem] xsm:[&_img]:h-[9.375rem] xsm:[&_.warpper-image]:h-[9.375rem]'
                 />
               </SwiperSlide>
             ))}

@@ -179,23 +179,23 @@ export default function Instruct({
         quan_huyen_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.district ?? ''
+            ? (dataFromOrder?.district ?? '')
             : '',
         phuong_xa_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.recipientWardsandcommunes ?? ''
+            ? (dataFromOrder?.recipientWardsandcommunes ?? '')
             : '',
         so_nha_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? dataFromOrder?.housingNumber ?? ''
+            ? (dataFromOrder?.housingNumber ?? '')
             : '',
         ten_duong_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? dataFromOrder?.roadName ?? ''
+            ? (dataFromOrder?.roadName ?? '')
             : '',
         id_hoac_cmt:
-          type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
+          type === 'viethan' ? (dataFromOrder?.passportNumber ?? '') : '',
 
         nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
         ten_nguoi_gui: dataFromOrder?.name ?? '',
@@ -219,7 +219,7 @@ export default function Instruct({
         nation: european === 'vnEu' ? dataFromOrder?.nation : '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
-        ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
+        ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
       }
       if (formData) {
         try {
@@ -309,7 +309,7 @@ export default function Instruct({
                             )}
                             {isMobile && field.value && selectBranchValue && (
                               <div className='space-x-[0.75rem] flex items-center flex-1'>
-                                <p className='text-black text-pc-sub14m'>
+                                <p className='text-black text-pc-sub14m !font-roboto'>
                                   {selectBranchValue}
                                 </p>
                               </div>
@@ -486,7 +486,7 @@ export default function Instruct({
                       )}
                       {isMobile && field.value && (
                         <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
-                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1'>
+                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 !font-roboto'>
                             {selectPaymentInformationValue?.title ||
                               dataFromOrder?.recipientPaymentInformation}
                           </p>
