@@ -10,7 +10,7 @@ export const MainContainer = ({data}: Prop) => {
 
   return (
     <div className='flex sm:ml-[6rem] items-start relative overflow-hidden xsm:block xsm:bg-[#fbf8f9] shadow-[0px_4px_45px_0px_rgba(0,0,0,0.05)] rounded-[1.25rem]'>
-      <div className='xsm:px-[1rem] flex flex-col items-start relative w-[21.5rem] xsm:w-full xsm:mb-0'>
+      <div className='xsm:px-[1rem] flex flex-col items-start relative w-[21.5rem] xsm:w-full xsm:mb-4'>
         <div className='fade-item relative self-stretch w-full h-[26.9375rem] xsm:h-auto xsm:w-full rounded-[1.25rem_0px_0px_1.25rem]  xsm:rounded-[1.25rem] overflow-hidden'>
           <div className='relative w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full '>
             <div className='bg-[#1DACFF] absolute w-[21.5rem] h-[26.9375rem] xsm:h-[11.25rem] xsm:w-full top-0  left-0 xsm:rounded-[1.25rem]'>

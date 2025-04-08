@@ -33,7 +33,7 @@ export default function ItemBlog({
       <div className='warpper-image h-[15.625rem] xsm:h-[12.96894rem] w-full relative overflow-hidden rounded-t-[1.25rem] xsm:rounded-t-[0.5rem]'>
         <ImageV2
           alt={item?.title}
-          src={item?.image?.url ?? '/detail-card-post.jpg'}
+          src={item?.image?.url || '/detail-card-post.jpg'}
           width={478}
           height={258}
           className='size-full object-cover rounded-t-[1.25rem] xsm:rounded-t-[0.5rem] sm:group-hover:scale-[1.2] transition-all duration-500'
