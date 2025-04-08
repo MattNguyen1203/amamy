@@ -152,7 +152,7 @@ const ServiceHighlight = ({
     className='fade-in-box-card-service-2 relative w-[30.75rem] h-[20.625rem] bg-white rounded-[1.25rem] overflow-hidden xsm:w-[18.75rem] xsm:h-[15.40181rem] xsm:min-w-max'
   >
     <div className='h-full bg-cover relative bg-center xsm:w-[18.75rem]'>
-      <div className='w-full h-full flex flex-col items-center justify-end p-4 gap-5 bg-opacity-10 bg-white xsm:rounded-full xsm:p-[0.62rem]'>
+      <div className='w-full h-full flex flex-col items-center justify-end p-4 gap-5 xsm:p-[0.62rem]'>
         <div className='flex items-center w-full gap-4 bg-background-elevation5 rounded-[1.25rem] px-4 py-2.5 xsm:rounded-full'>
           <span className='xsm:hidden'>{icon}</span>
           <div className='text-[#38B6FF] font-bold text-[1.375rem] mr-auto xsm:text-[0.875rem]'>

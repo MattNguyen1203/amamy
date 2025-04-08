@@ -47,7 +47,7 @@ const AboutPage = ({res, listBlog}: Prop) => {
     })
   }, [])
   return (
-    <div className='w-full bg-white xsm:bg-[#f7f7f7]'>
+    <div className='w-full bg-[#f7f7f7]'>
       <AboutAmamySection data={res?.banner} />
       <WhatMakesSpecial data={res?.amamy_special} />
       <QuantitySection data={res} />

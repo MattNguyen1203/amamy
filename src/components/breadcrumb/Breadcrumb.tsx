@@ -17,7 +17,7 @@ export default function Breadcrumb({
   return (
     <div
       className={cn(
-        'flex items-center justify-start p-[1.5rem_0rem_2.5rem_0rem] space-x-[0.5rem]',
+        'flex items-center justify-start p-[1.5rem_0rem_2.5rem_0rem] space-x-[0.5rem] xsm:py-4',
         className,
       )}
     >

@@ -26,7 +26,7 @@ export default function ItemBlog({
     <Link
       href={'/blogs/' + item?.slug}
       className={cn(
-        'fade-item ItemBlog group w-full flex flex-col h-[24.375rem] xsm:h-[18.19181rem] rounded-[1.25rem] bg-[#F8F8F8]',
+        'fade-item ItemBlog group w-full flex flex-col h-[24.375rem] xsm:h-[18.19181rem] rounded-[1.25rem] bg-[#F8F8F8] overflow-hidden',
         className,
       )}
     >
