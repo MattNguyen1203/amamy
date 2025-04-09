@@ -175,8 +175,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   ? dataInformation?.information?.time
                     ? '2'
                     : dataInformation?.information?.note
-                    ? '3'
-                    : '4'
+                      ? '3'
+                      : '4'
                   : '2'
               }
             />
@@ -224,8 +224,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -249,8 +249,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -273,8 +273,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -297,8 +297,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -325,8 +325,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -375,9 +375,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                         ? '5'
                         : '4'
                       : dataInformation?.information?.insurance
-                          ?.cargo_insurance_japanvn
-                      ? '5'
-                      : '4'
+                            ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '4'
                   }
                   setDataInformation={setDataInformation}
                 />
@@ -421,17 +421,11 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
           onClick={() => setSelectedImage(null)}
         >
-          <button
-            className='absolute top-[3rem] right-[3rem] text-black bg-gray-200 px-2 py-1 rounded'
-            onClick={() => setSelectedImage(null)}
-          >
-            ✕
-          </button>
           <div
             onClick={(e) => {
               e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
             }}
-            className='relative xsm:overflow-x-auto overflow-hidden bg-white p-4 rounded-lg max-w-[90vw] max-h-[90vh] flex flex-col items-center'
+            className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] max-h-[100vh] flex flex-col items-center'
           >
             <TransformWrapper
               initialScale={1}
@@ -446,7 +440,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       height={800 * 2}
                       src={selectedImage}
                       alt='Zoomed Image'
-                      className='rounded-[1.25rem] w-auto h-auto sm:max-w-[70vw] sm:max-h-[80vh] min-w-[50vw] min-h-[50vh] object-contain transition-transform duration-300 bg-white'
+                      className='w-full h-auto max-h-[80vh] object-contain transition-transform duration-300'
                     />
                   </TransformComponent>
                 </>
