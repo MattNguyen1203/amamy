@@ -37,7 +37,7 @@ const AIInput = ({
             placeholder={placeholder || 'Nhập yêu cầu của bạn...'}
             value={value}
             onChange={(e) => onChange?.(e.target.value)}
-            className='disabled:bg-white p-4 border-none outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
+            className='disabled:bg-white p-4 border-none w-full outline-none rounded-[1.25rem] text-pc-sub14m text-black placeholder:text-black/30'
           />
         </div>
         <button
