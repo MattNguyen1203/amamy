@@ -488,7 +488,8 @@ export default function Instruct({
                         <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
                           <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 '>
                             {selectPaymentInformationValue?.title ||
-                              dataFromOrder?.recipientPaymentInformation}
+                              dataFromOrder?.recipientPaymentInformation ||
+                              `Thanh toán bằng ${field.value}`}
                           </p>
                         </div>
                       )}

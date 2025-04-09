@@ -270,6 +270,23 @@ export default function FormDeliveryInformationJapanVN({
     }
   }, [dataFromOrder?.DistrictID])
 
+  // check if choosen address is atAmamyStore then not check for city, district, ward
+  useEffect(() => {
+    if (recipientAddressType === 'atAmamyStore') {
+      form.setValue('recipientCity', 'un')
+      form.setValue('district', 'un')
+      form.setValue('recipientWardsandcommunes', 'un')
+      form.setValue('recipientAddress', 'Nhận tại cửa hàng Amamy')
+
+      form.trigger([
+        'recipientCity',
+        'district',
+        'recipientWardsandcommunes',
+        'recipientAddress',
+      ])
+    }
+  }, [form, recipientAddressType])
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
