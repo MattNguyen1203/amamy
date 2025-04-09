@@ -2,24 +2,35 @@ version: '3.9'
 
 services:
   next-app:
-    container_name: nextjs14-okhub
+    container_name: amamy
     platform: linux/amd64
-    image: okhubvn/nextjs14-okhub:latest
+    image: okhubvn/amamy:latest
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        API: ${API}
+        NEXT_PUBLIC_DOMAIN: ${NEXT_PUBLIC_DOMAIN}
+        NEXT_PUBLIC_API: ${NEXT_PUBLIC_API}
+        NEXT_PUBLIC_API_ORDER: ${NEXT_PUBLIC_API_ORDER}
+        NEXT_PUBLIC_API_VERSION: ${NEXT_PUBLIC_API_VERSION}
+        ACF: ${ACF}
+        RANKMATH_API: ${RANKMATH_API}
+        CMS_DOMAIN: ${CMS_DOMAIN}
+        NEXT_PUBLIC_API_WP: ${NEXT_PUBLIC_API_WP}
+        NEXT_PUBLIC_API_CF7: ${NEXT_PUBLIC_API_CF7}
+        NEXT_PUBLIC_APIPROVINCES: ${NEXT_PUBLIC_APIPROVINCES}
+        NEXT_PUBLIC_TOKENPROVINCES: ${NEXT_PUBLIC_TOKENPROVINCES}
+
     restart: always
     ports:
       - 3000:3000
     networks:
-      - nextjs14-okhub
+      - amamy
 
   # Add more containers below (nginx, postgres, etc.)
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:
-  nextjs14-okhub:
+  amamy:
     external: true
