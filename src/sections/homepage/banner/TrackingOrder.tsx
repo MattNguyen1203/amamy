@@ -90,7 +90,7 @@ const TrackingOrder = () => {
       </TabsContent>
       <TabsContent
         value='estimate-price'
-        className='relative z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] '
+        className='relative z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] overflow-hidden'
       >
         <p className='text-pc-sub12s text-black/80 uppercase xsm:text-pc-sub10m xsm:!font-semibold'>
           Trò chuyện với trợ lý AI Amamy

@@ -31,9 +31,9 @@ const AIChatSection = ({data, listService}: Prop) => {
         <div className='w-[26.875rem] h-[69.6875rem] bg-background-elevation5 xsm:bg-[#fafafa] xsm:shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
           <div className='mt-[12.5rem] ml-[5.8rem] w-[18.5625rem]'>
             <div className='fade-item flex flex-col items-start gap-[1.06rem] relative '>
-              <p className='text-pc-h1 bg-clip-text text-transparent bg-[linear-gradient(109deg,#5383E9_1.71%,#B36DA1_47.44%,#D17682_84.93%)]'>
+              <h2 className='text-pc-h1 bg-clip-text text-transparent bg-[linear-gradient(109deg,#5383E9_1.71%,#B36DA1_47.44%,#D17682_84.93%)]'>
                 {data?.talk_to_ai?.title || ''}
-              </p>
+              </h2>
               <p
                 dangerouslySetInnerHTML={{
                   __html: data?.talk_to_ai?.subtitle || '',

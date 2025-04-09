@@ -89,9 +89,9 @@ const Banner = ({banner}: {banner: IBanner}) => {
               <p className='text-pc-sub14s'>{banner?.review_title}</p>
             </div>
           </div>
-          <p className='mt-6 text-[2.625rem] font-bold leading-[120%] w-[44rem] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
+          <h2 className='mt-6 text-[2.75rem] font-bold leading-[120%] w-[44rem] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
             {banner?.title}
-          </p>
+          </h2>
           <div className='mt-7'>
             <TrackingInterface />
           </div>
