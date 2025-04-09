@@ -39,6 +39,11 @@ export default async function sitemap() {
       lastModified: new Date(),
       priority: 0.9,
     },
+    {
+      url: `${process.env.NEXT_PUBLIC_DOMAIN}/tao-don-hang`,
+      lastModified: new Date(),
+      priority: 0.9,
+    },
   ]
   if (posts && posts.length > 0) {
     posts.map((post) => {

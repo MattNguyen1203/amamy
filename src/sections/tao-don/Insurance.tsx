@@ -112,7 +112,7 @@ export default function Insurance({
                       ref={(el) => {
                         containerRefs.current[index] = el
                       }}
-                      className=' [&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title *:text-black/[0.92] *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      className=' [&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title *:text-black/[0.92] *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem] *:text-pc-14'
                       dangerouslySetInnerHTML={{
                         __html: item?.content || '',
                       }}
@@ -162,7 +162,7 @@ export default function Insurance({
                     ref={(el) => {
                       containerRefs.current[index] = el
                     }}
-                    className='[&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:xsm:text-mb-13 *:font-medium [&_ul]:content-ul [&_ul]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                    className='[&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:xsm:text-mb-13 *:font-medium [&_ul]:content-ul [&_ul]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem] *:text-pc-14'
                     dangerouslySetInnerHTML={{
                       __html: item?.content || '',
                     }}
