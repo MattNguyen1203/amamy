@@ -122,7 +122,7 @@ const Header = ({
             <div className='w-[5.625rem]'>
               <Link href='/'>
                 <Amamy
-                  className={cn('w-[6.56213rem] h-[2.215rem] fill-[#38B6FF]')}
+                  className={cn('w-[5.56213rem] h-[2.215rem] fill-[#38B6FF]')}
                 />
               </Link>
             </div>
