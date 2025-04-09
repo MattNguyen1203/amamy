@@ -262,7 +262,7 @@ export default function Instruct({
         className='space-y-8'
       >
         <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-          <p className='text-black text-pc-sub16b'>
+          <p className='text-[#33A6E8] text-pc-sub16b'>
             Hướng dẫn gửi hàng lên Amamy Post
           </p>
           {data?.select_branch && (
