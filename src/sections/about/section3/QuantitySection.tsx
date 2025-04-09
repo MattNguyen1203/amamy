@@ -18,7 +18,7 @@ const QuantitySection = ({data}: Prop) => {
             <div className='flex flex-col items-start gap-[1.06rem] relative '>
               <h2
                 dangerouslySetInnerHTML={{__html: data?.amamy_quality?.title}}
-                className='[&_br]:sm:hidden fade-item text-[2.5rem] leading-[1.3] tracking-[-0.075rem] font-bold'
+                className='[&_br]:sm:hidden fade-item text-[2.75rem] leading-[1.3] tracking-[-0.075rem] font-bold'
               ></h2>
               <p className='fade-item text-[1rem] not-italic font-medium leading-[150%] w-[18.24512rem]'>
                 {data?.amamy_quality?.description}
