@@ -37,10 +37,10 @@ const Community = ({sectionCountry, section3}: Props) => {
         {!isMobile && (
           <div className='sm:absolute sm:z-[1] sm:left-0 w-[27.5rem] h-[65.1875rem] bg-background-elevation5 shadow-[0px_14px_24px_#0004500a] xsm:hidden'>
             <div className='fade-in-box-card-service-1 pt-[9.44rem] pl-[5.94rem] pr-12'>
-              <p
+              <h2
                 dangerouslySetInnerHTML={{__html: section3.title}}
                 className='text-pc-h1 text-black'
-              ></p>
+              ></h2>
               <p className='mt-4 text-pc-sub16m'>{section3.subtitle}</p>
             </div>
           </div>
