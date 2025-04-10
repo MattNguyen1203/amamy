@@ -15,7 +15,7 @@ Các bước build lên VPS: Trên local:
 
 docker compose -f docker-compose.yml build && docker push docker.io/okhubvn/nextjs14-okhub:latest
 Trên VPS: Lần đẩy đầu tiên: docker pull
-docker.io/okhubvn/nextjs14-okhub:latest && docker run -d -p 3000:3000 --name nextjs14-okhub docker.io/okhubvn/nextjs14-okhub:latest
+docker.io/okhubvn/amamy:latest && docker run -d -p 3000:3000 --name amamy docker.io/okhubvn/amamy:latest
 
 - Pull image mới về: docker pull docker.io/okhubvn/nextjs14-okhub:latest
 - Xóa container cũ:
