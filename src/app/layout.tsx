@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ChatBot from '@/components/chat-bot'
-import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
+// import ChatBot from '@/components/chat-bot'
+// import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
 import Header from '@/components/header/Header'
 import GsapProvider from '@/components/provider/GsapProvider'
 import fetchData from '@/fetch/fetchData'
@@ -9,6 +9,7 @@ import {Open_Sans, Roboto} from 'next/font/google'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
+// import PrenyAI from '@/lib/preni'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -114,13 +115,14 @@ export default async function RootLayout({
           dataHeader={dataFooter?.data?.header_site}
           dataCreateOrder={dataCreateOrder}
         />
-        <ChatBot
+        {/* <ChatBot
           dataMessage={[
             {message: 'test', role: 'user', time: '02:13 PM'},
             {message: 'test', role: 'bot', time: '02:13 PM'},
           ]}
         />
-        <ChatButtonMobile />
+        <ChatButtonMobile /> */}
+        {/* <PrenyAI /> */}
         <GsapProvider>{children}</GsapProvider>
         <Toaster
           theme='light'
