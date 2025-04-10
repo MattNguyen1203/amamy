@@ -164,6 +164,9 @@ export default function Instruct({
     }
   }, [selectBranch, selectPaymentInformation])
   function handleCreateOrder() {
+    console.log('🚀 ~ dataFromOrder:', dataFromOrder)
+    console.log('🚀 ~ type:', type)
+
     setTransition(async () => {
       const currentDate = new Date()
       const formData = {
@@ -174,7 +177,7 @@ export default function Instruct({
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
             ? dataFromOrder?.recipientCity
-            : '',
+            : (dataFromOrder?.recipientCity ?? ''),
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
         quan_huyen_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
@@ -221,6 +224,7 @@ export default function Instruct({
         name_facebook: dataFromOrder?.nameFacebook ?? '',
         ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
       }
+      console.log('🚀 ~ formData:', formData)
       if (formData) {
         try {
           const response = await fetch(
