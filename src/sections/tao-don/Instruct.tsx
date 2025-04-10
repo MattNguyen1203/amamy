@@ -439,7 +439,7 @@ export default function Instruct({
                     alt=''
                     width={300 * 2}
                     height={200 * 2}
-                    className='rounded-[0.5rem] w-[18.75rem] xsm:w-full h-[12.5rem] xsm:h-[12.95831rem] object-cover'
+                    className='rounded-[0.5rem] w-[18.75rem] xsm:w-full h-[12.5rem] xsm:h-[12.95831rem] object-contain'
                   />
                 </div>
               )}
