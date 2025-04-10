@@ -15,7 +15,6 @@ import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
 const TrackingOrder = () => {
-  const {setSearchValue} = useStore((state) => state)
   const [value, setValue] = useState('search-order')
   const [inputAI, setInputAI] = useState('')
   const [inputSearch, setInputSearch] = useState('')
@@ -30,9 +29,9 @@ const TrackingOrder = () => {
   const router = useRouter()
   const handleTrackingOrder = () => {
     // handle tracking order
-    setSearchValue(inputSearch)
+    // setSearchValue(inputSearch)
     // Chuyển hướng đến trang theo dõi vận đơn
-    router.push('/theo-doi-van-don')
+    router.push(`/theo-doi-van-don?code=${inputSearch}`)
   }
 
   return (
