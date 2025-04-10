@@ -64,21 +64,22 @@ const TrackingBill = ({dataAcf}: TrackingBillProps) => {
     }
   }, [code])
 
-  // useEffect(() => {
-  //   if (searchValue) {
-  //     setIsSearchValue(searchValue)
-  //     handleSearch()
-  //     setTimeout(() => {
-  //       setSearchValue('')
-  //     }, 3000)
-  //   }
-  // }, [searchValue])
+  // sync searchParams with searchValue
+  const handleSearchParams = (value: string) => {
+    const params = new URLSearchParams(window.location.search)
+    params.set('code', value)
+    window.history.replaceState({}, '', `${window.location.pathname}?${params}`)
+  }
+
   return (
     <div className='grid grid-cols-[min-content_auto] gap-6 w-full px-[6rem] pb-[4rem] xsm:px-4 xsm:gap-4 xsm:grid-cols-1'>
       <div className='w-[28.3125rem] xsm:w-full'>
         <SearchBill
           issearchValue={issearchValue}
-          onSearch={() => handleSearch(issearchValue)}
+          onSearch={() => {
+            handleSearch(issearchValue)
+            handleSearchParams(issearchValue)
+          }}
           setIsSearchValue={setIsSearchValue}
           isLoading={isLoading}
         />
