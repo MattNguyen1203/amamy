@@ -35,7 +35,7 @@ const Footer = async () => {
             {social.map((item: any, index: number) => (
               <Link
                 target='_blank'
-                href={item.link}
+                href={item.link || '#'}
                 key={index}
                 className='flex-center size-12 rounded-[1.25rem] border border-white/20 bg-[#8C8C8C2B]'
               >
@@ -66,7 +66,7 @@ const Footer = async () => {
                 key={index}
                 icon={item.icon}
                 title={item.title}
-                link={item.link}
+                link={item.link || '#'}
               />
             ))}
           </div>
@@ -79,7 +79,7 @@ const Footer = async () => {
             <div className='sm:flex sm:flex-col gap-[0.75rem] xsm:grid xsm:grid-cols-2 xsm:gap-[1rem]'>
               {service.map((item: any, index: number) => (
                 <Link
-                  href={item.link.url}
+                  href={item.link.url || '#'}
                   target={item.link.target}
                   key={index}
                   className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'
@@ -96,7 +96,7 @@ const Footer = async () => {
             <div className='sm:flex sm:flex-col sm:gap-[0.75rem] xsm:grid xsm:grid-cols-2 gap-[1rem]'>
               {solution.map((item: any, index: number) => (
                 <Link
-                  href={item.link.url}
+                  href={item.link.url || '#'}
                   target={item.link.target}
                   key={index}
                   className='text-[1rem] not-italic font-medium leading-[150%] opacity-80 xsm:text-pc-sub14m'
@@ -114,7 +114,7 @@ const Footer = async () => {
             {social.map((item: any, index: number) => (
               <Link
                 target='_blank'
-                href={item.link}
+                href={item.link || '#'}
                 key={index}
                 className='flex-center size-10 rounded-full border border-white/10'
               >
