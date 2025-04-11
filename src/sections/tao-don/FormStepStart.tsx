@@ -463,7 +463,7 @@ export default function FormStepStart({
               </p>
               <p className='pl-[0.75rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
-                giao hàng khách nhau sẽ giao sai.
+                giao hàng khác nhau sẽ giao sai.
               </p>
             </FormItem>
           )}
