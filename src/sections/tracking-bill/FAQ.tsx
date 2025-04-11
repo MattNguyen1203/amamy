@@ -21,20 +21,16 @@ const FAQ = ({dataFAQ}: FAQProps) => {
       <Accordion
         type='single'
         collapsible
-        className='mt-5 xsm:mt-4 flex flex-col space-y-4'
+        className='mt-5 xsm:mt-4 flex flex-col space-y-3'
       >
         {dataFAQ?.map((item, index) => (
           <AccordionItem
             key={index}
             value={`faq-${index}`}
-            className='bg-white rounded-[1.25rem]'
+            className='bg-white rounded-[1.25rem] p-5 xsm:p-4'
           >
-            <AccordionTrigger className='p-[1.25rem_1.25rem_1.25rem_1.5rem] bg-white rounded-[1.25rem]'>
-              {item.Title}
-            </AccordionTrigger>
-            <AccordionContent className='p-[1.25rem_1.25rem_1.25rem_1.5rem]'>
-              {item.content}
-            </AccordionContent>
+            <AccordionTrigger>{item.Title}</AccordionTrigger>
+            <AccordionContent>{item.content}</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
