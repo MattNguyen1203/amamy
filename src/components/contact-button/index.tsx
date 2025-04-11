@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 type ContactButtonProps = {
-  data: {
+  data?: {
     zalo: string
     messenger: string
   }
@@ -16,7 +16,7 @@ const ContactButton = ({data}: ContactButtonProps) => {
           <div className='size-10 xsm:size-8 animate-ping bg-white rounded-full z-0'></div>
         </div>
         <Link
-          href={data.messenger}
+          href={data?.messenger || 'http://m.me/'}
           target='_blank'
           className='size-[3.125rem] xsm:size-10 bg-[#38B6FF] rounded-full shadow-lg flex-center'
         >
@@ -34,7 +34,7 @@ const ContactButton = ({data}: ContactButtonProps) => {
           <div className='size-10 xsm:size-8 animate-ping bg-white rounded-full z-0'></div>
         </div>
         <Link
-          href={`https://zalo.me/${data.zalo}`}
+          href={`https://zalo.me/${data?.zalo || ''}`}
           target='_blank'
           className='size-[3.125rem] xsm:size-10 bg-[#38B6FF] rounded-full shadow-lg flex-center'
         >
