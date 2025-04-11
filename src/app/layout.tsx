@@ -9,6 +9,7 @@ import {Open_Sans, Roboto} from 'next/font/google'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
+import ContactButton from '@/components/contact-button'
 // import PrenyAI from '@/lib/preni'
 
 export const metadata: Metadata = {
@@ -123,6 +124,7 @@ export default async function RootLayout({
         />
         <ChatButtonMobile /> */}
         {/* <PrenyAI /> */}
+        <ContactButton data={dataFooter?.data?.header_site?.contact_us} />
         <GsapProvider>{children}</GsapProvider>
         <Toaster
           theme='light'

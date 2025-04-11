@@ -73,6 +73,11 @@ const TrackingOrder = () => {
         <input
           value={inputSearch}
           onChange={(e) => setInputSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleTrackingOrder()
+            }
+          }}
           type='text'
           placeholder='Nhập mã vận đơn'
           className='w-full p-4 xsm:p-3 border border-[#CFD0D5] outline-none rounded-[1.25rem] text-pc-sub14m xsm:text-mb-13M text-black placeholder:text-black/30'

@@ -53,6 +53,11 @@ const SearchBill = ({
             type='text'
             onFocus={() => setIsShowPaste(true)}
             value={issearchValue}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                onSearch()
+              }
+            }}
             onChange={(e) => setIsSearchValue(e.target.value)}
             placeholder='Nhập mã vận đơn'
             className='flex-1 text-pc-sub14m border-none bg-transparent outline-none text-black placeholder:text-black/30'
