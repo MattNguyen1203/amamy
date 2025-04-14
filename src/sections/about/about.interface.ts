@@ -5,6 +5,16 @@ export interface IAbout {
   amamy_special: IAmamySpecialAbout
   amamy_quality: IAmamyQualityAbout
   amamy_service: IAmamyServiceAbout
+  list_port: {
+    title: string
+    posts: {
+      title: string
+      slug: string
+      thumbnail: string
+      categories: string[]
+      date: string
+    }[]
+  }
   withDHS: NewsObject
 }
 export interface IBannerAbout {
