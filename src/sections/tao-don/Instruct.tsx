@@ -177,28 +177,28 @@ export default function Instruct({
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
             ? dataFromOrder?.recipientCity
-            : (dataFromOrder?.recipientCity ?? ''),
+            : dataFromOrder?.recipientCity ?? '',
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
         quan_huyen_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
-            ? (dataFromOrder?.district ?? '')
+            ? dataFromOrder?.district ?? ''
             : '',
         phuong_xa_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
-            ? (dataFromOrder?.recipientWardsandcommunes ?? '')
+            ? dataFromOrder?.recipientWardsandcommunes ?? ''
             : '',
         so_nha_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? (dataFromOrder?.housingNumber ?? '')
+            ? dataFromOrder?.housingNumber ?? ''
             : '',
         ten_duong_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? (dataFromOrder?.roadName ?? '')
+            ? dataFromOrder?.roadName ?? ''
             : '',
         id_hoac_cmt:
-          type === 'viethan' ? (dataFromOrder?.passportNumber ?? '') : '',
+          type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
 
         nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
         ten_nguoi_gui: dataFromOrder?.name ?? '',
@@ -222,7 +222,7 @@ export default function Instruct({
         nation: european === 'vnEu' ? dataFromOrder?.nation : '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
-        ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
+        ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
       }
       console.log('🚀 ~ formData:', formData)
       if (formData) {
@@ -443,7 +443,7 @@ export default function Instruct({
                     alt=''
                     width={300 * 2}
                     height={200 * 2}
-                    className='rounded-[0.5rem] max-w-[18.75rem] xsm:max-w-full max-h-[12.5rem] xsm:max-h-[12.95831rem] object-contain'
+                    className='rounded-[1rem] max-w-[18.75rem] xsm:max-w-full max-h-[12.5rem] xsm:max-h-[12.95831rem] object-contain'
                   />
                 </div>
               )}

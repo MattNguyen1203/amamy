@@ -1,3 +1,4 @@
+import PrenyAI from '@/lib/preni'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,7 +11,7 @@ type ContactButtonProps = {
 
 const ContactButton = ({data}: ContactButtonProps) => {
   return (
-    <div className='fixed flex flex-col space-y-8 xsm:space-y-6 bottom-10 right-10 z-30 xsm:bottom-6 xsm:right-6'>
+    <div className='fixed flex flex-col space-y-8 xsm:space-y-6 bottom-6 right-10 z-30 xsm:bottom-6 xsm:right-6'>
       <div className='relative'>
         <div className='absolute-center size-fit -z-10'>
           <div className='size-10 xsm:size-8 animate-ping bg-white rounded-full z-0'></div>
@@ -46,6 +47,13 @@ const ContactButton = ({data}: ContactButtonProps) => {
             className='size-7 xsm:size-[1.375rem] object-contain'
           />
         </Link>
+      </div>
+      <div className='relative'>
+        <div className='absolute-center size-fit -z-10'>
+          <div className='size-8 xsm:size-8 animate-ping bg-white rounded-full z-0'></div>
+        </div>
+        <div className='size-[3.125rem] xsm:size-10 rounded-full shadow-lg flex-center bg-transparent'></div>
+        <PrenyAI />
       </div>
     </div>
   )
