@@ -34,7 +34,7 @@ export default function SliderPC({
         withDHS?.list_news_event?.map((item: ListNewsObject, index) => (
           <SwiperSlide
             key={index}
-            className='opacity-0 [&.swiper-slide-active]:opacity-[1] w-[50.6875rem] h-[40.5rem] cursor-pointer xsm:w-[18.75rem]'
+            className='group opacity-0 hidden [&.swiper-slide-active]:block [&.swiper-slide-active]:opacity-[1] w-[50.6875rem] h-[40.5rem] xsm:w-[18.75rem]'
           >
             <Image
               src={item?.post?.[0]?.thumbnail}
@@ -50,19 +50,19 @@ export default function SliderPC({
                   __html: item?.post?.[0]?.title,
                 }}
               ></div>
-              <div className='sm:pointer-events-none sm:group-hover:pointer-events-auto sm:group-hover:opacity-[1] transition-all duration-700 overflow-hidden opacity-0'>
+              <div className='sm:pointer-events-none sm:group-hover:pointer-events-auto sm:group-hover:opacity-[1] transition-all duration-700 overflow-hidden opacity-0 flex flex-col'>
                 <p
                   dangerouslySetInnerHTML={{__html: item?.post?.[0]?.excerpt}}
-                  className='text-pc-sub16 text-[rgba(0,0,0,0.80)] line-clamp-[9]'
+                  className='text-pc-sub16 text-[rgba(0,0,0,0.80)] line-clamp-[9] flex-1'
                 ></p>
-                <BtnBlue
-                  slug={'/blogs/' + item?.post?.[0]?.slug}
-                  className='space-x-[0.75rem] w-max ml-auto mt-[1rem]'
-                >
-                  <p className='text-pc-sub16m text-white'>Xem chi tiết</p>
-                  <ICArrow className='size-[1.5rem] xsm:size-[1.66669rem]' />
-                </BtnBlue>
               </div>
+              <BtnBlue
+                slug={'/blogs/' + item?.post?.[0]?.slug}
+                className='space-x-[0.75rem] w-max ml-auto mt-[1rem]'
+              >
+                <p className='text-pc-sub16m text-white'>Xem chi tiết</p>
+                <ICArrow className='size-[1.5rem] xsm:size-[1.66669rem]' />
+              </BtnBlue>
             </div>
           </SwiperSlide>
         ))}
