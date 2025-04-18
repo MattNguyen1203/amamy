@@ -118,7 +118,7 @@ export default function FormDeliveryInformationVNHan({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng tại Hàn Quốc
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>

@@ -71,13 +71,10 @@ export default function TabsCategory({
   }
   return (
     <section>
-      <h1 className='xsm:px-[1rem] sm:hidden text-[#000] text-mb-h1 py-[1rem]'>
-        Hữu ích cho gửi hàng
-      </h1>
       <div className='xsm:px-[1rem] xsm:overflow-hidden xsm:overflow-x-auto xsm:w-full hidden_scroll'>
         <div
           ref={containerRef}
-          className='flex sm:flex-wrap space-x-[0.5rem] w-full xsm:w-max sm:mb-[2.5rem]'
+          className='flex sm:flex-wrap gap-2 w-full xsm:w-max sm:mb-[2.5rem]'
         >
           <div
             onClick={() => {
@@ -89,10 +86,10 @@ export default function TabsCategory({
             }}
             className={cn(
               (slugCategory === 'all' || slugCategory === null) && 'active',
-              'mt-[0.25rem] [&.active_p]:text-white hover:bg-greyscale-text60 cursor-pointer transition-all duration-500 flex-center rounded-[1.25rem] [&.active]:bg-greyscale-text60 p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4]',
+              '[&.active_p]:text-white hover:bg-greyscale-text60 cursor-pointer transition-all duration-500 flex-center rounded-[1.25rem] [&.active]:bg-greyscale-text60 p-[0.75rem_1rem] xsm:py-2 border-[1px] border-solid border-[#DCDFE4]',
             )}
           >
-            <p className='text-pc-sub14s group-hover:text-white text-greyscale-text60 transition-all duration-500'>
+            <p className='text-pc-sub14s group-hover:text-white xsm:text-[0.75rem] xsm:leading-[1.4] text-greyscale-text60 transition-all duration-500'>
               Tất cả
             </p>
           </div>
@@ -103,10 +100,10 @@ export default function TabsCategory({
                 onClick={() => handleSelectSortOption(e)}
                 className={cn(
                   slugCategory === e?.slug && 'active',
-                  'mt-[0.25rem] [&.active_p]:text-white group hover:bg-greyscale-text60 [&.active]:bg-greyscale-text60 transition-all duration-500 cursor-pointer flex-center rounded-[1.25rem] p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4]',
+                  ' [&.active_p]:text-white group hover:bg-greyscale-text60 [&.active]:bg-greyscale-text60 transition-all duration-500 cursor-pointer flex-center rounded-[1.25rem] p-[0.75rem_1rem] border-[1px] border-solid border-[#DCDFE4] xsm:py-2',
                 )}
               >
-                <p className='text-pc-sub14s group-hover:text-white text-greyscale-text60 transition-all duration-500'>
+                <p className='text-pc-sub14s group-hover:text-white text-greyscale-text60 transition-all duration-500 xsm:text-[0.75rem] xsm:leading-[1.4]'>
                   {e?.name}
                 </p>
               </div>

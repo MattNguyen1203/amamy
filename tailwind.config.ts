@@ -22,6 +22,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
+        roboto: ['var(--font-roboto)'],
+        openSans: ['var(--font-open-sans)'],
         montserrat: ['var(--font-montserrat)'],
       },
       colors: {
@@ -191,7 +193,7 @@ const config: Config = {
             {},
         },
         '.text-pc-h1': {
-          '@apply text-[2.875rem] font-bold leading-[1.2] tracking-[-0.115rem] font-montserrat':
+          '@apply text-[2.75rem] font-bold leading-[1.2] tracking-[-0.115rem] font-montserrat':
             {},
         },
         '.text-mb-h1': {

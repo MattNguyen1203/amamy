@@ -8,10 +8,10 @@ export default function WhatMakesSpecial({data}: Prop) {
   return (
     <section className='fade-section w-full mx-auto p-[6rem] xsm:p-[1rem] bg-[#EDF5FA] xsm:bg-[#f7f7f7]'>
       <div className='rounded-[1.25rem] max-w-[88rem] xsm:max-w-full overflow-hidden '>
-        <div className='grid sm:grid-cols-2 items-center bg-[#38b6ff]'>
+        <div className='grid sm:grid-cols-2 items-start bg-[#38b6ff]'>
           {/* Left content */}
           <div className='px-[2.0625rem] py-[2.25rem] xsm:p-[1rem]'>
-            <h2 className='fade-item font-montserrat font-bold text-[2.875rem] xsm:text-[1.25rem] xsm:leading-[1.2] leading-[3.45rem] xsm:tracking-[-0.05rem] tracking-[-0.04em] text-white mb-[7.375rem] xsm:mb-[1rem]'>
+            <h2 className='fade-item font-montserrat font-bold text-[2.75rem] leading-[1.3] tracking-[-0.075rem] xsm:text-[1.25rem] xsm:leading-[1.2] xsm:tracking-[-0.05rem] text-white mb-[1.25rem] xsm:mb-[1rem]'>
               {data?.title}
             </h2>
 

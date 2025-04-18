@@ -1,9 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import DetailCentenBlog from '@/sections/blog/detail/Index'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
 import metadataValues from '@/utils/metadataValues'
+export async function generateStaticParams() {
+  const posts = await fetchData({
+    api: 'all-slug-post',
+  })
+  return posts.map((post: any) => ({
+    slug: post.slug,
+  }))
+}
 export async function generateMetadata({params}: {params: {slug: string}}) {
   const res = await getMetaDataRankMath(params?.slug)
   return metadataValues(res)

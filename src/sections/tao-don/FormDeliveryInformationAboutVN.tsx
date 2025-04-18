@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/(store)/store'
-import { Button } from '@/components/ui/button'
+import {Button} from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -17,18 +17,18 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import {Input} from '@/components/ui/input'
+import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
+import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Check, ChevronDown } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Check, ChevronDown} from 'lucide-react'
+import {useEffect, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -118,15 +118,15 @@ export default function FormDeliveryInformationAboutVN({
         dataFromOrder?.recipientAddressType || 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCity ?? ''
+          ? (dataFromOrder?.recipientCity ?? '')
           : 'un',
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.district ?? ''
+          ? (dataFromOrder?.district ?? '')
           : 'un',
       recipientWardsandcommunes:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientWardsandcommunes ?? ''
+          ? (dataFromOrder?.recipientWardsandcommunes ?? '')
           : 'un',
     },
   })
@@ -150,6 +150,7 @@ export default function FormDeliveryInformationAboutVN({
   }
   useEffect(() => {
     if (pending) {
+      console.log(recipientAddressType)
       form.setValue(
         'recipientAddress',
         recipientAddressType === 'atAmamyStore'
@@ -160,22 +161,26 @@ export default function FormDeliveryInformationAboutVN({
       form.setValue(
         'recipientCity',
         recipientAddressType === 'atAmamyStore'
-          ? 'un'
-          : dataFromOrder?.recipientCity || '',
+          ? (form?.getValues('recipientCity') ?? 'un')
+          : (form?.getValues('recipientCity') ??
+              dataFromOrder?.recipientCity ??
+              ''),
         {shouldValidate: true},
       )
       form.setValue(
         'district',
         recipientAddressType === 'atAmamyStore'
-          ? 'un'
-          : dataFromOrder?.district || '',
+          ? (form?.getValues('district') ?? 'un')
+          : (form?.getValues('district') ?? dataFromOrder?.district ?? ''),
         {shouldValidate: true},
       )
       form.setValue(
         'recipientWardsandcommunes',
         recipientAddressType === 'atAmamyStore'
-          ? 'un'
-          : dataFromOrder?.recipientWardsandcommunes || '',
+          ? (form?.getValues('recipientWardsandcommunes') ?? 'un')
+          : (form?.getValues('recipientWardsandcommunes') ??
+              dataFromOrder?.recipientWardsandcommunes ??
+              ''),
         {shouldValidate: true},
       )
     }
@@ -213,7 +218,7 @@ export default function FormDeliveryInformationAboutVN({
     }
     setTimeout(() => {
       setPending(true)
-    }, 3000)
+    }, 1500)
   }, [])
   useEffect(() => {
     async function fetchProvinces() {
@@ -278,13 +283,31 @@ export default function FormDeliveryInformationAboutVN({
       fetchProvinces()
     }
   }, [dataFromOrder?.DistrictID])
+
+  // check if choosen address is atAmamyStore then not check for city, district, ward
+  useEffect(() => {
+    if (recipientAddressType === 'atAmamyStore') {
+      form.setValue('recipientCity', 'un')
+      form.setValue('district', 'un')
+      form.setValue('recipientWardsandcommunes', 'un')
+      form.setValue('recipientAddress', 'Nhận tại cửa hàng Amamy')
+
+      form.trigger([
+        'recipientCity',
+        'district',
+        'recipientWardsandcommunes',
+        'recipientAddress',
+      ])
+    }
+  }, [form, recipientAddressType])
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng tại Việt Nam
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
@@ -298,12 +321,12 @@ export default function FormDeliveryInformationAboutVN({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -317,12 +340,12 @@ export default function FormDeliveryInformationAboutVN({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className=' shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -342,7 +365,7 @@ export default function FormDeliveryInformationAboutVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='flex !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
+                  className='flex pl-[0.75rem] !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                     <FormControl>
@@ -353,7 +376,7 @@ export default function FormDeliveryInformationAboutVN({
                     </FormControl>
                     <FormLabel
                       htmlFor='r1'
-                      className='font-normal cursor-pointer'
+                      className='font-normal cursor-pointer '
                     >
                       Nhận tại địa chỉ đăng ký
                     </FormLabel>
@@ -367,7 +390,7 @@ export default function FormDeliveryInformationAboutVN({
                     </FormControl>
                     <FormLabel
                       htmlFor='r2'
-                      className='font-normal cursor-pointer'
+                      className='font-normal cursor-pointer '
                     >
                       Nhận tại cửa hàng Amamy
                     </FormLabel>
@@ -388,15 +411,15 @@ export default function FormDeliveryInformationAboutVN({
                   disabled={
                     recipientAddressType === 'atAmamyStore' ? true : false
                   }
-                  className='shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className=' shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Địa chỉ nhận hàng tại Việt Nam'
                   {...field}
                 />
               </FormControl>
-              <p className='pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
+              <p className=' pl-[0.75rem] xsm:text-pc-sub10m text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.5rem]'>
                 *Địa chỉ chi tiết, số nhà, tên đường,...
               </p>
-              <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+              <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
             </FormItem>
           )}
         />
@@ -422,7 +445,7 @@ export default function FormDeliveryInformationAboutVN({
                           variant='outline'
                           role='combobox'
                           className={cn(
-                            'justify-between',
+                            'justify-between ',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -484,7 +507,7 @@ export default function FormDeliveryInformationAboutVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />
@@ -508,7 +531,7 @@ export default function FormDeliveryInformationAboutVN({
                           variant='outline'
                           role='combobox'
                           className={cn(
-                            'justify-between',
+                            'justify-between ',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -568,7 +591,7 @@ export default function FormDeliveryInformationAboutVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />
@@ -592,7 +615,7 @@ export default function FormDeliveryInformationAboutVN({
                           variant='outline'
                           role='combobox'
                           className={cn(
-                            'justify-between',
+                            'justify-between ',
                             !field.value && 'text-muted-foreground',
                           )}
                         >
@@ -642,7 +665,7 @@ export default function FormDeliveryInformationAboutVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
                 </FormItem>
               )}
             />

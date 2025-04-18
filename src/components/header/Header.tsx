@@ -60,6 +60,7 @@ const Header = ({
   const pathname = usePathname()
   useEffect(() => {
     setIsHomePage(pathname === '/')
+    setIsShowSearchInput(false)
   }, [pathname])
 
   useEffect(() => {
@@ -121,7 +122,7 @@ const Header = ({
             <div className='w-[5.625rem]'>
               <Link href='/'>
                 <Amamy
-                  className={cn('w-[4.56213rem] h-[1.215rem] fill-[#38B6FF]')}
+                  className={cn('w-[5.56213rem] h-[2.215rem] fill-[#38B6FF]')}
                 />
               </Link>
             </div>
@@ -188,7 +189,7 @@ const Header = ({
               <Link href='/'>
                 <Amamy
                   className={cn(
-                    'w-[6.89394rem] h-[1.836rem] fill-[#38B6FF]',
+                    'w-[8.56213rem] h-[2.215rem] fill-[#38B6FF]',
                     isScrollTop && 'fill-white',
                   )}
                 />

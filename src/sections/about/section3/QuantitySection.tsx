@@ -16,10 +16,10 @@ const QuantitySection = ({data}: Prop) => {
         <div className='w-[27.5rem] h-[62.9375rem] bg-background-elevation5 xsm:hidden'>
           <div className='h-[535px] top-[12.5rem] left-[5.9375rem] relative w-[18.5625rem]'>
             <div className='flex flex-col items-start gap-[1.06rem] relative '>
-              <div
+              <h2
                 dangerouslySetInnerHTML={{__html: data?.amamy_quality?.title}}
-                className='[&_br]:sm:hidden fade-item text-[2.875rem] tracking-[-0.115rem] font-bold leading-[120%]'
-              ></div>
+                className='[&_br]:sm:hidden fade-item text-[2.75rem] leading-[1.3] tracking-[-0.075rem] font-bold'
+              ></h2>
               <p className='fade-item text-[1rem] not-italic font-medium leading-[150%] w-[18.24512rem]'>
                 {data?.amamy_quality?.description}
               </p>
@@ -54,7 +54,7 @@ const QuantitySection = ({data}: Prop) => {
           </div>
         </div>
       </div>
-      <div className='fade-section absolute xsm:relative bottom-[-15rem] xsm:bottom-0 rounded-[20px] bg-white xsm:mt-[1rem]'>
+      <div className='fade-section absolute xsm:relative bottom-[-15rem] xsm:bottom-0 rounded-[1.25rem] bg-white xsm:mt-[1rem]'>
         <MainContainer data={data?.amamy_service} />
       </div>
     </section>

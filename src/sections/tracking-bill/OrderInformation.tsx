@@ -5,6 +5,7 @@ import BillStatus from '@/sections/tracking-bill/BillStatus'
 import LocationTag from '@/sections/tracking-bill/LocationTag'
 import {toast} from 'sonner'
 import './style.css'
+import Link from 'next/link'
 export type IProgress = {
   title: string
   desc: string
@@ -18,7 +19,7 @@ export type OrderInformationProps = {
     ten_nguoi_nhan: string
     dia_chi_nguoi_gui: string
     dia_chi_nguoi_nhan: string
-    tien_trinh_giao_hang: IProgress[]
+    tien_trinh_giao_hang: string
     date: string
     trang_thai_don_hang: {
       value: 'pending' | 'delivered' | 'shipping' | 'completed'
@@ -26,6 +27,9 @@ export type OrderInformationProps = {
       label: string
       post_title: string
     }
+    text_tracking_thu_ba: string
+    ma_van_don_thu_ba: string
+    link_tracking_thu_ba: string
   } | null
 }
 
@@ -107,23 +111,40 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
               <LocationTag location={data.dia_chi_nguoi_nhan} />
             </div>
           </div>
-          <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-center'>
-            <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>Ngày tạo đơn:</p>
-            <p className='font-semibold text-black'>{data?.date}</p>
-          </div>
-          <div className='text-pc-14 xsm:text-mb-12 text-black/80 flex items-center'>
-            <p className='w-[8.75rem] xsm:w-[7.5rem] mr-2'>
-              Ngày nhận dự kiến:
-            </p>
-            <p className='font-semibold text-black'></p>
-          </div>
         </div>
         <div className='h-[1px] w-full bg-[#DCDFE4] hidden xsm:block' />
         {/* <InformationList data={data?.tien_trinh_giao_hang} /> */}
-        <div
-          dangerouslySetInnerHTML={{__html: data?.tien_trinh_giao_hang}}
-          className='progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
-        ></div>
+        <div className='flex-1'>
+          {data?.ma_van_don_thu_ba && (
+            <div className='mb-6 progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'>
+              <ul
+                dangerouslySetInnerHTML={{__html: data?.text_tracking_thu_ba}}
+              ></ul>
+              <p className='pl-12 xsm:pl-9'>
+                Mã vận đơn:{' '}
+                <span className='text-[#38b6ff] font-semibold'>
+                  {data?.ma_van_don_thu_ba}
+                </span>
+              </p>
+              <p className='pl-12 xsm:pl-9'>
+                Theo dõi tiếp{' '}
+                <Link
+                  target='_blank'
+                  href={data?.link_tracking_thu_ba || '#'}
+                  className='text-[#38b6ff] font-semibold'
+                >
+                  tại đây
+                </Link>
+              </p>
+            </div>
+          )}
+          {data?.tien_trinh_giao_hang && (
+            <div
+              dangerouslySetInnerHTML={{__html: data?.tien_trinh_giao_hang}}
+              className='progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
+            ></div>
+          )}
+        </div>
       </div>
     </div>
   )

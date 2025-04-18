@@ -1,10 +1,12 @@
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
+import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import CreateOrder from '@/sections/tao-don/CreateOrder'
 import metadataValues from '@/utils/metadataValues'
 
 export async function generateMetadata() {
-  return metadataValues('')
+  const res = await getMetaDataRankMath('tao-don-hang')
+  return metadataValues(res)
 }
 
 export default async function page() {

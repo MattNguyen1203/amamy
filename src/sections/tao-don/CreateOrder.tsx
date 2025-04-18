@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import useStore from '@/app/(store)/store'
+import ImageV2 from '@/components/image/ImageV2'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
@@ -19,6 +20,7 @@ import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import {useState} from 'react'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
   {title: 'Thời gian gửi hàng', value: '2'},
@@ -36,6 +38,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const [currentTab, setCurrentTab] = useState('1')
   const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   // const [faq, setFaq] = useState(true)
   // const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
@@ -106,10 +109,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   onClick={() => {
                     setCurrentTab(item?.value)
                     setIndexTab(index)
-                    if (item?.value === '1') {
-                      setDataInformation(undefined)
-                      setDataFromOrder({...dataFromOrder})
-                    }
                   }}
                   key={index}
                   value={item?.value}
@@ -176,8 +175,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   ? dataInformation?.information?.time
                     ? '2'
                     : dataInformation?.information?.note
-                    ? '3'
-                    : '4'
+                      ? '3'
+                      : '4'
                   : '2'
               }
             />
@@ -189,14 +188,12 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <OrderStepTime
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataInformation={dataInformation?.information?.time}
                   nextStep={dataInformation?.information?.note ? '3' : '4'}
-                  setDataInformation={setDataInformation}
-                  setDataFromOrder={setDataFromOrder}
-                  dataFromOrder={dataFromOrder}
                 />
               </TabsContent>
               <TabsContent
@@ -204,6 +201,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <CeateNote
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
@@ -226,8 +224,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -251,8 +249,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -275,8 +273,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -299,8 +297,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -327,8 +325,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.note
                         ? '3'
                         : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
+                          ? '2'
+                          : '1'
                     }
                     nextStep={
                       dataInformation?.information?.insurance?.compensation
@@ -346,6 +344,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Insurance
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   data={dataInformation?.information?.insurance}
@@ -357,6 +356,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Instruct
+                  setSelectedImage={setSelectedImage}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
                   data={dataInformation?.information?.instruct}
@@ -375,9 +375,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                         ? '5'
                         : '4'
                       : dataInformation?.information?.insurance
-                          ?.cargo_insurance_japanvn
-                      ? '5'
-                      : '4'
+                            ?.cargo_insurance_japanvn
+                        ? '5'
+                        : '4'
                   }
                   setDataInformation={setDataInformation}
                 />
@@ -416,6 +416,39 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           <p className='text-pc-sub16m text-white'>Xong</p>
         </div>
       </div>
+      {selectedImage && (
+        <div
+          className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            onClick={(e) => {
+              e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
+            }}
+            className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] max-h-[100vh] flex flex-col items-center'
+          >
+            <TransformWrapper
+              initialScale={1}
+              initialPositionX={200}
+              initialPositionY={100}
+            >
+              {() => (
+                <>
+                  <TransformComponent>
+                    <ImageV2
+                      width={1000 * 2}
+                      height={800 * 2}
+                      src={selectedImage}
+                      alt='Zoomed Image'
+                      className='w-full h-auto max-h-[80vh] object-contain transition-transform duration-300'
+                    />
+                  </TransformComponent>
+                </>
+              )}
+            </TransformWrapper>
+          </div>
+        </div>
+      )}
       {/* <div
         className={cn(
           'top-[50%] opacity-[1] pointer-events-auto xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] visible transition-all duration-500 flex-center flex-col fixed z-[51] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] rounded-[1.25rem] bg-white',

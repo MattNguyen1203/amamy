@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ChatBot from '@/components/chat-bot'
-import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
+// import ChatBot from '@/components/chat-bot'
+// import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
+import ContactButton from '@/components/contact-button'
 import Header from '@/components/header/Header'
 import GsapProvider from '@/components/provider/GsapProvider'
 import fetchData from '@/fetch/fetchData'
 import type {Metadata} from 'next'
+import {Open_Sans, Roboto} from 'next/font/google'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
+// import PrenyAI from '@/lib/preni'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -68,7 +71,18 @@ const montserrat = localFont({
   ],
   variable: '--font-montserrat',
 })
-
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-roboto',
+  display: 'swap',
+})
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-open-sans',
+  display: 'swap',
+})
 // export function generateStaticParams() {}
 
 export default async function RootLayout({
@@ -94,21 +108,41 @@ export default async function RootLayout({
   ])
   return (
     <html>
+      <head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Amamy',
+              url: process.env.NEXT_PUBLIC_DOMAIN,
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: `${process.env.NEXT_PUBLIC_DOMAIN}/blogs/search?key={search_term_string}`,
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+      </head>
       <body
-        className={`${montserrat.variable} ${montserrat.className} antialiased`}
+        className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >
         <Header
           social={dataFooter?.data?.footer_site?.social}
           dataHeader={dataFooter?.data?.header_site}
           dataCreateOrder={dataCreateOrder}
         />
-        <ChatBot
+        {/* <ChatBot
           dataMessage={[
             {message: 'test', role: 'user', time: '02:13 PM'},
             {message: 'test', role: 'bot', time: '02:13 PM'},
           ]}
         />
-        <ChatButtonMobile />
+        <ChatButtonMobile /> */}
+        {/* <PrenyAI /> */}
+        <ContactButton data={dataFooter?.data?.header_site?.contact_us} />
         <GsapProvider>{children}</GsapProvider>
         <Toaster
           theme='light'

@@ -88,7 +88,7 @@ export default function FormDeliveryInformationVNJapan({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
-        <p className='text-black text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
           Thông tin nhận hàng
         </p>
         <FormField
@@ -174,7 +174,7 @@ export default function FormDeliveryInformationVNJapan({
                 <br />
                 *Quý khách vui lòng cung cấp thông tin chi tiết: số phòng, toà
                 nhà nếu có <br />
-                <span></span>
+                <span className=''></span>
                 <br />
                 <span className='italic'>
                   Ví dụ: 富⼭県富⼭市 婦中町下管⽥137番地⼯ ⼘婦中305号

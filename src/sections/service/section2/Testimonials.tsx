@@ -21,7 +21,13 @@ interface Prop {
 export default function Testimonials({data}: Prop) {
   const [api, setApi] = React.useState<any>()
   const [current, setCurrent] = React.useState(0)
-  const testimonials = data?.feedback_customer?.list_feedback
+  const testimonials =
+    (data?.feedback_customer?.list_feedback.length ? 2 : 0) === 0
+      ? data?.feedback_customer?.list_feedback
+      : [
+          ...data?.feedback_customer?.list_feedback,
+          data?.feedback_customer?.list_feedback[0],
+        ]
 
   React.useEffect(() => {
     if (!api) {
@@ -57,7 +63,7 @@ export default function Testimonials({data}: Prop) {
             }}
             className='mx-auto w-full px-[4rem] xsm:px-0'
           >
-            <CarouselContent className='xsm:ml-0'>
+            <CarouselContent className='xsm:ml-0 pb-1'>
               {Array.isArray(testimonials) &&
                 testimonials?.map((testimonial, index) => (
                   <CarouselItem
@@ -65,7 +71,7 @@ export default function Testimonials({data}: Prop) {
                     className='fade-item md:basis-1/2 lg:basis-1/4 p-0 flex justify-center'
                   >
                     <Card
-                      className={`h-[20.5625rem] w-[20.875rem] border-none rounded-[1.25rem] xsm:rounded-[0.5rem] relative ${
+                      className={`h-[20.5625rem] w-[20.875rem] border-none rounded-[1.25rem] relative ${
                         index % 2 === 0 ? 'bg-[#DBF5FF]' : 'bg-[#F2F2F2]'
                       }`}
                     >

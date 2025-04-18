@@ -56,7 +56,7 @@ export default function ContentBlog({
     <section className='w-[60rem] xsm:w-full xsm:p-[1rem]'>
       <h1
         dangerouslySetInnerHTML={{__html: data?.title}}
-        className='mb-[0.81rem] xsm:mb-[1rem] text-[2.625rem] font-bold leading-[1.55] tracking-[-0.105rem] text-black xsm:text-mb-h2'
+        className='mb-[0.81rem] xsm:mb-[1rem] text-[1.7rem] font-bold leading-[1.55] tracking-[-0.105rem] text-black xsm:text-mb-h2'
       ></h1>
       <div className='xsm:mb-[1rem] xsm:pb-[1rem] xsm:border-b-[1px] xsm:border-solid xsm:border-[#DCDFE4] font-montserrat opacity-[0.72] text-black text-[1rem] font-semibold leading-[1.5] xsm:text-pc-sub14s'>
         {formattedDate}
@@ -89,7 +89,7 @@ export default function ContentBlog({
       <div className='mt-[5rem] xsm:mt-[1.5rem]'>
         <div
           dangerouslySetInnerHTML={{__html: updatedHtml || data?.content}}
-          className='content-detail-blog [&>p]:mb-[1rem] [&_div]:!w-full *:font-montserrat [&_em]:content-em [&_h2]:content-h2 [&_h3]:content-h3 [&_img]:content-img [&>p]:content-p [&>span]:content-span [&_strong]:content-strong [&_ol_li]:content-ol--li [&_ul_li]:content-ul--li [&>ul]:content-ul [&>ol]:content-ol [&_p_img]:inline-block'
+          className='content-detail-blog [&>p]:mb-[1rem] [&_div]:!w-full *:font-montserrat [&_em]:content-em [&_h2]:content-h2 [&_h3]:content-h3 [&_h4]:content-h4 [&_h5]:content-h5 [&_h6]:content-h6 [&_img]:content-img [&>p]:content-p [&>span]:content-span [&_strong]:content-strong [&_ol_li]:content-ol--li [&_ul_li]:content-ul--li [&>ul]:content-ul [&>ol]:content-ol [&_p_img]:inline-block'
         ></div>
         <div className='flex xsm:flex-col xsm:space-y-[0.5rem] sm:items-center mt-[2rem] xsm:pt-[1rem] xsm:mt-[1rem] xsm:border-t-[0.0625rem] xsm:border-t-solid xsm:border-t-[#DCDFE4]'>
           <p className='text-black font-montserrat xsm:text-pc-sub14s sm:mr-[1.25rem]'>

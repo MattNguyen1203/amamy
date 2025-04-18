@@ -13,7 +13,7 @@ import {
 import {cn} from '@/lib/utils'
 import {IInformationNoteOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function CeateNote({
@@ -22,12 +22,14 @@ export default function CeateNote({
   prevStep,
   setIndexTab,
   indexTab,
+  setSelectedImage,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (nextTab: string) => void
   prevStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const FormSchema = z.object({
     note: z.array(
@@ -37,6 +39,7 @@ export default function CeateNote({
     ),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -45,6 +48,18 @@ export default function CeateNote({
         ? data?.map(() => (stepOrder > 3 ? true : false))
         : [],
     },
+  })
+  useEffect(() => {
+    containerRefs.current.forEach((container) => {
+      if (!container) return
+      const images = container.querySelectorAll('img')
+      images.forEach((img) => {
+        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
+        img.onclick = () => {
+          setSelectedImage(img.src)
+        } // Khi click, mở ảnh lên
+      })
+    })
   })
   useEffect(() => {
     if (!data) {
@@ -75,7 +90,7 @@ export default function CeateNote({
   }
   return (
     <div className=''>
-      <p className='text-black text-pc-sub16b mb-[1.5rem] xsm:mb-[0.75rem]'>
+      <p className='text-[#33A6E8] text-pc-sub16b mb-[1.5rem] xsm:mb-[0.75rem]'>
         Lưu ý quan trọng khi gửi hàng
       </p>
       <Form {...form}>
@@ -89,11 +104,14 @@ export default function CeateNote({
                 key={index}
                 className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1rem]'
               >
-                <p className='xsm:text-pc-sub14s mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+                <p className='xsm:text-pc-sub14s mb-[0.88rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
                   {item?.title}
                 </p>
                 <div
-                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-14 *:font-semibold *:xsm:text-mb-13 [&_ul]:content-ul marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                  ref={(el) => {
+                    containerRefs.current[index] = el
+                  }}
+                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
@@ -111,7 +129,7 @@ export default function CeateNote({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className='cursor-pointer text-pc-sub14m !font-semibold text-black/[0.92] xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.agree_with ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>

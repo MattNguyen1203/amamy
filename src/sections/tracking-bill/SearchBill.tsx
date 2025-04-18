@@ -53,6 +53,11 @@ const SearchBill = ({
             type='text'
             onFocus={() => setIsShowPaste(true)}
             value={issearchValue}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                onSearch()
+              }
+            }}
             onChange={(e) => setIsSearchValue(e.target.value)}
             placeholder='Nhập mã vận đơn'
             className='flex-1 text-pc-sub14m border-none bg-transparent outline-none text-black placeholder:text-black/30'
@@ -101,7 +106,7 @@ const SearchBill = ({
           className,
         )}
       >
-        <ImageV2
+        {/* <ImageV2
           src='/tracking-bill/icon-search-mb.svg'
           width={40}
           height={40}
@@ -110,13 +115,13 @@ const SearchBill = ({
             'size-[1.125rem] cursor-pointer object-contain',
             searchValue ? 'hidden' : 'block',
           )}
-        />
+        /> */}
         <input
           type='text'
           value={issearchValue}
           onChange={(e) => setIsSearchValue(e.target.value)}
           placeholder='Nhập mã vận đơn'
-          className='flex-1 text-pc-sub14m xsm:text-mb-13M border-none bg-transparent outline-none text-black placeholder:text-black/30'
+          className='xsm:pl-[0.5rem] flex-1 text-pc-sub14m xsm:text-mb-13M border-none bg-transparent outline-none text-black placeholder:text-black/30'
         />
         <ImageV2
           src='/tracking-bill/icon-close.svg'
@@ -131,7 +136,7 @@ const SearchBill = ({
         />
         <button
           onClick={onSearch}
-          className='p-3 flex items-center justify-center rounded-[1.25rem] bg-[#38B6FF]'
+          className='p-3 px-[2.5rem] flex items-center justify-center rounded-[1.25rem] bg-[#38B6FF]'
         >
           <span className='text-background-elevation5 text-pc-sub12s tracking-[-0.03rem] leading-[1.4]'>
             Tra cứu

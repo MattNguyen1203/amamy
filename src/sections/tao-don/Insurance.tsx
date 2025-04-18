@@ -18,7 +18,7 @@ import {
   IInformationInsurance_policy,
 } from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 export default function Insurance({
@@ -26,13 +26,16 @@ export default function Insurance({
   handleClickcurrentTab,
   setIndexTab,
   indexTab,
+  setSelectedImage,
 }: {
   data?: IInformationInsurance
   handleClickcurrentTab: (nextTab: string) => void
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const {stepOrder, setStepOrder} = useStore((state) => state)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const FormSchema = z.object({
     order: z.array(
@@ -47,11 +50,23 @@ export default function Insurance({
       order: Array.isArray(data?.compensation?.policy)
         ? data?.compensation?.policy?.map(() => (stepOrder > 5 ? true : false))
         : Array.isArray(data?.cargo_insurance_japanvn)
-        ? data?.cargo_insurance_japanvn?.map(() =>
-            stepOrder > 5 ? true : false,
-          )
-        : [],
+          ? data?.cargo_insurance_japanvn?.map(() =>
+              stepOrder > 5 ? true : false,
+            )
+          : [],
     },
+  })
+  useEffect(() => {
+    containerRefs.current.forEach((container) => {
+      if (!container) return
+      const images = container.querySelectorAll('img')
+      images.forEach((img) => {
+        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
+        img.onclick = () => {
+          setSelectedImage(img.src)
+        } // Khi click, mở ảnh lên
+      })
+    })
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
@@ -79,10 +94,10 @@ export default function Insurance({
         {data?.compensation && (
           <>
             <div className='mb-[1rem]'>
-              <p className='text-black text-pc-tab-title'>
+              <p className='!font-bold text-[#33A6E8] text-pc-tab-title'>
                 {data?.compensation?.title}
               </p>
-              <p className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'>
+              <p className='text-pc-sub14m text-[rgba(0,0,0,0.92)]'>
                 {data?.compensation?.desc}
               </p>
             </div>
@@ -94,7 +109,10 @@ export default function Insurance({
                     className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1.2rem]'
                   >
                     <div
-                      className='[&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      ref={(el) => {
+                        containerRefs.current[index] = el
+                      }}
+                      className=' [&_a]:text-[#0084FF] [&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_h3]:text-pc-tab-title *:text-black/[0.92] *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem] *:text-pc-14'
                       dangerouslySetInnerHTML={{
                         __html: item?.content || '',
                       }}
@@ -112,7 +130,7 @@ export default function Insurance({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                            <FormLabel className=' cursor-pointer text-pc-sub14m !font-semibold text-black/[0.92] xsm:text-mb-13M xsm:line-clamp-2'>
                               {item?.clause ||
                                 'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                             </FormLabel>
@@ -136,24 +154,34 @@ export default function Insurance({
                 key={index}
                 className='p-[1rem] rounded-[1.25rem] bg-white space-y-[1.2rem]'
               >
-                <p className='xsm:text-pc-sub14s mb-[0.88rem] text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+                <p className='xsm:text-pc-sub14s mb-[0.88rem] !font-bold text-black font-montserrat text-[1rem] leading-[1.625] tracking-[-0.03rem]'>
                   {item?.title}
                 </p>
                 <div className='flex xsm:flex-col-reverse sm:space-x-[1rem] bg-white'>
                   <div
-                    className='[&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                    ref={(el) => {
+                      containerRefs.current[index] = el
+                    }}
+                    className='[&_img]:rounded-[1.25rem] [&_img]:mb-[1.2rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:xsm:text-mb-13 *:font-medium [&_ul]:content-ul [&_ul]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem] *:text-pc-14'
                     dangerouslySetInnerHTML={{
                       __html: item?.content || '',
                     }}
                   ></div>
                   {item?.image && (
-                    <ImageV2
-                      src={item?.image}
-                      alt=''
-                      width={500 * 2}
-                      height={300 * 2}
-                      className='flex-1 rounded-[0.5rem] xsm:mb-[0.5rem] xsm:w-full h-[14.81838rem] xsm:h-[12.95831rem] object-cover'
-                    />
+                    <div
+                      className='flex-1'
+                      ref={(el) => {
+                        containerRefs.current[index] = el
+                      }}
+                    >
+                      <ImageV2
+                        src={item?.image}
+                        alt=''
+                        width={500 * 2}
+                        height={300 * 2}
+                        className=' rounded-[0.5rem] xsm:mb-[0.5rem] xsm:w-full h-[14.81838rem] xsm:h-[12.95831rem] object-cover'
+                      />
+                    </div>
                   )}
                 </div>
                 <FormField
@@ -169,7 +197,7 @@ export default function Insurance({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer text-pc-sub14m text-black xsm:text-mb-13M xsm:line-clamp-2'>
+                        <FormLabel className=' cursor-pointer text-pc-sub14m !font-semibold text-black/[0.92] xsm:text-mb-13M xsm:line-clamp-2'>
                           {item?.clause ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>
