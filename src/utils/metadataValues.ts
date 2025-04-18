@@ -56,6 +56,5 @@ export default function metadataValues(res: any) {
       url: '/social.webp',
     })
   }
-
   return meta
 }

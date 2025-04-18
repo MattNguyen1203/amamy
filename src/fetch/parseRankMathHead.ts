@@ -2,17 +2,24 @@ export function parseRankMathHead(headHtml: string) {
   function getMetaContent(property: string) {
     const regex = new RegExp(`<meta[^>]+${property}[^>]+content="([^"]+)"`, 'i')
     const match = headHtml.match(regex)
-    return match ? match[1] : ''
+    return match ? match[1] : null
   }
 
   function getLinkHref(rel: string) {
     const regex = new RegExp(`<link[^>]+rel="${rel}"[^>]+href="([^"]+)"`, 'i')
     const match = headHtml.match(regex)
-    return match ? match[1] : ''
+    return match ? match[1] : null
+  }
+
+  function getSchemaMarkup() {
+    const regex =
+      /<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i
+    const match = headHtml.match(regex)
+    return match ? JSON.parse(match[1].trim()) : null
   }
 
   return {
-    title: headHtml.match(/<title>(.*?)<\/title>/)?.[1] || '',
+    title: headHtml.match(/<title>(.*?)<\/title>/)?.[1] || null,
     description: getMetaContent('name="description"'),
     canonical: getLinkHref('canonical'),
     openGraph: {
@@ -35,5 +42,6 @@ export function parseRankMathHead(headHtml: string) {
       description: getMetaContent('name="twitter:description"'),
       image: getMetaContent('name="twitter:image"'),
     },
+    schemaMarkup: getSchemaMarkup(),
   }
 }

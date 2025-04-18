@@ -108,24 +108,6 @@ export default async function RootLayout({
   ])
   return (
     <html>
-      <head>
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'Amamy',
-              url: process.env.NEXT_PUBLIC_DOMAIN,
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: `${process.env.NEXT_PUBLIC_DOMAIN}/blogs/search?key={search_term_string}`,
-                'query-input': 'required name=search_term_string',
-              },
-            }),
-          }}
-        />
-      </head>
       <body
         className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >

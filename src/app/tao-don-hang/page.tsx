@@ -1,6 +1,7 @@
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
+import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import CreateOrder from '@/sections/tao-don/CreateOrder'
 import metadataValues from '@/utils/metadataValues'
 
@@ -16,9 +17,16 @@ export default async function page() {
       next: {revalidate: 60},
     },
   })
-  const [dataCreateOrder] = await Promise.all([fetchCreateOrder])
+  const [dataCreateOrder, schemaData] = await Promise.all([
+    fetchCreateOrder,
+    getSchemaMarkup('tao-don-hang'),
+  ])
   return (
     <main className='bg-white sm:px-[6rem] sm:pt-0 min-h-[calc(100vh-5.75rem)]'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
+      ></script>
       <Breadcrumb
         data={[{title: 'Tạo đơn hàng', slug: ''}]}
         className='xsm:hidden'

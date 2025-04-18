@@ -1,6 +1,7 @@
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
+import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import TabsCategory from '@/sections/blog/TabsCategory'
 import metadataValues from '@/utils/metadataValues'
 import {Suspense} from 'react'
@@ -23,13 +24,18 @@ export default async function page() {
       next: {revalidate: 60},
     },
   })
-  const [dataFavourite, dataCategory] = await Promise.all([
+  const [dataFavourite, dataCategory, schemaData] = await Promise.all([
     fetchDataFavourite,
     fetchDataCategory,
+    getSchemaMarkup('blogs'),
   ])
 
   return (
     <main className='sm:px-[6rem] bg-white'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
+      ></script>
       <h1 className='hidden'>Hữu ích khách hàng</h1>
       <Breadcrumb
         data={[{title: 'Hữu ích cho gửi hàng', slug: ''}]}
