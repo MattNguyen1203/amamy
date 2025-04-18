@@ -5,7 +5,7 @@ import CreateOrder from '@/sections/tao-don/CreateOrder'
 import metadataValues from '@/utils/metadataValues'
 
 export async function generateMetadata() {
-  const res = await getMetaDataRankMath('/tao-don-hang')
+  const res = await getMetaDataRankMath('tao-don-hang')
   return metadataValues(res)
 }
 

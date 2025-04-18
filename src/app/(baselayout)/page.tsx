@@ -1,9 +1,11 @@
 import fetchData from '@/fetch/fetchData'
+import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import Homepage from '@/sections/homepage'
 import metadataValues from '@/utils/metadataValues'
 
 export async function generateMetadata() {
-  return metadataValues('')
+  const res = await getMetaDataRankMath('')
+  return metadataValues(res)
 }
 
 export default async function Home() {

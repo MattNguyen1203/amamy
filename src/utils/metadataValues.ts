@@ -15,7 +15,8 @@ export default function metadataValues(res: any) {
   const meta = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN!),
     title: result?.title,
-    description: result?.description === '' ? 'Amamy' : result?.description,
+    description:
+      result?.description === '' ? 'Amamy' : result?.description,
     alternates: {
       canonical: './',
     },
@@ -26,10 +27,10 @@ export default function metadataValues(res: any) {
       url: './',
       siteName: result?.openGraph?.siteName || 'Amamy',
       images: Array.isArray(result?.og_image)
-        ? [...result?.openGraph?.imagae?.url]
-        : result?.openGraph?.imagae?.url
-        ? result?.openGraph?.imagae?.url
-        : [],
+        ? [...result?.openGraph?.image?.url]
+        : result?.openGraph?.image?.url
+          ? result?.openGraph?.image?.url
+          : [],
       locale: result?.openGraph?.locale,
       type: result?.openGraph?.type,
     },
@@ -41,8 +42,8 @@ export default function metadataValues(res: any) {
       images: Array.isArray(result?.og_image)
         ? [...result?.twitter?.image]
         : result?.twitter?.image
-        ? result?.twitter?.image
-        : [],
+          ? result?.twitter?.image
+          : [],
       misc: result?.twitter_misc,
     },
   }

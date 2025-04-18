@@ -6,7 +6,7 @@ import metadataValues from '@/utils/metadataValues'
 import {Suspense} from 'react'
 
 export async function generateMetadata() {
-  const res = await getMetaDataRankMath('/blogs')
+  const res = await getMetaDataRankMath('blogs')
   return metadataValues(res)
 }
 
