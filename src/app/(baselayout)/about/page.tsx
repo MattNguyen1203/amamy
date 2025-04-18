@@ -1,5 +1,6 @@
 import {fetchDataAbout} from '@/fetch/fecthDataAbout'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
+import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import AboutPage from '@/sections/about'
 import metadataValues from '@/utils/metadataValues'
 export async function generateMetadata() {
@@ -7,10 +8,19 @@ export async function generateMetadata() {
   return metadataValues(res)
 }
 export default async function About() {
-  const res = await fetchDataAbout()
+  const [res, schemaData] = await Promise.all([
+    fetchDataAbout(),
+    getSchemaMarkup('ve-chung-toi'),
+  ])
   return (
-    <div className='w-full bg-white text-black flex flex-col items-center'>
-      <AboutPage res={res} />
-    </div>
+    <main>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
+      ></script>
+      <div className='w-full bg-white text-black flex flex-col items-center'>
+        <AboutPage res={res} />
+      </div>
+    </main>
   )
 }

@@ -1,5 +1,6 @@
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
+import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import Homepage from '@/sections/homepage'
 import metadataValues from '@/utils/metadataValues'
 
@@ -21,13 +22,23 @@ export default async function Home() {
       next: {revalidate: 60},
     },
   })
-  const [dataACF, dataBlogs] = await Promise.all([fetchDataACF, fetchDataBlogs])
+  const [dataACF, dataBlogs, schemaData] = await Promise.all([
+    fetchDataACF,
+    fetchDataBlogs,
+    getSchemaMarkup(''),
+  ])
   return (
-    <div className='w-full bg-white text-black flex flex-col items-center'>
-      <Homepage
-        res={dataACF}
-        dataBlog={dataBlogs?.posts}
-      />
-    </div>
+    <main>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
+      ></script>
+      <div className='w-full bg-white text-black flex flex-col items-center'>
+        <Homepage
+          res={dataACF}
+          dataBlog={dataBlogs?.posts}
+        />
+      </div>
+    </main>
   )
 }
