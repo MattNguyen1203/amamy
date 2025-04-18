@@ -15,8 +15,7 @@ export default function metadataValues(res: any) {
   const meta = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN!),
     title: result?.title,
-    description:
-      result?.description === '' ? 'Amamy' : result?.description,
+    description: result?.description === '' ? 'Amamy' : result?.description,
     alternates: {
       canonical: './',
     },
@@ -29,8 +28,8 @@ export default function metadataValues(res: any) {
       images: Array.isArray(result?.og_image)
         ? [...result?.openGraph?.image?.url]
         : result?.openGraph?.image?.url
-          ? result?.openGraph?.image?.url
-          : [],
+        ? result?.openGraph?.image?.url
+        : [],
       locale: result?.openGraph?.locale,
       type: result?.openGraph?.type,
     },
@@ -42,19 +41,19 @@ export default function metadataValues(res: any) {
       images: Array.isArray(result?.og_image)
         ? [...result?.twitter?.image]
         : result?.twitter?.image
-          ? result?.twitter?.image
-          : [],
+        ? result?.twitter?.image
+        : [],
       misc: result?.twitter_misc,
     },
   }
   if (!result?.openGraph?.image?.url) {
     meta.openGraph.images.push({
-      url: '/images/home/stories/background-left-story-mb.jpg',
+      url: '/social.webp',
       width: 1200,
       height: 630,
     })
     meta.twitter.images.push({
-      url: '/images/home/stories/background-left-story-mb.jpg',
+      url: '/social.webp',
     })
   }
 
