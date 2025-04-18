@@ -20,6 +20,7 @@ const page = async () => {
 
   return (
     <main className='bg-background-elevation5'>
+      <h1 className='hidden'>Theo dõi vận đơn</h1>
       <Breadcrumb
         data={[{title: 'Theo dõi vận đơn', slug: ''}]}
         className='sm:px-[5rem] xsm:hidden'

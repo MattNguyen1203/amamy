@@ -52,9 +52,10 @@ export default function ItemBlogV2({
         </div>
       </div>
       <div className='itembox-content p-[1.5rem] xsm:p-[0.75rem] flex-1 flex-col flex justify-between items-start'>
-        <h3 className='line-clamp-2 text-pc-sub16s xsm:text-pc-sub12s text-[#000]'>
-          {item?.title}
-        </h3>
+        <h3
+          dangerouslySetInnerHTML={{__html: item?.title}}
+          className='line-clamp-2 text-pc-sub16s xsm:text-pc-sub12s text-[#000]'
+        ></h3>
         <div className='flex justify-between w-full items-center'>
           <div className='flex space-x-[0.5rem]'>
             {/* <ICCalendar className='size-[1.25rem] object-contain xsm:size-[1rem]' /> */}
