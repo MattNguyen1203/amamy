@@ -21,7 +21,7 @@ const PrenyAI = () => {
         ? 'width:2.5rem;height:2.5rem;right:1.5rem;bottom:1.5rem'
         : 'width:3rem;height:3rem;right:2.5rem;bottom:1.6rem'
 
-      const containerStyle = isMobile ? 'height:100vh' : ''
+      const containerStyle = isMobile ? 'height:90dvh' : ''
       script.setAttribute('data-button-style', style)
       script.setAttribute('data-container-style', containerStyle)
     }
