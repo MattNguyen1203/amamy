@@ -6,6 +6,8 @@ import LocationTag from '@/sections/tracking-bill/LocationTag'
 import {toast} from 'sonner'
 import './style.css'
 import Link from 'next/link'
+import {useState} from 'react'
+
 export type IProgress = {
   title: string
   desc: string
@@ -34,10 +36,24 @@ export type OrderInformationProps = {
 }
 
 const OrderInformation = ({searched, data}: OrderInformationProps) => {
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipText, setTooltipText] = useState('Copy')
+
   const handleCopy = () => {
     navigator.clipboard.writeText(data?.ma_don || '')
     toast.success('Copy Thành Công')
   }
+
+  const handleCopyThirdParty = () => {
+    navigator.clipboard.writeText(data?.ma_van_don_thu_ba || '')
+    setTooltipText('Copied')
+    toast.success('Copy Thành Công')
+    setTimeout(() => {
+      setTooltipText('Copy')
+      setShowTooltip(false)
+    }, 2000)
+  }
+
   if (!searched) {
     return null
   }
@@ -122,8 +138,22 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
               ></ul>
               <p className='pl-12 xsm:pl-9'>
                 Mã vận đơn:{' '}
-                <span className='text-[#38b6ff] font-semibold'>
+                <span
+                  className='text-[#38b6ff] font-semibold cursor-pointer relative inline-block'
+                  onClick={handleCopyThirdParty}
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => {
+                    if (tooltipText === 'Copy') {
+                      setShowTooltip(false)
+                    }
+                  }}
+                >
                   {data?.ma_van_don_thu_ba}
+                  {showTooltip && (
+                    <span className='absolute -right-2 top-1/2 transform -translate-y-1/2 translate-x-full bg-black text-white text-xs px-2 py-1 rounded whitespace-nowrap'>
+                      {tooltipText}
+                    </span>
+                  )}
                 </span>
               </p>
               <p className='pl-12 xsm:pl-9'>
