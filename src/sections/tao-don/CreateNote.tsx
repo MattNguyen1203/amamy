@@ -141,7 +141,7 @@ export default function CeateNote({
                   ref={(el) => {
                     containerRefs.current[index] = el
                   }}
-                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_img]:my-2 [&_img]:rounded-[1rem]'
+                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
