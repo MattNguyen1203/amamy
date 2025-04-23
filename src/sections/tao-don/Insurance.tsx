@@ -69,24 +69,31 @@ export default function Insurance({
               const [url, size] = entry.trim().split(' ')
               // Parse the size value (e.g., "2x" or "1200w")
               const sizeValue = size
-                ? size.endsWith('x')
-                  ? parseFloat(size.replace('x', '')) * 1000 // Treat 1x, 2x as 1000, 2000, etc.
-                  : parseInt(size.replace(/[w]$/, '')) // Handle width-based sizes like 1200w
+                ? size.endsWith('w')
+                  ? parseInt(size.replace(/[w]$/, '')) // Only handle width-based sizes like 1200w
+                  : 0 // Ignore density descriptors like 2x
                 : 0
-              return {url, sizeValue}
+              return {
+                url,
+                sizeValue,
+                hasWidthDescriptor: size?.endsWith('w') || false,
+              }
             })
 
-            // Sort by size value in descending order and get the URL with the largest size
-            srcsetEntries.sort((a, b) => b.sizeValue - a.sizeValue)
+            // Filter for entries with width descriptors only (like 1200w)
+            const widthBasedEntries = srcsetEntries.filter(
+              (entry) => entry.hasWidthDescriptor,
+            )
 
-            if (srcsetEntries.length > 0 && srcsetEntries[0].url) {
-              setSelectedImage(srcsetEntries[0].url)
-              return
+            if (widthBasedEntries.length > 0) {
+              // Sort by width value in descending order and get the URL with the largest width
+              widthBasedEntries.sort((a, b) => b.sizeValue - a.sizeValue)
+              setSelectedImage(widthBasedEntries[0].url)
+            } else {
+              // Fallback to src if no width-based entries are found
+              setSelectedImage(img.src)
             }
           }
-
-          // Fallback to src if srcset is not available or parsing fails
-          setSelectedImage(img.src)
         } // Khi click, mở ảnh lên
       })
     })
@@ -202,7 +209,7 @@ export default function Insurance({
                         alt=''
                         width={500 * 2}
                         height={300 * 2}
-                        className=' rounded-[0.5rem] xsm:mb-[0.5rem] xsm:w-full h-[14.81838rem] xsm:h-[12.95831rem] object-cover'
+                        className=' rounded-[0.5rem] xsm:mb-[0.5rem] xsm:w-full h-auto object-contain'
                       />
                     </div>
                   )}
