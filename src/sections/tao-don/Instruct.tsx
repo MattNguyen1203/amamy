@@ -133,6 +133,29 @@ export default function Instruct({
       images.forEach((img) => {
         img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
         img.onclick = () => {
+          // Extract the highest resolution image from srcset if available
+          // if (img.srcset) {
+          //   const srcsetEntries = img.srcset.split(',').map((entry) => {
+          //     const [url, size] = entry.trim().split(' ')
+          //     // Parse the size value (e.g., "2x" or "1200w")
+          //     const sizeValue = size
+          //       ? size.endsWith('x')
+          //         ? parseFloat(size.replace('x', '')) * 1000 // Treat 1x, 2x as 1000, 2000, etc.
+          //         : parseInt(size.replace(/[w]$/, '')) // Handle width-based sizes like 1200w
+          //       : 0
+          //     return {url, sizeValue}
+          //   })
+
+          //   // Sort by size value in descending order and get the URL with the largest size
+          //   srcsetEntries.sort((a, b) => b.sizeValue - a.sizeValue)
+
+          //   if (srcsetEntries.length > 0 && srcsetEntries[0].url) {
+          //     setSelectedImage(srcsetEntries[0].url)
+          //     return
+          //   }
+          // }
+
+          // Fallback to src if srcset is not available or parsing fails
           setSelectedImage(img.src)
         } // Khi click, mở ảnh lên
       })
@@ -177,28 +200,28 @@ export default function Instruct({
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
             ? dataFromOrder?.recipientCity
-            : dataFromOrder?.recipientCity ?? '',
+            : (dataFromOrder?.recipientCity ?? ''),
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
         quan_huyen_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.district ?? ''
+            ? (dataFromOrder?.district ?? '')
             : '',
         phuong_xa_nguoi_nhan:
           dataFromOrder?.recipientAddressType === 'registeredAddress' &&
           (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.recipientWardsandcommunes ?? ''
+            ? (dataFromOrder?.recipientWardsandcommunes ?? '')
             : '',
         so_nha_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? dataFromOrder?.housingNumber ?? ''
+            ? (dataFromOrder?.housingNumber ?? '')
             : '',
         ten_duong_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? dataFromOrder?.roadName ?? ''
+            ? (dataFromOrder?.roadName ?? '')
             : '',
         id_hoac_cmt:
-          type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
+          type === 'viethan' ? (dataFromOrder?.passportNumber ?? '') : '',
 
         nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
         ten_nguoi_gui: dataFromOrder?.name ?? '',
@@ -222,7 +245,7 @@ export default function Instruct({
         nation: european === 'vnEu' ? dataFromOrder?.nation : '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
-        ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
+        ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
       }
       console.log('🚀 ~ formData:', formData)
       if (formData) {

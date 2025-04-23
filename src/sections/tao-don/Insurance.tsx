@@ -63,6 +63,29 @@ export default function Insurance({
       images.forEach((img) => {
         img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
         img.onclick = () => {
+          // Extract the highest resolution image from srcset if available
+          if (img.srcset) {
+            const srcsetEntries = img.srcset.split(',').map((entry) => {
+              const [url, size] = entry.trim().split(' ')
+              // Parse the size value (e.g., "2x" or "1200w")
+              const sizeValue = size
+                ? size.endsWith('x')
+                  ? parseFloat(size.replace('x', '')) * 1000 // Treat 1x, 2x as 1000, 2000, etc.
+                  : parseInt(size.replace(/[w]$/, '')) // Handle width-based sizes like 1200w
+                : 0
+              return {url, sizeValue}
+            })
+
+            // Sort by size value in descending order and get the URL with the largest size
+            srcsetEntries.sort((a, b) => b.sizeValue - a.sizeValue)
+
+            if (srcsetEntries.length > 0 && srcsetEntries[0].url) {
+              setSelectedImage(srcsetEntries[0].url)
+              return
+            }
+          }
+
+          // Fallback to src if srcset is not available or parsing fails
           setSelectedImage(img.src)
         } // Khi click, mở ảnh lên
       })
