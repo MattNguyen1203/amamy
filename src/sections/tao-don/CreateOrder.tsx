@@ -425,7 +425,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             onClick={(e) => {
               e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
             }}
-            className='relative xsm:overflow-x-auto overflow-hidden rounded-[1rem] max-w-[100vw] sm:max-w-[80vw] max-h-[100vh] flex flex-col items-center'
+            className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] sm:max-w-[80vw] max-h-[100vh] flex flex-col items-center'
           >
             <TransformWrapper
               initialScale={1}
@@ -441,7 +441,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       src={selectedImage}
                       alt='Zoomed Image'
                       quality={100}
-                      className='max-w-full h-auto object-contain transition-transform duration-300'
+                      className='max-w-full h-auto object-contain transition-transform duration-300 rounded-[1rem]'
                     />
                   </TransformComponent>
                 </>
