@@ -274,7 +274,7 @@ html > body[data-scroll-locked] {
   #cxgenie-chat-button {
     width: 2.5rem !important;
     height: 2.5rem !important;
-    bottom: 1.5rem;
-    right: 1.5rem;
+    bottom: 1.5rem !important;
+    right: 1.5rem !important;
   }
 }
