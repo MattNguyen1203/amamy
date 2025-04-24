@@ -1,11 +1,8 @@
 'use client'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
 import {IDetailBlog} from '@/sections/blog/blogs.interface'
 import {Iheadings} from '@/sections/blog/detail/AsideBlog'
 import ICCopy from '@/sections/blog/detail/ICCopy'
 import ICFb from '@/sections/blog/detail/ICFb'
-import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 import {useEffect, useState} from 'react'
 import {toast} from 'sonner'
@@ -13,13 +10,13 @@ import {toast} from 'sonner'
 export default function ContentBlog({
   data,
   updatedHtml,
-  headings,
+  // headings,
 }: {
   data: IDetailBlog
   updatedHtml: string
   headings: Iheadings[]
 }) {
-  const isMobile = useIsMobile()
+  // const isMobile = useIsMobile()
   const pathname = usePathname()
   const [currentUrl, setCurrentUrl] = useState('')
   const date = new Date(data?.date)
@@ -42,18 +39,18 @@ export default function ContentBlog({
     )}`
     window.open(facebookShareUrl, '_blank', 'noopener,noreferrer')
   }
-  const handleScroll = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      // Cuộn đến phần tử và thêm offset (khoảng cách từ top)
-      window.scrollTo({
-        top: element.offsetTop - 200, // Khoảng cách từ top có thể điều chỉnh theo nhu cầu
-        behavior: 'smooth', // Cuộn mượt mà
-      })
-    }
-  }
+  // const handleScroll = (id: string) => {
+  //   const element = document.getElementById(id)
+  //   if (element) {
+  //     // Cuộn đến phần tử và thêm offset (khoảng cách từ top)
+  //     window.scrollTo({
+  //       top: element.offsetTop - 200, // Khoảng cách từ top có thể điều chỉnh theo nhu cầu
+  //       behavior: 'smooth', // Cuộn mượt mà
+  //     })
+  //   }
+  // }
   return (
-    <section className='w-[60rem] xsm:w-full xsm:p-[1rem]'>
+    <section className='w-full xsm:p-[1rem]'>
       <h1
         dangerouslySetInnerHTML={{__html: data?.title}}
         className='mb-[0.81rem] xsm:mb-[1rem] text-[1.7rem] font-bold leading-[1.55] tracking-[-0.105rem] text-black xsm:text-mb-h2'
@@ -61,7 +58,7 @@ export default function ContentBlog({
       <div className='xsm:mb-[1rem] xsm:pb-[1rem] xsm:border-b-[1px] xsm:border-solid xsm:border-[#DCDFE4] font-montserrat opacity-[0.72] text-black text-[1rem] font-semibold leading-[1.5] xsm:text-pc-sub14s'>
         {formattedDate}
       </div>
-      {isMobile && (
+      {/* {isMobile && (
         <div className='rounded-[1.25rem] bg-[#EDF5FA] p-[1.5rem] xsm:p-[1rem]'>
           <p className='text-black text-pc-heading20b mb-[0.5rem] xsm:text-pc-sub16b pb-[0.5rem] border-b-[1px] border-solid border-[rgba(220,223,228,0.30)]'>
             Mục lục bài viết
@@ -85,11 +82,11 @@ export default function ContentBlog({
             ))}
           </div>
         </div>
-      )}
+      )} */}
       <div className='mt-[5rem] xsm:mt-[1.5rem]'>
         <div
           dangerouslySetInnerHTML={{__html: updatedHtml || data?.content}}
-          className='content-detail-blog [&>p]:mb-[1rem] [&_div]:!w-full *:font-montserrat [&_em]:content-em [&_h2]:content-h2 [&_h3]:content-h3 [&_h4]:content-h4 [&_h5]:content-h5 [&_h6]:content-h6 [&_img]:content-img [&>p]:content-p [&>span]:content-span [&_strong]:content-strong [&_ol_li]:content-ol--li [&_ul_li]:content-ul--li [&>ul]:content-ul [&>ol]:content-ol [&_p_img]:inline-block'
+          className='content-detail-blog [&>p]:mb-[1rem] xsm:[&>p]:mb-[0.5rem] [&_div]:!w-full *:font-montserrat [&_em]:content-em [&_h2]:content-h2 [&_h3]:content-h3 [&_h4]:content-h4 [&_h5]:content-h5 [&_h6]:content-h6 [&_img]:content-img [&>p]:content-p [&>span]:content-span [&_strong]:content-strong [&_ol_li]:content-ol--li [&_ul_li]:content-ul--li [&>ul]:content-ul [&>ol]:content-ol [&_p_img]:inline-block'
         ></div>
         <div className='flex xsm:flex-col xsm:space-y-[0.5rem] sm:items-center mt-[2rem] xsm:pt-[1rem] xsm:mt-[1rem] xsm:border-t-[0.0625rem] xsm:border-t-solid xsm:border-t-[#DCDFE4]'>
           <p className='text-black font-montserrat xsm:text-pc-sub14s sm:mr-[1.25rem]'>

@@ -1,7 +1,6 @@
 'use client'
 import useProcessHeadings from '@/hooks/useProcessHeadings'
 import {IDetailBlog, IFavouriteBlog} from '@/sections/blog/blogs.interface'
-import AsideBlog from '@/sections/blog/detail/AsideBlog'
 import ContentBlog from '@/sections/blog/detail/ContentBlog'
 interface IdataDetailPost {
   status: number
@@ -10,7 +9,7 @@ interface IdataDetailPost {
 }
 export default function DetailCentenBlog({
   dataDetailPost,
-  dataFavourite,
+  // dataFavourite,
 }: {
   dataDetailPost: IdataDetailPost
   dataFavourite: IFavouriteBlog[]
@@ -25,12 +24,12 @@ export default function DetailCentenBlog({
         data={dataDetailPost?.post}
         headings={headings}
       />
-      {updatedHtml && (
+      {/* {updatedHtml && (
         <AsideBlog
           dataFavourite={dataFavourite}
           headings={headings}
         />
-      )}
+      )} */}
     </div>
   )
 }
