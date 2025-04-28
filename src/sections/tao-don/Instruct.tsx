@@ -253,6 +253,12 @@ export default function Instruct({
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
         ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
+
+        // data branch
+        brand_title: dataBranch?.title ?? '',
+        brand_address: dataBranch?.address ?? '',
+        brand_time: dataBranch?.time ?? '',
+        brand_phone: dataBranch?.phone ?? '',
       }
       console.log('🚀 ~ formData:', formData)
       if (formData) {
