@@ -115,7 +115,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >
-        <GoogleAnalytics id='G-Q49NLV9QVC' />
+        <GoogleAnalytics id='G-D7KW83NYK0' />
         <Header
           social={dataFooter?.data?.footer_site?.social}
           dataHeader={dataFooter?.data?.header_site}
