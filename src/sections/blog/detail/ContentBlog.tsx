@@ -10,8 +10,8 @@ import {toast} from 'sonner'
 export default function ContentBlog({
   data,
   updatedHtml,
-  // headings,
-}: {
+}: // headings,
+{
   data: IDetailBlog
   updatedHtml: string
   headings: Iheadings[]
@@ -50,7 +50,7 @@ export default function ContentBlog({
   //   }
   // }
   return (
-    <section className='w-full xsm:p-[1rem]'>
+    <section className='w-full xsm:p-[1rem] container mx-auto'>
       <h1
         dangerouslySetInnerHTML={{__html: data?.title}}
         className='mb-[0.81rem] xsm:mb-[1rem] text-[1.7rem] font-bold leading-[1.55] tracking-[-0.105rem] text-black xsm:text-mb-h2'
