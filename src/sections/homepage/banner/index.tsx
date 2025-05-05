@@ -1,11 +1,17 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
-import {IBanner, IImage} from '@/utils/type'
+import {IBanner, IBoxChatAI, IImage} from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import TrackingInterface from './TrackingOrder'
 
-const Banner = ({banner}: {banner: IBanner}) => {
+const Banner = ({
+  banner,
+  boxChatAI,
+}: {
+  banner: IBanner
+  boxChatAI: IBoxChatAI
+}) => {
   useGSAP(() => {
     gsap.from('.fade-image', {
       opacity: 0,
@@ -93,13 +99,14 @@ const Banner = ({banner}: {banner: IBanner}) => {
             {banner?.title}
           </h2>
           <div className='mt-7'>
-            <TrackingInterface />
+            <TrackingInterface boxChatAI={boxChatAI} />
           </div>
         </div>
       </div>
       <div className='xsm:flex hidden '>
         <BackgroundMobile
           banner={banner}
+          boxChatAI={boxChatAI}
           height='h-[25.6874rem]'
         />
       </div>
@@ -111,9 +118,11 @@ export default Banner
 
 const BackgroundMobile = ({
   banner,
+  boxChatAI,
   height = 'h-[25.6874rem]',
 }: {
   banner: IBanner
+  boxChatAI: IBoxChatAI
   height?: string
 }) => {
   return (
@@ -184,7 +193,7 @@ const BackgroundMobile = ({
           {banner?.title}
         </p>
         <div className='mt-5'>
-          <TrackingInterface />
+          <TrackingInterface boxChatAI={boxChatAI} />
         </div>
       </div>
     </div>
