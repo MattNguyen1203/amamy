@@ -4,7 +4,7 @@ import ImageV2 from '@/components/image/ImageV2'
 import {IListServiceResponse, IServicePage} from '@/utils/type'
 import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
-import AIInput from '@/sections/service/section2/AIInput'
+import AIButton from '@/sections/service/section2/AIButton'
 
 interface Prop {
   data: IServicePage
@@ -78,7 +78,7 @@ const AIChatSection = ({data, listService}: Prop) => {
               </p>
             </div>
             <div className='bg-white rounded-[1.25rem] px-4 py-5 xsm:p-[0.75rem] flex flex-col flex-1 justify-end'>
-              <div className='flex-1 overflow-auto flex flex-col justify-end space-y-3 hidden_scroll'>
+              <div className='flex-1 overflow-auto flex flex-col justify-end space-y-3 hidden_scroll mb-8'>
                 {dataMessage.map((item, index) => (
                   <MessageItem
                     key={index}
@@ -86,10 +86,7 @@ const AIChatSection = ({data, listService}: Prop) => {
                   />
                 ))}
               </div>
-              <AIInput
-                className='mt-8'
-                disabled
-              />
+              <AIButton />
             </div>
           </div>
           {/*  */}

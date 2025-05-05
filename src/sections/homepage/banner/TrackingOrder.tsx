@@ -1,6 +1,6 @@
 'use client'
 
-import useStore from '@/app/(store)/store'
+import CardGradient from '@/components/card-gradient/CardGradient'
 import ImageV2 from '@/components/image/ImageV2'
 import Search from '@/components/svg/Search'
 import {cn} from '@/lib/utils'
@@ -10,21 +10,13 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/sections/homepage/banner/tabs-custom'
-import AIInput from '@/sections/service/section2/AIInput'
+import AIButton from '@/sections/service/section2/AIButton'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
 const TrackingOrder = () => {
   const [value, setValue] = useState('search-order')
-  const [inputAI, setInputAI] = useState('')
   const [inputSearch, setInputSearch] = useState('')
-  const {setChatBotMessage} = useStore((state) => state)
-
-  // toggle chat bot
-  const handleChatAI = () => {
-    setChatBotMessage(inputAI)
-    setInputAI('')
-  }
 
   const router = useRouter()
   const handleTrackingOrder = () => {
@@ -33,6 +25,17 @@ const TrackingOrder = () => {
     // Chuyển hướng đến trang theo dõi vận đơn
     router.push(`/theo-doi-van-don?code=${inputSearch}`)
   }
+
+  const messageItems = [
+    {
+      isUser: true,
+      message: 'Gửi 10kg hàng từ Việt Nam qua Mỹ',
+    },
+    {
+      isUser: false,
+      message: 'Gửi 10kg hàng từ Việt Nam qua Mỹ là 2.000.000 VNĐ',
+    },
+  ]
 
   return (
     <Tabs
@@ -96,21 +99,43 @@ const TrackingOrder = () => {
         value='estimate-price'
         className='relative z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] overflow-hidden'
       >
-        <p className='text-pc-sub12s text-black/80 uppercase xsm:text-pc-sub10m xsm:!font-semibold'>
-          Trò chuyện với trợ lý AI Amamy
-        </p>
-        <AIInput
-          className='mt-4 xsm:mt-3'
-          placeholder='VD: Gửi 10kg hàng từ Việt Nam đến Mỹ'
-          disabled
-          onSend={handleChatAI}
-        />
-        <p className='mt-2 text-pc-sub12m xsm:text-pc-sub10m text-black/80'>
-          Hãy nhập thông tin vận chuyển vào box chat để nhận báo giá từ trợ lý
-          AI.
-        </p>
+        <CardGradient>
+          <div className='p-[0.625rem_1.0625rem] bg-white rounded-[1.25rem] border border-Blue-100 space-y-[0.625rem]'>
+            {messageItems.map((item, index) => (
+              <MessageItem
+                key={index}
+                {...item}
+              />
+            ))}
+          </div>
+        </CardGradient>
+        <AIButton />
       </TabsContent>
     </Tabs>
   )
 }
 export default TrackingOrder
+
+type MessageItemProps = {
+  isUser?: boolean
+  message?: string
+}
+const MessageItem = ({isUser = false, message}: MessageItemProps) => {
+  return (
+    <div className={cn('flex flex-col', isUser ? 'items-start' : 'items-end')}>
+      <span className='text-xs leading-normal tracking-[-0.0225rem] text-[#667085] mb-1'>
+        {isUser ? 'Câu hỏi khách hàng' : 'Chat AI Amamy'}
+      </span>
+      <p
+        className={cn(
+          'inline-block font-medium p-3 rounded-[1.25rem] text-sm leading-4 tracking-[-0.00875rem]',
+          isUser
+            ? 'text-white bg-Blue-Primary rounded-tl-[0.25rem]'
+            : 'bg-Blue-50 text-black/[0.92] rounded-tr-[0.25rem]',
+        )}
+      >
+        {message}
+      </p>
+    </div>
+  )
+}
