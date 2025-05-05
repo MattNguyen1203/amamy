@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import useStore from '@/app/(store)/store'
-import ImageV2 from '@/components/image/ImageV2'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
@@ -19,6 +18,7 @@ import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import {ICreateOder} from '@/sections/tao-don/oder.interface'
+import Image from 'next/image'
 import {useState} from 'react'
 import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 let StepForm: {title: string; value: string}[] = [
@@ -418,14 +418,14 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       </div>
       {selectedImage && (
         <div
-          className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
+          className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 animate-fade-in'
           onClick={() => setSelectedImage(null)}
         >
           <div
             onClick={(e) => {
               e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
             }}
-            className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] sm:max-w-[80vw] max-h-[100vh] flex flex-col items-center'
+            className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] sm:max-w-[80vw] max-h-[100vh] flex flex-col items-center animate-scale-in'
           >
             <TransformWrapper
               initialScale={1}
@@ -435,7 +435,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
               {() => (
                 <>
                   <TransformComponent>
-                    <ImageV2
+                    <Image
                       width={1000 * 2}
                       height={800 * 2}
                       src={selectedImage}
