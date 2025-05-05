@@ -372,6 +372,7 @@ export interface NewsObject {
 
 export interface IHomePage {
   banner: IBanner
+  box_chat_ai: IBoxChatAI
   faq: IFaqs
   section3: StrengthsObject
   section_country: ShippingServiceObject
@@ -379,6 +380,11 @@ export interface IHomePage {
   withDHS: NewsObject
 }
 
+export interface IBoxChatAI {
+  customer_chat: string
+  ai_chat: string
+  link_chat_ai: string
+}
 export interface Guid {
   rendered: string
 }
@@ -570,6 +576,7 @@ export interface IServicePage {
       title: string
       customer_chat: string
       ai_chat: string
+      link_chat_ai: string
     }
     list_faq: IServiceFAQ[]
   }

@@ -11,10 +11,11 @@ import {
   TabsTrigger,
 } from '@/sections/homepage/banner/tabs-custom'
 import AIButton from '@/sections/service/section2/AIButton'
+import {IBoxChatAI} from '@/utils/type'
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
-const TrackingOrder = () => {
+const TrackingOrder = ({boxChatAI}: {boxChatAI: IBoxChatAI}) => {
   const [value, setValue] = useState('search-order')
   const [inputSearch, setInputSearch] = useState('')
 
@@ -29,11 +30,11 @@ const TrackingOrder = () => {
   const messageItems = [
     {
       isUser: true,
-      message: 'Gửi 10kg hàng từ Việt Nam qua Mỹ',
+      message: boxChatAI.customer_chat,
     },
     {
       isUser: false,
-      message: 'Gửi 10kg hàng từ Việt Nam qua Mỹ là 2.000.000 VNĐ',
+      message: boxChatAI.ai_chat,
     },
   ]
 
@@ -109,7 +110,7 @@ const TrackingOrder = () => {
             ))}
           </div>
         </CardGradient>
-        <AIButton />
+        <AIButton href={boxChatAI.link_chat_ai} />
       </TabsContent>
     </Tabs>
   )

@@ -86,7 +86,7 @@ const AIChatSection = ({data, listService}: Prop) => {
                   />
                 ))}
               </div>
-              <AIButton />
+              <AIButton href={data?.talk_to_ai?.box_chat?.link_chat_ai} />
             </div>
           </div>
           {/*  */}
