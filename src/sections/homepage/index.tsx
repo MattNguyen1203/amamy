@@ -24,7 +24,10 @@ const Homepage = ({res, dataBlog, chatBoxAiData}: Props) => {
       <h1 className='fixed z-[-1] pointer-events-none opacity-0'>Amamy</h1>
       <Banner
         banner={res.banner}
-        boxChatAI={chatBoxAiData}
+        boxChatAI={{
+          ...res.chat_box_ai,
+          link_chat_ai: chatBoxAiData.link_chat_ai,
+        }}
       />
       <Services services={res.services} />
       <Community
