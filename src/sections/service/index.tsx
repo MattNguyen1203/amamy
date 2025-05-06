@@ -6,13 +6,19 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {useEffect} from 'react'
 import ShippingHero from './section1/ShippingHero'
 import AIChatSection from './section2/AIChatSection'
-import Testimonials from './section2/Testimonials'
+// import Testimonials from './section2/Testimonials'
 gsap.registerPlugin(ScrollTrigger)
 interface Prop {
   data: IServicePage
   listService: IListServiceResponse
+  chatBoxAiData: {
+    title: string
+    customer_chat: string
+    ai_chat: string
+    link_chat_ai: string
+  }
 }
-const ServicePage = ({data, listService}: Prop) => {
+const ServicePage = ({data, listService, chatBoxAiData}: Prop) => {
   useEffect(() => {
     gsap.utils.toArray<HTMLElement>('.fade-section').forEach((section) => {
       const items = section.querySelectorAll<HTMLElement>('.fade-item')
@@ -47,8 +53,9 @@ const ServicePage = ({data, listService}: Prop) => {
       <AIChatSection
         listService={listService}
         data={data}
+        chatBoxAiData={chatBoxAiData}
       />
-      <Testimonials data={data} />
+      {/* <Testimonials data={data} /> */}
       {Array.isArray(data?.suggested_reading_articles_about_shipping?.post) && (
         <RelatedBlogsV2
           data={data?.suggested_reading_articles_about_shipping?.post}
