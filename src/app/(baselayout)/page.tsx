@@ -22,10 +22,18 @@ export default async function Home() {
       next: {revalidate: 60},
     },
   })
-  const [dataACF, dataBlogs, schemaData] = await Promise.all([
+  const fetchChatBoxAI = fetchData({
+    api: 'options?fields=box_chat_ai',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+
+  const [dataACF, dataBlogs, schemaData, chatBoxAIdata] = await Promise.all([
     fetchDataACF,
     fetchDataBlogs,
     getSchemaMarkup(''),
+    fetchChatBoxAI,
   ])
   return (
     <main>
@@ -36,6 +44,7 @@ export default async function Home() {
       <div className='w-full bg-white text-black flex flex-col items-center'>
         <Homepage
           res={dataACF}
+          chatBoxAiData={chatBoxAIdata?.data?.box_chat_ai}
           dataBlog={dataBlogs?.posts}
         />
       </div>

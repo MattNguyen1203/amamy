@@ -27,11 +27,21 @@ export default async function Service({params}: {params: {services: string}}) {
       next: {revalidate: 60},
     },
   })
-  const [resService, resListService, schemaData] = await Promise.all([
-    fetchDataServices,
-    fetchDataListService(),
-    getSchemaMarkup('chieu-van-chuyen/' + params?.services),
-  ])
+
+  const fetchChatBoxAI = fetchData({
+    api: 'options?fields=box_chat_ai',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+
+  const [resService, resListService, schemaData, chatBoxAIdata] =
+    await Promise.all([
+      fetchDataServices,
+      fetchDataListService(),
+      getSchemaMarkup('chieu-van-chuyen/' + params?.services),
+      fetchChatBoxAI,
+    ])
   if (resService?.data?.status === 404) {
     return notFound()
   }
@@ -45,6 +55,7 @@ export default async function Service({params}: {params: {services: string}}) {
         <ServicePage
           data={resService}
           listService={resListService}
+          chatBoxAiData={chatBoxAIdata?.data?.box_chat_ai}
         />
       </div>
     </main>
