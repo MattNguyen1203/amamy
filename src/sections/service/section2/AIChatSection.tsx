@@ -21,12 +21,16 @@ const AIChatSection = ({data, listService, chatBoxAiData}: Prop) => {
   const dataMessage: MessageItemProps[] = [
     {
       role: 'user',
-      message: chatBoxAiData?.customer_chat || '',
+      message:
+        data?.talk_to_ai?.box_chat?.customer_chat ||
+        chatBoxAiData?.customer_chat ||
+        '',
       time: '2:12 PM',
     },
     {
       role: 'bot',
-      message: chatBoxAiData?.ai_chat || '',
+      message:
+        data?.talk_to_ai?.box_chat?.ai_chat || chatBoxAiData?.ai_chat || '',
       time: '2:13 PM',
     },
   ]
@@ -80,7 +84,9 @@ const AIChatSection = ({data, listService, chatBoxAiData}: Prop) => {
                 className='size-6 object-contain'
               />
               <p className='text-white text-[1rem] font-semibold leading-none tracking-[0.01rem]'>
-                {chatBoxAiData?.title || 'Trợ lý AI Amamy'}
+                {data?.talk_to_ai?.box_chat?.title ||
+                  chatBoxAiData?.title ||
+                  'Trợ lý AI Amamy'}
               </p>
             </div>
             <div className='bg-white rounded-[1.25rem] px-4 py-5 xsm:p-[0.75rem] flex flex-col flex-1 justify-end'>

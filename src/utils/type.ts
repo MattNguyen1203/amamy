@@ -372,7 +372,7 @@ export interface NewsObject {
 
 export interface IHomePage {
   banner: IBanner
-  box_chat_ai: IBoxChatAI
+  chat_box_ai: IBoxChatAI
   faq: IFaqs
   section3: StrengthsObject
   section_country: ShippingServiceObject
