@@ -29,6 +29,10 @@ export default async function getSchemaMarkup(slug: string) {
           .replaceAll(
             process.env.NEXT_PUBLIC_DOMAIN! + '/wp-content/',
             process.env.CMS_DOMAIN! + '/wp-content/',
+          )
+          .replaceAll(
+            process.env.CMS_DOMAINV2!,
+            process.env.NEXT_PUBLIC_DOMAIN!,
           ),
       )
       return updatedSchemaMarkup
