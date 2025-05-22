@@ -35,9 +35,14 @@ export function FAQSection({faqs}: Prop) {
                 </span>
               </AccordionTrigger>
               <AccordionContent className='mt-[1.25rem] pb-0'>
-                <p className=' text-black/80 text-pc-14 xsm:text-mb-12'>
+                {/* <p className=' text-black/80 text-pc-14 xsm:text-mb-12'>
                   {faq.answer}
-                </p>
+                </p> */}
+
+                <div
+                  dangerouslySetInnerHTML={{__html: faq.answer}}
+                  className=' text-black/80 text-pc-14 xsm:text-mb-12'
+                ></div>
               </AccordionContent>
             </AccordionItem>
           ))}
