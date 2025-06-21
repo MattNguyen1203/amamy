@@ -198,6 +198,10 @@ const config: Config = {
           '@apply text-[0.8125rem] font-medium leading-[1.23] tracking-[-0.023438rem] font-montserrat':
             {},
         },
+        '.text-mb-13S': {
+          '@apply text-[0.8125rem] font-semibold leading-[1.23] tracking-[-0.023438rem] font-montserrat':
+            {},
+        },
         '.text-mb-12': {
           '@apply text-[0.75rem] leading-[1.5] tracking-[-0.0225rem] font-montserrat':
             {},

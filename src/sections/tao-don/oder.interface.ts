@@ -11,6 +11,13 @@ export interface IInformationTimeOrder {
   time_content?: string
   stock?: string
   clause?: string
+  user_chooses?: boolean
+  stock_user?: IInformationTimeOrder_StockUser[]
+}
+export interface IInformationTimeOrder_StockUser {
+  label: string
+  desc: string
+  tag: string
 }
 export interface IInformationNoteOrder {
   title: string
@@ -47,6 +54,21 @@ export interface IInformationInsurance {
     policy: IInformationInsurance_policy[]
   }
   cargo_insurance_japanvn: IInformationInsurance_CargoInsuranceJapanvn[]
+  user_chooses?: boolean
+  insurance_types?: {
+    clause: string
+    list_insurance_types: IInformationInsurance_Types[]
+  }
+}
+export interface IInformationInsurance_Types {
+  label: string
+  desc: string
+  tag?: string
+}
+export interface IInformation_Package {
+  label: string
+  desc: string
+  tag?: string
 }
 export interface IInformationOrder {
   time?: IInformationTimeOrder[]
@@ -59,4 +81,9 @@ export interface IInformationOrder {
     value: string
     title: string
   }[]
+  package?: {
+    title: string
+    list_package: IInformation_Package[]
+    note_more?: string
+  }
 }
