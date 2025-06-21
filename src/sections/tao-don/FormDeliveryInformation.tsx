@@ -1,7 +1,7 @@
 'use client'
 import useStore from '@/app/(store)/store'
 import ImageV2 from '@/components/image/ImageV2'
-import {Button} from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {Input} from '@/components/ui/input'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -19,14 +19,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
 import countries from '@/sections/tao-don/Europe'
 import ICX from '@/sections/tao-don/ICX'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -117,7 +117,7 @@ export default function FormDeliveryInformation({
       recipientCodeCity: dataFromOrder?.recipientCodeCity || '',
       housingNumber: dataFromOrder?.housingNumber || '',
       roadName: dataFromOrder?.roadName || '',
-      nation: european === 'vnEu' ? (dataFromOrder?.nation ?? '') : title,
+      nation: european === 'vnEu' ? dataFromOrder?.nation ?? '' : title,
     },
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
@@ -130,7 +130,6 @@ export default function FormDeliveryInformation({
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log('lot')
     setDataFromOrder({...dataFromOrder, ...values})
     if (stepOrder < 5) {
       setStepOrder(Number(nextStep))

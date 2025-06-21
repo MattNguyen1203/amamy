@@ -119,15 +119,15 @@ export default function FormDeliveryInformationAboutVN({
         dataFromOrder?.recipientAddressType || 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? (dataFromOrder?.recipientCity ?? '')
+          ? dataFromOrder?.recipientCity ?? ''
           : 'un',
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? (dataFromOrder?.district ?? '')
+          ? dataFromOrder?.district ?? ''
           : 'un',
       recipientWardsandcommunes:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? (dataFromOrder?.recipientWardsandcommunes ?? '')
+          ? dataFromOrder?.recipientWardsandcommunes ?? ''
           : 'un',
     },
   })
@@ -151,7 +151,6 @@ export default function FormDeliveryInformationAboutVN({
   }
   useEffect(() => {
     if (pending) {
-      console.log(recipientAddressType)
       form.setValue(
         'recipientAddress',
         recipientAddressType === 'atAmamyStore'
@@ -162,26 +161,26 @@ export default function FormDeliveryInformationAboutVN({
       form.setValue(
         'recipientCity',
         recipientAddressType === 'atAmamyStore'
-          ? (form?.getValues('recipientCity') ?? 'un')
-          : (form?.getValues('recipientCity') ??
+          ? form?.getValues('recipientCity') ?? 'un'
+          : form?.getValues('recipientCity') ??
               dataFromOrder?.recipientCity ??
-              ''),
+              '',
         {shouldValidate: true},
       )
       form.setValue(
         'district',
         recipientAddressType === 'atAmamyStore'
-          ? (form?.getValues('district') ?? 'un')
-          : (form?.getValues('district') ?? dataFromOrder?.district ?? ''),
+          ? form?.getValues('district') ?? 'un'
+          : form?.getValues('district') ?? dataFromOrder?.district ?? '',
         {shouldValidate: true},
       )
       form.setValue(
         'recipientWardsandcommunes',
         recipientAddressType === 'atAmamyStore'
-          ? (form?.getValues('recipientWardsandcommunes') ?? 'un')
-          : (form?.getValues('recipientWardsandcommunes') ??
+          ? form?.getValues('recipientWardsandcommunes') ?? 'un'
+          : form?.getValues('recipientWardsandcommunes') ??
               dataFromOrder?.recipientWardsandcommunes ??
-              ''),
+              '',
         {shouldValidate: true},
       )
     }
