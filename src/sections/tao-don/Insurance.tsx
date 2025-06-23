@@ -138,7 +138,6 @@ export default function Insurance({
       })
     }
   }
-  console.log(data)
   return (
     <Form {...form}>
       <form
@@ -184,7 +183,7 @@ export default function Insurance({
                         <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                           <FormControl>
                             <Checkbox
-                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
                               checked={field.value}
                               onCheckedChange={field.onChange}
                             />
@@ -216,7 +215,7 @@ export default function Insurance({
                           control={form.control}
                           name={`typeofinsurance`}
                           render={({field}) => (
-                            <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
+                            <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                               <FormControl>
                                 <Checkbox
                                   className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
@@ -229,12 +228,12 @@ export default function Insurance({
                                 />
                               </FormControl>
                               <div className='leading-none space-y-[0rem] flex flex-col'>
-                                <div className='flex xsm:flex-col-reverse sm:items-center sm:space-x-[0.3875rem]'>
+                                <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
                                   <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
                                     {insuranceItem?.label}
                                   </FormLabel>
                                   {insuranceItem?.tag && (
-                                    <p className='xsm:mb-[0.5rem] xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
+                                    <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
                                       {insuranceItem?.tag}
                                     </p>
                                   )}
@@ -263,7 +262,7 @@ export default function Insurance({
                     <FormItem className='mt-[1rem] relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                       <FormControl>
                         <Checkbox
-                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
@@ -330,7 +329,7 @@ export default function Insurance({
                     <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                       <FormControl>
                         <Checkbox
-                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />

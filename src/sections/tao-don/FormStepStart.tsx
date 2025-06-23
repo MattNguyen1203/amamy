@@ -64,10 +64,6 @@ const dataContactMethod = [
     title: 'Facebook Fanpage Amamy',
   },
   {
-    img: '/order/fb.png',
-    title: 'Vận chuyển Amamy',
-  },
-  {
     img: '/order/zalo.png',
     title: 'Zalo Amamy',
   },
@@ -320,10 +316,10 @@ export default function FormStepStart({
                   </SelectContent>
                 </Select>
                 <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.80)] !mt-[0.25rem]'>
+                {/* <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.80)] !mt-[0.25rem]'>
                   *Chọn đúng kênh đã từng liên hệ: "Facebook Page Amamy" khác
                   với "Vận chuyển Amamy"
-                </p>
+                </p> */}
               </FormItem>
             )}
           />

@@ -153,7 +153,7 @@ export default function CeateNote({
                     <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                       <FormControl>
                         <Checkbox
-                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
