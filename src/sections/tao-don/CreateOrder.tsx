@@ -218,7 +218,15 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   indexTab={indexTab}
                   handleClickcurrentTab={handleClickcurrentTab}
                   dataInformation={dataInformation?.information?.time}
-                  nextStep={dataInformation?.type === 'nhatviet' ? '3' : '4'}
+                  nextStep={
+                    dataInformation?.type === 'nhatviet' ||
+                    dataInformation?.type === 'ducvn' ||
+                    dataInformation?.type === 'viethan' ||
+                    (dataInformation?.type === 'vietnhat' &&
+                      dataInformation?.information?.note)
+                      ? '3'
+                      : '4'
+                  }
                   setDataFromOrder={setDataFromOrder}
                   dataFromOrder={dataFromOrder}
                 />
@@ -227,7 +235,11 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 value='3'
                 className='mt-0'
               >
-                {dataInformation?.type === 'nhatviet' && (
+                {(dataInformation?.type === 'nhatviet' ||
+                  dataInformation?.type === 'ducvn' ||
+                  dataInformation?.type === 'viethan' ||
+                  (dataInformation?.type === 'vietnhat' &&
+                    dataInformation?.information?.note)) && (
                   <CeateNote
                     setSelectedImage={setSelectedImage}
                     setIndexTab={setIndexTab}
