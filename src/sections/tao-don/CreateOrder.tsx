@@ -20,7 +20,7 @@ import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import Package from '@/sections/tao-don/Package'
 import Image from 'next/image'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
@@ -41,6 +41,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [prevTabFormDelivery, setPrevTabFormDelivery] = useState<string>('1')
   // const [faq, setFaq] = useState(true)
   // const [sentGoodsAtAmamy, setSentGoodsAtAmamy] = useState(false)
   const [dataFromOrder, setDataFromOrder] = useState<IDataFromOrder>({})
@@ -63,7 +64,12 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     if (foundItem?.information?.time) {
       StepForm = [...StepForm, {title: 'Thời gian gửi hàng', value: '2'}]
     }
-    if (foundItem?.type === 'nhatviet') {
+    if (
+      foundItem?.type === 'nhatviet' ||
+      foundItem?.type === 'ducvn' ||
+      foundItem?.type === 'viethan' ||
+      foundItem?.type === 'vietnhat'
+    ) {
       StepForm = [...StepForm, {title: 'Lưu ý quan trọng', value: '3'}]
     }
     StepForm = [...StepForm, {title: 'Thông tin nhận hàng', value: '4'}]
@@ -93,15 +99,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   //     setFaq(false)
   //   }, 1000)
   // }, [])
-  console.log(
-    dataInformation
-      ? dataInformation?.information?.time
-        ? '2'
-        : dataInformation?.information?.note
-        ? '3'
-        : '4'
-      : '2',
-  )
+  useEffect(() => {
+    if (
+      dataInformation?.information?.note &&
+      (dataInformation?.type === 'nhatviet' ||
+        dataInformation?.type === 'ducvn' ||
+        dataInformation?.type === 'viethan' ||
+        dataInformation?.type === 'vietnhat')
+    ) {
+      setPrevTabFormDelivery('3')
+    } else if (dataInformation?.information?.time) {
+      setPrevTabFormDelivery('2')
+    } else {
+      setPrevTabFormDelivery('1')
+    }
+  }, [dataInformation])
   return (
     <>
       <Tabs
@@ -237,13 +249,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
-                    prevStep={
-                      dataInformation?.information?.note
-                        ? '3'
-                        : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
-                    }
+                    prevStep={prevTabFormDelivery}
                     nextStep={
                       dataInformation?.information?.insurance
                         ? '5'
@@ -261,13 +267,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
                     shippingCost={dataInformation?.information?.shipping_cost}
-                    prevStep={
-                      dataInformation?.information?.note
-                        ? '3'
-                        : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
-                    }
+                    prevStep={prevTabFormDelivery}
                     nextStep={
                       dataInformation?.information?.insurance
                         ? '5'
@@ -284,13 +284,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
-                    prevStep={
-                      dataInformation?.information?.note
-                        ? '3'
-                        : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
-                    }
+                    prevStep={prevTabFormDelivery}
                     nextStep={
                       dataInformation?.information?.insurance
                         ? '5'
@@ -307,13 +301,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     setDataFromOrder={setDataFromOrder}
                     dataFromOrder={dataFromOrder}
-                    prevStep={
-                      dataInformation?.information?.note
-                        ? '3'
-                        : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
-                    }
+                    prevStep={prevTabFormDelivery}
                     nextStep={
                       dataInformation?.information?.insurance
                         ? '5'
@@ -334,13 +322,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     european={dataInformation?.european}
                     selectNationValue={selectNationValue}
                     setSelectNationValue={setSelectNationValue}
-                    prevStep={
-                      dataInformation?.information?.note
-                        ? '3'
-                        : dataInformation?.information?.time
-                        ? '2'
-                        : '1'
-                    }
+                    prevStep={prevTabFormDelivery}
                     nextStep={
                       dataInformation?.information?.insurance
                         ? '5'
