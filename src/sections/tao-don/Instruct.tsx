@@ -194,9 +194,6 @@ export default function Instruct({
     }
   }, [selectBranch, selectPaymentInformation])
   function handleCreateOrder() {
-    console.log('🚀 ~ dataFromOrder:', dataFromOrder)
-    console.log('🚀 ~ type:', type)
-
     setTransition(async () => {
       const currentDate = new Date()
       const formData = {
@@ -265,10 +262,12 @@ export default function Instruct({
         lua_chon_giao_hang:
           Object.values(dataFromOrder?.userChoices || {})[1] ?? '',
         loai_bao_hiem: dataFromOrder?.typeofinsurance ?? '',
-        loai_dong_goi: dataFromOrder?.package ?? '',
+        loai_dong_goi:
+          dataFromOrder?.package === 'note'
+            ? dataFromOrder?.packageMessage
+            : dataFromOrder?.package ?? '',
         yeu_cau_them: dataFromOrder?.packageMessage ?? '',
       }
-      console.log('🚀 ~ formData:', formData)
       if (formData) {
         try {
           const response = await fetch(

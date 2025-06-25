@@ -13,6 +13,7 @@ export interface IInformationTimeOrder {
   clause?: string
   user_chooses?: boolean
   stock_user?: IInformationTimeOrder_StockUser[]
+  note_more?: string
 }
 export interface IInformationTimeOrder_StockUser {
   label: string
@@ -69,6 +70,7 @@ export interface IInformation_Package {
   label: string
   desc: string
   tag?: string
+  separate_request?: boolean
 }
 export interface IInformationOrder {
   time?: IInformationTimeOrder[]
