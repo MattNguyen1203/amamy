@@ -147,6 +147,7 @@ export default function OrderStepTime({
       setTriggerScroll(true)
     }
   }
+  console.log('🚀 ~ dataInformation:', dataInformation)
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
       <p className='sm:hidden text-pc-sub16b text-[#33A6E8]'>
@@ -166,52 +167,64 @@ export default function OrderStepTime({
                       {item?.time_content}
                     </p>
                     {item?.user_chooses ? (
-                      <div className='space-y-[0.875rem] mb-[0.875rem]'>
-                        {item?.stock_user?.map((stockItem, stockIndex) => (
-                          <FormField
-                            key={stockIndex}
-                            control={form.control}
-                            name={`userChoices.${item?.time_content}`}
-                            render={({field}) => (
-                              <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none mb-[0.5rem]'>
-                                <FormControl>
-                                  <Checkbox
-                                    className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
-                                    checked={field.value === stockItem?.label}
-                                    onCheckedChange={(checked) => {
-                                      field.onChange(
-                                        checked ? stockItem?.label : undefined,
-                                      )
-                                    }}
-                                  />
-                                </FormControl>
-                                <div className='leading-none space-y-[0rem] flex flex-col'>
-                                  <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
-                                    <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
-                                      {stockItem?.label}
-                                    </FormLabel>
-                                    {stockItem?.tag && (
-                                      <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
-                                        {stockItem?.tag}
-                                      </p>
+                      <>
+                        <div className='space-y-[0.875rem] mb-[0.875rem]'>
+                          {item?.stock_user?.map((stockItem, stockIndex) => (
+                            <FormField
+                              key={stockIndex}
+                              control={form.control}
+                              name={`userChoices.${item?.time_content}`}
+                              render={({field}) => (
+                                <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none mb-[0.5rem]'>
+                                  <FormControl>
+                                    <Checkbox
+                                      className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
+                                      checked={field.value === stockItem?.label}
+                                      onCheckedChange={(checked) => {
+                                        field.onChange(
+                                          checked
+                                            ? stockItem?.label
+                                            : undefined,
+                                        )
+                                      }}
+                                    />
+                                  </FormControl>
+                                  <div className='leading-none space-y-[0rem] flex flex-col'>
+                                    <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
+                                      <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
+                                        {stockItem?.label}
+                                      </FormLabel>
+                                      {stockItem?.tag && (
+                                        <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
+                                          {stockItem?.tag}
+                                        </p>
+                                      )}
+                                    </div>
+                                    {stockItem?.desc && (
+                                      <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
+                                        <p
+                                          className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
+                                          dangerouslySetInnerHTML={{
+                                            __html: stockItem?.desc,
+                                          }}
+                                        ></p>
+                                      </FormLabel>
                                     )}
                                   </div>
-                                  {stockItem?.desc && (
-                                    <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
-                                      <p
-                                        className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
-                                        dangerouslySetInnerHTML={{
-                                          __html: stockItem?.desc,
-                                        }}
-                                      ></p>
-                                    </FormLabel>
-                                  )}
-                                </div>
-                              </FormItem>
-                            )}
-                          />
-                        ))}
-                      </div>
+                                </FormItem>
+                              )}
+                            />
+                          ))}
+                        </div>
+                        {item?.note_more && (
+                          <p
+                            className='text-pc-sub14m text-[#F00] mb-[1rem]'
+                            dangerouslySetInnerHTML={{
+                              __html: item?.note_more,
+                            }}
+                          ></p>
+                        )}
+                      </>
                     ) : (
                       <div
                         ref={(el) => {

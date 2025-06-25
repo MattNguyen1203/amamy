@@ -100,10 +100,19 @@ export default function Package({
                           <FormControl>
                             <Checkbox
                               className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
-                              checked={field.value === packageItem?.label}
+                              checked={
+                                field.value ===
+                                (packageItem?.separate_request
+                                  ? 'note'
+                                  : packageItem?.label)
+                              }
                               onCheckedChange={(checked) => {
                                 field.onChange(
-                                  checked ? packageItem?.label : undefined,
+                                  checked
+                                    ? packageItem?.separate_request
+                                      ? 'note'
+                                      : packageItem?.label
+                                    : undefined,
                                 )
                               }}
                             />
