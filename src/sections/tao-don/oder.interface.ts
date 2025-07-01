@@ -37,6 +37,7 @@ export interface IInformationInstructOrder {
   select_branch?: IInformationInstructOrder_SelectBranch[]
   note_more?: string
   shipping_instructions_image?: string[]
+  hidden_step?: boolean
 }
 export interface IInformationInsurance_policy {
   content: string
