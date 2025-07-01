@@ -19,10 +19,20 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
+import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useEffect, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
@@ -41,6 +51,7 @@ export default function Package({
   setSubmitting,
   setDataInformation,
   importantNote,
+  paymentMethod,
 }: {
   data: IInformationOrder['package']
   handleClickcurrentTab: (nextTab: string) => void
@@ -56,13 +67,25 @@ export default function Package({
     React.SetStateAction<ICreateOder | undefined>
   >
   importantNote?: string
+  paymentMethod?: {
+    value: string
+    title: string
+  }[]
 }) {
+  const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const [isPending, setTransition] = useTransition()
   const FormSchema = z.object({
     package: z.string().min(1, 'Vui lòng chọn loại bảo hiểm'),
     packageMessage: z.string().min(0, 'Vui lòng nhập nội dung'),
+    recipientPaymentInformation: z.string({
+      required_error: 'Vui lòng nhập thông tin thanh toán',
+    }),
   })
+  const [selectPaymentInformation, setSelectPaymentInformation] =
+    useState<boolean>(false)
+  const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
+    useState<{value: string; title: string}>({value: '', title: ''})
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -70,6 +93,8 @@ export default function Package({
         ? dataFromOrder?.package ?? ''
         : 'Chưa có thông tin',
       packageMessage: dataFromOrder?.packageMessage ?? '',
+      recipientPaymentInformation:
+        dataFromOrder?.recipientPaymentInformation ?? paymentMethod?.[0]?.value,
     },
   })
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
@@ -80,7 +105,13 @@ export default function Package({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
-
+  useEffect(() => {
+    if (selectPaymentInformation) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [selectPaymentInformation])
   function handleCreateOrder() {
     setTransition(async () => {
       const currentDate = new Date()
@@ -128,7 +159,7 @@ export default function Package({
         user: dataFromOrder?.email,
         gia_don_hang: '',
         khoi_luong_don_hang: '',
-        loai_tien_te: '',
+        loai_tien_te: form?.getValues('recipientPaymentInformation') ?? 'VND',
         date: currentDate.toISOString().slice(0, 10),
         sdt: dataFromOrder?.recipientPhone ?? '',
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
@@ -309,6 +340,85 @@ export default function Package({
             </FormItem>
           )}
         />
+        {stepEnd && (
+          <FormField
+            control={form.control}
+            name='recipientPaymentInformation'
+            render={({field}) => (
+              <FormItem
+                onClick={() => {
+                  if (isMobile) {
+                    setSelectPaymentInformation(true)
+                  }
+                }}
+                className={cn(
+                  'flex-1 space-y-0',
+                  Array.isArray(paymentMethod) &&
+                    paymentMethod?.length < 2 &&
+                    'pointer-events-none',
+                )}
+              >
+                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  Chọn thông tin thanh toán (*)
+                </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl
+                    className={cn(
+                      '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                      Array.isArray(paymentMethod) &&
+                        paymentMethod?.length < 2 &&
+                        '[&_svg]:hidden',
+                    )}
+                  >
+                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                      {!isMobile && (
+                        <SelectValue placeholder='Chọn thông tin thanh toán' />
+                      )}
+                      {isMobile && !field.value && (
+                        <SelectValue placeholder='Chọn thông tin thanh toán' />
+                      )}
+                      {isMobile && field.value && (
+                        <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
+                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 '>
+                            {selectPaymentInformationValue?.title ||
+                              dataFromOrder?.recipientPaymentInformation ||
+                              `Thanh toán bằng ${field.value}`}
+                          </p>
+                        </div>
+                      )}
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                    {Array.isArray(paymentMethod) &&
+                      paymentMethod?.map(
+                        (
+                          item: {
+                            value: string
+                            title: string
+                          },
+                          index: number,
+                        ) => (
+                          <SelectItem
+                            key={index}
+                            className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                            value={item?.value ?? item?.title}
+                          >
+                            <p className='text-black text-pc-sub14m'>
+                              {item?.title}
+                            </p>
+                          </SelectItem>
+                        ),
+                      )}
+                  </SelectContent>
+                </Select>
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
+              </FormItem>
+            )}
+          />
+        )}
 
         <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
@@ -532,6 +642,16 @@ export default function Package({
             </Button>
           )}
         </div>
+
+        {isMobile && stepEnd && (
+          <PopupPaymentInfor
+            form={form}
+            selectPaymentInformation={selectPaymentInformation}
+            setSelectPaymentInformation={setSelectPaymentInformation}
+            setSelectPaymentInformationValue={setSelectPaymentInformationValue}
+            paymentMethod={paymentMethod}
+          />
+        )}
       </form>
     </Form>
   )
