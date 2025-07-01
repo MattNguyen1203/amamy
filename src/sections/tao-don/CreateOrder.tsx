@@ -382,6 +382,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   setSubmitting={setSubmitting}
                   setDataInformation={setDataInformation}
                   importantNote={dataInformation?.information?.important_note}
+                  paymentMethod={dataInformation?.information?.payment_method}
                 />
               </TabsContent>
 
