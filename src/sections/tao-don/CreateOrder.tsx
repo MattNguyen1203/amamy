@@ -58,6 +58,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const handlesetDataInformation = (shipping: string) => {
     setDataInformation(undefined)
     const foundItem = data?.find((item) => item.id === Number(shipping))
+    console.log(foundItem)
     setDataInformation(foundItem)
     setStepOrder(2)
     StepForm = [{title: 'Thông tin gửi hàng', value: '1'}]
@@ -65,10 +66,11 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       StepForm = [...StepForm, {title: 'Thời gian gửi hàng', value: '2'}]
     }
     if (
-      foundItem?.type === 'nhatviet' ||
-      foundItem?.type === 'ducvn' ||
-      foundItem?.type === 'viethan' ||
-      foundItem?.type === 'vietnhat'
+      (foundItem?.type === 'nhatviet' ||
+        foundItem?.type === 'ducvn' ||
+        foundItem?.type === 'viethan' ||
+        foundItem?.type === 'vietnhat') &&
+      foundItem?.information?.note
     ) {
       StepForm = [...StepForm, {title: 'Lưu ý quan trọng', value: '3'}]
     }
@@ -88,11 +90,13 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     ) {
       StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
     }
-    StepForm = [
-      ...StepForm,
-      {title: 'Chọn cách đóng gói', value: '6'},
-      {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '7'},
-    ]
+    StepForm = [...StepForm, {title: 'Chọn cách đóng gói', value: '6'}]
+    if (!foundItem?.information?.instruct?.hidden_step) {
+      StepForm = [
+        ...StepForm,
+        {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '7'},
+      ]
+    }
   }
   // useEffect(() => {
   //   setTimeout(() => {
@@ -372,6 +376,12 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   handleClickcurrentTab={handleClickcurrentTab}
                   setIndexTab={setIndexTab}
                   indexTab={indexTab}
+                  stepEnd={dataInformation?.information?.instruct?.hidden_step}
+                  type={dataInformation?.type}
+                  european={dataInformation?.european}
+                  setSubmitting={setSubmitting}
+                  setDataInformation={setDataInformation}
+                  importantNote={dataInformation?.information?.important_note}
                 />
               </TabsContent>
 
