@@ -46,7 +46,6 @@ const formSchema = z.object({
 })
 
 export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
-  console.log(data)
   const isMobile = useIsMobile()
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [selectServiceDimension, setSelectServiceDimension] =
@@ -135,7 +134,6 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
       }
     }
   }, [dataInformation, form.getValues('branch')])
-  console.log(dataInformation?.information?.instruct?.select_branch)
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem] xsm:px-[1rem] sm:px-[10rem]'>
       <h1 className='text-[#33A6E8] text-pc-heading20b pt-[2.5rem]'>
@@ -154,6 +152,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                 onClick={() => {
                   if (isMobile) {
                     setSelectServiceDimension(true)
+                    document.body.style.overflow = 'hidden'
                   }
                 }}
                 className='flex-1 space-y-0 !mb-[1.25rem]'
@@ -237,17 +236,10 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                       onClick={() => {
                         if (isMobile) {
                           setSelectBranch(true)
+                          document.body.style.overflow = 'hidden'
                         }
                       }}
-                      className={cn(
-                        'flex-1 space-y-0',
-                        Array.isArray(
-                          dataInformation?.information?.instruct?.select_branch,
-                        ) &&
-                          dataInformation?.information?.instruct?.select_branch
-                            ?.length < 1 &&
-                          'pointer-events-none',
-                      )}
+                      className={cn('flex-1 space-y-0')}
                     >
                       <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                         Chọn chi nhánh Amamy Post (*)
@@ -398,6 +390,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
               <div
                 onClick={() => {
                   setSelectServiceDimension(false)
+                  document.body.style.overflow = 'auto'
                 }}
                 className={cn(
                   'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none',
@@ -417,6 +410,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                   <div
                     onClick={() => {
                       setSelectServiceDimension(false)
+                      document.body.style.overflow = 'auto'
                     }}
                     className='absolute top-[0.5rem] right-[0.5rem]'
                   >
@@ -439,6 +433,11 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                             })
                             setSelectServiceDimension(false)
                             handleSetDataInformation(String(item?.id))
+                            document.body.style.overflow = 'auto'
+                            setDataBranch(null)
+                            setSelectBranchValue('')
+                            form.setValue('branch', '')
+                            form.clearErrors('branch')
                           }}
                           className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
                         >
@@ -463,11 +462,12 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
               ) &&
                 dataInformation?.information?.instruct?.select_branch &&
                 dataInformation?.information?.instruct?.select_branch?.length >
-                  1 && (
+                  0 && (
                   <>
                     <div
                       onClick={() => {
                         setSelectBranch(false)
+                        document.body.style.overflow = 'auto'
                       }}
                       className={cn(
                         'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none !mt-0',
@@ -487,6 +487,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                         <div
                           onClick={() => {
                             setSelectBranch(false)
+                            document.body.style.overflow = 'auto'
                           }}
                           className='absolute top-[0.5rem] right-[0.5rem]'
                         >
@@ -510,6 +511,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                   })
                                   setSelectBranchValue(item?.title)
                                   setSelectBranch(false)
+                                  document.body.style.overflow = 'auto'
                                 }}
                                 className='bg-white rounded-[1.25rem] space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8]'
                               >
