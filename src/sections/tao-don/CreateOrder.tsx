@@ -58,7 +58,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const handlesetDataInformation = (shipping: string) => {
     setDataInformation(undefined)
     const foundItem = data?.find((item) => item.id === Number(shipping))
-    console.log(foundItem)
     setDataInformation(foundItem)
     setStepOrder(2)
     StepForm = [{title: 'Thông tin gửi hàng', value: '1'}]
