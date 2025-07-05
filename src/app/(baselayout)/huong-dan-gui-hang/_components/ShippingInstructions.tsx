@@ -137,7 +137,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
   }, [dataInformation, form.getValues('branch')])
   console.log(dataInformation?.information?.instruct?.select_branch)
   return (
-    <div className='space-y-[1.5rem] xsm:space-y-[0.75rem] xsm:px-[1rem] px-[10rem]'>
+    <div className='space-y-[1.5rem] xsm:space-y-[0.75rem] xsm:px-[1rem] sm:px-[10rem]'>
       <h1 className='text-[#33A6E8] text-pc-heading20b pt-[2.5rem]'>
         Hướng dẫn gửi hàng lên Amamy Post
       </h1>
