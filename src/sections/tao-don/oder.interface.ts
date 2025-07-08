@@ -6,6 +6,7 @@ export interface ICreateOder {
   information?: IInformationOrder
   slug?: string
   european?: string
+  note_page_huong_dan?: string
 }
 export interface IInformationTimeOrder {
   time_content?: string

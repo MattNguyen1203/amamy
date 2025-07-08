@@ -84,6 +84,15 @@ const MobileMenu = ({
             </Link>
           </SheetClose>
           <div className='w-full bg-[#DCDFE4] h-[1px]' />
+          <SheetClose asChild>
+            <Link
+              href={navItems?.[4]?.href || '#'}
+              className='text-mb-13M text-black py-4 block'
+            >
+              {navItems?.[4]?.name}
+            </Link>
+          </SheetClose>
+          <div className='w-full bg-[#DCDFE4] h-[1px]' />
           <div
             onClick={() => {
               setToggle(!toggle)

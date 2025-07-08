@@ -250,6 +250,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     handleClickcurrentTab={handleClickcurrentTab}
                     data={dataInformation?.information?.note}
                     prevStep={dataInformation?.information?.time ? '2' : '1'}
+                    type={dataInformation?.type}
+                    importantNote={dataInformation?.information?.important_note}
                   />
                 )}
               </TabsContent>

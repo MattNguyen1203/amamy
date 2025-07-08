@@ -23,6 +23,8 @@ export default function CeateNote({
   setIndexTab,
   indexTab,
   setSelectedImage,
+  type,
+  importantNote,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (nextTab: string) => void
@@ -30,6 +32,8 @@ export default function CeateNote({
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
+  type?: string
+  importantNote?: string
 }) {
   const FormSchema = z.object({
     note: z.array(
@@ -123,6 +127,22 @@ export default function CeateNote({
       <p className='text-[#33A6E8] text-pc-sub16b mb-[1.5rem] xsm:mb-[0.75rem]'>
         Lưu ý quan trọng khi gửi hàng
       </p>
+      {type === 'nhatviet' && (
+        <div className='mt-[1.75rem] mb-[1.75rem]'>
+          <div className='mb-[0.75rem] text-black text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
+            Lưu ý quan trọng về mã bưu điện nội địa Nhật
+          </div>
+          <p
+            ref={(el) => {
+              containerRefs.current[data?.length || 0] = el
+            }}
+            dangerouslySetInnerHTML={{
+              __html: importantNote || '',
+            }}
+            className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+          ></p>
+        </div>
+      )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
