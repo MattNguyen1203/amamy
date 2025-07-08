@@ -21,7 +21,7 @@ export default async function page() {
     getSchemaMarkup('huong-dan-gui-hang'),
   ])
   return (
-    <main className='bg-[#F8F8F8] xsm:bg-[#FAFAFA] sm:px-[6rem] sm:pt-0 min-h-[calc(100vh-5.75rem)]'>
+    <main className='bg-white sm:px-[6rem] sm:pt-0 min-h-[calc(100vh-5.75rem)]'>
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
