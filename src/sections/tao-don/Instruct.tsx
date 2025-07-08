@@ -614,7 +614,7 @@ export default function Instruct({
                     'w-[21.4375rem] max-w-[21.4375rem] sm:w-[52.5rem] sm:max-w-[52.5rem]',
                 )}
               >
-                <div className='xsm:max-h-[28rem] xsm:overflow-auto xsm:overflow-y-auto '>
+                <div className='xsm:max-h-[28rem] max-h-[60vh] overflow-hidden overflow-y-auto'>
                   <ImageV2
                     alt=''
                     src={'/order/WarningCircle.svg'}
