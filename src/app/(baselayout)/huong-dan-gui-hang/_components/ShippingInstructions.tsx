@@ -598,7 +598,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
             )}
           </div>
         )}
-        {Array.isArray(dataInformation?.information?.time) &&
+        {/* {Array.isArray(dataInformation?.information?.time) &&
           dataInformation?.information?.time?.map(
             (item: IInformationTimeOrder, index: number) => (
               <Fragment key={index}>
@@ -657,7 +657,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                 </div>
               </Fragment>
             ),
-          )}
+          )} */}
         {dataInformation?.note_page_huong_dan && (
           <div className='flex flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
             <p className='xsm:text-pc-sub14s mb-[0.75rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
