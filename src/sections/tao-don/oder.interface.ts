@@ -75,6 +75,7 @@ export interface IInformation_Package {
   separate_request?: boolean
 }
 export interface IInformationOrder {
+  hidden_shipping?: boolean
   time?: IInformationTimeOrder[]
   note?: IInformationNoteOrder[]
   instruct?: IInformationInstructOrder

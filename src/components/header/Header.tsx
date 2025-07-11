@@ -25,7 +25,7 @@ const navItems = [
   {name: 'Về Amamy', href: '/about'},
   {name: 'Dịch vụ', href: ''},
   {name: 'Hữu ích cho gửi hàng', href: '/blogs'},
-  {name: 'Hướng Dẫn Gửi Hàng', href: '/huong-dan-gui-hang'},
+  {name: 'Hướng dẫn gửi hàng', href: '/huong-dan-gui-hang'},
 ]
 
 export interface Isocial {
