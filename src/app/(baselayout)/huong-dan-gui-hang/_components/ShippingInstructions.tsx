@@ -425,43 +425,47 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                   <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
                     {Array.isArray(data) &&
                       data?.length > 0 &&
-                      data?.map((item: ICreateOder, index: number) => (
-                        <Fragment key={index}>
-                          <div
-                            onClick={() => {
-                              form.setValue('shipping', String(item?.id), {
-                                shouldValidate: true, // Kích hoạt validate ngay sau khi set value
-                              })
-                              setSelectServiceDimensionValue({
-                                img: item?.thumbnail,
-                                title: item?.title,
-                              })
-                              setSelectServiceDimension(false)
-                              handleSetDataInformation(String(item?.id))
-                              document.body.style.overflow = 'auto'
-                              setDataBranch(null)
-                              setSelectBranchValue('')
-                              form.setValue('branch', '')
-                              form.clearErrors('branch')
-                            }}
-                            className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
-                          >
-                            <ImageV2
-                              src={
-                                item?.thumbnail || '/order/flag-germany.webp'
-                              }
-                              alt=''
-                              height={50 * 2}
-                              width={50 * 2}
-                              className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
-                            />
-                            <p className='text-black text-pc-sub14m line-clamp-1'>
-                              {item?.title}
-                            </p>
-                          </div>
-                          <div className='h-[1px] w-full bg-[#F8F8F8]'></div>
-                        </Fragment>
-                      ))}
+                      data?.map(
+                        (item: ICreateOder, index: number) =>
+                          !item?.information?.hidden_shipping && (
+                            <Fragment key={index}>
+                              <div
+                                onClick={() => {
+                                  form.setValue('shipping', String(item?.id), {
+                                    shouldValidate: true, // Kích hoạt validate ngay sau khi set value
+                                  })
+                                  setSelectServiceDimensionValue({
+                                    img: item?.thumbnail,
+                                    title: item?.title,
+                                  })
+                                  setSelectServiceDimension(false)
+                                  handleSetDataInformation(String(item?.id))
+                                  document.body.style.overflow = 'auto'
+                                  setDataBranch(null)
+                                  setSelectBranchValue('')
+                                  form.setValue('branch', '')
+                                  form.clearErrors('branch')
+                                }}
+                                className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                              >
+                                <ImageV2
+                                  src={
+                                    item?.thumbnail ||
+                                    '/order/flag-germany.webp'
+                                  }
+                                  alt=''
+                                  height={50 * 2}
+                                  width={50 * 2}
+                                  className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
+                                />
+                                <p className='text-black text-pc-sub14m line-clamp-1'>
+                                  {item?.title}
+                                </p>
+                              </div>
+                              <div className='h-[1px] w-full bg-[#F8F8F8]'></div>
+                            </Fragment>
+                          ),
+                      )}
                   </div>
                 </div>
                 {Array.isArray(
