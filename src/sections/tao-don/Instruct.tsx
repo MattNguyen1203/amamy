@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/(store)/store'
-import {ICLoading} from '@/components/icon/ICLoading'
+import { ICLoading } from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
   AlertDialog,
@@ -27,8 +27,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
 import ICAddress from '@/sections/tao-don/ICAddress'
 import ICPhone from '@/sections/tao-don/ICPhone'
 import ICTime from '@/sections/tao-don/ICTime'
@@ -39,12 +39,12 @@ import {
   IInformationInstructOrder,
   IInformationInstructOrder_SelectBranch,
 } from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import {useEffect, useRef, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
-import {toast} from 'sonner'
-import {z} from 'zod'
+import { useEffect, useRef, useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
 const formSchema = z.object({
   branch: z
     .string({
@@ -72,6 +72,7 @@ export default function Instruct({
   indexTab,
   european,
   setSelectedImage,
+  nation,
 }: {
   data?: IInformationInstructOrder
   handleClickcurrentTab: (nextTab: string) => void
@@ -92,6 +93,7 @@ export default function Instruct({
   indexTab: number
   european?: string
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
+  nation?: string
 }) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
@@ -246,7 +248,7 @@ export default function Instruct({
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
-        nation: european === 'vnEu' ? dataFromOrder?.nation : '',
+        nation: european === 'vnEu' ? dataFromOrder?.nation : nation ?? '',
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
         ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
@@ -301,7 +303,7 @@ export default function Instruct({
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log('🚀 ~ onSubmit values:', values)
-    console.log(dataFromOrder)
+    // console.log(dataFromOrder)
   }
   return (
     <Form {...form}>

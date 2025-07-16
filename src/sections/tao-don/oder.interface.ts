@@ -5,6 +5,7 @@ export interface ICreateOder {
   id: number
   information?: IInformationOrder
   slug?: string
+  nation?: string
   european?: string
   note_page_huong_dan?: string
 }
