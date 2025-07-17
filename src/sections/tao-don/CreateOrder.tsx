@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import useStore from '@/app/(store)/store'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
+import {cn} from '@/lib/utils'
 import CeateNote from '@/sections/tao-don/CreateNote'
 import CustomBack from '@/sections/tao-don/CustomBack'
 import FormDeliveryInformation from '@/sections/tao-don/FormDeliveryInformation'
@@ -16,12 +16,13 @@ import ICCheck from '@/sections/tao-don/ICCheck'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
-import { ICreateOder } from '@/sections/tao-don/oder.interface'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import Package from '@/sections/tao-don/Package'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+import {useEffect, useState} from 'react'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
+import './style.css'
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
   {title: 'Thời gian gửi hàng', value: '2'},
@@ -384,7 +385,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   setDataInformation={setDataInformation}
                   importantNote={dataInformation?.information?.important_note}
                   paymentMethod={dataInformation?.information?.payment_method}
-                   nation={dataInformation?.nation}
+                  nation={dataInformation?.nation}
                 />
               </TabsContent>
 
