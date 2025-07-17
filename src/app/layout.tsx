@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import ChatBot from '@/components/chat-bot'
 // import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
-import ContactButton from '@/components/contact-button'
 import Header from '@/components/header/Header'
 import GsapProvider from '@/components/provider/GsapProvider'
 import fetchData from '@/fetch/fetchData'
@@ -10,7 +9,6 @@ import {Open_Sans, Roboto} from 'next/font/google'
 import localFont from 'next/font/local'
 import {Toaster} from 'sonner'
 import './globals.css'
-import GoogleAnalytics from '@/components/google-analytic'
 // import PrenyAI from '@/lib/preni'
 
 export const metadata: Metadata = {
@@ -115,7 +113,6 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >
-        <GoogleAnalytics id='G-D7KW83NYK0' />
         <Header
           social={dataFooter?.data?.footer_site?.social}
           dataHeader={dataFooter?.data?.header_site}
@@ -129,7 +126,6 @@ export default async function RootLayout({
         />
         <ChatButtonMobile /> */}
         {/* <PrenyAI /> */}
-        <ContactButton data={dataFooter?.data?.header_site?.contact_us} />
         <GsapProvider>{children}</GsapProvider>
         <Toaster
           theme='light'
