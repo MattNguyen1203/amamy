@@ -1,8 +1,20 @@
 'use client'
 
+import {usePathname} from 'next/navigation'
+import {useEffect} from 'react'
+
 // import Script from 'next/script'
 
 export default function GoogleAnalytics({id}: {id: string}) {
+  const pathname = usePathname()
+  useEffect(() => {
+    console.log(pathname)
+    if (pathname === '/tao-don-hang') {
+      document.body.classList.add('page-tao-don-hang')
+    } else {
+      document.body.classList.remove('page-tao-don-hang')
+    }
+  }, [pathname])
   return (
     <>
       <script

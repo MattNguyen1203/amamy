@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import ChatBot from '@/components/chat-bot'
 // import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
+import GoogleAnalytics from '@/components/google-analytic'
 import Header from '@/components/header/Header'
 import GsapProvider from '@/components/provider/GsapProvider'
 import fetchData from '@/fetch/fetchData'
@@ -113,6 +114,7 @@ export default async function RootLayout({
       <body
         className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >
+        <GoogleAnalytics id='G-D7KW83NYK0' />
         <Header
           social={dataFooter?.data?.footer_site?.social}
           dataHeader={dataFooter?.data?.header_site}

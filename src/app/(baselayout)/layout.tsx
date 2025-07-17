@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ContactButton from '@/components/contact-button'
 import Footer from '@/components/footer/Footer'
-import GoogleAnalytics from '@/components/google-analytic'
 import fetchData from '@/fetch/fetchData'
 export default async function RootLayout({
   children,
@@ -17,7 +16,6 @@ export default async function RootLayout({
   const [dataFooter] = await Promise.all([fetchFooter])
   return (
     <>
-      <GoogleAnalytics id='G-D7KW83NYK0' />
       {children}
       <ContactButton data={dataFooter?.data?.header_site?.contact_us} />
       <Footer data={dataFooter.data.footer_site} />
