@@ -1,16 +1,9 @@
 import ReceivingIncentivesFrom from '@/components/footer/ReceivingIncentivesFrom'
 import ImageV2 from '@/components/image/ImageV2'
-import fetchData from '@/fetch/fetchData'
 import Link from 'next/link'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const Footer = async () => {
-  const dataFooter = await fetchData({
-    api: 'options?fields=footer_site',
-    option: {
-      next: {revalidate: 10},
-    },
-  })
+const Footer = ({data}) => {
   const {
     title,
     social,
@@ -19,8 +12,7 @@ const Footer = async () => {
     solution,
     privacy_policy,
     terms_conditions,
-  } = dataFooter.data.footer_site
-
+  } = data
   return (
     <footer
       id='footer-section'
