@@ -8,7 +8,6 @@ import {useEffect} from 'react'
 export default function GoogleAnalytics({id}: {id: string}) {
   const pathname = usePathname()
   useEffect(() => {
-    console.log(pathname)
     if (pathname === '/tao-don-hang') {
       document.body.classList.add('page-tao-don-hang')
     } else {

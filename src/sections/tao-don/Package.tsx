@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/(store)/store'
-import { ICLoading } from '@/components/icon/ICLoading'
+import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
   AlertDialog,
@@ -11,8 +11,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import {Button} from '@/components/ui/button'
+import {Checkbox} from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -29,15 +29,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
-import { ICreateOder, IInformationOrder } from '@/sections/tao-don/oder.interface'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useState, useTransition} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
 export default function Package({
   data,
   handleClickcurrentTab,
@@ -188,33 +187,34 @@ export default function Package({
             ? form?.getValues('packageMessage')
             : form?.getValues('package') ?? '',
       }
-      if (formData) {
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData, null, 2),
-            },
-          )
-          if (response?.ok) {
-            setIndexTab(0)
-            setDataFromOrder({})
-            setSubmitting(true)
-            setStepOrder(1)
-            handleClickcurrentTab('1')
-            setTriggerScroll(true)
-            setDataInformation(undefined)
-          } else {
-            toast.error('Có lỗi xảy ra')
-          }
-        } catch {
-          toast.error('Có lỗi xảy ra')
-        }
-      }
+      console.log(formData)
+      // if (formData) {
+      //   try {
+      //     const response = await fetch(
+      //       `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
+      //       {
+      //         method: 'POST',
+      //         headers: {
+      //           'Content-Type': 'application/json',
+      //         },
+      //         body: JSON.stringify(formData, null, 2),
+      //       },
+      //     )
+      //     if (response?.ok) {
+      //       setIndexTab(0)
+      //       setDataFromOrder({})
+      //       setSubmitting(true)
+      //       setStepOrder(1)
+      //       handleClickcurrentTab('1')
+      //       setTriggerScroll(true)
+      //       setDataInformation(undefined)
+      //     } else {
+      //       toast.error('Có lỗi xảy ra')
+      //     }
+      //   } catch {
+      //     toast.error('Có lỗi xảy ra')
+      //   }
+      // }
     })
   }
 
