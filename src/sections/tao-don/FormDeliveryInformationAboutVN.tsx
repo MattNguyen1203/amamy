@@ -50,9 +50,12 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận',
     })
     .min(1, 'Vui lòng nhập địa chỉ (Tên đường, số nhà) người nhận'),
-  recipientAddressType: z.enum(['atAmamyStore', 'registeredAddress'], {
-    required_error: 'Vui lòng chọn nơi nhận hàng',
-  }),
+  recipientAddressType: z.enum(
+    ['atAmamyStore', 'registeredAddress', 'Nhận tại chợ Sapa'],
+    {
+      required_error: 'Vui lòng chọn nơi nhận hàng',
+    },
+  ),
   recipientCity: z
     .string({
       required_error: 'Vui lòng nhập thành phố người nhận',
@@ -88,6 +91,7 @@ export default function FormDeliveryInformationAboutVN({
   nextStep,
   setIndexTab,
   indexTab,
+  idOrder,
 }: {
   handleClickcurrentTab: (nextTab: string) => void
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
@@ -96,6 +100,7 @@ export default function FormDeliveryInformationAboutVN({
   nextStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
+  idOrder: number
 }) {
   const isMobile = useIsMobile()
   const {stepOrder, setStepOrder} = useStore((state) => state)
@@ -298,6 +303,18 @@ export default function FormDeliveryInformationAboutVN({
         'recipientWardsandcommunes',
         'recipientAddress',
       ])
+    } else if (recipientAddressType === 'Nhận tại chợ Sapa') {
+      form.setValue('recipientAddress', 'Nhận tại chợ Sapa')
+      form.setValue('recipientCity', 'un')
+      form.setValue('district', 'un')
+      form.setValue('recipientWardsandcommunes', 'un')
+
+      form.trigger([
+        'recipientCity',
+        'district',
+        'recipientWardsandcommunes',
+        'recipientAddress',
+      ])
     }
   }, [form, recipientAddressType])
 
@@ -395,6 +412,22 @@ export default function FormDeliveryInformationAboutVN({
                       Nhận tại cửa hàng Amamy
                     </FormLabel>
                   </FormItem>
+                  {idOrder === 1073 && (
+                    <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
+                      <FormControl>
+                        <RadioGroupItem
+                          id='r3'
+                          value='Nhận tại chợ Sapa'
+                        />
+                      </FormControl>
+                      <FormLabel
+                        htmlFor='r3'
+                        className='font-normal cursor-pointer '
+                      >
+                        Nhận tại chợ Sapa, Khách ra nhận.
+                      </FormLabel>
+                    </FormItem>
+                  )}
                 </RadioGroup>
               </FormControl>
               <FormMessage />
@@ -409,7 +442,7 @@ export default function FormDeliveryInformationAboutVN({
               <FormControl>
                 <Input
                   disabled={
-                    recipientAddressType === 'atAmamyStore' ? true : false
+                    recipientAddressType === 'registeredAddress' ? false : true
                   }
                   className=' shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                   placeholder='Địa chỉ nhận hàng tại Việt Nam'
@@ -423,7 +456,7 @@ export default function FormDeliveryInformationAboutVN({
             </FormItem>
           )}
         />
-        {recipientAddressType !== 'atAmamyStore' && (
+        {recipientAddressType == 'registeredAddress' && (
           <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
             <FormField
               control={form.control}
