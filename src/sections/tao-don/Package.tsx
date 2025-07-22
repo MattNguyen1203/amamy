@@ -36,6 +36,7 @@ import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useEffect, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
 import {z} from 'zod'
 export default function Package({
   data,
@@ -187,34 +188,34 @@ export default function Package({
             ? form?.getValues('packageMessage')
             : form?.getValues('package') ?? '',
       }
-      console.log(formData)
-      // if (formData) {
-      //   try {
-      //     const response = await fetch(
-      //       `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
-      //       {
-      //         method: 'POST',
-      //         headers: {
-      //           'Content-Type': 'application/json',
-      //         },
-      //         body: JSON.stringify(formData, null, 2),
-      //       },
-      //     )
-      //     if (response?.ok) {
-      //       setIndexTab(0)
-      //       setDataFromOrder({})
-      //       setSubmitting(true)
-      //       setStepOrder(1)
-      //       handleClickcurrentTab('1')
-      //       setTriggerScroll(true)
-      //       setDataInformation(undefined)
-      //     } else {
-      //       toast.error('Có lỗi xảy ra')
-      //     }
-      //   } catch {
-      //     toast.error('Có lỗi xảy ra')
-      //   }
-      // }
+      // console.log(formData)
+      if (formData) {
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_ORDER}v1/add`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData, null, 2),
+            },
+          )
+          if (response?.ok) {
+            setIndexTab(0)
+            setDataFromOrder({})
+            setSubmitting(true)
+            setStepOrder(1)
+            handleClickcurrentTab('1')
+            setTriggerScroll(true)
+            setDataInformation(undefined)
+          } else {
+            toast.error('Có lỗi xảy ra')
+          }
+        } catch {
+          toast.error('Có lỗi xảy ra')
+        }
+      }
     })
   }
 
