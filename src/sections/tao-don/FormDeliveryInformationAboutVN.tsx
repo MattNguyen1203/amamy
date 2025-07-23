@@ -71,6 +71,22 @@ const formSchema = z.object({
       required_error: 'Vui lòng nhập Phường xã người nhận',
     })
     .min(1, 'Vui lòng nhập Phường xã người nhận'),
+
+  recipientCodeCity: z
+    .string({
+      required_error: 'Vui lòng nhập mã thành phố người nhận',
+    })
+    .min(1, 'Vui lòng nhập mã thành phố người nhận'),
+  housingNumber: z
+    .string({
+      required_error: 'Vui lòng nhập thông tin số nhà',
+    })
+    .min(1, 'Vui lòng nhập thông tin số nhà'),
+  roadName: z
+    .string({
+      required_error: 'Vui lòng nhập thông tin tên đường',
+    })
+    .min(1, 'Vui lòng nhập thông tin tên đường'),
 })
 interface ICity {
   ProvinceName: string
@@ -111,7 +127,8 @@ export default function FormDeliveryInformationAboutVN({
   const [isDistrict, setIsDistrict] = useState<boolean>(false)
   const [dataWard, setWard] = useState<IWard[]>()
   const [isWard, setIsWard] = useState<boolean>(false)
-  const [recipientAddressType, setRecipientAddressType] = useState<string>('')
+  const [recipientAddressType, setRecipientAddressType] =
+    useState<string>('registeredAddress')
   const [pending, setPending] = useState<boolean>(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -126,6 +143,19 @@ export default function FormDeliveryInformationAboutVN({
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
           ? dataFromOrder?.recipientCity ?? ''
           : 'un',
+      recipientCodeCity:
+        dataFromOrder?.recipientAddressType !== 'atAmamyStore'
+          ? dataFromOrder?.recipientCodeCity ?? ''
+          : 'un',
+      housingNumber:
+        dataFromOrder?.housingNumber !== 'atAmamyStore'
+          ? dataFromOrder?.recipientCodeCity ?? ''
+          : 'un',
+      roadName:
+        dataFromOrder?.roadName !== 'atAmamyStore'
+          ? dataFromOrder?.recipientCodeCity ?? ''
+          : 'un',
+
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
           ? dataFromOrder?.district ?? ''
@@ -136,6 +166,7 @@ export default function FormDeliveryInformationAboutVN({
           : 'un',
     },
   })
+
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -154,6 +185,8 @@ export default function FormDeliveryInformationAboutVN({
     handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
+
+  console.log('dataFromOrder', dataFromOrder)
   useEffect(() => {
     if (pending) {
       form.setValue(
@@ -172,6 +205,7 @@ export default function FormDeliveryInformationAboutVN({
               '',
         {shouldValidate: true},
       )
+
       form.setValue(
         'district',
         recipientAddressType === 'atAmamyStore'
@@ -190,6 +224,7 @@ export default function FormDeliveryInformationAboutVN({
       )
     }
   }, [recipientAddressType, form])
+
   useEffect(() => {
     async function fetchProvinces() {
       try {
@@ -325,7 +360,7 @@ export default function FormDeliveryInformationAboutVN({
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
         <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
-          Thông tin nhận hàng tại Việt Nam
+          Thông tin nhận hàng {idOrder !== 1073 && 'tại Việt Nam'}
         </p>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
           <FormField
@@ -373,7 +408,7 @@ export default function FormDeliveryInformationAboutVN({
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
               <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ nhận hàng tại Việt Nam
+                Địa chỉ nhận hàng
               </FormLabel>
               <FormControl>
                 <RadioGroup
@@ -398,20 +433,23 @@ export default function FormDeliveryInformationAboutVN({
                       Nhận tại địa chỉ đăng ký
                     </FormLabel>
                   </FormItem>
-                  <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
-                    <FormControl>
-                      <RadioGroupItem
-                        id='r2'
-                        value='atAmamyStore'
-                      />
-                    </FormControl>
-                    <FormLabel
-                      htmlFor='r2'
-                      className='font-normal cursor-pointer '
-                    >
-                      Nhận tại cửa hàng Amamy
-                    </FormLabel>
-                  </FormItem>
+                  {idOrder !== 1073 && (
+                    <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
+                      <FormControl>
+                        <RadioGroupItem
+                          id='r2'
+                          value='atAmamyStore'
+                        />
+                      </FormControl>
+                      <FormLabel
+                        htmlFor='r2'
+                        className='font-normal cursor-pointer '
+                      >
+                        Nhận tại cửa hàng Amamy
+                      </FormLabel>
+                    </FormItem>
+                  )}
+
                   {idOrder === 1073 && (
                     <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                       <FormControl>
@@ -456,7 +494,7 @@ export default function FormDeliveryInformationAboutVN({
             </FormItem>
           )}
         />
-        {recipientAddressType == 'registeredAddress' && (
+        {recipientAddressType == 'registeredAddress' && idOrder !== 1073 && (
           <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
             <FormField
               control={form.control}
@@ -704,6 +742,91 @@ export default function FormDeliveryInformationAboutVN({
             />
           </div>
         )}
+        {recipientAddressType == 'registeredAddress' && idOrder === 1073 && (
+          <>
+            <div className='flex space-x-[1.5rem]'>
+              <FormField
+                control={form.control}
+                name='roadName'
+                render={({field}) => (
+                  <FormItem className='flex-1 space-y-0'>
+                    <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                      Tên đường(*)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                        placeholder='Marien Strasse'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='housingNumber'
+                render={({field}) => (
+                  <FormItem className='flex-1 space-y-0'>
+                    <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                      Số nhà (*)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                        placeholder='15'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className='flex space-x-[1.5rem]'>
+              <FormField
+                control={form.control}
+                name='recipientCity'
+                render={({field}) => (
+                  <FormItem className='flex-1 space-y-0'>
+                    <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                      Thành phố(*)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                        placeholder='Nhập tên thành phố'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='recipientCodeCity'
+                render={({field}) => (
+                  <FormItem className='flex-1 space-y-0'>
+                    <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                      Mã thành phố(*)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                        placeholder='10117'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </>
+        )}
+
         <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
           <div
             onClick={() => {

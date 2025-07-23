@@ -155,9 +155,10 @@ export default function Insurance({
               >
                 {data?.compensation?.title}
               </p>
-              <p className='text-pc-sub14m text-[rgba(0,0,0,0.92)]'>
-                {data?.compensation?.desc}
-              </p>
+              <div
+                className='text-pc-sub14m text-[rgba(0,0,0,0.92)]'
+                dangerouslySetInnerHTML={{__html: data?.compensation?.desc}}
+              ></div>
             </div>
             {!data?.user_chooses &&
               Array.isArray(data?.compensation?.policy) &&
