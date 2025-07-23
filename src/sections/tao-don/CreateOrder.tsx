@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import useStore from '@/app/(store)/store'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
+import {cn} from '@/lib/utils'
 import CeateNote from '@/sections/tao-don/CreateNote'
 import CustomBack from '@/sections/tao-don/CustomBack'
 import FormDeliveryInformation from '@/sections/tao-don/FormDeliveryInformation'
@@ -18,10 +18,10 @@ import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import Package from '@/sections/tao-don/Package'
-import { ICreateOder } from '@/sections/tao-don/oder.interface'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+import {useEffect, useState} from 'react'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 import './style.css'
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
@@ -118,7 +118,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       setPrevTabFormDelivery('1')
     }
   }, [dataInformation])
-  console.log(dataInformation)
   return (
     <>
       <Tabs

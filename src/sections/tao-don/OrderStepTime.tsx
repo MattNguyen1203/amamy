@@ -147,7 +147,6 @@ export default function OrderStepTime({
       setTriggerScroll(true)
     }
   }
-  console.log('🚀 ~ dataInformation:', dataInformation)
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
       <p className='sm:hidden text-pc-sub16b text-[#33A6E8]'>

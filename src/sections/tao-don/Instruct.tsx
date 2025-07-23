@@ -270,7 +270,6 @@ export default function Instruct({
             : dataFromOrder?.package ?? '',
         yeu_cau_them: dataFromOrder?.packageMessage ?? '',
       }
-      console.log(formData)
       if (formData) {
         try {
           const response = await fetch(

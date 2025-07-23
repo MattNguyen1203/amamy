@@ -26,7 +26,7 @@ import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Check, ChevronDown} from 'lucide-react'
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 const formSchema = z.object({
@@ -130,6 +130,11 @@ export default function FormDeliveryInformationAboutVN({
   const [recipientAddressType, setRecipientAddressType] =
     useState<string>('registeredAddress')
   const [pending, setPending] = useState<boolean>(false)
+  const isVietSec = useMemo(
+    () => recipientAddressType == 'registeredAddress' && idOrder === 1073,
+    [recipientAddressType, idOrder],
+  )
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -147,14 +152,16 @@ export default function FormDeliveryInformationAboutVN({
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
           ? dataFromOrder?.recipientCodeCity ?? ''
           : 'un',
-      housingNumber:
-        dataFromOrder?.housingNumber !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCodeCity ?? ''
-          : 'un',
-      roadName:
-        dataFromOrder?.roadName !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCodeCity ?? ''
-          : 'un',
+      housingNumber: isVietSec
+        ? dataFromOrder?.housingNumber
+        : dataFromOrder?.housingNumber !== 'atAmamyStore'
+        ? dataFromOrder?.recipientCodeCity ?? ''
+        : 'un',
+      roadName: isVietSec
+        ? dataFromOrder?.roadName
+        : dataFromOrder?.roadName !== 'atAmamyStore'
+        ? dataFromOrder?.recipientCodeCity ?? ''
+        : 'un',
 
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
@@ -166,6 +173,15 @@ export default function FormDeliveryInformationAboutVN({
           : 'un',
     },
   })
+
+  // set default value 'un' cho các field thêm ở viet-sec, để có thể next step không ảnh hưởng các chiều khác
+  useEffect(() => {
+    if (!isVietSec) {
+      form.setValue('housingNumber', 'un')
+      form.setValue('recipientCodeCity', 'un')
+      form.setValue('roadName', 'un')
+    }
+  }, [isVietSec])
 
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
@@ -186,7 +202,6 @@ export default function FormDeliveryInformationAboutVN({
     setTriggerScroll(true)
   }
 
-  console.log('dataFromOrder', dataFromOrder)
   useEffect(() => {
     if (pending) {
       form.setValue(
@@ -343,6 +358,11 @@ export default function FormDeliveryInformationAboutVN({
       form.setValue('recipientCity', 'un')
       form.setValue('district', 'un')
       form.setValue('recipientWardsandcommunes', 'un')
+      if (isVietSec) {
+        form.setValue('housingNumber', 'un')
+        form.setValue('recipientCodeCity', 'un')
+        form.setValue('roadName', 'un')
+      }
 
       form.trigger([
         'recipientCity',
@@ -350,6 +370,16 @@ export default function FormDeliveryInformationAboutVN({
         'recipientWardsandcommunes',
         'recipientAddress',
       ])
+    } else if (isVietSec) {
+      form.setValue('recipientWardsandcommunes', 'un')
+      form.setValue('district', 'un')
+      if (form.getValues('recipientCodeCity') === 'un') {
+        form.setValue('housingNumber', '')
+        form.setValue('recipientCodeCity', '')
+        form.setValue('recipientCity', '')
+        form.setValue('roadName', '')
+        form.setValue('recipientAddress', '')
+      }
     }
   }, [form, recipientAddressType])
 
@@ -742,28 +772,9 @@ export default function FormDeliveryInformationAboutVN({
             />
           </div>
         )}
-        {recipientAddressType == 'registeredAddress' && idOrder === 1073 && (
+        {isVietSec && (
           <>
             <div className='flex space-x-[1.5rem]'>
-              <FormField
-                control={form.control}
-                name='roadName'
-                render={({field}) => (
-                  <FormItem className='flex-1 space-y-0'>
-                    <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Tên đường(*)
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                        placeholder='Marien Strasse'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={form.control}
                 name='housingNumber'
@@ -776,6 +787,25 @@ export default function FormDeliveryInformationAboutVN({
                       <Input
                         className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
                         placeholder='15'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='roadName'
+                render={({field}) => (
+                  <FormItem className='flex-1 space-y-0'>
+                    <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                      Tên đường(*)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                        placeholder='Marien Strasse'
                         {...field}
                       />
                     </FormControl>

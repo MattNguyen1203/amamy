@@ -34,7 +34,7 @@ import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useState, useTransition} from 'react'
+import {useEffect, useMemo, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
 import {toast} from 'sonner'
 import {z} from 'zod'
@@ -88,6 +88,13 @@ export default function Package({
     useState<boolean>(false)
   const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
     useState<{value: string; title: string}>({value: '', title: ''})
+
+  const isVietSec = useMemo(
+    () =>
+      dataFromOrder?.recipientAddressType === 'registeredAddress' &&
+      dataFromOrder?.shipping === '1073',
+    [dataFromOrder?.recipientAddressType, dataFromOrder?.shipping],
+  )
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -127,24 +134,28 @@ export default function Package({
             ? dataFromOrder?.recipientCity
             : dataFromOrder?.recipientCity ?? '',
         ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
-        quan_huyen_nguoi_nhan:
-          dataFromOrder?.recipientAddressType === 'registeredAddress' &&
-          (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.district ?? ''
-            : '',
-        phuong_xa_nguoi_nhan:
-          dataFromOrder?.recipientAddressType === 'registeredAddress' &&
-          (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.recipientWardsandcommunes ?? ''
-            : '',
-        so_nha_nguoi_nhan:
-          type === 'vietduc' || type === 'viethan'
-            ? dataFromOrder?.housingNumber ?? ''
-            : '',
-        ten_duong_nguoi_nhan:
-          type === 'vietduc' || type === 'viethan'
-            ? dataFromOrder?.roadName ?? ''
-            : '',
+        quan_huyen_nguoi_nhan: isVietSec
+          ? ''
+          : dataFromOrder?.recipientAddressType === 'registeredAddress' &&
+            (type === 'ducvn' || type === 'nhatviet')
+          ? dataFromOrder?.district ?? ''
+          : '',
+        phuong_xa_nguoi_nhan: isVietSec
+          ? ''
+          : dataFromOrder?.recipientAddressType === 'registeredAddress' &&
+            (type === 'ducvn' || type === 'nhatviet')
+          ? dataFromOrder?.recipientWardsandcommunes ?? ''
+          : '',
+        so_nha_nguoi_nhan: isVietSec
+          ? dataFromOrder?.housingNumber
+          : type === 'vietduc' || type === 'viethan'
+          ? dataFromOrder?.housingNumber ?? ''
+          : '',
+        ten_duong_nguoi_nhan: isVietSec
+          ? dataFromOrder?.roadName
+          : type === 'vietduc' || type === 'viethan'
+          ? dataFromOrder?.roadName ?? ''
+          : '',
         id_hoac_cmt:
           type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
 
@@ -187,8 +198,8 @@ export default function Package({
           form?.getValues('package') === 'note'
             ? form?.getValues('packageMessage')
             : form?.getValues('package') ?? '',
+        yeu_cau_them: form?.getValues('packageMessage') ?? '',
       }
-      // console.log(formData)
       if (formData) {
         try {
           const response = await fetch(
@@ -259,7 +270,7 @@ export default function Package({
                     <FormField
                       key={packageIndex}
                       control={form.control}
-                      name={`package`}
+                      name='package'
                       render={({field}) => (
                         <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                           <FormControl>
@@ -315,7 +326,7 @@ export default function Package({
 
         <FormField
           control={form.control}
-          name={`packageMessage`}
+          name='packageMessage'
           render={({field}) => (
             <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
               <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
@@ -502,9 +513,13 @@ export default function Package({
                               dataFromOrder?.recipientAddressType ===
                                 'registeredAddress' &&
                               ' - ' +
-                                dataFromOrder?.recipientWardsandcommunes +
-                                ' - ' +
-                                dataFromOrder?.district +
+                                (isVietSec
+                                  ? dataFromOrder?.housingNumber +
+                                    ' - ' +
+                                    dataFromOrder?.roadName
+                                  : dataFromOrder?.recipientWardsandcommunes +
+                                    ' - ' +
+                                    dataFromOrder?.district) +
                                 ' - ' +
                                 dataFromOrder?.recipientCity}
                             {(type === 'vietduc' || type === 'viethan') &&
