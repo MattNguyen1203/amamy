@@ -2,6 +2,7 @@
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
+import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import DetailCentenBlog from '@/sections/blog/detail/Index'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
 import metadataValues from '@/utils/metadataValues'
@@ -30,19 +31,24 @@ export default async function page({params}: {params: {slug: string}}) {
       next: {revalidate: 60},
     },
   })
-  const [dataDetailPost, dataFavourite] = await Promise.all([
+  const [dataDetailPost, dataFavourite, schemaData] = await Promise.all([
     fetchDataDetailPost,
     fetchDataFavourite,
+    getSchemaMarkup(params?.slug),
   ])
   return (
     <main>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
+      ></script>
       <div className='bg-white'>
         <Breadcrumb
           data={[
             {title: 'Hữu ích cho gửi hàng', slug: '/blogs'},
             {title: dataDetailPost?.post?.title ?? 'Bài Viết', slug: ''},
           ]}
-          className='sm:px-[5rem] xsm:px-[1rem] xsm:pb-[1.5rem]'
+          className='container mx-auto xsm:px-[1rem] xsm:pb-[1.5rem]'
         />
         <DetailCentenBlog
           dataDetailPost={dataDetailPost}

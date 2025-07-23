@@ -1,4 +1,5 @@
-import PrenyAI from '@/lib/preni'
+import CX from '@/lib/CX'
+// import PrenyAI from '@/lib/preni'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -53,7 +54,8 @@ const ContactButton = ({data}: ContactButtonProps) => {
           <div className='size-8 xsm:size-8 animate-ping bg-white rounded-full z-0'></div>
         </div>
         <div className='size-[3.125rem] xsm:size-10 rounded-full shadow-lg flex-center bg-transparent'></div>
-        <PrenyAI />
+        {/* <PrenyAI /> */}
+        <CX />
       </div>
     </div>
   )

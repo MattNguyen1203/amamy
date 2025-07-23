@@ -6,6 +6,8 @@ import LocationTag from '@/sections/tracking-bill/LocationTag'
 import {toast} from 'sonner'
 import './style.css'
 import Link from 'next/link'
+import {useState} from 'react'
+
 export type IProgress = {
   title: string
   desc: string
@@ -34,10 +36,24 @@ export type OrderInformationProps = {
 }
 
 const OrderInformation = ({searched, data}: OrderInformationProps) => {
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipText, setTooltipText] = useState('Copy')
+
   const handleCopy = () => {
     navigator.clipboard.writeText(data?.ma_don || '')
     toast.success('Copy Thành Công')
   }
+
+  const handleCopyThirdParty = () => {
+    navigator.clipboard.writeText(data?.ma_van_don_thu_ba || '')
+    setTooltipText('Copied')
+    toast.success('Copy Thành Công')
+    setTimeout(() => {
+      setTooltipText('Copy')
+      setShowTooltip(false)
+    }, 2000)
+  }
+
   if (!searched) {
     return null
   }
@@ -116,14 +132,28 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
         {/* <InformationList data={data?.tien_trinh_giao_hang} /> */}
         <div className='flex-1'>
           {data?.ma_van_don_thu_ba && (
-            <div className='mb-6 progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'>
+            <div className='mb-6 progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.net/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.net/wp-content/uploads/2025/04/Huge-iconactive.svg)]'>
               <ul
                 dangerouslySetInnerHTML={{__html: data?.text_tracking_thu_ba}}
               ></ul>
               <p className='pl-12 xsm:pl-9'>
                 Mã vận đơn:{' '}
-                <span className='text-[#38b6ff] font-semibold'>
+                <span
+                  className='text-[#38b6ff] font-semibold cursor-pointer relative inline-block'
+                  onClick={handleCopyThirdParty}
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => {
+                    if (tooltipText === 'Copy') {
+                      setShowTooltip(false)
+                    }
+                  }}
+                >
                   {data?.ma_van_don_thu_ba}
+                  {showTooltip && (
+                    <span className='absolute -right-2 top-1/2 transform -translate-y-1/2 translate-x-full bg-black text-white text-xs px-2 py-1 rounded whitespace-nowrap'>
+                      {tooltipText}
+                    </span>
+                  )}
                 </span>
               </p>
               <p className='pl-12 xsm:pl-9'>
@@ -141,7 +171,7 @@ const OrderInformation = ({searched, data}: OrderInformationProps) => {
           {data?.tien_trinh_giao_hang && (
             <div
               dangerouslySetInnerHTML={{__html: data?.tien_trinh_giao_hang}}
-              className='progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.okhub-tech.com/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
+              className='progress-order text-pc-14 text-black [&_strong]:font-semibold xsm:text-mb-12 xsm:text-[rgba(0,0,0,0.80)] flex-1 [&_ul>li]:after:content-[url(https://cms.amamy.net/wp-content/uploads/2025/04/Huge-icon.svg)]  first-of-type:[&_ul>li]:after:content-[url(https://cms.amamy.net/wp-content/uploads/2025/04/Huge-iconactive.svg)]'
             ></div>
           )}
         </div>

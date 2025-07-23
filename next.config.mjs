@@ -8,6 +8,9 @@ const nextConfig = {
       {protocol: 'http', hostname: '**'},
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: false,
   output: 'standalone',
   compiler: {

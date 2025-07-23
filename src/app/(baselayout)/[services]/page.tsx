@@ -2,6 +2,7 @@
 import fetchData from '@/fetch/fetchData'
 import {fetchDataListService} from '@/fetch/fetchDataListService'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
+import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import ServicePage from '@/sections/service'
 import metadataValues from '@/utils/metadataValues'
 import {notFound} from 'next/navigation'
@@ -26,19 +27,37 @@ export default async function Service({params}: {params: {services: string}}) {
       next: {revalidate: 60},
     },
   })
-  const [resService, resListService] = await Promise.all([
-    fetchDataServices,
-    fetchDataListService(),
-  ])
+
+  const fetchChatBoxAI = fetchData({
+    api: 'options?fields=box_chat_ai',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+
+  const [resService, resListService, schemaData, chatBoxAIdata] =
+    await Promise.all([
+      fetchDataServices,
+      fetchDataListService(),
+      getSchemaMarkup('chieu-van-chuyen/' + params?.services),
+      fetchChatBoxAI,
+    ])
   if (resService?.data?.status === 404) {
     return notFound()
   }
   return (
-    <div className='w-full bg-white text-black flex flex-col items-center'>
-      <ServicePage
-        data={resService}
-        listService={resListService}
-      />
-    </div>
+    <main>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
+      ></script>
+      <div className='w-full bg-white text-black flex flex-col items-center'>
+        <ServicePage
+          data={resService}
+          listService={resListService}
+          chatBoxAiData={chatBoxAIdata?.data?.box_chat_ai}
+        />
+      </div>
+    </main>
   )
 }

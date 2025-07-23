@@ -31,11 +31,11 @@ const formSchema = z.object({
   email: z.string().email({
     message: 'Địa chỉ email không đúng!',
   }),
-  whereToContact: z
-    .string({
-      required_error: 'Vui lòng chọn phương thức liên lạc',
-    })
-    .min(1, 'Vui lòng chọn phương thức liên lạc'),
+  // whereToContact: z
+  //   .string({
+  //     required_error: 'Vui lòng chọn phương thức liên lạc',
+  //   })
+  //   .min(1, 'Vui lòng chọn phương thức liên lạc'),
   name: z
     .string({
       required_error: 'Vui lòng nhập tên người gửi',
@@ -62,10 +62,6 @@ const dataContactMethod = [
   {
     img: '/order/like.png',
     title: 'Facebook Fanpage Amamy',
-  },
-  {
-    img: '/order/fb.png',
-    title: 'Vận chuyển Amamy',
   },
   {
     img: '/order/zalo.png',
@@ -120,8 +116,8 @@ export default function FormStepStart({
       name: dataFromOrder?.name ?? '',
       shipping: dataFromOrder?.shipping ?? '',
       customercode: dataFromOrder?.customercode ?? '',
-      whereToContact:
-        dataFromOrder?.whereToContact ?? dataContactMethod?.[0]?.title,
+      // whereToContact:
+      //   dataFromOrder?.whereToContact ?? dataContactMethod?.[0]?.title,
       nameFacebook: dataFromOrder?.nameFacebook ?? '',
     },
   })
@@ -240,6 +236,7 @@ export default function FormStepStart({
               </FormItem>
             )}
           />
+          {/* 
           <FormField
             control={form.control}
             name='whereToContact'
@@ -320,13 +317,14 @@ export default function FormStepStart({
                   </SelectContent>
                 </Select>
                 <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.80)] !mt-[0.25rem]'>
+                {/* <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.80)] !mt-[0.25rem]'>
                   *Chọn đúng kênh đã từng liên hệ: "Facebook Page Amamy" khác
                   với "Vận chuyển Amamy"
-                </p>
+                </p> 
               </FormItem>
             )}
           />
+         */}
         </div>
         <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem] mb-[1.75rem] xsm:mb-[1.25rem]'>
           <FormField
@@ -557,7 +555,7 @@ export default function FormStepStart({
                   ))}
               </div>
             </div>
-            <div
+            {/* <div
               className={cn(
                 'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
                 howToContactAmamy && 'bottom-0',
@@ -621,7 +619,7 @@ export default function FormStepStart({
                     ),
                   )}
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </form>

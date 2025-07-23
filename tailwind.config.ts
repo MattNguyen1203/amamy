@@ -110,10 +110,20 @@ const config: Config = {
             height: '0',
           },
         },
+        'fade-in': {
+          '0%': {opacity: '0'},
+          '100%': {opacity: '1'},
+        },
+        'scale-in': {
+          '0%': {opacity: '0', transform: 'scale(0.85)'},
+          '100%': {opacity: '1', transform: 'scale(1)'},
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.3s ease-out',
+        'scale-in': 'scale-in 0.3s ease-out',
       },
     },
   },
@@ -186,6 +196,10 @@ const config: Config = {
         },
         '.text-mb-13M': {
           '@apply text-[0.8125rem] font-medium leading-[1.23] tracking-[-0.023438rem] font-montserrat':
+            {},
+        },
+        '.text-mb-13S': {
+          '@apply text-[0.8125rem] font-semibold leading-[1.23] tracking-[-0.023438rem] font-montserrat':
             {},
         },
         '.text-mb-12': {

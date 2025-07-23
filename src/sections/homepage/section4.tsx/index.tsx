@@ -92,7 +92,7 @@ const Section4 = ({withDHS}: Props) => {
                           className='xsm:!w-[18.75rem] xsm:bg-white xsm:rounded-[1.25rem] xsm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] xsm:!h-[21.25rem] w-[50.6875rem] h-[40.5rem] cursor-pointer'
                         >
                           <Link
-                            href={'/'}
+                            href={'/blogs/' + item?.post?.[0]?.slug}
                             className='block'
                           >
                             <div className='p-[0.75rem] space-y-[0.25rem]'>

@@ -11,6 +11,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+import {Button} from '@/components/ui/button'
+import {Checkbox} from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -29,85 +31,75 @@ import {
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import ICAddress from '@/sections/tao-don/ICAddress'
-import ICPhone from '@/sections/tao-don/ICPhone'
-import ICTime from '@/sections/tao-don/ICTime'
-import ICX from '@/sections/tao-don/ICX'
+import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import {
-  ICreateOder,
-  IInformationInstructOrder,
-  IInformationInstructOrder_SelectBranch,
-} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
-import Link from 'next/link'
-import {useEffect, useRef, useState, useTransition} from 'react'
+import {useEffect, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
 import {toast} from 'sonner'
 import {z} from 'zod'
-const formSchema = z.object({
-  branch: z
-    .string({
-      required_error: 'Vui lòng nhập thông tin tên đường',
-    })
-    .min(1, 'Vui lòng nhập thông tin tên đường'),
-  recipientPaymentInformation: z
-    .string({
-      required_error: 'Vui lòng nhập thông tin thanh toán',
-    })
-    .min(1, 'Vui lòng nhập thông tin thanh toán'),
-})
-export default function Instruct({
+export default function Package({
   data,
   handleClickcurrentTab,
-  dataFromOrder,
-  setSubmitting,
-  setDataFromOrder,
-  type,
-  importantNote,
-  prevStep,
-  setDataInformation,
-  paymentMethod,
   setIndexTab,
   indexTab,
+  setDataFromOrder,
+  dataFromOrder,
+  stepEnd = false,
+  type,
   european,
-  setSelectedImage,
+  setSubmitting,
+  setDataInformation,
+  importantNote,
+  paymentMethod,
   nation,
 }: {
-  data?: IInformationInstructOrder
+  data: IInformationOrder['package']
   handleClickcurrentTab: (nextTab: string) => void
-  dataFromOrder?: IDataFromOrder
-  setSubmitting: React.Dispatch<React.SetStateAction<boolean>>
+  setIndexTab: React.Dispatch<React.SetStateAction<number>>
+  indexTab: number
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
+  dataFromOrder: IDataFromOrder
+  stepEnd?: boolean
   type?: string
-  importantNote?: string
-  prevStep: string
+  european?: string
+  setSubmitting: React.Dispatch<React.SetStateAction<boolean>>
   setDataInformation: React.Dispatch<
     React.SetStateAction<ICreateOder | undefined>
   >
+  importantNote?: string
   paymentMethod?: {
     value: string
     title: string
   }[]
-  setIndexTab: React.Dispatch<React.SetStateAction<number>>
-  indexTab: number
-  european?: string
-  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
   nation?: string
 }) {
   const isMobile = useIsMobile()
-  const {setStepOrder} = useStore((state) => state)
+  const {stepOrder, setStepOrder} = useStore((state) => state)
   const [isPending, setTransition] = useTransition()
-  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
-  const containerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const FormSchema = z.object({
+    package: z.string().min(1, 'Vui lòng chọn loại bảo hiểm'),
+    packageMessage: z.string().min(0, 'Vui lòng nhập nội dung'),
+    recipientPaymentInformation: z.string({
+      required_error: 'Vui lòng nhập thông tin thanh toán',
+    }),
+  })
   const [selectPaymentInformation, setSelectPaymentInformation] =
     useState<boolean>(false)
   const [selectPaymentInformationValue, setSelectPaymentInformationValue] =
     useState<{value: string; title: string}>({value: '', title: ''})
-  const [selectBranch, setSelectBranch] = useState<boolean>(false)
-  const [dataBranch, setDataBranch] =
-    useState<IInformationInstructOrder_SelectBranch | null>(null)
-  const [selectBranchValue, setSelectBranchValue] = useState<string>()
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      package: data?.list_package
+        ? dataFromOrder?.package ?? ''
+        : 'Chưa có thông tin',
+      packageMessage: dataFromOrder?.packageMessage ?? '',
+      recipientPaymentInformation:
+        dataFromOrder?.recipientPaymentInformation ?? paymentMethod?.[0]?.value,
+    },
+  })
+  const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -115,86 +107,13 @@ export default function Instruct({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    mode: 'onChange',
-    defaultValues: {
-      branch:
-        dataFromOrder?.branch ??
-        data?.select_branch?.[0]?.title ??
-        'chưa có thông tin',
-      recipientPaymentInformation:
-        dataFromOrder?.recipientPaymentInformation ?? paymentMethod?.[0]?.value,
-    },
-  })
   useEffect(() => {
-    containerRefs.current.forEach((container) => {
-      if (!container) return
-      const images = container.querySelectorAll('img')
-      images.forEach((img) => {
-        img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
-        img.onclick = () => {
-          // Extract the highest resolution image from srcset if available
-          if (img.srcset) {
-            const srcsetEntries = img.srcset.split(',').map((entry) => {
-              const [url, size] = entry.trim().split(' ')
-              // Parse the size value (e.g., "2x" or "1200w")
-              const sizeValue = size
-                ? size.endsWith('w')
-                  ? parseInt(size.replace(/[w]$/, '')) // Only handle width-based sizes like 1200w
-                  : 0 // Ignore density descriptors like 2x
-                : 0
-              return {
-                url,
-                sizeValue,
-                hasWidthDescriptor: size?.endsWith('w') || false,
-              }
-            })
-
-            // Filter for entries with width descriptors only (like 1200w)
-            const widthBasedEntries = srcsetEntries.filter(
-              (entry) => entry.hasWidthDescriptor,
-            )
-
-            if (widthBasedEntries.length > 0) {
-              // Sort by width value in descending order and get the URL with the largest width
-              widthBasedEntries.sort((a, b) => b.sizeValue - a.sizeValue)
-              setSelectedImage(widthBasedEntries[0].url)
-            } else {
-              // Fallback to src if no width-based entries are found
-              setSelectedImage(img.src)
-            }
-          }
-        } // Khi click, mở ảnh lên
-      })
-    })
-  })
-  useEffect(() => {
-    if (
-      (form?.getValues('branch') || dataFromOrder?.branch) &&
-      Array.isArray(data?.select_branch)
-    ) {
-      const foundItem = data?.select_branch?.find(
-        (item) => item?.title === form?.getValues('branch'),
-      )
-      if (foundItem) {
-        setDataBranch({
-          title: foundItem?.title,
-          address: foundItem?.address,
-          time: foundItem?.time,
-          phone: foundItem?.phone,
-        })
-      }
-    }
-  }, [form?.getValues('branch'), dataFromOrder?.branch])
-  useEffect(() => {
-    if (selectBranch || selectPaymentInformation) {
+    if (selectPaymentInformation) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
-  }, [selectBranch, selectPaymentInformation])
+  }, [selectPaymentInformation])
   function handleCreateOrder() {
     setTransition(async () => {
       const currentDate = new Date()
@@ -254,10 +173,10 @@ export default function Instruct({
         ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
 
         // data branch
-        brand_title: dataBranch?.title ?? '',
-        brand_address: dataBranch?.address ?? '',
-        brand_time: dataBranch?.time ?? '',
-        brand_phone: dataBranch?.phone ?? '',
+        brand_title: '',
+        brand_address: '',
+        brand_time: '',
+        brand_phone: '',
 
         loai_thoi_gian_giao:
           Object.values(dataFromOrder?.userChoices || {})[0] ?? '',
@@ -265,12 +184,11 @@ export default function Instruct({
           Object.values(dataFromOrder?.userChoices || {})[1] ?? '',
         loai_bao_hiem: dataFromOrder?.typeofinsurance ?? '',
         loai_dong_goi:
-          dataFromOrder?.package === 'note'
-            ? dataFromOrder?.packageMessage
-            : dataFromOrder?.package ?? '',
-        yeu_cau_them: dataFromOrder?.packageMessage ?? '',
+          form?.getValues('package') === 'note'
+            ? form?.getValues('packageMessage')
+            : form?.getValues('package') ?? '',
       }
-      console.log(formData)
+      // console.log(formData)
       if (formData) {
         try {
           const response = await fetch(
@@ -300,202 +218,132 @@ export default function Instruct({
       }
     })
   }
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log('🚀 ~ onSubmit values:', values)
-    // console.log(dataFromOrder)
+
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    if (values) {
+      if (stepOrder < 7) {
+        setStepOrder(7)
+      }
+      setDataFromOrder({
+        ...dataFromOrder,
+        package: values.package,
+        packageMessage: values.packageMessage,
+      })
+      handleClickcurrentTab('7')
+      setTriggerScroll(true)
+      setIndexTab(indexTab + 1)
+    }
   }
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-8'
+        className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
       >
-        <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-          <p className='text-[#33A6E8] text-pc-sub16b'>
-            Hướng dẫn gửi hàng lên Amamy Post
-          </p>
-          {data?.select_branch && (
-            <>
-              <div className='rounded-[1.25rem]'>
-                <FormField
-                  control={form.control}
-                  name='branch'
-                  render={({field}) => (
-                    <FormItem
-                      onClick={() => {
-                        if (isMobile) {
-                          setSelectBranch(true)
-                        }
-                      }}
-                      className={cn(
-                        'flex-1 space-y-0',
-                        Array.isArray(data?.select_branch) &&
-                          data?.select_branch?.length < 2 &&
-                          'pointer-events-none',
-                      )}
-                    >
-                      <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                        Chọn chi nhánh Amamy Post (*)
-                      </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl
-                          className={cn(
-                            '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
-                            data?.select_branch &&
-                              data?.select_branch?.length < 2 &&
-                              '[&_svg]:hidden',
-                          )}
-                        >
-                          <SelectTrigger className='!shadow-none [&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-time]:hidden [&_.select-phone]:hidden xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
-                            {!isMobile && (
-                              <SelectValue placeholder='Chọn chi nhánh' />
-                            )}
-                            {isMobile && !selectBranchValue && (
-                              <SelectValue placeholder='Chọn chi nhánh' />
-                            )}
-                            {isMobile && field.value && selectBranchValue && (
-                              <div className='space-x-[0.75rem] flex items-center flex-1'>
-                                <p className='text-black text-pc-sub14m '>
-                                  {selectBranchValue}
+        {data?.list_package && (
+          <>
+            <div className='p-[1rem] rounded-[1.25rem] bg-white border-[1px] border-solid border-[#DCDFE4]'>
+              <p className='mb-[1rem] text-[rgba(0,0,0,0.92)] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+                {data?.title || 'Chọn cách đóng gói'}
+              </p>
+              {data?.note_more && (
+                <p
+                  className='my-[1rem] text-pc-sub14m text-[#F00] [&_ul_li]:list-disc [&_ul]:pl-[1rem]'
+                  dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
+                ></p>
+              )}
+              <div className='flex flex-col space-y-[1rem]'>
+                {Array.isArray(data?.list_package) &&
+                  data?.list_package?.map((packageItem, packageIndex) => (
+                    <FormField
+                      key={packageIndex}
+                      control={form.control}
+                      name={`package`}
+                      render={({field}) => (
+                        <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
+                          <FormControl>
+                            <Checkbox
+                              className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
+                              checked={
+                                field.value ===
+                                (packageItem?.separate_request
+                                  ? 'note'
+                                  : packageItem?.label)
+                              }
+                              onCheckedChange={(checked) => {
+                                field.onChange(
+                                  checked
+                                    ? packageItem?.separate_request
+                                      ? 'note'
+                                      : packageItem?.label
+                                    : undefined,
+                                )
+                              }}
+                            />
+                          </FormControl>
+                          <div className='leading-none space-y-[0rem] flex flex-col'>
+                            <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
+                              <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
+                                {packageItem?.label}
+                              </FormLabel>
+                              {packageItem?.tag && (
+                                <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
+                                  {packageItem?.tag}
                                 </p>
-                              </div>
+                              )}
+                            </div>
+                            {packageItem?.desc && (
+                              <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
+                                <p
+                                  className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
+                                  dangerouslySetInnerHTML={{
+                                    __html: packageItem?.desc,
+                                  }}
+                                ></p>
+                              </FormLabel>
                             )}
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
-                          {Array.isArray(data?.select_branch) &&
-                            data?.select_branch?.length > 0 &&
-                            data?.select_branch?.map(
-                              (
-                                item: IInformationInstructOrder_SelectBranch,
-                                index: number,
-                              ) => (
-                                <SelectItem
-                                  key={index}
-                                  className='[&>span>span>svg]:hidden cursor-pointer h-auto rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
-                                  value={String(item?.title)}
-                                >
-                                  <div className='flex-1 space-y-[0.75rem]'>
-                                    <p className='text-pc-tab-title text-black'>
-                                      <span className='amamy-post'>
-                                        Amamy Post{' '}
-                                      </span>
-                                      <span>{item?.title}</span>
-                                    </p>
-                                    <div className='select-addres flex space-x-[0.5rem] items-start'>
-                                      <ICAddress className='size-[1.5rem]' />
-                                      <p
-                                        dangerouslySetInnerHTML={{
-                                          __html: item?.address,
-                                        }}
-                                        className='text-black text-pc-sub14m '
-                                      ></p>
-                                    </div>
-                                    <div className='select-time flex space-x-[0.5rem] items-start'>
-                                      <ICTime className='size-[1.5rem]' />
-                                      <p
-                                        dangerouslySetInnerHTML={{
-                                          __html: item?.time,
-                                        }}
-                                        className='text-black text-pc-sub14m '
-                                      ></p>
-                                    </div>
-                                    <div className='select-phone flex space-x-[0.5rem] items-start'>
-                                      <ICPhone className='size-[1.5rem]' />
-                                      <p
-                                        dangerouslySetInnerHTML={{
-                                          __html: item?.phone,
-                                        }}
-                                        className='text-black text-pc-sub14m '
-                                      ></p>
-                                    </div>
-                                  </div>
-                                </SelectItem>
-                              ),
-                            )}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                    </FormItem>
-                  )}
-                />
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  ))}
               </div>
-              {dataBranch && (
-                <div className='!mt-[0.75rem] flex-1 space-y-[0.75rem] p-[1rem] bg-white rounded-[1.25rem]'>
-                  <p className='text-pc-tab-title text-black'>
-                    <span className='amamy-post'>Amamy Post </span>
-                    <span>{dataBranch?.title}</span>
-                  </p>
-                  {dataBranch?.address && (
-                    <div className='select-addres flex space-x-[0.5rem] items-start'>
-                      <ICAddress className='size-[1.5rem]' />
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: dataBranch?.address || '',
-                        }}
-                        className='flex-1 text-black text-pc-sub14m '
-                      ></p>
-                    </div>
-                  )}
-                  {dataBranch?.time && (
-                    <div className='select-time flex space-x-[0.5rem] items-start'>
-                      <ICTime className='size-[1.5rem]' />
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: dataBranch?.time || '',
-                        }}
-                        className='flex-1 text-black text-pc-sub14m '
-                      ></p>
-                    </div>
-                  )}
-                  {dataBranch?.phone && (
-                    <Link
-                      href={'tel:' + dataBranch?.phone}
-                      className='select-phone flex space-x-[0.5rem] items-start'
-                    >
-                      <ICPhone className='size-[1.5rem]' />
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: dataBranch?.phone || '',
-                        }}
-                        className='flex-1 text-black text-pc-sub14m '
-                      ></p>
-                    </Link>
-                  )}
-                </div>
-              )}
-            </>
-          )}
-          {data?.packing_instructions && (
-            <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
-              <div
-                className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]: [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]: [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *: [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
-                dangerouslySetInnerHTML={{
-                  __html: data?.packing_instructions || '',
-                }}
-              ></div>
-              {data?.images && (
-                <div
-                  ref={(el) => {
-                    containerRefs.current[0] = el
-                  }}
-                >
-                  <ImageV2
-                    src={data?.images}
-                    alt=''
-                    width={300 * 2}
-                    height={200 * 2}
-                    className='rounded-[1rem] max-w-[18.75rem] xsm:max-w-full max-h-[12.5rem] xsm:max-h-[12.95831rem] object-contain'
-                  />
-                </div>
-              )}
             </div>
+          </>
+        )}
+
+        <FormField
+          control={form.control}
+          name={`packageMessage`}
+          render={({field}) => (
+            <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
+              <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
+                <p className='text-pc-sub12s text-[rgba(0,0,0,0.80)]'>
+                  Viết yêu cầu của bạn
+                </p>
+              </FormLabel>
+              <FormControl>
+                <textarea
+                  {...field}
+                  placeholder='Nhập nội dung'
+                  className='overflow-hidden flex min-h-[4.5rem] w-full rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 resize-none'
+                  style={{
+                    height: 'auto',
+                    minHeight: '4.5rem',
+                  }}
+                  onInput={(e) => {
+                    const target = e.target as HTMLTextAreaElement
+                    target.style.height = 'auto'
+                    target.style.height =
+                      Math.max(4.5 * 16, target.scrollHeight) + 'px'
+                  }}
+                />
+              </FormControl>
+            </FormItem>
           )}
+        />
+        {stepEnd && (
           <FormField
             control={form.control}
             name='recipientPaymentInformation'
@@ -573,17 +421,19 @@ export default function Instruct({
               </FormItem>
             )}
           />
+        )}
 
-          <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
-            <div
-              onClick={() => {
-                setIndexTab(indexTab - 1)
-                handleClickcurrentTab(prevStep)
-              }}
-              className='flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
-            >
-              <p className='text-pc-sub16m text-black'>Quay lại</p>
-            </div>
+        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+          <div
+            onClick={() => {
+              setIndexTab(indexTab - 1)
+              handleClickcurrentTab('5')
+            }}
+            className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+          >
+            <p className='text-pc-sub16m text-black'>Quay lại</p>
+          </div>
+          {stepEnd ? (
             <AlertDialog>
               {form.formState.isValid ? (
                 <AlertDialogTrigger className='flex-1'>
@@ -617,7 +467,7 @@ export default function Instruct({
                     'w-[21.4375rem] max-w-[21.4375rem] sm:w-[52.5rem] sm:max-w-[52.5rem]',
                 )}
               >
-                <div className='xsm:max-h-[28rem] max-h-[60vh] overflow-hidden overflow-y-auto'>
+                <div className='xsm:max-h-[28rem] max-h-[60vh] overflow-hidden overflow-y-auto '>
                   <ImageV2
                     alt=''
                     src={'/order/WarningCircle.svg'}
@@ -735,14 +585,14 @@ export default function Instruct({
                           <span>{dataFromOrder?.email}</span>
                         </p>
                       )}
-                      <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                      {/* <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                         <strong className='font-semibold sm:leading-[1.14]'>
                           Loại tiền tệ thanh toán:{' '}
                         </strong>
                         <span>
                           {form?.getValues('recipientPaymentInformation')}
                         </span>
-                      </p>
+                      </p> */}
                     </div>
                     {type === 'nhatviet' && (
                       <div className='mt-[1.75rem]'>
@@ -781,112 +631,29 @@ export default function Instruct({
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-          </div>
-        </div>
-        {isMobile && (
-          <>
-            <PopupPaymentInfor
-              form={form}
-              selectPaymentInformation={selectPaymentInformation}
-              setSelectPaymentInformation={setSelectPaymentInformation}
-              setSelectPaymentInformationValue={
-                setSelectPaymentInformationValue
-              }
-              paymentMethod={paymentMethod}
-            />
-            {Array.isArray(data?.select_branch) &&
-              data?.select_branch &&
-              data?.select_branch?.length > 1 && (
-                <>
-                  <div
-                    onClick={() => {
-                      setSelectBranch(false)
-                    }}
-                    className={cn(
-                      'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none !mt-0',
-                      selectBranch && 'bg-black/70 pointer-events-auto',
-                    )}
-                  ></div>
-                  <div
-                    className={cn(
-                      'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem]',
-                      selectBranch && 'bottom-0',
-                    )}
-                  >
-                    <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] rounded-t-[1.25rem] relative p-[0.5rem] flex-center '>
-                      <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
-                        Chọn chi nhánh Amamy Post
-                      </p>
-                      <div
-                        onClick={() => {
-                          setSelectBranch(false)
-                        }}
-                        className='absolute top-[0.5rem] right-[0.5rem]'
-                      >
-                        <ICX className='size-[1.5rem]' />
-                      </div>
-                    </div>
-                    <div className='p-[1rem] bg-[#F6F6F6] space-y-[1rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
-                      {Array.isArray(data?.select_branch) &&
-                        data?.select_branch?.map(
-                          (
-                            item: IInformationInstructOrder_SelectBranch,
-                            index: number,
-                          ) => (
-                            <div
-                              key={index}
-                              onClick={() => {
-                                form.setValue('branch', String(item?.title), {
-                                  shouldValidate: true, // Kích hoạt validate ngay sau khi set value
-                                })
-                                setSelectBranchValue(item?.title)
-                                setSelectBranch(false)
-                              }}
-                              className='bg-white rounded-[1.25rem] space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8]'
-                            >
-                              <div className='flex-1 space-y-[0.75rem]'>
-                                <p className='text-pc-tab-title text-black xsm:text-pc-sub14s'>
-                                  <span className='amamy-post'>
-                                    Amamy Post{' '}
-                                  </span>
-                                  <span>{item?.title}</span>
-                                </p>
-                                <div className='select-addres flex space-x-[0.5rem] items-start'>
-                                  <ICAddress className='size-[1.5rem] xsm:size-[1.125rem]' />
-                                  <p
-                                    dangerouslySetInnerHTML={{
-                                      __html: item?.address,
-                                    }}
-                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
-                                  ></p>
-                                </div>
-                                <div className='select-time flex space-x-[0.5rem] items-start'>
-                                  <ICTime className='size-[1.5rem] xsm:size-[1.125rem]' />
-                                  <p
-                                    dangerouslySetInnerHTML={{
-                                      __html: item?.time,
-                                    }}
-                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
-                                  ></p>
-                                </div>
-                                <div className='select-phone flex space-x-[0.5rem] items-start'>
-                                  <ICPhone className='size-[1.5rem] xsm:size-[1.125rem]' />
-                                  <p
-                                    dangerouslySetInnerHTML={{
-                                      __html: item?.phone,
-                                    }}
-                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
-                                  ></p>
-                                </div>
-                              </div>
-                            </div>
-                          ),
-                        )}
-                    </div>
-                  </div>
-                </>
+          ) : (
+            <Button
+              type='submit'
+              disabled={!form.formState.isValid}
+              className={cn(
+                '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+                !form.formState.isValid &&
+                  'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
               )}
-          </>
+            >
+              <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+            </Button>
+          )}
+        </div>
+
+        {isMobile && stepEnd && (
+          <PopupPaymentInfor
+            form={form}
+            selectPaymentInformation={selectPaymentInformation}
+            setSelectPaymentInformation={setSelectPaymentInformation}
+            setSelectPaymentInformationValue={setSelectPaymentInformationValue}
+            paymentMethod={paymentMethod}
+          />
         )}
       </form>
     </Form>

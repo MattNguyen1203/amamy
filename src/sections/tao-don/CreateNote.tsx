@@ -23,6 +23,8 @@ export default function CeateNote({
   setIndexTab,
   indexTab,
   setSelectedImage,
+  type,
+  importantNote,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (nextTab: string) => void
@@ -30,6 +32,8 @@ export default function CeateNote({
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
+  type?: string
+  importantNote?: string
 }) {
   const FormSchema = z.object({
     note: z.array(
@@ -56,7 +60,37 @@ export default function CeateNote({
       images.forEach((img) => {
         img.style.cursor = 'pointer' // Biến con trỏ thành bàn tay khi hover
         img.onclick = () => {
-          setSelectedImage(img.src)
+          // Extract the highest resolution image from srcset if available
+          if (img.srcset) {
+            const srcsetEntries = img.srcset.split(',').map((entry) => {
+              const [url, size] = entry.trim().split(' ')
+              // Parse the size value (e.g., "2x" or "1200w")
+              const sizeValue = size
+                ? size.endsWith('w')
+                  ? parseInt(size.replace(/[w]$/, '')) // Only handle width-based sizes like 1200w
+                  : 0 // Ignore density descriptors like 2x
+                : 0
+              return {
+                url,
+                sizeValue,
+                hasWidthDescriptor: size?.endsWith('w') || false,
+              }
+            })
+
+            // Filter for entries with width descriptors only (like 1200w)
+            const widthBasedEntries = srcsetEntries.filter(
+              (entry) => entry.hasWidthDescriptor,
+            )
+
+            if (widthBasedEntries.length > 0) {
+              // Sort by width value in descending order and get the URL with the largest width
+              widthBasedEntries.sort((a, b) => b.sizeValue - a.sizeValue)
+              setSelectedImage(widthBasedEntries[0].url)
+            } else {
+              // Fallback to src if no width-based entries are found
+              setSelectedImage(img.src)
+            }
+          }
         } // Khi click, mở ảnh lên
       })
     })
@@ -93,6 +127,22 @@ export default function CeateNote({
       <p className='text-[#33A6E8] text-pc-sub16b mb-[1.5rem] xsm:mb-[0.75rem]'>
         Lưu ý quan trọng khi gửi hàng
       </p>
+      {type === 'nhatviet' && (
+        <div className='mt-[1.75rem] mb-[1.75rem]'>
+          <div className='mb-[0.75rem] text-black text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
+            Lưu ý quan trọng về mã bưu điện nội địa Nhật
+          </div>
+          <p
+            ref={(el) => {
+              containerRefs.current[data?.length || 0] = el
+            }}
+            dangerouslySetInnerHTML={{
+              __html: importantNote || '',
+            }}
+            className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+          ></p>
+        </div>
+      )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -111,7 +161,7 @@ export default function CeateNote({
                   ref={(el) => {
                     containerRefs.current[index] = el
                   }}
-                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
@@ -123,7 +173,7 @@ export default function CeateNote({
                     <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                       <FormControl>
                         <Checkbox
-                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />

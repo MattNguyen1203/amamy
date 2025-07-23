@@ -1,6 +1,6 @@
 'use client'
 
-import Favourite from '@/components/favourite/Favourite'
+// import Favourite from '@/components/favourite/Favourite'
 import PaginationV2 from '@/components/pagination/PaginationV2'
 import {fetcher} from '@/lib/swr'
 import {cn} from '@/lib/utils'
@@ -19,7 +19,7 @@ import useSWR from 'swr'
 gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 export default function TabsCategory({
   dataCategory,
-  dataFavourite,
+  // dataFavourite,
 }: {
   dataCategory: ICategoryBlog[]
   dataFavourite: IFavouriteBlog[]
@@ -38,12 +38,12 @@ export default function TabsCategory({
         slugCategory === 'all' || slugCategory === null
           ? ''
           : '&categories=' + slugCategory
-      }&limit=8`
+      }&limit=9`
     return `blogs?page=${slugpage ? slugpage : page}${
       slugCategory === 'all' || slugCategory === null
         ? ''
         : '&categories=' + slugCategory
-    }&limit=8`
+    }&limit=9`
   }, [searchParams, slugpage, slugCategory, page])
   const {data, isLoading} = useSWR(query, fetcher, {
     revalidateIfStale: false,
@@ -111,8 +111,8 @@ export default function TabsCategory({
         </div>
       </div>
       <div className='xsm:px-[1rem] xsm:pb-[1rem] flex xsm:flex-col sm:space-x-[3rem] relative sm:pb-[6rem]'>
-        <div className='sm:w-[59.375rem] xsm:py-[1rem]'>
-          <div className='grid grid-cols-2 xsm:grid-cols-1 gap-[1.5rem] xsm:gap-[0.75rem] w-full'>
+        <div className='w-full xsm:py-[1rem]'>
+          <div className='grid grid-cols-3 xsm:grid-cols-1 gap-[1.5rem] xsm:gap-[0.75rem] w-full'>
             {isLoading ? (
               Array(6)
                 .fill(null)
@@ -153,9 +153,9 @@ export default function TabsCategory({
             )}
           </div>
         </div>
-        <div className='sticky top-[5rem] h-fit w-[25.625rem] xsm:w-full'>
+        {/* <div className='sticky top-[5rem] h-fit w-[25.625rem] xsm:w-full'>
           <Favourite dataFavourite={dataFavourite} />
-        </div>
+        </div> */}
       </div>
     </section>
   )

@@ -43,7 +43,7 @@ const FAQItem = ({
   return (
     <div
       className={cn(
-        'FAQItem w-full p-[1rem] xsm:pt-0 xsm:pb-[0.75rem] relative transition-all duration-100 overflow-hidden',
+        'FAQItem w-full p-[1rem] xsm:pt-0 xsm:pb-[0.75rem] relative transition-all duration-500 overflow-hidden',
       )}
       style={{
         height: open
@@ -100,7 +100,7 @@ const FAQItem = ({
         ref={refAnswer}
         className={cn(
           'flex space-x-2 items-end w-full mt-2 xsm:mt-[0.75rem] transition-all left-0 duration-500 relative',
-          !open && 'left-[5rem]',
+          !open && 'left-[2rem] opacity-0',
         )}
       >
         <div className='relative flex xsm:flex-1 items-center space-x-3 p-5 pl-6 bg-white rounded-[1.25rem] w-full rounded-br-none shadow-[0px_4px_19.3px_0px_rgba(0,39,97,0.06)]'>

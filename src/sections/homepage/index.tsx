@@ -10,13 +10,25 @@ import Section5 from './section5.tsx/Section5'
 type Props = {
   res: IHomePage
   dataBlog: IItemPostBlog[]
+  chatBoxAiData: {
+    title: string
+    customer_chat: string
+    ai_chat: string
+    link_chat_ai: string
+  }
 }
 
-const Homepage = ({res, dataBlog}: Props) => {
+const Homepage = ({res, dataBlog, chatBoxAiData}: Props) => {
   return (
     <div className='w-full bg-[#EDF5FA] xsm:bg-[#F8F8FB]'>
       <h1 className='fixed z-[-1] pointer-events-none opacity-0'>Amamy</h1>
-      <Banner banner={res.banner} />
+      <Banner
+        banner={res.banner}
+        boxChatAI={{
+          ...res.chat_box_ai,
+          link_chat_ai: chatBoxAiData.link_chat_ai,
+        }}
+      />
       <Services services={res.services} />
       <Community
         sectionCountry={res.section_country}

@@ -11,21 +11,18 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Fragment, useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
-export default function OrderStepTime({
+export default function OrderStepTimeV2({
   dataInformation,
   handleClickcurrentTab,
   nextStep,
   setIndexTab,
   indexTab,
   setSelectedImage,
-  setDataFromOrder,
-  dataFromOrder,
 }: {
   dataInformation?: IInformationTimeOrder[]
   handleClickcurrentTab: (nextTab: string) => void
@@ -33,36 +30,12 @@ export default function OrderStepTime({
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
-  setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
-  dataFromOrder: IDataFromOrder
 }) {
   const FormSchema = z.object({
     policy: z.array(
       z.boolean().refine((value) => value === true, {
         message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
       }),
-    ),
-    userChoices: z.record(z.string(), z.string().optional()).refine(
-      (choices) => {
-        if (!Array.isArray(dataInformation)) return true
-
-        const itemsWithUserChoices = dataInformation.filter(
-          (item) => item?.user_chooses,
-        )
-        const requiredKeys = itemsWithUserChoices.map(
-          (item) => item?.time_content,
-        )
-
-        return requiredKeys.every((key) => {
-          if (!key) {
-            return true
-          }
-          return choices[key] && choices[key] !== ''
-        })
-      },
-      {
-        message: 'Vui lòng chọn đầy đủ các tùy chọn bắt buộc.',
-      },
     ),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
@@ -74,7 +47,6 @@ export default function OrderStepTime({
       policy: Array.isArray(dataInformation)
         ? dataInformation?.map(() => (stepOrder > 2 ? true : false))
         : [],
-      userChoices: dataFromOrder?.userChoices || {},
     },
   })
   useEffect(() => {
@@ -141,13 +113,11 @@ export default function OrderStepTime({
         setStepOrder(Number(nextStep))
       }
       setIndexTab(indexTab + 1)
-      setDataFromOrder({...dataFromOrder, userChoices: data?.userChoices})
-      // form.reset()
+      form.reset()
       handleClickcurrentTab(nextStep)
       setTriggerScroll(true)
     }
   }
-  console.log('🚀 ~ dataInformation:', dataInformation)
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
       <p className='sm:hidden text-pc-sub16b text-[#33A6E8]'>
@@ -166,76 +136,15 @@ export default function OrderStepTime({
                     <p className='xsm:text-pc-sub14s mb-[0.75rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
                       {item?.time_content}
                     </p>
-                    {item?.user_chooses ? (
-                      <>
-                        <div className='space-y-[0.875rem] mb-[0.875rem]'>
-                          {item?.stock_user?.map((stockItem, stockIndex) => (
-                            <FormField
-                              key={stockIndex}
-                              control={form.control}
-                              name={`userChoices.${item?.time_content}`}
-                              render={({field}) => (
-                                <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none mb-[0.5rem]'>
-                                  <FormControl>
-                                    <Checkbox
-                                      className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
-                                      checked={field.value === stockItem?.label}
-                                      onCheckedChange={(checked) => {
-                                        field.onChange(
-                                          checked
-                                            ? stockItem?.label
-                                            : undefined,
-                                        )
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <div className='leading-none space-y-[0rem] flex flex-col'>
-                                    <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
-                                      <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
-                                        {stockItem?.label}
-                                      </FormLabel>
-                                      {stockItem?.tag && (
-                                        <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
-                                          {stockItem?.tag}
-                                        </p>
-                                      )}
-                                    </div>
-                                    {stockItem?.desc && (
-                                      <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
-                                        <p
-                                          className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
-                                          dangerouslySetInnerHTML={{
-                                            __html: stockItem?.desc,
-                                          }}
-                                        ></p>
-                                      </FormLabel>
-                                    )}
-                                  </div>
-                                </FormItem>
-                              )}
-                            />
-                          ))}
-                        </div>
-                        {item?.note_more && (
-                          <p
-                            className='text-pc-sub14m text-[#F00] mb-[1rem]'
-                            dangerouslySetInnerHTML={{
-                              __html: item?.note_more,
-                            }}
-                          ></p>
-                        )}
-                      </>
-                    ) : (
-                      <div
-                        ref={(el) => {
-                          containerRefs.current[index] = el
-                        }}
-                        className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
-                        dangerouslySetInnerHTML={{
-                          __html: item?.stock || '',
-                        }}
-                      ></div>
-                    )}
+                    <div
+                      ref={(el) => {
+                        containerRefs.current[index] = el
+                      }}
+                      className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
+                      dangerouslySetInnerHTML={{
+                        __html: item?.stock || '',
+                      }}
+                    ></div>
                     <FormField
                       control={form.control}
                       name={`policy.${index}`}
@@ -243,7 +152,7 @@ export default function OrderStepTime({
                         <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                           <FormControl>
                             <Checkbox
-                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.5rem] xsm:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
                               checked={field.value}
                               onCheckedChange={field.onChange}
                             />

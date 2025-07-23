@@ -5,12 +5,22 @@ export interface ICreateOder {
   id: number
   information?: IInformationOrder
   slug?: string
+  nation?: string
   european?: string
+  note_page_huong_dan?: string
 }
 export interface IInformationTimeOrder {
   time_content?: string
   stock?: string
   clause?: string
+  user_chooses?: boolean
+  stock_user?: IInformationTimeOrder_StockUser[]
+  note_more?: string
+}
+export interface IInformationTimeOrder_StockUser {
+  label: string
+  desc: string
+  tag: string
 }
 export interface IInformationNoteOrder {
   title: string
@@ -29,6 +39,7 @@ export interface IInformationInstructOrder {
   select_branch?: IInformationInstructOrder_SelectBranch[]
   note_more?: string
   shipping_instructions_image?: string[]
+  hidden_step?: boolean
 }
 export interface IInformationInsurance_policy {
   content: string
@@ -47,8 +58,25 @@ export interface IInformationInsurance {
     policy: IInformationInsurance_policy[]
   }
   cargo_insurance_japanvn: IInformationInsurance_CargoInsuranceJapanvn[]
+  user_chooses?: boolean
+  insurance_types?: {
+    clause: string
+    list_insurance_types: IInformationInsurance_Types[]
+  }
+}
+export interface IInformationInsurance_Types {
+  label: string
+  desc: string
+  tag?: string
+}
+export interface IInformation_Package {
+  label: string
+  desc: string
+  tag?: string
+  separate_request?: boolean
 }
 export interface IInformationOrder {
+  hidden_shipping?: boolean
   time?: IInformationTimeOrder[]
   note?: IInformationNoteOrder[]
   instruct?: IInformationInstructOrder
@@ -59,4 +87,9 @@ export interface IInformationOrder {
     value: string
     title: string
   }[]
+  package?: {
+    title: string
+    list_package: IInformation_Package[]
+    note_more?: string
+  }
 }
