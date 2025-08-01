@@ -4,6 +4,7 @@ import {Button} from '@/components/ui/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -138,6 +139,10 @@ export default function FormDeliveryInformationVNHan({
                     {...field}
                   />
                 </FormControl>
+                <FormDescription className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                  *Tên người nhận phải trùng khớp với mã thông quan, nếu không
+                  khớp sẽ giao sai.
+                </FormDescription>
                 <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
