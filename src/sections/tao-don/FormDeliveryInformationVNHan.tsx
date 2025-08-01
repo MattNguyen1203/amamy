@@ -139,7 +139,7 @@ export default function FormDeliveryInformationVNHan({
                     {...field}
                   />
                 </FormControl>
-                <FormDescription className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                <FormDescription className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
                   *Tên người nhận phải trùng khớp với mã thông quan, nếu không
                   khớp sẽ giao sai.
                 </FormDescription>
