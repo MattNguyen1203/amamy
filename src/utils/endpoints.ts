@@ -6,6 +6,7 @@ const endpoints = {
     id: '486',
     unitTag: 'aa5f7bd',
   },
+  calculateOrderDelivery: 'tinh-gia-van-chuyen',
 }
 
 export default endpoints

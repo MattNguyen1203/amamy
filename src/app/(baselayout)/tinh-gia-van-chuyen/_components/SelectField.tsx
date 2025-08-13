@@ -59,6 +59,7 @@ export default function SelectField({
       <Select
         name={name}
         value={value}
+        disabled={!options?.length}
         onValueChange={handleValueChange}
       >
         <SelectTrigger
@@ -73,7 +74,7 @@ export default function SelectField({
             className='rounded-[1.25rem]'
           />
         </SelectTrigger>
-        <SelectContent className='w-[41.875rem] shadow-[0_4px_32px_0_rgba(0,39,97,0.08)] rounded-[1.25rem] border border-solid border-[#DCDFE4] bg-white'>
+        <SelectContent className='w-[min(41.875rem,100%)] shadow-[0_4px_32px_0_rgba(0,39,97,0.08)] rounded-[1.25rem] border border-solid border-[#DCDFE4] bg-white'>
           <SelectGroup>
             {options?.map(({name, value, icon}, index) => (
               <SelectItem

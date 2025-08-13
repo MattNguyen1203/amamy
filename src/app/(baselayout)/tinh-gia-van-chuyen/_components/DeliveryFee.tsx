@@ -200,7 +200,7 @@ export default function DeliveryFee({
       deliveryWeight: '',
       deliveryCurrency: '',
       deliveryFacility: '',
-      deliveryType: ' ',
+      deliveryType: '',
     }))
   }, [selectedDeliveryRoute])
 

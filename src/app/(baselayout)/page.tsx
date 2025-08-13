@@ -28,12 +28,35 @@ export default async function Home() {
       next: {revalidate: 60},
     },
   })
+  const fetchDeliveryDirection = fetchData({
+    api: 'chieu-van-chuyen',
+    method: 'GET',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+  const fetchCurrencyExchangeRate = fetchData({
+    api: 'options?fields=currency_to_usd',
+    method: 'GET',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
 
-  const [dataACF, dataBlogs, schemaData, chatBoxAIdata] = await Promise.all([
+  const [
+    dataACF,
+    dataBlogs,
+    schemaData,
+    chatBoxAIdata,
+    deliveryDirectionData,
+    currencyExchangeRateData,
+  ] = await Promise.all([
     fetchDataACF,
     fetchDataBlogs,
     getSchemaMarkup(''),
     fetchChatBoxAI,
+    fetchDeliveryDirection,
+    fetchCurrencyExchangeRate,
   ])
   return (
     <main>
@@ -46,6 +69,8 @@ export default async function Home() {
           res={dataACF}
           chatBoxAiData={chatBoxAIdata?.data?.box_chat_ai}
           dataBlog={dataBlogs?.posts}
+          deliveryDirectionData={deliveryDirectionData}
+          currencyExchangeRateData={currencyExchangeRateData}
         />
       </div>
     </main>
