@@ -685,10 +685,6 @@ export type DeliveryPriceType = {
   product_type: DeliveryProductType
   delivery_price: DeliveryPriceRangeItemType[]
   delivery_price_fixed: DeliveryPriceFixedItemType[]
-  price_by_weight: {
-    weight: string
-    price: string
-  }
 }
 
 export type DeliveryDirectionItem = {

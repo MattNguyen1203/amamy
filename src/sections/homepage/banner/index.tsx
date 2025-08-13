@@ -88,7 +88,7 @@ const Banner = ({
           className='fade-box w-[34.95956rem] h-[31.5rem] object-cover absolute left-[54rem] top-[14rem]'
         /> */}
 
-        <div className='fade-in-box absolute left-[6rem] top-[7.6875rem]'>
+        <div className='fade-in-box absolute left-[6rem] top-[8.675rem]'>
           <div className='flex items-center space-x-3'>
             <div className='flex relative w-[8.25rem] -space-x-3'>
               {banner?.user_list.map((item, index) => (

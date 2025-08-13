@@ -117,7 +117,11 @@ const TrackingOrder = ({
   const [deliveryInformation, setDeliveryInformation] =
     useState<DeliveryInformationType>({})
 
-  const formatPriceByLocale = (price: number, currencyCode: string) => {
+  const formatPriceByLocale = (
+    price: number,
+    currencyCode: string,
+    maximumFractionDigits: number = 0,
+  ) => {
     const currencyMap: Record<string, string> = {
       usd: 'USD',
       vnd: 'VND',
@@ -130,7 +134,7 @@ const TrackingOrder = ({
 
     return new Intl.NumberFormat('en-US', {
       currency: intlCurrency,
-      maximumFractionDigits: 0,
+      maximumFractionDigits: maximumFractionDigits,
     }).format(price)
   }
 
@@ -188,6 +192,7 @@ const TrackingOrder = ({
             name: `Ship nội địa (${formatPriceByLocale(
               +paid.price,
               paid.currency,
+              2,
             )} ${paid.currency}/${paid.unit_type})`,
             value: paid.price,
           },
@@ -306,7 +311,7 @@ const TrackingOrder = ({
         className='relative text-black z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] overflow-hidden'
       >
         <div className='grid gap-[0.75rem] grid-cols-2'>
-          <div className='col-span-full'>
+          <div className='col-span-1 xsm:col-span-full'>
             <SelectField
               hasPrefix={true}
               name='deliveryDirection'
@@ -320,7 +325,7 @@ const TrackingOrder = ({
           </div>
 
           <div
-            className={cn('col-span-full hidden', {
+            className={cn('col-span-1 hidden xsm:col-span-full', {
               block:
                 selectedDeliveryRoute &&
                 selectedDeliveryRoute?.acf?.dependency_price === 'facility',
