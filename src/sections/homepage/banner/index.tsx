@@ -1,17 +1,29 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
-import {IBanner, IBoxChatAI, IImage} from '@/utils/type'
+import {
+  CurrencyToUsdResType,
+  DeliveryDirectionResType,
+  IBanner,
+  IBoxChatAI,
+  IImage,
+} from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import TrackingInterface from './TrackingOrder'
 
+interface BannerProps {
+  banner: IBanner
+  boxChatAI: IBoxChatAI
+  deliveryDirectionData: DeliveryDirectionResType
+  currencyExchangeRateData: CurrencyToUsdResType
+}
+
 const Banner = ({
   banner,
   boxChatAI,
-}: {
-  banner: IBanner
-  boxChatAI: IBoxChatAI
-}) => {
+  deliveryDirectionData,
+  currencyExchangeRateData,
+}: BannerProps) => {
   useGSAP(() => {
     gsap.from('.fade-image', {
       opacity: 0,
@@ -31,9 +43,10 @@ const Banner = ({
       },
     })
   })
+
   return (
     <>
-      <div className='relative w-full h-[49.25rem] text-white xsm:hidden'>
+      <div className='relative w-full h-[50.455rem] text-white xsm:hidden'>
         <ImageV2
           alt=''
           className='size-full'
@@ -75,7 +88,7 @@ const Banner = ({
           className='fade-box w-[34.95956rem] h-[31.5rem] object-cover absolute left-[54rem] top-[14rem]'
         /> */}
 
-        <div className='fade-in-box absolute left-[6rem] top-[13.37rem]'>
+        <div className='fade-in-box absolute left-[6rem] top-[7.6875rem]'>
           <div className='flex items-center space-x-3'>
             <div className='flex relative w-[8.25rem] -space-x-3'>
               {banner?.user_list.map((item, index) => (
@@ -99,12 +112,18 @@ const Banner = ({
             {banner?.title}
           </h2>
           <div className='mt-7'>
-            <TrackingInterface boxChatAI={boxChatAI} />
+            <TrackingInterface
+              deliveryDirection={deliveryDirectionData}
+              currencyToUsd={currencyExchangeRateData}
+              boxChatAI={boxChatAI}
+            />
           </div>
         </div>
       </div>
       <div className='xsm:flex hidden '>
         <BackgroundMobile
+          deliveryDirectionData={deliveryDirectionData}
+          currencyExchangeRateData={currencyExchangeRateData}
           banner={banner}
           boxChatAI={boxChatAI}
           height='h-[25.6874rem]'
@@ -120,10 +139,14 @@ const BackgroundMobile = ({
   banner,
   boxChatAI,
   height = 'h-[25.6874rem]',
+  deliveryDirectionData,
+  currencyExchangeRateData,
 }: {
   banner: IBanner
   boxChatAI: IBoxChatAI
   height?: string
+  deliveryDirectionData: DeliveryDirectionResType
+  currencyExchangeRateData: CurrencyToUsdResType
 }) => {
   return (
     <div className='flex flex-col relative xsm:w-full'>
@@ -193,7 +216,11 @@ const BackgroundMobile = ({
           {banner?.title}
         </p>
         <div className='mt-5'>
-          <TrackingInterface boxChatAI={boxChatAI} />
+          <TrackingInterface
+            deliveryDirection={deliveryDirectionData}
+            currencyToUsd={currencyExchangeRateData}
+            boxChatAI={boxChatAI}
+          />
         </div>
       </div>
     </div>

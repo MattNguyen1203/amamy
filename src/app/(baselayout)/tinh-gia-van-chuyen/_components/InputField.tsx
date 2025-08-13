@@ -45,8 +45,8 @@ export default function InputField({
     onChange(name, val)
   }
   return (
-    <Label className='flex flex-col space-y-[0.3125rem] '>
-      <span className='text-[0.75rem] text-black/80 font-semibold tracking-[-0.015rem] leading-normal'>
+    <Label className='flex flex-col space-y-[0.3125rem] relative xsm:space-y-[0.375rem]'>
+      <span className='text-[0.75rem] text-black/80 font-semibold tracking-[-0.015rem] leading-normal xsm:leading-[140%]'>
         {label}
       </span>
 
@@ -56,7 +56,7 @@ export default function InputField({
         step={0.5}
         min={0}
         placeholder={placeholder}
-        className='rounded-[1.25rem] bg-white border border-solid border-[#DCDFE4] h-[3rem] px-[1rem] py-[0.75rem] placeholder:text-black/30 text-[0.875rem] font-medium leading-[150%] tracking-[-0.02625rem] shadow-none! outline-none! focus-visible:ring-0'
+        className='rounded-[1.25rem] bg-white border border-solid border-[#DCDFE4] h-[3rem] px-[1rem] py-[0.75rem] placeholder:text-black/30  text-[0.875rem] font-medium leading-[150%] tracking-[-0.02625rem] shadow-none! outline-none! focus-visible:ring-0 text-[rgba(0,0,0,0.92)] xsm:h-[2.5rem] xsm:border-[0.6px] xsm:bg-[rgba(245,246,248,0.5)] xsm:px-[0.75rem]'
         value={value}
         onChange={handleValueChange}
       />

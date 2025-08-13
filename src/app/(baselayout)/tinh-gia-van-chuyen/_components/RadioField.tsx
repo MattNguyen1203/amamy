@@ -29,7 +29,7 @@ export default function RadioField({
       name={name}
       value={value}
       onValueChange={handleValueChange}
-      className='py-[0.75rem] h-[3rem] relative flex items-center space-x-[2.5rem] font-montserrat'
+      className='py-[0.75rem] h-[3rem] relative flex items-center space-x-[2.5rem] xsm:flex-col xsm:space-x-0 xsm:space-y-[1rem] xsm:items-start xsm:h-auto gap-0 font-montserrat'
     >
       {options?.map(({name, value}, index) => (
         <div
@@ -39,9 +39,9 @@ export default function RadioField({
           <Label className='flex items-center gap-[0.5rem] cursor-pointer'>
             <RadioGroupItem
               value={value}
-              className='size-[1.25rem] data-[state="checked"]:border-[#38B6FF]'
+              className='xsm:size-[1.125rem] size-[1.25rem] data-[state="checked"]:border-[#38B6FF]'
             />
-            <span className='text-[0.75rem] font-semibold tracking-[-0.015rem] text-[rgba(0,0,0,0.92)] '>
+            <span className='text-[0.75rem] font-semibold tracking-[-0.015rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
               {name}
             </span>
           </Label>
