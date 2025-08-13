@@ -140,21 +140,22 @@ export default function useDeliveryPrice({
         priceListType === 'price_range'
           ? deliveryPriceList.delivery_price
           : deliveryPriceList.delivery_price_fixed
-
       let unitPrice = getUnitPrice(weight, priceList, priceListType)
-
       if (
         priceListType === 'price_fixed' &&
-        weight >= +deliveryPriceList?.price_by_weight?.weight
+        Math.ceil(weight) >= deliveryPriceList.delivery_price[0].min_weight
       ) {
-        unitPrice = deliveryPriceList?.price_by_weight?.price
+        unitPrice = getUnitPrice(
+          weight,
+          deliveryPriceList.delivery_price,
+          'price_range',
+        )
       }
-
       if (!unitPrice) return null
 
       totalPrice =
         priceListType === 'price_fixed' &&
-        weight < +deliveryPriceList?.price_by_weight?.weight
+        Math.ceil(weight) < +deliveryPriceList.delivery_price[0].min_weight
           ? +unitPrice
           : weight * +unitPrice
 

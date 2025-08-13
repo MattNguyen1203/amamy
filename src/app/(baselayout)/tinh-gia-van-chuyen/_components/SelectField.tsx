@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 'use client'
 
-import React from 'react'
+import React, {useMemo} from 'react'
 import {
   Select,
   SelectContent,
@@ -10,6 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select-v2'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer-v2'
 import {Label} from '@/components/ui/label'
 import {cn} from '@/lib/utils'
 import Image from 'next/image'
@@ -39,10 +48,14 @@ export default function SelectField({
 }: SelectFieldProps) {
   const variantSelectFieldClassnames: Record<SelectFieldVariant, string> = {
     primary:
-      'text-[rgba(0,0,0,0.92)] font-medium data-[placeholder]:text-[rgba(0,0,0,0.92)]',
+      'text-[rgba(0,0,0,0.92)] font-medium data-[placeholder]:text-[rgba(0,0,0,0.92)] placeholder:text-[rgba(0,0,0,0.92)]',
     secondary:
-      'text-[#38B6FF] font-semibold uppercase data-[placeholder]:normal-case data-[placeholder]:text-[rgba(0,0,0,0.3)]',
+      'xsm:text-[rgba(0,0,0,0.92)] text-[#38B6FF] font-semibold uppercase data-[placeholder]:normal-case data-[placeholder]:text-[rgba(0,0,0,0.3)] placeholder:text-[rgba(0,0,0,0.3)] xsm:normal-case xsm:font-medium',
   }
+
+  const activeItem = useMemo(() => {
+    return options?.find((opt) => opt.value === value) || null
+  }, [value, options])
 
   const handleValueChange = (value: string) => {
     if (!onChange) return
@@ -56,6 +69,112 @@ export default function SelectField({
           {label}
         </Label>
       )}
+      <Drawer>
+        <DrawerTrigger
+          disabled={!options?.length}
+          className='relative xsm:block hidden'
+        >
+          <p
+            className={cn(
+              'relative w-full rounded-[1.25rem] border border-solid border-[#DCDFE4] px-[0.75rem] outline-none! shadow-none! focus:ring-0 leading-[1rem] tracking-[-0.02438rem] text-[0.8125rem] font-montserrat text-left hidden h-[2.5rem] bg-[rgba(245,246,248,0.50)] focus-visible:ring-0 xsm:flex items-center space-x-[0.75rem]',
+              variantSelectFieldClassnames[variant],
+              {'xsm:text-[rgba(0,0,0,0.3)]': !value && variant === 'secondary'},
+              {
+                'opacity-50 cursor-not-allowed pointer-events-none':
+                  !options?.length,
+              },
+            )}
+          >
+            {hasPrefix && activeItem?.icon && (
+              <Image
+                alt=''
+                width={24}
+                height={24}
+                src={activeItem?.icon}
+                className='w-[1.5rem] h-auto shrink-0'
+              />
+            )}
+            <span>{activeItem ? activeItem?.name : placeholder}</span>
+          </p>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width={20}
+            height={20}
+            viewBox='0 0 20 20'
+            fill='none'
+            className='absolute top-1/2 right-[0.625rem] -translate-y-1/2 size-[1.25rem]'
+          >
+            <path
+              d='M13.3334 8.33337L10.0001 11.6667L6.66675 8.33337'
+              stroke='#1F648C'
+              strokeWidth={2}
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+          </svg>
+        </DrawerTrigger>
+
+        <DrawerContent className='bg-white rounded-t-[1.25rem] overflow-hidden'>
+          <DrawerHeader className='hidden'>
+            <DrawerTitle>
+              <p>{label}</p>
+            </DrawerTitle>
+            <DrawerDescription></DrawerDescription>
+          </DrawerHeader>
+          <div className='p-[0.5rem] flex items-center justify-between border-b border-solid border-[#DCDFE4] sticky top-0 bg-white'>
+            <div className='size-[1.5rem]'></div>
+            <p className='text-[rgba(0,0,0,0.92)] font-semibold text-[0.75rem] tracking-[-0.015rem] '>
+              Chọn dịch vụ gửi hàng
+            </p>
+            <DrawerClose className='size-[1.5rem]'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width={24}
+                height={24}
+                viewBox='0 0 24 24'
+                fill='none'
+                className='size-full'
+              >
+                <path
+                  d='M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16'
+                  stroke='black'
+                  strokeOpacity='0.6'
+                  strokeWidth={2}
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </svg>
+            </DrawerClose>
+          </div>
+          <div className='max-h-[70vh] overflow-y-auto bg-white'>
+            {options.map(({name: optName, value: optValue, icon}, index) => (
+              <DrawerClose
+                key={index}
+                onClick={() => {
+                  handleValueChange(optValue)
+                }}
+                className={cn(
+                  'p-[0.75rem] flex items-center space-x-[0.75rem] border-y border-solid border-[#F8F8F8] w-full',
+                  value === optValue && 'bg-blue-100',
+                )}
+              >
+                {hasPrefix && icon && (
+                  <Image
+                    alt=''
+                    width={24}
+                    height={24}
+                    src={icon}
+                    className='mr-2'
+                  />
+                )}
+                <p className='text-[0.875rem] font-medium tracking-[-0.02625rem] leading-[150%] text-[rgba(0,0,0,0.92)] line-clamp-1'>
+                  {optName}
+                </p>
+              </DrawerClose>
+            ))}
+          </div>
+        </DrawerContent>
+      </Drawer>
       <Select
         name={name}
         value={value}
@@ -64,7 +183,7 @@ export default function SelectField({
       >
         <SelectTrigger
           className={cn(
-            'relative w-full rounded-[1.25rem] border border-solid border-[#DCDFE4] bg-white px-[1rem] py-[0.75rem] h-[3rem] outline-none! shadow-none! focus:ring-0 leading-[150%] tracking-[-0.02625rem] text-[0.875rem]',
+            'relative w-full rounded-[1.25rem] border border-solid border-[#DCDFE4] bg-white px-[1rem] py-[0.75rem] h-[3rem] outline-none! shadow-none! focus:ring-0 leading-[150%] tracking-[-0.02625rem] text-[0.875rem] font-montserrat xsm:hidden',
             variantSelectFieldClassnames[variant],
             {'pl-[3rem]': hasPrefix && value},
           )}
@@ -81,7 +200,7 @@ export default function SelectField({
                 key={index}
                 value={value}
                 className={cn(
-                  'p-[0.75rem] h-[3rem] rounded-[1.25rem] bg-white cursor-pointer',
+                  'p-[0.75rem] h-[3rem] rounded-[1.25rem] bg-white cursor-pointer font-montserrat',
                   {
                     'pl-[3rem]': hasPrefix,
                   },

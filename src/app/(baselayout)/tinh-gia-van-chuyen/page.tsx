@@ -28,7 +28,7 @@ export default async function page() {
       <h1 className='hidden'>Tính giá vận chuyển</h1>
       <Breadcrumb
         data={[{title: 'Tính giá vận chuyển', slug: ''}]}
-        className='sm:px-[5rem] xsm:hidden'
+        className='sm:px-[5rem] xsm:px-[1rem]'
       />
       <DeliveryFee
         currencyToUsd={currencyToUsdData}

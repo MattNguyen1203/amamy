@@ -205,9 +205,12 @@ export default function DeliveryFee({
   }, [selectedDeliveryRoute])
 
   return (
-    <section className='relative pb-[6rem]'>
-      <div className='w-[88rem] rounded-[1.25rem] bg-[#F8F8F8] mx-auto p-[1.25rem] flex flex-col space-y-[1.5rem]'>
-        <div className='grid gap-[1.75rem] grid-cols-2'>
+    <section className='relative pb-[6rem] xsm:p-[1rem] xsm:bg-[#F8F8F8] font-montserrat'>
+      <div className='xsm:w-full xsm:p-[1rem] xsm:bg-white xsm:border xsm:border-solid xsm:border-[#DCDFE4] w-[88rem] rounded-[1.25rem] bg-[#F8F8F8] mx-auto p-[1.25rem] flex flex-col space-y-[1.5rem]'>
+        <h2 className='xsm:block hidden text-[1rem] text-center text-black font-semibold leading-[150%] tracking-[-0.03rem]'>
+          Dự tính giá vận chuyển
+        </h2>
+        <div className='grid gap-[1.75rem] grid-cols-2 xsm:gap-[1rem]'>
           <div className='col-span-full'>
             <SelectField
               hasPrefix={true}
@@ -272,7 +275,7 @@ export default function DeliveryFee({
               options={deliveryDomestic}
             />
           </div>
-          <div className='col-span-1'>
+          <div className='col-span-1 xsm:col-span-full'>
             <InputField
               name='deliveryWeight'
               value={deliveryInformation['deliveryWeight'] ?? ''}
@@ -293,7 +296,7 @@ export default function DeliveryFee({
               type='number'
             />
           </div>
-          <div className='col-span-1'>
+          <div className='col-span-1 xsm:col-span-full'>
             <SelectField
               name='deliveryCurrency'
               value={deliveryInformation['deliveryCurrency'] ?? ''}
@@ -304,8 +307,8 @@ export default function DeliveryFee({
               variant='secondary'
             />
           </div>
-          <div className='col-span-full'>
-            <p className='flex items-center space-x-[0.5rem] text-[0.875rem] font-semibold leading-[150%] tracking-[-0.02625rem] '>
+          <div className='col-span-full xsm:pt-[0.25rem]'>
+            <p className='flex items-center space-x-[0.5rem] text-[0.875rem] font-semibold leading-[150%] tracking-[-0.02625rem] xsm:px-[0.75rem] xsm:py-[1rem] xsm:rounded-[1.25rem] xsm:bg-[#F1F9FF] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[0.02438rem]'>
               <span className='text-[rgba(0,0,0,0.92)]'>Kết quả dự tính:</span>
               {deliveryPrice && deliveryInformation['deliveryCurrency'] && (
                 <span className='text-[#38B6FF]'>
@@ -325,7 +328,7 @@ export default function DeliveryFee({
         <div>
           <BtnBlue
             slug='/'
-            className='text-white w-fit border border-solid border-white/80 leading-[130%] font-medium text-[1rem] tracking-[-0.03rem]'
+            className='text-white w-fit border border-solid border-white/80 leading-[130%] font-montserrat font-medium text-[1rem] tracking-[-0.03rem] xsm:w-full xsm:h-[2.875rem] xsm:text-[0.875rem] xsm:tracking-[-0.02625rem]'
           >
             Nhắn tin tư vấn miễn phí
           </BtnBlue>
