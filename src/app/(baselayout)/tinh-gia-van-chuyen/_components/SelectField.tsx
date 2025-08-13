@@ -76,7 +76,7 @@ export default function SelectField({
         >
           <p
             className={cn(
-              'relative w-full rounded-[1.25rem] border border-solid border-[#DCDFE4] px-[0.75rem] outline-none! shadow-none! focus:ring-0 leading-[1rem] tracking-[-0.02438rem] text-[0.8125rem] font-montserrat text-left hidden h-[2.5rem] bg-[rgba(245,246,248,0.50)] focus-visible:ring-0 xsm:flex items-center space-x-[0.75rem]',
+              'relative w-full rounded-[1.25rem] border border-solid border-[#DCDFE4] px-[0.75rem] outline-none! shadow-none! focus:ring-0 leading-[1rem] tracking-[-0.02438rem] text-[0.8125rem] font-montserrat text-left hidden h-[2.5rem] bg-[rgba(245,246,248,0.50)] focus-visible:ring-0 xsm:flex items-center space-x-[0.75rem] line-clamp-1',
               variantSelectFieldClassnames[variant],
               {'xsm:text-[rgba(0,0,0,0.3)]': !value && variant === 'secondary'},
               {

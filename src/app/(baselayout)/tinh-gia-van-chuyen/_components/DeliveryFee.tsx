@@ -78,7 +78,11 @@ export default function DeliveryFee({
   const [deliveryInformation, setDeliveryInformation] =
     useState<DeliveryInformationType>({})
 
-  const formatPriceByLocale = (price: number, currencyCode: string) => {
+  const formatPriceByLocale = (
+    price: number,
+    currencyCode: string,
+    maximumFractionDigits: number = 0,
+  ) => {
     const currencyMap: Record<string, string> = {
       usd: 'USD',
       vnd: 'VND',
@@ -91,7 +95,7 @@ export default function DeliveryFee({
 
     return new Intl.NumberFormat('en-US', {
       currency: intlCurrency,
-      maximumFractionDigits: 0,
+      maximumFractionDigits: maximumFractionDigits,
     }).format(price)
   }
 
@@ -149,6 +153,7 @@ export default function DeliveryFee({
             name: `Ship nội địa (${formatPriceByLocale(
               +paid.price,
               paid.currency,
+              2,
             )} ${paid.currency}/${paid.unit_type})`,
             value: paid.price,
           },
