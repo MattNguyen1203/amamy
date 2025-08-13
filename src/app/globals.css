@@ -278,3 +278,20 @@ html > body[data-scroll-locked] {
     right: 1.5rem !important;
   }
 }
+
+/* Ẩn spinner trên Chrome, Safari, Edge */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ẩn spinner trên Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.fill-primary {
+  fill: #38b6ff;
+  stroke: #38b6ff;
+}

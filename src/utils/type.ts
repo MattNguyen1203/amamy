@@ -657,3 +657,89 @@ export interface IBlogResponse {
   total_paged: number
   posts: Post[]
 }
+
+export type DeliveryCostCalculationType = 'price_fixed' | 'price_range'
+export type DeliveryPriceFixedItemType = {
+  weight: string
+  price: string
+}
+export type DeliveryPriceRangeItemType = {
+  min_weight: string
+  max_weight: string
+  price: string
+}
+export type DeliveryDependencyPriceType = 'empty' | 'facility' | 'freight_type'
+export type DeliveryWeightType = 'kg' | 'lbs' | 'package'
+export type DeliveryFreightType = 'regular_product' | 'difficult_product'
+export type DeliveryCurrencyType = 'vnd' | 'euro' | 'usd' | 'yen' | 'won'
+export type DeliveryDirectionType = 'vn_to_world' | 'world_to_vn'
+export type DeliveryFacilityType =
+  | 'hanoi_city'
+  | 'hochiminh_city'
+  | 'california'
+  | 'texas'
+export type DeliveryProductType = 'regular_product' | 'difficult_product'
+export type DeliveryPriceType = {
+  currency: DeliveryCurrencyType
+  delivery_facility: DeliveryFacilityType
+  product_type: DeliveryProductType
+  delivery_price: DeliveryPriceRangeItemType[]
+  delivery_price_fixed: DeliveryPriceFixedItemType[]
+  price_by_weight: {
+    weight: string
+    price: string
+  }
+}
+
+export type DeliveryDirectionItem = {
+  id: number
+  title: string
+  slug: string
+  featured_image: string
+  acf: {
+    note: string
+    dependency_price: DeliveryDependencyPriceType
+    delivery_cost_calculation_type: DeliveryCostCalculationType
+    weight_unit: DeliveryWeightType
+    currency: DeliveryCurrencyType[]
+    delivery_direction: DeliveryDirectionType
+    delivery_price_list: DeliveryPriceType[]
+    domestic_delivery: {
+      free_delivery: {
+        condition_label: string
+        condition_value: string
+        unit_type: string
+      }
+      paid_delivery: {
+        currency: DeliveryCurrencyType
+        price: string
+        unit_type: DeliveryWeightType
+      }
+    }
+  }
+}
+export type DeliveryDirectionResType = {
+  data: DeliveryDirectionItem[]
+}
+
+export type CurrencyToUsdResType = {
+  data: {
+    currency_to_usd: {
+      usd: {
+        price: string
+      }
+      vnd: {
+        price: string
+      }
+      euro: {
+        price: string
+      }
+      won: {
+        price: string
+      }
+      yen: {
+        price: string
+      }
+    }
+  }
+}
