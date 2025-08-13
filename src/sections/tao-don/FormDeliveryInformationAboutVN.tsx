@@ -134,6 +134,10 @@ export default function FormDeliveryInformationAboutVN({
     () => recipientAddressType == 'registeredAddress' && idOrder === 1073,
     [recipientAddressType, idOrder],
   )
+  const isAmeriacaToVietNam = useMemo(
+    () => recipientAddressType === 'registeredAddress' && idOrder === 1183,
+    [recipientAddressType, idOrder],
+  )
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -447,7 +451,10 @@ export default function FormDeliveryInformationAboutVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='flex pl-[0.75rem] !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
+                  className={cn(
+                    'flex pl-[0.75rem] !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]',
+                    {hidden: isAmeriacaToVietNam},
+                  )}
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                     <FormControl>
