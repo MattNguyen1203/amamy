@@ -30,13 +30,14 @@ function getUnitPrice(
   priceListType: DeliveryCostCalculationType,
 ) {
   if (priceListType === 'price_range') {
+    const ceiledWeight = Math.ceil(weight)
     return (
       priceList?.find(
         (item): item is DeliveryPriceRangeItemType =>
-          +(item as DeliveryPriceRangeItemType).min_weight <= weight &&
-          +(item as DeliveryPriceRangeItemType).max_weight >= weight,
+          +(item as DeliveryPriceRangeItemType).min_weight <= ceiledWeight &&
+          +(item as DeliveryPriceRangeItemType).max_weight >= ceiledWeight,
       )?.price ||
-      priceList?.[priceList.length - 1]?.price ||
+      priceList?.at(-1)?.price ||
       null
     )
   }
@@ -152,7 +153,7 @@ export default function useDeliveryPrice({
         )
       }
       if (!unitPrice) return null
-
+      console.log('Unit price', unitPrice)
       totalPrice =
         priceListType === 'price_fixed' &&
         Math.ceil(weight) < +deliveryPriceList.delivery_price[0].min_weight
