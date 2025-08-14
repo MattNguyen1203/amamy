@@ -53,7 +53,7 @@ export default function InputField({
         step={type === 'number' ? 0.5 : undefined}
         min={type === 'number' ? 0 : undefined}
         placeholder={placeholder}
-        className='rounded-[1.25rem] bg-white border border-solid border-[#DCDFE4] h-[3rem] px-[1rem] py-[0.75rem] placeholder:text-black/30  text-[0.875rem] font-medium leading-[150%] tracking-[-0.02625rem] shadow-none! outline-none! focus-visible:ring-0 text-[rgba(0,0,0,0.92)] xsm:h-[2.5rem] xsm:border-[0.6px] xsm:bg-[rgba(245,246,248,0.5)] xsm:px-[0.75rem]'
+        className='rounded-[1.25rem] bg-white border border-solid border-[#DCDFE4] h-[3rem] px-[1rem] py-[0.75rem] placeholder:text-black/30  text-[0.875rem] font-medium leading-[150%] tracking-[-0.02625rem] shadow-none outline-none! focus-visible:ring-0 text-[rgba(0,0,0,0.92)] xsm:h-[2.5rem] xsm:border-[0.6px] xsm:px-[0.75rem] xsm:text-[0.8125rem]'
         value={value}
         onChange={handleValueChange}
       />
