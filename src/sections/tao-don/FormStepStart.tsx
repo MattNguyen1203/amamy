@@ -497,15 +497,15 @@ export default function FormStepStart({
                 setHowToContactAmamy(false)
               }}
               className={cn(
-                'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none',
+                'fixed transition-all ease-in-out duration-700 inset-0 bg-black/0 z-[51] pointer-events-none',
                 selectServiceDimension && 'bg-black/70 pointer-events-auto',
                 howToContactAmamy && 'bg-black/70 pointer-events-auto',
               )}
             ></div>
             <div
               className={cn(
-                'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                selectServiceDimension && 'bottom-0',
+                'fixed transition-all ease-in-out duration-700 shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                selectServiceDimension && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>

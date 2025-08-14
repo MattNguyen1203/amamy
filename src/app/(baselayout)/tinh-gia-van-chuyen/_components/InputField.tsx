@@ -30,6 +30,8 @@ export default function InputField({
     let val = e.target.value
 
     if (type === 'number') {
+      // Chuyển dấu phẩy thành dấu chấm (iOS thường nhập dấu phẩy)
+      val = val.replace(',', '.')
       // Chỉ giữ lại số và dấu chấm
       val = val.replace(/[^0-9.]/g, '')
 

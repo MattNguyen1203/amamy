@@ -178,13 +178,13 @@ export default function SelectField({
           <div
             onClick={() => setOpen(false)}
             className={cn(
-              'fixed top-0 left-0 w-full h-full z-[9998] bg-[rgba(0,0,0,0.5)] opacity-0 invisible transition-all duration-500 ease-in-out',
+              'fixed top-0 left-0 w-full h-full z-[9998] bg-[rgba(0,0,0,0.5)] opacity-0 invisible transition-all duration-700 ease-in-out',
               {'opacity-100 visible': open},
             )}
           ></div>
           <div
             className={cn(
-              'bg-white rounded-t-[1.25rem] overflow-hidden fixed bottom-0 left-0 w-full z-[9999] translate-y-full hidden xsm:block transition-transform duration-500 ease-in-out',
+              'bg-white rounded-t-[1.25rem] overflow-hidden fixed bottom-0 left-0 w-full z-[9999] translate-y-full hidden xsm:block transition-transform duration-700 ease-in-out',
               {
                 'translate-y-0': open,
               },
