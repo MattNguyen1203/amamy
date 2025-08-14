@@ -36,6 +36,7 @@ export interface IDataFromOrder {
   [key: string]: any
 }
 export default function CreateOrder({data}: {data: ICreateOder[]}) {
+  console.log({data})
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
@@ -118,6 +119,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       setPrevTabFormDelivery('1')
     }
   }, [dataInformation])
+
+  console.log('dataInformation?.information', dataInformation?.information)
   return (
     <>
       <Tabs
@@ -149,7 +152,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   {index < Number(indexTab) ? (
                     <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
                   ) : (
-                    <div className='box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] xsm:text-[0.89231rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]'>
+                    <div className='box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem] xsm:font-medium xsm:text-[0.75rem]'>
                       {index + 1}
                     </div>
                   )}

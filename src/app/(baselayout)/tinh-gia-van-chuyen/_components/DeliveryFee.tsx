@@ -44,15 +44,15 @@ const deliveryWeightInputMap: Record<
 > = {
   kg: {
     label: 'Nhập số cân cần gửi (*)',
-    placeholder: '10kg',
+    placeholder: 'Số cân cần gửi',
   },
   lbs: {
     label: 'Nhập số lbs cần gửi (*)',
-    placeholder: '10lbs',
+    placeholder: 'Số lbs cần gửi',
   },
   package: {
     label: 'Nhập số kiện hàng cần gửi (*)',
-    placeholder: '10 kiện hàng',
+    placeholder: 'Số kiện hàng cần gửi',
   },
 }
 
@@ -333,7 +333,7 @@ export default function DeliveryFee({
         <div>
           <BtnBlue
             slug='/'
-            className='text-white w-fit border border-solid border-white/80 leading-[130%] font-montserrat font-medium text-[1rem] tracking-[-0.03rem] xsm:w-full xsm:h-[2.875rem] xsm:text-[0.875rem] xsm:tracking-[-0.02625rem]'
+            className='text-white w-fit leading-[130%] font-montserrat font-medium text-[1rem] tracking-[-0.03rem] xsm:w-full xsm:h-[2.875rem] xsm:text-[0.875rem] xsm:tracking-[-0.02625rem]'
           >
             Nhắn tin tư vấn miễn phí
           </BtnBlue>

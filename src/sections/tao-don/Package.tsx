@@ -122,39 +122,36 @@ export default function Package({
     }
   }, [selectPaymentInformation])
   function handleCreateOrder() {
+    const sanitize = (val: string) => (val && val !== 'un' ? val : '')
     setTransition(async () => {
       const currentDate = new Date()
       const formData = {
         ma_don: '',
         trang_thai_don_hang: '',
 
-        tinh_thanh_nguoi_nhan:
-          dataFromOrder?.recipientAddressType === 'registeredAddress' &&
-          (type === 'ducvn' || type === 'nhatviet')
-            ? dataFromOrder?.recipientCity
-            : dataFromOrder?.recipientCity ?? '',
-        ma_tinh_thanh_nguoi_nhan: dataFromOrder?.recipientCodeCity ?? '',
+        tinh_thanh_nguoi_nhan: sanitize(dataFromOrder?.recipientCity),
+        ma_tinh_thanh_nguoi_nhan: sanitize(dataFromOrder?.recipientCodeCity),
         quan_huyen_nguoi_nhan: isVietSec
           ? ''
           : dataFromOrder?.recipientAddressType === 'registeredAddress' &&
             (type === 'ducvn' || type === 'nhatviet')
-          ? dataFromOrder?.district ?? ''
+          ? sanitize(dataFromOrder?.district)
           : '',
         phuong_xa_nguoi_nhan: isVietSec
           ? ''
           : dataFromOrder?.recipientAddressType === 'registeredAddress' &&
             (type === 'ducvn' || type === 'nhatviet')
-          ? dataFromOrder?.recipientWardsandcommunes ?? ''
+          ? sanitize(dataFromOrder?.recipientWardsandcommunes)
           : '',
         so_nha_nguoi_nhan: isVietSec
           ? dataFromOrder?.housingNumber
           : type === 'vietduc' || type === 'viethan'
-          ? dataFromOrder?.housingNumber ?? ''
+          ? sanitize(dataFromOrder?.housingNumber)
           : '',
         ten_duong_nguoi_nhan: isVietSec
           ? dataFromOrder?.roadName
           : type === 'vietduc' || type === 'viethan'
-          ? dataFromOrder?.roadName ?? ''
+          ? sanitize(dataFromOrder?.roadName)
           : '',
         id_hoac_cmt:
           type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',

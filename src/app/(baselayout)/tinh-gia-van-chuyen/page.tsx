@@ -20,7 +20,7 @@ export default async function page() {
       getSchemaMarkup(endpoints.calculateOrderDelivery),
     ])
   return (
-    <main className='bg-background-elevation5'>
+    <main className='bg-background-elevation5 relative'>
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}

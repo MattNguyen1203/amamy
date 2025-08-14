@@ -58,15 +58,15 @@ const deliveryWeightInputMap: Record<
 > = {
   kg: {
     label: 'Nhập số cân cần gửi (*)',
-    placeholder: '10kg',
+    placeholder: 'Số cân cần gửi',
   },
   lbs: {
     label: 'Nhập số lbs cần gửi (*)',
-    placeholder: '10lbs',
+    placeholder: 'Số lbs cần gửi',
   },
   package: {
     label: 'Nhập số kiện hàng cần gửi (*)',
-    placeholder: '10 kiện hàng',
+    placeholder: 'Số kiện hàng cần gửi',
   },
 }
 
@@ -427,7 +427,7 @@ const TrackingOrder = ({
           <div className='col-span-full py-[0.75rem]'>
             <BtnBlue
               slug={`/${endpoints.calculateOrderDelivery}`}
-              className='flex items-center justify-center w-full h-[3rem] rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.8)] bg-[#38B6FF] text-white text-[1rem] font-medium leading-[130%] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:tracking-[-0.02625rem] xsm:h-[2.875rem]'
+              className='flex items-center justify-center w-full h-[3rem] rounded-[1.25rem] bg-[#38B6FF] text-white text-[1rem] font-medium leading-[130%] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:tracking-[-0.02625rem] xsm:h-[2.5rem]'
             >
               Chuyển sang trang tính giá vận chuyển
             </BtnBlue>

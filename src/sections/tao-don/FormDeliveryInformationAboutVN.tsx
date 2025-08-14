@@ -550,6 +550,7 @@ export default function FormDeliveryInformationAboutVN({
                     <PopoverTrigger asChild>
                       <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1] !shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                         <Button
+                          type='button'
                           variant='outline'
                           role='combobox'
                           className={cn(
@@ -636,6 +637,7 @@ export default function FormDeliveryInformationAboutVN({
                     <PopoverTrigger asChild>
                       <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1] !shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                         <Button
+                          type='button'
                           variant='outline'
                           role='combobox'
                           className={cn(
@@ -720,6 +722,7 @@ export default function FormDeliveryInformationAboutVN({
                     <PopoverTrigger asChild>
                       <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1] !shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
                         <Button
+                          type='button'
                           variant='outline'
                           role='combobox'
                           className={cn(
@@ -895,7 +898,7 @@ export default function FormDeliveryInformationAboutVN({
                 setIsWard(false)
               }}
               className={cn(
-                '!mt-0 fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none',
+                '!mt-0 fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none',
                 isCity && 'bg-black/70 pointer-events-auto',
                 isDistrict && 'bg-black/70 pointer-events-auto',
                 isWard && 'bg-black/70 pointer-events-auto',
@@ -903,8 +906,8 @@ export default function FormDeliveryInformationAboutVN({
             ></div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                isCity && 'bottom-0',
+                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                isCity && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
@@ -962,8 +965,8 @@ export default function FormDeliveryInformationAboutVN({
             </div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                isDistrict && 'bottom-0',
+                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                isDistrict && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
@@ -1018,8 +1021,8 @@ export default function FormDeliveryInformationAboutVN({
             </div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                isWard && 'bottom-0',
+                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                isWard && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
