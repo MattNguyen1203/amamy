@@ -114,6 +114,7 @@ export default function useDeliveryPrice({
     const selectedRoute = deliveryDirection?.data?.find(
       ({slug}) => slug === routeSlug,
     )
+    const isVietnamToAmerica = selectedRoute?.id === 1183
 
     if (!selectedRoute) return null
     const priceListType = selectedRoute?.acf?.delivery_cost_calculation_type
@@ -192,7 +193,7 @@ export default function useDeliveryPrice({
       baseCurrency = domesticList.currency
       let deliveryWeight = weight
       if (
-        selectedRoute?.slug === 'tu-my-sang-viet-nam' &&
+        isVietnamToAmerica &&
         +weight <= +domesticList.delivery_price[0].min_weight
       ) {
         deliveryWeight = +domesticList.delivery_price[0].min_weight

@@ -44,15 +44,15 @@ const deliveryWeightInputMap: Record<
 > = {
   kg: {
     label: 'Nhập số cân cần gửi (*)',
-    placeholder: '10kg',
+    placeholder: 'Số cân cần gửi',
   },
   lbs: {
     label: 'Nhập số lbs cần gửi (*)',
-    placeholder: '10lbs',
+    placeholder: 'Số lbs cần gửi',
   },
   package: {
     label: 'Nhập số kiện hàng cần gửi (*)',
-    placeholder: '10 kiện hàng',
+    placeholder: 'Số kiện hàng cần gửi',
   },
 }
 

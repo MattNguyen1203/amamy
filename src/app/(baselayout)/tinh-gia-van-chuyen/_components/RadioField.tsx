@@ -41,7 +41,7 @@ export default function RadioField({
               value={value}
               className='xsm:size-[1.125rem] size-[1.25rem] data-[state="checked"]:border-[#38B6FF]'
             />
-            <span className='text-[0.75rem] font-semibold tracking-[-0.015rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
+            <span className='text-[0.75rem] font-medium tracking-[-0.015rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
               {name}
             </span>
           </Label>
