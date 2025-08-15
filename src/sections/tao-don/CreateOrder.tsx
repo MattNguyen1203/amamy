@@ -39,6 +39,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
+
   const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -143,14 +144,20 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   key={index}
                   value={item?.value}
                   className={cn(
-                    'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none [&_.box-index]:data-[state=active]:bg-[#38B6FF] [&_.box-text]:data-[state=active]:text-black',
+                    'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none  [&_.box-text]:data-[state=active]:text-black',
                     index > Number(indexTab) && 'pointer-events-none',
                   )}
                 >
                   {index < Number(indexTab) ? (
                     <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
                   ) : (
-                    <div className='box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem] xsm:font-normal xsm:text-[0.75rem]'>
+                    <div
+                      className={cn(
+                        'box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]  xsm:text-[0.75rem] xsm:bg-white xsm:text-[#38B6FF] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF]',
+                        index === +indexTab &&
+                          'bg-[#38B6FF] xsm:bg-[#38B6FF] xsm:text-white',
+                      )}
+                    >
                       {index + 1}
                     </div>
                   )}
@@ -163,7 +170,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </div>
           <div
             className={cn(
-              'z-[-1] absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.6rem] xsm:z-[-1] sm:top-[1.5rem] sm:bottom-[1.5rem] sm:left-[2.1rem] w-[0.25rem] xsm:w-auto xsm:h-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
+              'z-[-1] absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.8125rem] xsm:z-[-1] sm:top-[1.5rem] sm:bottom-[1.5rem] sm:left-[2.1rem] w-[0.25rem] xsm:w-auto xsm:h-[0.0625rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
             )}
           >
             <div
@@ -176,7 +183,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       height: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
                     }
               }
-              className='bg-[#38B6FF] xsm:h-[0.25rem] transition-all duration-1000'
+              className='bg-[#38B6FF] xsm:h-[0.0625rem] transition-all duration-1000'
             ></div>
           </div>
         </TabsList>
