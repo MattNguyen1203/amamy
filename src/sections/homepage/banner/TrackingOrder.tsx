@@ -90,7 +90,6 @@ const TrackingOrder = ({
   deliveryDirection,
   currencyToUsd,
 }: TrackingOrderProps) => {
-  console.log({deliveryDirection, currencyToUsd})
   const [value, setValue] = useState('search-order')
   const [inputSearch, setInputSearch] = useState('')
 

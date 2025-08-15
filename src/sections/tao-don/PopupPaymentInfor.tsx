@@ -29,14 +29,14 @@ export default function PopupPaymentInfor({
           setSelectPaymentInformation(false)
         }}
         className={cn(
-          'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none !mt-0',
-          selectPaymentInformation && 'bg-black/70 pointer-events-auto',
+          'fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none invisible !mt-0',
+          selectPaymentInformation && 'bg-black/50 visible pointer-events-auto',
         )}
       ></div>
       <div
         className={cn(
-          'bg-[#F6F6F6] fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] overflow-hidden',
-          selectPaymentInformation && 'bottom-0',
+          'bg-[#F6F6F6] fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] overflow-hidden',
+          selectPaymentInformation && 'translate-y-0',
         )}
       >
         <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>

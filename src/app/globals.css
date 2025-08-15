@@ -295,3 +295,8 @@ input[type='number'] {
   fill: #38b6ff;
   stroke: #38b6ff;
 }
+
+
+.drawer-transition {
+  transtion: all 0.7s ease-in-out;
+}

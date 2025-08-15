@@ -497,9 +497,9 @@ export default function FormStepStart({
                 setHowToContactAmamy(false)
               }}
               className={cn(
-                'fixed transition-all ease-in-out duration-700 inset-0 bg-black/0 z-[51] pointer-events-none',
-                selectServiceDimension && 'bg-black/70 pointer-events-auto',
-                howToContactAmamy && 'bg-black/70 pointer-events-auto',
+                'fixed transition-all ease-in-out duration-700 inset-0 bg-black/0 z-[51] invisible pointer-events-none',
+                (selectServiceDimension || howToContactAmamy) &&
+                  'bg-black/50 visible pointer-events-auto',
               )}
             ></div>
             <div

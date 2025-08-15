@@ -1,5 +1,6 @@
 'use client'
 import ImageV2 from '@/components/image/ImageV2'
+import {cn} from '@/lib/utils'
 import Link from 'next/link'
 
 const ArrowRightCircle = () => (
@@ -43,13 +44,22 @@ interface CountryCardProps {
   name: string
   icon: string
   href?: string
+  className?: string
 }
 
-const CountryCard: React.FC<CountryCardProps> = ({name, icon, href}) => {
+const CountryCard: React.FC<CountryCardProps> = ({
+  name,
+  icon,
+  href,
+  className,
+}) => {
   return (
     <Link
       href={href || ''}
-      className='relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF] group cursor-pointer'
+      className={cn(
+        'relative w-[16.625rem] h-[11.25rem] overflow-hidden border-[1px] border-solid border-[#F2F2F2] bg-[#FFF] group cursor-pointer',
+        className,
+      )}
     >
       <ImageV2
         alt=''

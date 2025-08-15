@@ -41,17 +41,18 @@ const MultiCountryService = ({
       </div>
     </div>
     <div className='flex'>
-      <div className='grid grid-cols-3 w-[50.0625] items-start gap-[0_0] '>
+      <div className='grid grid-cols-4 w-[66.5rem] items-start gap-0 '>
         {sectionCountry.list_country.map((country, index) => (
           <CountryCard
             key={index}
             name={country.country}
             icon={country.flag_img.url}
             href={`/${country.link.slug}`}
+            className='w-auto'
           />
         ))}
       </div>
-      <div className='flex flex-col w-[16.625rem] h-[33.8125rem] items-start '>
+      {/* <div className='flex flex-col w-[16.625rem] h-[33.8125rem] items-start '>
         <CountryCard
           name={
             sectionCountry.list_country[sectionCountry.list_country.length - 1]
@@ -82,7 +83,7 @@ const MultiCountryService = ({
             src={sectionCountry.background2_people}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
 )
