@@ -120,15 +120,15 @@ export default function FormDeliveryInformationJapanVN({
         dataFromOrder?.recipientAddressType ?? 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? (dataFromOrder?.recipientCity ?? '')
+          ? dataFromOrder?.recipientCity ?? ''
           : 'un',
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? (dataFromOrder?.district ?? '')
+          ? dataFromOrder?.district ?? ''
           : 'un',
       recipientWardsandcommunes:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? (dataFromOrder?.recipientWardsandcommunes ?? '')
+          ? dataFromOrder?.recipientWardsandcommunes ?? ''
           : 'un',
     },
   })
@@ -702,16 +702,15 @@ export default function FormDeliveryInformationJapanVN({
                 setIsWard(false)
               }}
               className={cn(
-                '!mt-0 fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none',
-                isCity && 'bg-black/70 pointer-events-auto',
-                isDistrict && 'bg-black/70 pointer-events-auto',
-                isWard && 'bg-black/70 pointer-events-auto',
+                '!mt-0 fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none invisible',
+                (isCity || isDistrict || isWard) &&
+                  'bg-black/50 pointer-events-auto visible',
               )}
             ></div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                isCity && 'bottom-0',
+                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                isCity && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
@@ -768,8 +767,8 @@ export default function FormDeliveryInformationJapanVN({
             </div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                isDistrict && 'bottom-0',
+                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                isDistrict && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
@@ -824,8 +823,8 @@ export default function FormDeliveryInformationJapanVN({
             </div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
-                isWard && 'bottom-0',
+                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                isWard && 'translate-y-0',
               )}
             >
               <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>

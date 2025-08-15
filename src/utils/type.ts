@@ -707,6 +707,7 @@ export type DeliveryDirectionItem = {
         unit_type: string
       }
       paid_delivery: {
+        title: string
         currency: DeliveryCurrencyType
         price: string
         unit_type: DeliveryWeightType

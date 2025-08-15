@@ -211,7 +211,7 @@ const MobileMenu = ({
           <p className='text-pc-sub14m text-black/80'>
             Tất cả quyền được bảo lưu.
             <br />
-            Bản quyền © 2024 Ltd.
+            Bản quyền © 2025 Ltd.
           </p>
           <div className='mt-4 flex-center space-x-8'>
             <Link

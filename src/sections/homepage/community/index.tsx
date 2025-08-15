@@ -31,6 +31,8 @@ const Community = ({sectionCountry, section3}: Props) => {
     })
   }, [])
 
+  console.log({sectionCountry})
+
   return (
     <div className='xsm:bg-[#F8F8FB] pb-[1.5rem]'>
       <div className='w-full flex xsm:flex-col'>

@@ -122,7 +122,7 @@ const Footer = ({data}) => {
           </div>
           <div className='xsm:hidden border-t-[1px] border-r border-l absolute top-0 right-0 left-0 rounded-t-[20px] h-3/4 w-full border-[#f1f9ff33]'></div>
           <p className='xsm:w-[13.1875rem] xsm:text-center text-[rgb(214,214,214,0.6)] xsm:text-[#F8F8F8] xsm:text-pc-sub14s text-[0.75rem] not-italic font-semibold leading-[normal] tracking-[-0.015rem] uppercase'>
-            Tất cả quyền được bảo lưu. Bản quyền © 2024 Ltd.
+            Tất cả quyền được bảo lưu. Bản quyền © 2025 Ltd.
           </p>
           <div className='flex sm:gap-[2.2rem] xsm:gap-[2rem] relative z-10'>
             <Link

@@ -799,14 +799,14 @@ export default function Instruct({
                       setSelectBranch(false)
                     }}
                     className={cn(
-                      'fixed transition-all duration-1000 inset-0 bg-black/0 z-[51] pointer-events-none !mt-0',
-                      selectBranch && 'bg-black/70 pointer-events-auto',
+                      'fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none invisible !mt-0',
+                      selectBranch && 'bg-black/50 visible pointer-events-auto',
                     )}
                   ></div>
                   <div
                     className={cn(
-                      'fixed transition-all duration-500 shadow-lg bottom-[-125%] z-[52] left-0 w-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem]',
-                      selectBranch && 'bottom-0',
+                      'fixed transition-all duration-700 shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem]',
+                      selectBranch && 'translate-y-0',
                     )}
                   >
                     <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] rounded-t-[1.25rem] relative p-[0.5rem] flex-center '>
