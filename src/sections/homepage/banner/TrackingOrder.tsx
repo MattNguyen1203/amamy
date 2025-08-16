@@ -188,11 +188,13 @@ const TrackingOrder = ({
     return paid && free
       ? [
           {
-            name: `Ship nội địa (${formatPriceByLocale(
-              +paid.price,
-              paid.currency,
-              2,
-            )} ${paid.currency}/${paid.unit_type})`,
+            name: paid?.title
+              ? paid?.title
+              : `Ship nội địa (${formatPriceByLocale(
+                  +paid.price,
+                  paid.currency,
+                  2,
+                )} ${paid.currency}/${paid.unit_type})`,
             value: paid.price,
           },
           {name: free.condition_label, value: 'free'},
