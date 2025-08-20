@@ -47,6 +47,10 @@ export interface IImage {
   sizes: ImageSize
 }
 export interface IBanner {
+  background: {
+    background_pc: IImage
+    background_mobile: IImage
+  }[]
   background_pc: IImage
   background_mobile: IImage
   image_1: IImage
