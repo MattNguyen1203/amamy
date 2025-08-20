@@ -387,6 +387,33 @@ export default function FormDeliveryInformationAboutVN({
     }
   }, [form, recipientAddressType])
 
+  const formDeliveryInformation = useMemo(() => {
+    const shippingDirectionId = +dataFromOrder.shipping
+    let descFieldName = ''
+    let placeholderFieldStreetName = `Marien Strasse`
+    let placeholderFieldHouseNumber = `15`
+    let placeholderFieldCityName = `Nhập tên thành phố`
+    let placeholderFieldCityCode = `10117`
+    switch (shippingDirectionId) {
+      // Việt - Séc
+      case 1073:
+        descFieldName = `*Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc đúng Občanský průkaz.`
+        placeholderFieldStreetName = `Lečkova`
+        placeholderFieldHouseNumber = `15`
+        placeholderFieldCityName = `Praha`
+        placeholderFieldCityCode = `14900`
+        break
+    }
+
+    return {
+      descFieldName,
+      placeholderFieldStreetName,
+      placeholderFieldHouseNumber,
+      placeholderFieldCityName,
+      placeholderFieldCityCode,
+    }
+  }, [dataFromOrder.shipping])
+
   return (
     <Form {...form}>
       <form
@@ -412,6 +439,12 @@ export default function FormDeliveryInformationAboutVN({
                     {...field}
                   />
                 </FormControl>
+                {formDeliveryInformation.descFieldName && (
+                  <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                    {formDeliveryInformation.descFieldName}
+                  </p>
+                )}
+
                 <FormMessage className=' pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
@@ -796,7 +829,9 @@ export default function FormDeliveryInformationAboutVN({
                     <FormControl>
                       <Input
                         className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                        placeholder='15'
+                        placeholder={
+                          formDeliveryInformation.placeholderFieldHouseNumber
+                        }
                         {...field}
                       />
                     </FormControl>
@@ -815,7 +850,9 @@ export default function FormDeliveryInformationAboutVN({
                     <FormControl>
                       <Input
                         className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                        placeholder='Marien Strasse'
+                        placeholder={
+                          formDeliveryInformation.placeholderFieldStreetName
+                        }
                         {...field}
                       />
                     </FormControl>
@@ -836,7 +873,9 @@ export default function FormDeliveryInformationAboutVN({
                     <FormControl>
                       <Input
                         className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                        placeholder='Nhập tên thành phố'
+                        placeholder={
+                          formDeliveryInformation.placeholderFieldCityName
+                        }
                         {...field}
                       />
                     </FormControl>
@@ -855,7 +894,9 @@ export default function FormDeliveryInformationAboutVN({
                     <FormControl>
                       <Input
                         className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                        placeholder='10117'
+                        placeholder={
+                          formDeliveryInformation.placeholderFieldCityCode
+                        }
                         {...field}
                       />
                     </FormControl>

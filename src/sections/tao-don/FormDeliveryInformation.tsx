@@ -1,7 +1,7 @@
 'use client'
 import useStore from '@/app/(store)/store'
 import ImageV2 from '@/components/image/ImageV2'
-import { Button } from '@/components/ui/button'
+import {Button} from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import {Input} from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -19,14 +19,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import countries from '@/sections/tao-don/Europe'
 import ICX from '@/sections/tao-don/ICX'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useMemo, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -138,6 +138,57 @@ export default function FormDeliveryInformation({
     handleClickcurrentTab(nextStep)
     setTriggerScroll(true)
   }
+
+  const formDeliveryInformation = useMemo(() => {
+    const shippingDirectionId = +dataFromOrder.shipping
+    let descFieldName = `*Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc đúng tên Auswei.`
+    let placeholderFieldStreetName = `Marien Strasse`
+    let placeholderFieldHouseNumber = `15`
+    let placeholderFieldCityName = `Nhập tên thành phố`
+    let placeholderFieldCityCode = `10117`
+    switch (shippingDirectionId) {
+      // Việt - Mỹ
+      case 1161:
+        descFieldName = `*Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc đúng issued ID.`
+        placeholderFieldStreetName = `Hightrail Rd/Schertz`
+        placeholderFieldHouseNumber = `740`
+        placeholderFieldCityName = `Schertz`
+        placeholderFieldCityCode = `78108`
+        break
+      // Việt - Canada
+      case 1181:
+        descFieldName = `*Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc đúng Government-issued ID.`
+        placeholderFieldStreetName = `Victor Street`
+        placeholderFieldHouseNumber = `501`
+        placeholderFieldCityName = `Winnipeg`
+        placeholderFieldCityCode = `R3G 1R1`
+        break
+      // Việt - Úc
+      case 1182:
+        descFieldName = `*Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc đúng Government-issued ID.`
+        placeholderFieldStreetName = `Diamond Avenue`
+        placeholderFieldHouseNumber = `36`
+        placeholderFieldCityName = `Albanvale`
+        placeholderFieldCityCode = `3021`
+        break
+      // Việt - Pháp
+      case 1428:
+        descFieldName = `*Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc đúng Carte Nationale d’Identité.`
+        placeholderFieldStreetName = `Route de Rennes`
+        placeholderFieldHouseNumber = `10`
+        placeholderFieldCityName = `Nantes`
+        placeholderFieldCityCode = `44119`
+        break
+    }
+
+    return {
+      descFieldName,
+      placeholderFieldStreetName,
+      placeholderFieldHouseNumber,
+      placeholderFieldCityName,
+      placeholderFieldCityCode,
+    }
+  }, [dataFromOrder.shipping])
   return (
     <Form {...form}>
       <form
@@ -164,8 +215,7 @@ export default function FormDeliveryInformation({
                   />
                 </FormControl>
                 <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
-                  *Bắt buộc đúng tên trên chuông cửa nhằm giao hàng đúng hoặc
-                  đúng tên Auswei.
+                  {formDeliveryInformation.descFieldName}
                 </p>
                 <FormMessage className=' pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem]' />
               </FormItem>
@@ -311,7 +361,9 @@ export default function FormDeliveryInformation({
                 <FormControl>
                   <Input
                     className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='Marien Strasse'
+                    placeholder={
+                      formDeliveryInformation.placeholderFieldStreetName
+                    }
                     {...field}
                   />
                 </FormControl>
@@ -330,7 +382,9 @@ export default function FormDeliveryInformation({
                 <FormControl>
                   <Input
                     className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='15'
+                    placeholder={
+                      formDeliveryInformation.placeholderFieldHouseNumber
+                    }
                     {...field}
                   />
                 </FormControl>
@@ -351,7 +405,9 @@ export default function FormDeliveryInformation({
                 <FormControl>
                   <Input
                     className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='Nhập tên thành phố'
+                    placeholder={
+                      formDeliveryInformation.placeholderFieldCityName
+                    }
                     {...field}
                   />
                 </FormControl>
@@ -370,7 +426,9 @@ export default function FormDeliveryInformation({
                 <FormControl>
                   <Input
                     className=' !shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
-                    placeholder='10117'
+                    placeholder={
+                      formDeliveryInformation.placeholderFieldCityCode
+                    }
                     {...field}
                   />
                 </FormControl>
