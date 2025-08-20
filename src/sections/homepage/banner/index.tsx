@@ -10,7 +10,10 @@ import {
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import TrackingInterface from './TrackingOrder'
-
+import {Swiper, SwiperSlide} from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+import {EffectFade} from 'swiper/modules'
 interface BannerProps {
   banner: IBanner
   boxChatAI: IBoxChatAI
@@ -24,6 +27,7 @@ const Banner = ({
   deliveryDirectionData,
   currencyExchangeRateData,
 }: BannerProps) => {
+  console.log('banner', banner)
   useGSAP(() => {
     gsap.from('.fade-image', {
       opacity: 0,
@@ -47,14 +51,36 @@ const Banner = ({
   return (
     <>
       <div className='relative w-full h-[50.455rem] text-white xsm:hidden'>
-        <ImageV2
-          alt=''
-          className='size-full'
-          src={banner?.background_pc.url}
-          width={3000}
-          height={2000}
-          quality={100}
-        />
+        <Swiper
+          loop={true}
+          effect='fade'
+          modules={[EffectFade]}
+          spaceBetween={0}
+          slidesPerView={1}
+          className='size-full !z-0'
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          speed={750}
+          grabCursor={true}
+        >
+          {banner?.background?.map(({background_pc}, index) => (
+            <SwiperSlide
+              key={index}
+              className='size-full'
+            >
+              <ImageV2
+                alt=''
+                className='size-full'
+                src={background_pc?.url}
+                width={1600}
+                height={788}
+                quality={100}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
         {/* <div className='absolute top-[11rem] left-[47rem] flex items-center space-x-4'>
           <ImageV2
             alt=''
@@ -126,7 +152,6 @@ const Banner = ({
           currencyExchangeRateData={currencyExchangeRateData}
           banner={banner}
           boxChatAI={boxChatAI}
-          height='h-[25.6874rem]'
         />
       </div>
     </>
@@ -138,25 +163,45 @@ export default Banner
 const BackgroundMobile = ({
   banner,
   boxChatAI,
-  height = 'h-[25.6874rem]',
   deliveryDirectionData,
   currencyExchangeRateData,
 }: {
   banner: IBanner
   boxChatAI: IBoxChatAI
-  height?: string
   deliveryDirectionData: DeliveryDirectionResType
   currencyExchangeRateData: CurrencyToUsdResType
 }) => {
   return (
     <div className='flex flex-col relative xsm:w-full'>
-      <ImageV2
-        className={`w-full ${height} flex-shrink-0`}
-        src={banner?.background_mobile.url}
-        alt={banner?.background_mobile.alt}
-        width={1000}
-        height={1000}
-      />
+      <Swiper
+        loop={true}
+        effect='fade'
+        modules={[EffectFade]}
+        spaceBetween={0}
+        slidesPerView={1}
+        className='size-full !z-0'
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        speed={750}
+        grabCursor={true}
+      >
+        {banner?.background?.map(({background_mobile}, index) => (
+          <SwiperSlide
+            key={index}
+            className='size-full'
+          >
+            <ImageV2
+              alt=''
+              width={375}
+              height={445}
+              src={background_mobile.url}
+              className='w-full h-[25.6874rem] object-cover'
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       {/* <div className='absolute top-[7rem] left-[0.5rem] flex items-center space-x-4'>
         <ImageV2
           alt=''
