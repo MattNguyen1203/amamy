@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import ReceivingIncentivesFrom from '@/components/footer/ReceivingIncentivesFrom'
 import ImageV2 from '@/components/image/ImageV2'
-import Link from 'next/link'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Footer = ({data}) => {

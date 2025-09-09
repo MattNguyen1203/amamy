@@ -1,13 +1,15 @@
 'use client'
-import BtnBlue from '@/components/button/BtnBlue'
+
 import ICArrow from '@/sections/blog/detail/ICArrow'
 import {ListNewsObject, NewsObject} from '@/utils/type'
 import Image from 'next/image'
+import BtnBlue from '@/components/button/BtnBlue'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
 import {EffectFade, Navigation} from 'swiper/modules'
 import {Swiper, SwiperSlide} from 'swiper/react'
+
 export default function SliderPC({
   setActiveSlider,
   withDHS,

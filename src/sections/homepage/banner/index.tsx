@@ -1,5 +1,5 @@
 'use client'
-import ImageV2 from '@/components/image/ImageV2'
+
 import {
   CurrencyToUsdResType,
   DeliveryDirectionResType,
@@ -9,11 +9,13 @@ import {
 } from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import TrackingInterface from './TrackingOrder'
 import {Swiper, SwiperSlide} from 'swiper/react'
+import ImageV2 from '@/components/image/ImageV2'
+import TrackingInterface from './TrackingOrder'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import {EffectFade} from 'swiper/modules'
+
 interface BannerProps {
   banner: IBanner
   boxChatAI: IBoxChatAI

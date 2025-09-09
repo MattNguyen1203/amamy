@@ -1,5 +1,5 @@
 'use client'
-import ImageV2 from '@/components/image/ImageV2'
+
 import useIsMobile from '@/hooks/useIsMobile'
 import CardService from '@/sections/homepage/community/CardService'
 import CardSlideMB from '@/sections/homepage/community/CardSlideMB'
@@ -9,6 +9,7 @@ import MultiCountryService, {
 import {ShippingServiceObject, StrengthsObject} from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
+import ImageV2 from '@/components/image/ImageV2'
 
 type Props = {
   sectionCountry: ShippingServiceObject

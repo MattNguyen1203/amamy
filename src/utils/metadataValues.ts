@@ -28,8 +28,8 @@ export default function metadataValues(res: any) {
       images: Array.isArray(result?.og_image)
         ? [...result?.openGraph?.image?.url]
         : result?.openGraph?.image?.url
-        ? result?.openGraph?.image?.url
-        : [],
+          ? result?.openGraph?.image?.url
+          : [],
       locale: result?.openGraph?.locale,
       type: result?.openGraph?.type,
     },
@@ -41,8 +41,8 @@ export default function metadataValues(res: any) {
       images: Array.isArray(result?.og_image)
         ? [...result?.twitter?.image]
         : result?.twitter?.image
-        ? result?.twitter?.image
-        : [],
+          ? result?.twitter?.image
+          : [],
       misc: result?.twitter_misc,
     },
   }

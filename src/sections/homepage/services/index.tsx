@@ -1,12 +1,13 @@
 'use client'
-import ImageV2 from '@/components/image/ImageV2'
+
+import React from 'react'
 import useIsMobile from '@/hooks/useIsMobile'
 import {Card, ImageIcon, ServicesObject} from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import ImageV2 from '@/components/image/ImageV2'
 
 const Services = ({services}: {services: ServicesObject}) => {
   const isMobile = useIsMobile()

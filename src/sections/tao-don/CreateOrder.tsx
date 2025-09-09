@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+
+import {useEffect, useState} from 'react'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 import useStore from '@/app/(store)/store'
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import CeateNote from '@/sections/tao-don/CreateNote'
@@ -16,13 +18,13 @@ import ICCheck from '@/sections/tao-don/ICCheck'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import Package from '@/sections/tao-don/Package'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import Image from 'next/image'
-import {useEffect, useState} from 'react'
-import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import './style.css'
+
 let StepForm: {title: string; value: string}[] = [
   {title: 'Thông tin gửi hàng', value: '1'},
   {title: 'Thời gian gửi hàng', value: '2'},
@@ -212,8 +214,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   ? dataInformation?.information?.time
                     ? '2'
                     : dataInformation?.information?.note
-                    ? '3'
-                    : '4'
+                      ? '3'
+                      : '4'
                   : '2'
               }
             />
@@ -281,8 +283,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -299,8 +301,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -316,8 +318,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -333,8 +335,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -354,8 +356,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}

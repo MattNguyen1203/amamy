@@ -1,16 +1,17 @@
 'use client'
-import BtnBlue from '@/components/button/BtnBlue'
-import ICArrow from '@/sections/blog/detail/ICArrow'
-import {Swiper, SwiperSlide} from 'swiper/react'
 
 // Import Swiper styles
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
-import ItemBlog from '@/sections/blog/ItemBlog'
 import {IItemPostBlog} from '@/sections/blog/blogs.interface'
+import ICArrow from '@/sections/blog/detail/ICArrow'
+import ItemBlog from '@/sections/blog/ItemBlog'
+import {Swiper, SwiperSlide} from 'swiper/react'
+import BtnBlue from '@/components/button/BtnBlue'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import {FreeMode, Navigation, Pagination} from 'swiper/modules'
+
 export default function RelatedBlogs({
   data,
   title,

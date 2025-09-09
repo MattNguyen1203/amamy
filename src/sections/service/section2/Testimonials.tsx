@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import Image from 'next/image'
 import * as React from 'react'
-
+import {IServicePage} from '@/utils/type'
+import Image from 'next/image'
 import ImageV2 from '@/components/image/ImageV2'
 import {Card, CardContent} from '@/components/ui/card'
 import {
@@ -13,7 +13,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import {IServicePage} from '@/utils/type'
 
 interface Prop {
   data: IServicePage

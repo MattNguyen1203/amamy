@@ -1,7 +1,6 @@
 import {CardServiceMB} from '@/sections/homepage/community/CardService'
 import {StrengthItem} from '@/utils/type'
 import {Swiper, SwiperSlide} from 'swiper/react'
-
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'

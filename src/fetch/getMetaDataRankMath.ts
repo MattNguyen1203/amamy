@@ -1,4 +1,5 @@
 import {parseRankMathHead} from '@/fetch/parseRankMathHead'
+
 export default async function getMetaDataRankMath(slug: string) {
   try {
     const res = await fetch(

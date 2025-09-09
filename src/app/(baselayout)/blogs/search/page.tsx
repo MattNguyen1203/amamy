@@ -1,9 +1,10 @@
+import {Suspense} from 'react'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import MenuSearch from '@/sections/blog/search/MenuSearch'
 import metadataValues from '@/utils/metadataValues'
-import {Suspense} from 'react'
+
 export async function generateMetadata() {
   const res = await getMetaDataRankMath('/blogs')
   return metadataValues(res)

@@ -1,4 +1,5 @@
 'use client'
+
 import {IAbout} from '@/sections/about/about.interface'
 import Image from 'next/image'
 import QuantityList from './QuantityList'

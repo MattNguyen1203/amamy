@@ -1,4 +1,5 @@
 'use client'
+
 import useIsMobile from '@/hooks/useIsMobile'
 import {IListServiceResponse} from '@/utils/type'
 import Image from 'next/image'

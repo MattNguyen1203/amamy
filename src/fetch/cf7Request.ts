@@ -26,7 +26,7 @@ class CF7Request {
     unitTag: string
   }): Promise<any> {
     if (!id || !unitTag) {
-      throw new Error('Both \'id\' and \'unitTag\' are required.')
+      throw new Error("Both 'id' and 'unitTag' are required.")
     }
 
     try {

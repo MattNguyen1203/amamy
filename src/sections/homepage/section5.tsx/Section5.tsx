@@ -1,4 +1,5 @@
 'use client'
+
 import FAQItem from '@/sections/homepage/section5.tsx/FAQItem'
 import {IFaq, IFaqs} from '@/utils/type'
 import {useGSAP} from '@gsap/react'

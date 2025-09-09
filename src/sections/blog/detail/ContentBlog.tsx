@@ -1,10 +1,11 @@
 'use client'
+
+import {useEffect, useState} from 'react'
 import {IDetailBlog} from '@/sections/blog/blogs.interface'
 import {Iheadings} from '@/sections/blog/detail/AsideBlog'
 import ICCopy from '@/sections/blog/detail/ICCopy'
 import ICFb from '@/sections/blog/detail/ICFb'
 import {usePathname} from 'next/navigation'
-import {useEffect, useState} from 'react'
 import {toast} from 'sonner'
 
 export default function ContentBlog({

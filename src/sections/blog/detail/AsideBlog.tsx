@@ -1,10 +1,12 @@
 'use client'
-import Favourite from '@/components/favourite/Favourite'
+
+import {useEffect, useState} from 'react'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IFavouriteBlog} from '@/sections/blog/blogs.interface'
 import Link from 'next/link'
-import {useEffect, useState} from 'react'
+import Favourite from '@/components/favourite/Favourite'
+
 export interface Iheadings {
   heading: number
   id: string

@@ -1,10 +1,10 @@
 'use client'
 
-import ImageV2 from '@/components/image/ImageV2'
-import Plus from '@/components/svg/Plus'
+import {useEffect, useRef, useState} from 'react'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
-import {useEffect, useRef, useState} from 'react'
+import ImageV2 from '@/components/image/ImageV2'
+import Plus from '@/components/svg/Plus'
 
 const FAQItem = ({
   content,

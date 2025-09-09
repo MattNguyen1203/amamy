@@ -1,10 +1,11 @@
 'use client'
+
+import {useEffect, useState} from 'react'
 import useStore from '@/app/(store)/store'
-import {ICLoading} from '@/components/icon/ICLoading'
-import ImageV2 from '@/components/image/ImageV2'
 import useClickOutside from '@/hooks/useClickOutside'
 import {cn} from '@/lib/utils'
-import {useEffect, useState} from 'react'
+import {ICLoading} from '@/components/icon/ICLoading'
+import ImageV2 from '@/components/image/ImageV2'
 
 type SearchBillProps = {
   onSearch: () => void

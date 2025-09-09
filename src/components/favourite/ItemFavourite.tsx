@@ -1,6 +1,6 @@
-import ICArraw from '@/components/icon/ICArraw'
 import {IFavouriteBlog} from '@/sections/blog/blogs.interface'
 import Link from 'next/link'
+import ICArraw from '@/components/icon/ICArraw'
 
 export default function ItemFavourite({item}: {item: IFavouriteBlog}) {
   return (

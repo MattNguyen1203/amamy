@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import DetailCentenBlog from '@/sections/blog/detail/Index'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
 import metadataValues from '@/utils/metadataValues'
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+
 export async function generateStaticParams() {
   const posts = await fetchData({
     api: 'all-slug-post',

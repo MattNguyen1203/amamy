@@ -1,6 +1,6 @@
-import SendMessage from '@/components/svg/SendMessage'
 import {cn} from '@/lib/utils'
 import Image from 'next/image'
+import SendMessage from '@/components/svg/SendMessage'
 
 type AIInputProps = {
   placeholder?: string

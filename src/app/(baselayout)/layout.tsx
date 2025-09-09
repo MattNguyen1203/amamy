@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import fetchData from '@/fetch/fetchData'
 import ContactButton from '@/components/contact-button'
 import Footer from '@/components/footer/Footer'
-import fetchData from '@/fetch/fetchData'
+
 export default async function RootLayout({
   children,
 }: Readonly<{

@@ -1,6 +1,6 @@
-import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
 import {IProgress} from '@/sections/tracking-bill/OrderInformation'
+import ImageV2 from '@/components/image/ImageV2'
 
 const InformationItem = ({day, title, desc}: IProgress) => {
   return (

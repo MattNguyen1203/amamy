@@ -1,13 +1,14 @@
 'use client'
+
+import {useEffect, useRef, useState} from 'react'
 import useStore from '@/app/(store)/store'
+import {cn} from '@/lib/utils'
+import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import MessageItem, {MessageItemProps} from '@/components/chat-bot/MessageItem'
 import ImageV2 from '@/components/image/ImageV2'
 import Plus from '@/components/svg/Plus'
 import SendMessage from '@/components/svg/SendMessage'
-import {cn} from '@/lib/utils'
-import gsap from 'gsap'
-import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import {useEffect, useRef, useState} from 'react'
 
 type ChatBotProps = {
   dataMessage?: MessageItemProps[]

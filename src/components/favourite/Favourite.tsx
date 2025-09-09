@@ -1,7 +1,7 @@
-import ItemFavourite from '@/components/favourite/ItemFavourite'
+import {Fragment} from 'react'
 import {cn} from '@/lib/utils'
 import {IFavouriteBlog} from '@/sections/blog/blogs.interface'
-import {Fragment} from 'react'
+import ItemFavourite from '@/components/favourite/ItemFavourite'
 
 export default function Favourite({
   dataFavourite,

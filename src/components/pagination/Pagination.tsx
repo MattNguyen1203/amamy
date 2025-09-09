@@ -1,5 +1,7 @@
 'use client'
+
 import ReactPaginate from 'react-paginate'
+
 const Pagination = () => {
   return (
     <ReactPaginate
