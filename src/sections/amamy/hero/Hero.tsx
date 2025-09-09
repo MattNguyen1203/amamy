@@ -21,8 +21,8 @@ const stats = [
 
 const Hero = () => {
   return (
-    <section className='w-full bg-Blue-Primary py-12 xsm:py-8'>
-      <div className='mx-auto flex max-w-5xl flex-col items-center px-4 pt-12 text-center text-white xsm:pt-0'>
+    <section className='size-full bg-Blue-Primary px-[5.75rem] py-10 xsm:px-4 xsm:py-8'>
+      <div className='mx-auto flex flex-col items-center pt-14 text-center text-white xsm:pt-0'>
         {/* Heading */}
         <h1 className='mb-4 text-[4rem] font-bold leading-[1.2] xsm:text-[1.5rem]'>
           Bạn có ý định gửi hàng ?
@@ -37,12 +37,12 @@ const Hero = () => {
         <button className='w-full max-w-sm rounded-[1.5rem] bg-white px-6 py-3 text-center text-[1.2rem] font-medium leading-[1.56rem] tracking-[-0.036rem] text-Blue-Primary xsm:max-w-64 xsm:px-3 xsm:py-[0.375rem] xsm:text-sm'>
           <span className='flex items-center justify-center gap-x-3'>
             Dự tính giá gửi hàng qua Pháp
-            <ICArrowRight className='xsm:size-3' />
+            <ICArrowRight className='stroke-Blue-Primary xsm:size-3' />
           </span>
         </button>
       </div>
 
-      <div className='mx-auto mt-10 px-[5.75rem] xsm:mt-7 xsm:px-4'>
+      <div className='mx-auto mt-10 xsm:mt-7'>
         <div className='grid items-center gap-8 border-t border-white sm:grid-cols-2'>
           {/* Intro */}
           <div className='mt-3 text-white'>

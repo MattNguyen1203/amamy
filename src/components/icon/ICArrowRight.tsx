@@ -12,7 +12,7 @@ const ICArrowRight = ({className}: {className?: string}) => {
     >
       <path
         d='M9.30019 14.0898L15.6 7.79003M15.6 7.79003L9.30019 1.49033M15.6 7.79003H1.19995'
-        stroke='#38B6FF'
+        stroke='current-color'
         stroke-width='2.4'
         stroke-linecap='round'
         stroke-linejoin='round'
