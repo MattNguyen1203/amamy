@@ -27,7 +27,7 @@ const Hero = () => {
         <h1 className='mb-4 text-[4rem] font-bold leading-[1.2] xsm:text-[1.5rem]'>
           Bạn có ý định gửi hàng ?
         </h1>
-        <p className='mb-8 max-w-2xl text-pc-sub16 xsm:text-[0.875rem]'>
+        <p className='mb-8 max-w-2xl text-pc-sub16 xsm:mb-5 xsm:max-w-72 xsm:text-[0.875rem]'>
           Gửi hàng từ Việt Nam sang Pháp đa dạng mặt hàng, giao nhanh 12–14 ngày
           tận tay. Nhận sữa, thực phẩm, quần áo, bánh kẹo, miễn phí đóng gói và
           hút chân không.
@@ -42,26 +42,41 @@ const Hero = () => {
         </button>
       </div>
 
-      <div className='mx-auto mt-10 px-[6rem] text-white xsm:px-4'>
-        <div className='flex flex-row items-start justify-between gap-10 border-t border-white py-6 xsm:flex-col'>
+      <div className='mx-auto mt-10 px-[5.75rem] xsm:mt-7 xsm:px-4'>
+        <div className='grid items-center gap-8 border-t border-white sm:grid-cols-2'>
           {/* Intro */}
-          <div className='text-left font-bold'>
-            <p className='text-4xl xsm:text-2xl'>Xin chào</p>
-            <p className='text-5xl xsm:text-3xl'>Chúng tôi là Amamy</p>
+          <div className='mt-3 text-white'>
+            <p className='text-[2rem] font-semibold leading-[120%] tracking-tight xsm:text-[1.125rem]'>
+              Xin chào
+            </p>
+            <p className='text-[2.75rem] font-bold leading-[1.3] tracking-[-0.055rem] xsm:text-[1rem] xsm:leading-[1.25rem]'>
+              Chúng tôi là Amamy
+            </p>
           </div>
 
           {/* Stats */}
-          <div className='grid grid-cols-3 gap-10 xsm:gap-5'>
+          <div className='mt-3 grid grid-cols-3 gap-[4rem] xsm:mt-0 xsm:gap-[1.25rem]'>
             {stats.map((item, index) => (
               <div
                 key={index}
-                className='text-start'
+                className='text-start text-white'
               >
-                <p className='text-[3rem] font-bold xsm:text-[1.5rem]'>
+                <p className='text-[3.75rem] font-bold leading-[1.2] tracking-[-0.15rem] xsm:text-[1.125rem] xsm:leading-[1.315rem]'>
                   {item.number}
                 </p>
-                <p className='font-bold xsm:text-[0.813rem]'>{item.label}</p>
-                <p className='max-w-[9rem] text-sm'>{item.description}</p>
+                <p className='text-[1.125rem] font-semibold uppercase leading-[1.6] xsm:mb-[0.5rem] xsm:text-[0.6875rem] xsm:leading-[0.8125rem] xsm:tracking-[-0.01375rem]'>
+                  {item.label}
+                </p>
+
+                {/* Desktop Desc */}
+                <p className='text-[0.875rem] font-medium leading-[1.3] tracking-[-0.02625rem] xsm:hidden xsm:text-[0.75rem] xsm:font-normal xsm:leading-[1.5] xsm:tracking-[-0.0225rem] xsm:opacity-[0.9]'>
+                  {item.description}
+                </p>
+
+                {/* Mobile Desc */}
+                <p className='text-[0.875rem] font-medium leading-[1.3] tracking-[-0.03em] sm:hidden xsm:text-[0.75rem] xsm:font-normal xsm:leading-[1.5] xsm:tracking-[-0.0225rem] xsm:opacity-[0.9]'>
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
