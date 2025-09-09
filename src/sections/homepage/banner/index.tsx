@@ -52,14 +52,14 @@ const Banner = ({
 
   return (
     <>
-      <div className='relative w-full h-[50.455rem] text-white xsm:hidden'>
+      <div className='relative h-[50.455rem] w-full text-white xsm:hidden'>
         <Swiper
           loop={true}
           effect='fade'
           modules={[EffectFade]}
           spaceBetween={0}
           slidesPerView={1}
-          className='size-full !z-0'
+          className='!z-0 size-full'
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
@@ -118,25 +118,25 @@ const Banner = ({
 
         <div className='fade-in-box absolute left-[6rem] top-[8.675rem]'>
           <div className='flex items-center space-x-3'>
-            <div className='flex relative w-[8.25rem] -space-x-3'>
+            <div className='relative flex w-[8.25rem] -space-x-3'>
               {banner?.user_list.map((item, index) => (
                 <AvatarIcon
                   key={index}
                   item={item}
                 />
               ))}
-              <div className='size-9 rounded-full border-[1.5px] border-white bg-Blue-400 flex-center text-[0.75rem] font-semibold text-white leading-none'>
+              <div className='size-9 rounded-full border-[1.5px] border-white bg-Blue-400 text-[0.75rem] font-semibold leading-none text-white flex-center'>
                 {banner?.user_number}
               </div>
             </div>
             <div className=''>
-              <p className='text-[1.5rem] font-bold tracking-[-0.045rem] uppercase'>
+              <p className='text-[1.5rem] font-bold uppercase tracking-[-0.045rem]'>
                 {banner?.user_number}
               </p>
               <p className='text-pc-sub14s'>{banner?.review_title}</p>
             </div>
           </div>
-          <h2 className='mt-6 text-[2.75rem] font-bold leading-[120%] w-[44rem] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
+          <h2 className='mt-6 w-[44rem] text-[2.75rem] font-bold leading-[120%] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
             {banner?.title}
           </h2>
           <div className='mt-7'>
@@ -148,7 +148,7 @@ const Banner = ({
           </div>
         </div>
       </div>
-      <div className='xsm:flex hidden '>
+      <div className='hidden xsm:flex'>
         <BackgroundMobile
           deliveryDirectionData={deliveryDirectionData}
           currencyExchangeRateData={currencyExchangeRateData}
@@ -174,14 +174,14 @@ const BackgroundMobile = ({
   currencyExchangeRateData: CurrencyToUsdResType
 }) => {
   return (
-    <div className='flex flex-col relative xsm:w-full'>
+    <div className='relative flex flex-col xsm:w-full'>
       <Swiper
         loop={true}
         effect='fade'
         modules={[EffectFade]}
         spaceBetween={0}
         slidesPerView={1}
-        className='size-full !z-0'
+        className='!z-0 size-full'
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -199,7 +199,7 @@ const BackgroundMobile = ({
               width={375}
               height={445}
               src={background_mobile.url}
-              className='w-full h-[25.6874rem] object-cover'
+              className='h-[25.6874rem] w-full object-cover'
             />
           </SwiperSlide>
         ))}
@@ -237,16 +237,16 @@ const BackgroundMobile = ({
         className='w-[16.9375rem] h-[15.25rem] object-cover absolute left-[4rem] top-[7rem]'
       /> */}
 
-      <div className='px-[1rem] pt-5 -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] relative z-[20]'>
-        <div className='flex space-x-[0.75rem] items-center'>
-          <div className='flex relative -space-x-2.5'>
+      <div className='relative z-[20] -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] px-[1rem] pt-5'>
+        <div className='flex items-center space-x-[0.75rem]'>
+          <div className='relative flex -space-x-2.5'>
             {banner?.user_list.map((item, index) => (
               <AvatarIcon
                 item={item}
                 key={index}
               />
             ))}
-            <div className='size-7 rounded-full border-[1.5px] border-white bg-Blue-400 flex-center text-[0.75rem] xsm:text-[0.58331rem] font-semibold text-white leading-none'>
+            <div className='size-7 rounded-full border-[1.5px] border-white bg-Blue-400 text-[0.75rem] font-semibold leading-none text-white flex-center xsm:text-[0.58331rem]'>
               {banner?.user_number}
             </div>
           </div>
@@ -277,7 +277,7 @@ const BackgroundMobile = ({
 const AvatarIcon = ({className, item}: {className?: string; item: IImage}) => {
   return (
     <ImageV2
-      className={`rounded-[2.25rem] border-[1.5px] border-solid object-cover border-[#FFF] bg-[#C8B1B1] size-9 xsm:size-7 ${className}`}
+      className={`size-9 rounded-[2.25rem] border-[1.5px] border-solid border-[#FFF] bg-[#C8B1B1] object-cover xsm:size-7 ${className}`}
       src={item.url}
       alt={item.alt}
       width={200}

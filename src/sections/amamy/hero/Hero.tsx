@@ -21,7 +21,7 @@ const stats = [
 
 const Hero = () => {
   return (
-    <section className='size-full bg-Blue-Primary px-[5.75rem] py-10 xsm:px-4 xsm:py-8'>
+    <section className='size-full bg-Blue-Primary px-[6rem] py-10 xsm:px-[1rem] xsm:py-8'>
       <div className='mx-auto flex flex-col items-center pt-14 text-center text-white xsm:pt-0'>
         {/* Heading */}
         <h1 className='mb-4 text-[4rem] font-bold leading-[1.2] xsm:text-[1.5rem]'>

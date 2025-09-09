@@ -76,7 +76,7 @@ const FAQ = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <section className='my-12 size-full px-[5.75rem] xsm:px-4'>
+    <section className='my-12 size-full px-[6rem] xsm:px-[1rem]'>
       <div className='w-full pb-8'>
         {/* Heading */}
         <h3 className='text-start text-[2.75rem] font-bold leading-[1.3] tracking-[-0.055rem] xsm:text-center xsm:text-[1.5rem] xsm:leading-[1.25rem]'>
@@ -99,57 +99,59 @@ const FAQ = () => {
 
         {/* Services */}
         <div className='col-span-4 xsm:col-span-12'>
-          {/* Desktop */}
-          <div className='h-fit rounded-[1.5rem] border border-white bg-[#F4FBFF] px-10 py-8 xsm:hidden'>
-            {services.map((item, index) => (
-              <div
-                key={index}
-                className='border-b border-[#E3DBD8] last:border-b-0'
+          <div className='sticky top-[5rem]'>
+            {/* Desktop */}
+            <div className='h-fit rounded-[1.5rem] border border-white bg-[#F4FBFF] px-10 py-8 xsm:hidden'>
+              {services.map((item, index) => (
+                <div
+                  key={index}
+                  className='border-b border-[#E3DBD8] last:border-b-0'
+                >
+                  <ServiceContainer
+                    service={item.service}
+                    description={item.description}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile */}
+            <div className='h-fit w-full rounded-[1.5rem] border border-white bg-[#F4FBFF] sm:hidden xsm:px-6 xsm:py-2'>
+              <button
+                className='group flex w-full items-center justify-between py-5 hover:text-Blue-Primary'
+                onClick={() => setOpen(!open)}
               >
-                <ServiceContainer
-                  service={item.service}
-                  description={item.description}
-                />
-              </div>
-            ))}
-          </div>
+                <p className='text-start text-[1.25rem] font-bold leading-[100%]'>
+                  Dịch vụ gửi hàng
+                </p>
+                <span>
+                  <ICAngleRight
+                    className={`fill-black stroke-black ${open ? 'rotate-90' : ''} group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
+                  />
+                </span>
+              </button>
 
-          {/* Mobile */}
-          <div className='h-fit w-full rounded-[1.5rem] border border-white bg-[#F4FBFF] sm:hidden xsm:px-6 xsm:py-2'>
-            <button
-              className='group flex w-full items-center justify-between py-5 hover:text-Blue-Primary'
-              onClick={() => setOpen(!open)}
-            >
-              <p className='text-start text-[1.25rem] font-bold leading-[100%]'>
-                Dịch vụ gửi hàng
-              </p>
-              <span>
-                <ICAngleRight
-                  className={`fill-black stroke-black ${open ? 'rotate-90' : ''} group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
-                />
-              </span>
-            </button>
+              {open && (
+                <div>
+                  {services.map((item, index) => (
+                    <div
+                      key={index}
+                      className='border-b border-[#E3DBD8] last:border-b-0'
+                    >
+                      <ServiceContainer
+                        service={item.service}
+                        description={item.description}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
-            {open && (
-              <div>
-                {services.map((item, index) => (
-                  <div
-                    key={index}
-                    className='border-b border-[#E3DBD8] last:border-b-0'
-                  >
-                    <ServiceContainer
-                      service={item.service}
-                      description={item.description}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Contact */}
-          <div className='mt-5 rounded-[1.5rem] bg-[#F4FBFF]'>
-            <ContactContainer />
+            {/* Contact */}
+            <div className='mt-5 rounded-[1.5rem] bg-[#F4FBFF]'>
+              <ContactContainer />
+            </div>
           </div>
         </div>
       </div>
