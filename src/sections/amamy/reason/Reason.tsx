@@ -30,7 +30,7 @@ const reasons = [
 
 const Reason = () => {
   return (
-    <div className='size-full px-[6rem] xsm:px-[1rem]'>
+    <section className='size-full px-[6rem] xsm:px-[1rem]'>
       {/* Heading */}
       <div className='flex w-full flex-col items-center justify-center py-16 xsm:py-8'>
         <p className='text-[2rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-base'>
@@ -75,7 +75,7 @@ const Reason = () => {
           ))}
         </Swiper>
       </div>
-    </div>
+    </section>
   )
 }
 
