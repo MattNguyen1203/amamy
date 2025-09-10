@@ -42,7 +42,7 @@ const Hero = () => {
         </button>
       </div>
 
-      <div className='mx-auto mt-[1.813rem] pb-[3.656rem] xsm:mt-[1.75rem]'>
+      <div className='mx-auto mt-[1.813rem] pb-[3.656rem] xsm:mt-[1.75rem] xsm:pb-0'>
         <div className='grid items-center gap-8 border-t border-white sm:grid-cols-2'>
           {/* Intro */}
           <div className='mt-[1.406rem] text-white xsm:mt-[0.563rem]'>
