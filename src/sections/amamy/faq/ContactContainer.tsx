@@ -1,9 +1,12 @@
-import React from 'react'
 import ICPhone from '@/components/icon/ICPhone'
+import Link from 'next/link'
 
 const ContactContainer = () => {
   return (
-    <div className='flex flex-col items-center justify-center p-7 xsm:flex-row xsm:justify-between xsm:p-4'>
+    <Link
+      href='tel:0926777966'
+      className='flex flex-col items-center justify-center p-7 xsm:flex-row xsm:justify-between xsm:p-4'
+    >
       <span className='xsm:hidden'>
         <p className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[1.313rem]'>
           Liên hệ tư vấn trực tiếp
@@ -25,7 +28,7 @@ const ContactContainer = () => {
           Liên hệ tư vấn trực tiếp
         </p>
       </span>
-    </div>
+    </Link>
   )
 }
 

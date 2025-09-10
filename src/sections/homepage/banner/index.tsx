@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import {
@@ -15,19 +16,25 @@ import TrackingInterface from './TrackingOrder'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import {EffectFade} from 'swiper/modules'
+import Image from 'next/image'
+import {cn} from '@/lib/utils'
 
 interface BannerProps {
   banner: IBanner
+  dataFaqs: any
   boxChatAI: IBoxChatAI
   deliveryDirectionData: DeliveryDirectionResType
   currencyExchangeRateData: CurrencyToUsdResType
+  isFaq?: boolean
 }
 
 const Banner = ({
   banner,
+  dataFaqs,
   boxChatAI,
   deliveryDirectionData,
   currencyExchangeRateData,
+  isFaq = false,
 }: BannerProps) => {
   useGSAP(() => {
     gsap.from('.fade-image', {
@@ -51,37 +58,52 @@ const Banner = ({
 
   return (
     <>
-      <div className='relative h-[50.455rem] w-full text-white xsm:hidden'>
-        <Swiper
-          loop={true}
-          effect='fade'
-          modules={[EffectFade]}
-          spaceBetween={0}
-          slidesPerView={1}
-          className='!z-0 size-full'
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          speed={750}
-          grabCursor={true}
-        >
-          {banner?.background?.map(({background_pc}, index) => (
-            <SwiperSlide
-              key={index}
-              className='size-full'
-            >
-              <ImageV2
-                alt=''
+      <div
+        className={cn(
+          'relative h-[50.455rem] w-full text-white xsm:hidden',
+          isFaq && 'h-[38rem]',
+        )}
+      >
+        {isFaq ? (
+          <Image
+            alt=''
+            className='size-full object-cover'
+            src={dataFaqs?.background_pc?.url}
+            width={dataFaqs?.background_pc?.width || 1600}
+            height={dataFaqs?.background_pc?.height || 788}
+          />
+        ) : (
+          <Swiper
+            loop={true}
+            effect='fade'
+            modules={[EffectFade]}
+            spaceBetween={0}
+            slidesPerView={1}
+            className='!z-0 size-full'
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            speed={750}
+            grabCursor={true}
+          >
+            {banner?.background?.map(({background_pc}, index) => (
+              <SwiperSlide
+                key={index}
                 className='size-full'
-                src={background_pc?.url}
-                width={1600}
-                height={788}
-                quality={100}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              >
+                <ImageV2
+                  alt=''
+                  className='size-full'
+                  src={background_pc?.url}
+                  width={1600}
+                  height={788}
+                  quality={100}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
         {/* <div className='absolute top-[11rem] left-[47rem] flex items-center space-x-4'>
           <ImageV2
             alt=''
@@ -115,29 +137,44 @@ const Banner = ({
           className='fade-box w-[34.95956rem] h-[31.5rem] object-cover absolute left-[54rem] top-[14rem]'
         /> */}
 
-        <div className='fade-in-box absolute left-[6rem] top-[8.675rem]'>
-          <div className='flex items-center space-x-3'>
-            <div className='relative flex w-[8.25rem] -space-x-3'>
-              {banner?.user_list.map((item, index) => (
-                <AvatarIcon
-                  key={index}
-                  item={item}
-                />
-              ))}
-              <div className='size-9 rounded-full border-[1.5px] border-white bg-Blue-400 text-[0.75rem] font-semibold leading-none text-white flex-center'>
-                {banner?.user_number}
+        <div
+          className={cn(
+            'fade-in-box absolute left-[6rem] top-[8.675rem]',
+            isFaq && 'top-[3.675rem]',
+          )}
+        >
+          {isFaq ? (
+            <>
+              <h2 className='w-[38.1875rem] text-[2.25rem] font-bold leading-[120%] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
+                {dataFaqs?.title}
+              </h2>
+            </>
+          ) : (
+            <>
+              <div className='flex items-center space-x-3'>
+                <div className='relative flex w-[8.25rem] -space-x-3'>
+                  {banner?.user_list.map((item, index) => (
+                    <AvatarIcon
+                      key={index}
+                      item={item}
+                    />
+                  ))}
+                  <div className='size-9 rounded-full border-[1.5px] border-white bg-Blue-400 text-[0.75rem] font-semibold leading-none text-white flex-center'>
+                    {banner?.user_number}
+                  </div>
+                </div>
+                <div className=''>
+                  <p className='text-[1.5rem] font-bold uppercase tracking-[-0.045rem]'>
+                    {banner?.user_number}
+                  </p>
+                  <p className='text-pc-sub14s'>{banner?.review_title}</p>
+                </div>
               </div>
-            </div>
-            <div className=''>
-              <p className='text-[1.5rem] font-bold uppercase tracking-[-0.045rem]'>
-                {banner?.user_number}
-              </p>
-              <p className='text-pc-sub14s'>{banner?.review_title}</p>
-            </div>
-          </div>
-          <h2 className='mt-6 w-[44rem] text-[2.75rem] font-bold leading-[120%] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
-            {banner?.title}
-          </h2>
+              <h2 className='mt-6 w-[44rem] text-[2.75rem] font-bold leading-[120%] tracking-[-0.105rem] [text-shadow:4px_8px_13.3px_rgba(0,0,0,0.12)]'>
+                {banner?.title}
+              </h2>
+            </>
+          )}
           <div className='mt-7'>
             <TrackingInterface
               deliveryDirection={deliveryDirectionData}

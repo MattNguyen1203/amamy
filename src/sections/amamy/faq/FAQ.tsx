@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, {useState} from 'react'
@@ -8,18 +9,7 @@ import ContactContainer from './ContactContainer'
 import FaqContainer from './FaqContainer'
 import ServiceContainer from './ServiceContainer'
 
-type SectionProps = {
-  dataFAQ?: {
-    Title: string
-    content: string
-  }[]
-  dataServices?: {
-    title: string
-    slug?: string
-  }[]
-}
-
-const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
+const FAQ = ({data, dataServices}: any) => {
   const [open, setOpen] = useState(false)
 
   useGSAP(() => {
@@ -30,7 +20,7 @@ const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
       },
       opacity: 0,
       y: 50,
-      duration: 1,
+      duration: 0.5,
       stagger: 0.2,
     })
     gsap.from('.fade-in-service', {
@@ -40,7 +30,7 @@ const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
       },
       opacity: 0,
       y: 50,
-      duration: 1,
+      duration: 0.5,
       stagger: 0.2,
     })
   }, [])
@@ -50,24 +40,26 @@ const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
       <div className='w-full pb-8'>
         {/* Heading */}
         <h3 className='fade-in-faq text-start text-[2.75rem] font-bold leading-[1.3] tracking-[-0.055rem] xsm:text-center xsm:text-[1.5rem] xsm:leading-[1.25rem]'>
-          Câu hỏi thường gặp
+          {data?.title}
         </h3>
       </div>
 
       <div className='grid grid-cols-12 items-stretch gap-8 xsm:my-6'>
         {/* FAQs */}
         <div className='col-span-8 flex h-full flex-col space-y-5 xsm:col-span-12'>
-          {dataFAQ?.map((item, index) => (
-            <div
-              key={index}
-              className='fade-in-faq'
-            >
-              <FaqContainer
-                question={item.Title}
-                answer={item.content}
-              />
-            </div>
-          ))}
+          {Array.isArray(data?.questions) &&
+            data?.questions.map((item, index) => (
+              <div
+                key={index}
+                className='fade-in-faq'
+              >
+                <FaqContainer
+                  initOpen={index === 0}
+                  question={item?.question}
+                  answer={item?.answer}
+                />
+              </div>
+            ))}
         </div>
 
         {/* Services */}
@@ -99,7 +91,9 @@ const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
                 </p>
                 <span>
                   <ICAngleRight
-                    className={`fill-black stroke-black transition-all duration-300 ${open ? 'rotate-90' : ''} group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
+                    className={`fill-black stroke-black transition-all duration-300 ${
+                      open ? 'rotate-90' : ''
+                    } group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
                   />
                 </span>
               </button>

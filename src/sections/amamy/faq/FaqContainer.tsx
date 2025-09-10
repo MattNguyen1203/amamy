@@ -1,3 +1,4 @@
+'use client'
 import React, {useRef, useState} from 'react'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
@@ -6,11 +7,13 @@ import ICArrowCircle from '@/components/icon/ICArrowCircle'
 const FaqContainer = ({
   question,
   answer,
+  initOpen,
 }: {
   question: string
   answer: string
+  initOpen: boolean
 }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(initOpen || false)
   const answerRef = useRef<HTMLDivElement | null>(null)
 
   useGSAP(() => {
@@ -50,7 +53,9 @@ const FaqContainer = ({
         </p>
         <span>
           <ICArrowCircle
-            className={`size-8 transition-all duration-300 xsm:size-5 ${open ? 'fill-Blue-Primary' : 'rotate-180 fill-[#CCCCCC]'}`}
+            className={`size-8 transition-all duration-300 xsm:size-5 ${
+              open ? 'fill-Blue-Primary' : 'rotate-180 fill-[#CCCCCC]'
+            }`}
           />
         </span>
       </button>
@@ -59,9 +64,10 @@ const FaqContainer = ({
         ref={answerRef}
         className='overflow-hidden'
       >
-        <div className='whitespace-pre-line px-[1.875rem] py-[1.25rem] text-[1rem] leading-[1.875rem] text-[#727272] xsm:px-[0.796rem] xsm:py-[0.603rem] xsm:text-sm'>
-          {answer}
-        </div>
+        <div
+          className='whitespace-pre-line px-[1.875rem] py-[1.25rem] text-[1rem] leading-[1.875rem] text-[#727272] xsm:px-[0.796rem] xsm:py-[0.603rem] xsm:text-sm'
+          dangerouslySetInnerHTML={{__html: answer}}
+        />
       </div>
     </div>
   )

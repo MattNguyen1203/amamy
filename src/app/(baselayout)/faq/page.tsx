@@ -1,4 +1,3 @@
-import React from 'react'
 import fetchData from '@/fetch/fetchData'
 import fetchDataWP from '@/fetch/fetchDataWP'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
@@ -53,7 +52,7 @@ const page = async () => {
     },
   })
   const fetchDataFaqs = fetchDataWP({
-    api: 'pages/355?_fields=acf&acf_format=standard',
+    api: 'pages/8647?_fields=acf&acf_format=standard',
     option: {
       next: {revalidate: 60},
     },
@@ -109,12 +108,13 @@ const page = async () => {
 
   return (
     <main className='overflow-hidden bg-white'>
-      <Hero />
+      <Hero data={dataFaqs?.acf?.banner} />
       <FAQ
-        dataFAQ={dataFaqs?.acf?.faq_order}
+        data={dataFaqs?.acf?.faq}
         dataServices={dataServices}
       />
       <Banner
+        dataFaqs={dataFaqs?.acf?.trackandprice}
         banner={dataBanner.banner}
         boxChatAI={{
           ...dataBanner.chat_box_ai,
@@ -122,6 +122,7 @@ const page = async () => {
         }}
         deliveryDirectionData={deliveryDirectionData}
         currencyExchangeRateData={currencyExchangeRateData}
+        isFaq={true}
       />
       <Reason />
       <Process />
