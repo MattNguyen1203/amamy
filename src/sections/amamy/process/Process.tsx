@@ -1,5 +1,11 @@
+'use client'
+
 import React from 'react'
 import ProcessContainer from './ProcessContainer'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import {Navigation} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
 
 const process = [
   {
@@ -8,6 +14,7 @@ const process = [
     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
     description:
       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
   },
   {
     number: 2,
@@ -15,6 +22,7 @@ const process = [
     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
     description:
       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
   },
   {
     number: 3,
@@ -22,6 +30,7 @@ const process = [
     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
     description:
       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
   },
   {
     number: 4,
@@ -29,6 +38,7 @@ const process = [
     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
     description:
       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
   },
   {
     number: 5,
@@ -36,12 +46,13 @@ const process = [
     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
     description:
       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
   },
 ]
 
 const Process = () => {
   return (
-    <section className='mt-28 size-full px-[6rem] xsm:my-8 xsm:px-[1rem]'>
+    <section className='mt-28 size-full px-[6rem] xsm:mt-8 xsm:px-[1rem]'>
       <div className='rounded-[3.125rem] bg-[#FFFFFFBA] py-14 shadow-[0px_2px_6.4px_-1px_#13102208] backdrop-blur-[12px]'>
         {/* Heading */}
         <div className='flex w-full flex-col items-center justify-center'>
@@ -53,8 +64,8 @@ const Process = () => {
           </h3>
         </div>
 
-        {/* Process Container */}
-        <div className='my-16 flex flex-col gap-y-16'>
+        {/* Process Container Desktop */}
+        <div className='my-16 flex flex-col gap-y-16 xsm:hidden'>
           <div className='flex justify-center gap-x-8'>
             {process.slice(0, 3).map((item, index) => (
               <ProcessContainer
@@ -71,6 +82,23 @@ const Process = () => {
               />
             ))}
           </div>
+        </div>
+
+        {/* Process Container Mobile */}
+        <div className='mt-7 w-full sm:hidden'>
+          <Swiper
+            grabCursor
+            spaceBetween={0}
+            slidesPerView={1}
+            modules={[Navigation]}
+            className='size-full'
+          >
+            {process.map((item, index) => (
+              <SwiperSlide key={index}>
+                <ProcessContainer {...item} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
