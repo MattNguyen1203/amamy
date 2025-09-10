@@ -1,5 +1,6 @@
 import React from 'react'
 import fetchData from '@/fetch/fetchData'
+import fetchDataWP from '@/fetch/fetchDataWP'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import FAQ from '@/sections/amamy/faq/FAQ'
 import Hero from '@/sections/amamy/hero/Hero'
@@ -41,23 +42,43 @@ const page = async () => {
       next: {revalidate: 60},
     },
   })
+  const fetchDataFaqs = fetchDataWP({
+    api: 'pages/355?_fields=acf&acf_format=standard',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+  const fetchDataServices = fetchData({
+    api: `chieu-van-chuyen-header`,
+    option: {
+      next: {revalidate: 60},
+    },
+  })
 
   const [
     dataBanner,
     chatBoxAiData,
     deliveryDirectionData,
     currencyExchangeRateData,
+    dataFaqs,
+    dataServices,
   ] = await Promise.all([
     fetchBanner,
     fetchChatBoxAI,
     fetchDeliveryDirection,
     fetchCurrencyExchangeRate,
+    fetchDataFaqs,
+    fetchDataServices,
   ])
 
+  console.log(JSON.stringify(dataServices?.data?.header_site, null, 2))
   return (
     <main className='overflow-hidden bg-white'>
       <Hero />
-      <FAQ />
+      <FAQ
+        dataFAQ={dataFaqs?.acf?.faq_order}
+        dataServices={dataServices}
+      />
       <Banner
         banner={dataBanner.banner}
         boxChatAI={{

@@ -1,32 +1,27 @@
-import React, {useState} from 'react'
+import React from 'react'
+import Link from 'next/link'
 import ICAngleRight from '@/components/icon/ICAngleRight'
 
 const ServiceContainer = ({
   service,
-  description,
+  slug,
 }: {
   service?: string
-  description?: string
+  slug?: string
 }) => {
-  const [open, setOpen] = useState(false)
-
   return (
     <div className='size-full'>
-      <button
+      <Link
+        href={slug || '#'}
         className='group flex w-full items-center justify-between py-5 hover:text-Blue-Primary'
-        onClick={() => setOpen(!open)}
       >
         <p className='text-start text-[1.5rem] font-medium leading-[100%] xsm:text-base'>
           {service}
         </p>
         <span>
-          <ICAngleRight
-            className={`fill-black ${open ? 'rotate-90' : ''} group-hover:fill-Blue-Primary`}
-          />
+          <ICAngleRight className='fill-black group-hover:fill-Blue-Primary' />
         </span>
-      </button>
-
-      {open && <div>{description}</div>}
+      </Link>
     </div>
   )
 }

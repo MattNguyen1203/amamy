@@ -8,73 +8,18 @@ import ContactContainer from './ContactContainer'
 import FaqContainer from './FaqContainer'
 import ServiceContainer from './ServiceContainer'
 
-const faqs = [
-  {
-    question: 'Bảng giá gửi hàng qua Pháp?',
-    answer: `2kg: 9,99euro/kg
-    2,1kg-5kg: 9,49euro/kg
-    5,1kg-10kg: 9,29euro/kg
-    10,1kg-20kg: 8,79euro/kg
-    20,1kg-200kg: 8,29euro/kg`,
-  },
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer: `Bạn có thể nhập mã vận đơn vào công cụ “Theo dõi đơn hàng” trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.`,
-  },
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer: `Bạn có thể nhập mã vận đơn vào công cụ “Theo dõi đơn hàng” trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.`,
-  },
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer: `Bạn có thể nhập mã vận đơn vào công cụ “Theo dõi đơn hàng” trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.`,
-  },
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer: `Bạn có thể nhập mã vận đơn vào công cụ “Theo dõi đơn hàng” trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.`,
-  },
-  {
-    question: 'Thời gian vận chuyển trung bình là bao lâu?',
-    answer: `Bạn có thể nhập mã vận đơn vào công cụ “Theo dõi đơn hàng” trên website để kiểm tra trạng thái đơn hàng của mình theo thời gian thực.`,
-  },
-]
+type SectionProps = {
+  dataFAQ?: {
+    Title: string
+    content: string
+  }[]
+  dataServices?: {
+    title: string
+    slug?: string
+  }[]
+}
 
-const services = [
-  {
-    service: 'Từ Việt sang Mỹ',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Úc',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Canada',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Séc',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Châu Âu',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Hàn Quốc',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Đức',
-    description: '',
-  },
-  {
-    service: 'Từ Việt sang Nhật Bản',
-    description: '',
-  },
-]
-
-const FAQ = () => {
+const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
   const [open, setOpen] = useState(false)
 
   useGSAP(() => {
@@ -112,15 +57,15 @@ const FAQ = () => {
       <div className='grid grid-cols-12 items-stretch gap-8 xsm:my-6'>
         {/* FAQs */}
         <div className='col-span-8 flex h-full flex-col space-y-5 xsm:col-span-12'>
-          {faqs.map((item, index) => (
+          {dataFAQ?.map((item, index) => (
             <div
               key={index}
               className='fade-in-faq'
             >
               <FaqContainer
-                question={item.question}
-                answer={item.answer}
-              ></FaqContainer>
+                question={item.Title}
+                answer={item.content}
+              />
             </div>
           ))}
         </div>
@@ -130,14 +75,14 @@ const FAQ = () => {
           <div className='sticky top-[5rem]'>
             {/* Desktop */}
             <div className='h-fit rounded-[1.5rem] border border-white bg-[#F4FBFF] px-10 py-8 xsm:hidden'>
-              {services.map((item, index) => (
+              {dataServices?.map((item, index) => (
                 <div
                   key={index}
                   className='fade-in-service border-b border-[#E3DBD8] last:border-b-0'
                 >
                   <ServiceContainer
-                    service={item.service}
-                    description={item.description}
+                    service={item.title}
+                    slug={`/${item.slug ?? ''}`}
                   />
                 </div>
               ))}
@@ -161,14 +106,14 @@ const FAQ = () => {
 
               {open && (
                 <div>
-                  {services.map((item, index) => (
+                  {dataServices?.map((item, index) => (
                     <div
                       key={index}
                       className='border-b border-[#E3DBD8] last:border-b-0'
                     >
                       <ServiceContainer
-                        service={item.service}
-                        description={item.description}
+                        service={item.title}
+                        slug={`/${item.slug ?? ''}`}
                       />
                     </div>
                   ))}
