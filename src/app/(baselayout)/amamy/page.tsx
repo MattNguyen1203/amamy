@@ -6,9 +6,19 @@ import FAQ from '@/sections/amamy/faq/FAQ'
 import Hero from '@/sections/amamy/hero/Hero'
 import Process from '@/sections/amamy/process/Process'
 import Reason from '@/sections/amamy/reason/Reason'
+import {IItemPostBlog} from '@/sections/blog/blogs.interface'
+import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
 import Banner from '@/sections/homepage/banner'
-import Section6 from '@/sections/homepage/section6/Section6'
 import metadataValues from '@/utils/metadataValues'
+
+type BlogPost = {
+  ID: number
+  title: string
+  slug: string
+  date: string
+  thumbnail: string
+  categories: string[]
+}
 
 export async function generateMetadata() {
   const res = await getMetaDataRankMath('')
@@ -54,6 +64,12 @@ const page = async () => {
       next: {revalidate: 60},
     },
   })
+  const fetchDataBlogs = fetchData({
+    api: 'chieu-van-chuyen/tu-viet-nam-sang-phap?_fields=suggested_reading_articles_about_shipping',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
 
   const [
     dataBanner,
@@ -62,6 +78,7 @@ const page = async () => {
     currencyExchangeRateData,
     dataFaqs,
     dataServices,
+    dataBlogs,
   ] = await Promise.all([
     fetchBanner,
     fetchChatBoxAI,
@@ -69,9 +86,27 @@ const page = async () => {
     fetchCurrencyExchangeRate,
     fetchDataFaqs,
     fetchDataServices,
+    fetchDataBlogs,
   ])
 
-  console.log(JSON.stringify(dataServices?.data?.header_site, null, 2))
+  const mapBlogPosts = (posts: BlogPost[]): IItemPostBlog[] => {
+    if (!Array.isArray(posts)) return []
+    return posts.map((post) => ({
+      title: post.title,
+      date: post.date,
+      slug: post.slug,
+      image: {
+        url: post.thumbnail,
+        alt: post.title,
+      },
+      categories: post.categories?.[0] || '',
+    }))
+  }
+
+  const blogsMapped = mapBlogPosts(
+    dataBlogs?.suggested_reading_articles_about_shipping?.post || [],
+  )
+
   return (
     <main className='overflow-hidden bg-white'>
       <Hero />
@@ -90,7 +125,15 @@ const page = async () => {
       />
       <Reason />
       <Process />
-      <Section6 />
+      {Array.isArray(
+        dataBlogs?.suggested_reading_articles_about_shipping?.post,
+      ) && (
+        <RelatedBlogs
+          data={blogsMapped}
+          title={dataBlogs.suggested_reading_articles_about_shipping.title}
+          className='[&_.ItemBlog]:shadow-none [&_.swiper-slide]:!w-[26.8125rem] xsm:[&_.swiper-slide]:!w-[16.875rem]'
+        />
+      )}
     </main>
   )
 }

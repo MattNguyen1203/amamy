@@ -29,7 +29,6 @@ const Banner = ({
   deliveryDirectionData,
   currencyExchangeRateData,
 }: BannerProps) => {
-  console.log('banner', banner)
   useGSAP(() => {
     gsap.from('.fade-image', {
       opacity: 0,
