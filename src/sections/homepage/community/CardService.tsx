@@ -1,6 +1,6 @@
-import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
 import Link from 'next/link'
+import ImageV2 from '@/components/image/ImageV2'
 
 type CardServiceProps = {
   flag: string

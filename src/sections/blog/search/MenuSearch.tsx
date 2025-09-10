@@ -1,4 +1,16 @@
 'use client'
+
+import {useMemo, useRef, useState} from 'react'
+import useIsMobile from '@/hooks/useIsMobile'
+import {fetcher} from '@/lib/swr'
+import {cn} from '@/lib/utils'
+import {ICategoryBlog, IItemPostBlog} from '@/sections/blog/blogs.interface'
+import ItemBlog from '@/sections/blog/ItemBlog'
+import {gsap} from 'gsap'
+import EaselPlugin from 'gsap/EaselPlugin'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
+import {usePathname, useRouter, useSearchParams} from 'next/navigation'
+import useSWR from 'swr'
 import PaginationV2 from '@/components/pagination/PaginationV2'
 import {
   Select,
@@ -8,17 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useIsMobile from '@/hooks/useIsMobile'
-import {fetcher} from '@/lib/swr'
-import {cn} from '@/lib/utils'
-import ItemBlog from '@/sections/blog/ItemBlog'
-import {ICategoryBlog, IItemPostBlog} from '@/sections/blog/blogs.interface'
-import {gsap} from 'gsap'
-import EaselPlugin from 'gsap/EaselPlugin'
-import ScrollToPlugin from 'gsap/ScrollToPlugin'
-import {usePathname, useRouter, useSearchParams} from 'next/navigation'
-import {useMemo, useRef, useState} from 'react'
-import useSWR from 'swr'
+
 gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 export default function MenuSearch({
   dataCategory,

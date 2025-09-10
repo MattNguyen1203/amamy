@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+
+import {forwardRef, useEffect} from 'react'
+import ReactPaginate from 'react-paginate'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {gsap} from 'gsap'
 import EaselPlugin from 'gsap/EaselPlugin'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
-import {forwardRef, useEffect} from 'react'
-import ReactPaginate from 'react-paginate'
+
 gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 type TProps = {
   pageCurrent: number

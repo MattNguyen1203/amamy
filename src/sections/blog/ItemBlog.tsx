@@ -1,8 +1,8 @@
-import ICArraw from '@/components/icon/ICArraw'
-import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
 import {IItemPostBlog} from '@/sections/blog/blogs.interface'
 import Link from 'next/link'
+import ICArraw from '@/components/icon/ICArraw'
+import ImageV2 from '@/components/image/ImageV2'
 
 export default function ItemBlog({
   item,

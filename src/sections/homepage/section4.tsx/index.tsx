@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+
+import {useState} from 'react'
 import useIsMobile from '@/hooks/useIsMobile'
 import ICLogo from '@/sections/homepage/section4.tsx/ICLogo'
 import SliderPC from '@/sections/homepage/section4.tsx/SliderPC'
 import {ListNewsObject, NewsObject} from '@/utils/type'
 import Image from 'next/image'
 import Link from 'next/link'
-import {useState} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import {Pagination} from 'swiper/modules'
 import {Swiper, SwiperSlide} from 'swiper/react'
+
 type Props = {
   withDHS: NewsObject
 }

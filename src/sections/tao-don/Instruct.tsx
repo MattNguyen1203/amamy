@@ -1,5 +1,25 @@
 'use client'
+
+import {useEffect, useRef, useState, useTransition} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import ICAddress from '@/sections/tao-don/ICAddress'
+import ICPhone from '@/sections/tao-don/ICPhone'
+import ICTime from '@/sections/tao-don/ICTime'
+import ICX from '@/sections/tao-don/ICX'
+import {
+  ICreateOder,
+  IInformationInstructOrder,
+  IInformationInstructOrder_SelectBranch,
+} from '@/sections/tao-don/oder.interface'
+import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
+import {zodResolver} from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import {toast} from 'sonner'
+import {z} from 'zod'
 import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
@@ -26,25 +46,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import ICAddress from '@/sections/tao-don/ICAddress'
-import ICPhone from '@/sections/tao-don/ICPhone'
-import ICTime from '@/sections/tao-don/ICTime'
-import ICX from '@/sections/tao-don/ICX'
-import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import {
-  ICreateOder,
-  IInformationInstructOrder,
-  IInformationInstructOrder_SelectBranch,
-} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import Link from 'next/link'
-import {useEffect, useRef, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
-import {toast} from 'sonner'
-import {z} from 'zod'
+
 const formSchema = z.object({
   branch: z
     .string({
@@ -217,14 +219,14 @@ export default function Instruct({
             : '',
         so_nha_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? sanitize(dataFromOrder?.housingNumber) ?? ''
+            ? (sanitize(dataFromOrder?.housingNumber) ?? '')
             : '',
         ten_duong_nguoi_nhan:
           type === 'vietduc' || type === 'viethan'
-            ? sanitize(dataFromOrder?.roadName) ?? ''
+            ? (sanitize(dataFromOrder?.roadName) ?? '')
             : '',
         id_hoac_cmt:
-          type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
+          type === 'viethan' ? (dataFromOrder?.passportNumber ?? '') : '',
 
         nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
         ten_nguoi_gui: dataFromOrder?.name ?? '',
@@ -245,10 +247,10 @@ export default function Instruct({
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
-        nation: european === 'vnEu' ? dataFromOrder?.nation : nation ?? '',
+        nation: european === 'vnEu' ? dataFromOrder?.nation : (nation ?? ''),
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
-        ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
+        ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
 
         // data branch
         brand_title: dataBranch?.title ?? '',
@@ -264,7 +266,7 @@ export default function Instruct({
         loai_dong_goi:
           dataFromOrder?.package === 'note'
             ? dataFromOrder?.packageMessage
-            : dataFromOrder?.package ?? '',
+            : (dataFromOrder?.package ?? ''),
         yeu_cau_them: dataFromOrder?.packageMessage ?? '',
       }
       if (formData) {

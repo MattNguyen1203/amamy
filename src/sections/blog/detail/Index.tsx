@@ -1,7 +1,9 @@
 'use client'
+
 import useProcessHeadings from '@/hooks/useProcessHeadings'
 import {IDetailBlog, IFavouriteBlog} from '@/sections/blog/blogs.interface'
 import ContentBlog from '@/sections/blog/detail/ContentBlog'
+
 interface IdataDetailPost {
   status: number
   message: string

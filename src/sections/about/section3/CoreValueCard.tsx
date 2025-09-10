@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 interface CoreValueCardProps {
   imageSrc: string
   imageAlt: string
@@ -7,8 +9,6 @@ interface CoreValueCardProps {
   title: string
   description: string
 }
-
-import Image from 'next/image'
 
 const CoreValueCard = ({
   imageSrc,

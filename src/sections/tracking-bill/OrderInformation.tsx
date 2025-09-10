@@ -1,12 +1,12 @@
 'use client'
 
-import ImageV2 from '@/components/image/ImageV2'
 import BillStatus from '@/sections/tracking-bill/BillStatus'
 import LocationTag from '@/sections/tracking-bill/LocationTag'
 import {toast} from 'sonner'
+import ImageV2 from '@/components/image/ImageV2'
 import './style.css'
-import Link from 'next/link'
 import {useState} from 'react'
+import Link from 'next/link'
 
 export type IProgress = {
   title: string

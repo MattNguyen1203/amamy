@@ -1,7 +1,8 @@
 'use client'
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
-import {IServicePage} from '@/utils/type'
+
 import type React from 'react'
+import {IServicePage} from '@/utils/type'
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 
 interface Prop {
   data: IServicePage

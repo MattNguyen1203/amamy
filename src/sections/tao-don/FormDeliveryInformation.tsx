@@ -1,5 +1,15 @@
 'use client'
+
+import {useEffect, useMemo, useState} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import countries from '@/sections/tao-don/Europe'
+import ICX from '@/sections/tao-don/ICX'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {z} from 'zod'
 import ImageV2 from '@/components/image/ImageV2'
 import {Button} from '@/components/ui/button'
 import {
@@ -18,15 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import countries from '@/sections/tao-don/Europe'
-import ICX from '@/sections/tao-don/ICX'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useMemo, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
+
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -117,7 +119,7 @@ export default function FormDeliveryInformation({
       recipientCodeCity: dataFromOrder?.recipientCodeCity || '',
       housingNumber: dataFromOrder?.housingNumber || '',
       roadName: dataFromOrder?.roadName || '',
-      nation: european === 'vnEu' ? dataFromOrder?.nation ?? '' : title,
+      nation: european === 'vnEu' ? (dataFromOrder?.nation ?? '') : title,
     },
   })
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})

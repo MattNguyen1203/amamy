@@ -1,5 +1,15 @@
 'use client'
+
+import {useEffect, useMemo, useState} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import ICX from '@/sections/tao-don/ICX'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Check, ChevronDown} from 'lucide-react'
+import {z} from 'zod'
 import {Button} from '@/components/ui/button'
 import {
   Command,
@@ -20,15 +30,7 @@ import {
 import {Input} from '@/components/ui/input'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import ICX from '@/sections/tao-don/ICX'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {Check, ChevronDown} from 'lucide-react'
-import {useEffect, useMemo, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
+
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -150,30 +152,30 @@ export default function FormDeliveryInformationAboutVN({
         dataFromOrder?.recipientAddressType || 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCity ?? ''
+          ? (dataFromOrder?.recipientCity ?? '')
           : 'un',
       recipientCodeCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCodeCity ?? ''
+          ? (dataFromOrder?.recipientCodeCity ?? '')
           : 'un',
       housingNumber: isVietSec
         ? dataFromOrder?.housingNumber
         : dataFromOrder?.housingNumber !== 'atAmamyStore'
-        ? dataFromOrder?.recipientCodeCity ?? ''
-        : 'un',
+          ? (dataFromOrder?.recipientCodeCity ?? '')
+          : 'un',
       roadName: isVietSec
         ? dataFromOrder?.roadName
         : dataFromOrder?.roadName !== 'atAmamyStore'
-        ? dataFromOrder?.recipientCodeCity ?? ''
-        : 'un',
+          ? (dataFromOrder?.recipientCodeCity ?? '')
+          : 'un',
 
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.district ?? ''
+          ? (dataFromOrder?.district ?? '')
           : 'un',
       recipientWardsandcommunes:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientWardsandcommunes ?? ''
+          ? (dataFromOrder?.recipientWardsandcommunes ?? '')
           : 'un',
     },
   })
@@ -218,27 +220,27 @@ export default function FormDeliveryInformationAboutVN({
       form.setValue(
         'recipientCity',
         recipientAddressType === 'atAmamyStore'
-          ? form?.getValues('recipientCity') ?? 'un'
-          : form?.getValues('recipientCity') ??
+          ? (form?.getValues('recipientCity') ?? 'un')
+          : (form?.getValues('recipientCity') ??
               dataFromOrder?.recipientCity ??
-              '',
+              ''),
         {shouldValidate: true},
       )
 
       form.setValue(
         'district',
         recipientAddressType === 'atAmamyStore'
-          ? form?.getValues('district') ?? 'un'
-          : form?.getValues('district') ?? dataFromOrder?.district ?? '',
+          ? (form?.getValues('district') ?? 'un')
+          : (form?.getValues('district') ?? dataFromOrder?.district ?? ''),
         {shouldValidate: true},
       )
       form.setValue(
         'recipientWardsandcommunes',
         recipientAddressType === 'atAmamyStore'
-          ? form?.getValues('recipientWardsandcommunes') ?? 'un'
-          : form?.getValues('recipientWardsandcommunes') ??
+          ? (form?.getValues('recipientWardsandcommunes') ?? 'un')
+          : (form?.getValues('recipientWardsandcommunes') ??
               dataFromOrder?.recipientWardsandcommunes ??
-              '',
+              ''),
         {shouldValidate: true},
       )
     }

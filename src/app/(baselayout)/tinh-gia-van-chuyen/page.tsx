@@ -1,11 +1,11 @@
+import React from 'react'
 import DeliveryFee from '@/app/(baselayout)/tinh-gia-van-chuyen/_components/DeliveryFee'
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import endpoints from '@/utils/endpoints'
 import metadataValues from '@/utils/metadataValues'
-import React from 'react'
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 
 export async function generateMetadata() {
   const res = await getMetaDataRankMath(endpoints.calculateOrderDelivery)

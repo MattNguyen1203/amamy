@@ -1,5 +1,15 @@
 'use client'
+
+import {useEffect, useState} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import ICX from '@/sections/tao-don/ICX'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Check, ChevronDown} from 'lucide-react'
+import {z} from 'zod'
 import {Button} from '@/components/ui/button'
 import {
   Command,
@@ -20,15 +30,7 @@ import {
 import {Input} from '@/components/ui/input'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import ICX from '@/sections/tao-don/ICX'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {Check, ChevronDown} from 'lucide-react'
-import {useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
+
 const formSchema = z.object({
   recipientName: z
     .string({
@@ -120,15 +122,15 @@ export default function FormDeliveryInformationJapanVN({
         dataFromOrder?.recipientAddressType ?? 'registeredAddress',
       recipientCity:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientCity ?? ''
+          ? (dataFromOrder?.recipientCity ?? '')
           : 'un',
       district:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.district ?? ''
+          ? (dataFromOrder?.district ?? '')
           : 'un',
       recipientWardsandcommunes:
         dataFromOrder?.recipientAddressType !== 'atAmamyStore'
-          ? dataFromOrder?.recipientWardsandcommunes ?? ''
+          ? (dataFromOrder?.recipientWardsandcommunes ?? '')
           : 'un',
     },
   })

@@ -1,5 +1,16 @@
 'use client'
+
+import {useEffect, useMemo, useState, useTransition} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
+import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {toast} from 'sonner'
+import {z} from 'zod'
 import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
@@ -28,16 +39,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
-import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useMemo, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
-import {toast} from 'sonner'
-import {z} from 'zod'
+
 export default function Package({
   data,
   handleClickcurrentTab,
@@ -99,7 +101,7 @@ export default function Package({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       package: data?.list_package
-        ? dataFromOrder?.package ?? ''
+        ? (dataFromOrder?.package ?? '')
         : 'Chưa có thông tin',
       packageMessage: dataFromOrder?.packageMessage ?? '',
       recipientPaymentInformation:
@@ -134,27 +136,27 @@ export default function Package({
         quan_huyen_nguoi_nhan: isVietSec
           ? ''
           : dataFromOrder?.recipientAddressType === 'registeredAddress' &&
-            (type === 'ducvn' || type === 'nhatviet')
-          ? sanitize(dataFromOrder?.district)
-          : '',
+              (type === 'ducvn' || type === 'nhatviet')
+            ? sanitize(dataFromOrder?.district)
+            : '',
         phuong_xa_nguoi_nhan: isVietSec
           ? ''
           : dataFromOrder?.recipientAddressType === 'registeredAddress' &&
-            (type === 'ducvn' || type === 'nhatviet')
-          ? sanitize(dataFromOrder?.recipientWardsandcommunes)
-          : '',
+              (type === 'ducvn' || type === 'nhatviet')
+            ? sanitize(dataFromOrder?.recipientWardsandcommunes)
+            : '',
         so_nha_nguoi_nhan: isVietSec
           ? dataFromOrder?.housingNumber
           : type === 'vietduc' || type === 'viethan'
-          ? sanitize(dataFromOrder?.housingNumber)
-          : '',
+            ? sanitize(dataFromOrder?.housingNumber)
+            : '',
         ten_duong_nguoi_nhan: isVietSec
           ? dataFromOrder?.roadName
           : type === 'vietduc' || type === 'viethan'
-          ? sanitize(dataFromOrder?.roadName)
-          : '',
+            ? sanitize(dataFromOrder?.roadName)
+            : '',
         id_hoac_cmt:
-          type === 'viethan' ? dataFromOrder?.passportNumber ?? '' : '',
+          type === 'viethan' ? (dataFromOrder?.passportNumber ?? '') : '',
 
         nguoi_gui_lien_he: dataFromOrder?.whereToContact ?? '',
         ten_nguoi_gui: dataFromOrder?.name ?? '',
@@ -175,10 +177,10 @@ export default function Package({
         dia_chi_nguoi_nhan_chi_tiet: dataFromOrder?.recipientAddress ?? '',
         chieu_van_don: dataFromOrder?.shipping,
         expected_date: '',
-        nation: european === 'vnEu' ? dataFromOrder?.nation : nation ?? '',
+        nation: european === 'vnEu' ? dataFromOrder?.nation : (nation ?? ''),
         ma_khach_hang: dataFromOrder?.customercode ?? '',
         name_facebook: dataFromOrder?.nameFacebook ?? '',
-        ma_buu_dien: type === 'vietnhat' ? dataFromOrder?.zipCode ?? '' : '',
+        ma_buu_dien: type === 'vietnhat' ? (dataFromOrder?.zipCode ?? '') : '',
 
         // data branch
         brand_title: '',
@@ -194,7 +196,7 @@ export default function Package({
         loai_dong_goi:
           form?.getValues('package') === 'note'
             ? form?.getValues('packageMessage')
-            : form?.getValues('package') ?? '',
+            : (form?.getValues('package') ?? ''),
         yeu_cau_them: form?.getValues('packageMessage') ?? '',
       }
       if (formData) {

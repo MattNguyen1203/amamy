@@ -2,13 +2,12 @@
 import {IAmamyQualityAbout_ListQuality} from '@/sections/about/about.interface'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import CoreValueCard from './CoreValueCard'
-
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
-
 // import required modules
 import {Pagination} from 'swiper/modules'
+
 interface Prop {
   quantities: IAmamyQualityAbout_ListQuality[]
 }

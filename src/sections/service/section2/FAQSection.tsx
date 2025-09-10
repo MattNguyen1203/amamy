@@ -1,10 +1,10 @@
+import {IServiceFAQ} from '@/utils/type'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import {IServiceFAQ} from '@/utils/type'
 
 interface Prop {
   faqs: IServiceFAQ[]

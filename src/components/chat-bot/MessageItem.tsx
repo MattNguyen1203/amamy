@@ -1,5 +1,5 @@
-import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
+import ImageV2 from '@/components/image/ImageV2'
 
 export type MessageItemProps = {
   role: 'user' | 'bot'

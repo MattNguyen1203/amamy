@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+
 import {useRef} from 'react'
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react'
-
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
-
-// import required modules
-import ImageV2 from '@/components/image/ImageV2'
 import {Post} from '@/utils/type'
 import {Pagination} from 'swiper/modules'
+// import required modules
+import ImageV2 from '@/components/image/ImageV2'
 
 interface Prop {
   posts: Post[]

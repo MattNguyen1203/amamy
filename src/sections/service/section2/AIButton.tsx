@@ -1,5 +1,5 @@
-import CardGradient from '@/components/card-gradient/CardGradient'
 import Link from 'next/link'
+import CardGradient from '@/components/card-gradient/CardGradient'
 
 type AIButtonProps = {
   title?: string

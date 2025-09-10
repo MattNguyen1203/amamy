@@ -1,10 +1,10 @@
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+import {Suspense} from 'react'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import TabsCategory from '@/sections/blog/TabsCategory'
 import metadataValues from '@/utils/metadataValues'
-import {Suspense} from 'react'
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 
 export async function generateMetadata() {
   const res = await getMetaDataRankMath('blogs')

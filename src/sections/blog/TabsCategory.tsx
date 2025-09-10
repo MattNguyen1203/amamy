@@ -1,21 +1,22 @@
 'use client'
 
 // import Favourite from '@/components/favourite/Favourite'
-import PaginationV2 from '@/components/pagination/PaginationV2'
+import {useMemo, useRef, useState} from 'react'
 import {fetcher} from '@/lib/swr'
 import {cn} from '@/lib/utils'
-import ItemBlog from '@/sections/blog/ItemBlog'
 import {
   ICategoryBlog,
   IFavouriteBlog,
   IItemPostBlog,
 } from '@/sections/blog/blogs.interface'
+import ItemBlog from '@/sections/blog/ItemBlog'
 import {gsap} from 'gsap'
 import EaselPlugin from 'gsap/EaselPlugin'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
-import {useMemo, useRef, useState} from 'react'
 import useSWR from 'swr'
+import PaginationV2 from '@/components/pagination/PaginationV2'
+
 gsap.registerPlugin(ScrollToPlugin, EaselPlugin)
 export default function TabsCategory({
   dataCategory,

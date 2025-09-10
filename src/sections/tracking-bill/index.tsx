@@ -1,5 +1,6 @@
 'use client'
 
+import {useEffect, useState} from 'react'
 import fetchDataOrder from '@/fetch/fetchDataOrder'
 import FAQ from '@/sections/tracking-bill/FAQ'
 import OrderInformation, {
@@ -7,7 +8,6 @@ import OrderInformation, {
 } from '@/sections/tracking-bill/OrderInformation'
 import SearchBill from '@/sections/tracking-bill/SearchBill'
 import {useSearchParams} from 'next/navigation'
-import {useEffect, useState} from 'react'
 import {toast} from 'sonner'
 
 type TrackingBillProps = {

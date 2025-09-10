@@ -1,10 +1,10 @@
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+import {Suspense} from 'react'
 import fetchDataWP from '@/fetch/fetchDataWP'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import TrackingBill from '@/sections/tracking-bill'
 import metadataValues from '@/utils/metadataValues'
-import {Suspense} from 'react'
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 
 export async function generateMetadata() {
   const res = await getMetaDataRankMath('theo-doi-don-hang')

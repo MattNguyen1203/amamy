@@ -1,11 +1,13 @@
 'use client'
+
+import {useEffect} from 'react'
 import RelatedBlogsV2 from '@/sections/blog/detail/RelatedBlogsV2'
 import {IListServiceResponse, IServicePage} from '@/utils/type'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import {useEffect} from 'react'
 import ShippingHero from './section1/ShippingHero'
 import AIChatSection from './section2/AIChatSection'
+
 // import Testimonials from './section2/Testimonials'
 gsap.registerPlugin(ScrollTrigger)
 interface Prop {

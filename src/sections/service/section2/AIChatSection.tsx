@@ -1,10 +1,11 @@
 'use client'
+
+import AIButton from '@/sections/service/section2/AIButton'
+import {IListServiceResponse, IServicePage} from '@/utils/type'
 import MessageItem, {MessageItemProps} from '@/components/chat-bot/MessageItem'
 import ImageV2 from '@/components/image/ImageV2'
-import {IListServiceResponse, IServicePage} from '@/utils/type'
 import {FAQSection} from './FAQSection'
 import SectionServiceFeature from './SectionServiceFeature'
-import AIButton from '@/sections/service/section2/AIButton'
 
 interface Prop {
   data: IServicePage

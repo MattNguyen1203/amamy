@@ -1,14 +1,15 @@
 'use client'
+
+import {useEffect} from 'react'
 import {IAbout} from '@/sections/about/about.interface'
 import WhatMakesSpecial from '@/sections/about/section2/WhatMakesSpecial'
 import QuantitySection from '@/sections/about/section3/QuantitySection'
+import {IItemPostBlog} from '@/sections/blog/blogs.interface'
 import RelatedBlogs from '@/sections/blog/detail/RelatedBlogs'
 import Section4 from '@/sections/homepage/section4.tsx'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import {useEffect} from 'react'
 import AboutAmamySection from './section1/AboutAmamySection'
-import {IItemPostBlog} from '@/sections/blog/blogs.interface'
 
 gsap.registerPlugin(ScrollTrigger)
 

@@ -2,6 +2,10 @@
 'use client'
 
 import React, {useEffect, useMemo, useState} from 'react'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import Image from 'next/image'
+import {Label} from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -10,10 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select-v2'
-import {Label} from '@/components/ui/label'
-import {cn} from '@/lib/utils'
-import Image from 'next/image'
-import useIsMobile from '@/hooks/useIsMobile'
 
 type SelectFieldVariant = 'primary' | 'secondary'
 

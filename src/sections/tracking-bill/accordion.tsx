@@ -1,10 +1,9 @@
 'use client'
 
-import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import * as React from 'react'
-
-import ImageV2 from '@/components/image/ImageV2'
 import {cn} from '@/lib/utils'
+import * as AccordionPrimitive from '@radix-ui/react-accordion'
+import ImageV2 from '@/components/image/ImageV2'
 
 const Accordion = AccordionPrimitive.Root
 

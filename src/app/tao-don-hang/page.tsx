@@ -1,9 +1,9 @@
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 import fetchData from '@/fetch/fetchData'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import CreateOrder from '@/sections/tao-don/CreateOrder'
 import metadataValues from '@/utils/metadataValues'
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
 
 export async function generateMetadata() {
   const res = await getMetaDataRankMath('tao-don-hang')

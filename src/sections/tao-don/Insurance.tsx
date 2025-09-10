@@ -1,5 +1,17 @@
 'use client'
+
+import {useEffect, useRef, useState} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {
+  IInformationInsurance,
+  IInformationInsurance_CargoInsuranceJapanvn,
+  IInformationInsurance_policy,
+} from '@/sections/tao-don/oder.interface'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {z} from 'zod'
 import ImageV2 from '@/components/image/ImageV2'
 import {Button} from '@/components/ui/button'
 import {Checkbox} from '@/components/ui/checkbox'
@@ -11,17 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import {
-  IInformationInsurance,
-  IInformationInsurance_CargoInsuranceJapanvn,
-  IInformationInsurance_policy,
-} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {z} from 'zod'
+
 export default function Insurance({
   data,
   handleClickcurrentTab,
@@ -66,12 +68,14 @@ export default function Insurance({
           ? [true]
           : [false]
         : Array.isArray(data?.compensation?.policy)
-        ? data?.compensation?.policy?.map(() => (stepOrder > 5 ? true : false))
-        : Array.isArray(data?.cargo_insurance_japanvn)
-        ? data?.cargo_insurance_japanvn?.map(() =>
-            stepOrder > 5 ? true : false,
-          )
-        : [false],
+          ? data?.compensation?.policy?.map(() =>
+              stepOrder > 5 ? true : false,
+            )
+          : Array.isArray(data?.cargo_insurance_japanvn)
+            ? data?.cargo_insurance_japanvn?.map(() =>
+                stepOrder > 5 ? true : false,
+              )
+            : [false],
       typeofinsurance: dataFromOrder?.typeofinsurance || '',
     },
   })

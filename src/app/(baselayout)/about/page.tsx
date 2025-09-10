@@ -3,6 +3,7 @@ import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import AboutPage from '@/sections/about'
 import metadataValues from '@/utils/metadataValues'
+
 export async function generateMetadata() {
   const res = await getMetaDataRankMath(`ve-chung-toi`)
   return metadataValues(res)
