@@ -117,7 +117,7 @@ const FAQ = ({data, dataServices}: any) => {
 
             {/* Contact */}
             <div className='mt-5 rounded-[1.5rem] bg-[#F4FBFF]'>
-              <ContactContainer />
+              <ContactContainer number={data?.number} />
             </div>
           </div>
         </div>

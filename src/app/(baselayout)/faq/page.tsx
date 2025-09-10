@@ -124,8 +124,8 @@ const page = async () => {
         currencyExchangeRateData={currencyExchangeRateData}
         isFaq={true}
       />
-      <Reason />
-      <Process />
+      <Reason data={dataFaqs?.acf?.reason} />
+      <Process data={dataFaqs?.acf?.procedure} />
       {Array.isArray(
         dataBlogs?.suggested_reading_articles_about_shipping?.post,
       ) && (

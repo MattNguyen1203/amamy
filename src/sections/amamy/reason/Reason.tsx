@@ -8,6 +8,7 @@ import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {Navigation} from 'swiper/modules'
 import ImageContainer from './ImageContainer'
+import { IImage } from '@/utils/type'
 
 const reasons = [
   {
@@ -28,8 +29,17 @@ const reasons = [
       'Nhân viên am hiểu về dịch vụ, cùng với hệ thống quản lý giúp giao hàng quốc tế đúng dự kiến, chính xác',
   },
 ]
-
-const Reason = () => {
+export interface IReason {
+  title: string
+  description: string
+  services: IService[]
+}
+export interface IService {
+  thumbnail: IImage
+  title: string
+  content: string
+}
+const Reason = ({data}: {data: IReason}) => {
   useGSAP(() => {
     gsap.from('.fade-in-reason', {
       scrollTrigger: {
@@ -48,25 +58,24 @@ const Reason = () => {
       {/* Heading */}
       <div className='fade-in-reason flex w-full flex-col items-center justify-center py-16 xsm:py-8'>
         <p className='text-[2rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-base'>
-          Lý do nên chọn gửi hàng tại Amamy?
+          {data?.title}
         </p>
         <h3 className='mt-5 max-w-6xl text-center text-[2.5rem] font-bold xsm:w-full xsm:text-[1.25rem]'>
-          Amamy dịch vụ Logistic với 4 năm kinh nghiệm và hơn 18.000 khách hàng
-          Việt Nam tại nước ngoài
+         {data?.description}
         </h3>
       </div>
 
       {/* Image Containter Desktop */}
       <div className='flex w-full items-stretch gap-x-24 xsm:hidden'>
-        {reasons.map((item, index) => (
+        {data?.services.map((item, index) => (
           <div
             key={index}
             className='fade-in-reason'
           >
             <ImageContainer
-              img={item.img}
-              label={item.label}
-              description={item.description}
+              img={item.thumbnail.url}
+              label={item.title}
+              description={item.content}
             />
           </div>
         ))}

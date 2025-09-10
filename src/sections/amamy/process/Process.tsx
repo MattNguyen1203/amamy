@@ -4,11 +4,12 @@ import React from 'react'
 import ProcessContainer from './ProcessContainer'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import {useGSAP} from '@gsap/react'
+import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
-import {Navigation} from 'swiper/modules'
-import {Swiper, SwiperSlide} from 'swiper/react'
+import { Navigation } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { IImage } from '@/utils/type'
 
 const process = [
   {
@@ -52,8 +53,18 @@ const process = [
     shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
   },
 ]
+export interface IProcess {
+  title: string
+  subtitle: string
+  steps: ISteps[]
+}
+export interface ISteps {
+  icon: IImage
+  title: string
+  description: string
+}
 
-const Process = () => {
+const Process = ({ data }: { data: IProcess }) => {
   useGSAP(() => {
     gsap.from('.fade-in-process', {
       scrollTrigger: {
@@ -90,20 +101,23 @@ const Process = () => {
         {/* Heading */}
         <div className='fade-in-process flex w-full flex-col items-center justify-center'>
           <p className='text-[1.25rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-sm'>
-            Dịch vụ của chúng tôi
+            {data?.title}
           </p>
           <h3 className='mt-2 text-center text-[3.125rem] font-bold leading-[3.75rem] xsm:text-[1.5rem] xsm:leading-[1.875.rem]'>
-            Quy Trình Gửi Hàng
+            {data?.subtitle}
           </h3>
         </div>
 
         {/* Process Container Desktop */}
         <div className='my-16 flex flex-col gap-y-16 xsm:hidden'>
           <div className='fade-in-process flex justify-center gap-x-8'>
-            {process.slice(0, 3).map((item, index) => (
+            {data?.steps.slice(0, 3).map((item, index) => (
               <ProcessContainer
                 key={index}
-                {...item}
+                number={index+1}
+                icon={item.icon.url}
+                label={item.title}
+                description={item.description}
               />
             ))}
           </div>
