@@ -1,6 +1,8 @@
 'use client'
 
 import React, {useState} from 'react'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 import ICAngleRight from '@/components/icon/ICAngleRight'
 import ContactContainer from './ContactContainer'
 import FaqContainer from './FaqContainer'
@@ -75,11 +77,34 @@ const services = [
 const FAQ = () => {
   const [open, setOpen] = useState(false)
 
+  useGSAP(() => {
+    gsap.from('.fade-in-faq', {
+      scrollTrigger: {
+        trigger: '.fade-in-faq',
+        start: 'top bottom',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+    })
+    gsap.from('.fade-in-service', {
+      scrollTrigger: {
+        trigger: '.fade-in-service',
+        start: 'top bottom',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+    })
+  }, [])
+
   return (
     <section className='my-12 size-full px-[6rem] xsm:px-[1rem]'>
       <div className='w-full pb-8'>
         {/* Heading */}
-        <h3 className='text-start text-[2.75rem] font-bold leading-[1.3] tracking-[-0.055rem] xsm:text-center xsm:text-[1.5rem] xsm:leading-[1.25rem]'>
+        <h3 className='fade-in-faq text-start text-[2.75rem] font-bold leading-[1.3] tracking-[-0.055rem] xsm:text-center xsm:text-[1.5rem] xsm:leading-[1.25rem]'>
           Câu hỏi thường gặp
         </h3>
       </div>
@@ -88,7 +113,10 @@ const FAQ = () => {
         {/* FAQs */}
         <div className='col-span-8 flex h-full flex-col space-y-5 xsm:col-span-12'>
           {faqs.map((item, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              className='fade-in-faq'
+            >
               <FaqContainer
                 question={item.question}
                 answer={item.answer}
@@ -105,7 +133,7 @@ const FAQ = () => {
               {services.map((item, index) => (
                 <div
                   key={index}
-                  className='border-b border-[#E3DBD8] last:border-b-0'
+                  className='fade-in-service border-b border-[#E3DBD8] last:border-b-0'
                 >
                   <ServiceContainer
                     service={item.service}

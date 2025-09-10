@@ -4,6 +4,8 @@ import React from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 import {Navigation} from 'swiper/modules'
 import ImageContainer from './ImageContainer'
 
@@ -28,10 +30,23 @@ const reasons = [
 ]
 
 const Reason = () => {
+  useGSAP(() => {
+    gsap.from('.fade-in-reason', {
+      scrollTrigger: {
+        trigger: '.fade-in-reason',
+        start: 'top bottom',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+    })
+  }, [])
+
   return (
     <section className='size-full px-[6rem] xsm:px-[1rem]'>
       {/* Heading */}
-      <div className='flex w-full flex-col items-center justify-center py-16 xsm:py-8'>
+      <div className='fade-in-reason flex w-full flex-col items-center justify-center py-16 xsm:py-8'>
         <p className='text-[2rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-base'>
           Lý do nên chọn gửi hàng tại Amamy?
         </p>
@@ -44,7 +59,10 @@ const Reason = () => {
       {/* Image Containter Desktop */}
       <div className='flex w-full items-stretch gap-x-24 xsm:hidden'>
         {reasons.map((item, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            className='fade-in-reason'
+          >
             <ImageContainer
               img={item.img}
               label={item.label}
@@ -58,13 +76,16 @@ const Reason = () => {
       <div className='w-full sm:hidden'>
         <Swiper
           grabCursor
-          spaceBetween={-70}
+          spaceBetween={0}
           slidesPerView={1}
           modules={[Navigation]}
-          className='size-full'
+          className='fade-in-reason size-full'
         >
           {reasons.map((item, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide
+              key={index}
+              className='fade-in'
+            >
               <ImageContainer
                 img={item.img}
                 label={item.label}

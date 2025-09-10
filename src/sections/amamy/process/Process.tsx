@@ -4,6 +4,8 @@ import React from 'react'
 import ProcessContainer from './ProcessContainer'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 import Image from 'next/image'
 import {Navigation} from 'swiper/modules'
 import {Swiper, SwiperSlide} from 'swiper/react'
@@ -52,6 +54,19 @@ const process = [
 ]
 
 const Process = () => {
+  useGSAP(() => {
+    gsap.from('.fade-in-process', {
+      scrollTrigger: {
+        trigger: '.fade-in-process',
+        start: 'top bottom',
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+    })
+  }, [])
+
   return (
     <section className='relative mt-28 size-full px-[6rem] xsm:mt-8 xsm:px-[1rem]'>
       {/* Background */}
@@ -73,7 +88,7 @@ const Process = () => {
       </div>
       <div className='rounded-[3.125rem] bg-[#FFFFFFBA] py-14 shadow-[0px_2px_6.4px_-1px_#13102208] backdrop-blur-[12px]'>
         {/* Heading */}
-        <div className='flex w-full flex-col items-center justify-center'>
+        <div className='fade-in-process flex w-full flex-col items-center justify-center'>
           <p className='text-[1.25rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-sm'>
             Dịch vụ của chúng tôi
           </p>
@@ -84,7 +99,7 @@ const Process = () => {
 
         {/* Process Container Desktop */}
         <div className='my-16 flex flex-col gap-y-16 xsm:hidden'>
-          <div className='flex justify-center gap-x-8'>
+          <div className='fade-in-process flex justify-center gap-x-8'>
             {process.slice(0, 3).map((item, index) => (
               <ProcessContainer
                 key={index}
@@ -92,7 +107,7 @@ const Process = () => {
               />
             ))}
           </div>
-          <div className='flex justify-center gap-x-8'>
+          <div className='fade-in-process flex justify-center gap-x-8'>
             {process.slice(3).map((item, index) => (
               <ProcessContainer
                 key={index}
@@ -109,7 +124,7 @@ const Process = () => {
             spaceBetween={0}
             slidesPerView={1}
             modules={[Navigation]}
-            className='size-full'
+            className='fade-in-process size-full'
           >
             {process.map((item, index) => (
               <SwiperSlide key={index}>

@@ -28,7 +28,7 @@ const page = async () => {
   ])
 
   return (
-    <main className='bg-white'>
+    <main className='overflow-hidden bg-white'>
       <Hero />
       <FAQ />
       <Banner
