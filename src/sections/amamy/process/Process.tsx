@@ -4,6 +4,7 @@ import React from 'react'
 import ProcessContainer from './ProcessContainer'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import Image from 'next/image'
 import {Navigation} from 'swiper/modules'
 import {Swiper, SwiperSlide} from 'swiper/react'
 
@@ -52,7 +53,24 @@ const process = [
 
 const Process = () => {
   return (
-    <section className='mt-28 size-full px-[6rem] xsm:mt-8 xsm:px-[1rem]'>
+    <section className='relative mt-28 size-full px-[6rem] xsm:mt-8 xsm:px-[1rem]'>
+      {/* Background */}
+      <div className='pointer-events-none absolute inset-0'>
+        <Image
+          src='/amamy/process/ellipse.svg'
+          alt=''
+          width={348}
+          height={348}
+          className='absolute -left-60 -top-10 size-[70%] object-fill xsm:hidden'
+        />
+        <Image
+          src='/amamy/process/ellipse1.svg'
+          alt=''
+          width={348}
+          height={348}
+          className='absolute -right-52 -top-20 size-[70%] object-fill xsm:-bottom-24 xsm:-right-10 xsm:top-auto xsm:size-[90%]'
+        />
+      </div>
       <div className='rounded-[3.125rem] bg-[#FFFFFFBA] py-14 shadow-[0px_2px_6.4px_-1px_#13102208] backdrop-blur-[12px]'>
         {/* Heading */}
         <div className='flex w-full flex-col items-center justify-center'>

@@ -2,11 +2,10 @@
 
 import React from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
-import ImageContainerDesktop from './ImageContainerDesktop'
-import ImageContainerMobile from './ImageContainerMobile'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {Navigation} from 'swiper/modules'
+import ImageContainer from './ImageContainer'
 
 const reasons = [
   {
@@ -46,7 +45,7 @@ const Reason = () => {
       <div className='flex w-full items-stretch gap-x-24 xsm:hidden'>
         {reasons.map((item, index) => (
           <div key={index}>
-            <ImageContainerDesktop
+            <ImageContainer
               img={item.img}
               label={item.label}
               description={item.description}
@@ -66,7 +65,7 @@ const Reason = () => {
         >
           {reasons.map((item, index) => (
             <SwiperSlide key={index}>
-              <ImageContainerMobile
+              <ImageContainer
                 img={item.img}
                 label={item.label}
                 description={item.description}
