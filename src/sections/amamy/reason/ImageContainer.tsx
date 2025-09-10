@@ -25,7 +25,7 @@ const ImageContainer = ({
         <p className='text-[2.5rem] font-bold text-Blue-Primary xsm:text-[1.5rem]'>
           {label}
         </p>
-        <p className='mt-2 text-base xsm:mt-1 xsm:max-w-[16.283rem] xsm:text-sm'>
+        <p className='mt-2 text-base xsm:mt-1 xsm:max-w-[15rem] xsm:text-sm'>
           {description}
         </p>
       </div>

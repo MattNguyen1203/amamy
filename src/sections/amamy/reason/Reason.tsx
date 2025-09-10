@@ -76,8 +76,10 @@ const Reason = () => {
       <div className='w-full sm:hidden'>
         <Swiper
           grabCursor
-          spaceBetween={0}
-          slidesPerView={1}
+          spaceBetween={12}
+          slidesOffsetBefore={16}
+          slidesOffsetAfter={16}
+          slidesPerView={1.3}
           modules={[Navigation]}
           className='fade-in-reason size-full'
         >

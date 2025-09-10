@@ -86,7 +86,7 @@ const Process = () => {
           className='absolute -right-52 -top-20 size-[70%] object-fill xsm:-bottom-24 xsm:-right-10 xsm:top-auto xsm:size-[90%]'
         />
       </div>
-      <div className='rounded-[3.125rem] bg-[#FFFFFFBA] py-14 shadow-[0px_2px_6.4px_-1px_#13102208] backdrop-blur-[12px]'>
+      <div className='rounded-[3.125rem] bg-[#FFFFFFBA] py-14 shadow-[0px_2px_6.4px_-1px_#13102208] backdrop-blur-[12px] xsm:w-screen'>
         {/* Heading */}
         <div className='fade-in-process flex w-full flex-col items-center justify-center'>
           <p className='text-[1.25rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-sm'>
@@ -121,8 +121,10 @@ const Process = () => {
         <div className='mt-7 w-full sm:hidden'>
           <Swiper
             grabCursor
-            spaceBetween={0}
-            slidesPerView={1}
+            spaceBetween={12}
+            slidesOffsetBefore={16}
+            slidesOffsetAfter={16}
+            slidesPerView={1.3}
             modules={[Navigation]}
             className='fade-in-process size-full'
           >
