@@ -91,7 +91,7 @@ const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
             {/* Mobile */}
             <div className='h-fit w-full rounded-[1.5rem] border border-white bg-[#F4FBFF] sm:hidden xsm:px-6 xsm:py-2'>
               <button
-                className='group flex w-full items-center justify-between py-5 hover:text-Blue-Primary'
+                className='group flex w-full items-center justify-between py-5 transition-all duration-300 hover:text-Blue-Primary'
                 onClick={() => setOpen(!open)}
               >
                 <p className='text-start text-[1.25rem] font-bold leading-[100%]'>
@@ -99,7 +99,7 @@ const FAQ = ({dataFAQ, dataServices}: SectionProps) => {
                 </p>
                 <span>
                   <ICAngleRight
-                    className={`fill-black stroke-black ${open ? 'rotate-90' : ''} group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
+                    className={`fill-black stroke-black transition-all duration-300 ${open ? 'rotate-90' : ''} group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
                   />
                 </span>
               </button>

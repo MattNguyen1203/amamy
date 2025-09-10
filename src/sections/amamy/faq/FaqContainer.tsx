@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 import ICArrowCircle from '@/components/icon/ICArrowCircle'
 
 const FaqContainer = ({
@@ -9,6 +11,33 @@ const FaqContainer = ({
   answer: string
 }) => {
   const [open, setOpen] = useState(false)
+  const answerRef = useRef<HTMLDivElement | null>(null)
+
+  useGSAP(() => {
+    if (!answerRef.current) {
+      return
+    }
+
+    if (open) {
+      gsap.fromTo(
+        answerRef.current,
+        {height: 0, opacity: 0},
+        {
+          height: 'auto',
+          opacity: 1,
+          duration: 0.4,
+          ease: 'power1.out',
+        },
+      )
+    } else {
+      gsap.to(answerRef.current, {
+        height: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power1.in',
+      })
+    }
+  }, [open])
 
   return (
     <div className='size-full rounded-[1.25rem] shadow-[0px_4.4px_20px_-1px_#1310220D]'>
@@ -21,16 +50,19 @@ const FaqContainer = ({
         </p>
         <span>
           <ICArrowCircle
-            className={`size-8 xsm:size-5 ${open ? 'fill-Blue-Primary' : 'rotate-180 fill-[#CCCCCC]'}`}
+            className={`size-8 transition-all duration-300 xsm:size-5 ${open ? 'fill-Blue-Primary' : 'rotate-180 fill-[#CCCCCC]'}`}
           />
         </span>
       </button>
 
-      {open && (
+      <div
+        ref={answerRef}
+        className='overflow-hidden'
+      >
         <div className='whitespace-pre-line px-[1.875rem] py-[1.25rem] text-[1rem] leading-[1.875rem] text-[#727272] xsm:px-[0.796rem] xsm:py-[0.603rem] xsm:text-sm'>
           {answer}
         </div>
-      )}
+      </div>
     </div>
   )
 }

@@ -13,7 +13,7 @@ const ServiceContainer = ({
     <div className='size-full'>
       <Link
         href={slug || '#'}
-        className='group flex w-full items-center justify-between py-5 hover:text-Blue-Primary'
+        className='group flex w-full items-center justify-between py-5 transition-all duration-300 hover:text-Blue-Primary'
       >
         <p className='text-start text-[1.5rem] font-medium leading-[100%] xsm:text-base'>
           {service}
