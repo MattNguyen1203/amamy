@@ -8,7 +8,7 @@ const ContactContainer = ({number}: {number: string}) => {
       className='flex flex-col items-center justify-center p-7 xsm:flex-row xsm:justify-between xsm:p-4'
     >
       <span className='xsm:hidden'>
-        <p className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[1.313rem]'>
+        <p className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[1.09375rem]'>
           Liên hệ tư vấn trực tiếp
         </p>
       </span>
@@ -23,7 +23,7 @@ const ContactContainer = ({number}: {number: string}) => {
         </p>
         <Link
           href={`tel:${number}`}
-          className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[2rem] xsm:text-Blue-Primary'
+          className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[1.875rem] xsm:tracking-normal xsm:text-Blue-Primary'
         >
           {number}
         </Link>

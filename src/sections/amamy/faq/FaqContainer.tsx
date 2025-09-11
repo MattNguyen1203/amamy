@@ -43,9 +43,9 @@ const FaqContainer = ({
   }, [open])
 
   return (
-    <div className='size-full rounded-[1.25rem] shadow-[0px_4.4px_20px_-1px_#1310220D]'>
+    <div className='size-full rounded-[1.25rem] xsm:w-full shadow-[0px_4.4px_20px_-1px_#1310220D]'>
       <button
-        className='flex w-full justify-between rounded-[1.25rem] border border-[#E3DBD8] p-7 xsm:p-5'
+        className='flex w-full justify-between rounded-[1.25rem] items-center border border-[#E3DBD8] p-7 xsm:p-5'
         onClick={() => setOpen(!open)}
       >
         <p className='text-start text-[1.125rem] font-semibold leading-[1.75rem] xsm:max-w-[16.875rem] xsm:text-sm xsm:font-medium'>

@@ -80,6 +80,9 @@ const Process = ({data}: {data: IProcess}) => {
   return (
     <section className='relative mt-28 size-full px-[6rem] xsm:mt-8 xsm:px-[1rem]'>
       {/* Background */}
+      <div className='sm:hidden block absolute left-0 pointer-events-none !bottom-[-5rem] size-[8rem] bg-white/20 z-50 rounded-full '>
+
+      </div>
       <div className='pointer-events-none absolute inset-0'>
         <Image
           src='/amamy/process/ellipse.svg'
@@ -134,7 +137,7 @@ const Process = ({data}: {data: IProcess}) => {
         </div>
 
         {/* Process Container Mobile */}
-        <div className='mt-7 w-full sm:hidden'>
+        <div className='mt-7 w-full sm:hidden xsm:translate-x-[-0.875rem]'>
           <Swiper
             grabCursor
             spaceBetween={12}

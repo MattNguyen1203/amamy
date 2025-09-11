@@ -2,14 +2,14 @@
 'use client'
 
 import ICAngleRight from '@/components/icon/ICAngleRight'
-import {useGSAP} from '@gsap/react'
+import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import {useState} from 'react'
+import { useState } from 'react'
 import ContactContainer from './ContactContainer'
 import FaqContainer from './FaqContainer'
 import ServiceContainer from './ServiceContainer'
 
-const FAQ = ({data, dataServices}: any) => {
+const FAQ = ({ data, dataServices }: any) => {
   const [open, setOpen] = useState(false)
 
   useGSAP(() => {
@@ -46,7 +46,7 @@ const FAQ = ({data, dataServices}: any) => {
 
       <div className='grid grid-cols-12 items-stretch gap-8 xsm:my-6'>
         {/* FAQs */}
-        <div className='col-span-8 flex h-full flex-col space-y-5 xsm:col-span-12'>
+        <div className='col-span-8 xsm:translate-x-[-0.3rem] flex h-full flex-col space-y-5 xsm:col-span-12'>
           {Array.isArray(data?.questions) &&
             data?.questions.map((item, index) => (
               <div
@@ -91,9 +91,8 @@ const FAQ = ({data, dataServices}: any) => {
                 </p>
                 <span>
                   <ICAngleRight
-                    className={`fill-black stroke-black transition-all duration-300 ${
-                      open ? 'rotate-90' : ''
-                    } group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
+                    className={`fill-black stroke-black transition-all duration-300 ${open ? 'rotate-90' : ''
+                      } group-hover:fill-Blue-Primary group-hover:stroke-Blue-Primary`}
                   />
                 </span>
               </button>
