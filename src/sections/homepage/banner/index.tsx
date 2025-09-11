@@ -21,7 +21,7 @@ import TrackingInterface from './TrackingOrder'
 
 interface BannerProps {
   banner: IBanner
-  dataFaqs: any
+  dataFaqs?: any
   boxChatAI: IBoxChatAI
   deliveryDirectionData: DeliveryDirectionResType
   currencyExchangeRateData: CurrencyToUsdResType

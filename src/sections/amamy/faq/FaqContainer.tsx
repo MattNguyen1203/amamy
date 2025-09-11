@@ -1,8 +1,8 @@
 'use client'
-import React, {useRef, useState} from 'react'
+import ICArrowCircle from '@/components/icon/ICArrowCircle'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import ICArrowCircle from '@/components/icon/ICArrowCircle'
+import {useRef, useState} from 'react'
 
 const FaqContainer = ({
   question,
@@ -65,7 +65,7 @@ const FaqContainer = ({
         className='overflow-hidden'
       >
         <div
-          className='whitespace-pre-line px-[1.875rem] py-[1.25rem] text-[1rem] leading-[1.875rem] text-[#727272] xsm:px-[0.796rem] xsm:py-[0.603rem] xsm:text-sm'
+          className='px-[1.875rem] py-[1.25rem] text-[1rem] leading-[1.875rem] text-[#727272] xsm:px-[0.796rem] xsm:py-[0.603rem] xsm:text-sm'
           dangerouslySetInnerHTML={{__html: answer}}
         />
       </div>

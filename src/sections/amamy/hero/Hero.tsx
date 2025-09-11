@@ -94,7 +94,7 @@ const Hero = ({data}: {data: any}) => {
                     <p
                       className={cn(
                         'text-[0.875rem] leading-[1.3] tracking-[-0.02625rem] xsm:hidden xsm:text-[0.75rem] xsm:font-normal xsm:leading-[1.5] xsm:tracking-[-0.0225rem] xsm:opacity-[0.9] ',
-                        index === 1 && 'max-w-[99px]',
+                        index === 1 && 'max-w-[6rem]',
                       )}
                     >
                       {item?.content}

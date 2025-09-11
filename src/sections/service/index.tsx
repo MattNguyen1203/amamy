@@ -88,6 +88,7 @@ const ServicePage = ({
       />
       <FAQ
         data={{
+          title: 'Câu hỏi thường gặp',
           questions: data?.talk_to_ai?.list_faq.map((item) => ({
             question: item.question,
             answer: item.answer,
