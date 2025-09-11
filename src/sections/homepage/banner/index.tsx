@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
+import ImageV2 from '@/components/image/ImageV2'
+import {cn} from '@/lib/utils'
 import {
   CurrencyToUsdResType,
   DeliveryDirectionResType,
@@ -10,18 +12,16 @@ import {
 } from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {Swiper, SwiperSlide} from 'swiper/react'
-import ImageV2 from '@/components/image/ImageV2'
-import TrackingInterface from './TrackingOrder'
+import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import {EffectFade} from 'swiper/modules'
-import Image from 'next/image'
-import {cn} from '@/lib/utils'
+import {Swiper, SwiperSlide} from 'swiper/react'
+import TrackingInterface from './TrackingOrder'
 
 interface BannerProps {
   banner: IBanner
-  dataFaqs: any
+  dataFaqs?: any
   boxChatAI: IBoxChatAI
   deliveryDirectionData: DeliveryDirectionResType
   currencyExchangeRateData: CurrencyToUsdResType
@@ -59,6 +59,7 @@ const Banner = ({
   return (
     <>
       <div
+        id='tinh-gia-van-chuyen'
         className={cn(
           'relative h-[50.455rem] w-full text-white xsm:hidden',
           isFaq && 'h-[38rem]',
@@ -186,6 +187,8 @@ const Banner = ({
       </div>
       <div className='hidden xsm:flex'>
         <BackgroundMobile
+          dataFaqs={dataFaqs}
+          isFaq={isFaq}
           deliveryDirectionData={deliveryDirectionData}
           currencyExchangeRateData={currencyExchangeRateData}
           banner={banner}
@@ -200,46 +203,68 @@ export default Banner
 
 const BackgroundMobile = ({
   banner,
+  dataFaqs,
   boxChatAI,
   deliveryDirectionData,
   currencyExchangeRateData,
+  isFaq,
 }: {
   banner: IBanner
+  dataFaqs: any
   boxChatAI: IBoxChatAI
   deliveryDirectionData: DeliveryDirectionResType
   currencyExchangeRateData: CurrencyToUsdResType
+  isFaq: boolean
 }) => {
   return (
-    <div className='relative flex flex-col xsm:w-full'>
-      <Swiper
-        loop={true}
-        effect='fade'
-        modules={[EffectFade]}
-        spaceBetween={0}
-        slidesPerView={1}
-        className='!z-0 size-full'
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        speed={750}
-        grabCursor={true}
-      >
-        {banner?.background?.map(({background_mobile}, index) => (
-          <SwiperSlide
-            key={index}
-            className='size-full'
-          >
-            <ImageV2
-              alt=''
-              width={375}
-              height={445}
-              src={background_mobile.url}
-              className='h-[25.6874rem] w-full object-cover'
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div
+      className={cn(
+        'relative flex flex-col xsm:w-full',
+        isFaq && 'xsm:min-h-[564px]',
+      )}
+    >
+      {isFaq && (
+        <>
+          <Image
+            alt={dataFaqs?.background_mb?.alt || ''}
+            src={dataFaqs?.background_mb?.url}
+            width={dataFaqs?.background_mb?.width || 431}
+            height={dataFaqs?.background_mb?.height || 564}
+            className='absolute top-0 left-0 size-full object-cover'
+          />
+        </>
+      )}
+      {!isFaq && (
+        <Swiper
+          loop={true}
+          effect='fade'
+          modules={[EffectFade]}
+          spaceBetween={0}
+          slidesPerView={1}
+          className='!z-0 size-full'
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          speed={750}
+          grabCursor={true}
+        >
+          {banner?.background?.map(({background_mobile}, index) => (
+            <SwiperSlide
+              key={index}
+              className='size-full'
+            >
+              <ImageV2
+                alt=''
+                width={375}
+                height={445}
+                src={background_mobile.url}
+                className='h-[25.6874rem] w-full object-cover'
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
       {/* <div className='absolute top-[7rem] left-[0.5rem] flex items-center space-x-4'>
         <ImageV2
           alt=''
@@ -273,30 +298,42 @@ const BackgroundMobile = ({
         className='w-[16.9375rem] h-[15.25rem] object-cover absolute left-[4rem] top-[7rem]'
       /> */}
 
-      <div className='relative z-[20] -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] px-[1rem] pt-5'>
-        <div className='flex items-center space-x-[0.75rem]'>
-          <div className='relative flex -space-x-2.5'>
-            {banner?.user_list.map((item, index) => (
-              <AvatarIcon
-                item={item}
-                key={index}
-              />
-            ))}
-            <div className='size-7 rounded-full border-[1.5px] border-white bg-Blue-400 text-[0.75rem] font-semibold leading-none text-white flex-center xsm:text-[0.58331rem]'>
-              {banner?.user_number}
+      <div
+        className={cn(
+          'relative z-[20] -mt-8 rounded-t-[1.25rem] bg-[#F8F8FB] px-[1rem] pt-5',
+          isFaq && 'bg-transparent mt-auto mb-[1rem]',
+        )}
+      >
+        {!isFaq && (
+          <div className='flex items-center space-x-[0.75rem]'>
+            <div className='relative flex -space-x-2.5'>
+              {banner?.user_list.map((item, index) => (
+                <AvatarIcon
+                  item={item}
+                  key={index}
+                />
+              ))}
+              <div className='size-7 rounded-full border-[1.5px] border-white bg-Blue-400 text-[0.75rem] font-semibold leading-none text-white flex-center xsm:text-[0.58331rem]'>
+                {banner?.user_number}
+              </div>
+            </div>
+            <div className='flex-1'>
+              <p className='font-montserrat text-[1rem] font-bold leading-[normal] tracking-[-0.03rem]'>
+                {banner?.user_number}
+              </p>
+              <p className='text-[0.625rem] font-medium leading-[140%]'>
+                {banner?.review_title}
+              </p>
             </div>
           </div>
-          <div className='flex-1'>
-            <p className='font-montserrat text-[1rem] font-bold leading-[normal] tracking-[-0.03rem]'>
-              {banner?.user_number}
-            </p>
-            <p className='text-[0.625rem] font-medium leading-[140%]'>
-              {banner?.review_title}
-            </p>
-          </div>
-        </div>
-        <p className='mt-3 text-[1.25rem] font-bold leading-[120%]'>
-          {banner?.title}
+        )}
+        <p
+          className={cn(
+            'mt-3 text-[1.25rem] font-bold leading-[120%]',
+            isFaq && 'text-white',
+          )}
+        >
+          {isFaq ? 'Nhập mức cân mong muốn ' : banner?.title}
         </p>
         <div className='mt-5'>
           <TrackingInterface

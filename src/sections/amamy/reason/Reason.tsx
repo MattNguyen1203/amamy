@@ -1,14 +1,13 @@
 'use client'
 
-import React from 'react'
-import {Swiper, SwiperSlide} from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
+import {IImage} from '@/utils/type'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import {Navigation} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import ImageContainer from './ImageContainer'
-import { IImage } from '@/utils/type'
 
 const reasons = [
   {
@@ -60,8 +59,8 @@ const Reason = ({data}: {data: IReason}) => {
         <p className='text-[2rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-base'>
           {data?.title}
         </p>
-        <h3 className='mt-5 max-w-6xl text-center text-[2.5rem] font-bold xsm:w-full xsm:text-[1.25rem]'>
-         {data?.description}
+        <h3 className='mt-5 max-w-[70rem] text-center text-[2.5rem] font-bold xsm:w-full xsm:text-[1.125rem]'>
+          {data?.description}
         </h3>
       </div>
 

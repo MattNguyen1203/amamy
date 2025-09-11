@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import React, {useState} from 'react'
+import ICAngleRight from '@/components/icon/ICAngleRight'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import ICAngleRight from '@/components/icon/ICAngleRight'
+import {useState} from 'react'
 import ContactContainer from './ContactContainer'
 import FaqContainer from './FaqContainer'
 import ServiceContainer from './ServiceContainer'
@@ -37,7 +37,7 @@ const FAQ = ({data, dataServices}: any) => {
 
   return (
     <section className='my-12 size-full px-[6rem] xsm:px-[1rem]'>
-      <div className='w-full pb-8'>
+      <div className='w-full pb-8 xsm:pb-0'>
         {/* Heading */}
         <h3 className='fade-in-faq text-start text-[2.75rem] font-bold leading-[1.3] tracking-[-0.055rem] xsm:text-center xsm:text-[1.5rem] xsm:leading-[1.25rem]'>
           {data?.title}

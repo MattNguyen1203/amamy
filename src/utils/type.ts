@@ -572,6 +572,7 @@ export interface IServicePage {
   banner: {
     title: string
     sub_title: string
+    label_link?: string
   }
   talk_to_ai: {
     title: string
