@@ -21,6 +21,20 @@ const Hero = ({data}: {data: any}) => {
     })
   }, [])
 
+  const handleScrollToLink = (e) => {
+    e.preventDefault()
+    if (data?.link?.url && data?.link?.url.startsWith('#')) {
+      gsap.to(window, {
+        duration: 0.8,
+        scrollTo: {
+          y: data?.link?.url,
+          offsetY: 80,
+        }, // có thể là element hoặc tọa độ số
+        ease: 'power2.inOut',
+      })
+    }
+  }
+
   return (
     <section className='size-full bg-Blue-Primary px-[6rem] py-10 xsm:px-[1rem] xsm:py-8'>
       <div className='mx-auto flex flex-col items-center pt-14 text-center text-white xsm:pt-0'>
@@ -35,6 +49,8 @@ const Hero = ({data}: {data: any}) => {
         {/* CTA */}
         {data?.link && (
           <Link
+            {...(data?.link?.url &&
+              data?.link?.url.startsWith('#') && {onClick: handleScrollToLink})}
             href={data?.link?.url || '#'}
             target={data?.link?.target || '_self'}
             className='fade-in-hero w-full max-w-sm rounded-[1.5rem] bg-white px-[1.813rem] py-4 text-center text-[1.2rem] font-medium leading-[1.56rem] tracking-[-0.036rem] text-Blue-Primary xsm:max-w-64 xsm:px-3 xsm:py-[0.375rem] xsm:text-sm'

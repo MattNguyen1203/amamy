@@ -59,6 +59,7 @@ const Banner = ({
   return (
     <>
       <div
+        id='tinh-gia-van-chuyen'
         className={cn(
           'relative h-[50.455rem] w-full text-white xsm:hidden',
           isFaq && 'h-[38rem]',
