@@ -55,11 +55,11 @@ const Reason = ({data}: {data: IReason}) => {
   return (
     <section className='size-full px-[6rem] xsm:px-[1rem]'>
       {/* Heading */}
-      <div className='fade-in-reason flex w-full flex-col items-center justify-center py-16 xsm:py-8'>
-        <p className='text-[2rem] font-semibold leading-[1.75rem] text-Blue-Primary xsm:text-base'>
+      <div className='fade-in-reason flex w-full flex-col items-center justify-center py-16 xsm:py-8 pb-10'>
+        <p className='text-[2rem] font-semibold leading-[1.66667rem] text-Blue-Primary xsm:text-base'>
           {data?.title}
         </p>
-        <h3 className='mt-5 max-w-[70rem] text-center text-[2.5rem] font-bold xsm:w-full xsm:text-[1.125rem]'>
+        <h3 className='mt-3 max-w-[70rem] text-center text-[2.08333rem] font-bold xsm:w-full xsm:text-[1.125rem]'>
           {data?.description}
         </h3>
       </div>
@@ -81,7 +81,7 @@ const Reason = ({data}: {data: IReason}) => {
       </div>
 
       {/* Image Containter Mobile */}
-      <div className='w-full sm:hidden'>
+      <div className='w-full sm:hidden xsm:translate-x-[-0.4rem]'>
         <Swiper
           grabCursor
           spaceBetween={12}

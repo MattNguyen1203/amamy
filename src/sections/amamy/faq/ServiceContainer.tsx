@@ -15,7 +15,7 @@ const ServiceContainer = ({
         href={slug || '#'}
         className='group flex w-full items-center justify-between py-5 transition-all duration-300 hover:text-Blue-Primary'
       >
-        <p className='text-start text-[1.5rem] font-medium leading-[100%] xsm:text-base'>
+        <p className='text-start text-[1.25rem] font-medium leading-[100%] xsm:text-base'>
           {service}
         </p>
         <span>

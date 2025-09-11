@@ -39,10 +39,10 @@ const Hero = ({data}: {data: any}) => {
     <section className='size-full bg-Blue-Primary px-[6rem] py-10 xsm:px-[1rem] xsm:py-8'>
       <div className='mx-auto flex flex-col items-center pt-14 text-center text-white xsm:pt-0'>
         {/* Heading */}
-        <h1 className='fade-in-hero mb-4 text-center text-[4rem] font-bold leading-[122%] xsm:text-[1.5rem]'>
+        <h1 className='fade-in-hero mb-4 text-center text-[3.33333rem] font-bold leading-[122%] xsm:text-[1.5rem]'>
           {data?.heading}
         </h1>
-        <p className='fade-in-hero mb-14 max-w-[41.875rem] text-center text-base leading-[100%] xsm:mb-7 xsm:max-w-[17.938rem] xsm:text-sm'>
+        <p className='fade-in-hero mb-[2.86rem] max-w-[36.875rem] text-center text-[0.83rem] leading-[140%] xsm:mb-7 xsm:max-w-[17.938rem] xsm:text-sm'>
           {data?.description}
         </p>
 
@@ -83,7 +83,7 @@ const Hero = ({data}: {data: any}) => {
                     key={index}
                     className='fade-in-hero text-start text-white'
                   >
-                    <p className='text-[3.75rem] font-bold leading-[1.2] tracking-[-0.15rem] xsm:text-[1.5rem] xsm:leading-[1.315rem] xsm:mb-[0.5rem]'>
+                    <p className='text-[3.75rem] font-bold leading-[1.2] tracking-[-0.15rem] xsm:text-[1.25rem] xsm:tracking-wider xsm:leading-[1.315rem] xsm:mb-[0.5rem]'>
                       {item?.title}
                     </p>
                     <p className='text-[1.125rem] font-semibold uppercase leading-[1.6] xsm:mb-[0.5rem] xsm:text-[0.6875rem] xsm:leading-[0.8125rem] xsm:tracking-[-0.01375rem]'>
