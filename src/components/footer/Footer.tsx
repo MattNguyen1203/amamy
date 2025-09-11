@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import ReceivingIncentivesFrom from '@/components/footer/ReceivingIncentivesFrom'
 import ImageV2 from '@/components/image/ImageV2'
+import Link from 'next/link'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Footer = ({data}) => {
@@ -63,7 +63,7 @@ const Footer = ({data}) => {
             ))}
           </div>
         </div>
-        <div className='max-w-[35.875rem] xsm:space-y-[2.5rem] flex-1 flex xsm:flex-col sm:justify-between xsm:mt-[2.5rem]'>
+        <div className='ml-[5rem] max-w-[35.875rem] xsm:space-y-[2.5rem] flex-1 flex xsm:flex-col sm:justify-between xsm:mt-[2.5rem] xsm:ml-0'>
           <div>
             <h3 className='text-[1.25rem] mb-[1.5rem] xsm:mb-[0.75rem] not-italic font-bold leading-[120%] xsm:text-pc-sub14s'>
               Dịch vụ

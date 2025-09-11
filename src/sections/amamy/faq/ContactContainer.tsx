@@ -21,10 +21,13 @@ const ContactContainer = ({number}: {number: string}) => {
         <p className='text-center text-base leading-[1.875rem] xsm:hidden'>
           Hotline
         </p>
-        <Link href={`tel:${number}`} className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[2.25rem] xsm:text-Blue-Primary'>
+        <Link
+          href={`tel:${number}`}
+          className='text-center text-[1.375rem] font-bold leading-[1.875rem] xsm:text-[2rem] xsm:text-Blue-Primary'
+        >
           {number}
         </Link>
-        <p className='text-center text-[1.375rem] font-bold leading-[1.875rem] sm:hidden xsm:text-[1.313rem]'>
+        <p className='text-center text-[1.375rem] font-bold leading-[1.875rem] sm:hidden xsm:text-[1.25rem]'>
           Liên hệ tư vấn trực tiếp
         </p>
       </span>

@@ -1,15 +1,14 @@
 'use client'
 
-import React from 'react'
-import ProcessContainer from './ProcessContainer'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import { useGSAP } from '@gsap/react'
+import {IImage} from '@/utils/type'
+import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
-import { Navigation } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { IImage } from '@/utils/type'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import {Navigation} from 'swiper/modules'
+import {Swiper, SwiperSlide} from 'swiper/react'
+import ProcessContainer from './ProcessContainer'
 
 const process = [
   {
@@ -64,7 +63,7 @@ export interface ISteps {
   description: string
 }
 
-const Process = ({ data }: { data: IProcess }) => {
+const Process = ({data}: {data: IProcess}) => {
   useGSAP(() => {
     gsap.from('.fade-in-process', {
       scrollTrigger: {
@@ -114,7 +113,7 @@ const Process = ({ data }: { data: IProcess }) => {
             {data?.steps.slice(0, 3).map((item, index) => (
               <ProcessContainer
                 key={index}
-                number={index+1}
+                number={index + 1}
                 icon={item.icon.url}
                 label={item.title}
                 description={item.description}
@@ -122,10 +121,13 @@ const Process = ({ data }: { data: IProcess }) => {
             ))}
           </div>
           <div className='fade-in-process flex justify-center gap-x-8'>
-            {process.slice(3).map((item, index) => (
+            {data?.steps.slice(3).map((item, index) => (
               <ProcessContainer
                 key={index}
-                {...item}
+                number={index + 3}
+                icon={item.icon.url}
+                label={item.title}
+                description={item.description}
               />
             ))}
           </div>

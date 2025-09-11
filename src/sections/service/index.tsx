@@ -1,10 +1,12 @@
 'use client'
 
-import {useEffect} from 'react'
+import FAQ from '@/sections/amamy/faq/FAQ'
+import Hero from '@/sections/amamy/hero/Hero'
 import RelatedBlogsV2 from '@/sections/blog/detail/RelatedBlogsV2'
 import {IListServiceResponse, IServicePage} from '@/utils/type'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {useEffect} from 'react'
 import ShippingHero from './section1/ShippingHero'
 import AIChatSection from './section2/AIChatSection'
 
@@ -19,8 +21,15 @@ interface Prop {
     ai_chat: string
     link_chat_ai: string
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resDataServicesHeader: any
 }
-const ServicePage = ({data, listService, chatBoxAiData}: Prop) => {
+const ServicePage = ({
+  data,
+  listService,
+  chatBoxAiData,
+  resDataServicesHeader,
+}: Prop) => {
   useEffect(() => {
     gsap.utils.toArray<HTMLElement>('.fade-section').forEach((section) => {
       const items = section.querySelectorAll<HTMLElement>('.fade-item')
@@ -51,6 +60,21 @@ const ServicePage = ({data, listService, chatBoxAiData}: Prop) => {
   }, [])
   return (
     <div className='w-full bg-white'>
+      <Hero
+        data={{
+          heading: data?.banner?.title,
+          description: data?.banner?.sub_title,
+        }}
+      />
+      <FAQ
+        data={{
+          questions: data?.talk_to_ai?.list_faq.map((item) => ({
+            question: item.question,
+            answer: item.answer,
+          })),
+        }}
+        dataServices={resDataServicesHeader}
+      />
       <ShippingHero data={data} />
       <AIChatSection
         listService={listService}
