@@ -89,10 +89,12 @@ const ServicePage = ({
       <FAQ
         data={{
           title: 'Câu hỏi thường gặp',
-          questions: data?.talk_to_ai?.list_faq.map((item) => ({
-            question: item.question,
-            answer: item.answer,
-          })),
+          questions:
+            Array.isArray(data?.talk_to_ai?.list_faq) &&
+            data?.talk_to_ai?.list_faq.map((item) => ({
+              question: item.question,
+              answer: item.answer,
+            })),
           number: data?.list_services?.phone,
         }}
         dataServices={resDataServicesHeader}
