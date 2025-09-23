@@ -36,9 +36,7 @@ const ServicePage = ({
   res,
   data,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  listService,
   chatBoxAiData,
-  resDataServicesHeader,
   resDataFaqs,
   resBanner,
   resDeliveryDirection,
@@ -91,12 +89,10 @@ const ServicePage = ({
         faqsData={{
           title: 'Câu hỏi thường gặp',
           questions:
-            Array.isArray(data?.talk_to_ai?.list_faq) &&
-            data?.talk_to_ai?.list_faq.map((item) => ({
+            data?.talk_to_ai?.list_faq?.map((item) => ({
               question: item.question,
               answer: item.answer,
-            })),
-          number: data?.list_services?.phone,
+            })) ?? [],
         }}
       />
       <Reason reasonsData={resDataFaqs?.acf?.reason} />

@@ -1,28 +1,11 @@
 'use client'
 
 import React, {ReactNode} from 'react'
-import ICPhoneCall from '@/components/icon/ICPhoneCall'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import {Navigation} from 'swiper/modules'
-import {Swiper, SwiperSlide} from 'swiper/react'
 import ICMessengerLogo from '@/components/icon/ICMessengerLogo'
+import ICPhoneCall from '@/components/icon/ICPhoneCall'
 import {ServicesObject} from '@/utils/type'
 import ServiceCard from './ServiceCard'
 import ServiceHighlight from './ServiceHighlight'
-
-const reasonsData = [
-  {
-    icon: '/services-test/amamy.webp',
-    label: 'THÙNG CARTON 5 LỚP CHUẨN QUỐC TẾ',
-    desc: 'Các gói đóng hàng phù hợp với từng nhu cầu, 100% bảo hiểm hỏng vỡ',
-  },
-  {
-    icon: '/services-test/amamy.webp',
-    label: 'THÙNG CARTON 5 LỚP CHUẨN QUỐC TẾ',
-    desc: 'Các gói đóng hàng phù hợp với từng nhu cầu, 100% bảo hiểm hỏng vỡ',
-  },
-]
 
 const Service = ({services}: {services: ServicesObject}) => {
   return (
@@ -66,37 +49,33 @@ const Service = ({services}: {services: ServicesObject}) => {
           </div>
 
           {/* Reasons Desktop */}
-          <div className='hidden w-full items-center justify-between gap-x-[1.25rem] sm:flex'>
-            {reasonsData.map((item, index) => (
-              <ServiceHighlight
-                key={index}
-                icon={item.icon}
-                label={item.label}
-                desc={item.desc}
-              />
-            ))}
+          <div className='hidden_scroll inline-flex h-[20.625rem] items-center space-x-6 xsm:hidden xsm:h-[15.40181rem] xsm:w-full xsm:space-x-3 xsm:overflow-auto xsm:px-4'>
+            <ServiceHighlight
+              backgroundUrl={services.list_service_2[0].image.url}
+              title={services.list_service_2[0].title}
+              href={`/blogs/${services.list_service_2[0].link.slug}`}
+            />
+
+            <ServiceHighlight
+              backgroundUrl={services.list_service_2[1].image.url}
+              title={services.list_service_2[1].title}
+              href={`/blogs/${services.list_service_2[1].link.slug}`}
+            />
           </div>
         </div>
-
         {/* Reasons Mobile */}
-        <div className='block w-full sm:hidden'>
-          <Swiper
-            grabCursor
-            slidesOffsetAfter={-13}
-            slidesPerView={1.12}
-            modules={[Navigation]}
-            className='size-full'
-          >
-            {reasonsData.map((item, index) => (
-              <SwiperSlide key={index}>
-                <ServiceHighlight
-                  icon={item.icon}
-                  label={item.label}
-                  desc={item.desc}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <div className='hidden_scroll inline-flex h-[20.625rem] items-center space-x-6 sm:hidden xsm:h-[15.40181rem] xsm:w-full xsm:space-x-3 xsm:overflow-auto xsm:px-4'>
+          <ServiceHighlight
+            backgroundUrl={services.list_service_2[0].image.url}
+            title={services.list_service_2[0].title}
+            href={`/blogs/${services.list_service_2[0].link.slug}`}
+          />
+
+          <ServiceHighlight
+            backgroundUrl={services.list_service_2[1].image.url}
+            title={services.list_service_2[1].title}
+            href={`/blogs/${services.list_service_2[1].link.slug}`}
+          />
         </div>
 
         <ChatButton

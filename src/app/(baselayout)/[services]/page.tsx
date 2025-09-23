@@ -8,12 +8,14 @@ import ServicePage from '@/sections/services-test'
 import {notFound} from 'next/navigation'
 import metadataValues from '@/utils/metadataValues'
 
+type TransportSlug = {slug: string}
+
 export async function generateStaticParams() {
-  const posts = await fetchData({
+  const posts: TransportSlug[] = await fetchData({
     api: 'all-slug-transport',
   })
 
-  return posts.map((post: any) => ({
+  return posts.map((post) => ({
     services: post.slug,
   }))
 }

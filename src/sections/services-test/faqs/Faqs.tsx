@@ -13,6 +13,7 @@ interface FAQItem {
 
 interface FaqsProps {
   faqsData?: {
+    title: string
     questions: FAQItem[]
   }
 }
@@ -133,7 +134,7 @@ const Faqs = ({faqsData}: FaqsProps) => {
     <div className='flex w-[full] flex-col items-start gap-[0.625rem] bg-white px-4 py-10 sm:p-[5rem_6rem]'>
       <div className='flex w-full flex-col items-center gap-[1.5rem] sm:w-[88rem] sm:gap-[2.5rem]'>
         <h2 className='text-center font-montserrat text-[1.25rem] font-bold not-italic leading-[120%] tracking-[-0.105rem] text-[color:var(--greyscaletext-92,rgba(0,0,0,0.92))] sm:text-[2.625rem]'>
-          Câu hỏi thường gặp cho đi Pháp
+          {faqsData?.title}
         </h2>
 
         <div className='flex w-full flex-col items-start sm:w-[62.5rem] sm:gap-2'>

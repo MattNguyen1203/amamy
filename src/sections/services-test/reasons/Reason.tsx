@@ -23,7 +23,11 @@ export interface IService {
   content: string
 }
 
-const Reason = ({reasonsData}: IReason) => {
+interface ReasonProps {
+  reasonsData: IReason
+}
+
+const Reason = ({reasonsData}: ReasonProps) => {
   const isMobile = useIsMobile()
   const containerGalleryRef = useRef<HTMLDivElement>(null)
   const contentGalleryRef = useRef<HTMLDivElement>(null)
@@ -95,7 +99,7 @@ const Reason = ({reasonsData}: IReason) => {
               <div className='relative aspect-[310.67/393.35] w-full overflow-hidden rounded-[2.5rem] xsm:aspect-[223/282] xsm:rounded-[1.25rem]'>
                 <Image
                   src={item.thumbnail.url}
-                  alt={item.label}
+                  alt={item.title}
                   fill
                   className='object-cover'
                 />
