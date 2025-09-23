@@ -2,14 +2,16 @@
 
 import React, {useEffect} from 'react'
 import gsap from 'gsap'
-import {IListServiceResponse, IServicePage} from '@/utils/type'
+import {IHomePage, IListServiceResponse, IServicePage} from '@/utils/type'
 import RelatedBlogsV2 from '../blog/detail/RelatedBlogsV2'
 import Banner from '../homepage/banner'
 import Faqs from './faqs/Faqs'
 import Hero from './hero/Hero'
 import Reason from './reasons/Reason'
+import Service from './service/Service'
 
 interface ServicePageProps {
+  res: IHomePage
   data: IServicePage
   listService: IListServiceResponse
   chatBoxAiData: {
@@ -31,6 +33,7 @@ interface ServicePageProps {
 }
 
 const ServicePage = ({
+  res,
   data,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   listService,
@@ -106,7 +109,7 @@ const ServicePage = ({
         deliveryDirectionData={resDeliveryDirection}
         currencyExchangeRateData={resCurrencyExchangeRate}
       />
-      {/*    <Instructions /> */}
+      <Service services={res.services} />
       {Array.isArray(data?.suggested_reading_articles_about_shipping?.post) && (
         <RelatedBlogsV2
           data={data?.suggested_reading_articles_about_shipping?.post}

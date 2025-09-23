@@ -23,6 +23,12 @@ export async function generateMetadata({params}: {params: {services: string}}) {
 }
 
 const ServicesPage = async ({params}: {params: {services: string}}) => {
+  const fetchDataACF = fetchData({
+    api: 'pages/11',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
   const fetchDataFaqs = fetchDataWP({
     api: 'pages/8647?_fields=acf&acf_format=standard',
     option: {
@@ -69,6 +75,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     },
   })
   const [
+    dataACF,
     resService,
     resListService,
     schemaData,
@@ -79,6 +86,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     resDeliveryDirection,
     resCurrencyExchangeRate,
   ] = await Promise.all([
+    fetchDataACF,
     fetchDataServices,
     fetchDataListService(),
     getSchemaMarkup('chieu-van-chuyen/' + params?.services),
@@ -101,6 +109,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
       ></script>
       <div className='flex w-full flex-col items-center overflow-hidden bg-white text-black'>
         <ServicePage
+          res={dataACF}
           resDataFaqs={resDataFaqs}
           resDataServicesHeader={resDataServicesHeader}
           data={resService}

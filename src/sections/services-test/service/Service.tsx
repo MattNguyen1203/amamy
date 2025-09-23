@@ -6,30 +6,10 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import {Navigation} from 'swiper/modules'
 import {Swiper, SwiperSlide} from 'swiper/react'
-import ICAdvise from '@/components/icon/ICAdvise'
 import ICMessengerLogo from '@/components/icon/ICMessengerLogo'
-import ICPackage from '@/components/icon/ICPackage'
-import ICPayment from '@/components/icon/ICPayment'
-import ReasonCard from './ReasonCard'
-import StepCard from './StepCard'
-
-const stepsData = [
-  {
-    icon: <ICAdvise className='size-[3rem] xsm:size-[2.23956rem]' />,
-    label: 'Tư vấn',
-    desc: 'Amamy dịch vụ Logistic với 4 năm kinh nghiệm và hơn 20.000 khách hàng Việt Nam tại nước ngoài',
-  },
-  {
-    icon: <ICPackage className='size-[3rem] xsm:size-[2.23956rem]' />,
-    label: 'Nhận hàng đóng gói',
-    desc: 'Amamy dịch vụ Logistic với 4 năm kinh nghiệm và hơn 20.000 khách hàng Việt Nam tại nước ngoài',
-  },
-  {
-    icon: <ICPayment className='size-[3rem] xsm:size-[2.23956rem]' />,
-    label: 'Thanh toán',
-    desc: 'Amamy dịch vụ Logistic với 4 năm kinh nghiệm và hơn 20.000 khách hàng Việt Nam tại nước ngoài',
-  },
-]
+import {ServicesObject} from '@/utils/type'
+import ServiceCard from './ServiceCard'
+import ServiceHighlight from './ServiceHighlight'
 
 const reasonsData = [
   {
@@ -44,7 +24,7 @@ const reasonsData = [
   },
 ]
 
-const Instructions = () => {
+const Service = ({services}: {services: ServicesObject}) => {
   return (
     <div className='my-[5rem] size-full px-[6rem] xsm:my-[2.5rem] xsm:px-[1rem]'>
       <div className='flex size-full flex-row items-stretch gap-x-[3.75rem] xsm:flex-col xsm:items-start'>
@@ -73,13 +53,14 @@ const Instructions = () => {
         <div className='flex flex-col items-center gap-y-[1.25rem] xsm:my-[1.25rem]'>
           {/* Steps */}
           <div className='grid w-full grid-cols-3 gap-[1.25rem] xsm:grid-cols-1 xsm:gap-[0.62rem]'>
-            {stepsData.map((item, index) => (
-              <StepCard
+            {services?.list_service_1?.map((item, index) => (
+              <ServiceCard
                 key={index}
                 icon={item.icon}
-                stepNumber={index + 1}
-                label={item.label}
-                desc={item.desc}
+                title={item.title}
+                description={item.description}
+                subtitle={item.subtitle}
+                href={`/blogs/${item.link.slug}`}
               />
             ))}
           </div>
@@ -87,7 +68,7 @@ const Instructions = () => {
           {/* Reasons Desktop */}
           <div className='hidden w-full items-center justify-between gap-x-[1.25rem] sm:flex'>
             {reasonsData.map((item, index) => (
-              <ReasonCard
+              <ServiceHighlight
                 key={index}
                 icon={item.icon}
                 label={item.label}
@@ -108,7 +89,7 @@ const Instructions = () => {
           >
             {reasonsData.map((item, index) => (
               <SwiperSlide key={index}>
-                <ReasonCard
+                <ServiceHighlight
                   icon={item.icon}
                   label={item.label}
                   desc={item.desc}
@@ -128,7 +109,7 @@ const Instructions = () => {
   )
 }
 
-export default Instructions
+export default Service
 
 const ChatButton = ({
   icon,

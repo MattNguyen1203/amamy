@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import ICArrowCircle from '@/components/icon/ICArrowCircle'
 
-const ReasonCard = ({
+const ServiceHighlight = ({
   icon,
   label,
   desc,
@@ -50,4 +50,4 @@ const ReasonCard = ({
   )
 }
 
-export default ReasonCard
+export default ServiceHighlight
