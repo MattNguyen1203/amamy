@@ -6,6 +6,7 @@ import ICMessage from '@/components/icon/ICMessage'
 import ICPlus from '@/components/icon/ICPlus'
 import ICQuestion from '@/components/icon/ICQuestion'
 import BackgroundServicesFaq from '@/components/icon/BackgroundServicesFaq'
+import Image from 'next/image'
 
 type FAQItem = {question: string; answer: string}
 type FaqsData = {
@@ -117,8 +118,14 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
   const title = faqsData?.title ?? 'Câu hỏi thường gặp'
 
   return (
-    <div className='flex w-[full] flex-col items-start gap-[0.625rem] bg-white px-4 py-10 sm:p-[5rem_6rem] relative'>
-      <BackgroundServicesFaq className='absolute z-0 w-full' />
+    <div className='flex w-[full] flex-col items-start gap-[0.625rem] bg-white px-4 py-10 sm:p-[5rem_6rem] relative overflow-hidden'>
+      <Image
+        src={'/newPage/img2.png'}
+        width={1380}
+        height={1022}
+        alt='background'
+        className='w-[86.25794rem] h-[63.91225rem] absolute left-[-17.25rem] bottom-[-11.78294rem] rotate-[9.508deg] object-contain xsm:hidden pointer-events-none'
+      />
       <div className='flex w-full flex-col items-center gap-[1.5rem] sm:w-[88rem] sm:gap-[2.5rem] z-10'>
         <div className='flex w-full items-center justify-between gap-4 sm:w-[62.5rem]'>
           <h2 className='text-center font-montserrat text-[1.25rem] font-bold not-italic leading-[120%] tracking-[-0.105rem] text-[color:var(--greyscaletext-92,rgba(0,0,0,0.92))] sm:text-[2.625rem]'>
