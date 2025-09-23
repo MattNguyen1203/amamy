@@ -25,7 +25,7 @@ const ProcessContainer = ({
           className='size-10 object-cover xsm:size-9'
         />
       </div>
-      <div className='ml-auto max-h-[15.813rem] max-w-[23.125rem] rounded-[1.25rem] border border-[#E3DBD8] bg-white py-8 pl-16 pr-10 xsm:max-h-[15.438rem] xsm:max-w-[15.563rem] xsm:py-7 xsm:pl-12 xsm:pr-5'>
+      <div className='ml-auto max-h-[15.813rem] max-w-[23.125rem] rounded-[1.25rem] border border-[#E3DBD8] bg-white py-8 pl-16 pr-10 xsm:max-h-[20.438rem] xsm:max-w-[15.563rem] xsm:py-7 xsm:pl-12 xsm:pr-5'>
         <p className='pb-[0.313rem] text-[1.125rem] font-semibold leading-[1.75rem] text-[#727272] xsm:text-base'>
           0{number}
         </p>

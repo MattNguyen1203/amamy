@@ -257,13 +257,13 @@ const TrackingOrder = ({
     >
       <TabsList className='relative xsm:w-full'>
         <TabsTrigger
-          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.60)] opacity-[0.5] data-[state=active]:opacity-[1] data-[state=active]:text-black'
+          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)] opacity-[0.8] data-[state=active]:opacity-[1] data-[state=active]:text-black'
           value='search-order'
         >
           Theo dõi bưu kiện
         </TabsTrigger>
         <TabsTrigger
-          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.60)] opacity-[0.5] data-[state=active]:opacity-[1] data-[state=active]:text-black'
+          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)] opacity-[0.8] data-[state=active]:opacity-[1] data-[state=active]:text-black'
           value='estimate-price'
         >
           Dự tính giá vận chuyển

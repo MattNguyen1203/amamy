@@ -1,14 +1,13 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useClickOutside from '@/hooks/useClickOutside'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
+import { cn } from '@/lib/utils'
+import { ICreateOder } from '@/sections/tao-don/oder.interface'
 import Link from 'next/link'
-import {usePathname, useRouter} from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import MobileMenu from '@/components/header/MobileMenu'
-import Amamy from '@/components/svg/Amamy'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Close from '@/components/svg/Close'
 import Plus from '@/components/svg/Plus'
@@ -21,13 +20,15 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
+import Image from 'next/image'
+import { IImage } from '@/utils/type'
 
 const navItems = [
-  {name: 'Theo dõi vận đơn', href: '/theo-doi-van-don'},
-  {name: 'Về Amamy', href: '/about'},
-  {name: 'Dịch vụ', href: ''},
-  {name: 'Hữu ích cho gửi hàng', href: '/blogs'},
-  {name: 'Hướng dẫn gửi hàng', href: '/huong-dan-gui-hang'},
+  { name: 'Theo dõi vận đơn', href: '/theo-doi-van-don' },
+  { name: 'Về Amamy', href: '/about' },
+  { name: 'Dịch vụ', href: '' },
+  { name: 'Hữu ích cho gửi hàng', href: '/blogs' },
+  { name: 'Hướng dẫn gửi hàng', href: '/huong-dan-gui-hang' },
 ]
 
 export interface Isocial {
@@ -41,6 +42,8 @@ export interface IDataHeader {
   }[]
   clause: string
   privacy_policy: string
+  logo: IImage
+  logo_white: IImage
 }
 
 const Header = ({
@@ -58,7 +61,7 @@ const Header = ({
   const [isHomePage, setIsHomePage] = useState(false)
   const [isShowSearchInput, setIsShowSearchInput] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const {isOutside, ref} = useClickOutside<HTMLDivElement>()
+  const { isOutside, ref } = useClickOutside<HTMLDivElement>()
 
   const pathname = usePathname()
   useEffect(() => {
@@ -124,9 +127,14 @@ const Header = ({
           >
             <div className='w-[5.625rem]'>
               <Link href='/'>
-                <Amamy
-                  className={cn('w-[5.56213rem] h-[2.215rem] fill-[#38B6FF]')}
+                <Image
+                  src={dataHeader?.logo?.url}
+                  alt='Amamy'
+                  width={50 * 2}
+                  height={50 * 2}
+                  className='w-[5.56213rem] h-[2.215rem] fill-[#38B6FF]'
                 />
+
               </Link>
             </div>
             <div className='flex items-center space-x-4'>
@@ -179,7 +187,7 @@ const Header = ({
             'xsm:hidden sticky w-full top-0 z-50 p-[0.875rem_6rem] bg-white border-b border-[#DCDFE4]',
             isHomePage && 'fixed',
             isScrollTop &&
-              'shadow-[0px_0px_1px_0px_rgba(0,0,0,0.05)] border-none bg-transparent',
+            'shadow-[0px_0px_1px_0px_rgba(0,0,0,0.05)] border-none bg-transparent',
           )}
         >
           <div
@@ -190,12 +198,14 @@ const Header = ({
           >
             <div className='w-[14.6875rem]'>
               <Link href='/'>
-                <Amamy
-                  className={cn(
-                    'w-[8.56213rem] h-[2.215rem] fill-[#38B6FF]',
-                    isScrollTop && 'fill-white',
-                  )}
-                />
+                {
+                  isScrollTop ? (
+                    <Image src={dataHeader?.logo_white?.url} alt='Amamy' width={50 * 2} height={50 * 2} className='w-[8.56213rem] h-[2.215rem] ' />
+                  ) : (
+                    <Image src={dataHeader?.logo?.url} alt='Amamy' width={50 * 2} height={50 * 2} className='w-[8.56213rem] h-[2.215rem] ' />
+                  )
+                }
+
               </Link>
             </div>
             <nav className='flex items-center space-x-8 text-pc-sub16s'>

@@ -1,8 +1,8 @@
 'use client'
 
 import {IImage} from '@/utils/type'
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
+// import {useGSAP} from '@gsap/react'
+// import gsap from 'gsap'
 import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -10,48 +10,48 @@ import {Navigation} from 'swiper/modules'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import ProcessContainer from './ProcessContainer'
 
-const process = [
-  {
-    number: 1,
-    icon: '/amamy/process/process.svg',
-    label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
-    description:
-      "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
-    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
-  },
-  {
-    number: 2,
-    icon: '/amamy/process/process1.svg',
-    label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
-    description:
-      "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
-    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
-  },
-  {
-    number: 3,
-    icon: '/amamy/process/process2.svg',
-    label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
-    description:
-      "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
-    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
-  },
-  {
-    number: 4,
-    icon: '/amamy/process/process3.svg',
-    label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
-    description:
-      "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
-    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
-  },
-  {
-    number: 5,
-    icon: '/amamy/process/process4.svg',
-    label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
-    description:
-      "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
-    shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
-  },
-]
+// const process = [
+//   {
+//     number: 1,
+//     icon: '/amamy/process/process.svg',
+//     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
+//     description:
+//       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+//     shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
+//   },
+//   {
+//     number: 2,
+//     icon: '/amamy/process/process1.svg',
+//     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
+//     description:
+//       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+//     shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
+//   },
+//   {
+//     number: 3,
+//     icon: '/amamy/process/process2.svg',
+//     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
+//     description:
+//       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+//     shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
+//   },
+//   {
+//     number: 4,
+//     icon: '/amamy/process/process3.svg',
+//     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
+//     description:
+//       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+//     shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
+//   },
+//   {
+//     number: 5,
+//     icon: '/amamy/process/process4.svg',
+//     label: 'Tiếp nhận yêu cầu & tư vấn (miễn phí)',
+//     description:
+//       "Lorem Ipsum is simply dummy text th printing and typese Lorem Ipm  been the industry's standard ",
+//     shortDesc: 'Lorem Ipsum is simply dummy text th printing and typese',
+//   },
+// ]
 export interface IProcess {
   title: string
   subtitle: string
@@ -64,18 +64,18 @@ export interface ISteps {
 }
 
 const Process = ({data}: {data: IProcess}) => {
-  useGSAP(() => {
-    gsap.from('.fade-in-process', {
-      scrollTrigger: {
-        trigger: '.fade-in-process',
-        start: 'top bottom',
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.2,
-    })
-  }, [])
+  // useGSAP(() => {
+  //   gsap.from('.fade-in-process', {
+  //     scrollTrigger: {
+  //       trigger: '.fade-in-process',
+  //       start: 'top bottom',
+  //     },
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 1,
+  //     stagger: 0.2,
+  //   })
+  // }, [])
 
   return (
     <section className='relative mt-28 size-full px-[6rem] xsm:mt-8 xsm:px-[1rem]'>
@@ -147,9 +147,9 @@ const Process = ({data}: {data: IProcess}) => {
             modules={[Navigation]}
             className='fade-in-process size-full'
           >
-            {process.map((item, index) => (
+            {data?.steps.map((item, index) => (
               <SwiperSlide key={index}>
-                <ProcessContainer {...item} />
+                <ProcessContainer number={index + 1} label={item.title} shortDesc={item.description} description={item.description} icon={item.icon.url} />
               </SwiperSlide>
             ))}
           </Swiper>

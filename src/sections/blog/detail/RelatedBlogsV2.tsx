@@ -24,7 +24,7 @@ export default function RelatedBlogsV2({
   const isMobile = useIsMobile()
   return (
     <section
-      className={cn('fade-section py-[6rem] xsm:py-[2.5rem]', className)}
+      className={cn(' py-[6rem] xsm:py-[2.5rem]', className)}
     >
       <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[0.5rem] xsm:mb-[1rem]'>
         <h2 className='fade-item font-bold text-black text-[2.5rem] leading-[1.3] tracking-[-0.075rem] xsm:text-mb-h2'>
