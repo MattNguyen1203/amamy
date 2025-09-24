@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react'
 import fetchData from '@/fetch/fetchData'
 import {fetchDataListService} from '@/fetch/fetchDataListService'
 import fetchDataWP from '@/fetch/fetchDataWP'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
-import ServicePage from '@/sections/service'
-import metadataValues from '@/utils/metadataValues'
+import ServicePage from '@/sections/services-test'
 import {notFound} from 'next/navigation'
+import metadataValues from '@/utils/metadataValues'
 
 export async function generateStaticParams() {
   const posts = await fetchData({
@@ -21,7 +21,14 @@ export async function generateMetadata({params}: {params: {services: string}}) {
   const res = await getMetaDataRankMath('chieu-van-chuyen/' + params?.services)
   return metadataValues(res)
 }
-export default async function Service({params}: {params: {services: string}}) {
+
+const ServicesPage = async ({params}: {params: {services: string}}) => {
+  const fetchDataACF = fetchData({
+    api: 'pages/11',
+    option: {
+      next: {revalidate: 60},
+    },
+  })
   const fetchDataFaqs = fetchDataWP({
     api: 'pages/8647?_fields=acf&acf_format=standard',
     option: {
@@ -68,6 +75,7 @@ export default async function Service({params}: {params: {services: string}}) {
     },
   })
   const [
+    dataACF,
     resService,
     resListService,
     schemaData,
@@ -78,6 +86,7 @@ export default async function Service({params}: {params: {services: string}}) {
     resDeliveryDirection,
     resCurrencyExchangeRate,
   ] = await Promise.all([
+    fetchDataACF,
     fetchDataServices,
     fetchDataListService(),
     getSchemaMarkup('chieu-van-chuyen/' + params?.services),
@@ -91,14 +100,22 @@ export default async function Service({params}: {params: {services: string}}) {
   if (resService?.data?.status === 404) {
     return notFound()
   }
+  console.log('4. chatBoxAIdata:', JSON.stringify(chatBoxAIdata, null, 2))
+  console.log(
+    '5. resDataServicesHeader:',
+    JSON.stringify(resDataServicesHeader, null, 2),
+  )
+  console.log('6. resDataFaqs:', JSON.stringify(resDataFaqs, null, 2))
+
   return (
     <main>
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{__html: JSON.stringify(schemaData, null, 2)}}
       ></script>
-      <div className='w-full bg-white text-black flex flex-col items-center overflow-hidden'>
+      <div className='flex w-full flex-col items-center overflow-hidden bg-white text-black'>
         <ServicePage
+          res={dataACF}
           resDataFaqs={resDataFaqs}
           resDataServicesHeader={resDataServicesHeader}
           data={resService}
@@ -112,3 +129,5 @@ export default async function Service({params}: {params: {services: string}}) {
     </main>
   )
 }
+
+export default ServicesPage
