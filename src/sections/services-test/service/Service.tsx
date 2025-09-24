@@ -53,7 +53,7 @@ const Service = ({services}: {services: ServicesObject}) => {
           </div>
 
           {/* Reasons Desktop */}
-          <div className='hidden w-full items-center justify-between gap-x-[1.25rem] sm:flex'>
+          <div className='hidden w-full items-center justify-between sm:flex'>
             {services?.list_service_2?.map((item, index) => (
               <ServiceHighlight
                 key={index}

@@ -192,6 +192,16 @@ html > body[data-scroll-locked] {
   .custom-prose td {
     @apply border px-2 py-1;
   }
+
+  @media screen and (max-width: 639px) {
+    .custom-prose ul,
+    .custom-prose ol,
+    .custom-prose table,
+    .custom-prose th,
+    .custom-prose td {
+      @apply text-[0.75rem];
+    }
+  }
 }
 * {
   margin: 0;
