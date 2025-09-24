@@ -1,11 +1,16 @@
-import React from 'react'
+import ICArrowRight from '@/components/icon/ICArrowRight'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import Link from 'next/link'
-import ICArrowRight from '@/components/icon/ICArrowRight'
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger)
 
 const Hero = ({heroData}: {heroData: any}) => {
   useGSAP(() => {
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
     gsap.from('.fade-in-hero', {
       scrollTrigger: {
         trigger: '.fade-in-hero',
@@ -35,10 +40,10 @@ const Hero = ({heroData}: {heroData: any}) => {
   return (
     <div className='flex w-full flex-shrink-0 flex-col items-center bg-[#38B6FF] px-0 py-10 sm:px-[6rem] sm:pb-[5rem] sm:pt-[4rem]'>
       <div className='mb-8 flex w-full flex-col items-center px-4 sm:mb-[2.5rem]'>
-        <h2 className='mb-3 text-center font-montserrat text-[1.5rem] font-bold leading-[120%] tracking-[-0.115rem] text-white sm:mb-[1rem] sm:text-[2.875rem]'>
+        <h2 className='fade-in-hero mb-3 text-center font-montserrat text-[1.5rem] font-bold leading-[120%] tracking-[-0.115rem] text-white sm:mb-[1rem] sm:text-[2.875rem]'>
           {heroData?.heading}
         </h2>
-        <p className='text-center font-montserrat text-[0.875rem] font-medium leading-[150%] tracking-[-0.03rem] text-[var(--greyscaletext-inverse-body-80,rgba(255,255,255,0.80))] sm:w-[41.25rem] sm:text-base'>
+        <p className='fade-in-hero text-center font-montserrat text-[0.875rem] font-medium leading-[150%] tracking-[-0.03rem] text-[var(--greyscaletext-inverse-body-80,rgba(255,255,255,0.80))] sm:w-[41.25rem] sm:text-base'>
           {heroData?.description}
         </p>
       </div>
@@ -50,7 +55,7 @@ const Hero = ({heroData}: {heroData: any}) => {
             })}
           href={heroData?.link?.url || '#'}
           target={heroData?.link?.target || '_self'}
-          className='flex w-[21.4375rem] items-center justify-center gap-[0.75rem] rounded-[1.375rem] bg-white px-8 py-3 sm:w-[23.75rem] sm:rounded-[1.5rem] sm:px-[2rem] sm:py-[1rem]'
+          className='fade-in-hero flex w-[21.4375rem] items-center justify-center gap-[0.75rem] rounded-[1.375rem] bg-white px-8 py-3 sm:w-[23.75rem] sm:rounded-[1.5rem] sm:px-[2rem] sm:py-[1rem]'
         >
           <span className='font-montserrat text-base font-medium leading-[1.56rem] tracking-[-0.036rem] text-[var(--Color-1,#38B6FF)] sm:text-[1.2rem]'>
             {heroData?.link?.title}

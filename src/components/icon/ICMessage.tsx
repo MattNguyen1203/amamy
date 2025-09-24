@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ICMessage = ({className}: {className?: string}) => {
   return (
     <div>
@@ -18,9 +16,9 @@ const ICMessage = ({className}: {className?: string}) => {
         <path
           d='M13.3334 15.8333H25M13.3334 22.5H21.6667'
           stroke='white'
-          stroke-width='2.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='2.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
       </svg>
     </div>

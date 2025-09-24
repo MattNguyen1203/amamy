@@ -1,12 +1,11 @@
 'use client'
 
-import React, {useEffect, useRef, useState} from 'react'
-import gsap from 'gsap'
 import ICMessage from '@/components/icon/ICMessage'
 import ICPlus from '@/components/icon/ICPlus'
 import ICQuestion from '@/components/icon/ICQuestion'
-import BackgroundServicesFaq from '@/components/icon/BackgroundServicesFaq'
+import gsap from 'gsap'
 import Image from 'next/image'
+import React, {useEffect, useRef, useState} from 'react'
 
 type FAQItem = {question: string; answer: string}
 type FaqsData = {
@@ -29,6 +28,8 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
 
   // Khởi tạo timeline cho từng item (theo số lượng items)
   useEffect(() => {
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
     tlRefs.current.forEach((tl) => tl?.kill())
     tlRefs.current = []
 
@@ -90,6 +91,8 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
 
   // Điều khiển mở/đóng theo openSet
   useEffect(() => {
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
     const len = faqsData?.questions?.length ?? 0
     for (let i = 0; i < len; i++) {
       const tl = tlRefs.current[i]
@@ -176,7 +179,7 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
                     <div className='flex flex-[1_0_0] flex-col items-start gap-6 rounded-[0.75rem_0.75rem_0_0.75rem] bg-white px-4 py-3 shadow-[0_4px_19.3px_0_rgba(0,39,97,0.06)] sm:rounded-[1.25rem_1.25rem_0_1.25rem] sm:p-[1.25rem_1.25rem_1.25rem_1.5rem]'>
                       {/* answer là HTML string từ WP */}
                       <div
-                        className='prose max-w-none text-[var(--greyscaletext-92,#292F36)] prose-p:my-1 prose-ul:my-1 prose-li:my-0 prose-li:marker:text-current sm:text-base text-[0.875rem]'
+                        className='prose max-w-none custom-prose'
                         dangerouslySetInnerHTML={{__html: item?.answer ?? ''}}
                       />
                     </div>

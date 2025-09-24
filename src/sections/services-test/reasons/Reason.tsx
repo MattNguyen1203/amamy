@@ -1,20 +1,23 @@
 'use client'
 
-import React, {useEffect, useRef} from 'react'
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
-import {Draggable} from 'gsap/Draggable'
-import Image from 'next/image'
 import ICPhoneCall from '@/components/icon/ICPhoneCall'
 import useIsMobile from '@/hooks/useIsMobile'
 import {IImage} from '@/utils/type'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
+import {Draggable} from 'gsap/Draggable'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import Image from 'next/image'
+import {useEffect, useRef} from 'react'
 
-gsap.registerPlugin(Draggable)
+gsap.registerPlugin(Draggable, ScrollTrigger)
 
 export interface IReason {
-  title: string
-  description: string
-  services: IService[]
+  reasonsData: {
+    title: string
+    description: string
+    services: IService[]
+  }
 }
 
 export interface IService {
@@ -29,6 +32,8 @@ const Reason = ({reasonsData}: IReason) => {
   const contentGalleryRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
     if (!containerGalleryRef.current || !contentGalleryRef.current || !isMobile)
       return
 
@@ -46,6 +51,8 @@ const Reason = ({reasonsData}: IReason) => {
   }, [isMobile])
 
   useGSAP(() => {
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
     gsap.from('.fade-in-reason', {
       scrollTrigger: {
         trigger: '.fade-in-reason',
@@ -95,8 +102,9 @@ const Reason = ({reasonsData}: IReason) => {
               <div className='relative aspect-[310.67/393.35] w-full overflow-hidden rounded-[2.5rem] xsm:aspect-[223/282] xsm:rounded-[1.25rem]'>
                 <Image
                   src={item.thumbnail.url}
-                  alt={item.label}
+                  alt={item.thumbnail.alt || item.title || 'Service image'}
                   fill
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   className='object-cover'
                 />
               </div>

@@ -1,18 +1,17 @@
-import React from 'react'
 import fetchData from '@/fetch/fetchData'
 import {fetchDataListService} from '@/fetch/fetchDataListService'
 import fetchDataWP from '@/fetch/fetchDataWP'
 import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import ServicePage from '@/sections/services-test'
-import {notFound} from 'next/navigation'
 import metadataValues from '@/utils/metadataValues'
+import {notFound} from 'next/navigation'
 
 export async function generateStaticParams() {
   const posts = await fetchData({
     api: 'all-slug-transport',
   })
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return posts.map((post: any) => ({
     services: post.slug,
   }))
@@ -41,6 +40,11 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
       next: {revalidate: 60},
     },
   })
+
+  console.log(
+    'fetchDataFaqs',
+    `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping`,
+  )
 
   const fetchChatBoxAI = fetchData({
     api: 'options?fields=box_chat_ai',
@@ -100,12 +104,6 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
   if (resService?.data?.status === 404) {
     return notFound()
   }
-  console.log('4. chatBoxAIdata:', JSON.stringify(chatBoxAIdata, null, 2))
-  console.log(
-    '5. resDataServicesHeader:',
-    JSON.stringify(resDataServicesHeader, null, 2),
-  )
-  console.log('6. resDataFaqs:', JSON.stringify(resDataFaqs, null, 2))
 
   return (
     <main>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ICAdvise = ({className}: {className?: string}) => {
   return (
     <svg
@@ -21,20 +19,20 @@ const ICAdvise = ({className}: {className?: string}) => {
       <path
         d='M17.3035 18.1919L26.6984 18.1919'
         stroke='#FFF8DE'
-        stroke-width='1.34375'
-        stroke-linecap='round'
+        strokeWidth='1.34375'
+        strokeLinecap='round'
       />
       <path
         d='M17.3035 25.8704L26.6984 25.8704'
         stroke='#FFF8DE'
-        stroke-width='1.34375'
-        stroke-linecap='round'
+        strokeWidth='1.34375'
+        strokeLinecap='round'
       />
       <path
         d='M15.8573 22.0308L28.143 22.0308'
         stroke='#FFF8DE'
-        stroke-width='1.34375'
-        stroke-linecap='round'
+        strokeWidth='1.34375'
+        strokeLinecap='round'
       />
     </svg>
   )

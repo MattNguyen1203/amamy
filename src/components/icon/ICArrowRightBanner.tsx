@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ICArrowRightBanner = ({className}: {className?: string}) => {
   return (
     <div>
@@ -14,9 +12,9 @@ const ICArrowRightBanner = ({className}: {className?: string}) => {
         <path
           d='M12.7502 17.7498L18 12.5M18 12.5L12.7502 7.25027M18 12.5H6'
           stroke='#38B6FF'
-          stroke-width='2'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
       </svg>
     </div>

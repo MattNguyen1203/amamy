@@ -312,6 +312,7 @@ interface ServiceItem2 {
   image: ImageIcon
   title: string
   link: Link
+  description: string
 }
 
 export interface Card {
@@ -326,6 +327,13 @@ export interface Card {
 }
 
 export interface ServicesObject {
+  title: string
+  description: string
+  link: {
+    title: string
+    url: string
+    target: string
+  }
   list_service_1: ServiceItem1[]
   list_service_2: ServiceItem2[]
   card: Card

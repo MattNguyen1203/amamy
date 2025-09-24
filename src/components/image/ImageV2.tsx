@@ -1,8 +1,8 @@
 'use client'
 
-import {useEffect, useState} from 'react'
 import {StaticImport} from 'next/dist/shared/lib/get-img-props'
 import NextImage, {ImageProps} from 'next/image'
+import {useEffect, useState} from 'react'
 
 export interface IImageProps extends ImageProps {
   fallbackImage?: string
@@ -31,10 +31,21 @@ const ImageV2 = ({
     }
   }
 
+  // Auto-add sizes prop when using fill and alt text when missing
+  const imageProps = {
+    ...rest,
+    ...(rest.fill &&
+      !rest.sizes && {
+        sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+      }),
+    // Auto-add alt text when missing or empty
+    alt: rest.alt || 'Image',
+  }
+
   return (
     <NextImage
       src={imgSrc || fallbackImage}
-      {...rest}
+      {...imageProps}
       placeholder='blur'
       blurDataURL={fallbackImg}
       onError={handleError}

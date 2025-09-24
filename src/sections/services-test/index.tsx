@@ -1,14 +1,18 @@
 'use client'
 
-import React, {useEffect} from 'react'
-import gsap from 'gsap'
 import {IHomePage, IListServiceResponse, IServicePage} from '@/utils/type'
+import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {useEffect} from 'react'
 import RelatedBlogsV2 from '../blog/detail/RelatedBlogsV2'
 import Banner from '../homepage/banner'
 import Faqs from './faqs/Faqs'
 import Hero from './hero/Hero'
 import Reason from './reasons/Reason'
 import Service from './service/Service'
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger)
 
 interface ServicePageProps {
   res: IHomePage
@@ -36,7 +40,7 @@ const ServicePage = ({
   res,
   data,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  listService,
+  listService, // Intentionally unused
   chatBoxAiData,
   resDataFaqs,
   resBanner,
@@ -44,34 +48,39 @@ const ServicePage = ({
   resCurrencyExchangeRate,
 }: ServicePageProps) => {
   useEffect(() => {
-    gsap.utils.toArray<HTMLElement>('.fade-section').forEach((section) => {
-      const items = section.querySelectorAll<HTMLElement>('.fade-item')
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      gsap.utils.toArray<HTMLElement>('.fade-section').forEach((section) => {
+        const items = section.querySelectorAll<HTMLElement>('.fade-item')
 
-      items.forEach((el, index) => {
-        const duration = parseFloat(el.dataset.duration ?? '1')
-        const delay = parseFloat(el.dataset.delay ?? (0.3 * index).toString())
+        items.forEach((el, index) => {
+          const duration = parseFloat(el.dataset.duration ?? '1')
+          const delay = parseFloat(el.dataset.delay ?? (0.3 * index).toString())
 
-        gsap.fromTo(
-          el,
-          {autoAlpha: 0, y: 50},
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration,
-            delay,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 70%',
-              once: true,
-              // markers: true,
+          gsap.fromTo(
+            el,
+            {autoAlpha: 0, y: 50},
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration,
+              delay,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 70%',
+                once: true,
+                // markers: true,
+              },
             },
-          },
-        )
+          )
+        })
       })
     })
   }, [])
-
+  console.log('resDataFaqs', resDataFaqs)
   return (
     <div className='w-full bg-white'>
       <Hero
@@ -89,14 +98,15 @@ const ServicePage = ({
       <Faqs
         faqsData={{
           title: resDataFaqs?.acf?.faq?.title ?? 'Câu hỏi thường gặp',
-          questions: Array.isArray(resDataFaqs?.acf?.faq?.questions)
-            ? resDataFaqs.acf.faq.questions.map((item: any) => ({
+          questions: Array.isArray(data?.talk_to_ai?.list_faq)
+            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              data.talk_to_ai.list_faq.map((item: any) => ({
                 question: item?.question ?? '',
                 // answer có HTML -> render bằng dangerouslySetInnerHTML ở nơi hiển thị
                 answer: item?.answer ?? '',
               }))
             : [],
-          number: resDataFaqs?.acf?.faq?.number ?? '',
+          number: data?.list_services?.phone ?? '',
         }}
       />
       <Reason reasonsData={resDataFaqs?.acf?.reason} />

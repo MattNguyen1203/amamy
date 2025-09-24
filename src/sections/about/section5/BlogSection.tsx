@@ -61,9 +61,9 @@ const ArrowIcon = () => {
 //       <path
 //         d='M14.9997 22.9995L8 15.9998M8 15.9998L14.9997 9.00017M8 15.9998L24 15.9998'
 //         stroke='black'
-//         stroke-width='2'
-//         stroke-linecap='round'
-//         stroke-linejoin='round'
+//         strokeWidth='2'
+//         strokeLinecap='round'
+//         strokeLinejoin='round'
 //       />
 //     </svg>
 //   )
