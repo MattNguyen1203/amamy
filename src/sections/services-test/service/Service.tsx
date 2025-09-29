@@ -1,7 +1,6 @@
 'use client'
 
 import ICMessengerLogo from '@/components/icon/ICMessengerLogo'
-import ICPhoneCall from '@/components/icon/ICPhoneCall'
 import {ServicesObject} from '@/utils/type'
 import Link from 'next/link'
 import {ComponentProps, ReactNode} from 'react'
@@ -9,6 +8,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import ServiceCard from './ServiceCard'
 import ServiceHighlight from './ServiceHighlight'
+import {cn} from '@/lib/utils'
 
 const Service = ({services}: {services: ServicesObject}) => {
   return (
@@ -17,7 +17,7 @@ const Service = ({services}: {services: ServicesObject}) => {
         {/* Heading */}
         <div className='flex flex-col items-start justify-between gap-y-[1.5rem] flex-1 mr-[3.75rem] xsm:mr-0 xsm:px-[1rem]'>
           <div className='flex flex-col gap-y-[1.25rem] xsm:gap-y-[0.63rem]'>
-            <h3
+            <h2
               className='text-[rgba(0, 0, 0, 0.92)] text-[2.625rem] font-bold leading-[3.4125rem] tracking-[-0.105rem] xsm:text-[1.25rem] xsm:leading-[1.5rem] xsm:tracking-[-0.05rem] [&_br]:sm:hidden'
               dangerouslySetInnerHTML={{__html: services?.title ?? ''}}
             />
@@ -79,12 +79,23 @@ const Service = ({services}: {services: ServicesObject}) => {
           ))}
         </div>
 
-        <ChatButton
-          icon={<ICPhoneCall className='size-[1.13406rem] fill-Blue-Primary' />}
+        {/* <ChatButton
+          icon={
+            <ICMessengerLogo className='size-[1.13406rem] fill-Blue-Primary' />
+          }
           text='Chat với chúng tôi'
           className='sm:hidden'
           target={services?.link.target || '_self'}
           href={services?.link.url || '#'}
+        /> */}
+        <ChatButton
+          href={services?.link.url || '#'}
+          target={services?.link.target || '_self'}
+          icon={
+            <ICMessengerLogo className='size-[1.17944rem] fill-Blue-Primary' />
+          }
+          text='Chat với chúng tôi'
+          className='sm:hidden'
         />
       </div>
     </div>
@@ -101,7 +112,10 @@ interface ChatButtonProps extends ComponentProps<typeof Link> {
 const ChatButton = ({icon, text, ...props}: ChatButtonProps) => (
   <Link
     {...props}
-    className={`flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] text-white xsm:mx-auto xsm:mt-[1.5rem] ${props.className}`}
+    className={cn(
+      'flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] text-white xsm:mx-auto xsm:mt-[1.5rem] xsm:text-[1.125rem] xsm:h-[3rem]',
+      props.className,
+    )}
   >
     <span className='flex size-[2.25rem] items-center justify-center rounded-[72.58063rem] bg-white xsm:size-[2rem]'>
       {icon}
