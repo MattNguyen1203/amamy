@@ -3,6 +3,7 @@
 import ICPhoneCall from '@/components/icon/ICPhoneCall'
 import {IImage} from '@/utils/type'
 import Image from 'next/image'
+import Link from 'next/link'
 import {useRef} from 'react'
 
 export interface IReason {
@@ -10,6 +11,7 @@ export interface IReason {
     title: string
     description: string
     services: IService[]
+    phone: string
   }
 }
 
@@ -71,14 +73,17 @@ const Reason = ({reasonsData}: IReason) => {
           ></div>
         </div>
 
-        <button className='flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:hidden'>
+        <Link
+          href={'tel:' + reasonsData?.phone?.replaceAll('.', '')}
+          className='flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:hidden'
+        >
           <span className='flex size-[2.25rem] items-center justify-center rounded-[72.58063rem] bg-white'>
             <ICPhoneCall className='size-[1.45163rem] fill-Blue-Primary' />
           </span>
           <p className='font-montserrat text-[1.375rem] font-semibold not-italic leading-[1.7875rem] tracking-[-0.04125rem] text-white'>
-            0926.777.966
+            {reasonsData?.phone || ''}
           </p>
-        </button>
+        </Link>
       </div>
 
       {/* right */}
