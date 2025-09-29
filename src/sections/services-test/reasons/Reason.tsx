@@ -115,7 +115,7 @@ const Reason = ({reasonsData}: IReason) => {
       </div>
 
       {/* hotline mb */}
-      <button className='hidden w-fit items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:flex xsm:rounded-[1.375rem] xsm:py-[0.5rem] xsm:pl-[0.5rem] xsm:pr-[1.5rem]'>
+      <button className='hidden w-fit items-center justify-center gap-[0.5rem] rounded-[1.75rem] xsm:ml-4 bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:flex xsm:rounded-[1.375rem] xsm:py-[0.5rem] xsm:pl-[0.5rem] xsm:pr-[1.5rem]'>
         <span className='flex size-[2rem] items-center justify-center rounded-[64.51613rem] bg-white'>
           <ICPhoneCall className='size-[1.00806rem]' />
         </span>
