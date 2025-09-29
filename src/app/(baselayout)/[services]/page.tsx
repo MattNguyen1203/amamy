@@ -73,7 +73,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     },
   })
   const fetchCurrencyExchangeRate = fetchData({
-    api: 'options?fields=currency_to_usd',
+    api: 'options?fields=currency_to_usd,contact_consultant',
     method: 'GET',
     option: {
       next: {revalidate: 60},
@@ -89,7 +89,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     resDataFaqs,
     resBanner,
     resDeliveryDirection,
-    resCurrencyExchangeRate,
+    optionFields,
     dataServiceData,
   ] = await Promise.all([
     fetchDataACF,
@@ -104,10 +104,10 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     fetchCurrencyExchangeRate,
     dataService,
   ])
+
   if (resService?.data?.status === 404) {
     return notFound()
   }
-  console.log('resService: ', resService)
   return (
     <main>
       <script
@@ -124,7 +124,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
           chatBoxAiData={chatBoxAIdata?.data?.box_chat_ai}
           resBanner={resBanner}
           resDeliveryDirection={resDeliveryDirection}
-          resCurrencyExchangeRate={resCurrencyExchangeRate}
+          optionFields={optionFields}
           dataService={dataServiceData}
         />
       </div>

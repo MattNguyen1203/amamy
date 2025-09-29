@@ -23,9 +23,7 @@ export default function RelatedBlogsV2({
 }) {
   const isMobile = useIsMobile()
   return (
-    <section
-      className={cn(' py-[6rem] xsm:py-[2.5rem]', className)}
-    >
+    <section className={cn(' py-[6rem] xsm:py-[2.5rem]', className)}>
       <div className='sm:px-[6rem] xsm:px-[1rem] flex items-center w-full justify-between mb-[0.5rem] xsm:mb-[1rem]'>
         <h2 className='fade-item font-bold text-black text-[2.5rem] leading-[1.3] tracking-[-0.075rem] xsm:text-mb-h2'>
           {title || 'Các bài viết liên quan'}
@@ -80,10 +78,10 @@ export default function RelatedBlogsV2({
               ),
             )}
         </Swiper>
-        <div className='xsm:hidden swiper-button-custom-prev cursor-pointer absolute z-10 left-[6rem] translate-x-[-50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] backdrop-blur-[10px] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
+        <div className='xsm:hidden swiper-button-custom-prev cursor-pointer absolute z-10 left-[6rem] translate-x-[-50%] top-[11.75rem] p-[1rem] flex-center rounded-[2.5rem] backdrop-blur-[10px] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100] rotate-[180deg]' />
         </div>
-        <div className='xsm:hidden swiper-button-custom-next cursor-pointer absolute z-10 right-[6rem] translate-x-[50%] top-[calc(50%+1.25rem)] translate-y-[-50%] p-[1rem] flex-center rounded-[2.5rem] backdrop-blur-[10px] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
+        <div className='xsm:hidden swiper-button-custom-next cursor-pointer absolute z-10 right-[6rem] translate-x-[50%] top-[11.75rem] p-[1rem] flex-center rounded-[2.5rem] backdrop-blur-[10px] bg-[rgba(255,255,255,0.7)] shadow-2xl'>
           <ICArrow className='size-[2rem] filter brightness-[100] invert-[100]' />
         </div>
       </div>
