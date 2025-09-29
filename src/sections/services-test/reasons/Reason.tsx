@@ -1,16 +1,9 @@
 'use client'
 
 import ICPhoneCall from '@/components/icon/ICPhoneCall'
-import useIsMobile from '@/hooks/useIsMobile'
 import {IImage} from '@/utils/type'
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
-import {Draggable} from 'gsap/Draggable'
-import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import Image from 'next/image'
-import {useEffect, useRef} from 'react'
-
-gsap.registerPlugin(Draggable, ScrollTrigger)
+import {useRef} from 'react'
 
 export interface IReason {
   reasonsData: {
@@ -27,48 +20,47 @@ export interface IService {
 }
 
 const Reason = ({reasonsData}: IReason) => {
-  const isMobile = useIsMobile()
   const containerGalleryRef = useRef<HTMLDivElement>(null)
   const contentGalleryRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    // Only run on client side to prevent hydration mismatch
-    if (typeof window === 'undefined') return
-    if (!containerGalleryRef.current || !contentGalleryRef.current || !isMobile)
-      return
+  // useEffect(() => {
+  //   // Only run on client side to prevent hydration mismatch
+  //   if (typeof window === 'undefined') return
+  //   if (!containerGalleryRef.current || !contentGalleryRef.current || !isMobile)
+  //     return
 
-    const draggable = Draggable.create(contentGalleryRef.current, {
-      type: 'x',
-      bounds: containerGalleryRef.current,
-      inertia: true,
-      cursor: 'grab',
-      activeCursor: 'grabbing',
-    })
+  //   const draggable = Draggable.create(contentGalleryRef.current, {
+  //     type: 'x',
+  //     bounds: containerGalleryRef.current,
+  //     inertia: true,
+  //     cursor: 'grab',
+  //     activeCursor: 'grabbing',
+  //   })
 
-    return () => {
-      draggable[0].kill()
-    }
-  }, [isMobile])
+  //   return () => {
+  //     draggable[0].kill()
+  //   }
+  // }, [isMobile])
 
-  useGSAP(() => {
-    // Only run on client side to prevent hydration mismatch
-    if (typeof window === 'undefined') return
-    gsap.from('.fade-in-reason', {
-      scrollTrigger: {
-        trigger: '.fade-in-reason',
-        start: 'top bottom',
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.2,
-    })
-  }, [])
+  // useGSAP(() => {
+  //   // Only run on client side to prevent hydration mismatch
+  //   if (typeof window === 'undefined') return
+  //   gsap.from('.fade-in-reason', {
+  //     scrollTrigger: {
+  //       trigger: '.fade-in-reason',
+  //       start: 'top bottom',
+  //     },
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 1,
+  //     stagger: 0.2,
+  //   })
+  // }, [])
 
   return (
-    <div className='flex w-full gap-[3.125rem] overflow-hidden bg-[#F9FDFF] px-[6rem] py-[5rem] xsm:flex-col xsm:gap-[1.5rem] xsm:px-[1rem] xsm:py-[2.5rem]'>
+    <div className='flex w-full gap-[3.125rem] bg-[#F9FDFF] px-[6rem] py-[5rem] xsm:flex-col xsm:gap-[1.5rem] xsm:px-0 xsm:py-[2.5rem]'>
       {/* left */}
-      <div className='flex h-[24.5625rem] w-[23.125rem] shrink-0 flex-col items-start justify-between xsm:h-full xsm:w-full'>
+      <div className='xsm:px-[1rem] flex h-[24.5625rem] w-[23.125rem] shrink-0 flex-col items-start justify-between xsm:h-full xsm:w-full'>
         <div className='flex flex-col items-start gap-[1.25rem] self-stretch xsm:gap-[0.625rem]'>
           <p className='self-stretch font-montserrat text-[2.625rem] font-bold not-italic leading-[3.4125rem] tracking-[-0.105rem] text-[rgba(0,0,0,0.92)] xsm:text-[1.25rem] xsm:leading-[1.5rem] xsm:tracking-[-0.05rem]'>
             {reasonsData?.title}
@@ -92,12 +84,12 @@ const Reason = ({reasonsData}: IReason) => {
       <div ref={containerGalleryRef}>
         <div
           ref={contentGalleryRef}
-          className='grid grid-cols-3 gap-x-[1.75rem] xsm:w-max xsm:gap-x-[1rem]'
+          className='grid grid-cols-3 gap-x-[1.75rem] xsm:flex xsm:flex-row xsm:overflow-x-auto hidden_scroll xsm:gap-x-[1rem]'
         >
           {reasonsData?.services?.map((item, index) => (
             <div
               key={index}
-              className='flex w-full flex-col gap-[1.5rem] xsm:w-[13.9375rem]'
+              className='flex w-full flex-col gap-[1.5rem] xsm:w-[13.9375rem] xsm:shrink-0 xsm:first:ml-[1rem] xsm:last:mr-[1rem]'
             >
               <div className='relative aspect-[310.67/393.35] w-full overflow-hidden rounded-[2.5rem] xsm:aspect-[223/282] xsm:rounded-[1.25rem]'>
                 <Image

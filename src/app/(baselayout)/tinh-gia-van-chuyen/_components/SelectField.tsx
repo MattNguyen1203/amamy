@@ -18,6 +18,7 @@ import {
 type SelectFieldVariant = 'primary' | 'secondary'
 
 interface SelectFieldProps {
+  isStraightAway?: boolean
   name: string
   label: string
   placeholder: string
@@ -36,6 +37,7 @@ export default function SelectField({
   options,
   hasPrefix,
   value,
+  isStraightAway = false,
   onChange,
 }: SelectFieldProps) {
   const [open, setOpen] = useState<boolean>(false)
@@ -73,7 +75,12 @@ export default function SelectField({
     <>
       <div className='flex flex-col space-y-[0.3125rem] font-montserrat'>
         {label && (
-          <Label className='text-[0.75rem] text-black/80 font-semibold tracking-[-0.015rem] leading-normal'>
+          <Label
+            className={cn(
+              'text-[0.75rem] text-black/80 font-semibold tracking-[-0.015rem] leading-normal',
+              isStraightAway && 'pl-[1rem] xsm:px-[0.75rem]',
+            )}
+          >
             {label}
           </Label>
         )}

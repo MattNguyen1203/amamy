@@ -17,6 +17,7 @@ type Props = {
 }
 
 const Community = ({sectionCountry, section3}: Props) => {
+  console.log(sectionCountry)
   const isMobile = useIsMobile()
   useGSAP(() => {
     gsap.from('.fade-in-box-card-service-1', {

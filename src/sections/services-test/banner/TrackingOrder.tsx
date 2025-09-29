@@ -24,7 +24,7 @@ import {
   DeliveryWeightType,
   IBoxChatAI,
 } from '@/utils/type'
-import {useRouter} from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 import BtnBlue from '@/components/button/BtnBlue'
 // import CardGradient from '@/components/card-gradient/CardGradient'
 import ImageV2 from '@/components/image/ImageV2'
@@ -90,7 +90,8 @@ const TrackingOrder = ({
   deliveryDirection,
   currencyToUsd,
 }: TrackingOrderProps) => {
-  const [value, setValue] = useState('search-order')
+  const pathname = usePathname()
+  const [value, setValue] = useState('estimate-price')
   const [inputSearch, setInputSearch] = useState('')
 
   const router = useRouter()
@@ -228,6 +229,14 @@ const TrackingOrder = ({
   }
 
   useEffect(() => {
+    const initialDeliveryDirectionOption = pathname.slice(1)
+    setDeliveryInformation((prev) => ({
+      ...prev,
+      deliveryDirection: initialDeliveryDirectionOption,
+    }))
+  }, [])
+
+  useEffect(() => {
     const deliveryDirectionValue = deliveryInformation['deliveryDirection']
     if (!deliveryDirectionValue) return
     const directionRoute = deliveryDirection?.data?.find(
@@ -252,7 +261,7 @@ const TrackingOrder = ({
   return (
     <Tabs
       onValueChange={setValue}
-      defaultValue='search-order'
+      defaultValue='estimate-price'
       className='w-[38.1875rem] xsm:w-full xsm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] xsm:rounded-[1.25rem]'
     >
       <TabsList className='relative xsm:w-full'>
@@ -314,7 +323,6 @@ const TrackingOrder = ({
         <div className='grid gap-[0.75rem] grid-cols-2'>
           <div className='col-span-1 xsm:col-span-full'>
             <SelectField
-              isStraightAway
               hasPrefix={true}
               name='deliveryDirection'
               variant='primary'
@@ -334,7 +342,6 @@ const TrackingOrder = ({
             })}
           >
             <SelectField
-              isStraightAway
               name='deliveryFacility'
               variant='primary'
               label='Chọn cơ sở gửi hàng (*)'
@@ -353,7 +360,6 @@ const TrackingOrder = ({
             })}
           >
             <SelectField
-              isStraightAway
               variant='primary'
               name='deliveryFreightType'
               label='Chọn loại hàng (*)'
@@ -381,7 +387,6 @@ const TrackingOrder = ({
           </div>
           <div className='col-span-1 xsm:col-span-full'>
             <InputField
-              isStraightAway
               name='deliveryWeight'
               value={deliveryInformation['deliveryWeight'] ?? ''}
               onChange={handleChangeDeliveryInformation}
@@ -403,7 +408,6 @@ const TrackingOrder = ({
           </div>
           <div className='col-span-1 xsm:col-span-full'>
             <SelectField
-              isStraightAway
               name='deliveryCurrency'
               value={deliveryInformation['deliveryCurrency'] ?? ''}
               onChange={handleChangeDeliveryInformation}
@@ -414,7 +418,7 @@ const TrackingOrder = ({
             />
           </div>
           <div className='col-span-full'>
-            <p className='flex items-center space-x-[0.5rem] text-[0.875rem] font-semibold leading-[150%] tracking-[-0.02625rem] xsm:px-[0.75rem] xsm:py-[0.875rem] xsm:rounded-[1.25rem] xsm:bg-[#F1F9FF] xsm:text-[0.8125rem] xsm:tracking-[-0.02438rem] xsm:leading-[1rem] pl-[1rem]'>
+            <p className='flex items-center space-x-[0.5rem] text-[0.875rem] font-semibold leading-[150%] tracking-[-0.02625rem] xsm:px-[0.75rem] xsm:py-[0.875rem] xsm:rounded-[1.25rem] xsm:bg-[#F1F9FF] xsm:text-[0.8125rem] xsm:tracking-[-0.02438rem] xsm:leading-[1rem]'>
               <span className='text-[rgba(0,0,0,0.92)]'>Kết quả dự tính:</span>
               {deliveryPrice && deliveryInformation['deliveryCurrency'] && (
                 <span className='text-[#38B6FF]'>

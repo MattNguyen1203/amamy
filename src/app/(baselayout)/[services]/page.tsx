@@ -28,12 +28,12 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
       next: {revalidate: 60},
     },
   })
-  const dataService =fetchData({
+  const dataService = fetchData({
     api: 'pages/8647',
     option: {
       next: {revalidate: 60},
     },
-  }) 
+  })
   const fetchDataFaqs = fetchDataWP({
     api: 'pages/8647?_fields=acf&acf_format=standard',
     option: {
@@ -41,16 +41,11 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     },
   })
   const fetchDataServices = fetchData({
-    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping`,
+    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping,estimate_price`,
     option: {
       next: {revalidate: 60},
     },
   })
-
-  console.log(
-    'fetchDataFaqs',
-    `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping`,
-  )
 
   const fetchChatBoxAI = fetchData({
     api: 'options?fields=box_chat_ai',
@@ -112,7 +107,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
   if (resService?.data?.status === 404) {
     return notFound()
   }
-
+  console.log('resService: ', resService)
   return (
     <main>
       <script

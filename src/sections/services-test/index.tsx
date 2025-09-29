@@ -5,11 +5,11 @@ import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {useEffect} from 'react'
 import RelatedBlogsV2 from '../blog/detail/RelatedBlogsV2'
-import Banner from '../homepage/banner'
 import Faqs from './faqs/Faqs'
 import Hero from './hero/Hero'
 import Reason from './reasons/Reason'
 import Service from './service/Service'
+import Banner from '@/sections/services-test/banner'
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
@@ -83,7 +83,6 @@ const ServicePage = ({
       })
     })
   }, [])
-  console.log('resDataFaqs', resDataFaqs)
   return (
     <div className='w-full bg-white'>
       <Hero
@@ -114,7 +113,7 @@ const ServicePage = ({
       />
       <Reason reasonsData={resDataFaqs?.acf?.reason} />
       <Banner
-        banner={resBanner?.banner}
+        banner={data?.estimate_price}
         boxChatAI={{
           ...resBanner?.chat_box_ai,
           link_chat_ai: chatBoxAiData?.link_chat_ai,

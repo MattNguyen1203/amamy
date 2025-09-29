@@ -200,7 +200,7 @@ interface Link {
   categories: any[]
   tags: any[]
   thumbnail: boolean
-  url?:string
+  url?: string
   meta: {
     _edit_last: string[]
     _edit_lock: string[]
@@ -606,6 +606,11 @@ export interface IServicePage {
   suggested_reading_articles_about_shipping: {
     title: string
     post: suggested_reading_articles_about_shipping_post[]
+  }
+  estimate_price: {
+    title: string
+    background_pc: IImage
+    background_mobile: IImage
   }
 }
 export interface suggested_reading_articles_about_shipping_post {
