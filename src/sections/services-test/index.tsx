@@ -33,21 +33,18 @@ interface ServicePageProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resDeliveryDirection: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  resCurrencyExchangeRate: any
+  optionFields: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataService: any
 }
 
 const ServicePage = ({
-  res,
   data,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  listService, // Intentionally unused
   chatBoxAiData,
   resDataFaqs,
   resBanner,
   resDeliveryDirection,
-  resCurrencyExchangeRate,
+  optionFields,
   dataService,
 }: ServicePageProps) => {
   useEffect(() => {
@@ -118,8 +115,9 @@ const ServicePage = ({
           ...resBanner?.chat_box_ai,
           link_chat_ai: chatBoxAiData?.link_chat_ai,
         }}
+        contact_consultant={optionFields?.data?.contact_consultant}
         deliveryDirectionData={resDeliveryDirection}
-        currencyExchangeRateData={resCurrencyExchangeRate}
+        currencyExchangeRateData={optionFields}
       />
       <Service services={dataService?.three_steps} />
       {Array.isArray(data?.suggested_reading_articles_about_shipping?.post) && (

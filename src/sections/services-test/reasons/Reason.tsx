@@ -65,9 +65,10 @@ const Reason = ({reasonsData}: IReason) => {
           <p className='self-stretch font-montserrat text-[2.625rem] font-bold not-italic leading-[3.4125rem] tracking-[-0.105rem] text-[rgba(0,0,0,0.92)] xsm:text-[1.25rem] xsm:leading-[1.5rem] xsm:tracking-[-0.05rem]'>
             {reasonsData?.title}
           </p>
-          <p className='w-[18.24513rem] font-montserrat text-[1rem] font-medium not-italic leading-[1.5rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.80)] xsm:w-full xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'>
-            {reasonsData?.description}
-          </p>
+          <div
+            dangerouslySetInnerHTML={{__html: reasonsData?.description || ''}}
+            className='w-[18.24513rem] font-montserrat text-[1rem] font-medium not-italic leading-[1.5rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.80)] xsm:w-full xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+          ></div>
         </div>
 
         <button className='flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:hidden'>
@@ -115,7 +116,7 @@ const Reason = ({reasonsData}: IReason) => {
       </div>
 
       {/* hotline mb */}
-      <button className='hidden w-fit items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:flex xsm:rounded-[1.375rem] xsm:py-[0.5rem] xsm:pl-[0.5rem] xsm:pr-[1.5rem]'>
+      <button className='hidden w-fit items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:flex xsm:rounded-[1.375rem] xsm:py-[0.5rem] xsm:pl-[0.5rem] xsm:pr-[1.5rem] xsm:ml-[1rem]'>
         <span className='flex size-[2rem] items-center justify-center rounded-[64.51613rem] bg-white'>
           <ICPhoneCall className='size-[1.00806rem]' />
         </span>

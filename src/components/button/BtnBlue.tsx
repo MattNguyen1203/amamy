@@ -5,14 +5,17 @@ export default function BtnBlue({
   className,
   slug,
   children,
+  target,
 }: {
   className?: string
   slug: string
   children: React.ReactNode
+  target?: string
 }) {
   return (
     <Link
-      href={slug}
+      target={target || '_self'}
+      href={slug || '/'}
       className={cn(
         'flex-center h-[3rem] p-[0.75rem_1rem_0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
         className,

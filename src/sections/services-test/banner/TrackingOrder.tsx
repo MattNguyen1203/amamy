@@ -12,8 +12,6 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/sections/homepage/banner/tabs-custom'
-import endpoints from '@/utils/endpoints'
-// import AIButton from '@/sections/service/section2/AIButton'
 import {
   CurrencyToUsdResType,
   DeliveryCurrencyType,
@@ -83,12 +81,18 @@ interface TrackingOrderProps {
   boxChatAI: IBoxChatAI
   deliveryDirection: DeliveryDirectionResType
   currencyToUsd: CurrencyToUsdResType
+  linkContactConsultant: {
+    url: string
+    target: string
+    title: string
+  }
 }
 
 const TrackingOrder = ({
   // boxChatAI,
   deliveryDirection,
   currencyToUsd,
+  linkContactConsultant,
 }: TrackingOrderProps) => {
   const pathname = usePathname()
   const [value, setValue] = useState('estimate-price')
@@ -264,15 +268,15 @@ const TrackingOrder = ({
       defaultValue='estimate-price'
       className='w-[38.1875rem] xsm:w-full xsm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] xsm:rounded-[1.25rem]'
     >
-      <TabsList className='relative xsm:w-full'>
+      <TabsList className='relative xsm:w-full xsm:mb-[-1px]'>
         <TabsTrigger
-          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)] opacity-[0.8] data-[state=active]:opacity-[1] data-[state=active]:text-black'
+          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)] opacity-[0.8] data-[state=active]:opacity-[1] data-[state=active]:text-black xsm:hidden'
           value='search-order'
         >
           Theo dõi bưu kiện
         </TabsTrigger>
         <TabsTrigger
-          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:text-[0.75rem] xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)] opacity-[0.8] data-[state=active]:opacity-[1] data-[state=active]:text-black'
+          className='relative z-10 xsm:flex-1 text-pc-tab-title xsm:font-semibold xsm:leading-[1.33] xsm:tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)] opacity-[0.8] data-[state=active]:opacity-[1] data-[state=active]:text-black xsm:text-[1rem] xsm:pt-[1rem]'
           value='estimate-price'
         >
           Dự tính giá vận chuyển
@@ -283,7 +287,7 @@ const TrackingOrder = ({
           height={200}
           src='/homepage/tabs.webp'
           className={cn(
-            'w-auto h-[5.6875rem] xsm:h-[4.625rem] object-cover absolute top-0 xsm:top-0.5',
+            'w-auto h-[5.6875rem] xsm:h-[4.625rem] object-cover absolute top-0 xsm:top-0.5 xsm:hidden',
             value === 'search-order'
               ? 'left-[1.4rem] xsm:left-[2.4rem] transform -scale-x-100'
               : 'right-[4rem] xsm:right-[2.3rem]',
@@ -320,7 +324,7 @@ const TrackingOrder = ({
         value='estimate-price'
         className='relative text-black z-10 sm:shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] overflow-hidden'
       >
-        <div className='grid gap-[0.75rem] grid-cols-2'>
+        <div className='grid gap-[0.75rem] xsm:gap-[1rem] grid-cols-2'>
           <div className='col-span-1 xsm:col-span-full'>
             <SelectField
               hasPrefix={true}
@@ -434,12 +438,13 @@ const TrackingOrder = ({
               )}
             </p>
           </div>
-          <div className='col-span-full py-[0.75rem]'>
+          <div className='col-span-full py-[0.75rem] xsm:pb-0 xsm:pt-[0.5rem]'>
             <BtnBlue
-              slug={`/${endpoints.calculateOrderDelivery}`}
+              target={linkContactConsultant?.target}
+              slug={linkContactConsultant?.url}
               className='flex items-center justify-center w-full h-[3rem] rounded-[1.25rem] bg-[#38B6FF] text-white text-[1rem] font-medium leading-[130%] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:tracking-[-0.02625rem] xsm:h-[2.5rem]'
             >
-              Chuyển sang trang tính giá vận chuyển
+              {linkContactConsultant?.title || 'Nhắn tin tư vấn miễn phí'}
             </BtnBlue>
           </div>
         </div>
