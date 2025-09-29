@@ -120,7 +120,6 @@ const Reason = ({ reasonsData }: IReason) => {
         <span className='flex size-[2rem] items-center justify-center rounded-[64.51613rem] bg-white'>
           <ICPhoneCall className='size-[1.00806rem]' />
         </span>
-
         <p className='font-montserrat text-[1.375rem] font-semibold not-italic leading-[1.7875rem] tracking-[-0.04125rem] text-white'>
           0926.777.966
         </p>
