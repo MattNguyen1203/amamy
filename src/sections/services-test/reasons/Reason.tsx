@@ -3,13 +3,15 @@
 import ICPhoneCall from '@/components/icon/ICPhoneCall'
 import { IImage } from '@/utils/type'
 import Image from 'next/image'
-import { useRef } from 'react'
+import Link from 'next/link'
+import {useRef} from 'react'
 
 export interface IReason {
   reasonsData: {
     title: string
     description: string
     services: IService[]
+    phone: string
   }
 }
 
@@ -71,14 +73,17 @@ const Reason = ({ reasonsData }: IReason) => {
           ></div>
         </div>
 
-        <button className='flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:hidden'>
+        <Link
+          href={'tel:' + reasonsData?.phone?.replaceAll('.', '')}
+          className='flex items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:hidden'
+        >
           <span className='flex size-[2.25rem] items-center justify-center rounded-[72.58063rem] bg-white'>
             <ICPhoneCall className='size-[1.45163rem] fill-Blue-Primary' />
           </span>
           <p className='font-montserrat text-[1.375rem] font-semibold not-italic leading-[1.7875rem] tracking-[-0.04125rem] text-white'>
-            0926.777.966
+            {reasonsData?.phone || ''}
           </p>
-        </button>
+        </Link>
       </div>
 
       {/* right */}
@@ -116,14 +121,17 @@ const Reason = ({ reasonsData }: IReason) => {
       </div>
 
       {/* hotline mb */}
-      <button className='hidden w-fit items-center justify-center gap-[0.5rem] rounded-[1.75rem] xsm:ml-4 bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:flex xsm:rounded-[1.375rem] xsm:py-[0.5rem] xsm:pl-[0.5rem] xsm:pr-[1.5rem]'>
+      <Link
+        href={'tel:' + reasonsData?.phone?.replaceAll('.', '')}
+        className='hidden w-fit items-center justify-center gap-[0.5rem] rounded-[1.75rem] bg-Blue-Primary py-[0.75rem] pl-[0.75rem] pr-[1.5rem] xsm:flex xsm:rounded-[1.375rem] xsm:py-[0.5rem] xsm:pl-[0.5rem] xsm:pr-[1.5rem] xsm:ml-[1rem]'
+      >
         <span className='flex size-[2rem] items-center justify-center rounded-[64.51613rem] bg-white'>
           <ICPhoneCall className='size-[1.00806rem]' />
         </span>
         <p className='font-montserrat text-[1.375rem] font-semibold not-italic leading-[1.7875rem] tracking-[-0.04125rem] text-white'>
-          0926.777.966
+          {reasonsData?.phone || ''}
         </p>
-      </button>
+      </Link>
     </div>
   )
 }
