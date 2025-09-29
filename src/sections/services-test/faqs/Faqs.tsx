@@ -129,7 +129,7 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
   const title = faqsData?.title ?? 'Câu hỏi thường gặp'
 
   return (
-    <div className='flex w-[full] flex-col items-start gap-[0.625rem] bg-white px-4 py-10 sm:p-[5rem_6rem] relative overflow-hidden xsm:bg-[#fff]'>
+    <div className='flex w-[full] flex-col items-start gap-[0.625rem] bg-white py-10 sm:py-[5rem] relative overflow-hidden xsm:bg-[#fff]'>
       <Image
         src={'/newPage/img2.png'}
         width={1380}
@@ -137,14 +137,12 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
         alt='background'
         className='w-[86.25794rem] h-[63.91225rem] absolute left-[-17.25rem] bottom-[-11.78294rem] rotate-[9.508deg] object-contain xsm:hidden pointer-events-none'
       />
-      <div className='flex w-full flex-col items-center gap-[1.5rem] sm:w-[88rem] sm:gap-[2.5rem] z-10'>
-        <div className='flex w-full items-center justify-between gap-4 sm:w-[62.5rem]'>
-          <h2 className='text-center font-montserrat text-[1.25rem] font-bold not-italic leading-[120%] tracking-[-0.105rem] text-[color:var(--greyscaletext-92,rgba(0,0,0,0.92))] sm:text-[2.625rem]'>
-            {title}
-          </h2>
-        </div>
+      <div className='flex w-full flex-col items-center gap-[1.5rem] sm:w-[88rem] sm:gap-[2.5rem] z-10 mx-auto'>
+        <h2 className='xsm:px-4 px-[6rem] text-center font-montserrat text-[1.25rem] font-bold not-italic leading-[120%] tracking-[-0.105rem] text-[color:var(--greyscaletext-92,rgba(0,0,0,0.92))] sm:text-[2.625rem]'>
+          {title}
+        </h2>
 
-        <div className='flex w-full flex-col items-start sm:w-[62.5rem] sm:gap-2'>
+        <div className='flex w-full flex-col items-start sm:w-[74.5rem] sm:gap-2'>
           {/* {faqsData?.questions?.map((item, index) => {
             const isOpen = openSet.has(index)
             return (
@@ -281,7 +279,7 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
                   key={index}
                   className='border-none'
                 >
-                  <div className='w-full'>
+                  <div className='w-full xsm:px-4 px-[6rem]'>
                     <AccordionTrigger>
                       <div className='mb-2 flex w-full items-center justify-between gap-2'>
                         <div className='flex h-[3rem] w-[3rem] items-center self-stretch rounded-[3.125rem] bg-white p-2 shadow-[0_4px_19.3px_0_rgba(0,39,97,0.06)] sm:h-[4.125rem] sm:w-[4.125rem] sm:p-[0.8125rem]'>
@@ -303,16 +301,16 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
                             height={40}
                             className='w-[1.375rem] h-[1rem] absolute top-0 left-0 -translate-x-1/2 rotate-180'
                           />
-                          <span className='flex items-start justify-start text-start font-montserrat xsm:leading-[140%] text-[0.75rem] font-semibold not-italic leading-[1.05rem] tracking-[-0.05rem] text-[var(--greyscaletext-92,#292F36)] sm:text-xl sm:leading-[1.75rem]'>
+                          <p className='flex items-start justify-start text-start font-montserrat xsm:leading-[140%] text-[0.75rem] font-semibold not-italic leading-[1.05rem] tracking-[-0.05rem] text-[var(--greyscaletext-92,#292F36)] sm:text-xl sm:leading-[1.75rem] pr-[2.5rem] xsm:pr-[1.25rem]'>
                             {item?.question ?? ''}
-                          </span>
+                          </p>
                         </div>
                       </div>
                     </AccordionTrigger>
 
-                    <AccordionContent>
+                    <AccordionContent className='pb-[1rem]'>
                       <div className='flex w-full gap-2'>
-                        <div className='flex w-full items-end justify-between gap-2 pb-4'>
+                        <div className='flex w-full items-end justify-between gap-2'>
                           <div className='flex relative text-[1rem] flex-[1_0_0] flex-col items-start xsm:[&_*]:text-[0.75rem]  xsm:[&_*]:leading-[140%] xsm:[&_*]:font-normal   xsm:[&_*]:tracking-[-0.0225rem] gap-6 rounded-[0.75rem_0.75rem_0_0.75rem] bg-white px-4 py-3 shadow-[0_4px_19.3px_0_rgba(0,39,97,0.06)] sm:rounded-[1.25rem_1.25rem_0_1.25rem] sm:p-[1.25rem_1.25rem_1.25rem_1.5rem]'>
                             <Image
                               src={'/newPage/tamgiac.svg'}
