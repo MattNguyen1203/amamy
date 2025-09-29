@@ -16,11 +16,8 @@ const ServiceCard = ({
   description: string
   href?: string
 }) => {
-  return (
-    <Link
-      href={href || ''}
-      className='flex min-h-[12.0625rem] w-full min-w-[19.54167rem] flex-col items-start gap-[1.5rem] rounded-[1.5rem] bg-[#F8F9FA] p-[1.5rem] xsm:min-h-0 xsm:gap-[1.25rem] xsm:p-[1.25rem]'
-    >
+  const cardContent = (
+    <>
       <div className='flex items-center gap-[0.875rem]'>
         <ImageV2
           alt={icon.alt}
@@ -41,7 +38,24 @@ const ServiceCard = ({
       <p className='text-[rgba(0, 0, 0, 0.80)] text-[1rem] font-medium leading-[1.5rem] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
         {description}
       </p>
-    </Link>
+    </>
+  )
+
+  const cardClassName = 'flex min-h-[12.0625rem] w-full min-w-[19.54167rem] flex-col items-start gap-[1.5rem] rounded-[1.5rem] bg-[#F8F9FA] p-[1.5rem] xsm:min-h-0 xsm:gap-[1.25rem] xsm:p-[1.25rem]'
+
+  // Nếu có href hợp lệ thì render Link, không thì render div
+  if (href && href !== 'undefined' && href.trim() !== '') {
+    return (
+      <Link href={href} className={cardClassName}>
+        {cardContent}
+      </Link>
+    )
+  }
+
+  return (
+    <div className={cardClassName}>
+      {cardContent}
+    </div>
   )
 }
 

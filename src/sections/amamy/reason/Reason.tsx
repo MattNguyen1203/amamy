@@ -72,7 +72,7 @@ const Reason = ({data}: {data: IReason}) => {
             className='fade-in-reason'
           >
             <ImageContainer
-              img={item.thumbnail.url}
+              img={item.thumbnail.url || ''}
               label={item.title}
               description={item.content}
             />

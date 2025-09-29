@@ -132,7 +132,7 @@ const Header = ({
                   alt='Amamy'
                   width={50 * 2}
                   height={50 * 2}
-                  className='w-[5.56213rem] h-[2.215rem] fill-[#38B6FF]'
+                  className='w-[5.56213rem] h-[2.215rem] fill-[#38B6FF] object-contain'
                 />
 
               </Link>
@@ -200,9 +200,9 @@ const Header = ({
               <Link href='/'>
                 {
                   isScrollTop ? (
-                    <Image src={dataHeader?.logo_white?.url} alt='Amamy' width={50 * 2} height={50 * 2} className='w-[8.56213rem] h-[2.215rem] ' />
+                    <Image src={dataHeader?.logo_white?.url} alt='Amamy' width={200 * 2} height={200 * 2} className='w-[8.56213rem] h-[2.215rem] ' />
                   ) : (
-                    <Image src={dataHeader?.logo?.url} alt='Amamy' width={50 * 2} height={50 * 2} className='w-[8.56213rem] h-[2.215rem] ' />
+                    <Image src={dataHeader?.logo?.url} alt='Amamy' width={200 * 2} height={200 * 2} className='w-[8.56213rem] h-[2.215rem] ' />
                   )
                 }
 

@@ -34,6 +34,8 @@ interface ServicePageProps {
   resDeliveryDirection: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resCurrencyExchangeRate: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dataService: any
 }
 
 const ServicePage = ({
@@ -46,6 +48,7 @@ const ServicePage = ({
   resBanner,
   resDeliveryDirection,
   resCurrencyExchangeRate,
+  dataService,
 }: ServicePageProps) => {
   useEffect(() => {
     // Only run on client side to prevent hydration mismatch
@@ -119,7 +122,7 @@ const ServicePage = ({
         deliveryDirectionData={resDeliveryDirection}
         currencyExchangeRateData={resCurrencyExchangeRate}
       />
-      <Service services={res.services} />
+      <Service services={dataService?.three_steps} />
       {Array.isArray(data?.suggested_reading_articles_about_shipping?.post) && (
         <RelatedBlogsV2
           data={data?.suggested_reading_articles_about_shipping?.post}

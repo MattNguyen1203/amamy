@@ -28,6 +28,12 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
       next: {revalidate: 60},
     },
   })
+  const dataService =fetchData({
+    api: 'pages/8647',
+    option: {
+      next: {revalidate: 60},
+    },
+  }) 
   const fetchDataFaqs = fetchDataWP({
     api: 'pages/8647?_fields=acf&acf_format=standard',
     option: {
@@ -89,6 +95,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     resBanner,
     resDeliveryDirection,
     resCurrencyExchangeRate,
+    dataServiceData,
   ] = await Promise.all([
     fetchDataACF,
     fetchDataServices,
@@ -100,6 +107,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     fetchBanner,
     fetchDeliveryDirection,
     fetchCurrencyExchangeRate,
+    dataService,
   ])
   if (resService?.data?.status === 404) {
     return notFound()
@@ -122,6 +130,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
           resBanner={resBanner}
           resDeliveryDirection={resDeliveryDirection}
           resCurrencyExchangeRate={resCurrencyExchangeRate}
+          dataService={dataServiceData}
         />
       </div>
     </main>

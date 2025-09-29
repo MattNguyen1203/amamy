@@ -200,6 +200,7 @@ interface Link {
   categories: any[]
   tags: any[]
   thumbnail: boolean
+  url?:string
   meta: {
     _edit_last: string[]
     _edit_lock: string[]

@@ -47,7 +47,7 @@ const Service = ({services}: {services: ServicesObject}) => {
                 title={item.title}
                 description={item.description}
                 subtitle={item.subtitle}
-                href={`/blogs/${item.link.slug}`}
+                href={`${item.link.url}`}
               />
             ))}
           </div>
@@ -60,7 +60,7 @@ const Service = ({services}: {services: ServicesObject}) => {
                 icon={item.image.url || ''}
                 label={item.title}
                 desc={item.description ?? ''}
-                link={`/blogs/${item.link.slug}`}
+                link={`${item.link.url}`}
               />
             ))}
           </div>

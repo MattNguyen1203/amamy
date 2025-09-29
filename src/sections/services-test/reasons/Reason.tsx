@@ -97,11 +97,11 @@ const Reason = ({reasonsData}: IReason) => {
           {reasonsData?.services?.map((item, index) => (
             <div
               key={index}
-              className='fade-in-reason flex w-full flex-col gap-[1.5rem] xsm:w-[13.9375rem]'
+              className='flex w-full flex-col gap-[1.5rem] xsm:w-[13.9375rem]'
             >
               <div className='relative aspect-[310.67/393.35] w-full overflow-hidden rounded-[2.5rem] xsm:aspect-[223/282] xsm:rounded-[1.25rem]'>
                 <Image
-                  src={item.thumbnail.url}
+                  src={item.thumbnail.url || ''}
                   alt={item.thumbnail.alt || item.title || 'Service image'}
                   fill
                   sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
