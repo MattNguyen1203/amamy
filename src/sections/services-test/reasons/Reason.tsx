@@ -62,9 +62,9 @@ const Reason = ({reasonsData}: IReason) => {
       {/* left */}
       <div className='xsm:px-[1rem] flex h-[24.5625rem] w-[23.125rem] shrink-0 flex-col items-start justify-between xsm:h-full xsm:w-full'>
         <div className='flex flex-col items-start gap-[1.25rem] self-stretch xsm:gap-[0.625rem]'>
-          <p className='self-stretch font-montserrat text-[2.625rem] font-bold not-italic leading-[3.4125rem] tracking-[-0.105rem] text-[rgba(0,0,0,0.92)] xsm:text-[1.25rem] xsm:leading-[1.5rem] xsm:tracking-[-0.05rem]'>
+          <h2 className='self-stretch font-montserrat text-[2.625rem] font-bold not-italic leading-[3.4125rem] tracking-[-0.105rem] text-[rgba(0,0,0,0.92)] xsm:text-[1.25rem] xsm:leading-[1.5rem] xsm:tracking-[-0.05rem]'>
             {reasonsData?.title}
-          </p>
+          </h2>
           <div
             dangerouslySetInnerHTML={{__html: reasonsData?.description || ''}}
             className='w-[18.24513rem] font-montserrat text-[1rem] font-medium not-italic leading-[1.5rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.80)] xsm:w-full xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'

@@ -47,6 +47,7 @@ const ServicePage = ({
   optionFields,
   dataService,
 }: ServicePageProps) => {
+  console.log('Data: ', dataService)
   useEffect(() => {
     // Only run on client side to prevent hydration mismatch
     if (typeof window === 'undefined') return
@@ -110,7 +111,17 @@ const ServicePage = ({
       />
       <Reason reasonsData={resDataFaqs?.acf?.reason} />
       <Banner
-        banner={data?.estimate_price}
+        // banner={data?.estimate_price}
+        banner={{
+          title:
+            data?.estimate_price?.title || dataService?.trackandprice?.title,
+          background_pc:
+            data?.estimate_price?.background_pc ||
+            dataService?.trackandprice?.background_pc,
+          background_mobile:
+            data?.estimate_price?.background_mobile ||
+            dataService?.trackandprice?.background_mb,
+        }}
         boxChatAI={{
           ...resBanner?.chat_box_ai,
           link_chat_ai: chatBoxAiData?.link_chat_ai,

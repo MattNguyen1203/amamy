@@ -68,7 +68,7 @@ export default function InputField({
         onChange={handleValueChange}
       />
       {description && (
-        <p className='mt-[0.25rem] text-black/60 text-[0.75rem] font-medium leading-[140%] tracking-[-0.0225rem]'>
+        <p className='mt-[0.25rem] pl-[1rem] xsm:pl-[0.75rem] text-black/60 text-[0.75rem] font-medium leading-[140%] tracking-[-0.0225rem]'>
           {description}
         </p>
       )}
