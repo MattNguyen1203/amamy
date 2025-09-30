@@ -128,7 +128,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         value={currentTab}
         className='flex xsm:flex-col sm:space-x-[1.5rem] pb-[5rem] bg-white xsm:bg-[#FAFAFA]'
       >
-        <TabsList className='xsm:space-y-[0.5rem] sticky z-[50] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
+        <TabsList className='xsm:space-y-[0.5rem] sticky z-[49] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
           {isMobile && (
             <div className='flex justify-between items-center w-full !mb-[1rem]'>
               <h1 className='flex-1 text-mb-h2 text-black'>Tạo đơn hàng</h1>
@@ -214,8 +214,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   ? dataInformation?.information?.time
                     ? '2'
                     : dataInformation?.information?.note
-                      ? '3'
-                      : '4'
+                    ? '3'
+                    : '4'
                   : '2'
               }
             />
@@ -283,8 +283,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                          ? '6'
-                          : '7'
+                        ? '6'
+                        : '7'
                     }
                   />
                 )}
@@ -301,8 +301,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                          ? '6'
-                          : '7'
+                        ? '6'
+                        : '7'
                     }
                   />
                 )}
@@ -318,8 +318,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                          ? '6'
-                          : '7'
+                        ? '6'
+                        : '7'
                     }
                   />
                 )}
@@ -335,8 +335,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                          ? '6'
-                          : '7'
+                        ? '6'
+                        : '7'
                     }
                   />
                 )}
@@ -356,8 +356,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                          ? '6'
-                          : '7'
+                        ? '6'
+                        : '7'
                     }
                   />
                 )}
