@@ -15,7 +15,7 @@ const ServiceHighlight = ({
 }) => {
   return (
     <div
-      className='flex flex-col min-h-[19.9375rem] w-auto rounded-[1.5rem] xsm:rounded-[0.8955rem] p-[0_1.75rem_0_1.81rem] sm:flex-1 sm:first:mr-[1.25rem] xsm:flex-shrink-0 xsm:mr-[0.75rem] xsm:first:ml-[1rem] xsm:min-h-[11.903rem] xsm:p-[0_0.67rem_0_1.08rem] xsm:w-[17.5rem]'
+      className='flex flex-col min-h-[19.9375rem] rounded-[1.5rem] xsm:rounded-[0.8955rem] p-[0_1.75rem_0_1.81rem] sm:flex-1 xsm:flex-shrink-0 xsm:mr-[0.75rem] xsm:first:ml-[1rem] xsm:min-h-[11.903rem] xsm:p-[0_0.67rem_0_1.08rem] xsm:w-[17.5rem]'
       style={{
         background: 'linear-gradient(247deg, #73C1FF 2.69%, #38B6FF 100%)',
       }}

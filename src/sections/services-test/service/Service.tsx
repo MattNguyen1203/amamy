@@ -13,9 +13,9 @@ import {cn} from '@/lib/utils'
 const Service = ({services}: {services: ServicesObject}) => {
   return (
     <div className='my-[5rem] size-full xsm:my-[2.5rem] xsm:max-w-full max-w-[88rem] mx-auto'>
-      <div className='flex size-full flex-row items-stretch xsm:flex-col xsm:items-start'>
+      <div className='flex size-full flex-row items-stretch xsm:flex-col xsm:items-start space-x-[3.75rem] xsm:space-x-0'>
         {/* Heading */}
-        <div className='flex flex-col items-start justify-between gap-y-[1.5rem] flex-1 mr-[3.75rem] xsm:mr-0 xsm:px-[1rem]'>
+        <div className='flex flex-col items-start justify-between gap-y-[1.5rem] w-[23.125rem] xsm:px-[1rem]'>
           <div className='flex flex-col gap-y-[1.25rem] xsm:gap-y-[0.63rem]'>
             <h2
               className='text-[rgba(0, 0, 0, 0.92)] text-[2.625rem] font-bold leading-[3.4125rem] tracking-[-0.105rem] xsm:text-[1.25rem] xsm:leading-[1.5rem] xsm:tracking-[-0.05rem] [&_br]:sm:hidden'
@@ -37,7 +37,7 @@ const Service = ({services}: {services: ServicesObject}) => {
         </div>
 
         {/* Main Content */}
-        <div className='flex flex-col items-center gap-y-[1.25rem] xsm:my-[1.25rem] w-[61.1rem] xsm:w-full xsm:px-[1rem]'>
+        <div className='flex flex-col items-center gap-y-[1.25rem] xsm:my-[1.25rem] flex-1 xsm:w-full xsm:px-[1rem]'>
           {/* Steps */}
           <div className='grid w-full grid-cols-3 gap-[1.25rem] xsm:grid-cols-1 xsm:gap-[0.62rem]'>
             {services?.list_service_1?.map((item, index) => (
@@ -53,15 +53,19 @@ const Service = ({services}: {services: ServicesObject}) => {
           </div>
 
           {/* Reasons Desktop */}
-          <div className='hidden w-full items-center justify-between sm:flex'>
+          <div className='xsm:hidden w-full items-center justify-between grid grid-cols-2 gap-[1.25rem]'>
             {services?.list_service_2?.map((item, index) => (
-              <ServiceHighlight
+              <div
                 key={index}
-                icon={item.image.url || ''}
-                label={item.title}
-                desc={item.description ?? ''}
-                link={`${item.link.url}`}
-              />
+                className='col-span-1'
+              >
+                <ServiceHighlight
+                  icon={item.image.url || ''}
+                  label={item.title}
+                  desc={item.description ?? ''}
+                  link={`${item.link.url}`}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -88,15 +92,16 @@ const Service = ({services}: {services: ServicesObject}) => {
           target={services?.link.target || '_self'}
           href={services?.link.url || '#'}
         /> */}
-        <ChatButton
-          href={services?.link.url || '#'}
-          target={services?.link.target || '_self'}
-          icon={
-            <ICMessengerLogo className='size-[1.17944rem] fill-Blue-Primary' />
-          }
-          text='Chat với chúng tôi'
-          className='sm:hidden'
-        />
+        <div className='xsm:flex justify-center self-stretch hidden'>
+          <ChatButton
+            href={services?.link.url || '#'}
+            target={services?.link.target || '_self'}
+            icon={
+              <ICMessengerLogo className='size-[1.17944rem] fill-Blue-Primary' />
+            }
+            text='Chat với chúng tôi'
+          />
+        </div>
       </div>
     </div>
   )
