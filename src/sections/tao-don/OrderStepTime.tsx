@@ -18,6 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
 
 export default function OrderStepTime({
   dataInformation,
@@ -151,79 +152,98 @@ export default function OrderStepTime({
   }
   return (
     <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-      <p className='sm:hidden text-pc-sub16b text-[#33A6E8]'>
-        Thời gian gửi hàng
-      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-[1.59rem]'
+          className='space-y-[1.59rem] pb-[3.9rem]'
         >
           {Array.isArray(dataInformation) &&
             dataInformation?.map(
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
-                  <div className='p-[1rem] rounded-[1.25rem] bg-white'>
-                    <p className='xsm:text-pc-sub14s mb-[0.75rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+                  <div className='h-full rounded-[1.25rem] bg-white p-[1rem] xsm:rounded-[2rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
+                    <p className='mb-[0.75rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:!font-bold xsm:text-pc-sub14s'>
                       {item?.time_content}
                     </p>
                     {item?.user_chooses ? (
                       <>
-                        <div className='space-y-[0.875rem] mb-[0.875rem]'>
+                        <div className='mb-[0.875rem] space-y-[0.875rem] xsm:mb-[1rem] xsm:mt-[1rem] xsm:space-y-[0.62rem]'>
                           {item?.stock_user?.map((stockItem, stockIndex) => (
                             <FormField
                               key={stockIndex}
                               control={form.control}
                               name={`userChoices.${item?.time_content}`}
-                              render={({field}) => (
-                                <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none mb-[0.5rem]'>
-                                  <FormControl>
-                                    <Checkbox
-                                      className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
-                                      checked={field.value === stockItem?.label}
-                                      onCheckedChange={(checked) => {
-                                        field.onChange(
-                                          checked
-                                            ? stockItem?.label
-                                            : undefined,
-                                        )
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <div className='leading-none space-y-[0rem] flex flex-col'>
-                                    <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
-                                      <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
-                                        {stockItem?.label}
-                                      </FormLabel>
-                                      {stockItem?.tag && (
-                                        <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
-                                          {stockItem?.tag}
-                                        </p>
+                              render={({field}) => {
+                                const isChecked =
+                                  field.value === stockItem?.label
+
+                                return (
+                                  <FormItem
+                                    className={cn(
+                                      'relative mb-[0.5rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem]',
+                                      isChecked
+                                        ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
+                                        : 'xsm:border-transparent xsm:bg-[rgba(239,239,239,0.60)]',
+                                    )}
+                                  >
+                                    <FormControl>
+                                      <Checkbox
+                                        className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
+                                        checked={isChecked}
+                                        onCheckedChange={(checked) => {
+                                          field.onChange(
+                                            checked
+                                              ? stockItem?.label
+                                              : undefined,
+                                          )
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <div className='flex flex-col leading-none'>
+                                      <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
+                                        <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:!font-semibold xsm:text-mb-13S'>
+                                          {stockItem?.label}
+                                        </FormLabel>
+                                        {stockItem?.tag && (
+                                          <p className='rounded-[62.5rem] bg-[#5DAF46] p-[0.25rem_0.75rem] text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                            {stockItem?.tag}
+                                          </p>
+                                        )}
+                                      </div>
+                                      {stockItem?.desc && (
+                                        <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.1rem]'>
+                                          <p
+                                            className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[rgba(0,0,0,0.60)]'
+                                            dangerouslySetInnerHTML={{
+                                              __html: stockItem?.desc,
+                                            }}
+                                          ></p>
+                                        </FormLabel>
                                       )}
                                     </div>
-                                    {stockItem?.desc && (
-                                      <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
-                                        <p
-                                          className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
-                                          dangerouslySetInnerHTML={{
-                                            __html: stockItem?.desc,
-                                          }}
-                                        ></p>
-                                      </FormLabel>
-                                    )}
-                                  </div>
-                                </FormItem>
-                              )}
+                                  </FormItem>
+                                )
+                              }}
                             />
                           ))}
                         </div>
                         {item?.note_more && (
-                          <p
-                            className='text-pc-sub14m text-[#F00] mb-[1rem]'
-                            dangerouslySetInnerHTML={{
-                              __html: item?.note_more,
-                            }}
-                          ></p>
+                          <div className='flex flex-col items-start'>
+                            <div className='flex items-center space-x-[0.38rem]'>
+                              <span className='flex size-[1.25rem] shrink-0 items-center justify-center rounded-md bg-Blue-Primary'>
+                                <ICMessageQuestion className='size-[0.9rem]' />
+                              </span>
+                              <p className='text-[0.875rem] font-bold leading-[1.3125rem] tracking-[-0.02625rem] text-Blue-Primary'>
+                                LƯU Ý
+                              </p>
+                            </div>
+                            <p
+                              className='mb-[1rem] mt-[0.5rem] text-[#F00] text-pc-sub14m'
+                              dangerouslySetInnerHTML={{
+                                __html: item?.note_more,
+                              }}
+                            ></p>
+                          </div>
                         )}
                       </>
                     ) : (
@@ -231,7 +251,7 @@ export default function OrderStepTime({
                         ref={(el) => {
                           containerRefs.current[index] = el
                         }}
-                        className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
+                        className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium [&_a]:text-[#0084FF] [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:not-italic [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                         dangerouslySetInnerHTML={{
                           __html: item?.stock || '',
                         }}
@@ -241,21 +261,31 @@ export default function OrderStepTime({
                       control={form.control}
                       name={`policy.${index}`}
                       render={({field}) => (
-                        <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
+                        <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                           <FormControl>
                             <Checkbox
-                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
+                              className={cn(
+                                'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
+                                // mobile
+                                'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:transition-all xsm:duration-200',
+                                // === Khi checked trên mobile ===
+                                'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
+                                // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===
+                                'xsm:[&_svg]:hidden',
+
+                                'xsm:data-[state=checked]:after:absolute xsm:data-[state=checked]:after:left-1/2 xsm:data-[state=checked]:after:top-[40%] xsm:data-[state=checked]:after:h-[0.7rem] xsm:data-[state=checked]:after:w-[0.4rem] xsm:data-[state=checked]:after:-translate-x-1/2 xsm:data-[state=checked]:after:-translate-y-1/2 xsm:data-[state=checked]:after:rotate-45 xsm:data-[state=checked]:after:border-b-[2px] xsm:data-[state=checked]:after:border-r-[2px] xsm:data-[state=checked]:after:border-white xsm:data-[state=checked]:after:content-[""]',
+                              )}
                               checked={field.value}
                               onCheckedChange={field.onChange}
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13M xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
+                            <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:!font-semibold xsm:text-mb-13M'>
                               {item?.clause ||
                                 'Tôi đồng ý với điều khoản của Amamy'}
                             </FormLabel>
                           </div>
-                          <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
+                          <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
                         </FormItem>
                       )}
                     />
@@ -263,7 +293,7 @@ export default function OrderStepTime({
                 </Fragment>
               ),
             )}
-          <div className='space-x-[2rem] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 xsm:p-[1rem] xsm:bg-[#FAFAFA] flex items-center justify-between sm:w-full'>
+          <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 handleClickcurrentTab('1')
@@ -271,15 +301,15 @@ export default function OrderStepTime({
                 // setDataInformation(undefined)
                 // setDataFromOrder({...dataFromOrder})
               }}
-              className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+              className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
             >
-              <p className='text-pc-sub16m text-black'>Quay lại</p>
+              <p className='text-black text-pc-sub16m'>Quay lại</p>
             </div>
             <Button
               type='submit'
               disabled={!form.formState.isValid}
               className={cn(
-                '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+                'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
                 !form.formState.isValid &&
                   'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
               )}

@@ -133,7 +133,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          // nếu scroll xuống và qua ngưỡng nhất định
           if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
             setHideHeader(true)
           } else {
@@ -156,18 +155,12 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     <>
       <Tabs
         value={currentTab}
-        className='flex xsm:flex-col xsm:p-[0.75rem_0.75rem_0rem_0.75rem] sm:space-x-[1.5rem] pb-[5rem] bg-white xsm:bg-[#FAFAFA]'
+        className='flex bg-white pb-[5rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem]'
       >
         {/* desktop */}
         {!isMobile && (
-          <TabsList className='xsm:space-y-[0.5rem] sticky z-[49] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
-            {isMobile && (
-              <div className='flex justify-between items-center w-full !mb-[1rem]'>
-                <h1 className='flex-1 text-mb-h2 text-black'>Tạo đơn hàng</h1>
-                <CustomBack />
-              </div>
-            )}
-            <div className='xsm:w-full xsm:justify-between sm:space-y-[2.5rem] flex sm:flex-col flex-1'>
+          <TabsList className='sticky top-[7rem] z-[49] flex h-max w-[28.3125rem] rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem]'>
+            <div className='flex flex-1 flex-col space-y-[2.5rem]'>
               {StepForm?.map(
                 (item: {title: string; value: string}, index: number) => (
                   <TabsTrigger
@@ -178,24 +171,23 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     key={index}
                     value={item?.value}
                     className={cn(
-                      'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none  [&_.box-text]:data-[state=active]:text-black',
+                      'flex space-x-[0.62rem] p-0 data-[state=active]:shadow-none [&_.box-text]:data-[state=active]:text-black',
                       index > Number(indexTab) && 'pointer-events-none',
                     )}
                   >
                     {index < Number(indexTab) ? (
-                      <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
+                      <ICCheck className='size-[2.0125rem]' />
                     ) : (
                       <div
                         className={cn(
-                          'box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]  xsm:text-[0.75rem] xsm:bg-white xsm:text-[#38B6FF] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF]',
-                          index === +indexTab &&
-                            'bg-[#38B6FF] xsm:bg-[#38B6FF] xsm:text-white',
+                          'box-index size-[1.8125rem] rounded-[100%] bg-[#DCDFE4] p-[0.34375rem] font-montserrat text-[1.11538rem] font-bold leading-[1.5] tracking-[-0.02231rem] text-white flex-center',
+                          index === +indexTab && 'bg-[#38B6FF]',
                         )}
                       >
                         {index + 1}
                       </div>
                     )}
-                    <p className='xsm:hidden box-text flex-1 text-start text-pc-sub14s text-[rgba(0,0,0,0.30)]'>
+                    <p className='box-text flex-1 text-start text-[rgba(0,0,0,0.30)] text-pc-sub14s'>
                       {item?.title}
                     </p>
                   </TabsTrigger>
@@ -204,20 +196,14 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             </div>
             <div
               className={cn(
-                'z-[-1] absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.8125rem] xsm:z-[-1] sm:top-[1.5rem] sm:bottom-[1.5rem] sm:left-[2.1rem] w-[0.25rem] xsm:w-auto xsm:h-[0.0625rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
+                'absolute z-[-1] w-[0.25rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 sm:bottom-[1.5rem] sm:left-[2.1rem] sm:top-[1.5rem]',
               )}
             >
               <div
-                style={
-                  isMobile
-                    ? {
-                        width: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
-                      }
-                    : {
-                        height: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
-                      }
-                }
-                className='bg-[#38B6FF] xsm:h-[0.0625rem] transition-all duration-1000'
+                style={{
+                  height: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
+                }}
+                className='bg-[#38B6FF] transition-all duration-1000'
               ></div>
             </div>
           </TabsList>
@@ -227,14 +213,14 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {isMobile && (
           <TabsList
             className={cn(
-              'space-y-[0.5rem] sticky z-[49] flex flex-col w-full xsm:p-0 h-max p-[1rem] rounded-[2rem] bg-white transition-all duration-500 ease-in-out',
+              'z-[49] flex h-max w-full flex-col space-y-[0.5rem] rounded-[2rem] bg-white p-[1rem] transition-all duration-500 ease-in-out xsm:p-0',
               hideHeader
-                ? '-translate-y-full opacity-0 pointer-events-none'
+                ? 'pointer-events-none -translate-y-full opacity-0'
                 : 'translate-y-0 opacity-100',
             )}
           >
             {/* title */}
-            <div className='w-full p-[0.75rem_0.8125rem_0.625rem_1rem] flex items-center justify-between'>
+            <div className='flex w-full items-center justify-between p-[0.75rem_0.8125rem_0.625rem_1rem]'>
               <h1 className='flex-1 text-[0.875rem] font-bold leading-[1.05rem] tracking-[-0.035rem] text-[rgba(0,0,0,0.92)]'>
                 Tạo đơn hàng
               </h1>
@@ -242,23 +228,23 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             </div>
 
             {/* steps */}
-            <div className='w-full px-[0.8125rem] relative'>
+            <div className='relative w-full px-[0.8125rem]'>
               {/* progress line */}
               <div
                 className={cn(
-                  'absolute left-[1.25rem] right-[1.25rem] bottom-[1.8125rem] top-[50%] translate-y-[50%] z-[-1] w-auto h-[0.0625rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
+                  'absolute bottom-[1.8125rem] left-[1.25rem] right-[1.25rem] top-[50%] z-[-1] h-[0.0625rem] w-auto translate-y-[50%] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0',
                 )}
               >
                 <div
                   style={{
                     width: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
                   }}
-                  className='bg-[#38B6FF] xsm:h-[0.0625rem] transition-all duration-1000'
+                  className='bg-[#38B6FF] transition-all duration-1000 xsm:h-[0.0625rem]'
                 ></div>
               </div>
 
               {/* numbers */}
-              <div className='flex w-full justify-between flex-1'>
+              <div className='flex w-full flex-1 justify-between'>
                 {StepForm?.map(
                   (item: {title: string; value: string}, index: number) => (
                     <TabsTrigger
@@ -269,7 +255,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       key={index}
                       value={item?.value}
                       className={cn(
-                        'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none  [&_.box-text]:data-[state=active]:text-black',
+                        'flex w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none xsm:w-max xsm:justify-start [&_.box-text]:data-[state=active]:text-black',
                         index > Number(indexTab) && 'pointer-events-none',
                       )}
                     >
@@ -278,7 +264,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       ) : (
                         <div
                           className={cn(
-                            'box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]  xsm:text-[0.75rem] xsm:bg-white xsm:text-[#38B6FF] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF]',
+                            'box-index size-[1.8125rem] rounded-[100%] bg-[#DCDFE4] p-[0.34375rem] font-montserrat text-[1.11538rem] font-bold leading-[1.5] tracking-[-0.02231rem] text-white flex-center xsm:size-[1.45rem] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF] xsm:bg-white xsm:text-[0.75rem] xsm:tracking-[-0.01788rem] xsm:text-[#38B6FF]',
                             index === +indexTab &&
                               'bg-[#38B6FF] xsm:bg-[#38B6FF] xsm:text-white',
                           )}
@@ -286,7 +272,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                           {index + 1}
                         </div>
                       )}
-                      <p className='xsm:hidden box-text flex-1 text-start text-pc-sub14s text-[rgba(0,0,0,0.30)]'>
+                      <p className='box-text flex-1 text-start text-[rgba(0,0,0,0.30)] text-pc-sub14s xsm:hidden'>
                         {item?.title}
                       </p>
                     </TabsTrigger>
@@ -296,18 +282,18 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             </div>
 
             {/* section title */}
-            <div className='w-full p-[0.25rem_1rem_0.75rem_1rem] flex items-start'>
+            <div className='flex w-full items-start p-[0.25rem_1rem_0.75rem_1rem]'>
               <p className='flex-1 text-[0.875rem] font-semibold leading-[1.1375rem] tracking-[-0.02625rem] text-[#33A6E8]'>
-                Thông tin gửi hàng
+                {StepForm[indexTab]?.title || ''}
               </p>
             </div>
           </TabsList>
         )}
 
-        <div className='flex-1 p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8] xsm:bg-[#FAFAFA]'>
+        <div className='flex-1 rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:bg-[#FAFAFA] xsm:p-[1rem_0rem]'>
           {!isMobile && (
-            <h1 className='text-black text-pc-heading20b mb-[1.5rem]'>
-              {StepForm[indexTab]?.title || ''}
+            <h1 className='mb-[1.5rem] text-black text-pc-heading20b'>
+              Tạo đơn hàng
             </h1>
           )}
           <TabsContent
@@ -329,8 +315,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   ? dataInformation?.information?.time
                     ? '2'
                     : dataInformation?.information?.note
-                    ? '3'
-                    : '4'
+                      ? '3'
+                      : '4'
                   : '2'
               }
             />
@@ -398,8 +384,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -416,8 +402,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -433,8 +419,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -450,8 +436,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -471,8 +457,8 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       dataInformation?.information?.insurance
                         ? '5'
                         : dataInformation?.information?.package
-                        ? '6'
-                        : '7'
+                          ? '6'
+                          : '7'
                     }
                   />
                 )}
@@ -543,22 +529,22 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       </Tabs>
       <div
         className={cn(
-          'fixed transition-all duration-700 inset-0 bg-black/70 z-[51] hidden !mt-0',
+          'fixed inset-0 z-[51] !mt-0 hidden bg-black/70 transition-all duration-700',
           submitting && 'block',
           // !faq && 'block',
         )}
       ></div>
       <div
         className={cn(
-          'xsm:w-[21.4375rem] xsm:p-[1.5rem_1rem_1rem_1rem] xsm:rounded-[1.25rem] pointer-events-none visible transition-all duration-500 flex-center opacity-0 flex-col fixed z-[51] top-[75%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[29.375rem] p-[2rem_1.25rem_1.25rem_1.25rem] rounded-[1.25rem] bg-white',
-          submitting && 'top-[50%] opacity-[1] pointer-events-auto',
+          'pointer-events-none visible fixed left-[50%] top-[75%] z-[51] w-[29.375rem] -translate-x-1/2 -translate-y-1/2 flex-col rounded-[1.25rem] bg-white p-[2rem_1.25rem_1.25rem_1.25rem] opacity-0 transition-all duration-500 flex-center xsm:w-[21.4375rem] xsm:rounded-[1.25rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
+          submitting && 'pointer-events-auto top-[50%] opacity-[1]',
         )}
       >
-        <ICSuccess className='size-[2rem] xsm:size-[2.5rem] mb-[1.5rem]' />
-        <p className='text-center w-full text-pc-heading20b xsm:text-pc-sub16b text-black mb-[0.5rem]'>
+        <ICSuccess className='mb-[1.5rem] size-[2rem] xsm:size-[2.5rem]' />
+        <p className='mb-[0.5rem] w-full text-center text-black text-pc-heading20b xsm:text-pc-sub16b'>
           Tạo đơn hàng thành công!
         </p>
-        <p className='text-center text-pc-14 text-[rgba(0,0,0,0.80)] mb-[2rem] xsm:mb-[1.5rem]'>
+        <p className='mb-[2rem] text-center text-[rgba(0,0,0,0.80)] text-pc-14 xsm:mb-[1.5rem]'>
           Đơn hàng của bạn đã được tạo thành công. Chúng tôi đã gửi thông tin
           xác nhận qua email của bạn.
         </p>
@@ -566,21 +552,21 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           onClick={() => {
             setSubmitting(false)
           }}
-          className='cursor-pointer h-[3rem] w-full p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF]'
+          className='h-[3rem] w-full cursor-pointer rounded-[1.25rem] border-[1.5px] border-solid border-[rgba(255,255,255,0.80)] bg-[#38B6FF] p-[0.75rem_1.5rem] flex-center'
         >
-          <p className='text-pc-sub16m text-white'>Xong</p>
+          <p className='text-white text-pc-sub16m'>Xong</p>
         </div>
       </div>
       {selectedImage && (
         <div
-          className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 animate-fade-in'
+          className='fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black bg-opacity-50'
           onClick={() => setSelectedImage(null)}
         >
           <div
             onClick={(e) => {
               e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
             }}
-            className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] sm:max-w-[80vw] max-h-[100vh] flex flex-col items-center animate-scale-in'
+            className='relative flex max-h-[100vh] max-w-[100vw] animate-scale-in flex-col items-center overflow-hidden sm:max-w-[80vw] xsm:overflow-x-auto'
           >
             <TransformWrapper
               initialScale={1}
@@ -596,7 +582,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                       src={selectedImage}
                       alt='Zoomed Image'
                       quality={100}
-                      className='max-w-full h-auto object-contain transition-transform duration-300 rounded-[1rem]'
+                      className='h-auto max-w-full rounded-[1rem] object-contain transition-transform duration-300'
                     />
                   </TransformComponent>
                 </>
