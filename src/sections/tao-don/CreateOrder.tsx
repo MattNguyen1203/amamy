@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 import useStore from '@/app/(store)/store'
 import useIsMobile from '@/hooks/useIsMobile'
@@ -41,6 +41,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
+
+  const [hideHeader, setHideHeader] = useState(false)
+  const lastScrollY = useRef(0)
 
   const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -122,77 +125,189 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     }
   }, [dataInformation])
 
+  useEffect(() => {
+    let ticking = false
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // nếu scroll xuống và qua ngưỡng nhất định
+          if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+            setHideHeader(true)
+          } else {
+            setHideHeader(false)
+          }
+
+          lastScrollY.current = currentScrollY
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <>
       <Tabs
         value={currentTab}
-        className='flex xsm:flex-col sm:space-x-[1.5rem] pb-[5rem] bg-white xsm:bg-[#FAFAFA]'
+        className='flex xsm:flex-col xsm:p-[0.75rem_0.75rem_0rem_0.75rem] sm:space-x-[1.5rem] pb-[5rem] bg-white xsm:bg-[#FAFAFA]'
       >
-        <TabsList className='xsm:space-y-[0.5rem] sticky z-[49] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
-          {isMobile && (
-            <div className='flex justify-between items-center w-full !mb-[1rem]'>
-              <h1 className='flex-1 text-mb-h2 text-black'>Tạo đơn hàng</h1>
-              <CustomBack />
-            </div>
-          )}
-          <div className='xsm:w-full xsm:justify-between sm:space-y-[2.5rem] flex sm:flex-col flex-1'>
-            {StepForm?.map(
-              (item: {title: string; value: string}, index: number) => (
-                <TabsTrigger
-                  onClick={() => {
-                    setCurrentTab(item?.value)
-                    setIndexTab(index)
-                  }}
-                  key={index}
-                  value={item?.value}
-                  className={cn(
-                    'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none  [&_.box-text]:data-[state=active]:text-black',
-                    index > Number(indexTab) && 'pointer-events-none',
-                  )}
-                >
-                  {index < Number(indexTab) ? (
-                    <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
-                  ) : (
-                    <div
-                      className={cn(
-                        'box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]  xsm:text-[0.75rem] xsm:bg-white xsm:text-[#38B6FF] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF]',
-                        index === +indexTab &&
-                          'bg-[#38B6FF] xsm:bg-[#38B6FF] xsm:text-white',
-                      )}
-                    >
-                      {index + 1}
-                    </div>
-                  )}
-                  <p className='xsm:hidden box-text flex-1 text-start text-pc-sub14s text-[rgba(0,0,0,0.30)]'>
-                    {item?.title}
-                  </p>
-                </TabsTrigger>
-              ),
+        {/* desktop */}
+        {!isMobile && (
+          <TabsList className='xsm:space-y-[0.5rem] sticky z-[49] top-[7rem] xsm:top-[0rem] flex xsm:flex-col w-[28.3125rem] xsm:w-full h-max p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8]'>
+            {isMobile && (
+              <div className='flex justify-between items-center w-full !mb-[1rem]'>
+                <h1 className='flex-1 text-mb-h2 text-black'>Tạo đơn hàng</h1>
+                <CustomBack />
+              </div>
             )}
-          </div>
-          <div
+            <div className='xsm:w-full xsm:justify-between sm:space-y-[2.5rem] flex sm:flex-col flex-1'>
+              {StepForm?.map(
+                (item: {title: string; value: string}, index: number) => (
+                  <TabsTrigger
+                    onClick={() => {
+                      setCurrentTab(item?.value)
+                      setIndexTab(index)
+                    }}
+                    key={index}
+                    value={item?.value}
+                    className={cn(
+                      'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none  [&_.box-text]:data-[state=active]:text-black',
+                      index > Number(indexTab) && 'pointer-events-none',
+                    )}
+                  >
+                    {index < Number(indexTab) ? (
+                      <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
+                    ) : (
+                      <div
+                        className={cn(
+                          'box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]  xsm:text-[0.75rem] xsm:bg-white xsm:text-[#38B6FF] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF]',
+                          index === +indexTab &&
+                            'bg-[#38B6FF] xsm:bg-[#38B6FF] xsm:text-white',
+                        )}
+                      >
+                        {index + 1}
+                      </div>
+                    )}
+                    <p className='xsm:hidden box-text flex-1 text-start text-pc-sub14s text-[rgba(0,0,0,0.30)]'>
+                      {item?.title}
+                    </p>
+                  </TabsTrigger>
+                ),
+              )}
+            </div>
+            <div
+              className={cn(
+                'z-[-1] absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.8125rem] xsm:z-[-1] sm:top-[1.5rem] sm:bottom-[1.5rem] sm:left-[2.1rem] w-[0.25rem] xsm:w-auto xsm:h-[0.0625rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
+              )}
+            >
+              <div
+                style={
+                  isMobile
+                    ? {
+                        width: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
+                      }
+                    : {
+                        height: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
+                      }
+                }
+                className='bg-[#38B6FF] xsm:h-[0.0625rem] transition-all duration-1000'
+              ></div>
+            </div>
+          </TabsList>
+        )}
+
+        {/* mobile */}
+        {isMobile && (
+          <TabsList
             className={cn(
-              'z-[-1] absolute xsm:left-[1.25rem] xsm:right-[1.25rem] xsm:bottom-[1.8125rem] xsm:z-[-1] sm:top-[1.5rem] sm:bottom-[1.5rem] sm:left-[2.1rem] w-[0.25rem] xsm:w-auto xsm:h-[0.0625rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
+              'space-y-[0.5rem] sticky z-[49] flex flex-col w-full xsm:p-0 h-max p-[1rem] rounded-[2rem] bg-white transition-all duration-500 ease-in-out',
+              hideHeader
+                ? '-translate-y-full opacity-0 pointer-events-none'
+                : 'translate-y-0 opacity-100',
             )}
           >
-            <div
-              style={
-                isMobile
-                  ? {
-                      width: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
-                    }
-                  : {
-                      height: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
-                    }
-              }
-              className='bg-[#38B6FF] xsm:h-[0.0625rem] transition-all duration-1000'
-            ></div>
-          </div>
-        </TabsList>
+            {/* title */}
+            <div className='w-full p-[0.75rem_0.8125rem_0.625rem_1rem] flex items-center justify-between'>
+              <h1 className='flex-1 text-[0.875rem] font-bold leading-[1.05rem] tracking-[-0.035rem] text-[rgba(0,0,0,0.92)]'>
+                Tạo đơn hàng
+              </h1>
+              <CustomBack />
+            </div>
+
+            {/* steps */}
+            <div className='w-full px-[0.8125rem] relative'>
+              {/* progress line */}
+              <div
+                className={cn(
+                  'absolute left-[1.25rem] right-[1.25rem] bottom-[1.8125rem] top-[50%] translate-y-[50%] z-[-1] w-auto h-[0.0625rem] rounded-[1rem] bg-[rgba(0,0,0,0.08)] before:absolute before:top-0 ',
+                )}
+              >
+                <div
+                  style={{
+                    width: `${(indexTab / (StepForm?.length - 1)) * 100}%`,
+                  }}
+                  className='bg-[#38B6FF] xsm:h-[0.0625rem] transition-all duration-1000'
+                ></div>
+              </div>
+
+              {/* numbers */}
+              <div className='flex w-full justify-between flex-1'>
+                {StepForm?.map(
+                  (item: {title: string; value: string}, index: number) => (
+                    <TabsTrigger
+                      onClick={() => {
+                        setCurrentTab(item?.value)
+                        setIndexTab(index)
+                      }}
+                      key={index}
+                      value={item?.value}
+                      className={cn(
+                        'flex xsm:justify-start xsm:w-max w-full space-x-[0.62rem] p-0 data-[state=active]:shadow-none  [&_.box-text]:data-[state=active]:text-black',
+                        index > Number(indexTab) && 'pointer-events-none',
+                      )}
+                    >
+                      {index < Number(indexTab) ? (
+                        <ICCheck className='size-[2.0125rem] xsm:size-[1.75rem]' />
+                      ) : (
+                        <div
+                          className={cn(
+                            'box-index p-[0.34375rem] size-[1.8125rem] xsm:size-[1.45rem] rounded-[100%] flex-center bg-[#DCDFE4] text-white text-[1.11538rem] font-bold leading-[1.5] font-montserrat tracking-[-0.02231rem] xsm:tracking-[-0.01788rem]  xsm:text-[0.75rem] xsm:bg-white xsm:text-[#38B6FF] xsm:border-[0.5px] xsm:border-solid xsm:border-[#38B6FF]',
+                            index === +indexTab &&
+                              'bg-[#38B6FF] xsm:bg-[#38B6FF] xsm:text-white',
+                          )}
+                        >
+                          {index + 1}
+                        </div>
+                      )}
+                      <p className='xsm:hidden box-text flex-1 text-start text-pc-sub14s text-[rgba(0,0,0,0.30)]'>
+                        {item?.title}
+                      </p>
+                    </TabsTrigger>
+                  ),
+                )}
+              </div>
+            </div>
+
+            {/* section title */}
+            <div className='w-full p-[0.25rem_1rem_0.75rem_1rem] flex items-start'>
+              <p className='flex-1 text-[0.875rem] font-semibold leading-[1.1375rem] tracking-[-0.02625rem] text-[#33A6E8]'>
+                Thông tin gửi hàng
+              </p>
+            </div>
+          </TabsList>
+        )}
+
         <div className='flex-1 p-[1.25rem] xsm:p-[1rem] rounded-[1.25rem] bg-[#F8F8F8] xsm:bg-[#FAFAFA]'>
           {!isMobile && (
             <h1 className='text-black text-pc-heading20b mb-[1.5rem]'>
-              Tạo đơn hàng
+              {StepForm[indexTab]?.title || ''}
             </h1>
           )}
           <TabsContent
