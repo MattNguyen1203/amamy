@@ -19,6 +19,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
+import ICStar from '@/components/icon/ICStar'
+import useIsMobile from '@/hooks/useIsMobile'
 
 export default function OrderStepTime({
   dataInformation,
@@ -39,6 +41,7 @@ export default function OrderStepTime({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
 }) {
+  const isMobile = useIsMobile()
   const FormSchema = z.object({
     policy: z.array(
       z.boolean().refine((value) => value === true, {
@@ -201,13 +204,24 @@ export default function OrderStepTime({
                                     </FormControl>
                                     <div className='flex flex-col leading-none'>
                                       <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
+                                        {isMobile && stockItem?.tag && (
+                                          <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
+                                            <ICStar />
+                                            <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                              {stockItem?.tag}
+                                            </p>
+                                          </div>
+                                        )}
                                         <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:!font-semibold xsm:text-mb-13S'>
                                           {stockItem?.label}
                                         </FormLabel>
-                                        {stockItem?.tag && (
-                                          <p className='rounded-[62.5rem] bg-[#5DAF46] p-[0.25rem_0.75rem] text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
-                                            {stockItem?.tag}
-                                          </p>
+                                        {!isMobile && stockItem?.tag && (
+                                          <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] xsm:hidden'>
+                                            <ICStar />
+                                            <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                              {stockItem?.tag}
+                                            </p>
+                                          </div>
                                         )}
                                       </div>
                                       {stockItem?.desc && (

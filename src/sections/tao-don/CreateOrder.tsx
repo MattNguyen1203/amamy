@@ -159,7 +159,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
       >
         {/* desktop */}
         {!isMobile && (
-          <TabsList className='sticky top-[7rem] z-[49] flex h-max w-[28.3125rem] rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem]'>
+          <TabsList className='sticky top-[7rem] z-[49] flex h-max w-[28.3125rem] rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:hidden'>
             <div className='flex flex-1 flex-col space-y-[2.5rem]'>
               {StepForm?.map(
                 (item: {title: string; value: string}, index: number) => (
@@ -213,7 +213,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {isMobile && (
           <TabsList
             className={cn(
-              'z-[49] flex h-max w-full flex-col space-y-[0.5rem] rounded-[2rem] bg-white p-[1rem] transition-all duration-500 ease-in-out xsm:p-0',
+              'z-[49] flex h-max w-full flex-col space-y-[0.5rem] rounded-[2rem] bg-white p-[1rem] transition-all duration-150 ease-in-out sm:hidden xsm:p-0',
               hideHeader
                 ? 'pointer-events-none -translate-y-full opacity-0'
                 : 'translate-y-0 opacity-100',
