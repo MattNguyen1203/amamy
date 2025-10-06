@@ -39,6 +39,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import ICStar from '@/components/icon/ICStar'
 
 export default function Package({
   data,
@@ -249,17 +250,17 @@ export default function Package({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
+        className='space-y-[1.5rem] pb-[4rem] xsm:space-y-[0.75rem]'
       >
         {data?.list_package && (
           <>
-            <div className='p-[1rem] rounded-[1.25rem] bg-white border-[1px] border-solid border-[#DCDFE4]'>
-              <p className='mb-[1rem] text-[rgba(0,0,0,0.92)] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+            <div className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] xsm:rounded-[2.125rem] xsm:border-0 xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
+              <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)]'>
                 {data?.title || 'Chọn cách đóng gói'}
               </p>
               {data?.note_more && (
                 <p
-                  className='my-[1rem] text-pc-sub14m text-[#F00] [&_ul_li]:list-disc [&_ul]:pl-[1rem]'
+                  className='my-[1rem] text-[#F00] text-pc-sub14m [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></p>
               )}
@@ -270,52 +271,77 @@ export default function Package({
                       key={packageIndex}
                       control={form.control}
                       name='package'
-                      render={({field}) => (
-                        <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
-                          <FormControl>
-                            <Checkbox
-                              className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
-                              checked={
-                                field.value ===
-                                (packageItem?.separate_request
-                                  ? 'note'
-                                  : packageItem?.label)
-                              }
-                              onCheckedChange={(checked) => {
-                                field.onChange(
-                                  checked
-                                    ? packageItem?.separate_request
-                                      ? 'note'
-                                      : packageItem?.label
-                                    : undefined,
-                                )
-                              }}
-                            />
-                          </FormControl>
-                          <div className='leading-none space-y-[0rem] flex flex-col'>
-                            <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
-                              <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
-                                {packageItem?.label}
-                              </FormLabel>
-                              {packageItem?.tag && (
-                                <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
-                                  {packageItem?.tag}
-                                </p>
+                      render={({field}) => {
+                        const value = packageItem?.separate_request
+                          ? 'note'
+                          : packageItem?.label
+                        const isChecked = field.value === value
+
+                        return (
+                          <FormItem
+                            className={cn(
+                              'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem]',
+                              isChecked
+                                ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
+                                : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
+                            )}
+                          >
+                            <FormControl>
+                              <Checkbox
+                                className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:!bg-[#EFEFEF99] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
+                                checked={
+                                  field.value ===
+                                  (packageItem?.separate_request
+                                    ? 'note'
+                                    : packageItem?.label)
+                                }
+                                onCheckedChange={(checked) => {
+                                  field.onChange(
+                                    checked
+                                      ? packageItem?.separate_request
+                                        ? 'note'
+                                        : packageItem?.label
+                                      : undefined,
+                                  )
+                                }}
+                              />
+                            </FormControl>
+                            <div className='flex flex-col space-y-[0rem] leading-none'>
+                              <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
+                                {isMobile && packageItem?.tag && (
+                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
+                                    <ICStar />
+                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                      {packageItem?.tag}
+                                    </p>
+                                  </div>
+                                )}
+                                <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:!font-semibold xsm:text-mb-13S'>
+                                  {packageItem?.label}
+                                </FormLabel>
+                                {!isMobile && packageItem?.tag && (
+                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] xsm:hidden'>
+                                    <ICStar />
+                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                      {packageItem?.tag}
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                              {packageItem?.desc && (
+                                <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
+                                  <p
+                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m'
+                                    dangerouslySetInnerHTML={{
+                                      __html: packageItem?.desc,
+                                    }}
+                                  ></p>
+                                </FormLabel>
                               )}
                             </div>
-                            {packageItem?.desc && (
-                              <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
-                                <p
-                                  className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
-                                  dangerouslySetInnerHTML={{
-                                    __html: packageItem?.desc,
-                                  }}
-                                ></p>
-                              </FormLabel>
-                            )}
-                          </div>
-                        </FormItem>
-                      )}
+                          </FormItem>
+                        )
+                      }}
                     />
                   ))}
               </div>
@@ -328,8 +354,8 @@ export default function Package({
           name='packageMessage'
           render={({field}) => (
             <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
-              <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
-                <p className='text-pc-sub12s text-[rgba(0,0,0,0.80)]'>
+              <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
+                <p className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Viết yêu cầu của bạn
                 </p>
               </FormLabel>
@@ -337,7 +363,7 @@ export default function Package({
                 <textarea
                   {...field}
                   placeholder='Nhập nội dung'
-                  className='overflow-hidden flex min-h-[4.5rem] w-full rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 resize-none'
+                  className='flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50'
                   style={{
                     height: 'auto',
                     minHeight: '4.5rem',
@@ -380,13 +406,13 @@ export default function Package({
                 >
                   <FormControl
                     className={cn(
-                      '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',
                     )}
                   >
-                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn thông tin thanh toán' />
                       )}
@@ -394,8 +420,8 @@ export default function Package({
                         <SelectValue placeholder='Chọn thông tin thanh toán' />
                       )}
                       {isMobile && field.value && (
-                        <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
-                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 '>
+                        <div className='flex w-full flex-1 items-center space-x-[0.75rem]'>
+                          <p className='line-clamp-1 w-full text-start text-black text-pc-sub14m'>
                             {selectPaymentInformationValue?.title ||
                               dataFromOrder?.recipientPaymentInformation ||
                               `Thanh toán bằng ${field.value}`}
@@ -404,7 +430,7 @@ export default function Package({
                       )}
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                     {Array.isArray(paymentMethod) &&
                       paymentMethod?.map(
                         (
@@ -416,7 +442,7 @@ export default function Package({
                         ) => (
                           <SelectItem
                             key={index}
-                            className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                            className='flex h-[3rem] items-center rounded-[1.25rem] bg-white p-[0.75rem]'
                             value={item?.value ?? item?.title}
                           >
                             <p className='text-black text-pc-sub14m'>
@@ -433,15 +459,15 @@ export default function Package({
           />
         )}
 
-        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+        <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)
               handleClickcurrentTab('5')
             }}
-            className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+            className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
           >
-            <p className='text-pc-sub16m text-black'>Quay lại</p>
+            <p className='text-black text-pc-sub16m'>Quay lại</p>
           </div>
           {stepEnd ? (
             <AlertDialog>
@@ -449,7 +475,7 @@ export default function Package({
                 <AlertDialogTrigger className='flex-1'>
                   <div
                     className={cn(
-                      '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+                      'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
                     )}
                   >
                     {isPending ? (
@@ -464,7 +490,7 @@ export default function Package({
                   type='submit'
                   disabled={!form.formState.isValid}
                   className={cn(
-                    '!shadow-none flex-1 sm:p-[0.75rem_1.5rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
+                    'h-[2.8125rem] flex-1 rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
                   )}
                 >
                   <p className='text-white text-pc-sub16m'>Xác nhận</p>
@@ -472,29 +498,29 @@ export default function Package({
               )}
               <AlertDialogContent
                 className={cn(
-                  'gap-0 w-[21.4375rem] max-w-[21.4375rem] sm:w-[29.375rem] sm:max-w-[29.375rem] p-[2rem_1rem_1rem_1.25rem] xsm:p-[1.5rem_1rem_1rem_1rem] !rounded-[1.25rem] bg-white',
+                  'w-[21.4375rem] max-w-[21.4375rem] gap-0 !rounded-[1.25rem] bg-white p-[2rem_1rem_1rem_1.25rem] sm:w-[29.375rem] sm:max-w-[29.375rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
                   type === 'nhatviet' &&
                     'w-[21.4375rem] max-w-[21.4375rem] sm:w-[52.5rem] sm:max-w-[52.5rem]',
                 )}
               >
-                <div className='xsm:max-h-[28rem] max-h-[60vh] overflow-hidden overflow-y-auto '>
+                <div className='max-h-[60vh] overflow-hidden overflow-y-auto xsm:max-h-[28rem]'>
                   <ImageV2
                     alt=''
                     src={'/order/WarningCircle.svg'}
                     width={50 * 2}
                     height={50 * 2}
-                    className='size-[2rem] sm:size-[2.5rem] mx-auto'
+                    className='mx-auto size-[2rem] sm:size-[2.5rem]'
                   />
-                  <AlertDialogTitle className='w-full text-center !mt-[1rem] !mb-[1.75rem] text-[1rem] sm:text-[1.25rem] font-bold leading-[1.2] tracking-[-0.04rem] sm:tracking-[-0.05rem] text-[#38B6FF] font-montserrat'>
+                  <AlertDialogTitle className='!mb-[1.75rem] !mt-[1rem] w-full text-center font-montserrat text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] text-[#38B6FF] sm:text-[1.25rem] sm:tracking-[-0.05rem]'>
                     Xác nhận đơn hàng & địa chỉ giao
                   </AlertDialogTitle>
-                  <div className='xsm:px-[0.75rem] px-[1rem]'>
-                    <div className='mb-[0.62rem] text-[0.875rem] sm:text-[1rem] font-semibold leading-[1.4] sm:leading-[1.62] tracking-[-0.035rem] sm:tracking-[-0.03rem] text-black font-montserrat'>
+                  <div className='px-[1rem] xsm:px-[0.75rem]'>
+                    <div className='mb-[0.62rem] font-montserrat text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.035rem] text-black sm:text-[1rem] sm:leading-[1.62] sm:tracking-[-0.03rem]'>
                       Thông tin nhận hàng
                     </div>
                     <div className='space-y-[0.25rem]'>
                       {dataFromOrder?.recipientName && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Tên người nhận:{' '}
                           </strong>
@@ -502,7 +528,7 @@ export default function Package({
                         </p>
                       )}
                       {dataFromOrder?.recipientAddress && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Địa chỉ chi tiết:{' '}
                           </strong>
@@ -560,7 +586,7 @@ export default function Package({
                         </p>
                       )} */}
                       {type === 'viethan' && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Mã thông quan, ID hoặc CMT:{' '}
                           </strong>
@@ -568,7 +594,7 @@ export default function Package({
                         </p>
                       )}
                       {type === 'vietnhat' && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Mã bưu điện:{' '}
                           </strong>
@@ -576,7 +602,7 @@ export default function Package({
                         </p>
                       )}
                       {european === 'vnEu' && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Quốc gia:{' '}
                           </strong>
@@ -584,7 +610,7 @@ export default function Package({
                         </p>
                       )}
                       {dataFromOrder?.recipientPhone && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Số điện thoại:{' '}
                           </strong>
@@ -592,7 +618,7 @@ export default function Package({
                         </p>
                       )}
                       {dataFromOrder?.email && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Email:{' '}
                           </strong>
@@ -610,35 +636,35 @@ export default function Package({
                     </div>
                     {type === 'nhatviet' && (
                       <div className='mt-[1.75rem]'>
-                        <div className='mb-[0.75rem] text-black text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
+                        <div className='mb-[0.75rem] text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
                           Lưu ý quan trọng về mã bưu điện nội địa Nhật
                         </div>
                         <p
                           dangerouslySetInnerHTML={{
                             __html: importantNote || '',
                           }}
-                          className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
                         ></p>
                       </div>
                     )}
-                    <div className='mt-[1.75rem] sm:mt-[1.25rem] mb-[1.5rem] sm:mb-[2rem] text-[#F00] text-[0.75rem] font-semibold leading-[1.4] sm:leading-[1.5] tracking-[-0.015rem] font-montserrat'>
+                    <div className='mb-[1.5rem] mt-[1.75rem] font-montserrat text-[0.75rem] font-semibold leading-[1.4] tracking-[-0.015rem] text-[#F00] sm:mb-[2rem] sm:mt-[1.25rem] sm:leading-[1.5]'>
                       *Sau khi xác nhận, bạn sẽ không thể chỉnh sửa đơn hàng.
                     </div>
                   </div>
                 </div>
                 <AlertDialogFooter
                   className={cn(
-                    'flex xsm:flex-row !mt-0 space-x-[1rem] xsm:space-x-[0.75rem] xsm:space-y-0',
+                    '!mt-0 flex space-x-[1rem] xsm:flex-row xsm:space-x-[0.75rem] xsm:space-y-0',
                     type === 'nhatviet' &&
-                      'xsm:absolute xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:bg-white xsm:px-[1rem] xsm:pb-[1rem] xsm:pt-[1.5rem] xsm:rounded-b-[1.25rem]',
+                      'xsm:absolute xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:rounded-b-[1.25rem] xsm:bg-white xsm:px-[1rem] xsm:pb-[1rem] xsm:pt-[1.5rem]',
                   )}
                 >
-                  <AlertDialogCancel className='!border-none !shadow-none xsm:p-0 xsm:mt-0 flex-1 text-black xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[2.625rem] bg-[#F0F0F0] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white font-montserrat'>
+                  <AlertDialogCancel className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#F0F0F0] font-montserrat text-black !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:mt-0 xsm:p-0 xsm:text-pc-sub16m'>
                     Hủy
                   </AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleCreateOrder}
-                    className='!border-none !shadow-none flex-1 xsm:p-0 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[2.625rem] bg-[#38B6FF] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white font-montserrat'
+                    className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#38B6FF] font-montserrat !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:p-0 xsm:text-pc-sub16m'
                   >
                     Xác nhận
                   </AlertDialogAction>
@@ -650,7 +676,7 @@ export default function Package({
               type='submit'
               disabled={!form.formState.isValid}
               className={cn(
-                '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+                'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
                 !form.formState.isValid &&
                   'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
               )}

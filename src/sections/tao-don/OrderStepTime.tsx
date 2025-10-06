@@ -151,11 +151,11 @@ export default function OrderStepTime({
     }
   }
   return (
-    <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
+    <div className='space-y-[1.5rem] pb-[4rem] xsm:space-y-[0.75rem]'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-[1.59rem] pb-[3.9rem]'
+          className='space-y-[1.59rem]'
         >
           {Array.isArray(dataInformation) &&
             dataInformation?.map(
@@ -180,15 +180,15 @@ export default function OrderStepTime({
                                 return (
                                   <FormItem
                                     className={cn(
-                                      'relative mb-[0.5rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem]',
+                                      'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem] xsm:transition-all xsm:duration-150',
                                       isChecked
                                         ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
-                                        : 'xsm:border-transparent xsm:bg-[rgba(239,239,239,0.60)]',
+                                        : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
                                     )}
                                   >
                                     <FormControl>
                                       <Checkbox
-                                        className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
+                                        className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:!bg-[#EFEFEF99] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
                                         checked={isChecked}
                                         onCheckedChange={(checked) => {
                                           field.onChange(
@@ -267,7 +267,7 @@ export default function OrderStepTime({
                               className={cn(
                                 'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
                                 // mobile
-                                'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:transition-all xsm:duration-200',
+                                'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:shadow-none xsm:transition-all xsm:duration-150',
                                 // === Khi checked trên mobile ===
                                 'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
                                 // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===

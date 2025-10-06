@@ -195,7 +195,7 @@ export default function FormDeliveryInformation({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.75rem] pb-[4.5rem] xsm:space-y-[1.25rem]'
+        className='space-y-[1.75rem] pb-[4rem] xsm:space-y-[1.25rem]'
       >
         <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
           Thông tin nhận hàng
