@@ -1,20 +1,20 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import {useEffect, useRef, useState} from 'react'
+import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {
   IInformationInsurance,
   IInformationInsurance_CargoInsuranceJapanvn,
   IInformationInsurance_policy,
 } from '@/sections/tao-don/oder.interface'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {z} from 'zod'
 import ImageV2 from '@/components/image/ImageV2'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import {Button} from '@/components/ui/button'
+import {Checkbox} from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -46,7 +46,7 @@ export default function Insurance({
   type: string
 }) {
   const isMobile = useIsMobile()
-  const { stepOrder, setStepOrder } = useStore((state) => state)
+  const {stepOrder, setStepOrder} = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const FormSchema = z.object({
@@ -72,12 +72,12 @@ export default function Insurance({
           : [false]
         : Array.isArray(data?.compensation?.policy)
           ? data?.compensation?.policy?.map(() =>
-            stepOrder > 5 ? true : false,
-          )
-          : Array.isArray(data?.cargo_insurance_japanvn)
-            ? data?.cargo_insurance_japanvn?.map(() =>
               stepOrder > 5 ? true : false,
             )
+          : Array.isArray(data?.cargo_insurance_japanvn)
+            ? data?.cargo_insurance_japanvn?.map(() =>
+                stepOrder > 5 ? true : false,
+              )
             : [false],
       typeofinsurance: dataFromOrder?.typeofinsurance || '',
     },
@@ -124,7 +124,7 @@ export default function Insurance({
       })
     })
   })
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
@@ -159,7 +159,7 @@ export default function Insurance({
                 (item: IInformationInsurance_policy, index: number) => (
                   <div
                     key={index}
-                    className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem] '
+                    className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]'
                   >
                     <div
                       ref={(el) => {
@@ -174,11 +174,14 @@ export default function Insurance({
                     <FormField
                       control={form.control}
                       name={`order.${index}`}
-                      render={({ field }) => (
+                      render={({field}) => (
                         <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                           <FormControl>
                             <Checkbox
-                              className='size-[1.875rem] border-none bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] xsm:size-[1.5rem] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]'
+                              className={cn(
+                                'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                                'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
+                              )}
                               checked={field.value}
                               onCheckedChange={field.onChange}
                             />
@@ -198,9 +201,9 @@ export default function Insurance({
               )}
 
             {data?.user_chooses && (
-              <div className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] xsm:rounded-[2.125rem] xsm:border-0 xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
+              <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
                 {/* title */}
-                <div className='mb-[1rem]'>
+                <div className='mb-[1rem] sm:mb-[1.25rem]'>
                   <p
                     className={cn(
                       '!font-bold text-[#33A6E8] text-pc-tab-title',
@@ -211,11 +214,11 @@ export default function Insurance({
                   </p>
                   <div
                     className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
-                    dangerouslySetInnerHTML={{ __html: data?.compensation?.desc }}
+                    dangerouslySetInnerHTML={{__html: data?.compensation?.desc}}
                   ></div>
                 </div>
 
-                <div className='flex flex-col space-y-[0.62rem]'>
+                <div className='flex flex-col space-y-[0.75rem]'>
                   {Array.isArray(data?.insurance_types?.list_insurance_types) &&
                     data?.insurance_types?.list_insurance_types?.map(
                       (insuranceItem, insuranceIndex) => (
@@ -223,22 +226,31 @@ export default function Insurance({
                           key={insuranceIndex}
                           control={form.control}
                           name={`typeofinsurance`}
-                          render={({ field }) => {
+                          render={({field}) => {
                             const isChecked =
                               field.value === insuranceItem?.label
 
                             return (
                               <FormItem
                                 className={cn(
-                                  'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] transition-all duration-150 xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem]',
+                                  'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.88rem_0.75rem]',
                                   isChecked
-                                    ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
-                                    : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
+                                    ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                                    : 'border-[#DCDFE4] bg-[#EFEFEF99]',
                                 )}
                               >
                                 <FormControl>
                                   <Checkbox
-                                    className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white transition-all duration-150 flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:!bg-[#EFEFEF99] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
+                                    className={cn(
+                                      'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[#EFEFEF99] shadow-none transition-all duration-200',
+                                      'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                                      // hide default SVG indicator
+                                      '[&_svg]:hidden',
+                                      // Indicator customization
+                                      '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
+                                      '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                      '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                    )}
                                     checked={
                                       field.value === insuranceItem?.label
                                     }
@@ -292,20 +304,13 @@ export default function Insurance({
                 <FormField
                   control={form.control}
                   name={`order.0`}
-                  render={({ field }) => (
+                  render={({field}) => (
                     <FormItem className='relative mt-[1rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                       <FormControl>
                         <Checkbox
                           className={cn(
-                            'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
-                            // mobile
-                            'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:shadow-none xsm:transition-all xsm:duration-150',
-                            // === Khi checked trên mobile ===
-                            'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
-                            // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===
-                            'xsm:[&_svg]:hidden',
-
-                            'xsm:data-[state=checked]:after:absolute xsm:data-[state=checked]:after:left-1/2 xsm:data-[state=checked]:after:top-[40%] xsm:data-[state=checked]:after:h-[0.7rem] xsm:data-[state=checked]:after:w-[0.4rem] xsm:data-[state=checked]:after:-translate-x-1/2 xsm:data-[state=checked]:after:-translate-y-1/2 xsm:data-[state=checked]:after:rotate-45 xsm:data-[state=checked]:after:border-b-[2px] xsm:data-[state=checked]:after:border-r-[2px] xsm:data-[state=checked]:after:border-white xsm:data-[state=checked]:after:content-[""]',
+                            'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                            'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                           )}
                           checked={field.value}
                           onCheckedChange={field.onChange}
@@ -334,7 +339,7 @@ export default function Insurance({
             ) => (
               <div
                 key={index}
-                className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]   '
+                className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]'
               >
                 <p className='mb-[0.88rem] font-montserrat text-[1rem] !font-bold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-pc-sub14s'>
                   {item?.title}
@@ -369,20 +374,13 @@ export default function Insurance({
                 <FormField
                   control={form.control}
                   name={`order.${data?.user_chooses ? index + 1 : index}`}
-                  render={({ field }) => (
+                  render={({field}) => (
                     <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                       <FormControl>
                         <Checkbox
                           className={cn(
-                            'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
-                            // mobile
-                            'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:shadow-none xsm:transition-all xsm:duration-150',
-                            // === Khi checked trên mobile ===
-                            'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
-                            // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===
-                            'xsm:[&_svg]:hidden',
-
-                            'xsm:data-[state=checked]:after:absolute xsm:data-[state=checked]:after:left-1/2 xsm:data-[state=checked]:after:top-[40%] xsm:data-[state=checked]:after:h-[0.7rem] xsm:data-[state=checked]:after:w-[0.4rem] xsm:data-[state=checked]:after:-translate-x-1/2 xsm:data-[state=checked]:after:-translate-y-1/2 xsm:data-[state=checked]:after:rotate-45 xsm:data-[state=checked]:after:border-b-[2px] xsm:data-[state=checked]:after:border-r-[2px] xsm:data-[state=checked]:after:border-white xsm:data-[state=checked]:after:content-[""]',
+                            'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                            'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                           )}
                           checked={field.value}
                           onCheckedChange={field.onChange}
@@ -417,7 +415,7 @@ export default function Insurance({
             className={cn(
               'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
               !form.formState.isValid &&
-              'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+                'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
           >
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>

@@ -212,27 +212,28 @@ export default function FormStepStart({
         onSubmit={form.handleSubmit(onSubmit)}
         className=''
       >
-        <p className='text-[#33A6E8] text-pc-sub16b mb-[1.5rem] xsm:hidden'>
+        <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
           Thông tin gửi hàng
         </p>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem] mb-[1.75rem] xsm:mb-[1.25rem]'>
+        <div className='mb-[1.75rem] flex sm:space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='email'
             render={({field}) => (
+              // email
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
                   Email của bạn(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] xsm:pl-[0.75rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
                     placeholder='Email@email'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
+                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:pl-[0.75rem]'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -328,43 +329,46 @@ export default function FormStepStart({
           />
          */}
         </div>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem] mb-[1.75rem] xsm:mb-[1.25rem]'>
+        <div className='mb-[1.75rem] flex sm:space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-y-[1.25rem]'>
+          {/* name */}
           <FormField
             control={form.control}
             name='name'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
                   Tên người gửi (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] xsm:pl-[0.75rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
                     placeholder='Nhập tên người gửi'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
+
+          {/* facebook */}
           <FormField
             control={form.control}
             name='nameFacebook'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
                   Tên Facebook (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] xsm:pl-[0.75rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
                     placeholder='Nhập tên Facebook'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-                <p className='pl-[0.75rem] text-pc-sub12m text-[rgba(0,0,0,0.80)] !mt-[0.25rem]'>
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
+                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12m'>
                   *Ghi đúng tên Facebook bạn đã dùng để liên hệ Amamy trước đó -
                   Amamy sẽ phản hồi theo tên này.
                 </p>
@@ -372,6 +376,8 @@ export default function FormStepStart({
             )}
           />
         </div>
+
+        {/* services */}
         <FormField
           control={form.control}
           name='shipping'
@@ -382,17 +388,17 @@ export default function FormStepStart({
                   setSelectServiceDimension(true)
                 }
               }}
-              className='flex-1 space-y-0 !mb-[1.25rem]'
+              className='!mb-[1.25rem] flex-1 space-y-0'
             >
-              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
                 Chọn chiều dịch vụ (*)
               </FormLabel>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
-                <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] xsm:pl-[0.75rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                  <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                <FormControl className='!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:pl-[0.75rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
+                  <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
                     {!isMobile && (
                       <SelectValue placeholder='Chọn chiều dịch vụ' />
                     )}
@@ -400,7 +406,7 @@ export default function FormStepStart({
                       <SelectValue placeholder='Chọn chiều dịch vụ' />
                     )}
                     {isMobile && field.value && (
-                      <div className='space-x-[0.75rem] flex items-center flex-1'>
+                      <div className='flex flex-1 items-center space-x-[0.75rem]'>
                         <ImageV2
                           src={
                             selectServiceDimensionValue?.img ||
@@ -412,7 +418,7 @@ export default function FormStepStart({
                           width={100 * 2}
                           className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                         />
-                        <p className=' text-black text-pc-sub14m'>
+                        <p className='text-black text-pc-sub14m'>
                           {selectServiceDimensionValue?.title ||
                             dataInformation?.title}
                         </p>
@@ -420,16 +426,16 @@ export default function FormStepStart({
                     )}
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                   {Array.isArray(data) &&
                     data?.length > 0 &&
                     data?.map((item: ICreateOder, index: number) => (
                       <SelectItem
                         key={index}
-                        className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                        className='flex h-[3rem] cursor-pointer items-center rounded-[1.25rem] bg-white p-[0.75rem]'
                         value={String(item?.id)}
                       >
-                        <div className='space-x-[0.75rem] flex items-center flex-1'>
+                        <div className='flex flex-1 items-center space-x-[0.75rem]'>
                           <ImageV2
                             src={item?.thumbnail || '/order/flag-germany.webp'}
                             alt=''
@@ -445,43 +451,45 @@ export default function FormStepStart({
                     ))}
                 </SelectContent>
               </Select>
-              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
             </FormItem>
           )}
         />
+
+        {/* code */}
         <FormField
           control={form.control}
           name='customercode'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
                 Mã khách hàng (*)
               </FormLabel>
               <FormControl>
                 <Input
-                  className=' shadow-none xsm:h-[2.5rem] aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m xsm:text-mb-13M !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] xsm:pl-[0.75rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
                   placeholder='Nhập mã khách hàng'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m  xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
-              <p className='pl-[0.75rem] !mb-[0.5rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)] !mt-[0.25rem]'>
+              <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
+              <p className='!mb-[0.5rem] !mt-[0.25rem] pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:pl-[0.75rem]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='pl-[0.75rem] text-pc-sub12m !leading-[1.5] !tracking-[-0.0125rem] !font-medium text-[rgba(0,0,0,0.60)]'>
+              <p className='pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:pl-[0.75rem]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khác nhau sẽ giao sai.
               </p>
             </FormItem>
           )}
         />
-        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0'>
+        <div className='space-x-[2rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <Button
             type='submit'
             disabled={isMobile ? false : !form.formState.isValid}
             className={cn(
-              '!shadow-none xsm:w-full sm:w-[50%] hover:bg-[#38B6FF] mt-[1.5rem] xsm:mt-0 ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+              'ml-auto mt-[1.5rem] h-[2.8125rem] rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF] sm:w-[50%] xsm:mt-0 xsm:w-full',
               !form.formState.isValid &&
                 'sm:bg-[#F0F0F0] [&_p]:sm:text-[rgba(0,0,0,0.30)]',
             )}
@@ -499,31 +507,31 @@ export default function FormStepStart({
                 setHowToContactAmamy(false)
               }}
               className={cn(
-                'fixed transition-all ease-in-out duration-700 inset-0 bg-black/0 z-[51] invisible pointer-events-none',
+                'pointer-events-none invisible fixed inset-0 z-[51] bg-black/0 transition-all duration-700 ease-in-out',
                 (selectServiceDimension || howToContactAmamy) &&
-                  'bg-black/50 visible pointer-events-auto',
+                  'pointer-events-auto visible bg-black/50',
               )}
             ></div>
             <div
               className={cn(
-                'fixed transition-all ease-in-out duration-700 shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                'fixed bottom-0 left-0 z-[52] w-full translate-y-full overflow-hidden rounded-t-[1.25rem] bg-white shadow-lg transition-all duration-700 ease-in-out',
                 selectServiceDimension && 'translate-y-0',
               )}
             >
-              <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
-                <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+              <div className='relative border-b-[1px] border-solid border-b-[#DCDFE4] p-[0.5rem] flex-center'>
+                <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                   Chọn chiều dịch vụ
                 </p>
                 <div
                   onClick={() => {
                     setSelectServiceDimension(false)
                   }}
-                  className='absolute top-[0.5rem] right-[0.5rem]'
+                  className='absolute right-[0.5rem] top-[0.5rem]'
                 >
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+              <div className='hidden_scroll max-h-[70vh] space-y-[0.5rem] overflow-hidden overflow-y-auto pb-[2rem]'>
                 {Array.isArray(data) &&
                   data?.length > 0 &&
                   data?.map((item: ICreateOder, index: number) => (
@@ -539,7 +547,7 @@ export default function FormStepStart({
                           })
                           setSelectServiceDimension(false)
                         }}
-                        className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                        className='flex items-center space-x-[0.75rem] bg-white p-[0.75rem]'
                       >
                         <ImageV2
                           src={item?.thumbnail || '/order/flag-germany.webp'}
@@ -548,7 +556,7 @@ export default function FormStepStart({
                           width={50 * 2}
                           className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                         />
-                        <p className='text-black text-pc-sub14m line-clamp-1'>
+                        <p className='line-clamp-1 text-black text-pc-sub14m'>
                           {item?.title}
                         </p>
                       </div>

@@ -200,7 +200,7 @@ export default function FormDeliveryInformation({
         <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
           Thông tin nhận hàng
         </p>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem]'>
+        <div className='flex sm:space-x-[1.25rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='recipientName'

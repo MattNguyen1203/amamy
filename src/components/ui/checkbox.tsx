@@ -18,11 +18,11 @@ const Checkbox = React.forwardRef<
     {...props}
   >
     <CheckboxPrimitive.Indicator
-      className={cn('flex items-center justify-center text-current')}
+      className={cn('flex items-center justify-center text-current text-white')}
     >
       <Check className='h-4 w-4' />
     </CheckboxPrimitive.Indicator>
-    <div className='hidden svg-none-check'>
+    <div className='svg-none-check hidden'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='10'
@@ -32,7 +32,7 @@ const Checkbox = React.forwardRef<
       >
         <path
           d='M1 1H9'
-          stroke='black'
+          stroke='currentColor'
           strokeWidth='2'
           strokeLinecap='round'
         />

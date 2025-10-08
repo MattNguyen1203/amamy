@@ -164,13 +164,13 @@ export default function OrderStepTime({
             dataInformation?.map(
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
-                  <div className='h-full rounded-[1.25rem] bg-white p-[1rem] xsm:rounded-[2rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
-                    <p className='mb-[0.75rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:!font-bold xsm:text-pc-sub14s'>
+                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                    <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:mb-[0.75rem] xsm:!font-bold xsm:text-pc-sub14s'>
                       {item?.time_content}
                     </p>
                     {item?.user_chooses ? (
                       <>
-                        <div className='mb-[0.875rem] space-y-[0.875rem] xsm:mb-[1rem] xsm:mt-[1rem] xsm:space-y-[0.62rem]'>
+                        <div className='mb-[1rem] space-y-[0.75rem] xsm:mt-[1rem] xsm:space-y-[0.62rem]'>
                           {item?.stock_user?.map((stockItem, stockIndex) => (
                             <FormField
                               key={stockIndex}
@@ -183,15 +183,24 @@ export default function OrderStepTime({
                                 return (
                                   <FormItem
                                     className={cn(
-                                      'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.88rem_0.75rem] xsm:transition-all xsm:duration-150',
+                                      'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.88rem_0.75rem]',
                                       isChecked
-                                        ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
-                                        : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
+                                        ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                                        : 'border-[#DCDFE4] bg-[#EFEFEF99]',
                                     )}
                                   >
                                     <FormControl>
                                       <Checkbox
-                                        className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:!bg-[#EFEFEF99] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
+                                        className={cn(
+                                          'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[#EFEFEF99] shadow-none transition-all duration-200',
+                                          'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                                          // hide default SVG indicator
+                                          '[&_svg]:hidden',
+                                          // Indicator customization
+                                          '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
+                                          '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                          '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                        )}
                                         checked={isChecked}
                                         onCheckedChange={(checked) => {
                                           field.onChange(
@@ -242,17 +251,18 @@ export default function OrderStepTime({
                           ))}
                         </div>
                         {item?.note_more && (
-                          <div className='flex flex-col items-start'>
-                            <div className='flex items-center space-x-[0.38rem]'>
+                          <div className='flex flex-col items-start sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] sm:p-[1.5rem_2rem_1.5rem_1.5rem]'>
+                            {/* icon */}
+                            <div className='flex items-center space-x-[0.38rem] sm:mb-[0.63rem] sm:space-x-[0.69rem]'>
                               <span className='flex size-[1.25rem] shrink-0 items-center justify-center rounded-md bg-Blue-Primary'>
-                                <ICMessageQuestion className='size-[0.9rem]' />
+                                <ICMessageQuestion className='size-[1.5rem]' />
                               </span>
-                              <p className='text-[0.875rem] font-bold leading-[1.3125rem] tracking-[-0.02625rem] text-Blue-Primary'>
+                              <p className='text-[0.875rem] font-bold leading-[1.3125rem] tracking-[-0.02625rem] text-Blue-Primary sm:text-[1rem] sm:leading-[1.5rem] sm:tracking-[-0.03rem]'>
                                 LƯU Ý
                               </p>
                             </div>
                             <p
-                              className='mb-[1rem] mt-[0.5rem] [&_*]:!text-[rgba(0,0,0,0.60)] [&_*]:!not-italic text-pc-sub14m [&_*]:list-inside [&_*]:list-disc xsm:marker:[&_ul_li]:text-[0.5rem]'
+                              className='mb-[1rem] mt-[0.5rem] text-pc-sub14m [&_*]:list-inside [&_*]:list-disc [&_*]:!not-italic [&_*]:!text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                               dangerouslySetInnerHTML={{
                                 __html: item?.note_more,
                               }}
@@ -265,7 +275,7 @@ export default function OrderStepTime({
                         ref={(el) => {
                           containerRefs.current[index] = el
                         }}
-                        className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] xsm:[&_*]:!text-[rgba(0,0,0,0.60)] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium [&_a]:text-[#0084FF] [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:not-italic [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                        className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_a]:text-[#0084FF] [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:not-italic [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                         dangerouslySetInnerHTML={{
                           __html: item?.stock || '',
                         }}
@@ -275,19 +285,12 @@ export default function OrderStepTime({
                       control={form.control}
                       name={`policy.${index}`}
                       render={({field}) => (
-                        <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
+                        <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none sm:mt-[1.25rem]'>
                           <FormControl>
                             <Checkbox
                               className={cn(
-                                'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
-                                // mobile
-                                'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:shadow-none xsm:transition-all xsm:duration-150',
-                                // === Khi checked trên mobile ===
-                                'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
-                                // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===
-                                'xsm:[&_svg]:hidden',
-
-                                'xsm:data-[state=checked]:after:absolute xsm:data-[state=checked]:after:left-1/2 xsm:data-[state=checked]:after:top-[40%] xsm:data-[state=checked]:after:h-[0.7rem] xsm:data-[state=checked]:after:w-[0.4rem] xsm:data-[state=checked]:after:-translate-x-1/2 xsm:data-[state=checked]:after:-translate-y-1/2 xsm:data-[state=checked]:after:rotate-45 xsm:data-[state=checked]:after:border-b-[2px] xsm:data-[state=checked]:after:border-r-[2px] xsm:data-[state=checked]:after:border-white xsm:data-[state=checked]:after:content-[""]',
+                                'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                                'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                               )}
                               checked={field.value}
                               onCheckedChange={field.onChange}

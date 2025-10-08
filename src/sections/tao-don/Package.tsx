@@ -254,17 +254,17 @@ export default function Package({
       >
         {data?.list_package && (
           <>
-            <div className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] xsm:rounded-[2.125rem] xsm:border-0 xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
-              <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)]'>
+            <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+              <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] sm:mb-[1.25rem]'>
                 {data?.title || 'Chọn cách đóng gói'}
               </p>
               {data?.note_more && (
                 <p
-                  className='my-[1rem] text-[#F00] text-pc-sub14m [&_ul]:pl-[1rem] [&_ul_li]:list-disc xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
+                  className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></p>
               )}
-              <div className='flex flex-col space-y-[1rem]'>
+              <div className='flex flex-col space-y-[0.75rem]'>
                 {Array.isArray(data?.list_package) &&
                   data?.list_package?.map((packageItem, packageIndex) => (
                     <FormField
@@ -280,15 +280,24 @@ export default function Package({
                         return (
                           <FormItem
                             className={cn(
-                              'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.88rem_0.75rem]',
+                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.88rem_0.75rem]',
                               isChecked
-                                ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
-                                : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
+                                ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                                : 'border-[#DCDFE4] bg-[#EFEFEF99]',
                             )}
                           >
                             <FormControl>
                               <Checkbox
-                                className='size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] !bg-white flex-center data-[state=checked]:!border-[#38B6FF] xsm:border-[#A3DDFF] xsm:!bg-[#EFEFEF99] xsm:shadow-none [&>span]:size-[0.75rem] [&>span]:rounded-[100%] [&>span]:bg-transparent [&>span]:data-[state=checked]:!bg-[#38B6FF] [&_svg]:!hidden'
+                                className={cn(
+                                  'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[#EFEFEF99] shadow-none transition-all duration-200',
+                                  'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                                  // hide default SVG indicator
+                                  '[&_svg]:hidden',
+                                  // Indicator customization
+                                  '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
+                                  '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                  '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                )}
                                 checked={
                                   field.value ===
                                   (packageItem?.separate_request
@@ -331,7 +340,7 @@ export default function Package({
                               {packageItem?.desc && (
                                 <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                   <p
-                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m  xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
+                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
                                     dangerouslySetInnerHTML={{
                                       __html: packageItem?.desc,
                                     }}
@@ -354,7 +363,7 @@ export default function Package({
           name='packageMessage'
           render={({field}) => (
             <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
-              <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m '>
+              <FormLabel className='cursor-pointer pl-[0.75rem] pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m sm:pl-[1rem]'>
                 <p className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Viết yêu cầu của bạn
                 </p>
@@ -363,7 +372,7 @@ export default function Package({
                 <textarea
                   {...field}
                   placeholder='Nhập nội dung'
-                  className='flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50'
+                  className='flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] pl-[0.75rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 sm:pl-[1rem]'
                   style={{
                     height: 'auto',
                     minHeight: '4.5rem',
@@ -397,7 +406,7 @@ export default function Package({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Chọn thông tin thanh toán (*)
                 </FormLabel>
                 <Select
@@ -406,7 +415,7 @@ export default function Package({
                 >
                   <FormControl
                     className={cn(
-                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[0.75rem] !shadow-none aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',
@@ -643,7 +652,7 @@ export default function Package({
                           dangerouslySetInnerHTML={{
                             __html: importantNote || '',
                           }}
-                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
                         ></p>
                       </div>
                     )}
