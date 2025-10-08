@@ -1,20 +1,20 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
 import {
   IInformationInsurance,
   IInformationInsurance_CargoInsuranceJapanvn,
   IInformationInsurance_policy,
 } from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {z} from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import ImageV2 from '@/components/image/ImageV2'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -46,7 +46,7 @@ export default function Insurance({
   type: string
 }) {
   const isMobile = useIsMobile()
-  const {stepOrder, setStepOrder} = useStore((state) => state)
+  const { stepOrder, setStepOrder } = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const FormSchema = z.object({
@@ -72,12 +72,12 @@ export default function Insurance({
           : [false]
         : Array.isArray(data?.compensation?.policy)
           ? data?.compensation?.policy?.map(() =>
-              stepOrder > 5 ? true : false,
-            )
+            stepOrder > 5 ? true : false,
+          )
           : Array.isArray(data?.cargo_insurance_japanvn)
             ? data?.cargo_insurance_japanvn?.map(() =>
-                stepOrder > 5 ? true : false,
-              )
+              stepOrder > 5 ? true : false,
+            )
             : [false],
       typeofinsurance: dataFromOrder?.typeofinsurance || '',
     },
@@ -124,7 +124,7 @@ export default function Insurance({
       })
     })
   })
-  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
@@ -159,7 +159,7 @@ export default function Insurance({
                 (item: IInformationInsurance_policy, index: number) => (
                   <div
                     key={index}
-                    className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]'
+                    className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem] '
                   >
                     <div
                       ref={(el) => {
@@ -174,7 +174,7 @@ export default function Insurance({
                     <FormField
                       control={form.control}
                       name={`order.${index}`}
-                      render={({field}) => (
+                      render={({ field }) => (
                         <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                           <FormControl>
                             <Checkbox
@@ -210,8 +210,8 @@ export default function Insurance({
                     {data?.compensation?.title}
                   </p>
                   <div
-                    className='text-[rgba(0,0,0,0.92)] text-pc-sub14m'
-                    dangerouslySetInnerHTML={{__html: data?.compensation?.desc}}
+                    className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
+                    dangerouslySetInnerHTML={{ __html: data?.compensation?.desc }}
                   ></div>
                 </div>
 
@@ -223,7 +223,7 @@ export default function Insurance({
                           key={insuranceIndex}
                           control={form.control}
                           name={`typeofinsurance`}
-                          render={({field}) => {
+                          render={({ field }) => {
                             const isChecked =
                               field.value === insuranceItem?.label
 
@@ -272,9 +272,9 @@ export default function Insurance({
                                     )}
                                   </div>
                                   {insuranceItem?.desc && (
-                                    <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
+                                    <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                       <p
-                                        className='text-[rgba(0,0,0,0.80)] text-pc-sub14m'
+                                        className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
                                         dangerouslySetInnerHTML={{
                                           __html: insuranceItem?.desc,
                                         }}
@@ -292,7 +292,7 @@ export default function Insurance({
                 <FormField
                   control={form.control}
                   name={`order.0`}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <FormItem className='relative mt-[1rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                       <FormControl>
                         <Checkbox
@@ -334,12 +334,12 @@ export default function Insurance({
             ) => (
               <div
                 key={index}
-                className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]'
+                className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]   '
               >
                 <p className='mb-[0.88rem] font-montserrat text-[1rem] !font-bold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-pc-sub14s'>
                   {item?.title}
                 </p>
-                <div className='flex bg-white sm:space-x-[1rem] xsm:flex-col-reverse'>
+                <div className='flex bg-white sm:space-x-[1rem] xsm:flex-col-reverse xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                   <div
                     ref={(el) => {
                       containerRefs.current[index] = el
@@ -369,11 +369,21 @@ export default function Insurance({
                 <FormField
                   control={form.control}
                   name={`order.${data?.user_chooses ? index + 1 : index}`}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                       <FormControl>
                         <Checkbox
-                          className='size-[1.875rem] border-none bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] xsm:size-[1.5rem] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]'
+                          className={cn(
+                            'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
+                            // mobile
+                            'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:shadow-none xsm:transition-all xsm:duration-150',
+                            // === Khi checked trên mobile ===
+                            'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
+                            // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===
+                            'xsm:[&_svg]:hidden',
+
+                            'xsm:data-[state=checked]:after:absolute xsm:data-[state=checked]:after:left-1/2 xsm:data-[state=checked]:after:top-[40%] xsm:data-[state=checked]:after:h-[0.7rem] xsm:data-[state=checked]:after:w-[0.4rem] xsm:data-[state=checked]:after:-translate-x-1/2 xsm:data-[state=checked]:after:-translate-y-1/2 xsm:data-[state=checked]:after:rotate-45 xsm:data-[state=checked]:after:border-b-[2px] xsm:data-[state=checked]:after:border-r-[2px] xsm:data-[state=checked]:after:border-white xsm:data-[state=checked]:after:content-[""]',
+                          )}
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
@@ -407,7 +417,7 @@ export default function Insurance({
             className={cn(
               'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
               !form.formState.isValid &&
-                'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+              'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
           >
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>

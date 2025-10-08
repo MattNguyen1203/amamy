@@ -442,7 +442,7 @@ export default function FormDeliveryInformationAboutVN({
                   />
                 </FormControl>
                 {formDeliveryInformation.descFieldName && (
-                  <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                  <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] '>
                     {formDeliveryInformation.descFieldName}
                   </p>
                 )}

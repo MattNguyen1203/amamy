@@ -260,7 +260,7 @@ export default function Package({
               </p>
               {data?.note_more && (
                 <p
-                  className='my-[1rem] text-[#F00] text-pc-sub14m [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
+                  className='my-[1rem] text-[#F00] text-pc-sub14m [&_ul]:pl-[1rem] [&_ul_li]:list-disc xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></p>
               )}
@@ -280,7 +280,7 @@ export default function Package({
                         return (
                           <FormItem
                             className={cn(
-                              'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem]',
+                              'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.88rem_0.75rem]',
                               isChecked
                                 ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
                                 : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
@@ -329,9 +329,9 @@ export default function Package({
                                 )}
                               </div>
                               {packageItem?.desc && (
-                                <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
+                                <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                   <p
-                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m'
+                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m  xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
                                     dangerouslySetInnerHTML={{
                                       __html: packageItem?.desc,
                                     }}
@@ -354,7 +354,7 @@ export default function Package({
           name='packageMessage'
           render={({field}) => (
             <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
-              <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
+              <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m '>
                 <p className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Viết yêu cầu của bạn
                 </p>
@@ -643,7 +643,7 @@ export default function Package({
                           dangerouslySetInnerHTML={{
                             __html: importantNote || '',
                           }}
-                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
                         ></p>
                       </div>
                     )}

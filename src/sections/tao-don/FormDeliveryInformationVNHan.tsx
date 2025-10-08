@@ -141,7 +141,7 @@ export default function FormDeliveryInformationVNHan({
                     {...field}
                   />
                 </FormControl>
-                <FormDescription className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <FormDescription className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] '>
                   *Tên người nhận phải trùng khớp với mã thông quan, nếu không
                   khớp sẽ giao sai.
                 </FormDescription>
@@ -269,7 +269,7 @@ export default function FormDeliveryInformationVNHan({
                   />
                 </FormControl>
                 <FormMessage className='pl-[0.75rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] !text-[#F00] text-pc-sub12m' />
-                <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+                <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                   *Mã thông quan: P828*****888, <br />
                   *CMT: 96*********27: *ID:***213 <br />
                   <span className='text-[#F00]'>

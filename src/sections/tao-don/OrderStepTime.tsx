@@ -183,7 +183,7 @@ export default function OrderStepTime({
                                 return (
                                   <FormItem
                                     className={cn(
-                                      'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.625rem_0.75rem] xsm:transition-all xsm:duration-150',
+                                      'relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-[0px] xsm:rounded-[2rem] xsm:border-[1.2px] xsm:p-[0.88rem_0.75rem] xsm:transition-all xsm:duration-150',
                                       isChecked
                                         ? 'xsm:border-[#38B6FF] xsm:bg-[#F1F9FF]'
                                         : 'xsm:border-transparent xsm:bg-[#EFEFEF99]',
@@ -225,7 +225,7 @@ export default function OrderStepTime({
                                         )}
                                       </div>
                                       {stockItem?.desc && (
-                                        <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.1rem]'>
+                                        <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.1rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                           <p
                                             className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[rgba(0,0,0,0.60)]'
                                             dangerouslySetInnerHTML={{
@@ -252,7 +252,7 @@ export default function OrderStepTime({
                               </p>
                             </div>
                             <p
-                              className='mb-[1rem] mt-[0.5rem] text-[#F00] text-pc-sub14m'
+                              className='mb-[1rem] mt-[0.5rem] [&_*]:!text-[rgba(0,0,0,0.60)] [&_*]:!not-italic text-pc-sub14m [&_*]:list-inside [&_*]:list-disc xsm:marker:[&_ul_li]:text-[0.5rem]'
                               dangerouslySetInnerHTML={{
                                 __html: item?.note_more,
                               }}
@@ -265,7 +265,7 @@ export default function OrderStepTime({
                         ref={(el) => {
                           containerRefs.current[index] = el
                         }}
-                        className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium [&_a]:text-[#0084FF] [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:not-italic [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                        className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] xsm:[&_*]:!text-[rgba(0,0,0,0.60)] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium [&_a]:text-[#0084FF] [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:not-italic [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
                         dangerouslySetInnerHTML={{
                           __html: item?.stock || '',
                         }}

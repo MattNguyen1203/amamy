@@ -1,14 +1,14 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import {cn} from '@/lib/utils'
-import {IInformationNoteOrder} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {z} from 'zod'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
+import { cn } from '@/lib/utils'
+import { IInformationNoteOrder } from '@/sections/tao-don/oder.interface'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -44,7 +44,7 @@ export default function CeateNote({
       }),
     ),
   })
-  const {stepOrder, setStepOrder} = useStore((state) => state)
+  const { stepOrder, setStepOrder } = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -106,7 +106,7 @@ export default function CeateNote({
       setTriggerScroll(true)
     }
   }, [])
-  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
@@ -163,7 +163,7 @@ export default function CeateNote({
                   ref={(el) => {
                     containerRefs.current[index] = el
                   }}
-                  className='[&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem]'
+                  className='[&_a]:text-[#0084FF] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]   mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem]'
                   dangerouslySetInnerHTML={{
                     __html: item?.text || '',
                   }}
@@ -171,12 +171,21 @@ export default function CeateNote({
                 <FormField
                   control={form.control}
                   name={`note.${index}`}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
                       <FormControl>
                         <Checkbox
-                          className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
-                          checked={field.value}
+                          className={cn(
+                            'size-[1.875rem] border-[0px] bg-[#FFEC1F] text-[#000000] flex-center data-[state=checked]:bg-[#FFEC1F] data-[state=checked]:text-[#000000] [&>span>svg]:size-[1.25rem] [&_.svg-none-check]:aria-[checked=false]:block [&_svg]:size-[1rem]',
+                            // mobile
+                            'xsm:relative xsm:aspect-square xsm:size-[1.25rem] xsm:rounded-[0.375rem] xsm:border-[1.5px] xsm:border-[#A3DDFF] xsm:bg-white xsm:shadow-none xsm:transition-all xsm:duration-150',
+                            // === Khi checked trên mobile ===
+                            'xsm:data-[state=checked]:border-[#38B6FF] xsm:data-[state=checked]:bg-[#38B6FF]',
+                            // === Ẩn SVG mặc định và tạo custom tick bằng pseudo ===
+                            'xsm:[&_svg]:hidden',
+
+                            'xsm:data-[state=checked]:after:absolute xsm:data-[state=checked]:after:left-1/2 xsm:data-[state=checked]:after:top-[40%] xsm:data-[state=checked]:after:h-[0.7rem] xsm:data-[state=checked]:after:w-[0.4rem] xsm:data-[state=checked]:after:-translate-x-1/2 xsm:data-[state=checked]:after:-translate-y-1/2 xsm:data-[state=checked]:after:rotate-45 xsm:data-[state=checked]:after:border-b-[2px] xsm:data-[state=checked]:after:border-r-[2px] xsm:data-[state=checked]:after:border-white xsm:data-[state=checked]:after:content-[""]',
+                          )}
                           onCheckedChange={field.onChange}
                         />
                       </FormControl>
@@ -208,7 +217,7 @@ export default function CeateNote({
               className={cn(
                 '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
                 !form.formState.isValid &&
-                  'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+                'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
               )}
             >
               <p className='text-white text-pc-sub16m'>Tiếp tục</p>

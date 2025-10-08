@@ -155,7 +155,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     <>
       <Tabs
         value={currentTab}
-        className='flex bg-white pb-[5rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem]'
+        className='flex xsm:pb-[5rem] bg-white pb-[5rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem]'
       >
         {/* desktop */}
         {!isMobile && (
