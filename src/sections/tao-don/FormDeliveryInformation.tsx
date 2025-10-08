@@ -206,20 +206,20 @@ export default function FormDeliveryInformation({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0 xsm:-mt-[1.25rem]'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Tên người nhận(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
-                <p className='!mt-[0.25rem] pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+                <p className='!mt-[0.25rem] pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m sm:pl-[1rem]'>
                   {formDeliveryInformation.descFieldName}
                 </p>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem]' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem]' />
               </FormItem>
             )}
           />
@@ -228,17 +228,17 @@ export default function FormDeliveryInformation({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Số điện thoại người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[0.75rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -254,7 +254,7 @@ export default function FormDeliveryInformation({
                 }}
                 className='flex-1 space-y-0'
               >
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Chọn quốc gia (*)
                 </FormLabel>
                 <Select
@@ -262,7 +262,7 @@ export default function FormDeliveryInformation({
                   defaultValue={field.value}
                 >
                   <FormControl className='!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
-                    <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
+                    <SelectTrigger className='h-[3rem] pl-[0.75rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 sm:pl-[1rem] xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
                       {!isMobile && <SelectValue placeholder='Chọn quốc gia' />}
                       {isMobile && !field.value && (
                         <SelectValue placeholder='Chọn quốc gia' />
@@ -321,7 +321,7 @@ export default function FormDeliveryInformation({
                     )}
                   </SelectContent>
                 </Select>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -331,23 +331,23 @@ export default function FormDeliveryInformation({
           name='recipientAddress'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                 Địa chỉ (*)
               </FormLabel>
               <FormControl>
                 <Input
-                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[0.75rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
                   placeholder='Etage 4, Ha Restaurant, Hotel A, Nails B...'
                   {...field}
                 />
               </FormControl>
               {dataFromOrder?.shipping === '326' && (
-                <p className='!mt-[0.25rem] pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+                <p className='!mt-[0.25rem] pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m sm:pl-[1rem]'>
                   *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số
                   tầng, số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
                 </p>
               )}
-              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+              <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
             </FormItem>
           )}
         />
@@ -357,19 +357,19 @@ export default function FormDeliveryInformation({
             name='roadName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Tên đường(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[0.75rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldStreetName
                     }
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -378,19 +378,19 @@ export default function FormDeliveryInformation({
             name='housingNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Số nhà (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[0.75rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldHouseNumber
                     }
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -401,19 +401,19 @@ export default function FormDeliveryInformation({
             name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Thành phố(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[0.75rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldCityName
                     }
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -422,19 +422,19 @@ export default function FormDeliveryInformation({
             name='recipientCodeCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
                   Mã thành phố(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[0.75rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldCityCode
                     }
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m sm:pl-[1rem] xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
