@@ -133,7 +133,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
             setHideHeader(true)
           } else {
             setHideHeader(false)

@@ -285,7 +285,7 @@ export default function Package({
                               'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.88rem_0.75rem]',
                               isChecked
                                 ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                                : 'border-[#DCDFE4] bg-[#EFEFEF99]',
+                                : 'border-transparent bg-[#EFEFEF99]',
                             )}
                           >
                             <FormControl>
