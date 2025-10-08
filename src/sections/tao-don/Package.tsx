@@ -254,12 +254,12 @@ export default function Package({
       >
         {data?.list_package && (
           <>
+            {!isMobile && (
+              <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[#33A6E8] sm:mb-[1.25rem]'>
+                {data?.title || 'Chọn cách đóng gói'}
+              </p>
+            )}
             <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
-              {!isMobile && (
-                <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] sm:mb-[1.25rem]'>
-                  {data?.title || 'Chọn cách đóng gói'}
-                </p>
-              )}
               {data?.note_more && (
                 <p
                   className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'

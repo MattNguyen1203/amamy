@@ -151,6 +151,9 @@ export default function Insurance({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
       >
+        <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
+          Bảo hiểm hàng hóa
+        </p>
         {data?.compensation && (
           <>
             {!data?.user_chooses &&
