@@ -155,7 +155,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     <>
       <Tabs
         value={currentTab}
-        className='flex xsm:pb-[5rem] bg-white pb-[5rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem]'
+        className='flex bg-white pb-[5rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem] xsm:pb-[5rem]'
       >
         {/* desktop */}
         {!isMobile && (
@@ -213,9 +213,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {isMobile && (
           <TabsList
             className={cn(
-              'z-[49] flex h-max w-full flex-col space-y-[0.5rem] rounded-[2rem] bg-white p-[1rem] transition-all duration-150 ease-in-out sm:hidden xsm:p-0',
+              'ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity fixed inset-x-[0.75rem] top-[4.25rem] z-[49] flex h-max flex-col space-y-[0.5rem] rounded-[2rem] bg-white p-0 shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] transition-all duration-200 will-change-transform sm:hidden',
               hideHeader
-                ? 'pointer-events-none -translate-y-full opacity-0'
+                ? 'pointer-events-none -translate-y-[110%] opacity-0'
                 : 'translate-y-0 opacity-100',
             )}
           >
@@ -228,7 +228,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             </div>
 
             {/* steps */}
-            <div className='relative w-full px-[0.8125rem]'>
+            <div className='relative w-full px-[1.05rem]'>
               {/* progress line */}
               <div
                 className={cn(
@@ -282,7 +282,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
             </div>
 
             {/* section title */}
-            <div className='flex w-full items-start p-[0.25rem_1rem_0.75rem_1rem]'>
+            <div className='flex w-full items-start p-[0.25rem_0.8125rem_0.75rem_1rem]'>
               <p className='flex-1 text-[0.875rem] font-semibold leading-[1.1375rem] tracking-[-0.02625rem] text-[#33A6E8]'>
                 {StepForm[indexTab]?.title || ''}
               </p>
@@ -290,7 +290,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </TabsList>
         )}
 
-        <div className='flex-1 rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:bg-[#FAFAFA] xsm:p-[1rem_0rem]'>
+        <div className='flex-1 rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:mt-[8rem] xsm:bg-[#FAFAFA] xsm:p-[1rem_0rem]'>
           {!isMobile && (
             <h1 className='mb-[1.5rem] text-black text-pc-heading20b'>
               Tạo đơn hàng

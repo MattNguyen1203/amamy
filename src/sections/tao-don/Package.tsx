@@ -250,14 +250,16 @@ export default function Package({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.5rem] pb-[4rem] xsm:space-y-[0.75rem]'
+        className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
       >
         {data?.list_package && (
           <>
             <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
-              <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] sm:mb-[1.25rem]'>
-                {data?.title || 'Chọn cách đóng gói'}
-              </p>
+              {!isMobile && (
+                <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] sm:mb-[1.25rem]'>
+                  {data?.title || 'Chọn cách đóng gói'}
+                </p>
+              )}
               {data?.note_more && (
                 <p
                   className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
@@ -338,7 +340,7 @@ export default function Package({
                                 )}
                               </div>
                               {packageItem?.desc && (
-                                <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                                <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                   <p
                                     className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
                                     dangerouslySetInnerHTML={{

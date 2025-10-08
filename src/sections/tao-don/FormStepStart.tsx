@@ -208,10 +208,7 @@ export default function FormStepStart({
   }
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className=''
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
           Thông tin gửi hàng
         </p>
@@ -222,18 +219,18 @@ export default function FormStepStart({
             render={({field}) => (
               // email
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Email của bạn(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:text-mb-13M'
                     placeholder='Email@email'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
-                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:pl-[0.75rem]'>
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -336,17 +333,17 @@ export default function FormStepStart({
             name='name'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người gửi (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:text-mb-13M'
                     placeholder='Nhập tên người gửi'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -357,17 +354,17 @@ export default function FormStepStart({
             name='nameFacebook'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên Facebook (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:text-mb-13M'
                     placeholder='Nhập tên Facebook'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
                 <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12m'>
                   *Ghi đúng tên Facebook bạn đã dùng để liên hệ Amamy trước đó -
                   Amamy sẽ phản hồi theo tên này.
@@ -390,14 +387,14 @@ export default function FormStepStart({
               }}
               className='!mb-[1.25rem] flex-1 space-y-0'
             >
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Chọn chiều dịch vụ (*)
               </FormLabel>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
-                <FormControl className='!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:pl-[0.75rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
+                <FormControl className='!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
                   <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
                     {!isMobile && (
                       <SelectValue placeholder='Chọn chiều dịch vụ' />
@@ -462,22 +459,22 @@ export default function FormStepStart({
           name='customercode'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:pl-[0.75rem]'>
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Mã khách hàng (*)
               </FormLabel>
               <FormControl>
                 <Input
-                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] xsm:h-[2.5rem] xsm:pl-[0.75rem] xsm:text-mb-13M'
+                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:text-mb-13M'
                   placeholder='Nhập mã khách hàng'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:pl-[0.75rem] xsm:text-mb-sub10m' />
-              <p className='!mb-[0.5rem] !mt-[0.25rem] pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:pl-[0.75rem]'>
+              <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
+              <p className='!mb-[0.5rem] !mt-[0.25rem] pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:pl-[0.75rem]'>
+              <p className='pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khác nhau sẽ giao sai.
               </p>

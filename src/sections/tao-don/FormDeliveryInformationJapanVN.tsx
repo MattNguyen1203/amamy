@@ -306,28 +306,30 @@ export default function FormDeliveryInformationJapanVN({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
+        className='space-y-[1.75rem] xsm:-mt-4 xsm:space-y-[1.25rem]'
       >
-        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
-          Thông tin nhận hàng
-        </p>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+        {!isMobile && (
+          <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:!mb-[1rem]'>
+            Thông tin nhận hàng
+          </p>
+        )}
+        <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder={'Tên người nhận'}
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
@@ -336,17 +338,17 @@ export default function FormDeliveryInformationJapanVN({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -356,7 +358,7 @@ export default function FormDeliveryInformationJapanVN({
           name='recipientAddressType'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ nhận hàng tại Việt Nam (*)
               </FormLabel>
               <FormControl>
@@ -366,7 +368,7 @@ export default function FormDeliveryInformationJapanVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='flex pl-[0.75rem] !my-[0.75rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
+                  className='!my-[0.75rem] flex pl-[1rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]'
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
                     <FormControl>
@@ -377,7 +379,7 @@ export default function FormDeliveryInformationJapanVN({
                     </FormControl>
                     <FormLabel
                       htmlFor='r1'
-                      className='font-normal cursor-pointer'
+                      className='cursor-pointer font-normal'
                     >
                       Nhận tại địa chỉ đăng ký
                     </FormLabel>
@@ -391,7 +393,7 @@ export default function FormDeliveryInformationJapanVN({
                     </FormControl>
                     <FormLabel
                       htmlFor='r2'
-                      className='font-normal cursor-pointer'
+                      className='cursor-pointer font-normal'
                     >
                       Nhận tại cửa hàng Amamy
                     </FormLabel>
@@ -406,26 +408,26 @@ export default function FormDeliveryInformationJapanVN({
           control={form.control}
           name='recipientAddress'
           render={({field}) => (
-            <FormItem className={cn('flex-1 space-y-0 !mt-0')}>
+            <FormItem className={cn('!mt-0 flex-1 space-y-0')}>
               <FormControl>
                 <Input
                   disabled={
                     recipientAddressType === 'atAmamyStore' ? true : false
                   }
-                  className='shadow-none disabled:opacity-[1] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] disabled:opacity-[1] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                   placeholder={'Nhập địa chỉ nhận hàng tại Việt Nam'}
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='pl-[0.75rem] !mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] '>
+              <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m' />
+              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
                 *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>
             </FormItem>
           )}
         />
         {recipientAddressType !== 'atAmamyStore' && (
-          <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+          <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
             <FormField
               control={form.control}
               name='recipientCity'
@@ -434,14 +436,14 @@ export default function FormDeliveryInformationJapanVN({
                   onClick={() => {
                     setIsCity(true)
                   }}
-                  className='flex flex-col flex-1 space-y-0'
+                  className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Tỉnh/Thành phố (*)
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1] !shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                      <FormControl className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
                         <Button
                           variant='outline'
                           role='combobox'
@@ -508,7 +510,7 @@ export default function FormDeliveryInformationJapanVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
                 </FormItem>
               )}
             />
@@ -520,14 +522,14 @@ export default function FormDeliveryInformationJapanVN({
                   onClick={() => {
                     setIsDistrict(true)
                   }}
-                  className='flex flex-col flex-1 space-y-0'
+                  className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Quận Huyện (*)
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1] !shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                      <FormControl className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
                         <Button
                           variant='outline'
                           role='combobox'
@@ -592,7 +594,7 @@ export default function FormDeliveryInformationJapanVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
                 </FormItem>
               )}
             />
@@ -604,14 +606,14 @@ export default function FormDeliveryInformationJapanVN({
                   onClick={() => {
                     setIsWard(true)
                   }}
-                  className='flex flex-col flex-1 space-y-0'
+                  className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Phường Xã (*)
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1] !shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                      <FormControl className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
                         <Button
                           variant='outline'
                           role='combobox'
@@ -666,28 +668,28 @@ export default function FormDeliveryInformationJapanVN({
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                  <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
                 </FormItem>
               )}
             />
           </div>
         )}
 
-        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+        <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)
               handleClickcurrentTab(prevStep)
             }}
-            className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+            className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
           >
-            <p className='text-pc-sub16m text-black'>Quay lại</p>
+            <p className='text-black text-pc-sub16m'>Quay lại</p>
           </div>
           <Button
             type='submit'
             disabled={!form.formState.isValid}
             className={cn(
-              '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+              'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
               !form.formState.isValid &&
                 'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
@@ -704,31 +706,31 @@ export default function FormDeliveryInformationJapanVN({
                 setIsWard(false)
               }}
               className={cn(
-                '!mt-0 fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none invisible',
+                'pointer-events-none invisible fixed inset-0 z-[51] !mt-0 bg-black/0 transition-all duration-700 ease-in-out',
                 (isCity || isDistrict || isWard) &&
-                  'bg-black/50 pointer-events-auto visible',
+                  'pointer-events-auto visible bg-black/50',
               )}
             ></div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                'fixed bottom-0 left-0 z-[52] !mt-0 w-full translate-y-full overflow-hidden rounded-t-[1.25rem] bg-white shadow-lg transition-all duration-700 ease-in-out',
                 isCity && 'translate-y-0',
               )}
             >
-              <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
-                <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+              <div className='relative border-b-[1px] border-solid border-b-[#DCDFE4] p-[0.5rem] flex-center'>
+                <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                   Chọn Tỉnh/Thành phố
                 </p>
                 <div
                   onClick={() => {
                     setIsCity(false)
                   }}
-                  className='absolute top-[0.5rem] right-[0.5rem]'
+                  className='absolute right-[0.5rem] top-[0.5rem]'
                 >
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+              <div className='hidden_scroll max-h-[70vh] space-y-[0.5rem] overflow-hidden overflow-y-auto pb-[2rem]'>
                 <Command>
                   <CommandInput placeholder='Tỉnh/Thành phố...' />
                   <CommandList>
@@ -769,24 +771,24 @@ export default function FormDeliveryInformationJapanVN({
             </div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                'fixed bottom-0 left-0 z-[52] !mt-0 w-full translate-y-full overflow-hidden rounded-t-[1.25rem] bg-white shadow-lg transition-all duration-700 ease-in-out',
                 isDistrict && 'translate-y-0',
               )}
             >
-              <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
-                <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+              <div className='relative border-b-[1px] border-solid border-b-[#DCDFE4] p-[0.5rem] flex-center'>
+                <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                   Chọn Quận Huyện
                 </p>
                 <div
                   onClick={() => {
                     setIsDistrict(false)
                   }}
-                  className='absolute top-[0.5rem] right-[0.5rem]'
+                  className='absolute right-[0.5rem] top-[0.5rem]'
                 >
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+              <div className='hidden_scroll max-h-[70vh] space-y-[0.5rem] overflow-hidden overflow-y-auto pb-[2rem]'>
                 <Command>
                   <CommandInput placeholder='Tìm Quận Huyện...' />
                   <CommandList>
@@ -825,24 +827,24 @@ export default function FormDeliveryInformationJapanVN({
             </div>
             <div
               className={cn(
-                '!mt-0 fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                'fixed bottom-0 left-0 z-[52] !mt-0 w-full translate-y-full overflow-hidden rounded-t-[1.25rem] bg-white shadow-lg transition-all duration-700 ease-in-out',
                 isWard && 'translate-y-0',
               )}
             >
-              <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
-                <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+              <div className='relative border-b-[1px] border-solid border-b-[#DCDFE4] p-[0.5rem] flex-center'>
+                <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                   Chọn Phường xã
                 </p>
                 <div
                   onClick={() => {
                     setIsWard(false)
                   }}
-                  className='absolute top-[0.5rem] right-[0.5rem]'
+                  className='absolute right-[0.5rem] top-[0.5rem]'
                 >
                   <ICX className='size-[1.5rem]' />
                 </div>
               </div>
-              <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+              <div className='hidden_scroll max-h-[70vh] space-y-[0.5rem] overflow-hidden overflow-y-auto pb-[2rem]'>
                 <Command>
                   <CommandInput placeholder='Tìm Phường Xã...' />
                   <CommandList>

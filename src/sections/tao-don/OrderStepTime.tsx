@@ -154,7 +154,7 @@ export default function OrderStepTime({
     }
   }
   return (
-    <div className='space-y-[1.5rem] pb-[4rem] xsm:space-y-[0.75rem]'>
+    <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -165,12 +165,14 @@ export default function OrderStepTime({
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
                   <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
-                    <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:mb-[0.75rem] xsm:!font-bold xsm:text-pc-sub14s'>
-                      {item?.time_content}
-                    </p>
+                    {!isMobile && (
+                      <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:mb-[0.75rem] xsm:!font-bold xsm:text-pc-sub14s'>
+                        {item?.time_content}
+                      </p>
+                    )}
                     {item?.user_chooses ? (
                       <>
-                        <div className='mb-[1rem] space-y-[0.75rem] xsm:mt-[1rem] xsm:space-y-[0.62rem]'>
+                        <div className='mb-[1rem] space-y-[0.75rem] xsm:space-y-[0.62rem]'>
                           {item?.stock_user?.map((stockItem, stockIndex) => (
                             <FormField
                               key={stockIndex}
@@ -234,7 +236,7 @@ export default function OrderStepTime({
                                         )}
                                       </div>
                                       {stockItem?.desc && (
-                                        <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.1rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                                        <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                           <p
                                             className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[rgba(0,0,0,0.60)]'
                                             dangerouslySetInnerHTML={{
@@ -251,7 +253,7 @@ export default function OrderStepTime({
                           ))}
                         </div>
                         {item?.note_more && (
-                          <div className='flex flex-col items-start sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] sm:p-[1.5rem_2rem_1.5rem_1.5rem]'>
+                          <div className='flex flex-col items-start sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] sm:p-[1.5rem_2rem_1.5rem_1.5rem] xsm:mb-[1rem] xsm:mt-[1.5rem]'>
                             {/* icon */}
                             <div className='flex items-center space-x-[0.38rem] sm:mb-[0.63rem] sm:space-x-[0.69rem]'>
                               <span className='flex size-[1.25rem] shrink-0 items-center justify-center rounded-md bg-Blue-Primary'>
@@ -262,7 +264,7 @@ export default function OrderStepTime({
                               </p>
                             </div>
                             <p
-                              className='mb-[1rem] mt-[0.5rem] text-pc-sub14m [&_*]:list-inside [&_*]:list-disc [&_*]:!not-italic [&_*]:!text-[rgba(0,0,0,0.60)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                              className='mb-[1rem] mt-[0.5rem] text-pc-sub14m xsm:text-[0.75rem] xsm:font-medium xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem] xsm:text-[rgba(0,0,0,0.80)] [&_*]:list-inside [&_*]:list-disc xsm:marker:[&_ul_li]:text-[0.5rem]'
                               dangerouslySetInnerHTML={{
                                 __html: item?.note_more,
                               }}

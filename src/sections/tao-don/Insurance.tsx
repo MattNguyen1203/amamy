@@ -149,7 +149,7 @@ export default function Insurance({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.5rem] pb-[4rem] xsm:space-y-[0.75rem]'
+        className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
       >
         {data?.compensation && (
           <>
@@ -201,7 +201,7 @@ export default function Insurance({
               )}
 
             {data?.user_chooses && (
-              <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+              <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] pl-[1rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
                 {/* title */}
                 <div className='mb-[1rem] sm:mb-[1.25rem]'>
                   <p
@@ -284,7 +284,7 @@ export default function Insurance({
                                     )}
                                   </div>
                                   {insuranceItem?.desc && (
-                                    <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                                    <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                       <p
                                         className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
                                         dangerouslySetInnerHTML={{

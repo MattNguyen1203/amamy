@@ -126,11 +126,11 @@ export default function CeateNote({
   }
   return (
     <div className=''>
-      <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:mb-[0.75rem]'>
+      <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:mb-[0.75rem] xsm:hidden'>
         Lưu ý quan trọng khi gửi hàng
       </p>
       {type === 'nhatviet' && (
-        <div className='mb-[1.75rem] mt-[1.75rem]'>
+        <div className='mb-[1.75rem] mt-[1.75rem] xsm:pl-[1rem]'>
           <div className='mb-[0.75rem] text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
             Lưu ý quan trọng về mã bưu điện nội địa Nhật
           </div>

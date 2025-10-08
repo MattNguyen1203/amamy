@@ -136,11 +136,13 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
     }
   }, [dataInformation, form.getValues('branch')])
   return (
-    <div className='xsm:px-[0rem] sm:px-[8.5rem] pb-[1.5rem] pt-[1.5rem]'>
-      <div className='min-h-[80vh] bg-[#F8F8F8] xsm:bg-[#FAFAFA] p-[1.5rem] xsm:p-[1rem] rounded-[1.25rem] space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-        <h1 className='text-[#33A6E8] text-pc-heading20b xsm:text-[1rem]'>
-          Hướng dẫn gửi hàng lên Amamy Post
-        </h1>
+    <div className='pb-[1.5rem] pt-[1.5rem] sm:px-[8.5rem] xsm:px-[0rem]'>
+      <div className='min-h-[80vh] space-y-[1.5rem] rounded-[1.25rem] bg-[#F8F8F8] p-[1.5rem] xsm:space-y-[0.75rem] xsm:bg-[#FAFAFA] xsm:p-[1rem]'>
+        {!isMobile && (
+          <h1 className='text-[#33A6E8] text-pc-heading20b xsm:text-[1rem]'>
+            Hướng dẫn gửi hàng lên Amamy Post
+          </h1>
+        )}
         <Form {...form}>
           <form
             onSubmit={() => {}}
@@ -157,7 +159,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                       document.body.style.overflow = 'hidden'
                     }
                   }}
-                  className='flex-1 space-y-0 !mb-[1.25rem]'
+                  className='!mb-[1.25rem] flex-1 space-y-0'
                 >
                   <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                     Chọn chiều dịch vụ (*)
@@ -173,8 +175,8 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                     }}
                     defaultValue={field.value}
                   >
-                    <FormControl className='xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]'>
-                      <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    <FormControl className='!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
+                      <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
                         {!isMobile && (
                           <SelectValue placeholder='Chọn chiều dịch vụ' />
                         )}
@@ -182,7 +184,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                           <SelectValue placeholder='Chọn chiều dịch vụ' />
                         )}
                         {isMobile && field.value && (
-                          <div className='space-x-[0.75rem] flex items-center flex-1'>
+                          <div className='flex flex-1 items-center space-x-[0.75rem]'>
                             <ImageV2
                               src={selectServiceDimensionValue?.img || ''}
                               alt=''
@@ -190,14 +192,14 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                               width={100 * 2}
                               className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                             />
-                            <p className=' text-black text-pc-sub14m'>
+                            <p className='text-black text-pc-sub14m'>
                               {selectServiceDimensionValue?.title}
                             </p>
                           </div>
                         )}
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                    <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                       {Array.isArray(data) &&
                         data?.length > 0 &&
                         data?.map(
@@ -205,10 +207,10 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                             !item?.information?.hidden_shipping && (
                               <SelectItem
                                 key={index}
-                                className='cursor-pointer h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                                className='flex h-[3rem] cursor-pointer items-center rounded-[1.25rem] bg-white p-[0.75rem]'
                                 value={String(item?.id)}
                               >
-                                <div className='space-x-[0.75rem] flex items-center flex-1'>
+                                <div className='flex flex-1 items-center space-x-[0.75rem]'>
                                   <ImageV2
                                     src={
                                       item?.thumbnail ||
@@ -260,7 +262,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                         >
                           <FormControl
                             className={cn(
-                              '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                              '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                               dataInformation?.information?.instruct
                                 ?.select_branch &&
                                 dataInformation?.information?.instruct
@@ -268,7 +270,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                 '[&_svg]:hidden',
                             )}
                           >
-                            <SelectTrigger className='!shadow-none [&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-time]:hidden [&_.select-phone]:hidden xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                            <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-phone]:hidden [&_.select-time]:hidden [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
                               {!isMobile && (
                                 <SelectValue placeholder='Các chi nhánh' />
                               )}
@@ -276,15 +278,15 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                 <SelectValue placeholder='Các chi nhánh' />
                               )}
                               {isMobile && field.value && selectBranchValue && (
-                                <div className='space-x-[0.75rem] flex items-center flex-1'>
-                                  <p className='text-black text-pc-sub14m '>
+                                <div className='flex flex-1 items-center space-x-[0.75rem]'>
+                                  <p className='text-black text-pc-sub14m'>
                                     {selectBranchValue || 'Các chi nhánh'}
                                   </p>
                                 </div>
                               )}
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                          <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                             {Array.isArray(
                               dataInformation?.information?.instruct
                                 ?.select_branch,
@@ -298,41 +300,41 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                 ) => (
                                   <SelectItem
                                     key={index}
-                                    className='[&>span>span>svg]:hidden cursor-pointer h-auto rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                                    className='flex h-auto cursor-pointer items-center rounded-[1.25rem] bg-white p-[0.75rem] [&>span>span>svg]:hidden'
                                     value={String(item?.title)}
                                   >
                                     <div className='flex-1 space-y-[0.75rem]'>
-                                      <p className='text-pc-tab-title text-black'>
+                                      <p className='text-black text-pc-tab-title'>
                                         <span className='amamy-post'>
                                           Amamy Post{' '}
                                         </span>
                                         <span>{item?.title}</span>
                                       </p>
-                                      <div className='select-addres flex space-x-[0.5rem] items-start'>
+                                      <div className='select-addres flex items-start space-x-[0.5rem]'>
                                         <ICAddress className='size-[1.5rem]' />
                                         <p
                                           dangerouslySetInnerHTML={{
                                             __html: item?.address,
                                           }}
-                                          className='text-black text-pc-sub14m '
+                                          className='text-black text-pc-sub14m'
                                         ></p>
                                       </div>
-                                      <div className='select-time flex space-x-[0.5rem] items-start'>
+                                      <div className='select-time flex items-start space-x-[0.5rem]'>
                                         <ICTime className='size-[1.5rem]' />
                                         <p
                                           dangerouslySetInnerHTML={{
                                             __html: item?.time,
                                           }}
-                                          className='text-black text-pc-sub14m '
+                                          className='text-black text-pc-sub14m'
                                         ></p>
                                       </div>
-                                      <div className='select-phone flex space-x-[0.5rem] items-start'>
+                                      <div className='select-phone flex items-start space-x-[0.5rem]'>
                                         <ICPhone className='size-[1.5rem]' />
                                         <p
                                           dangerouslySetInnerHTML={{
                                             __html: item?.phone,
                                           }}
-                                          className='text-black text-pc-sub14m '
+                                          className='text-black text-pc-sub14m'
                                         ></p>
                                       </div>
                                     </div>
@@ -346,44 +348,44 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                   />
                 </div>
                 {dataBranch && (
-                  <div className='shadow-sm !mt-[0.75rem] flex-1 space-y-[0.75rem] p-[1rem] bg-white rounded-[1.25rem]'>
-                    <p className='text-pc-tab-title text-black'>
+                  <div className='!mt-[0.75rem] flex-1 space-y-[0.75rem] rounded-[1.25rem] bg-white p-[1rem] shadow-sm'>
+                    <p className='text-black text-pc-tab-title'>
                       <span className='amamy-post'>Amamy Post </span>
                       <span>{dataBranch?.title}</span>
                     </p>
                     {dataBranch?.address && (
-                      <div className='select-addres flex space-x-[0.5rem] items-start'>
+                      <div className='select-addres flex items-start space-x-[0.5rem]'>
                         <ICAddress className='size-[1.5rem]' />
                         <p
                           dangerouslySetInnerHTML={{
                             __html: dataBranch?.address || '',
                           }}
-                          className='flex-1 text-black text-pc-sub14m '
+                          className='flex-1 text-black text-pc-sub14m'
                         ></p>
                       </div>
                     )}
                     {dataBranch?.time && (
-                      <div className='select-time flex space-x-[0.5rem] items-start'>
+                      <div className='select-time flex items-start space-x-[0.5rem]'>
                         <ICTime className='size-[1.5rem]' />
                         <p
                           dangerouslySetInnerHTML={{
                             __html: dataBranch?.time || '',
                           }}
-                          className='flex-1 text-black text-pc-sub14m '
+                          className='flex-1 text-black text-pc-sub14m'
                         ></p>
                       </div>
                     )}
                     {dataBranch?.phone && (
                       <Link
                         href={'tel:' + dataBranch?.phone}
-                        className='select-phone flex space-x-[0.5rem] items-start'
+                        className='select-phone flex items-start space-x-[0.5rem]'
                       >
                         <ICPhone className='size-[1.5rem]' />
                         <p
                           dangerouslySetInnerHTML={{
                             __html: dataBranch?.phone || '',
                           }}
-                          className='flex-1 text-black text-pc-sub14m '
+                          className='flex-1 text-black text-pc-sub14m'
                         ></p>
                       </Link>
                     )}
@@ -399,19 +401,19 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                     document.body.style.overflow = 'auto'
                   }}
                   className={cn(
-                    'fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] invisible pointer-events-none',
+                    'pointer-events-none invisible fixed inset-0 z-[51] bg-black/0 transition-all duration-700 ease-in-out',
                     selectServiceDimension &&
-                      'bg-black/50 visible pointer-events-auto',
+                      'pointer-events-auto visible bg-black/50',
                   )}
                 ></div>
                 <div
                   className={cn(
-                    'fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-white overflow-hidden',
+                    'fixed bottom-0 left-0 z-[52] w-full translate-y-full overflow-hidden rounded-t-[1.25rem] bg-white shadow-lg transition-all duration-700 ease-in-out',
                     selectServiceDimension && 'translate-y-0',
                   )}
                 >
-                  <div className='border-b-[1px] border-solid border-b-[#DCDFE4] relative p-[0.5rem] flex-center '>
-                    <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+                  <div className='relative border-b-[1px] border-solid border-b-[#DCDFE4] p-[0.5rem] flex-center'>
+                    <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                       Chọn chiều dịch vụ
                     </p>
                     <div
@@ -419,12 +421,12 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                         setSelectServiceDimension(false)
                         document.body.style.overflow = 'auto'
                       }}
-                      className='absolute top-[0.5rem] right-[0.5rem]'
+                      className='absolute right-[0.5rem] top-[0.5rem]'
                     >
                       <ICX className='size-[1.5rem]' />
                     </div>
                   </div>
-                  <div className='space-y-[0.5rem] pb-[2rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+                  <div className='hidden_scroll max-h-[70vh] space-y-[0.5rem] overflow-hidden overflow-y-auto pb-[2rem]'>
                     {Array.isArray(data) &&
                       data?.length > 0 &&
                       data?.map(
@@ -448,7 +450,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                   form.setValue('branch', '')
                                   form.clearErrors('branch')
                                 }}
-                                className='space-x-[0.75rem] flex items-center p-[0.75rem] bg-white'
+                                className='flex items-center space-x-[0.75rem] bg-white p-[0.75rem]'
                               >
                                 <ImageV2
                                   src={
@@ -460,7 +462,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                   width={50 * 2}
                                   className='size-[1.5rem] rounded-[100%] border-[0.5px] border-solid border-[rgba(0,0,0,0.25)]'
                                 />
-                                <p className='text-black text-pc-sub14m line-clamp-1'>
+                                <p className='line-clamp-1 text-black text-pc-sub14m'>
                                   {item?.title}
                                 </p>
                               </div>
@@ -483,19 +485,19 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                           document.body.style.overflow = 'auto'
                         }}
                         className={cn(
-                          'fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none invisible !mt-0',
+                          'pointer-events-none invisible fixed inset-0 z-[51] !mt-0 bg-black/0 transition-all duration-700 ease-in-out',
                           selectBranch &&
-                            'bg-black/50 visible pointer-events-auto',
+                            'pointer-events-auto visible bg-black/50',
                         )}
                       ></div>
                       <div
                         className={cn(
-                          'fixed transition-all duration-700 ease-in-out shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem]',
+                          'fixed bottom-0 left-0 z-[52] w-full translate-y-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem] shadow-lg transition-all duration-700 ease-in-out',
                           selectBranch && 'translate-y-0',
                         )}
                       >
-                        <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] rounded-t-[1.25rem] relative p-[0.5rem] flex-center '>
-                          <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+                        <div className='relative rounded-t-[1.25rem] border-b-[1px] border-solid border-b-[#DCDFE4] bg-white p-[0.5rem] flex-center'>
+                          <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                             Chọn chi nhánh Amamy Post
                           </p>
                           <div
@@ -503,12 +505,12 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                               setSelectBranch(false)
                               document.body.style.overflow = 'auto'
                             }}
-                            className='absolute top-[0.5rem] right-[0.5rem]'
+                            className='absolute right-[0.5rem] top-[0.5rem]'
                           >
                             <ICX className='size-[1.5rem]' />
                           </div>
                         </div>
-                        <div className='p-[1rem] bg-[#F6F6F6] space-y-[1rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+                        <div className='hidden_scroll max-h-[70vh] space-y-[1rem] overflow-hidden overflow-y-auto bg-[#F6F6F6] p-[1rem]'>
                           {Array.isArray(
                             dataInformation?.information?.instruct
                               ?.select_branch,
@@ -532,40 +534,40 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                     setSelectBranch(false)
                                     document.body.style.overflow = 'auto'
                                   }}
-                                  className='bg-white rounded-[1.25rem] space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8]'
+                                  className='flex items-center space-x-[0.75rem] rounded-[1.25rem] border-[1px] border-solid border-[#F8F8F8] bg-white p-[0.75rem]'
                                 >
                                   <div className='flex-1 space-y-[0.75rem]'>
-                                    <p className='text-pc-tab-title text-black xsm:text-pc-sub14s'>
+                                    <p className='text-black text-pc-tab-title xsm:text-pc-sub14s'>
                                       <span className='amamy-post'>
                                         Amamy Post{' '}
                                       </span>
                                       <span>{item?.title}</span>
                                     </p>
-                                    <div className='select-addres flex space-x-[0.5rem] items-start'>
+                                    <div className='select-addres flex items-start space-x-[0.5rem]'>
                                       <ICAddress className='size-[1.5rem] xsm:size-[1.125rem]' />
                                       <p
                                         dangerouslySetInnerHTML={{
                                           __html: item?.address,
                                         }}
-                                        className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                        className='flex-1 text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                       ></p>
                                     </div>
-                                    <div className='select-time flex space-x-[0.5rem] items-start'>
+                                    <div className='select-time flex items-start space-x-[0.5rem]'>
                                       <ICTime className='size-[1.5rem] xsm:size-[1.125rem]' />
                                       <p
                                         dangerouslySetInnerHTML={{
                                           __html: item?.time,
                                         }}
-                                        className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                        className='flex-1 text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                       ></p>
                                     </div>
-                                    <div className='select-phone flex space-x-[0.5rem] items-start'>
+                                    <div className='select-phone flex items-start space-x-[0.5rem]'>
                                       <ICPhone className='size-[1.5rem] xsm:size-[1.125rem]' />
                                       <p
                                         dangerouslySetInnerHTML={{
                                           __html: item?.phone,
                                         }}
-                                        className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                        className='flex-1 text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                       ></p>
                                     </div>
                                   </div>
@@ -581,9 +583,9 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
           </form>
         </Form>
         {dataInformation?.information?.instruct?.packing_instructions && (
-          <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
+          <div className='flex rounded-[1.25rem] bg-white p-[1rem] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem]'>
             <div
-              className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]: [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]: [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *: [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+              className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
               dangerouslySetInnerHTML={{
                 __html:
                   dataInformation?.information?.instruct
@@ -601,19 +603,19 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                   alt=''
                   width={300 * 2}
                   height={200 * 2}
-                  className='rounded-[1rem] max-w-[18.75rem] xsm:max-w-full max-h-[12.5rem] xsm:max-h-[12.95831rem] object-contain'
+                  className='max-h-[12.5rem] max-w-[18.75rem] rounded-[1rem] object-contain xsm:max-h-[12.95831rem] xsm:max-w-full'
                 />
               </div>
             )}
           </div>
         )}
         {dataInformation?.note_page_huong_dan && (
-          <div className='flex flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
-            <p className='xsm:text-pc-sub14s mb-[0.75rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
+          <div className='flex flex-col rounded-[1.25rem] bg-white p-[1rem] sm:space-x-[1rem] xsm:space-y-[1rem]'>
+            <p className='mb-[0.75rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:!font-bold xsm:text-pc-sub14s'>
               Lưu ý quan trọng
             </p>
             <div
-              className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]: [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]: [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *: [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+              className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
               dangerouslySetInnerHTML={{
                 __html: dataInformation?.note_page_huong_dan || '',
               }}
@@ -622,14 +624,14 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
         )}
         {selectedImage && (
           <div
-            className='fixed !mt-0 inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 animate-fade-in'
+            className='fixed inset-0 z-50 !mt-0 flex animate-fade-in items-center justify-center bg-black bg-opacity-50'
             onClick={() => setSelectedImage(null)}
           >
             <div
               onClick={(e) => {
                 e.stopPropagation() // Ngăn việc click vào ảnh đóng popup
               }}
-              className='relative xsm:overflow-x-auto overflow-hidden max-w-[100vw] sm:max-w-[80vw] max-h-[100vh] flex flex-col items-center animate-scale-in'
+              className='relative flex max-h-[100vh] max-w-[100vw] animate-scale-in flex-col items-center overflow-hidden sm:max-w-[80vw] xsm:overflow-x-auto'
             >
               <TransformWrapper
                 initialScale={1}
@@ -645,7 +647,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                         src={selectedImage}
                         alt='Zoomed Image'
                         quality={100}
-                        className='max-w-full h-auto object-contain transition-transform duration-300 rounded-[1rem]'
+                        className='h-auto max-w-full rounded-[1rem] object-contain transition-transform duration-300'
                       />
                     </TransformComponent>
                   </>

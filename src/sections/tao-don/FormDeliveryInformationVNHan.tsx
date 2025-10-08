@@ -120,53 +120,53 @@ export default function FormDeliveryInformationVNHan({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
+        className='space-y-[1.75rem] xsm:-mt-4 xsm:space-y-[1.25rem]'
       >
-        <p className='text-[#33A6E8] text-pc-sub16b !mb-[1.5rem] xsm:!mb-[1rem]'>
+        <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:!mb-[1rem] xsm:hidden'>
           Thông tin nhận hàng tại Hàn Quốc
         </p>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+        <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên người nhận(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='Tên người nhận'
                     {...field}
                   />
                 </FormControl>
-                <FormDescription className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] '>
+                <FormDescription className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
                   *Tên người nhận phải trùng khớp với mã thông quan, nếu không
                   khớp sẽ giao sai.
                 </FormDescription>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
         </div>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+        <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Thành phố (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='전주시'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M' />
               </FormItem>
             )}
           />
@@ -175,38 +175,38 @@ export default function FormDeliveryInformationVNHan({
             name='district'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Quận (nếu có)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='덕진구'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
         </div>
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+        <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='roadName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Tên đường (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='명륜 4길'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M' />
               </FormItem>
             )}
           />
@@ -215,17 +215,17 @@ export default function FormDeliveryInformationVNHan({
             name='housingNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số nhà (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='4 - 12'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
@@ -235,41 +235,41 @@ export default function FormDeliveryInformationVNHan({
           name='recipientAddress'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                 Địa chỉ chi tiết (*)
               </FormLabel>
               <FormControl>
                 <Input
-                  className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                   placeholder='영스빌 3층 301호'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='pl-[0.75rem] xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
-              <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem]'>
+              <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem]' />
+              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
                 *Số phòng, toà nhà nếu có
               </p>
             </FormItem>
           )}
         />
-        <div className='flex xsm:flex-col xsm:space-y-[1.25rem] sm:space-x-[1.5rem]'>
+        <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='passportNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Mã thông quan, ID hoặc CMT
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='P12345****012'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] !text-[#F00] text-pc-sub12m' />
-                <p className='pl-[0.75rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m !mt-[0.25rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem]' />
+                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                   *Mã thông quan: P828*****888, <br />
                   *CMT: 96*********27: *ID:***213 <br />
                   <span className='text-[#F00]'>
@@ -285,36 +285,36 @@ export default function FormDeliveryInformationVNHan({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Số điện thoại người nhận(*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='shadow-none xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_0.75rem] xsm:text-mb-13M aria-[invalid=true]:!border-[#F00] h-[3rem] text-[#000] text-pc-sub14m !mt-[0.37rem] placeholder:opacity-[0.7rem] rounded-[1.25rem] p-[1rem_0.75rem_1rem_1rem] border-[1px] border-solid border-[#DCDFE4] bg-white'
+                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='0987654321'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='pl-[0.75rem] xsm:text-mb-sub10m xsm:mt-[0.25rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
               </FormItem>
             )}
           />
         </div>
-        <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+        <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)
               handleClickcurrentTab(prevStep)
             }}
-            className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+            className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
           >
-            <p className='text-pc-sub16m text-black'>Quay lại</p>
+            <p className='text-black text-pc-sub16m'>Quay lại</p>
           </div>
           <Button
             type='submit'
             disabled={!form.formState.isValid}
             className={cn(
-              '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+              'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
               !form.formState.isValid &&
                 'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
