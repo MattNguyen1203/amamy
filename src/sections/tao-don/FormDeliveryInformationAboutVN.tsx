@@ -434,7 +434,7 @@ export default function FormDeliveryInformationAboutVN({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận(*)
+                  Tên người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -459,7 +459,7 @@ export default function FormDeliveryInformationAboutVN({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số điện thoại(*)
+                  Số điện thoại (*)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -489,7 +489,7 @@ export default function FormDeliveryInformationAboutVN({
                     setRecipientAddressType(value)
                   }}
                   className={cn(
-                    'xsm:!mt-[0.37rem]flex !mt-[0.5rem] pl-[1rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]',
+                    '!my-[0.75rem] flex pl-[1rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]',
                     {hidden: isAmeriacaToVietNam},
                   )}
                 >
@@ -849,7 +849,7 @@ export default function FormDeliveryInformationAboutVN({
                 render={({field}) => (
                   <FormItem className='flex-1 space-y-0'>
                     <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Tên đường(*)
+                      Tên đường (*)
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -872,7 +872,7 @@ export default function FormDeliveryInformationAboutVN({
                 render={({field}) => (
                   <FormItem className='flex-1 space-y-0'>
                     <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Thành phố(*)
+                      Thành phố (*)
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -893,7 +893,7 @@ export default function FormDeliveryInformationAboutVN({
                 render={({field}) => (
                   <FormItem className='flex-1 space-y-0'>
                     <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Mã thành phố(*)
+                      Mã thành phố (*)
                     </FormLabel>
                     <FormControl>
                       <Input
