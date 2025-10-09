@@ -225,7 +225,7 @@ export default function Insurance({
                   </div>
                 )}
 
-                <div className='!mt-[1.5rem] h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:!mt-0 xsm:rounded-[2rem] xsm:p-[1rem]'>
+                <div className='!mt-[1.5rem] h-full rounded-[2.25rem] bg-white p-[1.5rem] xsm:!mt-0 xsm:rounded-[2rem] xsm:p-[1rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
                   {/* title */}
                   {isMobile && (
                     <div className='xsm:mb-[1rem]'>

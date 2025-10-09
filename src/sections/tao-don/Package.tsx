@@ -258,7 +258,7 @@ export default function Package({
               <div className='mb-[1rem]'>
                 <p
                   className={cn(
-                    'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                    'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
                   )}
                 >
                   {data?.title || 'Chọn cách đóng gói'}
@@ -270,7 +270,7 @@ export default function Package({
               </div>
               {!isMobile && data?.note_more && (
                 <p
-                  className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
+                  className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.80)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></p>
               )}
@@ -329,8 +329,8 @@ export default function Package({
                               <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
                                 {isMobile && packageItem?.tag && (
                                   <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                    <ICStar />
-                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                    <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
+                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                       {packageItem?.tag}
                                     </p>
                                   </div>
@@ -339,18 +339,18 @@ export default function Package({
                                   {packageItem?.label}
                                 </FormLabel>
                                 {!isMobile && packageItem?.tag && (
-                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] xsm:hidden'>
-                                    <ICStar />
-                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
+                                    <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
+                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                       {packageItem?.tag}
                                     </p>
                                   </div>
                                 )}
                               </div>
                               {packageItem?.desc && (
-                                <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                                <FormLabel className='cursor-pointer pt-[0.19rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                   <p
-                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem] xsm:text-[rgba(0,0,0,0.60)]'
+                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                     dangerouslySetInnerHTML={{
                                       __html: packageItem?.desc,
                                     }}
@@ -382,7 +382,7 @@ export default function Package({
                 <textarea
                   {...field}
                   placeholder='Nhập nội dung'
-                  className='flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] pl-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50'
+                  className='!mt-[0.5rem] flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] pl-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 xsm:!mt-[0.37rem]'
                   style={{
                     height: 'auto',
                     minHeight: '4.5rem',
@@ -425,7 +425,7 @@ export default function Package({
                 >
                   <FormControl
                     className={cn(
-                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                      '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',
@@ -479,7 +479,7 @@ export default function Package({
         )}
 
         <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
-          <div className='flex w-full items-center gap-[2rem] xsm:gap-[0.5rem]'>
+          <div className='!mt-[1.5rem] flex w-full items-center gap-[2rem] xsm:!mt-0 xsm:gap-[0.5rem]'>
             <div className='flex-1'>
               <div
                 onClick={() => {
