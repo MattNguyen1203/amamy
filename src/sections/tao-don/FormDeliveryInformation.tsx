@@ -208,7 +208,7 @@ export default function FormDeliveryInformation({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0 xsm:-mt-[1.25rem]'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận(*)
+                  Tên người nhận (*)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -357,18 +357,18 @@ export default function FormDeliveryInformation({
             </FormItem>
           )}
         />
-        <div className='flex space-x-[1.25rem]'>
+        <div className='flex space-x-[1.25rem] xsm:space-x-[0.75rem]'>
           <FormField
             control={form.control}
             name='roadName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên đường(*)
+                  Tên đường (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] !bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldStreetName
                     }
@@ -389,7 +389,7 @@ export default function FormDeliveryInformation({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] !bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldHouseNumber
                     }
@@ -401,18 +401,18 @@ export default function FormDeliveryInformation({
             )}
           />
         </div>
-        <div className='flex space-x-[1.25rem]'>
+        <div className='flex space-x-[1.25rem] xsm:space-x-[0.75rem]'>
           <FormField
             control={form.control}
             name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Thành phố(*)
+                  Thành phố (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] !bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldCityName
                     }
@@ -429,11 +429,11 @@ export default function FormDeliveryInformation({
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Mã thành phố(*)
+                  Mã thành phố (*)
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] !bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] !shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder={
                       formDeliveryInformation.placeholderFieldCityCode
                     }

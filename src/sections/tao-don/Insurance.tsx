@@ -207,7 +207,7 @@ export default function Insurance({
               <>
                 {/* title */}
                 {!isMobile && (
-                  <div className='mb-[1rem] sm:mb-[1.25rem]'>
+                  <div>
                     <p
                       className={cn(
                         'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
@@ -217,7 +217,7 @@ export default function Insurance({
                       {data?.compensation?.title}
                     </p>
                     <div
-                      className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
+                      className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem]'
                       dangerouslySetInnerHTML={{
                         __html: data?.compensation?.desc,
                       }}
@@ -225,10 +225,10 @@ export default function Insurance({
                   </div>
                 )}
 
-                <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:!mt-0 xsm:rounded-[2rem] xsm:p-[1rem]'>
+                <div className='!mt-[1.5rem] h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:!mt-0 xsm:rounded-[2rem] xsm:p-[1rem]'>
                   {/* title */}
                   {isMobile && (
-                    <div className='mb-[1rem] sm:mb-[1.25rem]'>
+                    <div className='xsm:mb-[1rem]'>
                       <p
                         className={cn(
                           'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
@@ -247,7 +247,7 @@ export default function Insurance({
                   )}
 
                   {!isMobile && (
-                    <div className='mb-[1rem] sm:mb-[1.25rem]'>
+                    <div className='mb-[1rem]'>
                       <p
                         className={cn(
                           'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
@@ -307,8 +307,8 @@ export default function Insurance({
                                     <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
                                       {isMobile && insuranceItem?.tag && (
                                         <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                          <ICStar />
-                                          <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                          <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
+                                          <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                             {insuranceItem?.tag}
                                           </p>
                                         </div>
@@ -317,18 +317,18 @@ export default function Insurance({
                                         {insuranceItem?.label}
                                       </FormLabel>
                                       {!isMobile && insuranceItem?.tag && (
-                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] xsm:hidden'>
-                                          <ICStar />
-                                          <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
+                                          <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
+                                          <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                             {insuranceItem?.tag}
                                           </p>
                                         </div>
                                       )}
                                     </div>
                                     {insuranceItem?.desc && (
-                                      <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                                      <FormLabel className='cursor-pointer pt-[0.19rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                         <p
-                                          className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem] xsm:text-[rgba(0,0,0,0.60)]'
+                                          className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                           dangerouslySetInnerHTML={{
                                             __html: insuranceItem?.desc,
                                           }}
@@ -347,7 +347,7 @@ export default function Insurance({
                     control={form.control}
                     name={`order.0`}
                     render={({field}) => (
-                      <FormItem className='relative mt-[1rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
+                      <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none sm:mt-[1.25rem] xsm:mt-[1rem]'>
                         <FormControl>
                           <Checkbox
                             className={cn(
@@ -445,7 +445,9 @@ export default function Insurance({
               </div>
             ),
           )}
-        <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+
+        {/* footer */}
+        <div className='!mt-[1.5rem] flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)

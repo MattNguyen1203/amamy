@@ -226,9 +226,9 @@ export default function OrderStepTime({
                                           {stockItem?.label}
                                         </FormLabel>
                                         {!isMobile && stockItem?.tag && (
-                                          <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] xsm:hidden'>
-                                            <ICStar />
-                                            <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                          <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
+                                            <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
+                                            <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                               {stockItem?.tag}
                                             </p>
                                           </div>
