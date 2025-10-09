@@ -306,7 +306,7 @@ export default function FormDeliveryInformationJapanVN({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.75rem] xsm:-mt-4 xsm:space-y-[1.25rem]'
+        className='space-y-[1.75rem] xsm:-mt-1 xsm:space-y-[1.25rem]'
       >
         {!isMobile && (
           <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:!mb-[1rem]'>

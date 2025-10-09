@@ -260,7 +260,22 @@ export default function Package({
               </p>
             )}
             <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
-              {data?.note_more && (
+              {isMobile && (
+                <div className='mb-[1rem]'>
+                  <p
+                    className={cn(
+                      'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                    )}
+                  >
+                    {data?.title || 'Chọn cách đóng gói'}
+                  </p>
+                  <div
+                    className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
+                    dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
+                  ></div>
+                </div>
+              )}
+              {!isMobile && data?.note_more && (
                 <p
                   className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
@@ -471,104 +486,108 @@ export default function Package({
         )}
 
         <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
-          <div
-            onClick={() => {
-              setIndexTab(indexTab - 1)
-              handleClickcurrentTab('5')
-            }}
-            className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
-          >
-            <p className='text-black text-pc-sub16m'>Quay lại</p>
-          </div>
-          {stepEnd ? (
-            <AlertDialog>
-              {form.formState.isValid ? (
-                <AlertDialogTrigger className='flex-1'>
-                  <div
+          <div className='flex w-full items-center gap-[2rem] xsm:gap-[0.5rem]'>
+            <div className='flex-1'>
+              <div
+                onClick={() => {
+                  setIndexTab(indexTab - 1)
+                  handleClickcurrentTab('5')
+                }}
+                className='cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
+              >
+                <p className='text-black text-pc-sub16m'>Quay lại</p>
+              </div>
+            </div>
+
+            {stepEnd ? (
+              <AlertDialog>
+                {form.formState.isValid ? (
+                  <AlertDialogTrigger className='flex-1'>
+                    <div
+                      className={cn(
+                        'ml-auto mt-[0rem] h-[2.8125rem] rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                      )}
+                    >
+                      {isPending ? (
+                        <ICLoading />
+                      ) : (
+                        <p className='text-white text-pc-sub16m'>Xác nhận</p>
+                      )}
+                    </div>
+                  </AlertDialogTrigger>
+                ) : (
+                  <button
+                    type='submit'
+                    disabled={!form.formState.isValid}
                     className={cn(
-                      'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                      'h-[2.8125rem] flex-1 rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
                     )}
                   >
-                    {isPending ? (
-                      <ICLoading />
-                    ) : (
-                      <p className='text-white text-pc-sub16m'>Xác nhận</p>
-                    )}
-                  </div>
-                </AlertDialogTrigger>
-              ) : (
-                <button
-                  type='submit'
-                  disabled={!form.formState.isValid}
+                    <p className='text-white text-pc-sub16m'>Xác nhận</p>
+                  </button>
+                )}
+                <AlertDialogContent
                   className={cn(
-                    'h-[2.8125rem] flex-1 rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
+                    'w-[21.4375rem] max-w-[21.4375rem] gap-0 !rounded-[1.25rem] bg-white p-[2rem_1rem_1rem_1.25rem] sm:w-[29.375rem] sm:max-w-[29.375rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
+                    type === 'nhatviet' &&
+                      'w-[21.4375rem] max-w-[21.4375rem] sm:w-[52.5rem] sm:max-w-[52.5rem]',
                   )}
                 >
-                  <p className='text-white text-pc-sub16m'>Xác nhận</p>
-                </button>
-              )}
-              <AlertDialogContent
-                className={cn(
-                  'w-[21.4375rem] max-w-[21.4375rem] gap-0 !rounded-[1.25rem] bg-white p-[2rem_1rem_1rem_1.25rem] sm:w-[29.375rem] sm:max-w-[29.375rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
-                  type === 'nhatviet' &&
-                    'w-[21.4375rem] max-w-[21.4375rem] sm:w-[52.5rem] sm:max-w-[52.5rem]',
-                )}
-              >
-                <div className='max-h-[60vh] overflow-hidden overflow-y-auto xsm:max-h-[28rem]'>
-                  <ImageV2
-                    alt=''
-                    src={'/order/WarningCircle.svg'}
-                    width={50 * 2}
-                    height={50 * 2}
-                    className='mx-auto size-[2rem] sm:size-[2.5rem]'
-                  />
-                  <AlertDialogTitle className='!mb-[1.75rem] !mt-[1rem] w-full text-center font-montserrat text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] text-[#38B6FF] sm:text-[1.25rem] sm:tracking-[-0.05rem]'>
-                    Xác nhận đơn hàng & địa chỉ giao
-                  </AlertDialogTitle>
-                  <div className='px-[1rem] xsm:px-[0.75rem]'>
-                    <div className='mb-[0.62rem] font-montserrat text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.035rem] text-black sm:text-[1rem] sm:leading-[1.62] sm:tracking-[-0.03rem]'>
-                      Thông tin nhận hàng
-                    </div>
-                    <div className='space-y-[0.25rem]'>
-                      {dataFromOrder?.recipientName && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Tên người nhận:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.recipientName}</span>
-                        </p>
-                      )}
-                      {dataFromOrder?.recipientAddress && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Địa chỉ chi tiết:{' '}
-                          </strong>
-                          <span>
-                            {dataFromOrder?.recipientAddress}
-                            {(type === 'ducvn' || type === 'nhatviet') &&
-                              dataFromOrder?.recipientAddressType ===
-                                'registeredAddress' &&
-                              ' - ' +
-                                (isVietSec
-                                  ? dataFromOrder?.housingNumber +
-                                    ' - ' +
-                                    dataFromOrder?.roadName
-                                  : dataFromOrder?.recipientWardsandcommunes +
-                                    ' - ' +
-                                    dataFromOrder?.district) +
+                  <div className='max-h-[60vh] overflow-hidden overflow-y-auto xsm:max-h-[28rem]'>
+                    <ImageV2
+                      alt=''
+                      src={'/order/WarningCircle.svg'}
+                      width={50 * 2}
+                      height={50 * 2}
+                      className='mx-auto size-[2rem] sm:size-[2.5rem]'
+                    />
+                    <AlertDialogTitle className='!mb-[1.75rem] !mt-[1rem] w-full text-center font-montserrat text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] text-[#38B6FF] sm:text-[1.25rem] sm:tracking-[-0.05rem]'>
+                      Xác nhận đơn hàng & địa chỉ giao
+                    </AlertDialogTitle>
+                    <div className='px-[1rem] xsm:px-[0.75rem]'>
+                      <div className='mb-[0.62rem] font-montserrat text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.035rem] text-black sm:text-[1rem] sm:leading-[1.62] sm:tracking-[-0.03rem]'>
+                        Thông tin nhận hàng
+                      </div>
+                      <div className='space-y-[0.25rem]'>
+                        {dataFromOrder?.recipientName && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Tên người nhận:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.recipientName}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.recipientAddress && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Địa chỉ chi tiết:{' '}
+                            </strong>
+                            <span>
+                              {dataFromOrder?.recipientAddress}
+                              {(type === 'ducvn' || type === 'nhatviet') &&
+                                dataFromOrder?.recipientAddressType ===
+                                  'registeredAddress' &&
                                 ' - ' +
-                                dataFromOrder?.recipientCity}
-                            {(type === 'vietduc' || type === 'viethan') &&
-                              ' - ' +
-                                dataFromOrder?.housingNumber +
+                                  (isVietSec
+                                    ? dataFromOrder?.housingNumber +
+                                      ' - ' +
+                                      dataFromOrder?.roadName
+                                    : dataFromOrder?.recipientWardsandcommunes +
+                                      ' - ' +
+                                      dataFromOrder?.district) +
+                                  ' - ' +
+                                  dataFromOrder?.recipientCity}
+                              {(type === 'vietduc' || type === 'viethan') &&
                                 ' - ' +
-                                dataFromOrder?.roadName +
-                                ' - ' +
-                                dataFromOrder?.recipientCity}
-                          </span>
-                        </p>
-                      )}
-                      {/* {dataFromOrder?.recipientAddressType ===
+                                  dataFromOrder?.housingNumber +
+                                  ' - ' +
+                                  dataFromOrder?.roadName +
+                                  ' - ' +
+                                  dataFromOrder?.recipientCity}
+                            </span>
+                          </p>
+                        )}
+                        {/* {dataFromOrder?.recipientAddressType ===
                         'registeredAddress' &&
                         (type === 'ducvn' || type === 'nhatviet') && (
                           <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
@@ -596,47 +615,47 @@ export default function Package({
                           </span>
                         </p>
                       )} */}
-                      {type === 'viethan' && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Mã thông quan, ID hoặc CMT:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.passportNumber}</span>
-                        </p>
-                      )}
-                      {type === 'vietnhat' && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Mã bưu điện:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.zipCode}</span>
-                        </p>
-                      )}
-                      {european === 'vnEu' && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Quốc gia:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.nation}</span>
-                        </p>
-                      )}
-                      {dataFromOrder?.recipientPhone && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Số điện thoại:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.recipientPhone}</span>
-                        </p>
-                      )}
-                      {dataFromOrder?.email && (
-                        <p className='font-montserrat text-[0.8125rem] font-medium leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
-                          <strong className='font-semibold sm:leading-[1.14]'>
-                            Email:{' '}
-                          </strong>
-                          <span>{dataFromOrder?.email}</span>
-                        </p>
-                      )}
-                      {/* <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        {type === 'viethan' && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Mã thông quan, ID hoặc CMT:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.passportNumber}</span>
+                          </p>
+                        )}
+                        {type === 'vietnhat' && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Mã bưu điện:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.zipCode}</span>
+                          </p>
+                        )}
+                        {european === 'vnEu' && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Quốc gia:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.nation}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.recipientPhone && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Số điện thoại:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.recipientPhone}</span>
+                          </p>
+                        )}
+                        {dataFromOrder?.email && (
+                          <p className='font-montserrat text-[0.8125rem] font-medium leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
+                            <strong className='font-semibold sm:leading-[1.14]'>
+                              Email:{' '}
+                            </strong>
+                            <span>{dataFromOrder?.email}</span>
+                          </p>
+                        )}
+                        {/* <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
                         <strong className='font-semibold sm:leading-[1.14]'>
                           Loại tiền tệ thanh toán:{' '}
                         </strong>
@@ -644,57 +663,58 @@ export default function Package({
                           {form?.getValues('recipientPaymentInformation')}
                         </span>
                       </p> */}
-                    </div>
-                    {type === 'nhatviet' && (
-                      <div className='mt-[1.75rem]'>
-                        <div className='mb-[0.75rem] text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
-                          Lưu ý quan trọng về mã bưu điện nội địa Nhật
-                        </div>
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: importantNote || '',
-                          }}
-                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
-                        ></p>
                       </div>
-                    )}
-                    <div className='mb-[1.5rem] mt-[1.75rem] font-montserrat text-[0.75rem] font-semibold leading-[1.4] tracking-[-0.015rem] text-[#F00] sm:mb-[2rem] sm:mt-[1.25rem] sm:leading-[1.5]'>
-                      *Sau khi xác nhận, bạn sẽ không thể chỉnh sửa đơn hàng.
+                      {type === 'nhatviet' && (
+                        <div className='mt-[1.75rem]'>
+                          <div className='mb-[0.75rem] text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
+                            Lưu ý quan trọng về mã bưu điện nội địa Nhật
+                          </div>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: importantNote || '',
+                            }}
+                            className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          ></p>
+                        </div>
+                      )}
+                      <div className='mb-[1.5rem] mt-[1.75rem] font-montserrat text-[0.75rem] font-semibold leading-[1.4] tracking-[-0.015rem] text-[#F00] sm:mb-[2rem] sm:mt-[1.25rem] sm:leading-[1.5]'>
+                        *Sau khi xác nhận, bạn sẽ không thể chỉnh sửa đơn hàng.
+                      </div>
                     </div>
                   </div>
-                </div>
-                <AlertDialogFooter
-                  className={cn(
-                    '!mt-0 flex space-x-[1rem] xsm:flex-row xsm:space-x-[0.75rem] xsm:space-y-0',
-                    type === 'nhatviet' &&
-                      'xsm:absolute xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:rounded-b-[1.25rem] xsm:bg-white xsm:px-[1rem] xsm:pb-[1rem] xsm:pt-[1.5rem]',
-                  )}
-                >
-                  <AlertDialogCancel className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#F0F0F0] font-montserrat text-black !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:mt-0 xsm:p-0 xsm:text-pc-sub16m'>
-                    Hủy
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={handleCreateOrder}
-                    className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#38B6FF] font-montserrat !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:p-0 xsm:text-pc-sub16m'
+                  <AlertDialogFooter
+                    className={cn(
+                      '!mt-0 flex space-x-[1rem] xsm:flex-row xsm:space-x-[0.75rem] xsm:space-y-0',
+                      type === 'nhatviet' &&
+                        'xsm:absolute xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:rounded-b-[1.25rem] xsm:bg-white xsm:px-[1rem] xsm:pb-[1rem] xsm:pt-[1.5rem]',
+                    )}
                   >
-                    Xác nhận
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          ) : (
-            <Button
-              type='submit'
-              disabled={!form.formState.isValid}
-              className={cn(
-                'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
-                !form.formState.isValid &&
-                  'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
-              )}
-            >
-              <p className='text-white text-pc-sub16m'>Tiếp tục</p>
-            </Button>
-          )}
+                    <AlertDialogCancel className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#F0F0F0] font-montserrat text-black !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:mt-0 xsm:p-0 xsm:text-pc-sub16m'>
+                      Hủy
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleCreateOrder}
+                      className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#38B6FF] font-montserrat !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:p-0 xsm:text-pc-sub16m'
+                    >
+                      Xác nhận
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            ) : (
+              <Button
+                type='submit'
+                disabled={!form.formState.isValid}
+                className={cn(
+                  'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                  !form.formState.isValid &&
+                    'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+                )}
+              >
+                <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+              </Button>
+            )}
+          </div>
         </div>
 
         {isMobile && stepEnd && (

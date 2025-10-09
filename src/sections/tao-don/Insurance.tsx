@@ -149,7 +149,7 @@ export default function Insurance({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
+        className='space-y-[1.5rem] xsm:!mt-0 xsm:space-y-[0.62rem]'
       >
         <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
           Bảo hiểm hàng hóa
@@ -209,14 +209,14 @@ export default function Insurance({
                 <div className='mb-[1rem] sm:mb-[1.25rem]'>
                   <p
                     className={cn(
-                      '!font-bold text-[#33A6E8] text-pc-tab-title',
-                      data?.user_chooses && 'text-[rgba(0,0,0,0.92)]',
+                      'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                      data?.user_chooses,
                     )}
                   >
                     {data?.compensation?.title}
                   </p>
                   <div
-                    className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
+                    className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
                     dangerouslySetInnerHTML={{__html: data?.compensation?.desc}}
                   ></div>
                 </div>
@@ -342,7 +342,10 @@ export default function Insurance({
             ) => (
               <div
                 key={index}
-                className='space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem]'
+                className={cn(
+                  'space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem] xsm:rounded-[2.125rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]',
+                  index === 0 ? 'xsm:!mt-0' : '',
+                )}
               >
                 <p className='mb-[0.88rem] font-montserrat text-[1rem] !font-bold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-pc-sub14s'>
                   {item?.title}

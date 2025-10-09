@@ -427,7 +427,7 @@ export default function FormDeliveryInformationAboutVN({
             Thông tin nhận hàng {idOrder !== 1073 && 'tại Việt Nam'}
           </p>
         )}
-        <div className='flex sm:space-x-[1.5rem] xsm:flex-col xsm:space-y-[1.25rem]'>
+        <div className='flex sm:space-x-[1.5rem] xsm:mt-[1rem] xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='recipientName'

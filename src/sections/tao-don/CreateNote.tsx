@@ -154,7 +154,7 @@ export default function CeateNote({
             data?.map((item: IInformationNoteOrder, index: number) => (
               <div
                 key={index}
-                className='space-y-[1rem] rounded-[1.25rem] bg-white p-[1rem]'
+                className='space-y-[1rem] rounded-[1.25rem] bg-white p-[1rem] xsm:rounded-[2.125rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'
               >
                 <p className='mb-[0.88rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:!font-bold xsm:text-pc-sub14s'>
                   {item?.title}
