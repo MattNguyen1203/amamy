@@ -164,20 +164,14 @@ export default function OrderStepTime({
             dataInformation?.map(
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
-                  {!isMobile && (
-                    <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[#33A6E8] xsm:mb-[0.75rem] xsm:!font-bold xsm:text-pc-sub14s'>
+                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                    <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[1rem] xsm:!font-bold xsm:text-pc-sub14s'>
                       {item?.time_content}
                     </p>
-                  )}
-                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
-                    {isMobile && (
-                      <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.75rem] xsm:!font-bold xsm:text-pc-sub14s'>
-                        {item?.time_content}
-                      </p>
-                    )}
+
                     {item?.user_chooses ? (
                       <>
-                        <div className='mb-[1rem] space-y-[0.75rem] xsm:space-y-[0.62rem]'>
+                        <div className='mb-[1rem] space-y-[0.75rem] xsm:space-y-[0.5rem]'>
                           {item?.stock_user?.map((stockItem, stockIndex) => (
                             <FormField
                               key={stockIndex}
@@ -190,7 +184,7 @@ export default function OrderStepTime({
                                 return (
                                   <FormItem
                                     className={cn(
-                                      'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.88rem_0.75rem]',
+                                      'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                                       isChecked
                                         ? 'border-[#38B6FF] bg-[#F1F9FF]'
                                         : 'border-transparent bg-[#EFEFEF99]',
@@ -223,12 +217,12 @@ export default function OrderStepTime({
                                         {isMobile && stockItem?.tag && (
                                           <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
                                             <ICStar />
-                                            <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem]'>
+                                            <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                               {stockItem?.tag}
                                             </p>
                                           </div>
                                         )}
-                                        <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:!font-semibold xsm:text-mb-13S'>
+                                        <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:font-semibold xsm:tracking-[-0.01625rem]'>
                                           {stockItem?.label}
                                         </FormLabel>
                                         {!isMobile && stockItem?.tag && (
@@ -243,7 +237,7 @@ export default function OrderStepTime({
                                       {stockItem?.desc && (
                                         <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                           <p
-                                            className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[rgba(0,0,0,0.60)]'
+                                            className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem] xsm:text-[rgba(0,0,0,0.60)]'
                                             dangerouslySetInnerHTML={{
                                               __html: stockItem?.desc,
                                             }}
@@ -258,7 +252,7 @@ export default function OrderStepTime({
                           ))}
                         </div>
                         {item?.note_more && (
-                          <div className='flex flex-col items-start sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] sm:p-[1.5rem_2rem_1.5rem_1.5rem] xsm:mb-[1rem] xsm:mt-[1.5rem]'>
+                          <div className='flex flex-col items-start sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] sm:p-[1.5rem_2rem_1.5rem_1.5rem] xsm:mb-0 xsm:py-[0.75rem]'>
                             {/* icon */}
                             <div className='flex items-center space-x-[0.38rem] sm:mb-[0.63rem] sm:space-x-[0.69rem]'>
                               <span className='flex size-[1.25rem] shrink-0 items-center justify-center rounded-md bg-Blue-Primary'>
@@ -269,9 +263,15 @@ export default function OrderStepTime({
                               </p>
                             </div>
                             <p
-                              className='mb-[1rem] mt-[0.5rem] text-pc-sub14m xsm:text-[0.75rem] xsm:font-medium xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem] xsm:text-[rgba(0,0,0,0.80)] [&_*]:list-inside [&_*]:list-disc xsm:marker:[&_ul_li]:text-[0.5rem]'
+                              className='mb-[1rem] mt-[0.5rem] text-pc-sub14m xsm:mb-0 xsm:text-[0.75rem] xsm:font-medium xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem] xsm:text-[rgba(0,0,0,0.80)] [&>br]:block [&>br]:content-[""] [&>span::before]:absolute [&>span::before]:left-0 [&>span::before]:content-["•"] [&>span]:relative [&>span]:mb-[0.37rem] [&>span]:block [&>span]:pl-[0.75rem]'
                               dangerouslySetInnerHTML={{
-                                __html: item?.note_more,
+                                __html:
+                                  item?.note_more
+                                    ?.split(/\r?\n/) // tách theo xuống dòng
+                                    ?.map((line) => line.trim()) // bỏ khoảng trắng thừa
+                                    ?.filter(Boolean) // loại dòng trống
+                                    ?.map((line) => `<span>${line}</span>`) // wrap từng dòng
+                                    ?.join('') ?? '',
                               }}
                             ></p>
                           </div>
@@ -292,7 +292,7 @@ export default function OrderStepTime({
                       control={form.control}
                       name={`policy.${index}`}
                       render={({field}) => (
-                        <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none sm:mt-[1.25rem]'>
+                        <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none sm:mt-[1.25rem] xsm:mt-[1rem]'>
                           <FormControl>
                             <Checkbox
                               className={cn(
@@ -317,7 +317,7 @@ export default function OrderStepTime({
                 </Fragment>
               ),
             )}
-          <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+          <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 handleClickcurrentTab('1')

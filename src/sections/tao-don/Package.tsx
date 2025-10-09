@@ -254,34 +254,27 @@ export default function Package({
       >
         {data?.list_package && (
           <>
-            {!isMobile && (
-              <p className='mb-[1rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[#33A6E8] sm:mb-[1.25rem]'>
-                {data?.title || 'Chọn cách đóng gói'}
-              </p>
-            )}
             <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
-              {isMobile && (
-                <div className='mb-[1rem]'>
-                  <p
-                    className={cn(
-                      'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
-                    )}
-                  >
-                    {data?.title || 'Chọn cách đóng gói'}
-                  </p>
-                  <div
-                    className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
-                    dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
-                  ></div>
-                </div>
-              )}
+              <div className='mb-[1rem]'>
+                <p
+                  className={cn(
+                    'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                  )}
+                >
+                  {data?.title || 'Chọn cách đóng gói'}
+                </p>
+                <div
+                  className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
+                  dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
+                ></div>
+              </div>
               {!isMobile && data?.note_more && (
                 <p
                   className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></p>
               )}
-              <div className='flex flex-col space-y-[0.75rem]'>
+              <div className='flex flex-col space-y-[0.75rem] xsm:space-y-[0.5rem]'>
                 {Array.isArray(data?.list_package) &&
                   data?.list_package?.map((packageItem, packageIndex) => (
                     <FormField
@@ -297,7 +290,7 @@ export default function Package({
                         return (
                           <FormItem
                             className={cn(
-                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.88rem_0.75rem]',
+                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                               isChecked
                                 ? 'border-[#38B6FF] bg-[#F1F9FF]'
                                 : 'border-transparent bg-[#EFEFEF99]',
@@ -342,7 +335,7 @@ export default function Package({
                                     </p>
                                   </div>
                                 )}
-                                <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:!font-semibold xsm:text-mb-13S'>
+                                <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:font-semibold xsm:tracking-[-0.01625rem]'>
                                   {packageItem?.label}
                                 </FormLabel>
                                 {!isMobile && packageItem?.tag && (
@@ -357,7 +350,7 @@ export default function Package({
                               {packageItem?.desc && (
                                 <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                   <p
-                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'
+                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem] xsm:text-[rgba(0,0,0,0.60)]'
                                     dangerouslySetInnerHTML={{
                                       __html: packageItem?.desc,
                                     }}
@@ -380,7 +373,7 @@ export default function Package({
           name='packageMessage'
           render={({field}) => (
             <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
-              <FormLabel className='cursor-pointer pl-[0.75rem] pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m sm:pl-[1rem]'>
+              <FormLabel className='cursor-pointer pl-[1rem] pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
                 <p className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Viết yêu cầu của bạn
                 </p>
@@ -389,7 +382,7 @@ export default function Package({
                 <textarea
                   {...field}
                   placeholder='Nhập nội dung'
-                  className='flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] pl-[0.75rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 sm:pl-[1rem]'
+                  className='flex min-h-[4.5rem] w-full resize-none overflow-hidden rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem] pl-[1rem] text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50'
                   style={{
                     height: 'auto',
                     minHeight: '4.5rem',
@@ -423,7 +416,7 @@ export default function Package({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='pl-[0.75rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s sm:pl-[1rem]'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                   Chọn thông tin thanh toán (*)
                 </FormLabel>
                 <Select
@@ -432,7 +425,7 @@ export default function Package({
                 >
                   <FormControl
                     className={cn(
-                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[0.75rem] !shadow-none aria-[invalid=true]:!border-[#F00] sm:pl-[1rem] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',

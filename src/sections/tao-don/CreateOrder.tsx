@@ -133,7 +133,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+          if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
             setHideHeader(true)
           } else {
             setHideHeader(false)
@@ -290,7 +290,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </TabsList>
         )}
 
-        <div className='flex-1 rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:mt-[8rem] xsm:bg-[#FAFAFA] xsm:p-[1rem_0rem]'>
+        <div className='flex-1 rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:mt-[7.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem_0rem_0rem_0rem]'>
           {!isMobile && (
             <h1 className='mb-[1.5rem] text-black text-pc-heading20b'>
               Tạo đơn hàng

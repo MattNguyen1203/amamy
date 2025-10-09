@@ -427,7 +427,7 @@ export default function FormDeliveryInformationAboutVN({
             Thông tin nhận hàng {idOrder !== 1073 && 'tại Việt Nam'}
           </p>
         )}
-        <div className='flex sm:space-x-[1.5rem] xsm:mt-[1rem] xsm:flex-col xsm:space-y-[1.25rem]'>
+        <div className='flex sm:space-x-[1.5rem] xsm:mt-0 xsm:flex-col xsm:space-y-[1.25rem]'>
           <FormField
             control={form.control}
             name='recipientName'
@@ -912,7 +912,7 @@ export default function FormDeliveryInformationAboutVN({
           </>
         )}
 
-        <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+        <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)

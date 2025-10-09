@@ -209,10 +209,12 @@ export default function FormStepStart({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
-          Thông tin gửi hàng
-        </p>
-        <div className='mb-[1.75rem] flex sm:space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-y-[1.25rem]'>
+        {!isMobile && (
+          <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
+            Thông tin gửi hàng
+          </p>
+        )}
+        <div className='mb-[1.75rem] flex sm:space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col'>
           <FormField
             control={form.control}
             name='email'
