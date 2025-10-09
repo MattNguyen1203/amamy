@@ -265,13 +265,7 @@ export default function OrderStepTime({
                             <p
                               className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:mb-0 xsm:text-[0.75rem] xsm:font-medium xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem] [&>br]:block [&>br]:content-[""] [&>span::before]:absolute [&>span::before]:left-0 [&>span::before]:content-["•"] [&>span]:relative [&>span]:mb-[0.37rem] [&>span]:block [&>span]:pl-[0.75rem]'
                               dangerouslySetInnerHTML={{
-                                __html:
-                                  item?.note_more
-                                    ?.split(/\r?\n/) // tách theo xuống dòng
-                                    ?.map((line) => line.trim()) // bỏ khoảng trắng thừa
-                                    ?.filter(Boolean) // loại dòng trống
-                                    ?.map((line) => `<span>${line}</span>`) // wrap từng dòng
-                                    ?.join('') ?? '',
+                                __html: item?.note_more,
                               }}
                             ></p>
                           </div>
