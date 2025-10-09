@@ -158,13 +158,13 @@ export default function OrderStepTime({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-[1.59rem]'
+          className='space-y-[1.5rem] xsm:space-y-[0.88rem]'
         >
           {Array.isArray(dataInformation) &&
             dataInformation?.map(
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
-                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] xsm:rounded-[2rem] xsm:p-[1rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
                     <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[1rem] xsm:!font-bold xsm:text-pc-sub14s'>
                       {item?.time_content}
                     </p>
@@ -216,7 +216,7 @@ export default function OrderStepTime({
                                       <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
                                         {isMobile && stockItem?.tag && (
                                           <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                            <ICStar />
+                                            <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
                                             <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
                                               {stockItem?.tag}
                                             </p>
@@ -237,7 +237,7 @@ export default function OrderStepTime({
                                       {stockItem?.desc && (
                                         <FormLabel className='cursor-pointer pt-[0.19rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                           <p
-                                            className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem] xsm:text-[rgba(0,0,0,0.60)]'
+                                            className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                             dangerouslySetInnerHTML={{
                                               __html: stockItem?.desc,
                                             }}
@@ -252,9 +252,9 @@ export default function OrderStepTime({
                           ))}
                         </div>
                         {item?.note_more && (
-                          <div className='flex flex-col items-start sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] sm:p-[1.5rem_2rem_1.5rem_1.5rem] xsm:mb-0 xsm:py-[0.75rem]'>
+                          <div className='mt-[1rem] flex flex-col items-start p-[1.5rem] sm:rounded-[2.5rem] sm:bg-[#EFEFEF99] xsm:mb-0 xsm:mt-[1.5rem] xsm:px-0 xsm:py-[0.75rem]'>
                             {/* icon */}
-                            <div className='flex items-center space-x-[0.38rem] sm:mb-[0.63rem] sm:space-x-[0.69rem]'>
+                            <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
                               <span className='flex size-[1.25rem] shrink-0 items-center justify-center rounded-md bg-Blue-Primary'>
                                 <ICMessageQuestion className='size-[1.5rem]' />
                               </span>
@@ -263,7 +263,7 @@ export default function OrderStepTime({
                               </p>
                             </div>
                             <p
-                              className='mb-[1rem] mt-[0.5rem] text-pc-sub14m xsm:mb-0 xsm:text-[0.75rem] xsm:font-medium xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem] xsm:text-[rgba(0,0,0,0.80)] [&>br]:block [&>br]:content-[""] [&>span::before]:absolute [&>span::before]:left-0 [&>span::before]:content-["•"] [&>span]:relative [&>span]:mb-[0.37rem] [&>span]:block [&>span]:pl-[0.75rem]'
+                              className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:mb-0 xsm:text-[0.75rem] xsm:font-medium xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem] [&>br]:block [&>br]:content-[""] [&>span::before]:absolute [&>span::before]:left-0 [&>span::before]:content-["•"] [&>span]:relative [&>span]:mb-[0.37rem] [&>span]:block [&>span]:pl-[0.75rem]'
                               dangerouslySetInnerHTML={{
                                 __html:
                                   item?.note_more
@@ -317,7 +317,7 @@ export default function OrderStepTime({
                 </Fragment>
               ),
             )}
-          <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+          <div className='!mt-[1.5rem] flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 handleClickcurrentTab('1')

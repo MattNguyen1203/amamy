@@ -222,7 +222,7 @@ export default function FormStepStart({
               // email
               <FormItem className='flex-1 space-y-0'>
                 <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Email của bạn(*)
+                  Email của bạn (*)
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -232,7 +232,7 @@ export default function FormStepStart({
                   />
                 </FormControl>
                 <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
-                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12m'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
