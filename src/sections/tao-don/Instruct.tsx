@@ -345,7 +345,7 @@ export default function Instruct({
                       >
                         <FormControl
                           className={cn(
-                            '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                            '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                             data?.select_branch &&
                               data?.select_branch?.length < 2 &&
                               '[&_svg]:hidden',
@@ -426,7 +426,7 @@ export default function Instruct({
                 />
               </div>
               {dataBranch && (
-                <div className='!mt-[0.75rem] flex-1 space-y-[0.75rem] rounded-[1.25rem] bg-white p-[1rem]'>
+                <div className='!mt-[0.75rem] flex-1 space-y-[0.75rem] rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
                   <p className='text-black text-pc-tab-title'>
                     <span className='amamy-post'>Amamy Post </span>
                     <span>{dataBranch?.title}</span>
@@ -472,7 +472,7 @@ export default function Instruct({
             </>
           )}
           {data?.packing_instructions && (
-            <div className='flex rounded-[1.25rem] bg-white p-[1rem] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem]'>
+            <div className='mt-0 flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
               <div
                 className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                 dangerouslySetInnerHTML={{
@@ -522,7 +522,7 @@ export default function Instruct({
                 >
                   <FormControl
                     className={cn(
-                      '!mt-[0.37rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                      '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',
@@ -569,12 +569,12 @@ export default function Instruct({
                       )}
                   </SelectContent>
                 </Select>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!mt-[0.25rem] pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
 
-          <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+          <div className='!mt-[1.5rem] flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:!mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 setIndexTab(indexTab - 1)

@@ -164,7 +164,7 @@ export default function OrderStepTime({
             dataInformation?.map(
               (item: IInformationTimeOrder, index: number) => (
                 <Fragment key={index}>
-                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] xsm:rounded-[2rem] xsm:p-[1rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
+                  <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
                     <p className='mb-[1.25rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[1rem] xsm:!font-bold xsm:text-pc-sub14s'>
                       {item?.time_content}
                     </p>
