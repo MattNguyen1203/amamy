@@ -103,7 +103,7 @@ export default function FormDeliveryInformationVNJapan({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                  className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                   placeholder={'Bich Ngoc (ビック ゴック)'}
                   {...field}
                 />
@@ -126,7 +126,7 @@ export default function FormDeliveryInformationVNJapan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='939-2716'
                     {...field}
                   />
@@ -145,7 +145,7 @@ export default function FormDeliveryInformationVNJapan({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                     placeholder='0987654321'
                     {...field}
                   />
@@ -165,7 +165,7 @@ export default function FormDeliveryInformationVNJapan({
               </FormLabel>
               <FormControl>
                 <Input
-                  className='!mt-[0.37rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] disabled:opacity-[1] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
+                  className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] disabled:opacity-[1] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem] xsm:text-mb-13M'
                   placeholder={'Nhập địa chỉ nhận hàng'}
                   {...field}
                 />
@@ -187,7 +187,7 @@ export default function FormDeliveryInformationVNJapan({
             </FormItem>
           )}
         />
-        <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] xsm:shadow-lg disabled:xsm:opacity-[1]'>
+        <div className='!mt-[1.5rem] flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:!mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] xsm:shadow-lg disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)
