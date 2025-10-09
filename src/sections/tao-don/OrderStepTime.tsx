@@ -235,7 +235,7 @@ export default function OrderStepTime({
                                         )}
                                       </div>
                                       {stockItem?.desc && (
-                                        <FormLabel className='cursor-pointer pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:pt-[0.19rem] xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                                        <FormLabel className='cursor-pointer pt-[0.19rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                                           <p
                                             className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem] xsm:text-[rgba(0,0,0,0.60)]'
                                             dangerouslySetInnerHTML={{

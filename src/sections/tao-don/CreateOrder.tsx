@@ -155,7 +155,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     <>
       <Tabs
         value={currentTab}
-        className='flex bg-white pb-[5rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem] xsm:pb-[5rem]'
+        className='flex bg-white pb-[4rem] sm:space-x-[1.5rem] xsm:flex-col xsm:bg-[#FAFAFA] xsm:p-[0.75rem_0.75rem_0rem_0.75rem] xsm:pb-[5rem]'
       >
         {/* desktop */}
         {!isMobile && (
@@ -290,9 +290,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </TabsList>
         )}
 
-        <div className='flex-1 rounded-[1.25rem] bg-[#F8F8F8] p-[1.25rem] xsm:mt-[7.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem_0rem_0rem_0rem]'>
+        <div className='flex-1 rounded-[2.25rem] bg-[#FAFAFA] p-[1.5rem] xsm:mt-[calc(100vh-34.5rem)] xsm:px-0'>
           {!isMobile && (
-            <h1 className='mb-[1.5rem] text-black text-pc-heading20b'>
+            <h1 className='mb-[1.5rem] text-[rgba(0,0,0,0.92)] text-pc-heading20b'>
               Tạo đơn hàng
             </h1>
           )}
