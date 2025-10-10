@@ -147,10 +147,7 @@ export default function Insurance({
   }
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.5rem] xsm:space-y-[0.62rem]'
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         {data?.compensation && (
           <>
             {!data?.user_chooses &&
@@ -179,7 +176,7 @@ export default function Insurance({
                           <FormControl>
                             <Checkbox
                               className={cn(
-                                'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                                'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
                                 'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                               )}
                               checked={field.value}
@@ -187,12 +184,12 @@ export default function Insurance({
                             />
                           </FormControl>
                           <div className='space-y-1 leading-none'>
-                            <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14m xsm:line-clamp-2 xsm:text-mb-13M'>
+                            <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
                               {item?.clause ||
                                 'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                             </FormLabel>
                           </div>
-                          <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
+                          <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
                         </FormItem>
                       )}
                     />
@@ -204,38 +201,39 @@ export default function Insurance({
               <>
                 {/* title */}
                 {!isMobile && (
-                  <div>
+                  <>
                     <p
                       className={cn(
-                        'mb-[0.37rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                        'mb-[0.38rem] font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)]',
                         data?.user_chooses,
                       )}
                     >
                       {data?.compensation?.title}
                     </p>
                     <div
-                      className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem]'
+                      className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)]'
                       dangerouslySetInnerHTML={{
                         __html: data?.compensation?.desc,
                       }}
                     ></div>
-                  </div>
+                  </>
                 )}
 
-                <div className='!mt-[1.5rem] h-full rounded-[2.25rem] bg-white p-[1.5rem] xsm:!mt-0 xsm:rounded-[2rem] xsm:p-[1rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'>
+                <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:mb-[0.5rem] xsm:mt-0 xsm:p-[1rem]'>
                   {/* title */}
                   {isMobile && (
                     <div className='xsm:mb-[1rem]'>
-                      <p
+                      <h3
                         className={cn(
-                          'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                          'mb-[0.37rem] font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]',
                           data?.user_chooses,
                         )}
                       >
                         {data?.compensation?.title}
-                      </p>
+                      </h3>
+
                       <div
-                        className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
+                        className='text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'
                         dangerouslySetInnerHTML={{
                           __html: data?.compensation?.desc,
                         }}
@@ -245,17 +243,13 @@ export default function Insurance({
 
                   {!isMobile && (
                     <div className='mb-[1rem]'>
-                      <p
-                        className={cn(
-                          'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
-                        )}
-                      >
+                      <h4 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
                         Chọn bảo hiểm
-                      </p>
+                      </h4>
                     </div>
                   )}
 
-                  <div className='flex flex-col space-y-[0.75rem] xsm:space-y-[0.5rem]'>
+                  <div className='flex w-full flex-1 flex-col space-y-[0.75rem] xsm:space-y-[0.5rem]'>
                     {Array.isArray(
                       data?.insurance_types?.list_insurance_types,
                     ) &&
@@ -272,16 +266,16 @@ export default function Insurance({
                               return (
                                 <FormItem
                                   className={cn(
-                                    'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
+                                    'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] py-[0.88rem] pl-[1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
                                     isChecked
                                       ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                                      : 'border-transparent bg-[#EFEFEF99]',
+                                      : 'border-transparent bg-[rgba(239,239,239,0.60)]',
                                   )}
                                 >
                                   <FormControl>
                                     <Checkbox
                                       className={cn(
-                                        'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[#EFEFEF99] shadow-none transition-all duration-200',
+                                        'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
                                         'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
                                         // hide default SVG indicator
                                         '[&_svg]:hidden',
@@ -300,37 +294,35 @@ export default function Insurance({
                                       }}
                                     />
                                   </FormControl>
-                                  <div className='flex flex-col space-y-[0rem] leading-none'>
-                                    <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
+                                  <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                                    <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
                                       {isMobile && insuranceItem?.tag && (
-                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                          <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
-                                          <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
+                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                          <ICStar className='size-[0.75rem]' />
+                                          <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
                                             {insuranceItem?.tag}
                                           </p>
                                         </div>
                                       )}
-                                      <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:font-semibold xsm:tracking-[-0.01625rem]'>
+                                      <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
                                         {insuranceItem?.label}
                                       </FormLabel>
                                       {!isMobile && insuranceItem?.tag && (
-                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                          <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
-                                          <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
+                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                          <ICStar className='size-[0.875rem]' />
+                                          <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
                                             {insuranceItem?.tag}
                                           </p>
                                         </div>
                                       )}
                                     </div>
                                     {insuranceItem?.desc && (
-                                      <FormLabel className='cursor-pointer pt-[0.19rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
-                                        <p
-                                          className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
-                                          dangerouslySetInnerHTML={{
-                                            __html: insuranceItem?.desc,
-                                          }}
-                                        ></p>
-                                      </FormLabel>
+                                      <FormLabel
+                                        className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+                                        dangerouslySetInnerHTML={{
+                                          __html: insuranceItem?.desc,
+                                        }}
+                                      ></FormLabel>
                                     )}
                                   </div>
                                 </FormItem>
@@ -340,15 +332,16 @@ export default function Insurance({
                         ),
                       )}
                   </div>
+
                   <FormField
                     control={form.control}
                     name={`order.0`}
                     render={({field}) => (
-                      <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none sm:mt-[1.25rem] xsm:mt-[1rem]'>
+                      <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                         <FormControl>
                           <Checkbox
                             className={cn(
-                              'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                              'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
                               'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                             )}
                             checked={field.value}
@@ -356,12 +349,12 @@ export default function Insurance({
                           />
                         </FormControl>
                         <div className='space-y-1 leading-none'>
-                          <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14m xsm:line-clamp-2 xsm:text-mb-13M'>
+                          <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
                             {data?.insurance_types?.clause ||
                               'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                           </FormLabel>
                         </div>
-                        <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
+                        <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
                       </FormItem>
                     )}
                   />
@@ -370,6 +363,7 @@ export default function Insurance({
             )}
           </>
         )}
+
         {(!data?.user_chooses || type === 'ducvn') &&
           Array.isArray(data?.cargo_insurance_japanvn) &&
           data?.cargo_insurance_japanvn?.map(
@@ -418,11 +412,11 @@ export default function Insurance({
                   control={form.control}
                   name={`order.${data?.user_chooses ? index + 1 : index}`}
                   render={({field}) => (
-                    <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
+                    <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                       <FormControl>
                         <Checkbox
                           className={cn(
-                            'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                            'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
                             'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                           )}
                           checked={field.value}
@@ -430,12 +424,12 @@ export default function Insurance({
                         />
                       </FormControl>
                       <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14m xsm:line-clamp-2 xsm:text-mb-13M'>
+                        <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
                           {item?.clause ||
                             'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
                         </FormLabel>
                       </div>
-                      <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
+                      <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
                     </FormItem>
                   )}
                 />
@@ -444,7 +438,7 @@ export default function Insurance({
           )}
 
         {/* footer */}
-        <div className='!mt-[1.5rem] flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+        <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <div
             onClick={() => {
               setIndexTab(indexTab - 1)

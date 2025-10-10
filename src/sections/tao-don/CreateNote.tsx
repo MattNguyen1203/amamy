@@ -139,7 +139,7 @@ export default function CeateNote({
               return (
                 <div
                   key={index}
-                  className='space-y-[0.75rem] xsm:space-y-[0.5rem] xsm:rounded-[2rem] xsm:bg-white xsm:p-[1rem]'
+                  className='space-y-[0.75rem] xsm:space-y-[0.5rem] xsm:rounded-[2rem] xsm:bg-white xsm:p-[1rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]'
                 >
                   <div className='mb-[1rem]'>
                     <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
