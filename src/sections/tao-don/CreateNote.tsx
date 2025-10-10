@@ -17,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
 
 export default function CeateNote({
   data,
@@ -25,8 +26,6 @@ export default function CeateNote({
   setIndexTab,
   indexTab,
   setSelectedImage,
-  type,
-  importantNote,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (nextTab: string) => void
@@ -125,76 +124,93 @@ export default function CeateNote({
     }
   }
   return (
-    <div className=''>
-      <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:mb-[0.75rem] xsm:hidden'>
-        Lưu ý quan trọng khi gửi hàng
-      </p>
-      {type === 'nhatviet' && (
-        <div className='mb-[1.75rem] mt-[1.75rem] xsm:pl-[1rem]'>
-          <div className='mb-[0.75rem] text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
-            Lưu ý quan trọng về mã bưu điện nội địa Nhật
-          </div>
-          <p
-            ref={(el) => {
-              containerRefs.current[data?.length || 0] = el
-            }}
-            dangerouslySetInnerHTML={{
-              __html: importantNote || '',
-            }}
-            className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
-          ></p>
-        </div>
-      )}
+    <div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
         >
           {Array.isArray(data) &&
-            data?.map((item: IInformationNoteOrder, index: number) => (
-              <div
-                key={index}
-                className='space-y-[1rem] rounded-[2.125rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:p-[1rem]'
-              >
-                <p className='mb-[0.88rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:!font-bold xsm:text-pc-sub14s'>
-                  {item?.title}
-                </p>
+            data?.map((item: IInformationNoteOrder, index: number) => {
+              const html = item?.text || ''
+              const imgs = html.match(/<img[^>]*>/g) || []
+              const content = html.replace(/<img[^>]*>/g, '').trim()
+
+              return (
                 <div
-                  ref={(el) => {
-                    containerRefs.current[index] = el
-                  }}
-                  className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
-                  dangerouslySetInnerHTML={{
-                    __html: item?.text || '',
-                  }}
-                ></div>
-                <FormField
-                  control={form.control}
-                  name={`note.${index}`}
-                  render={({field}) => (
-                    <FormItem className='relative !mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:!mt-[1rem]'>
-                      <FormControl>
-                        <Checkbox
-                          className={cn(
-                            'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[1.5px] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
-                            'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
-                          )}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className='space-y-1 leading-none'>
-                        <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14m xsm:line-clamp-2 xsm:text-mb-13M'>
-                          {item?.agree_with ||
-                            'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
-                        </FormLabel>
-                      </div>
-                      <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] text-pc-sub12m first-letter:!text-[#F00]' />
-                    </FormItem>
+                  key={index}
+                  className='space-y-[0.75rem] xsm:space-y-[0.5rem] xsm:rounded-[2rem] xsm:bg-white xsm:p-[1rem]'
+                >
+                  <div className='mb-[1rem]'>
+                    <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
+                      {item?.title}
+                    </h3>
+                  </div>
+
+                  {imgs.length > 0 && (
+                    <>
+                      {imgs.map((img, i) => {
+                        const roundedImg = img.replace(
+                          /<img(.*?)>/,
+                          `<img$1 style="border-radius:1rem;">`,
+                        )
+
+                        return (
+                          <div
+                            key={i}
+                            dangerouslySetInnerHTML={{__html: roundedImg}}
+                          />
+                        )
+                      })}
+                    </>
                   )}
-                />
-              </div>
-            ))}
-          <div className='flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+
+                  <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                    {/* icon */}
+                    <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem] xsm:ml-[0.75rem]'>
+                      <span className='flex size-[1.25rem] shrink-0 items-center justify-center'>
+                        <ICMessageQuestion className='size-[1.5rem]' />
+                      </span>
+                      <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
+                        LƯU Ý
+                      </p>
+                    </div>
+
+                    <p
+                      className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem]'
+                      dangerouslySetInnerHTML={{__html: content}}
+                    ></p>
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name={`note.${index}`}
+                    render={({field}) => (
+                      <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
+                        <FormControl>
+                          <Checkbox
+                            className={cn(
+                              'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                              'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
+                            )}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className='space-y-1 leading-none'>
+                          <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
+                            {item?.agree_with ||
+                              'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
+                          </FormLabel>
+                        </div>
+                        <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              )
+            })}
+
+          <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 handleClickcurrentTab(prevStep)

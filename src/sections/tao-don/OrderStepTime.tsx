@@ -21,7 +21,6 @@ import {
 import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
 import ICStar from '@/components/icon/ICStar'
 import useIsMobile from '@/hooks/useIsMobile'
-import {Label} from '@/components/ui/label'
 
 export default function OrderStepTime({
   dataInformation,
