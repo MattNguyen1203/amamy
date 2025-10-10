@@ -151,9 +151,6 @@ export default function Insurance({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-[1.5rem] xsm:space-y-[0.62rem]'
       >
-        <p className='!mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
-          Bảo hiểm hàng hóa
-        </p>
         {data?.compensation && (
           <>
             {!data?.user_chooses &&
@@ -210,7 +207,7 @@ export default function Insurance({
                   <div>
                     <p
                       className={cn(
-                        'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:mb-[0.37rem] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
+                        'mb-[0.37rem] font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
                         data?.user_chooses,
                       )}
                     >

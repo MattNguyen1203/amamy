@@ -210,29 +210,29 @@ export default function FormStepStart({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         {!isMobile && (
-          <p className='mb-[1.5rem] text-[#33A6E8] text-pc-sub16b xsm:hidden'>
+          <h2 className='mb-[1.5rem] font-montserrat text-[1rem] font-bold leading-[1.3rem] tracking-[-0.03rem] text-[#33A6E8] xsm:hidden'>
             Thông tin gửi hàng
-          </p>
+          </h2>
         )}
-        <div className='mb-[1.75rem] flex sm:space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col'>
+        <div className='mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-x-0 xsm:space-y-[1.25rem]'>
+          {/* email */}
           <FormField
             control={form.control}
             name='email'
             render={({field}) => (
-              // email
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                   Email của bạn <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] xsm:placeholder:text-[rgba(0,0,0,0.30)] xsm:placeholder:font-medium xsm:placeholder:opacity-[1] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white py-[0.75rem] pl-[1rem] font-montserrat text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.92)] shadow-none placeholder:opacity-[0.3] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.38rem] xsm:h-[2.5rem] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'
                     placeholder='Email@email'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
-                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+                <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+                <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
                   *Bạn sẽ nhận thông báo mã vận đơn qua Email
                 </p>
               </FormItem>
@@ -328,24 +328,24 @@ export default function FormStepStart({
           />
          */}
         </div>
-        <div className='mb-[1.75rem] flex sm:space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-y-[1.25rem]'>
+        <div className='mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-x-0 xsm:space-y-[1.25rem]'>
           {/* name */}
           <FormField
             control={form.control}
             name='name'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                   Tên người gửi <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white py-[0.75rem] pl-[1rem] font-montserrat text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.92)] shadow-none placeholder:opacity-[0.3] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.38rem] xsm:h-[2.5rem] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'
                     placeholder='Nhập tên người gửi'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
+                <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
               </FormItem>
             )}
           />
@@ -356,18 +356,18 @@ export default function FormStepStart({
             name='nameFacebook'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                   Tên Facebook <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:text-mb-13M'
+                    className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white py-[0.75rem] pl-[1rem] font-montserrat text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.92)] shadow-none placeholder:opacity-[0.3] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.38rem] xsm:h-[2.5rem] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'
                     placeholder='Nhập tên Facebook'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
-                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12m xsm:text-[rgba(0,0,0,0.60)]'>
+                <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+                <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
                   *Ghi đúng tên Facebook bạn đã dùng để liên hệ Amamy trước đó -
                   Amamy sẽ phản hồi theo tên này.
                 </p>
@@ -387,22 +387,22 @@ export default function FormStepStart({
                   setSelectServiceDimension(true)
                 }
               }}
-              className='!mb-[1.75rem] flex-1 space-y-0 xsm:!mb-[1.25rem]'
+              className='mb-[1.75rem] flex-1 space-y-0 xsm:mb-[1.25rem]'
             >
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+              <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                 Chọn chiều dịch vụ <strong>(*)</strong>
               </FormLabel>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
-                <FormControl className='!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
-                  <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
+                <FormControl className='!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white py-[0.75rem] pl-[1rem] aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.38rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter'>
+                  <SelectTrigger className='h-[3rem] shadow-none placeholder:opacity-[0.3] focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:font-montserrat [&_span]:text-[0.875rem] [&_span]:font-medium [&_span]:leading-[1.3125rem] [&_span]:tracking-[-0.02625rem] [&_span]:text-[rgba(0,0,0,0.92)] [&_span]:xsm:text-[0.8125rem] [&_span]:xsm:leading-[1rem] [&_span]:xsm:tracking-[-0.02438rem]'>
                     {!isMobile && (
-                      <SelectValue placeholder='Chọn chiều dịch vụ' />
+                      <SelectValue placeholder='Chọn dịch vụ gửi hàng' />
                     )}
                     {isMobile && !field.value && (
-                      <SelectValue placeholder='Chọn chiều dịch vụ' />
+                      <SelectValue placeholder='Chọn dịch vụ gửi hàng' />
                     )}
                     {isMobile && field.value && (
                       <div className='flex flex-1 items-center space-x-[0.75rem]'>
@@ -461,22 +461,22 @@ export default function FormStepStart({
           name='customercode'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+              <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                 Mã khách hàng <strong>(*)</strong>
               </FormLabel>
               <FormControl>
                 <Input
-                  className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[1rem_0.75rem_1rem_1rem] pl-[1rem] text-[#000] shadow-none text-pc-sub14m placeholder:opacity-[0.7rem] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.37rem] xsm:h-[2.5rem] xsm:text-mb-13M'
+                  className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white py-[0.75rem] pl-[1rem] font-montserrat text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.92)] shadow-none placeholder:opacity-[0.3] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.38rem] xsm:h-[2.5rem] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'
                   placeholder='Nhập mã khách hàng'
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
-              <p className='!mb-[0.38rem] !mt-[0.25rem] pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.80)] text-pc-sub12m xsm:text-[rgba(0,0,0,0.60)]'>
+              <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+              <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
                 *Nếu chưa có mã khách hàng vui lòng liên hệ nhân viên tư vấn để
                 nhận mã.
               </p>
-              <p className='pl-[1rem] !font-medium !leading-[1.5] !tracking-[-0.0125rem] text-[rgba(0,0,0,0.80)] text-pc-sub12m xsm:text-[rgba(0,0,0,0.60)]'>
+              <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
                 *Mỗi mã sẽ tương ứng với 1 địa chỉ giao hàng, nếu 1 mã 2 địa chỉ
                 giao hàng khác nhau sẽ giao sai.
               </p>
@@ -485,7 +485,7 @@ export default function FormStepStart({
         />
 
         {/* footer */}
-        <div className='space-x-[2rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:bg-white xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+        <div className='mt-[1.5rem] space-x-[2rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
           <Button
             type='submit'
             disabled={isMobile ? false : !form.formState.isValid}
@@ -500,6 +500,7 @@ export default function FormStepStart({
             </p>
           </Button>
         </div>
+
         {isMobile && (
           <>
             <div
