@@ -336,8 +336,8 @@ export default function Instruct({
                           'pointer-events-none',
                       )}
                     >
-                      <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                        Chọn chi nhánh Amamy Post (*)
+                      <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                        Chọn chi nhánh Amamy Post <strong>(*)</strong>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -438,7 +438,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.address || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m'
+                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
                       ></p>
                     </div>
                   )}
@@ -449,7 +449,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.time || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m'
+                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
                       ></p>
                     </div>
                   )}
@@ -463,7 +463,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.phone || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m'
+                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
                       ></p>
                     </Link>
                   )}
@@ -474,7 +474,7 @@ export default function Instruct({
           {data?.packing_instructions && (
             <div className='mt-0 flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
               <div
-                className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.80)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -513,8 +513,8 @@ export default function Instruct({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Chọn thông tin thanh toán (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Chọn thông tin thanh toán <strong>(*)</strong>
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -857,7 +857,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.address,
                                     }}
-                                    className='flex-1 text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                    className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                   ></p>
                                 </div>
                                 <div className='select-time flex items-start space-x-[0.5rem]'>
@@ -866,7 +866,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.time,
                                     }}
-                                    className='flex-1 text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                    className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                   ></p>
                                 </div>
                                 <div className='select-phone flex items-start space-x-[0.5rem]'>
@@ -875,7 +875,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.phone,
                                     }}
-                                    className='flex-1 text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                    className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                   ></p>
                                 </div>
                               </div>

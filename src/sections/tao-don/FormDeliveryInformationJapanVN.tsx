@@ -319,8 +319,8 @@ export default function FormDeliveryInformationJapanVN({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Tên người nhận <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -338,8 +338,8 @@ export default function FormDeliveryInformationJapanVN({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số điện thoại (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Số điện thoại <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -358,8 +358,8 @@ export default function FormDeliveryInformationJapanVN({
           name='recipientAddressType'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ nhận hàng tại Việt Nam (*)
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                Địa chỉ nhận hàng tại Việt Nam <strong>(*)</strong>
               </FormLabel>
               <FormControl>
                 <RadioGroup
@@ -420,7 +420,7 @@ export default function FormDeliveryInformationJapanVN({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m' />
-              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:text-[rgba(0,0,0,0.60)]  '>
                 *Nhận tại cửa hàng hoặc nhận tại địa chỉ đăng ký
               </p>
             </FormItem>
@@ -438,8 +438,8 @@ export default function FormDeliveryInformationJapanVN({
                   }}
                   className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                    Tỉnh/Thành phố (*)
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                    Tỉnh/Thành phố <strong>(*)</strong>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -524,8 +524,8 @@ export default function FormDeliveryInformationJapanVN({
                   }}
                   className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                    Quận Huyện (*)
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                    Quận Huyện <strong>(*)</strong>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -608,8 +608,8 @@ export default function FormDeliveryInformationJapanVN({
                   }}
                   className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                    Phường Xã (*)
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                    Phường Xã <strong>(*)</strong>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>

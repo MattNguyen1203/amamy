@@ -131,8 +131,8 @@ export default function FormDeliveryInformationVNHan({
             name='recipientName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Tên người nhận <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -156,8 +156,8 @@ export default function FormDeliveryInformationVNHan({
             name='recipientCity'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Thành phố (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Thành phố <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -175,8 +175,8 @@ export default function FormDeliveryInformationVNHan({
             name='district'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Quận (nếu có)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Quận <strong>(nếu có)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -196,8 +196,8 @@ export default function FormDeliveryInformationVNHan({
             name='roadName'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên đường (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Tên đường <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -215,8 +215,8 @@ export default function FormDeliveryInformationVNHan({
             name='housingNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số nhà (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Số nhà<strong> (*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -235,8 +235,8 @@ export default function FormDeliveryInformationVNHan({
           name='recipientAddress'
           render={({field}) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ chi tiết (*)
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                Địa chỉ chi tiết <strong>(*)</strong>
               </FormLabel>
               <FormControl>
                 <Input
@@ -246,7 +246,7 @@ export default function FormDeliveryInformationVNHan({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m' />
-              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:text-[rgba(0,0,0,0.60)]'>
                 *Số phòng, toà nhà nếu có
               </p>
             </FormItem>
@@ -258,7 +258,7 @@ export default function FormDeliveryInformationVNHan({
             name='passportNumber'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium  '>
                   Mã thông quan, ID hoặc CMT
                 </FormLabel>
                 <FormControl>
@@ -269,10 +269,10 @@ export default function FormDeliveryInformationVNHan({
                   />
                 </FormControl>
                 <FormMessage className='pl-[1rem] !text-[#F00] text-pc-sub12m xsm:h-[2.5rem] xsm:p-[0.75rem_0.625rem_0.75rem_1rem]' />
-                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.92)] text-pc-sub12m xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'>
+                <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.92)] xsm:text-[rgba(0,0,0,0.60)] [&_span]:!text-[rgba(0,0,0,0.60)] xsm:tracking-[-0.0225rem] text-pc-sub12m xm:leading-[150%] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'>
                   *Mã thông quan: P828*****888, <br />
                   *CMT: 96*********27: *ID:***213 <br />
-                  <span className='text-[#F00]'>
+                  <span className='xsm:!text-[rgba(0,0,0,0.60)] xsm:tracking-[-0.0225rem] '>
                     *Lưu ý: Mã thông quan, ID hoặc CMT phải trùng địa chỉ giao
                     hàng, nếu không sẽ giao sai. Phí giao lại {shippingCost}.
                   </span>
@@ -285,8 +285,8 @@ export default function FormDeliveryInformationVNHan({
             name='recipientPhone'
             render={({field}) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số điện thoại người nhận (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Số điện thoại người nhận <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input

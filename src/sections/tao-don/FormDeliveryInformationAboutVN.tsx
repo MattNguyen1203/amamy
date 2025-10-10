@@ -1,16 +1,16 @@
 'use client'
 
-import {useEffect, useMemo, useState} from 'react'
-import {useForm} from 'react-hook-form'
+import { useEffect, useMemo, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import useStore from '@/app/(store)/store'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
 import ICX from '@/sections/tao-don/ICX'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {Check, ChevronDown} from 'lucide-react'
-import {z} from 'zod'
-import {Button} from '@/components/ui/button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Check, ChevronDown } from 'lucide-react'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -27,9 +27,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {Input} from '@/components/ui/input'
-import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
-import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
+import { Input } from '@/components/ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
 const formSchema = z.object({
   recipientName: z
@@ -121,7 +121,7 @@ export default function FormDeliveryInformationAboutVN({
   idOrder: number
 }) {
   const isMobile = useIsMobile()
-  const {stepOrder, setStepOrder} = useStore((state) => state)
+  const { stepOrder, setStepOrder } = useStore((state) => state)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
   const [dataCity, setDataCity] = useState<ICity[]>()
   const [isCity, setIsCity] = useState<boolean>(false)
@@ -189,7 +189,7 @@ export default function FormDeliveryInformationAboutVN({
     }
   }, [isVietSec])
 
-  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
@@ -199,7 +199,7 @@ export default function FormDeliveryInformationAboutVN({
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    setDataFromOrder({...dataFromOrder, ...values})
+    setDataFromOrder({ ...dataFromOrder, ...values })
     if (stepOrder < 5) {
       setStepOrder(Number(nextStep))
     }
@@ -215,16 +215,16 @@ export default function FormDeliveryInformationAboutVN({
         recipientAddressType === 'atAmamyStore'
           ? 'Nhận tại cửa hàng Amamy'
           : dataFromOrder?.recipientAddress || '',
-        {shouldValidate: true},
+        { shouldValidate: true },
       )
       form.setValue(
         'recipientCity',
         recipientAddressType === 'atAmamyStore'
           ? (form?.getValues('recipientCity') ?? 'un')
           : (form?.getValues('recipientCity') ??
-              dataFromOrder?.recipientCity ??
-              ''),
-        {shouldValidate: true},
+            dataFromOrder?.recipientCity ??
+            ''),
+        { shouldValidate: true },
       )
 
       form.setValue(
@@ -232,16 +232,16 @@ export default function FormDeliveryInformationAboutVN({
         recipientAddressType === 'atAmamyStore'
           ? (form?.getValues('district') ?? 'un')
           : (form?.getValues('district') ?? dataFromOrder?.district ?? ''),
-        {shouldValidate: true},
+        { shouldValidate: true },
       )
       form.setValue(
         'recipientWardsandcommunes',
         recipientAddressType === 'atAmamyStore'
           ? (form?.getValues('recipientWardsandcommunes') ?? 'un')
           : (form?.getValues('recipientWardsandcommunes') ??
-              dataFromOrder?.recipientWardsandcommunes ??
-              ''),
-        {shouldValidate: true},
+            dataFromOrder?.recipientWardsandcommunes ??
+            ''),
+        { shouldValidate: true },
       )
     }
   }, [recipientAddressType, form])
@@ -285,8 +285,7 @@ export default function FormDeliveryInformationAboutVN({
     async function fetchProvinces() {
       try {
         const response = await fetch(
-          `${
-            process.env.NEXT_PUBLIC_APIPROVINCES
+          `${process.env.NEXT_PUBLIC_APIPROVINCES
           }district?province_id=${encodeURIComponent(
             dataFromOrder?.ProvinceID,
           )}`,
@@ -320,8 +319,7 @@ export default function FormDeliveryInformationAboutVN({
     async function fetchProvinces() {
       try {
         const response = await fetch(
-          `${
-            process.env.NEXT_PUBLIC_APIPROVINCES
+          `${process.env.NEXT_PUBLIC_APIPROVINCES
           }ward?district_id=${encodeURIComponent(dataFromOrder?.DistrictID)}`,
           {
             method: 'GET',
@@ -431,10 +429,10 @@ export default function FormDeliveryInformationAboutVN({
           <FormField
             control={form.control}
             name='recipientName'
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Tên người nhận (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Tên người nhận <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -444,7 +442,7 @@ export default function FormDeliveryInformationAboutVN({
                   />
                 </FormControl>
                 {formDeliveryInformation.descFieldName && (
-                  <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m'>
+                  <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:text-[rgba(0,0,0,0.60)]'>
                     {formDeliveryInformation.descFieldName}
                   </p>
                 )}
@@ -456,10 +454,10 @@ export default function FormDeliveryInformationAboutVN({
           <FormField
             control={form.control}
             name='recipientPhone'
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem className='flex-1 space-y-0'>
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Số điện thoại (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Số điện thoại <strong>(*)</strong>
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -476,10 +474,10 @@ export default function FormDeliveryInformationAboutVN({
         <FormField
           control={form.control}
           name='recipientAddressType'
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem className='flex-1 space-y-0'>
-              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                Địa chỉ nhận hàng
+              <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                Địa chỉ nhận hàng <strong>(*)</strong>
               </FormLabel>
               <FormControl>
                 <RadioGroup
@@ -490,7 +488,7 @@ export default function FormDeliveryInformationAboutVN({
                   }}
                   className={cn(
                     '!my-[0.75rem] flex pl-[1rem] sm:space-x-[4rem] xsm:flex-col xsm:space-y-[1rem]',
-                    {hidden: isAmeriacaToVietNam},
+                    { hidden: isAmeriacaToVietNam },
                   )}
                 >
                   <FormItem className='flex items-center space-x-3 space-y-0 aria-[checked=true]:[&>button]:border-[#38B6FF] [&_svg]:fill-[#38B6FF] [&_svg]:stroke-white'>
@@ -549,7 +547,7 @@ export default function FormDeliveryInformationAboutVN({
         <FormField
           control={form.control}
           name='recipientAddress'
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem className='!mt-0 flex-1 space-y-0'>
               <FormControl>
                 <Input
@@ -561,7 +559,7 @@ export default function FormDeliveryInformationAboutVN({
                   {...field}
                 />
               </FormControl>
-              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:text-pc-sub10m'>
+              <p className='!mt-[0.25rem] pl-[1rem] text-[rgba(0,0,0,0.60)] text-pc-sub12m xsm:text-pc-sub10m xsm:text-[rgba(0,0,0,0.60)]'>
                 *Địa chỉ chi tiết, số nhà, tên đường,...
               </p>
               <FormMessage className='!mt-[0.25rem] pl-[1rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m' />
@@ -573,15 +571,15 @@ export default function FormDeliveryInformationAboutVN({
             <FormField
               control={form.control}
               name='recipientCity'
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem
                   onClick={() => {
                     setIsCity(true)
                   }}
                   className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                    Tỉnh/Thành phố (*)
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                    Tỉnh/Thành phố <strong>(*)</strong>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -597,8 +595,8 @@ export default function FormDeliveryInformationAboutVN({
                         >
                           {field.value
                             ? dataCity?.find(
-                                (city) => city?.ProvinceName === field.value,
-                              )?.ProvinceName
+                              (city) => city?.ProvinceName === field.value,
+                            )?.ProvinceName
                             : 'Tỉnh/Thành phố người nhận'}
                           <ChevronDown className='h-4 w-4 opacity-50' />
                         </Button>
@@ -619,7 +617,7 @@ export default function FormDeliveryInformationAboutVN({
                                     form.setValue(
                                       'recipientCity',
                                       city?.ProvinceName,
-                                      {shouldValidate: true},
+                                      { shouldValidate: true },
                                     )
                                     form.setValue('district', '', {
                                       shouldValidate: true,
@@ -627,7 +625,7 @@ export default function FormDeliveryInformationAboutVN({
                                     form.setValue(
                                       'recipientWardsandcommunes',
                                       '',
-                                      {shouldValidate: true},
+                                      { shouldValidate: true },
                                     )
                                     setDataFromOrder({
                                       ...dataFromOrder,
@@ -660,15 +658,15 @@ export default function FormDeliveryInformationAboutVN({
             <FormField
               control={form.control}
               name='district'
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem
                   onClick={() => {
                     setIsDistrict(true)
                   }}
                   className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                    Quận Huyện (*)
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                    Quận Huyện <strong>(*)</strong>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -684,9 +682,9 @@ export default function FormDeliveryInformationAboutVN({
                         >
                           {field.value
                             ? dataDistrict?.find(
-                                (district) =>
-                                  district?.DistrictName === field.value,
-                              )?.DistrictName
+                              (district) =>
+                                district?.DistrictName === field.value,
+                            )?.DistrictName
                             : 'Quận Huyện người nhận'}
                           <ChevronDown className='h-4 w-4 opacity-50' />
                         </Button>
@@ -709,12 +707,12 @@ export default function FormDeliveryInformationAboutVN({
                                     form.setValue(
                                       'district',
                                       district?.DistrictName,
-                                      {shouldValidate: true},
+                                      { shouldValidate: true },
                                     )
                                     form.setValue(
                                       'recipientWardsandcommunes',
                                       '',
-                                      {shouldValidate: true},
+                                      { shouldValidate: true },
                                     )
                                     setDataFromOrder({
                                       ...dataFromOrder,
@@ -745,15 +743,15 @@ export default function FormDeliveryInformationAboutVN({
             <FormField
               control={form.control}
               name='recipientWardsandcommunes'
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem
                   onClick={() => {
                     setIsWard(true)
                   }}
                   className='flex flex-1 flex-col space-y-0'
                 >
-                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                    Phường Xã (*)
+                  <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                    Phường Xã <strong>(*)</strong>
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -769,8 +767,8 @@ export default function FormDeliveryInformationAboutVN({
                         >
                           {field.value
                             ? dataWard?.find(
-                                (city) => city?.WardName === field.value,
-                              )?.WardName
+                              (city) => city?.WardName === field.value,
+                            )?.WardName
                             : 'Phường Xã người nhận'}
                           <ChevronDown className='h-4 w-4 opacity-50' />
                         </Button>
@@ -793,7 +791,7 @@ export default function FormDeliveryInformationAboutVN({
                                     form.setValue(
                                       'recipientWardsandcommunes',
                                       ward?.WardName,
-                                      {shouldValidate: true},
+                                      { shouldValidate: true },
                                     )
                                   }}
                                 >
@@ -825,10 +823,10 @@ export default function FormDeliveryInformationAboutVN({
               <FormField
                 control={form.control}
                 name='housingNumber'
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem className='flex-1 space-y-0'>
-                    <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Số nhà (*)
+                    <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                      Số nhà<strong> (*)</strong>
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -846,10 +844,10 @@ export default function FormDeliveryInformationAboutVN({
               <FormField
                 control={form.control}
                 name='roadName'
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem className='flex-1 space-y-0'>
-                    <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Tên đường (*)
+                    <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                      Tên đường <strong>(*)</strong>
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -869,7 +867,7 @@ export default function FormDeliveryInformationAboutVN({
               <FormField
                 control={form.control}
                 name='recipientCity'
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem className='flex-1 space-y-0'>
                     <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
                       Thành phố (*)
@@ -890,10 +888,10 @@ export default function FormDeliveryInformationAboutVN({
               <FormField
                 control={form.control}
                 name='recipientCodeCity'
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem className='flex-1 space-y-0'>
-                    <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                      Mã thành phố (*)
+                    <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                      Mã thành phố <strong>(*)</strong>
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -928,7 +926,7 @@ export default function FormDeliveryInformationAboutVN({
             className={cn(
               'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
               !form.formState.isValid &&
-                'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+              'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
           >
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>
@@ -983,7 +981,7 @@ export default function FormDeliveryInformationAboutVN({
                               form.setValue(
                                 'recipientCity',
                                 city?.ProvinceName,
-                                {shouldValidate: true},
+                                { shouldValidate: true },
                               )
                               form.setValue('district', '', {
                                 shouldValidate: true,
@@ -1044,7 +1042,7 @@ export default function FormDeliveryInformationAboutVN({
                               form.setValue(
                                 'district',
                                 district?.DistrictName,
-                                {shouldValidate: true},
+                                { shouldValidate: true },
                               )
                               form.setValue('recipientWardsandcommunes', '', {
                                 shouldValidate: true,
@@ -1100,7 +1098,7 @@ export default function FormDeliveryInformationAboutVN({
                               form.setValue(
                                 'recipientWardsandcommunes',
                                 ward?.WardName,
-                                {shouldValidate: true},
+                                { shouldValidate: true },
                               )
                               setIsWard(false)
                             }}

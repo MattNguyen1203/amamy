@@ -416,8 +416,8 @@ export default function Package({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Chọn thông tin thanh toán (*)
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                  Chọn thông tin thanh toán <strong>(*)</strong>
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
