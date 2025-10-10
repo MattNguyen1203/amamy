@@ -264,16 +264,10 @@ export default function Package({
                   {data?.title || 'Chọn cách đóng gói'}
                 </p>
                 <div
-                  className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
+                  className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem]'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></div>
               </div>
-              {!isMobile && data?.note_more && (
-                <p
-                  className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.80)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
-                  dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
-                ></p>
-              )}
               <div className='flex flex-col space-y-[0.75rem] xsm:space-y-[0.5rem]'>
                 {Array.isArray(data?.list_package) &&
                   data?.list_package?.map((packageItem, packageIndex) => (
@@ -416,7 +410,7 @@ export default function Package({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                   Chọn thông tin thanh toán <strong>(*)</strong>
                 </FormLabel>
                 <Select
