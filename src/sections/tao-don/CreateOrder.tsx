@@ -288,7 +288,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </TabsList>
         )}
 
-        <div className='flex-1 rounded-[2.25rem] bg-[#FAFAFA] p-[1.5rem] xsm:mt-[calc(100vh-34.5rem)] xsm:px-0'>
+        <div className='flex-1 rounded-[2.25rem] bg-[#FAFAFA] p-[1.5rem] xsm:mt-[7rem] xsm:px-0'>
           {!isMobile && (
             <h1 className='mb-[1.5rem] text-[rgba(0,0,0,0.92)] text-pc-heading20b'>
               Tạo đơn hàng

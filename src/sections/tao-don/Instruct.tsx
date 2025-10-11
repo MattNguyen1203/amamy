@@ -754,7 +754,12 @@ export default function Instruct({
                           dangerouslySetInnerHTML={{
                             __html: importantNote || '',
                           }}
-                          className='[&_ul]:content-ul flex-1 text-[rgba(0,0,0,0.80)] text-pc-sub14m *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          className={cn(
+                            '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                            '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
+                            '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
+                            '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                          )}
                         ></p>
                       </div>
                     )}

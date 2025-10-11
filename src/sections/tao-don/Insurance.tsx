@@ -162,7 +162,12 @@ export default function Insurance({
                       ref={(el) => {
                         containerRefs.current[index] = el
                       }}
-                      className='[&_ul]:content-ul [&_ol]:content-ol *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_p]:pt-[0.75rem] first:[&_p]:pt-0 [&_ul]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                      className={cn(
+                        '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                        '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
+                        '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
+                        '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                      )}
                       dangerouslySetInnerHTML={{
                         __html: item?.content || '',
                       }}
@@ -211,7 +216,7 @@ export default function Insurance({
                       {data?.compensation?.title}
                     </p>
                     <div
-                      className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)]'
+                      className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                       dangerouslySetInnerHTML={{
                         __html: data?.compensation?.desc,
                       }}
@@ -233,7 +238,7 @@ export default function Insurance({
                       </h3>
 
                       <div
-                        className='text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'
+                        className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                         dangerouslySetInnerHTML={{
                           __html: data?.compensation?.desc,
                         }}
@@ -266,7 +271,7 @@ export default function Insurance({
                               return (
                                 <FormItem
                                   className={cn(
-                                    'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] py-[0.88rem] pl-[1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
+                                    'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:px-[0.75rem] xsm:py-[0.62rem]',
                                     isChecked
                                       ? 'border-[#38B6FF] bg-[#F1F9FF]'
                                       : 'border-transparent bg-[rgba(239,239,239,0.60)]',
@@ -275,13 +280,22 @@ export default function Insurance({
                                   <FormControl>
                                     <Checkbox
                                       className={cn(
-                                        'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
+                                        // reset base layout
+                                        'relative flex items-center justify-center',
+                                        // fixed size + shape
+                                        'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                                        // visual background
+                                        'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
+                                        // fix positioning context
+                                        'overflow-hidden',
+                                        // handle checked state
                                         'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                        // hide default SVG indicator
+                                        // hide default svg
                                         '[&_svg]:hidden',
-                                        // Indicator customization
-                                        '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
-                                        '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                        // create pseudo indicator circle
+                                        'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                        '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                                        '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
                                         '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
                                       )}
                                       checked={
@@ -386,7 +400,12 @@ export default function Insurance({
                     ref={(el) => {
                       containerRefs.current[index] = el
                     }}
-                    className='[&_ul]:content-ul flex-1 *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-pc-sub14s [&_ul]:!my-0 xsm:marker:[&_ul_li]:text-[0.5rem]'
+                    className={cn(
+                      '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                      '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
+                      '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
+                      '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                    )}
                     dangerouslySetInnerHTML={{
                       __html: item?.content || '',
                     }}

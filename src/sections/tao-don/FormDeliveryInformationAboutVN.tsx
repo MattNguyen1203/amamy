@@ -491,7 +491,7 @@ export default function FormDeliveryInformationAboutVN({
                     setRecipientAddressType(value)
                   }}
                   className={cn(
-                    'mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:space-x-[0.75rem]',
+                    'mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-x-[0.75rem]',
                     {hidden: isAmeriacaToVietNam},
                   )}
                 >
@@ -502,7 +502,7 @@ export default function FormDeliveryInformationAboutVN({
                     return (
                       <FormItem
                         className={cn(
-                          'flex-1',
+                          'flex-1 xsm:!ml-0',
                           'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                           isChecked
                             ? 'border-[#38B6FF] bg-[#F1F9FF]'
@@ -543,7 +543,7 @@ export default function FormDeliveryInformationAboutVN({
                       return (
                         <FormItem
                           className={cn(
-                            'flex-1',
+                            'flex-1 xsm:!ml-0',
                             'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                             isChecked
                               ? 'border-[#38B6FF] bg-[#F1F9FF]'
@@ -584,7 +584,7 @@ export default function FormDeliveryInformationAboutVN({
                       return (
                         <FormItem
                           className={cn(
-                            'flex-1',
+                            'flex-1 xsm:!ml-0',
                             'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                             isChecked
                               ? 'border-[#38B6FF] bg-[#F1F9FF]'
