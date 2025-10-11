@@ -177,15 +177,15 @@ html > body[data-scroll-locked] {
     @apply my-[0.5rem] !font-roboto text-[1.25rem] font-bold leading-[1.5] tracking-[-0.015rem] text-black xsm:text-[1.125rem];
   }
   .custom-prose ul {
-    @apply list-disc pl-5 my-1;
+    @apply my-1 list-disc pl-5;
   }
 
   .custom-prose ol {
-    @apply list-decimal pl-5 my-1;
+    @apply my-1 list-decimal pl-5;
   }
 
   .custom-prose table {
-    @apply border border-gray-300 my-2 text-sm;
+    @apply my-2 border border-gray-300 text-sm;
   }
 
   .custom-prose th,

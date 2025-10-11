@@ -370,7 +370,7 @@ export default function FormDeliveryInformationJapanVN({
                     field.onChange(value)
                     setRecipientAddressType(value)
                   }}
-                  className='mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:space-x-[0.75rem]'
+                  className='mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-x-[0.75rem]'
                 >
                   {/* item 1 */}
                   {(() => {
@@ -379,7 +379,7 @@ export default function FormDeliveryInformationJapanVN({
                     return (
                       <FormItem
                         className={cn(
-                          'flex-1',
+                          'flex-1 xsm:!ml-0',
                           'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                           isChecked
                             ? 'border-[#38B6FF] bg-[#F1F9FF]'
@@ -391,14 +391,26 @@ export default function FormDeliveryInformationJapanVN({
                             id='r1'
                             value={value}
                             className={cn(
-                              'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-white shadow-none',
+                              // layout reset
+                              'relative box-border inline-flex items-center justify-center align-middle',
+                              // fixed shape
+                              'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                              // visual bg
+                              'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                              // ensure perfect circle
+                              'aspect-square overflow-hidden',
+                              // handle checked state
                               'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                              // hide default SVG indicator
+                              // hide radix default SVG
                               '[&_svg]:hidden',
-                              // Indicator customization
-                              '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
-                              '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                              // span (indicator wrapper)
+                              'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                              // pseudo indicator
+                              '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                              '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
                               '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                              // fine-tune optical centering
+                              'translate-y-[0.5px]', // adjusts subpixel misalignment
                             )}
                           />
                         </FormControl>
@@ -419,7 +431,7 @@ export default function FormDeliveryInformationJapanVN({
                     return (
                       <FormItem
                         className={cn(
-                          'flex-1',
+                          'flex-1 xsm:!ml-0',
                           'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
                           isChecked
                             ? 'border-[#38B6FF] bg-[#F1F9FF]'
@@ -431,14 +443,26 @@ export default function FormDeliveryInformationJapanVN({
                             id='r2'
                             value={value}
                             className={cn(
-                              'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-white shadow-none',
+                              // layout reset
+                              'relative box-border inline-flex items-center justify-center align-middle',
+                              // fixed shape
+                              'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                              // visual bg
+                              'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                              // ensure perfect circle
+                              'aspect-square overflow-hidden',
+                              // handle checked state
                               'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                              // hide default SVG indicator
+                              // hide radix default SVG
                               '[&_svg]:hidden',
-                              // Indicator customization
-                              '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
-                              '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                              // span (indicator wrapper)
+                              'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                              // pseudo indicator
+                              '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                              '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
                               '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                              // fine-tune optical centering
+                              'translate-y-[0.5px]', // adjusts subpixel misalignment
                             )}
                           />
                         </FormControl>

@@ -165,19 +165,22 @@ export default function CeateNote({
                     </>
                   )}
 
-                  <div className='!mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] xsm:mb-[0.5rem] xsm:p-0'>
+                  <div className='mt-[1rem] flex flex-col items-start p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
                     {/* icon */}
-                    <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem] xsm:ml-[0.75rem]'>
-                      <span className='flex size-[1.25rem] shrink-0 items-center justify-center'>
-                        <ICMessageQuestion className='size-[1.5rem]' />
-                      </span>
+                    <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
+                      <ICMessageQuestion className='size-[1.5rem] shrink-0' />
                       <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
                         LƯU Ý
                       </p>
                     </div>
 
                     <div
-                      className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem]'
+                      className={cn(
+                        '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                        '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+                        '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
+                        '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                      )}
                       dangerouslySetInnerHTML={{__html: content}}
                     ></div>
 
@@ -209,6 +212,116 @@ export default function CeateNote({
                 </div>
               )
             })}
+
+          {/* TEST */}
+          {/* <>
+            <div className='mb-[1rem]'>
+              <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
+                Xử lý cân nặng
+              </h3>
+            </div>
+            <div className='space-y-[0.75rem] xsm:space-y-[0.5rem]'>
+              {[
+                {
+                  label: 'Standards – Miễn phí',
+                  desc: 'Chụp hình hiển thị rõ số cân trước khi gửi.',
+                },
+                {
+                  label: 'Video-Nachweis – +0,29€/kiện',
+                  desc: 'Quay video toàn bộ quá trình cân từ mốc 0kg đến khi đặt kiện hàng lên cân và gửi lại cho khách hàng.',
+                },
+              ].map((stockItem, stockIndex) => (
+                <FormField
+                  key={stockIndex}
+                  control={form.control as any}
+                  name={`userChoices.test`}
+                  render={({field}) => {
+                    const isChecked = field.value === stockItem.label
+
+                    return (
+                      <FormItem
+                        className={cn(
+                          'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] py-[0.88rem] pl-[1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
+                          isChecked
+                            ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                            : 'border-transparent bg-[rgba(239,239,239,0.60)]',
+                        )}
+                      >
+                        <FormControl>
+                          <Checkbox
+                            className={cn(
+                              'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
+                              'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                              '[&_svg]:hidden',
+                              '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
+                              '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                              '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                            )}
+                            checked={isChecked}
+                            onCheckedChange={(checked) => {
+                              field.onChange(
+                                checked ? stockItem.label : undefined,
+                              )
+                            }}
+                          />
+                        </FormControl>
+
+                        <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                          <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.8125rem]'>
+                            {stockItem.label}
+                          </FormLabel>
+                          {stockItem.desc && (
+                            <FormLabel className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem]'>
+                              {stockItem.desc}
+                            </FormLabel>
+                          )}
+                        </div>
+                      </FormItem>
+                    )
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] p-[1.5rem] sm:bg-[rgba(239,239,239,0.60)] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+              <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem] xsm:ml-[0.75rem]'>
+                <span className='flex size-[1.25rem] shrink-0 items-center justify-center'>
+                  <ICMessageQuestion className='size-[1.5rem]' />
+                </span>
+                <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem]'>
+                  LƯU Ý
+                </p>
+              </div>
+
+              <div className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem]'>
+                <p>
+                  Trong một số trường hợp, cân nặng hiển thị tại DHL có thể
+                  chênh lệch nhẹ so với cân nặng trên hóa đơn Amamy (ví dụ:
+                  7,0kg so với 7,2kg).
+                </p>
+                <br />
+                <p>Nguyên nhân có thể do:</p>
+                <ul className='list-disc pl-6'>
+                  <li>Sai số tự nhiên của cân điện tử (dao động 0,1–0,2kg).</li>
+                  <li>
+                    Kiện hàng được đóng lại hoặc thay thùng để đảm bảo an toàn
+                    vận chuyển.
+                  </li>
+                </ul>
+                <br />
+                <p>
+                  Với các kiện trên <strong>15kg</strong>, Amamy có thể tách
+                  thùng nhằm hạn chế móp méo, hư hại khi vận chuyển.
+                </p>
+                <p>
+                  Nhằm tăng tính minh bạch tuyệt đối, đảm bảo không có phí ẩn
+                  hay gian lận trong khâu cân hàng, Amamy cung cấp hai hình thức
+                  xác thực để khách hàng lựa chọn:
+                </p>
+              </div>
+            </div>
+          </> */}
+          {/* TEST */}
 
           <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div

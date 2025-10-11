@@ -183,7 +183,7 @@ export default function OrderStepTime({
                             return (
                               <FormItem
                                 className={cn(
-                                  'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] py-[0.88rem] pl-[1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
+                                  'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
                                   isChecked
                                     ? 'border-[#38B6FF] bg-[#F1F9FF]'
                                     : 'border-transparent bg-[rgba(239,239,239,0.60)]',
@@ -192,14 +192,26 @@ export default function OrderStepTime({
                                 <FormControl>
                                   <Checkbox
                                     className={cn(
-                                      'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
+                                      // layout reset
+                                      'relative box-border inline-flex items-center justify-center align-middle',
+                                      // fixed shape
+                                      'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                                      // visual bg
+                                      'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                                      // ensure perfect circle
+                                      'aspect-square overflow-hidden',
+                                      // handle checked state
                                       'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                      // hide default SVG indicator
+                                      // hide radix default SVG
                                       '[&_svg]:hidden',
-                                      // Indicator customization
-                                      '[&>span]:absolute [&>span]:left-1/2 [&>span]:top-1/2 [&>span]:-translate-x-1/2 [&>span]:-translate-y-1/2',
-                                      '[&>span]:before:block [&>span]:before:size-[0.75rem] [&>span]:before:rounded-full [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                      // span (indicator wrapper)
+                                      'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                      // pseudo indicator
+                                      '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                                      '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
                                       '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                      // fine-tune optical centering
+                                      'translate-y-[0.5px]', // adjusts subpixel misalignment
                                     )}
                                     checked={isChecked}
                                     onCheckedChange={(checked) => {
@@ -248,23 +260,26 @@ export default function OrderStepTime({
                     </div>
 
                     {item?.note_more && (
-                      <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] p-[1.5rem] sm:bg-[rgba(239,239,239,0.60)] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                      <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
                         {/* icon */}
-                        <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem] xsm:ml-[0.75rem]'>
-                          <span className='flex size-[1.25rem] shrink-0 items-center justify-center'>
-                            <ICMessageQuestion className='size-[1.5rem]' />
-                          </span>
+                        <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
+                          <ICMessageQuestion className='size-[1.5rem] shrink-0' />
                           <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
                             LƯU Ý
                           </p>
                         </div>
 
-                        <p
-                          className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem]'
+                        <div
+                          className={cn(
+                            '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                            '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+                            '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
+                            '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                          )}
                           dangerouslySetInnerHTML={{
                             __html: item?.note_more,
                           }}
-                        ></p>
+                        ></div>
                       </div>
                     )}
                   </>
@@ -273,7 +288,7 @@ export default function OrderStepTime({
                     ref={(el) => {
                       containerRefs.current[index] = el
                     }}
-                    className='[&_ul]:content-ul [&_ol]:content-ol mb-[1rem] *:font-medium *:text-black/[0.92] *:text-pc-14 *:xsm:text-mb-13 [&>p>span]:font-medium xsm:[&_*]:!text-[rgba(0,0,0,0.60)] [&_a]:text-[#0084FF] [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:not-italic [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F] [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 [&_strong]:text-pc-sub14s marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                    className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                     dangerouslySetInnerHTML={{
                       __html: item?.stock || '',
                     }}
