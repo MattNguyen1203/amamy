@@ -154,7 +154,7 @@ export default function useDeliveryPrice({
         )
       }
       if (!unitPrice) return null
-      console.log('Unit price', unitPrice)
+      // console.log('Unit price', unitPrice)
       totalPrice =
         priceListType === 'price_fixed' &&
         Math.ceil(weight) < +deliveryPriceList.delivery_price[0].min_weight

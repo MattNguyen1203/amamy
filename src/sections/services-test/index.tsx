@@ -47,7 +47,7 @@ const ServicePage = ({
   optionFields,
   dataService,
 }: ServicePageProps) => {
-  console.log('Data: ', dataService)
+  // console.log('Data: ', dataService)
   useEffect(() => {
     // Only run on client side to prevent hydration mismatch
     if (typeof window === 'undefined') return
