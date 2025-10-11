@@ -482,31 +482,36 @@ export default function Package({
 
             {stepEnd ? (
               <AlertDialog>
-                {form.formState.isValid ? (
-                  <AlertDialogTrigger className='flex-1'>
-                    <div
-                      className={cn(
-                        'ml-auto mt-[0rem] h-[2.8125rem] rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
-                      )}
-                    >
-                      {isPending ? (
-                        <ICLoading />
-                      ) : (
+                <div className='flex-1'>
+                  {form.formState.isValid ? (
+                    <AlertDialogTrigger className='w-full'>
+                      <div
+                        className={cn(
+                          'ml-auto mt-[0rem] h-[2.8125rem] rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                        )}
+                      >
+                        {isPending ? (
+                          <ICLoading />
+                        ) : (
+                          <p className='text-white text-pc-sub16m'>Xác nhận</p>
+                        )}
+                      </div>
+                    </AlertDialogTrigger>
+                  ) : (
+                    <div className='flex-1'>
+                      <button
+                        type='submit'
+                        disabled={!form.formState.isValid}
+                        className={cn(
+                          'h-[2.8125rem] w-full rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
+                        )}
+                      >
                         <p className='text-white text-pc-sub16m'>Xác nhận</p>
-                      )}
+                      </button>
                     </div>
-                  </AlertDialogTrigger>
-                ) : (
-                  <button
-                    type='submit'
-                    disabled={!form.formState.isValid}
-                    className={cn(
-                      'h-[2.8125rem] flex-1 rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
-                    )}
-                  >
-                    <p className='text-white text-pc-sub16m'>Xác nhận</p>
-                  </button>
-                )}
+                  )}
+                </div>
+
                 <AlertDialogContent
                   className={cn(
                     'w-[21.4375rem] max-w-[21.4375rem] gap-0 !rounded-[1.25rem] bg-white p-[2rem_1rem_1rem_1.25rem] sm:w-[29.375rem] sm:max-w-[29.375rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
@@ -683,17 +688,19 @@ export default function Package({
                 </AlertDialogContent>
               </AlertDialog>
             ) : (
-              <Button
-                type='submit'
-                disabled={!form.formState.isValid}
-                className={cn(
-                  'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
-                  !form.formState.isValid &&
-                    'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
-                )}
-              >
-                <p className='text-white text-pc-sub16m'>Tiếp tục</p>
-              </Button>
+              <div className='flex-1'>
+                <Button
+                  type='submit'
+                  disabled={!form.formState.isValid}
+                  className={cn(
+                    'ml-auto mt-[0rem] h-[2.8125rem] w-full rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                    !form.formState.isValid &&
+                      'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+                  )}
+                >
+                  <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+                </Button>
+              </div>
             )}
           </div>
         </div>

@@ -176,10 +176,10 @@ export default function CeateNote({
                       </p>
                     </div>
 
-                    <p
+                    <div
                       className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem]'
                       dangerouslySetInnerHTML={{__html: content}}
-                    ></p>
+                    ></div>
 
                     <FormField
                       control={form.control}
