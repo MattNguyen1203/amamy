@@ -165,7 +165,7 @@ export default function CeateNote({
                     </>
                   )}
 
-                  <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                  <div className='!mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] xsm:mb-[0.5rem] xsm:p-0'>
                     {/* icon */}
                     <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem] xsm:ml-[0.75rem]'>
                       <span className='flex size-[1.25rem] shrink-0 items-center justify-center'>
@@ -180,32 +180,32 @@ export default function CeateNote({
                       className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.125rem] xsm:tracking-[-0.0225rem]'
                       dangerouslySetInnerHTML={{__html: content}}
                     ></p>
-                  </div>
 
-                  <FormField
-                    control={form.control}
-                    name={`note.${index}`}
-                    render={({field}) => (
-                      <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
-                        <FormControl>
-                          <Checkbox
-                            className={cn(
-                              'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
-                              'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
-                            )}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className='space-y-1 leading-none'>
-                          <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
-                            {item?.agree_with ||
-                              'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
-                          </FormLabel>
-                        </div>
-                        <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
-                      </FormItem>
-                    )}
-                  />
+                    <FormField
+                      control={form.control}
+                      name={`note.${index}`}
+                      render={({field}) => (
+                        <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
+                          <FormControl>
+                            <Checkbox
+                              className={cn(
+                                'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                                'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
+                              )}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className='space-y-1 leading-none'>
+                            <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
+                              {item?.agree_with ||
+                                'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
+                            </FormLabel>
+                          </div>
+                          <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
               )
             })}

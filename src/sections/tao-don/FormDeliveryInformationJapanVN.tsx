@@ -404,7 +404,7 @@ export default function FormDeliveryInformationJapanVN({
                         </FormControl>
                         <FormLabel
                           htmlFor='r1'
-                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)]'
+                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
                         >
                           Nhận tại địa chỉ đăng ký
                         </FormLabel>
@@ -444,7 +444,7 @@ export default function FormDeliveryInformationJapanVN({
                         </FormControl>
                         <FormLabel
                           htmlFor='r2'
-                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)]'
+                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
                         >
                           Nhận tại cửa hàng Amamy
                         </FormLabel>

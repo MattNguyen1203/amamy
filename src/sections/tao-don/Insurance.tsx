@@ -374,14 +374,14 @@ export default function Insurance({
               <div
                 key={index}
                 className={cn(
-                  'space-y-[1.2rem] rounded-[1.25rem] bg-white p-[1rem] xsm:rounded-[2.125rem] xsm:shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)]',
-                  index === 0 ? 'xsm:!mt-0' : '',
+                  'space-y-[1.2rem] rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2.125rem] xsm:p-[1rem]',
+                  index > 0 ? 'mt-[1rem] xsm:mt-[0.88rem]' : '',
                 )}
               >
-                <p className='mb-[0.88rem] font-montserrat text-[1rem] !font-bold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-pc-sub14s'>
+                <p className='mb-[0.88rem] font-montserrat text-[1rem] !font-bold leading-[1.625] tracking-[-0.03rem] text-black xsm:mb-[0.38rem] xsm:text-pc-sub14s'>
                   {item?.title}
                 </p>
-                <div className='flex bg-white sm:space-x-[1rem] xsm:flex-col-reverse xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                <div className='flex bg-white sm:space-x-[1rem] xsm:!mt-0 xsm:flex-col-reverse xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
                   <div
                     ref={(el) => {
                       containerRefs.current[index] = el

@@ -306,16 +306,15 @@ export default function Instruct({
   }
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-8'
-      >
-        <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-          {!isMobile && (
-            <p className='text-[#33A6E8] text-pc-sub16b'>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        {!isMobile && (
+          <div className='mb-[1.25rem] xsm:mb-[1rem]'>
+            <h2 className='mb-[1.5rem] font-montserrat text-[1rem] font-bold leading-[1.3rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:hidden'>
               Hướng dẫn gửi hàng lên Amamy Post
-            </p>
-          )}
+            </h2>
+          </div>
+        )}
+        <div className='space-y-[1.75rem] xsm:space-y-[1.25rem]'>
           {data?.select_branch && (
             <>
               <div className='rounded-[1.25rem]'>
@@ -336,7 +335,7 @@ export default function Instruct({
                           'pointer-events-none',
                       )}
                     >
-                      <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                      <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                         Chọn chi nhánh Amamy Post <strong>(*)</strong>
                       </FormLabel>
                       <Select
@@ -345,7 +344,7 @@ export default function Instruct({
                       >
                         <FormControl
                           className={cn(
-                            '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                            '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                             data?.select_branch &&
                               data?.select_branch?.length < 2 &&
                               '[&_svg]:hidden',
@@ -367,6 +366,7 @@ export default function Instruct({
                             )}
                           </SelectTrigger>
                         </FormControl>
+
                         <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                           {Array.isArray(data?.select_branch) &&
                             data?.select_branch?.length > 0 &&
@@ -425,8 +425,9 @@ export default function Instruct({
                   )}
                 />
               </div>
+
               {dataBranch && (
-                <div className='!mt-[0.75rem] flex-1 space-y-[0.75rem] rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                <div className='flex-1 space-y-[0.75rem] rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
                   <p className='text-black text-pc-tab-title'>
                     <span className='amamy-post'>Amamy Post </span>
                     <span>{dataBranch?.title}</span>
@@ -438,7 +439,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.address || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
+                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                       ></p>
                     </div>
                   )}
@@ -449,7 +450,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.time || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
+                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                       ></p>
                     </div>
                   )}
@@ -463,7 +464,7 @@ export default function Instruct({
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.phone || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
+                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                       ></p>
                     </Link>
                   )}
@@ -472,9 +473,9 @@ export default function Instruct({
             </>
           )}
           {data?.packing_instructions && (
-            <div className='mt-0 flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
+            <div className='flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
               <div
-                className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.80)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -513,7 +514,7 @@ export default function Instruct({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                   Chọn thông tin thanh toán <strong>(*)</strong>
                 </FormLabel>
                 <Select
@@ -522,7 +523,7 @@ export default function Instruct({
                 >
                   <FormControl
                     className={cn(
-                      '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
+                      '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',
@@ -574,7 +575,7 @@ export default function Instruct({
             )}
           />
 
-          <div className='!mt-[1.5rem] flex items-center justify-between space-x-[1.25rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:!mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+          <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 setIndexTab(indexTab - 1)
@@ -845,7 +846,7 @@ export default function Instruct({
                               className='flex items-center space-x-[0.75rem] rounded-[1.25rem] border-[1px] border-solid border-[#F8F8F8] bg-white p-[0.75rem]'
                             >
                               <div className='flex-1 space-y-[0.75rem]'>
-                                <p className='text-black text-pc-tab-title xsm:text-pc-sub14s'>
+                                <p className='font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
                                   <span className='amamy-post'>
                                     Amamy Post{' '}
                                   </span>
@@ -857,7 +858,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.address,
                                     }}
-                                    className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                    className='flex-1 text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                   ></p>
                                 </div>
                                 <div className='select-time flex items-start space-x-[0.5rem]'>
@@ -866,7 +867,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.time,
                                     }}
-                                    className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                    className='flex-1 text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                   ></p>
                                 </div>
                                 <div className='select-phone flex items-start space-x-[0.5rem]'>
@@ -875,7 +876,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.phone,
                                     }}
-                                    className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                    className='flex-1 text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                   ></p>
                                 </div>
                               </div>
