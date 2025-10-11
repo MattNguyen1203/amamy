@@ -249,31 +249,22 @@ export default function Package({
   return (
     <Form {...form}>
       <form
+        className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-[1.5rem] xsm:space-y-[0.75rem]'
       >
         {data?.list_package && (
           <>
-            <div className='h-full rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+            <div className='rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
               <div className='mb-[1rem]'>
-                <p
-                  className={cn(
-                    'font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:!font-bold xsm:leading-[1.225rem] xsm:tracking-[-0.035rem] xsm:text-pc-sub14s',
-                  )}
-                >
+                <p className='mb-[0.38rem] font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
                   {data?.title || 'Chọn cách đóng gói'}
                 </p>
                 <div
-                  className='text-[rgba(0,0,0,0.92)] text-pc-sub14m xsm:[&_*]:text-[0.75rem] xsm:[&_*]:leading-[1.05rem] xsm:[&_*]:tracking-[-0.0225rem] xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'
+                  className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></div>
               </div>
-              {!isMobile && data?.note_more && (
-                <p
-                  className='my-[1rem] text-[#F00] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.80)] [&_ul]:pl-[1rem] [&_ul_li]:list-disc'
-                  dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
-                ></p>
-              )}
+
               <div className='flex flex-col space-y-[0.75rem] xsm:space-y-[0.5rem]'>
                 {Array.isArray(data?.list_package) &&
                   data?.list_package?.map((packageItem, packageIndex) => (
@@ -290,16 +281,16 @@ export default function Package({
                         return (
                           <FormItem
                             className={cn(
-                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
+                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] py-[0.88rem] pl-[1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
                               isChecked
                                 ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                                : 'border-transparent bg-[#EFEFEF99]',
+                                : 'border-transparent bg-[rgba(239,239,239,0.60)]',
                             )}
                           >
                             <FormControl>
                               <Checkbox
                                 className={cn(
-                                  'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[#EFEFEF99] shadow-none transition-all duration-200',
+                                  'relative size-[1.25rem] rounded-full border border-[#A3DDFF] bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
                                   'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
                                   // hide default SVG indicator
                                   '[&_svg]:hidden',
@@ -325,37 +316,36 @@ export default function Package({
                                 }}
                               />
                             </FormControl>
-                            <div className='flex flex-col space-y-[0rem] leading-none'>
-                              <div className='flex sm:items-center sm:space-x-[0.3875rem] xsm:flex-wrap xsm:gap-[0.5rem]'>
+                            <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                              <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
                                 {isMobile && packageItem?.tag && (
-                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                    <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
-                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
+                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                    <ICStar className='size-[0.75rem]' />
+                                    <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
                                       {packageItem?.tag}
                                     </p>
                                   </div>
                                 )}
-                                <FormLabel className='cursor-pointer !font-semibold text-black/[0.92] text-pc-sub14s xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:font-semibold xsm:tracking-[-0.01625rem]'>
+                                <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
                                   {packageItem?.label}
                                 </FormLabel>
                                 {!isMobile && packageItem?.tag && (
-                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.13rem_0.38rem] sm:hidden'>
-                                    <ICStar className='size-[0.875rem] xsm:size-[0.75rem]' />
-                                    <p className='text-white flex-center text-pc-sub14m xsm:w-max xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[0.875rem] xsm:tracking-[-0.01875rem]'>
+                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                    <ICStar className='size-[0.875rem]' />
+                                    <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
                                       {packageItem?.tag}
                                     </p>
                                   </div>
                                 )}
                               </div>
+
                               {packageItem?.desc && (
-                                <FormLabel className='cursor-pointer pt-[0.19rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
-                                  <p
-                                    className='text-[rgba(0,0,0,0.80)] text-pc-sub14m xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
-                                    dangerouslySetInnerHTML={{
-                                      __html: packageItem?.desc,
-                                    }}
-                                  ></p>
-                                </FormLabel>
+                                <FormLabel
+                                  className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+                                  dangerouslySetInnerHTML={{
+                                    __html: packageItem?.desc,
+                                  }}
+                                ></FormLabel>
                               )}
                             </div>
                           </FormItem>
@@ -373,10 +363,8 @@ export default function Package({
           name='packageMessage'
           render={({field}) => (
             <FormItem className='relative flex flex-col items-start space-y-[0.38rem]'>
-              <FormLabel className='cursor-pointer pl-[1rem] pt-[0.5rem] text-[rgba(0,0,0,0.80)] text-pc-sub14m'>
-                <p className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Viết yêu cầu của bạn
-                </p>
+              <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
+                Viết yêu cầu của bạn
               </FormLabel>
               <FormControl>
                 <textarea
@@ -416,7 +404,7 @@ export default function Package({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='pl-[1rem] text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                   Chọn thông tin thanh toán <strong>(*)</strong>
                 </FormLabel>
                 <Select
@@ -478,8 +466,8 @@ export default function Package({
           />
         )}
 
-        <div className='flex items-center justify-between space-x-[2rem] sm:w-full xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
-          <div className='!mt-[1.5rem] flex w-full items-center gap-[2rem] xsm:!mt-0 xsm:gap-[0.5rem]'>
+        <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+          <div className='flex w-full items-center gap-[2rem] xsm:!mt-0 xsm:gap-[0.5rem]'>
             <div className='flex-1'>
               <div
                 onClick={() => {
@@ -494,31 +482,36 @@ export default function Package({
 
             {stepEnd ? (
               <AlertDialog>
-                {form.formState.isValid ? (
-                  <AlertDialogTrigger className='flex-1'>
-                    <div
-                      className={cn(
-                        'ml-auto mt-[0rem] h-[2.8125rem] rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
-                      )}
-                    >
-                      {isPending ? (
-                        <ICLoading />
-                      ) : (
+                <div className='flex-1'>
+                  {form.formState.isValid ? (
+                    <AlertDialogTrigger className='w-full'>
+                      <div
+                        className={cn(
+                          'ml-auto mt-[0rem] h-[2.8125rem] rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                        )}
+                      >
+                        {isPending ? (
+                          <ICLoading />
+                        ) : (
+                          <p className='text-white text-pc-sub16m'>Xác nhận</p>
+                        )}
+                      </div>
+                    </AlertDialogTrigger>
+                  ) : (
+                    <div className='flex-1'>
+                      <button
+                        type='submit'
+                        disabled={!form.formState.isValid}
+                        className={cn(
+                          'h-[2.8125rem] w-full rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
+                        )}
+                      >
                         <p className='text-white text-pc-sub16m'>Xác nhận</p>
-                      )}
+                      </button>
                     </div>
-                  </AlertDialogTrigger>
-                ) : (
-                  <button
-                    type='submit'
-                    disabled={!form.formState.isValid}
-                    className={cn(
-                      'h-[2.8125rem] flex-1 rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
-                    )}
-                  >
-                    <p className='text-white text-pc-sub16m'>Xác nhận</p>
-                  </button>
-                )}
+                  )}
+                </div>
+
                 <AlertDialogContent
                   className={cn(
                     'w-[21.4375rem] max-w-[21.4375rem] gap-0 !rounded-[1.25rem] bg-white p-[2rem_1rem_1rem_1.25rem] sm:w-[29.375rem] sm:max-w-[29.375rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
@@ -695,17 +688,19 @@ export default function Package({
                 </AlertDialogContent>
               </AlertDialog>
             ) : (
-              <Button
-                type='submit'
-                disabled={!form.formState.isValid}
-                className={cn(
-                  'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
-                  !form.formState.isValid &&
-                    'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
-                )}
-              >
-                <p className='text-white text-pc-sub16m'>Tiếp tục</p>
-              </Button>
+              <div className='flex-1'>
+                <Button
+                  type='submit'
+                  disabled={!form.formState.isValid}
+                  className={cn(
+                    'ml-auto mt-[0rem] h-[2.8125rem] w-full rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                    !form.formState.isValid &&
+                      'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+                  )}
+                >
+                  <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+                </Button>
+              </div>
             )}
           </div>
         </div>
