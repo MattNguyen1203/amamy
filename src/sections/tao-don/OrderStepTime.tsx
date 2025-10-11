@@ -192,23 +192,26 @@ export default function OrderStepTime({
                                 <FormControl>
                                   <Checkbox
                                     className={cn(
-                                      // reset base layout
-                                      'relative flex items-center justify-center',
-                                      // fixed size + shape
+                                      // layout reset
+                                      'relative box-border inline-flex items-center justify-center align-middle',
+                                      // fixed shape
                                       'size-[1.25rem] rounded-full border border-[#A3DDFF]',
-                                      // visual background
-                                      'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
-                                      // fix positioning context
-                                      'overflow-hidden',
+                                      // visual bg
+                                      'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                                      // ensure perfect circle
+                                      'aspect-square overflow-hidden',
                                       // handle checked state
                                       'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                      // hide default svg
+                                      // hide radix default SVG
                                       '[&_svg]:hidden',
-                                      // create pseudo indicator circle
+                                      // span (indicator wrapper)
                                       'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                      // pseudo indicator
                                       '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
                                       '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
                                       '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                      // fine-tune optical centering
+                                      'translate-y-[0.5px]', // adjusts subpixel misalignment
                                     )}
                                     checked={isChecked}
                                     onCheckedChange={(checked) => {
@@ -257,12 +260,10 @@ export default function OrderStepTime({
                     </div>
 
                     {item?.note_more && (
-                      <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] p-[1.5rem] sm:bg-[rgba(239,239,239,0.60)] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                      <div className='mt-[1rem] flex flex-col items-start p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
                         {/* icon */}
-                        <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem] xsm:ml-[0.75rem]'>
-                          <span className='flex size-[1.25rem] shrink-0 items-center justify-center'>
-                            <ICMessageQuestion />
-                          </span>
+                        <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
+                          <ICMessageQuestion className='size-[1.5rem] shrink-0' />
                           <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
                             LƯU Ý
                           </p>
@@ -271,8 +272,8 @@ export default function OrderStepTime({
                         <p
                           className={cn(
                             '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-                            '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
-                            '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
+                            '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+                            '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
                             '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
                           )}
                           dangerouslySetInnerHTML={{

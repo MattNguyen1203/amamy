@@ -290,23 +290,26 @@ export default function Package({
                             <FormControl>
                               <Checkbox
                                 className={cn(
-                                  // reset base layout
-                                  'relative flex items-center justify-center',
-                                  // fixed size + shape
+                                  // layout reset
+                                  'relative box-border inline-flex items-center justify-center align-middle',
+                                  // fixed shape
                                   'size-[1.25rem] rounded-full border border-[#A3DDFF]',
-                                  // visual background
-                                  'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200',
-                                  // fix positioning context
-                                  'overflow-hidden',
+                                  // visual bg
+                                  'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                                  // ensure perfect circle
+                                  'aspect-square overflow-hidden',
                                   // handle checked state
                                   'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                  // hide default svg
+                                  // hide radix default SVG
                                   '[&_svg]:hidden',
-                                  // create pseudo indicator circle
+                                  // span (indicator wrapper)
                                   'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                  // pseudo indicator
                                   '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
                                   '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
                                   '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                  // fine-tune optical centering
+                                  'translate-y-[0.5px]', // adjusts subpixel misalignment
                                 )}
                                 checked={
                                   field.value ===
