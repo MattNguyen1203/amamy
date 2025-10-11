@@ -260,16 +260,16 @@ export default function OrderStepTime({
                     </div>
 
                     {item?.note_more && (
-                      <div className='mt-[1rem] flex flex-col items-start p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                      <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
                         {/* icon */}
-                        <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
+                        <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
                           <ICMessageQuestion className='size-[1.5rem] shrink-0' />
                           <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
                             LƯU Ý
                           </p>
                         </div>
 
-                        <p
+                        <div
                           className={cn(
                             '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
                             '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
@@ -279,7 +279,7 @@ export default function OrderStepTime({
                           dangerouslySetInnerHTML={{
                             __html: item?.note_more,
                           }}
-                        ></p>
+                        ></div>
                       </div>
                     )}
                   </>
