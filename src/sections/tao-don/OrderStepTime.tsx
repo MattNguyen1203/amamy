@@ -245,7 +245,7 @@ export default function OrderStepTime({
                                   </div>
                                   {stockItem?.desc && (
                                     <FormLabel
-                                      className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+                                      className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                       dangerouslySetInnerHTML={{
                                         __html: stockItem?.desc,
                                       }}
@@ -288,7 +288,7 @@ export default function OrderStepTime({
                     ref={(el) => {
                       containerRefs.current[index] = el
                     }}
-                    className='text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                     dangerouslySetInnerHTML={{
                       __html: item?.stock || '',
                     }}
