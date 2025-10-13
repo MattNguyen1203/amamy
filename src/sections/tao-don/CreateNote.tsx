@@ -40,36 +40,15 @@ export default function CeateNote({
 }) {
   const isMobile = useIsMobile()
 
-  const buildUserChoicesSchema = (data: IInformationNoteOrder[]) =>
-    z.record(z.string(), z.string().optional()).refine(
-      (choices) => {
-        return data.every((item, itemIndex) => {
-          return item.note_options?.every((noteOpt, noteIdx) => {
-            const groupKey = `noteOption_${itemIndex}_${noteIdx}`
-            const groupSelections = Object.keys(choices).filter((key) =>
-              key.startsWith(groupKey),
-            )
-            return groupSelections.length > 0 // Hoặc adjust nếu optional
-          })
-        })
-      },
-      {message: 'Vui lòng chọn ít nhất một tùy chọn cho mỗi nhóm.'},
-    )
-
   const FormSchema = z.object({
     note: z.array(
       z.boolean().refine((value) => value === true, {
         message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
       }),
     ),
-    userChoices: Array.isArray(data)
-      ? buildUserChoicesSchema(data)
-      : z.record(z.string(), z.string().optional()),
-    finalAgreements: z.array(
-      z.boolean().refine((v) => v === true, {
-        message: 'Bạn cần đồng ý với điều khoản của mục này.',
-      }),
-    ),
+      noteOptions: z.record(z.string(), z.string().optional()),
+    // Dynamic fields for note_options agreements (checkboxes)
+    noteOptionsAgreement: z.record(z.string(), z.boolean()),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -80,8 +59,8 @@ export default function CeateNote({
       note: Array.isArray(data)
         ? data?.map(() => (stepOrder > 3 ? true : false))
         : [],
-      userChoices: {},
-      finalAgreements: Array.isArray(data) ? data.map(() => false) : [],
+     noteOptions: {},
+      noteOptionsAgreement: {},
     },
   })
   useEffect(() => {
@@ -154,9 +133,8 @@ export default function CeateNote({
     }
   }
   return (
-    <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-[1.75rem] xsm:space-y-[1.25rem]'>
           {Array.isArray(data) &&
             data?.map((item: IInformationNoteOrder, index: number) => {
               const html = item?.text || ''
@@ -169,7 +147,8 @@ export default function CeateNote({
                   className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
                 >
                   <div className='rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:space-y-[1.25rem] xsm:rounded-[2rem] xsm:p-[1rem]'>
-                    <div>
+                    <div
+                    >
                       <div className='mb-[1rem]'>
                         <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
                           {item?.title}
@@ -246,6 +225,9 @@ export default function CeateNote({
                     item.note_options.length > 0 &&
                     item.note_options.map((noteOpt, noteIdx) => {
                       if (!noteOpt?.list_note_options?.length) return null
+                      
+ const radioFieldName = `noteOptions.${index}-${noteIdx}`
+                      const checkboxFieldName = `noteOptionsAgreement.${index}-${noteIdx}`
 
                       return (
                         <Fragment key={`${index}-${noteIdx}`}>
@@ -266,7 +248,7 @@ export default function CeateNote({
                                       <FormField
                                         key={`${index}-${noteIdx}-${optIndex}`}
                                         control={form.control}
-                                        name={`userChoices.noteOption_${index}_${noteIdx}`}
+                                           name={radioFieldName as `noteOptions.${string}`}
                                         render={({field}) => {
                                           const isChecked =
                                             field.value === opt?.label
@@ -382,7 +364,7 @@ export default function CeateNote({
 
                               <FormField
                                 control={form.control}
-                                name={`finalAgreements.${index * 10 + noteIdx}`}
+                                 name={checkboxFieldName as `noteOptionsAgreement.${string}`}
                                 render={({field}) => (
                                   <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                                     <FormControl>
@@ -439,6 +421,5 @@ export default function CeateNote({
           </div>
         </form>
       </Form>
-    </div>
   )
 }
