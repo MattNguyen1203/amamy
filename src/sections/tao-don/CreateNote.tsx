@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
+import {Fragment, useEffect, useRef, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
 import {cn} from '@/lib/utils'
@@ -166,76 +166,78 @@ export default function CeateNote({
               return (
                 <div
                   key={index}
-                  className='rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:space-y-[1.25rem] xsm:rounded-[2rem] xsm:p-[1rem]'
+                  className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
                 >
-                  <div>
-                    <div className='mb-[1rem]'>
-                      <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
-                        {item?.title}
-                      </h3>
-                    </div>
-
-                    {imgs.length > 0 && (
-                      <>
-                        {imgs.map((img, i) => {
-                          const roundedImg = img.replace(
-                            /<img(.*?)>/,
-                            `<img$1 style="border-radius:1rem;">`,
-                          )
-
-                          return (
-                            <div
-                              key={i}
-                              dangerouslySetInnerHTML={{__html: roundedImg}}
-                            />
-                          )
-                        })}
-                      </>
-                    )}
-
-                    <div className='mt-[1rem] flex flex-col items-start p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
-                      {/* icon */}
-                      <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
-                        <ICMessageQuestion className='size-[1.5rem] shrink-0' />
-                        <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
-                          LƯU Ý
-                        </p>
+                  <div className='rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:space-y-[1.25rem] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                    <div>
+                      <div className='mb-[1rem]'>
+                        <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
+                          {item?.title}
+                        </h3>
                       </div>
 
-                      <div
-                        className={cn(
-                          '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-                          '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
-                          '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
-                          '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
-                        )}
-                        dangerouslySetInnerHTML={{__html: content}}
-                      ></div>
+                      {imgs.length > 0 && (
+                        <>
+                          {imgs.map((img, i) => {
+                            const roundedImg = img.replace(
+                              /<img(.*?)>/,
+                              `<img$1 style="border-radius:1rem;">`,
+                            )
 
-                      <FormField
-                        control={form.control}
-                        name={`note.${index}`}
-                        render={({field}) => (
-                          <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
-                            <FormControl>
-                              <Checkbox
-                                className={cn(
-                                  'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
-                                  'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
-                                )}
-                                onCheckedChange={field.onChange}
+                            return (
+                              <div
+                                key={i}
+                                dangerouslySetInnerHTML={{__html: roundedImg}}
                               />
-                            </FormControl>
-                            <div className='space-y-1 leading-none'>
-                              <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
-                                {item?.agree_with ||
-                                  'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
-                              </FormLabel>
-                            </div>
-                            <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
-                          </FormItem>
-                        )}
-                      />
+                            )
+                          })}
+                        </>
+                      )}
+
+                      <div className='mt-[1rem] flex flex-col items-start p-[1.5rem] xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                        {/* icon */}
+                        <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
+                          <ICMessageQuestion className='size-[1.5rem] shrink-0' />
+                          <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
+                            LƯU Ý
+                          </p>
+                        </div>
+
+                        <div
+                          className={cn(
+                            '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                            '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+                            '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
+                            '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                          )}
+                          dangerouslySetInnerHTML={{__html: content}}
+                        ></div>
+
+                        <FormField
+                          control={form.control}
+                          name={`note.${index}`}
+                          render={({field}) => (
+                            <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
+                              <FormControl>
+                                <Checkbox
+                                  className={cn(
+                                    'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                                    'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
+                                  )}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <div className='space-y-1 leading-none'>
+                                <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
+                                  {item?.agree_with ||
+                                    'Tôi đã đọc và đồng ý với chính sách về kiện hàng'}
+                                </FormLabel>
+                              </div>
+                              <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -246,142 +248,141 @@ export default function CeateNote({
                       if (!noteOpt?.list_note_options?.length) return null
 
                       return (
-                        <div
-                          key={`${index}-${noteIdx}`}
-                          className='p-[1.5rem] xsm:p-0'
-                        >
-                          {noteOpt.note_options_title && (
-                            <div className='mb-[1rem] sm:-mx-[1.5rem]'>
-                              <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
-                                {noteOpt?.note_options_title}
-                              </h3>
-                            </div>
-                          )}
-
-                          <div className=''>
-                            <div className='space-y-[0.75rem] xsm:space-y-[0.5rem]'>
-                              {noteOpt.list_note_options.map(
-                                (opt, optIndex) => {
-                                  return (
-                                    <FormField
-                                      key={`${index}-${noteIdx}-${optIndex}`}
-                                      control={form.control}
-                                      name={`userChoices.noteOption_${index}_${noteIdx}`}
-                                      render={({field}) => {
-                                        const isChecked =
-                                          field.value === opt?.label
-
-                                        return (
-                                          <FormItem
-                                            className={cn(
-                                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
-                                              isChecked
-                                                ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                                                : 'border-transparent bg-[rgba(239,239,239,0.60)]',
-                                            )}
-                                          >
-                                            <FormControl>
-                                              <Checkbox
-                                                className={cn(
-                                                  // layout reset
-                                                  'relative box-border inline-flex items-center justify-center align-middle',
-                                                  // fixed shape
-                                                  'size-[1.25rem] rounded-full border border-[#A3DDFF]',
-                                                  // visual bg
-                                                  'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
-                                                  // ensure perfect circle
-                                                  'aspect-square overflow-hidden',
-                                                  // handle checked state
-                                                  'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                                  // hide radix default SVG
-                                                  '[&_svg]:hidden',
-                                                  // span (indicator wrapper)
-                                                  'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
-                                                  // pseudo indicator
-                                                  '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
-                                                  '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
-                                                  '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
-                                                  // fine-tune optical centering
-                                                  'translate-y-[0.5px]', // adjusts subpixel misalignment
-                                                )}
-                                                checked={isChecked}
-                                                onCheckedChange={(checked) => {
-                                                  field.onChange(
-                                                    checked
-                                                      ? opt?.label
-                                                      : undefined,
-                                                  )
-                                                }}
-                                              />
-                                            </FormControl>
-                                            <div className='flex flex-col gap-y-[0.25rem] leading-none'>
-                                              <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
-                                                {isMobile && opt?.tag && (
-                                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
-                                                    <ICStar className='size-[0.75rem]' />
-                                                    <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
-                                                      {opt?.tag}
-                                                    </p>
-                                                  </div>
-                                                )}
-                                                <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
-                                                  {opt?.label}
-                                                </FormLabel>
-                                                {!isMobile && opt?.tag && (
-                                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
-                                                    <ICStar className='size-[0.875rem]' />
-                                                    <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
-                                                      {opt?.tag}
-                                                    </p>
-                                                  </div>
-                                                )}
-                                              </div>
-                                              {opt?.description && (
-                                                <FormLabel
-                                                  className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
-                                                  dangerouslySetInnerHTML={{
-                                                    __html: opt?.description,
-                                                  }}
-                                                ></FormLabel>
-                                              )}
-                                            </div>
-                                          </FormItem>
-                                        )
-                                      }}
-                                    />
-                                  )
-                                },
-                              )}
-                            </div>
-
-                            {noteOpt?.note_more && (
-                              <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
-                                {/* icon */}
-                                <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
-                                  <ICMessageQuestion className='size-[1.5rem] shrink-0' />
-                                  <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
-                                    LƯU Ý
-                                  </p>
-                                </div>
-
-                                <div
-                                  className={cn(
-                                    '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-                                    '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
-                                    '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
-                                    '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
-                                  )}
-                                  dangerouslySetInnerHTML={{
-                                    __html: noteOpt.note_more,
-                                  }}
-                                ></div>
+                        <Fragment key={`${index}-${noteIdx}`}>
+                          <div className='rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                            {noteOpt.note_options_title && (
+                              <div className='mb-[1rem]'>
+                                <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
+                                  {noteOpt?.note_options_title}
+                                </h3>
                               </div>
                             )}
 
-                            {noteOpt?.note_options_clause && (
+                            <>
+                              <div className='space-y-[0.75rem] xsm:space-y-[0.5rem]'>
+                                {noteOpt.list_note_options.map(
+                                  (opt, optIndex) => {
+                                    return (
+                                      <FormField
+                                        key={`${index}-${noteIdx}-${optIndex}`}
+                                        control={form.control}
+                                        name={`userChoices.noteOption_${index}_${noteIdx}`}
+                                        render={({field}) => {
+                                          const isChecked =
+                                            field.value === opt?.label
+
+                                          return (
+                                            <FormItem
+                                              className={cn(
+                                                'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
+                                                isChecked
+                                                  ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                                                  : 'border-transparent bg-[rgba(239,239,239,0.60)]',
+                                              )}
+                                            >
+                                              <FormControl>
+                                                <Checkbox
+                                                  className={cn(
+                                                    // layout reset
+                                                    'relative box-border inline-flex items-center justify-center align-middle',
+                                                    // fixed shape
+                                                    'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                                                    // visual bg
+                                                    'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                                                    // ensure perfect circle
+                                                    'aspect-square overflow-hidden',
+                                                    // handle checked state
+                                                    'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                                                    // hide radix default SVG
+                                                    '[&_svg]:hidden',
+                                                    // span (indicator wrapper)
+                                                    'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                                    // pseudo indicator
+                                                    '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                                                    '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                                    '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                                    // fine-tune optical centering
+                                                    'translate-y-[0.5px]', // adjusts subpixel misalignment
+                                                  )}
+                                                  checked={isChecked}
+                                                  onCheckedChange={(
+                                                    checked,
+                                                  ) => {
+                                                    field.onChange(
+                                                      checked
+                                                        ? opt?.label
+                                                        : undefined,
+                                                    )
+                                                  }}
+                                                />
+                                              </FormControl>
+                                              <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                                                <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
+                                                  {isMobile && opt?.tag && (
+                                                    <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                                      <ICStar className='size-[0.75rem]' />
+                                                      <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
+                                                        {opt?.tag}
+                                                      </p>
+                                                    </div>
+                                                  )}
+                                                  <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
+                                                    {opt?.label}
+                                                  </FormLabel>
+                                                  {!isMobile && opt?.tag && (
+                                                    <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                                      <ICStar className='size-[0.875rem]' />
+                                                      <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
+                                                        {opt?.tag}
+                                                      </p>
+                                                    </div>
+                                                  )}
+                                                </div>
+                                                {opt?.description && (
+                                                  <FormLabel
+                                                    className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+                                                    dangerouslySetInnerHTML={{
+                                                      __html: opt?.description,
+                                                    }}
+                                                  ></FormLabel>
+                                                )}
+                                              </div>
+                                            </FormItem>
+                                          )
+                                        }}
+                                      />
+                                    )
+                                  },
+                                )}
+                              </div>
+
+                              {noteOpt?.note_more && (
+                                <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+                                  {/* icon */}
+                                  <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
+                                    <ICMessageQuestion className='size-[1.5rem] shrink-0' />
+                                    <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
+                                      LƯU Ý
+                                    </p>
+                                  </div>
+
+                                  <div
+                                    className={cn(
+                                      '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                                      '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+                                      '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
+                                      '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                                    )}
+                                    dangerouslySetInnerHTML={{
+                                      __html: noteOpt.note_more,
+                                    }}
+                                  ></div>
+                                </div>
+                              )}
+
                               <FormField
                                 control={form.control}
-                                name={`finalAgreements.${index}`}
+                                name={`finalAgreements.${index * 10 + noteIdx}`}
                                 render={({field}) => (
                                   <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                                     <FormControl>
@@ -390,6 +391,7 @@ export default function CeateNote({
                                           'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
                                           'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
                                         )}
+                                        checked={field.value}
                                         onCheckedChange={field.onChange}
                                       />
                                     </FormControl>
@@ -403,12 +405,11 @@ export default function CeateNote({
                                   </FormItem>
                                 )}
                               />
-                            )}
+                            </>
                           </div>
-                        </div>
+                        </Fragment>
                       )
                     })}
-
                   {/* TEST */}
                 </div>
               )
