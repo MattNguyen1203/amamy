@@ -26,6 +26,16 @@ export interface IInformationNoteOrder {
   title: string
   text: string
   agree_with: string
+  note_options?: Array<{
+    note_options_title: string
+    note_options_clause: string
+    list_note_options: Array<{
+      label: string
+      description?: string
+      tag?: string
+    }>
+    note_more?: string
+  }>
 }
 export interface IInformationInstructOrder_SelectBranch {
   title: string
