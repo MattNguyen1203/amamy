@@ -67,43 +67,52 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     const foundItem = data?.find((item) => item.id === Number(shipping))
     setDataInformation(foundItem)
     setStepOrder(2)
-    StepForm = [{title: 'Thông tin gửi hàng', value: '1'}]
+
+    const newStepForm: {title: string; value: string}[] = [
+      {title: 'Thông tin gửi hàng', value: '1'},
+    ]
+
     if (foundItem?.information?.time) {
-      StepForm = [...StepForm, {title: 'Thời gian gửi hàng', value: '2'}]
+      newStepForm.push({title: 'Thời gian gửi hàng', value: '2'})
     }
+
     if (
-      (foundItem?.type === 'nhatviet' ||
-        foundItem?.type === 'ducvn' ||
-        foundItem?.type === 'viethan' ||
-        foundItem?.type === 'vietnhat') &&
-      foundItem?.information?.note
+      foundItem &&
+      ['nhatviet', 'ducvn', 'viethan', 'vietnhat'].includes(foundItem.type) &&
+      foundItem.information?.note
     ) {
-      StepForm = [...StepForm, {title: 'Lưu ý quan trọng', value: '3'}]
+      newStepForm.push({title: 'Lưu ý quan trọng', value: '3'})
     }
-    StepForm = [...StepForm, {title: 'Thông tin nhận hàng', value: '4'}]
-    if (
-      (foundItem?.type === 'vietduc' &&
-        (foundItem?.information?.insurance?.compensation?.title ||
-          foundItem?.information?.insurance?.compensation?.desc)) ||
-      foundItem?.information?.insurance?.compensation?.policy
-    ) {
-      StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
+
+    newStepForm.push({title: 'Thông tin nhận hàng', value: '4'})
+
+    const insurance = foundItem?.information?.insurance
+    if (insurance) {
+      const hasInsuranceStep =
+        (foundItem.type === 'vietduc' &&
+          (insurance?.compensation?.title ||
+            insurance?.compensation?.desc ||
+            insurance?.compensation?.policy)) ||
+        (foundItem.type !== 'vietduc' &&
+          (insurance?.user_chooses || insurance?.cargo_insurance_japanvn))
+
+      if (hasInsuranceStep) {
+        newStepForm.push({title: 'Bảo hiểm hàng hóa', value: '5'})
+      }
     }
-    if (
-      foundItem?.type !== 'vietduc' &&
-      (foundItem?.information?.insurance?.user_chooses ||
-        foundItem?.information?.insurance?.cargo_insurance_japanvn)
-    ) {
-      StepForm = [...StepForm, {title: 'Bảo hiểm hàng hóa', value: '5'}]
-    }
-    StepForm = [...StepForm, {title: 'Chọn cách đóng gói', value: '6'}]
+
+    newStepForm.push({title: 'Chọn cách đóng gói', value: '6'})
+
     if (!foundItem?.information?.instruct?.hidden_step) {
-      StepForm = [
-        ...StepForm,
-        {title: 'Hướng dẫn gửi hàng lên Amamy Post', value: '7'},
-      ]
+      newStepForm.push({
+        title: 'Hướng dẫn gửi hàng lên Amamy Post',
+        value: '7',
+      })
     }
+
+    StepForm = newStepForm
   }
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     setFaq(false)
