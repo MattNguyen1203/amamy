@@ -1,25 +1,29 @@
 'use client'
 
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import {cn} from '@/lib/utils'
-import {IInformationNoteOrder} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {z} from 'zod'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
 import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
-import useIsMobile from '@/hooks/useIsMobile'
 import ICStar from '@/components/icon/ICStar'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/components/ui/form'
+import useIsMobile from '@/hooks/useIsMobile'
+import { cn } from '@/lib/utils'
+import { IInformationNoteOrder } from '@/sections/tao-don/oder.interface'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+
+interface IDataFromOrder {
+  [key: string]: string | number | boolean | object | undefined
+}
 
 export default function CeateNote({
   data,
@@ -28,13 +32,15 @@ export default function CeateNote({
   setIndexTab,
   indexTab,
   setSelectedImage,
+  setDataFromOrder,
 }: {
   data?: IInformationNoteOrder[]
-  handleClickcurrentTab: (nextTab: string) => void
+  handleClickcurrentTab: (_nextTab: string) => void
   prevStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>
+  setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   type?: string
   importantNote?: string
 }) {
@@ -123,6 +129,13 @@ export default function CeateNote({
   }, [triggerScroll])
   function onSubmit(values: z.infer<typeof FormSchema>) {
     if (values) {
+      // Save noteOptions to dataFromOrder
+      setDataFromOrder((prev: IDataFromOrder) => ({
+        ...prev,
+        noteOptions: values.noteOptions,
+        noteOptionsAgreement: values.noteOptionsAgreement,
+      }))
+
       if (stepOrder < 4) {
         setStepOrder(4)
       }
@@ -162,7 +175,7 @@ export default function CeateNote({
                         {imgs.map((img, i) => {
                           const roundedImg = img.replace(
                             /<img(.*?)>/,
-                            `<img$1 style="border-radius:1rem;">`,
+                            '<img$1 style="border-radius:1rem;">',
                           )
 
                           return (
@@ -325,14 +338,14 @@ export default function CeateNote({
                                                     </p>
                                                   </div>
                                                 )}
-                                              </div>
+																							</div>
                                               {opt?.description && (
                                                 <FormLabel
                                                   className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
                                                   dangerouslySetInnerHTML={{
                                                     __html: opt?.description,
                                                   }}
-                                                ></FormLabel>
+																								></FormLabel>
                                               )}
                                             </div>
                                           </FormItem>
