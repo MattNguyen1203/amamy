@@ -28,3 +28,7 @@ docker.io/okhubvn/amamy:latest && docker run -d -p 3000:3000 --name amamy docker
 
 docker pull docker.io/okhubvn/nextjs14-okhub:latest && docker stop nextjs14-okhub && docker rm
 nextjs14-okhub && docker run -d -p 3000:3000 --name nextjs14-okhub docker.io/okhubvn/nextjs14-okhub:latest
+
+docker compose -f docker-compose.yml build && docker push docker.io/okhubvn/amamy:latest
+
+docker pull docker.io/okhubvn/amamy:latest && docker stop amamy && docker rm amamy && docker run -d -p 3000:3000 --name amamy docker.io/okhubvn/amamy:latest && docker system prune -a

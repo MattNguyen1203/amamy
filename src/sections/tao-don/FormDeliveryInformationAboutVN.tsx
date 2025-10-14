@@ -1,35 +1,35 @@
 'use client'
 
-import {useEffect, useMemo, useState} from 'react'
-import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import ICX from '@/sections/tao-don/ICX'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {Check, ChevronDown} from 'lucide-react'
-import {z} from 'zod'
-import {Button} from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
 } from '@/components/ui/command'
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
 } from '@/components/ui/form'
-import {Input} from '@/components/ui/input'
-import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
-import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
+import { Input } from '@/components/ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import useIsMobile from '@/hooks/useIsMobile'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import ICX from '@/sections/tao-don/ICX'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Check, ChevronDown } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 const formSchema = z.object({
   recipientName: z
@@ -491,7 +491,7 @@ export default function FormDeliveryInformationAboutVN({
                     setRecipientAddressType(value)
                   }}
                   className={cn(
-                    'mb-[1.75rem] flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-x-[0.75rem]',
+                    'mb-[1.75rem] gap-0 flex space-x-[1.5rem] xsm:mb-[1.25rem] xsm:flex-col xsm:space-x-0 xsm:space-y-2',
                     {hidden: isAmeriacaToVietNam},
                   )}
                 >
@@ -500,50 +500,52 @@ export default function FormDeliveryInformationAboutVN({
                     const value = 'registeredAddress'
                     const isChecked = field.value === value
                     return (
-                      <FormItem
-                        className={cn(
-                          'flex-1 xsm:!ml-0',
-                          'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
-                          isChecked
-                            ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                            : 'border-[#DCDFE4] bg-white',
-                        )}
-                      >
-                        <FormControl>
-                          <RadioGroupItem
-                            id='r1'
-                            value={value}
-                            className={cn(
-                              // layout reset
-                              'relative box-border inline-flex items-center justify-center align-middle',
-                              // fixed shape
-                              'size-[1.25rem] rounded-full border border-[#A3DDFF]',
-                              // visual bg
-                              'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
-                              // ensure perfect circle
-                              'aspect-square overflow-hidden',
-                              // handle checked state
-                              'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                              // hide radix default SVG
-                              '[&_svg]:hidden',
-                              // span (indicator wrapper)
-                              'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
-                              // pseudo indicator
-                              '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
-                              '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
-                              '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
-                              // fine-tune optical centering
-                              'translate-y-[0.5px]', // adjusts subpixel misalignment
-                            )}
-                          />
-                        </FormControl>
-                        <FormLabel
-                          htmlFor='r1'
-                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
-                        >
-                          Nhận tại địa chỉ đăng ký
-                        </FormLabel>
-                      </FormItem>
+                      <label htmlFor='r1' className='cursor-pointer block w-full'>
+                      	<FormItem
+	                        className={cn(
+	                          'flex-1 xsm:!ml-0',
+	                          'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[1.25rem] border-[1.2px] p-[0.88rem_1.25rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:p-[0.62rem_0.75rem]',
+	                          isChecked
+	                            ? 'border-[#38B6FF] bg-[#F1F9FF]'
+	                            : 'border-[#DCDFE4] bg-white',
+	                        )}
+	                      >
+	                        <FormControl>
+	                          <RadioGroupItem
+	                            id='r1'
+	                            value={value}
+	                            className={cn(
+	                              // layout reset
+	                              'relative box-border inline-flex items-center justify-center align-middle',
+	                              // fixed shape
+	                              'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+	                              // visual bg
+	                              'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+	                              // ensure perfect circle
+	                              'aspect-square overflow-hidden',
+	                              // handle checked state
+	                              'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+	                              // hide radix default SVG
+	                              '[&_svg]:hidden',
+	                              // span (indicator wrapper)
+	                              'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+	                              // pseudo indicator
+	                              '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+	                              '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+	                              '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+	                              // fine-tune optical centering
+	                              'translate-y-[0.5px]', // adjusts subpixel misalignment
+	                            )}
+	                          />
+	                        </FormControl>
+	                        <FormLabel
+	                          htmlFor='r1'
+	                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
+	                        >
+	                          Nhận tại địa chỉ đăng ký
+	                        </FormLabel>
+	                      </FormItem>
+                      </label>
                     )
                   })()}
 
@@ -552,7 +554,8 @@ export default function FormDeliveryInformationAboutVN({
                     (() => {
                       const value = 'atAmamyStore'
                       const isChecked = field.value === value
-                      return (
+										return (
+												<label htmlFor='r2' className='cursor-pointer block w-full'>
                         <FormItem
                           className={cn(
                             'flex-1 xsm:!ml-0',
@@ -596,7 +599,8 @@ export default function FormDeliveryInformationAboutVN({
                           >
                             Nhận tại cửa hàng Amamy
                           </FormLabel>
-                        </FormItem>
+												</FormItem>
+												</label>
                       )
                     })()}
 

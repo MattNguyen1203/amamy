@@ -52,9 +52,53 @@ export default function CeateNote({
         message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
       }),
     ),
-    noteOptions: z.record(z.string(), z.string().optional()),
+    noteOptions: z.record(z.string(), z.string().optional()).refine(
+      (choices) => {
+        if (!Array.isArray(data)) return true
+
+        const itemsWithNoteOptions = data.filter(
+          (item) => Array.isArray(item.note_options) && item.note_options.length > 0,
+        )
+        
+        const requiredKeys = itemsWithNoteOptions.map((item, itemIndex) => 
+          item.note_options?.map((_, noteIdx) => `${itemIndex}-${noteIdx}`)
+        ).flat().filter(Boolean)
+
+        return requiredKeys.every((key) => {
+          if (!key) {
+            return true
+          }
+          return choices[key] && choices[key] !== ''
+        })
+      },
+      {
+        message: 'Vui lòng chọn đầy đủ các tùy chọn bắt buộc.',
+      },
+    ),
     // Dynamic fields for note_options agreements (checkboxes)
-    noteOptionsAgreement: z.record(z.string(), z.boolean()),
+    noteOptionsAgreement: z.record(z.string(), z.boolean()).refine(
+      (agreements) => {
+        if (!Array.isArray(data)) return true
+
+        const itemsWithNoteOptions = data.filter(
+          (item) => Array.isArray(item.note_options) && item.note_options.length > 0,
+        )
+        
+        const requiredKeys = itemsWithNoteOptions.map((item, itemIndex) => 
+          item.note_options?.map((_, noteIdx) => `${itemIndex}-${noteIdx}`)
+        ).flat().filter(Boolean)
+
+        return requiredKeys.every((key) => {
+          if (!key) {
+            return true
+          }
+          return agreements[key] === true
+        })
+      },
+      {
+        message: 'Vui lòng đồng ý với tất cả điều khoản.',
+      },
+    ),
   })
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
