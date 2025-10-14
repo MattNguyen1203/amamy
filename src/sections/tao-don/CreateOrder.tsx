@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
-import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 import useStore from '@/app/(store)/store'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import CeateNote from '@/sections/tao-don/CreateNote'
 import CustomBack from '@/sections/tao-don/CustomBack'
 import FormDeliveryInformation from '@/sections/tao-don/FormDeliveryInformation'
@@ -18,11 +17,12 @@ import ICCheck from '@/sections/tao-don/ICCheck'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
+import { ICreateOder } from '@/sections/tao-don/oder.interface'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import Package from '@/sections/tao-don/Package'
 import Image from 'next/image'
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
+import { useEffect, useRef, useState } from 'react'
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import './style.css'
 
 let StepForm: {title: string; value: string}[] = [
@@ -371,6 +371,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                     prevStep={dataInformation?.information?.time ? '2' : '1'}
                     type={dataInformation?.type}
                     importantNote={dataInformation?.information?.important_note}
+                    setDataFromOrder={setDataFromOrder}
                   />
                 )}
               </TabsContent>

@@ -1,45 +1,45 @@
 'use client'
 
-import {useEffect, useMemo, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
-import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {toast} from 'sonner'
-import {z} from 'zod'
-import {ICLoading} from '@/components/icon/ICLoading'
+import { ICLoading } from '@/components/icon/ICLoading'
+import ICStar from '@/components/icon/ICStar'
 import ImageV2 from '@/components/image/ImageV2'
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogTitle,
+	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
 } from '@/components/ui/form'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 } from '@/components/ui/select'
-import ICStar from '@/components/icon/ICStar'
+import useIsMobile from '@/hooks/useIsMobile'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import { ICreateOder, IInformationOrder } from '@/sections/tao-don/oder.interface'
+import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useMemo, useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
 
 export default function Package({
   data,
@@ -58,7 +58,7 @@ export default function Package({
   nation,
 }: {
   data: IInformationOrder['package']
-  handleClickcurrentTab: (nextTab: string) => void
+  handleClickcurrentTab: (_nextTab: string) => void
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
@@ -199,6 +199,11 @@ export default function Package({
             ? form?.getValues('packageMessage')
             : (form?.getValues('package') ?? ''),
         yeu_cau_them: form?.getValues('packageMessage') ?? '',
+
+        // Note options data
+        note_options: JSON.stringify(dataFromOrder?.noteOptions || {}),
+        note_options_agreement: JSON.stringify(dataFromOrder?.noteOptionsAgreement || {}),
+        minh_bach_can_nang: Object.values(dataFromOrder?.noteOptions || {}).join(', '),
       }
       if (formData) {
         try {

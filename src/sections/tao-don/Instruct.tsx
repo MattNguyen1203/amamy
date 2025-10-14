@@ -1,51 +1,51 @@
 'use client'
 
-import {useEffect, useRef, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
+import { ICLoading } from '@/components/icon/ICLoading'
+import ImageV2 from '@/components/image/ImageV2'
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/components/ui/form'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
 import ICAddress from '@/sections/tao-don/ICAddress'
 import ICPhone from '@/sections/tao-don/ICPhone'
 import ICTime from '@/sections/tao-don/ICTime'
 import ICX from '@/sections/tao-don/ICX'
 import {
-  ICreateOder,
-  IInformationInstructOrder,
-  IInformationInstructOrder_SelectBranch,
+	ICreateOder,
+	IInformationInstructOrder,
+	IInformationInstructOrder_SelectBranch,
 } from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import {toast} from 'sonner'
-import {z} from 'zod'
-import {ICLoading} from '@/components/icon/ICLoading'
-import ImageV2 from '@/components/image/ImageV2'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { useEffect, useRef, useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
 
 const formSchema = z.object({
   branch: z
@@ -268,6 +268,11 @@ export default function Instruct({
             ? dataFromOrder?.packageMessage
             : (dataFromOrder?.package ?? ''),
         yeu_cau_them: dataFromOrder?.packageMessage ?? '',
+        
+        // Note options data
+        note_options: JSON.stringify(dataFromOrder?.noteOptions || {}),
+        note_options_agreement: JSON.stringify(dataFromOrder?.noteOptionsAgreement || {}),
+        minh_bach_can_nang: Object.values(dataFromOrder?.noteOptions || {}).join(', '),
       }
       if (formData) {
         try {
