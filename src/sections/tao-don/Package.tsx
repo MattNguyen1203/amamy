@@ -1,45 +1,45 @@
 'use client'
 
 import useStore from '@/app/(store)/store'
-import { ICLoading } from '@/components/icon/ICLoading'
+import {ICLoading} from '@/components/icon/ICLoading'
 import ICStar from '@/components/icon/ICStar'
 import ImageV2 from '@/components/image/ImageV2'
 import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogTitle,
-	AlertDialogTrigger,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import {Button} from '@/components/ui/button'
+import {Checkbox} from '@/components/ui/checkbox'
 import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
-import { ICreateOder, IInformationOrder } from '@/sections/tao-don/oder.interface'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useMemo, useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useMemo, useState, useTransition} from 'react'
+import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
+import {z} from 'zod'
 
 export default function Package({
   data,
@@ -202,8 +202,12 @@ export default function Package({
 
         // Note options data
         note_options: JSON.stringify(dataFromOrder?.noteOptions || {}),
-        note_options_agreement: JSON.stringify(dataFromOrder?.noteOptionsAgreement || {}),
-        minh_bach_can_nang: Object.values(dataFromOrder?.noteOptions || {}).join(', '),
+        note_options_agreement: JSON.stringify(
+          dataFromOrder?.noteOptionsAgreement || {},
+        ),
+        minh_bach_can_nang: Object.values(
+          dataFromOrder?.noteOptions || {},
+        ).join(', '),
       }
       if (formData) {
         try {
@@ -265,7 +269,7 @@ export default function Package({
                   {data?.title || 'Chọn cách đóng gói'}
                 </p>
                 <div
-                  className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                  className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                   dangerouslySetInnerHTML={{__html: data?.note_more ?? ''}}
                 ></div>
               </div>

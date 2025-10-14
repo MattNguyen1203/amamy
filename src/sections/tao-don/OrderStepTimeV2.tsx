@@ -1,22 +1,22 @@
 'use client'
 
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import {cn} from '@/lib/utils'
-import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {z} from 'zod'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from '@/components/ui/form'
+import { cn } from '@/lib/utils'
+import { IInformationTimeOrder } from '@/sections/tao-don/oder.interface'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 export default function OrderStepTimeV2({
   dataInformation,
