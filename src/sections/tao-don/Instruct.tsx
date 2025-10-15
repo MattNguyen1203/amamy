@@ -485,7 +485,7 @@ export default function Instruct({
           {data?.packing_instructions && (
             <div className='flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
               <div
-                className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -873,7 +873,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.address,
                                     }}
-                                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                                 <div className='select-time flex items-start space-x-[0.5rem]'>
@@ -882,7 +882,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.time,
                                     }}
-                                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                                 <div className='select-phone flex items-start space-x-[0.5rem]'>
@@ -891,7 +891,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.phone,
                                     }}
-                                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                               </div>
