@@ -3,28 +3,29 @@
 import useStore from '@/app/(store)/store'
 import ICStar from '@/components/icon/ICStar'
 import ImageV2 from '@/components/image/ImageV2'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
+import {Button} from '@/components/ui/button'
+import {Checkbox} from '@/components/ui/checkbox'
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
+import {Label} from '@/components/ui/label'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import {
-    IInformationInsurance,
-    IInformationInsurance_CargoInsuranceJapanvn,
-    IInformationInsurance_policy,
+  IInformationInsurance,
+  IInformationInsurance_CargoInsuranceJapanvn,
+  IInformationInsurance_policy,
 } from '@/sections/tao-don/oder.interface'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useEffect, useRef, useState} from 'react'
+import {FieldErrors, useForm} from 'react-hook-form'
+import {z} from 'zod'
 
 export default function Insurance({
   data,
@@ -145,9 +146,23 @@ export default function Insurance({
       })
     }
   }
+
+  const onError = (errors: FieldErrors<z.infer<typeof FormSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
+    }
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit, onError)}>
         {data?.compensation && (
           <>
             {!data?.user_chooses &&
@@ -269,80 +284,90 @@ export default function Insurance({
                                 field.value === insuranceItem?.label
 
                               return (
-                                <FormItem
-                                  className={cn(
-                                    'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:px-[0.75rem] xsm:py-[0.62rem]',
-                                    isChecked
-                                      ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                                      : 'border-transparent bg-[rgba(239,239,239,0.60)]',
-                                  )}
+                                <Label
+                                  htmlFor={`typeofinsurance-${insuranceIndex}`}
+                                  className='block w-full cursor-pointer'
                                 >
-                                  <FormControl>
-                                    <Checkbox
-                                      className={cn(
-                                        // layout reset
-                                        'relative box-border inline-flex items-center justify-center align-middle',
-                                        // fixed shape
-                                        'size-[1.25rem] rounded-full border border-[#A3DDFF]',
-                                        // visual bg
-                                        'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
-                                        // ensure perfect circle
-                                        'aspect-square overflow-hidden',
-                                        // handle checked state
-                                        'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                        // hide radix default SVG
-                                        '[&_svg]:hidden',
-                                        // span (indicator wrapper)
-                                        'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
-                                        // pseudo indicator
-                                        '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
-                                        '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
-                                        '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
-                                        // fine-tune optical centering
-                                        'translate-y-[0.5px]', // adjusts subpixel misalignment
-                                      )}
-                                      checked={
-                                        field.value === insuranceItem?.label
-                                      }
-                                      onCheckedChange={(checked) => {
-                                        field.onChange(
-                                          checked ? insuranceItem?.label : '',
-                                        )
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <div className='flex flex-col gap-y-[0.25rem] leading-none'>
-                                    <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
-                                      {isMobile && insuranceItem?.tag && (
-                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
-                                          <ICStar className='size-[0.75rem]' />
-                                          <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
-                                            {insuranceItem?.tag}
-                                          </p>
-                                        </div>
-                                      )}
-                                      <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
-                                        {insuranceItem?.label}
-                                      </FormLabel>
-                                      {!isMobile && insuranceItem?.tag && (
-                                        <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
-                                          <ICStar className='size-[0.875rem]' />
-                                          <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
-                                            {insuranceItem?.tag}
-                                          </p>
-                                        </div>
+                                  <FormItem
+                                    className={cn(
+                                      'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:px-[0.75rem] xsm:py-[0.62rem]',
+                                      isChecked
+                                        ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                                        : 'border-transparent bg-[rgba(239,239,239,0.60)]',
+                                    )}
+                                  >
+                                    <FormControl>
+                                      <Checkbox
+                                        id={`typeofinsurance-${insuranceIndex}`}
+                                        className={cn(
+                                          // layout reset
+                                          'relative box-border inline-flex items-center justify-center align-middle',
+                                          // fixed shape
+                                          'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                                          // visual bg
+                                          'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                                          // ensure perfect circle
+                                          'aspect-square overflow-hidden',
+                                          // handle checked state
+                                          'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                                          // hide radix default SVG
+                                          '[&_svg]:hidden',
+                                          // span (indicator wrapper)
+                                          'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                          // pseudo indicator
+                                          '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                                          '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                          '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                          // fine-tune optical centering
+                                          'translate-y-[0.5px]', // adjusts subpixel misalignment
+                                        )}
+                                        checked={
+                                          field.value === insuranceItem?.label
+                                        }
+                                        onCheckedChange={(checked) => {
+                                          field.onChange(
+                                            checked ? insuranceItem?.label : '',
+                                          )
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                                      <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
+                                        {isMobile && insuranceItem?.tag && (
+                                          <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                            <ICStar className='size-[0.75rem]' />
+                                            <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
+                                              {insuranceItem?.tag}
+                                            </p>
+                                          </div>
+                                        )}
+                                        <FormLabel
+                                          htmlFor={`typeofinsurance-${insuranceIndex}`}
+                                          className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
+                                        >
+                                          {insuranceItem?.label}
+                                        </FormLabel>
+                                        {!isMobile && insuranceItem?.tag && (
+                                          <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                            <ICStar className='size-[0.875rem]' />
+                                            <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
+                                              {insuranceItem?.tag}
+                                            </p>
+                                          </div>
+                                        )}
+                                      </div>
+                                      {insuranceItem?.desc && (
+                                        <FormLabel
+                                          htmlFor={`typeofinsurance-${insuranceIndex}`}
+                                          className='custom-prose xsm:-[-0.0225rem] cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                          dangerouslySetInnerHTML={{
+                                            __html: insuranceItem?.desc,
+                                          }}
+                                        ></FormLabel>
                                       )}
                                     </div>
-                                    {insuranceItem?.desc && (
-                                      <FormLabel
-                                        className='custom-prose xsm:-[-0.0225rem] cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
-                                        dangerouslySetInnerHTML={{
-                                          __html: insuranceItem?.desc,
-                                        }}
-                                      ></FormLabel>
-                                    )}
-                                  </div>
-                                </FormItem>
+                                  </FormItem>
+                                </Label>
                               )
                             }}
                           />

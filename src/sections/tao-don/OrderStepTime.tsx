@@ -13,6 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {Label} from '@/components/ui/label'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
@@ -26,7 +27,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {useForm, UseFormReturn} from 'react-hook-form'
+import {FieldErrors, useForm, UseFormReturn} from 'react-hook-form'
 import {z} from 'zod'
 
 // Type for form data
@@ -116,57 +117,69 @@ const UserChoicesSection = React.memo(function UserChoicesSection({
                   const isChecked = field.value === stockItem?.label
 
                   return (
-                    <FormItem
-                      className={cn(
-                        'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
-                        isChecked
-                          ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                          : 'border-transparent bg-[rgba(239,239,239,0.60)]',
-                      )}
+                    <Label
+                      htmlFor={`userChoices.${item?.time_content}-${stockIndex}`}
+                      className='block w-full cursor-pointer'
                     >
-                      <FormControl>
-                        <Checkbox
-                          className={checkboxClassName}
-                          checked={isChecked}
-                          onCheckedChange={(checked) => {
-                            field.onChange(
-                              checked ? stockItem?.label : undefined,
-                            )
-                          }}
-                        />
-                      </FormControl>
-                      <div className='flex flex-col gap-y-[0.25rem] leading-none'>
-                        <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
-                          {isMobile && stockItem?.tag && (
-                            <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
-                              <ICStar className='size-[0.75rem]' />
-                              <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
-                                {stockItem?.tag}
-                              </p>
-                            </div>
-                          )}
-                          <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
-                            {stockItem?.label}
-                          </FormLabel>
-                          {!isMobile && stockItem?.tag && (
-                            <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
-                              <ICStar className='size-[0.875rem]' />
-                              <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
-                                {stockItem?.tag}
-                              </p>
-                            </div>
+                      <FormItem
+                        className={cn(
+                          'relative flex cursor-pointer flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
+                          isChecked
+                            ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                            : 'border-transparent bg-[rgba(239,239,239,0.60)]',
+                        )}
+                      >
+                        <FormControl>
+                          <Checkbox
+                            id={`userChoices.${item?.time_content}-${stockIndex}`}
+                            className={checkboxClassName}
+                            checked={isChecked}
+                            onCheckedChange={() => {
+                              if (field.value === stockItem?.label) {
+                                field.onChange(undefined)
+                              } else {
+                                field.onChange(stockItem?.label)
+                              }
+                            }}
+                          />
+                        </FormControl>
+                        <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                          <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
+                            {isMobile && stockItem?.tag && (
+                              <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                <ICStar className='size-[0.75rem]' />
+                                <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
+                                  {stockItem?.tag}
+                                </p>
+                              </div>
+                            )}
+                            <FormLabel
+                              htmlFor={`userChoices.${item?.time_content}-${stockIndex}`}
+                              className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
+                            >
+                              {stockItem?.label}
+                            </FormLabel>
+                            {!isMobile && stockItem?.tag && (
+                              <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                <ICStar className='size-[0.875rem]' />
+                                <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
+                                  {stockItem?.tag}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                          {stockItem?.desc && (
+                            <FormLabel
+                              htmlFor={`userChoices.${item?.time_content}-${stockIndex}`}
+                              className='custom-prose xsm:-[-0.0225rem] cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                              dangerouslySetInnerHTML={{
+                                __html: stockItem?.desc,
+                              }}
+                            ></FormLabel>
                           )}
                         </div>
-                        {stockItem?.desc && (
-                          <FormLabel
-                            className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
-                            dangerouslySetInnerHTML={{
-                              __html: stockItem?.desc,
-                            }}
-                          ></FormLabel>
-                        )}
-                      </div>
-                    </FormItem>
+                      </FormItem>
+                    </Label>
                   )
                 }}
               />
@@ -363,6 +376,19 @@ const OrderStepTime = React.memo(function OrderStepTime({
     ],
   )
 
+  const onError = (errors: FieldErrors<z.infer<typeof FormSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
+    }
+  }
+
   const handleBackClick = useCallback(() => {
     handleClickcurrentTab('1')
     setIndexTab(indexTab - 1)
@@ -373,7 +399,7 @@ const OrderStepTime = React.memo(function OrderStepTime({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, onError)}
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
       >
         {Array.isArray(dataInformation) &&

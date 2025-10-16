@@ -44,7 +44,7 @@ import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import {useEffect, useRef, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
+import {FieldErrors, useForm} from 'react-hook-form'
 import {toast} from 'sonner'
 import {z} from 'zod'
 
@@ -314,9 +314,23 @@ export default function Instruct({
     console.log('🚀 ~ onSubmit values:', values)
     // console.log(dataFromOrder)
   }
+
+  const onError = (errors: FieldErrors<z.infer<typeof formSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
+    }
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit, onError)}>
         {!isMobile && (
           <div className='mb-[1.25rem] xsm:mb-[1rem]'>
             <h2 className='mb-[1.5rem] font-montserrat text-[1rem] font-bold leading-[1.3rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:hidden'>

@@ -1,7 +1,7 @@
 'use client'
 
 import {Fragment, useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
+import {FieldError, FieldErrors, useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
 import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
@@ -206,9 +206,23 @@ export default function FormStepStart({
       setDataFromOrder({...dataFromOrder, ...values})
     }
   }
+
+  const onError = (errors: FieldErrors<z.infer<typeof formSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
+    }
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit, onError)}>
         {!isMobile && (
           <h2 className='mb-[1.5rem] font-montserrat text-[1rem] font-bold leading-[1.3rem] tracking-[-0.03rem] text-[#33A6E8] xsm:hidden'>
             Thông tin gửi hàng

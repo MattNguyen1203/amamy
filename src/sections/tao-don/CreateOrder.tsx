@@ -220,7 +220,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {isMobile && (
           <TabsList
             className={cn(
-              'ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity inset-x-[0.75rem] top-[4.25rem] z-[49] flex h-max flex-col space-y-[0.5rem] bg-white p-0 shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] transition-all duration-500 will-change-transform sm:hidden',
+              'ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity inset-x-[0.75rem] top-[4.25rem] z-[49] flex h-max flex-col space-y-[0.5rem] rounded-[2.25rem] bg-white p-0 shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] transition-all duration-500 will-change-transform sm:hidden',
             )}
           >
             {/* title */}

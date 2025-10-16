@@ -23,6 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {Label} from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -37,7 +38,7 @@ import {ICreateOder, IInformationOrder} from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useEffect, useMemo, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
+import {FieldErrors, useForm} from 'react-hook-form'
 import {toast} from 'sonner'
 import {z} from 'zod'
 
@@ -255,11 +256,24 @@ export default function Package({
     }
   }
 
+  const onError = (errors: FieldErrors<z.infer<typeof FormSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
+    }
+  }
+
   return (
     <Form {...form}>
       <form
         className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, onError)}
       >
         {data?.list_package && (
           <>
@@ -288,88 +302,98 @@ export default function Package({
                         const isChecked = field.value === value
 
                         return (
-                          <FormItem
-                            className={cn(
-                              'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:px-[0.75rem] xsm:py-[0.62rem]',
-                              isChecked
-                                ? 'border-[#38B6FF] bg-[#F1F9FF]'
-                                : 'border-transparent bg-[rgba(239,239,239,0.60)]',
-                            )}
+                          <Label
+                            htmlFor={`package-${packageIndex}`}
+                            className='block w-full cursor-pointer'
                           >
-                            <FormControl>
-                              <Checkbox
-                                className={cn(
-                                  // layout reset
-                                  'relative box-border inline-flex items-center justify-center align-middle',
-                                  // fixed shape
-                                  'size-[1.25rem] rounded-full border border-[#A3DDFF]',
-                                  // visual bg
-                                  'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
-                                  // ensure perfect circle
-                                  'aspect-square overflow-hidden',
-                                  // handle checked state
-                                  'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
-                                  // hide radix default SVG
-                                  '[&_svg]:hidden',
-                                  // span (indicator wrapper)
-                                  'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
-                                  // pseudo indicator
-                                  '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
-                                  '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
-                                  '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
-                                  // fine-tune optical centering
-                                  'translate-y-[0.5px]', // adjusts subpixel misalignment
-                                )}
-                                checked={
-                                  field.value ===
-                                  (packageItem?.separate_request
-                                    ? 'note'
-                                    : packageItem?.label)
-                                }
-                                onCheckedChange={(checked) => {
-                                  field.onChange(
-                                    checked
-                                      ? packageItem?.separate_request
-                                        ? 'note'
-                                        : packageItem?.label
-                                      : undefined,
-                                  )
-                                }}
-                              />
-                            </FormControl>
-                            <div className='flex flex-col gap-y-[0.25rem] leading-none'>
-                              <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
-                                {isMobile && packageItem?.tag && (
-                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
-                                    <ICStar className='size-[0.75rem]' />
-                                    <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
-                                      {packageItem?.tag}
-                                    </p>
-                                  </div>
-                                )}
-                                <FormLabel className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
-                                  {packageItem?.label}
-                                </FormLabel>
-                                {!isMobile && packageItem?.tag && (
-                                  <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
-                                    <ICStar className='size-[0.875rem]' />
-                                    <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
-                                      {packageItem?.tag}
-                                    </p>
-                                  </div>
+                            <FormItem
+                              className={cn(
+                                'relative flex flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:px-[0.75rem] xsm:py-[0.62rem]',
+                                isChecked
+                                  ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                                  : 'border-transparent bg-[rgba(239,239,239,0.60)]',
+                              )}
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  id={`package-${packageIndex}`}
+                                  className={cn(
+                                    // layout reset
+                                    'relative box-border inline-flex items-center justify-center align-middle',
+                                    // fixed shape
+                                    'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+                                    // visual bg
+                                    'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+                                    // ensure perfect circle
+                                    'aspect-square overflow-hidden',
+                                    // handle checked state
+                                    'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+                                    // hide radix default SVG
+                                    '[&_svg]:hidden',
+                                    // span (indicator wrapper)
+                                    'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+                                    // pseudo indicator
+                                    '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+                                    '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+                                    '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+                                    // fine-tune optical centering
+                                    'translate-y-[0.5px]', // adjusts subpixel misalignment
+                                  )}
+                                  checked={
+                                    field.value ===
+                                    (packageItem?.separate_request
+                                      ? 'note'
+                                      : packageItem?.label)
+                                  }
+                                  onCheckedChange={(checked) => {
+                                    field.onChange(
+                                      checked
+                                        ? packageItem?.separate_request
+                                          ? 'note'
+                                          : packageItem?.label
+                                        : undefined,
+                                    )
+                                  }}
+                                />
+                              </FormControl>
+                              <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                                <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
+                                  {isMobile && packageItem?.tag && (
+                                    <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                      <ICStar className='size-[0.75rem]' />
+                                      <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
+                                        {packageItem?.tag}
+                                      </p>
+                                    </div>
+                                  )}
+                                  <FormLabel
+                                    htmlFor={`package-${packageIndex}`}
+                                    className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
+                                  >
+                                    {packageItem?.label}
+                                  </FormLabel>
+                                  {!isMobile && packageItem?.tag && (
+                                    <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                      <ICStar className='size-[0.875rem]' />
+                                      <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
+                                        {packageItem?.tag}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {packageItem?.desc && (
+                                  <FormLabel
+                                    htmlFor={`package-${packageIndex}`}
+                                    className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
+                                    dangerouslySetInnerHTML={{
+                                      __html: packageItem?.desc,
+                                    }}
+                                  ></FormLabel>
                                 )}
                               </div>
-
-                              {packageItem?.desc && (
-                                <FormLabel
-                                  className='cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'
-                                  dangerouslySetInnerHTML={{
-                                    __html: packageItem?.desc,
-                                  }}
-                                ></FormLabel>
-                              )}
-                            </div>
-                          </FormItem>
+                            </FormItem>
+                          </Label>
                         )
                       }}
                     />
