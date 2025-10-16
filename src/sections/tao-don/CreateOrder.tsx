@@ -2,9 +2,9 @@
 'use client'
 
 import useStore from '@/app/(store)/store'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
+import {cn} from '@/lib/utils'
 import CeateNote from '@/sections/tao-don/CreateNote'
 import CustomBack from '@/sections/tao-don/CustomBack'
 import FormDeliveryInformation from '@/sections/tao-don/FormDeliveryInformation'
@@ -17,12 +17,12 @@ import ICCheck from '@/sections/tao-don/ICCheck'
 import ICSuccess from '@/sections/tao-don/ICSuccess'
 import Instruct from '@/sections/tao-don/Instruct'
 import Insurance from '@/sections/tao-don/Insurance'
-import { ICreateOder } from '@/sections/tao-don/oder.interface'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
 import OrderStepTime from '@/sections/tao-don/OrderStepTime'
 import Package from '@/sections/tao-don/Package'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
-import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+import {useEffect, useState} from 'react'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
 import './style.css'
 
 let StepForm: {title: string; value: string}[] = [
@@ -41,9 +41,6 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
-
-  const [hideHeader, setHideHeader] = useState(false)
-  const lastScrollY = useRef(0)
 
   const [indexTab, setIndexTab] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -134,31 +131,31 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
     }
   }, [dataInformation])
 
-  useEffect(() => {
-    let ticking = false
+  // useEffect(() => {
+  //   let ticking = false
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
+  //   const handleScroll = () => {
+  //     const currentScrollY = window.scrollY
 
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-            setHideHeader(true)
-          } else {
-            setHideHeader(false)
-          }
+  //     if (!ticking) {
+  //       window.requestAnimationFrame(() => {
+  //         if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+  //           setHideHeader(true)
+  //         } else {
+  //           setHideHeader(false)
+  //         }
 
-          lastScrollY.current = currentScrollY
-          ticking = false
-        })
-        ticking = true
-      }
-    }
+  //         lastScrollY.current = currentScrollY
+  //         ticking = false
+  //       })
+  //       ticking = true
+  //     }
+  //   }
 
-    window.addEventListener('scroll', handleScroll)
+  //   window.addEventListener('scroll', handleScroll)
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  //   return () => window.removeEventListener('scroll', handleScroll)
+  // }, [])
 
   return (
     <>
@@ -223,10 +220,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
         {isMobile && (
           <TabsList
             className={cn(
-              'ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity fixed inset-x-[0.75rem] top-[4.25rem] z-[49] flex h-max flex-col space-y-[0.5rem] rounded-[2rem] bg-white p-0 shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] transition-all duration-500 will-change-transform sm:hidden',
-              hideHeader
-                ? 'pointer-events-none -translate-y-[110%] opacity-0'
-                : 'translate-y-0 opacity-100',
+              'ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity inset-x-[0.75rem] top-[4.25rem] z-[49] flex h-max flex-col space-y-[0.5rem] bg-white p-0 shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] transition-all duration-500 will-change-transform sm:hidden',
             )}
           >
             {/* title */}
@@ -297,7 +291,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
           </TabsList>
         )}
 
-        <div className='flex-1 rounded-[2.25rem] bg-[#FAFAFA] p-[1.5rem] xsm:mt-[7rem] xsm:px-0'>
+        <div className='flex-1 rounded-[2.25rem] bg-[#FAFAFA] p-[1.5rem] xsm:px-0'>
           {!isMobile && (
             <h1 className='mb-[1.5rem] text-[rgba(0,0,0,0.92)] text-pc-heading20b'>
               Tạo đơn hàng

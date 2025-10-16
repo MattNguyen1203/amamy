@@ -1,23 +1,6 @@
 'use client'
 
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import ICAddress from '@/sections/tao-don/ICAddress'
-import ICPhone from '@/sections/tao-don/ICPhone'
-import ICTime from '@/sections/tao-don/ICTime'
-import ICX from '@/sections/tao-don/ICX'
-import {
-  ICreateOder,
-  IInformationInstructOrder_SelectBranch,
-} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import Image from 'next/image'
-import Link from 'next/link'
-import {z} from 'zod'
-import ImageV2 from '@/components/image/ImageV2'
+import ImageV2, {IImageProps} from '@/components/image/ImageV2'
 import {
   Form,
   FormControl,
@@ -32,6 +15,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import ICAddress from '@/sections/tao-don/ICAddress'
+import ICPhone from '@/sections/tao-don/ICPhone'
+import ICTime from '@/sections/tao-don/ICTime'
+import ICX from '@/sections/tao-don/ICX'
+import {
+  ICreateOder,
+  IInformationInstructOrder_SelectBranch,
+} from '@/sections/tao-don/oder.interface'
+import {zodResolver} from '@hookform/resolvers/zod'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {TransformComponent, TransformWrapper} from 'react-zoom-pan-pinch'
+import {z} from 'zod'
 
 const formSchema = z.object({
   shipping: z
@@ -249,7 +249,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                         }}
                         className={cn('flex-1 space-y-0')}
                       >
-                        <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s xsm:[&_strong]:text-[rgba(0,0,0,0.60)] [&_strong]:font-medium'>
+                        <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
                           Chọn chi nhánh Amamy Post <strong>(*)</strong>
                         </FormLabel>
                         <Select
@@ -316,7 +316,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                           dangerouslySetInnerHTML={{
                                             __html: item?.address,
                                           }}
-                                          className='text-black text-pc-sub14m text-[0.8125rem]'
+                                          className='text-[0.8125rem] text-black text-pc-sub14m'
                                         ></p>
                                       </div>
                                       <div className='select-time flex items-start space-x-[0.5rem]'>
@@ -325,7 +325,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                           dangerouslySetInnerHTML={{
                                             __html: item?.time,
                                           }}
-                                          className='text-black text-pc-sub14m text-[0.8125rem]'
+                                          className='text-[0.8125rem] text-black text-pc-sub14m'
                                         ></p>
                                       </div>
                                       <div className='select-phone flex items-start space-x-[0.5rem]'>
@@ -334,7 +334,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                           dangerouslySetInnerHTML={{
                                             __html: item?.phone,
                                           }}
-                                          className='text-black text-pc-sub14m text-[0.8125rem]'
+                                          className='text-[0.8125rem] text-black text-pc-sub14m'
                                         ></p>
                                       </div>
                                     </div>
@@ -360,7 +360,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                           dangerouslySetInnerHTML={{
                             __html: dataBranch?.address || '',
                           }}
-                          className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
+                          className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                         ></p>
                       </div>
                     )}
@@ -371,7 +371,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                           dangerouslySetInnerHTML={{
                             __html: dataBranch?.time || '',
                           }}
-                          className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
+                          className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                         ></p>
                       </div>
                     )}
@@ -385,7 +385,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                           dangerouslySetInnerHTML={{
                             __html: dataBranch?.phone || '',
                           }}
-                          className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)]'
+                          className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                         ></p>
                       </Link>
                     )}
@@ -549,7 +549,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                         dangerouslySetInnerHTML={{
                                           __html: item?.address,
                                         }}
-                                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                       ></p>
                                     </div>
                                     <div className='select-time flex items-start space-x-[0.5rem]'>
@@ -558,7 +558,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                         dangerouslySetInnerHTML={{
                                           __html: item?.time,
                                         }}
-                                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                       ></p>
                                     </div>
                                     <div className='select-phone flex items-start space-x-[0.5rem]'>
@@ -567,7 +567,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                                         dangerouslySetInnerHTML={{
                                           __html: item?.phone,
                                         }}
-                                        className='flex-1 text-black text-pc-sub14m !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
+                                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m xsm:text-[rgba(0,0,0,0.80)] xsm:text-mb-13M'
                                       ></p>
                                     </div>
                                   </div>
@@ -585,7 +585,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
         {dataInformation?.information?.instruct?.packing_instructions && (
           <div className='flex rounded-[1.25rem] bg-white p-[1rem] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem]'>
             <div
-              className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_a]:text-[#0084FF] [&_*]:text-[0.8125rem] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+              className='[&_h3]: [&_strong]: *: [&_ul]:content-ul flex-1 *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 [&_*]:text-[0.8125rem] [&_a]:text-[#0084FF] [&_h3]:text-black [&_h3]:text-pc-tab-title [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem] [&_strong]:text-black [&_strong]:text-pc-sub14s [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
               dangerouslySetInnerHTML={{
                 __html:
                   dataInformation?.information?.instruct
@@ -598,7 +598,7 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
                   containerRefs.current[0] = el
                 }}
               >
-                <ImageV2
+                <ImageMemo
                   src={dataInformation?.information?.instruct?.images}
                   alt=''
                   width={300 * 2}
@@ -660,3 +660,8 @@ export default function ShippingInstructions({data}: {data: ICreateOder[]}) {
     </div>
   )
 }
+
+// Memoized component for image item
+export const ImageMemo = React.memo(function ImageMemo(props: IImageProps) {
+  return <ImageV2 {...props} />
+})

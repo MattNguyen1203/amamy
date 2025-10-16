@@ -1,51 +1,52 @@
 'use client'
 
+import {ImageMemo} from '@/app/(baselayout)/huong-dan-gui-hang/_components/ShippingInstructions'
 import useStore from '@/app/(store)/store'
-import { ICLoading } from '@/components/icon/ICLoading'
+import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogTitle,
-	AlertDialogTrigger,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select'
 import useIsMobile from '@/hooks/useIsMobile'
-import { cn } from '@/lib/utils'
-import { IDataFromOrder } from '@/sections/tao-don/CreateOrder'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
 import ICAddress from '@/sections/tao-don/ICAddress'
 import ICPhone from '@/sections/tao-don/ICPhone'
 import ICTime from '@/sections/tao-don/ICTime'
 import ICX from '@/sections/tao-don/ICX'
 import {
-	ICreateOder,
-	IInformationInstructOrder,
-	IInformationInstructOrder_SelectBranch,
+  ICreateOder,
+  IInformationInstructOrder,
+  IInformationInstructOrder_SelectBranch,
 } from '@/sections/tao-don/oder.interface'
 import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import { zodResolver } from '@hookform/resolvers/zod'
+import {zodResolver} from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useEffect, useRef, useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import {useEffect, useRef, useState, useTransition} from 'react'
+import {useForm} from 'react-hook-form'
+import {toast} from 'sonner'
+import {z} from 'zod'
 
 const formSchema = z.object({
   branch: z
@@ -268,11 +269,15 @@ export default function Instruct({
             ? dataFromOrder?.packageMessage
             : (dataFromOrder?.package ?? ''),
         yeu_cau_them: dataFromOrder?.packageMessage ?? '',
-        
+
         // Note options data
         note_options: JSON.stringify(dataFromOrder?.noteOptions || {}),
-        note_options_agreement: JSON.stringify(dataFromOrder?.noteOptionsAgreement || {}),
-        minh_bach_can_nang: Object.values(dataFromOrder?.noteOptions || {}).join(', '),
+        note_options_agreement: JSON.stringify(
+          dataFromOrder?.noteOptionsAgreement || {},
+        ),
+        minh_bach_can_nang: Object.values(
+          dataFromOrder?.noteOptions || {},
+        ).join(', '),
       }
       if (formData) {
         try {
@@ -480,7 +485,7 @@ export default function Instruct({
           {data?.packing_instructions && (
             <div className='flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
               <div
-                className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -491,7 +496,7 @@ export default function Instruct({
                     containerRefs.current[0] = el
                   }}
                 >
-                  <ImageV2
+                  <ImageMemo
                     src={data?.images}
                     alt=''
                     width={300 * 2}
@@ -868,7 +873,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.address,
                                     }}
-                                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                                 <div className='select-time flex items-start space-x-[0.5rem]'>
@@ -877,7 +882,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.time,
                                     }}
-                                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                                 <div className='select-phone flex items-start space-x-[0.5rem]'>
@@ -886,7 +891,7 @@ export default function Instruct({
                                     dangerouslySetInnerHTML={{
                                       __html: item?.phone,
                                     }}
-                                    className='xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                               </div>

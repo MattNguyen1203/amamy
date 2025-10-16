@@ -3,10 +3,10 @@
 import ICMessage from '@/components/icon/ICMessage'
 import ICQuestion from '@/components/icon/ICQuestion'
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
 } from '@/sections/services-test/faqs/accordion'
 import Image from 'next/image'
 
@@ -310,7 +310,7 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
 
                     <AccordionContent className='pb-[1rem]'>
                       <div className='flex w-full gap-2'>
-                        <div className='flex w-full items-end justify-between gap-2'>
+                        <div className='flex w-full items-end justify-between gap-2 overflow-auto'>
                           <div className='flex relative text-[1rem] flex-[1_0_0] flex-col items-start xsm:[&_*]:text-[0.75rem]  xsm:[&_*]:leading-[140%] xsm:[&_*]:font-normal   xsm:[&_*]:tracking-[-0.0225rem] gap-6 rounded-[0.75rem_0.75rem_0_0.75rem] bg-white px-4 py-3 shadow-[0_4px_19.3px_0_rgba(0,39,97,0.06)] sm:rounded-[1.25rem_1.25rem_0_1.25rem] sm:p-[1.25rem_1.25rem_1.25rem_1.5rem]'>
                             <Image
                               src={'/newPage/tamgiac.svg'}
