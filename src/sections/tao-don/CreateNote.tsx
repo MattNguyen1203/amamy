@@ -28,6 +28,7 @@ import React, {
 } from 'react'
 import {FieldErrors, useForm, UseFormReturn} from 'react-hook-form'
 import {z} from 'zod'
+import Image from 'next/image'
 
 // Type for form data
 type FormData = {
@@ -202,10 +203,11 @@ const NoteOptionsSection = React.memo(function NoteOptionsSection({
                     <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
                       {/* icon */}
                       <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
-                        <ICMessageQuestion className='size-[1.5rem] shrink-0' />
-                        <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
+                        {/* <ICMessageQuestion className='size-[1.5rem] shrink-0' /> */}
+                        <Image src='/icon/question.svg' alt='icon' width={24} height={24}  className='size-[1.5rem] shrink-0'/>
+                        <span className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
                           LƯU Ý
-                        </p>
+                        </span>
                       </div>
 
                       <div
@@ -349,7 +351,8 @@ const NoteContentSection = React.memo(function NoteContentSection({
         <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
           {/* icon */}
           <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
-            <ICMessageQuestion className='size-[1.5rem] shrink-0' />
+            {/* <ICMessageQuestion className='size-[1.5rem] shrink-0' /> */}
+            <Image src='/icon/question.svg' alt='icon' width={24} height={24}  className='size-[1.5rem] shrink-0'/>
             <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
               LƯU Ý
             </p>

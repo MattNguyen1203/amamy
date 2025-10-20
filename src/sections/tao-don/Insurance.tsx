@@ -423,7 +423,7 @@ export default function Insurance({
                 <p className='mb-[0.88rem] font-montserrat text-[1rem] !font-bold leading-[1.625] tracking-[-0.03rem] text-black xsm:mb-[0.38rem] xsm:text-pc-sub14s'>
                   {item?.title}
                 </p>
-                <div className='flex bg-white sm:space-x-[1rem] xsm:!mt-0 xsm:flex-col-reverse xsm:[&_*]:!text-[rgba(0,0,0,0.60)]'>
+                <div className='flex bg-white sm:space-x-[1rem] xsm:!mt-0 xsm:flex-col-reverse xsm:[&_*]:!text-[rgba(0,0,0,0.80)]'>
                   <div
                     ref={(el) => {
                       containerRefs.current[index] = el
