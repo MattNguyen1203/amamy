@@ -1,7 +1,6 @@
 'use client'
 
 import useStore from '@/app/(store)/store'
-import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
 import ICStar from '@/components/icon/ICStar'
 import {Button} from '@/components/ui/button'
 import {Checkbox} from '@/components/ui/checkbox'
@@ -18,6 +17,7 @@ import useIsMobile from '@/hooks/useIsMobile'
 import {cn} from '@/lib/utils'
 import {IInformationNoteOrder} from '@/sections/tao-don/oder.interface'
 import {zodResolver} from '@hookform/resolvers/zod'
+import Image from 'next/image'
 import React, {
   Fragment,
   useCallback,
@@ -28,7 +28,6 @@ import React, {
 } from 'react'
 import {FieldErrors, useForm, UseFormReturn} from 'react-hook-form'
 import {z} from 'zod'
-import Image from 'next/image'
 
 // Type for form data
 type FormData = {
@@ -204,7 +203,13 @@ const NoteOptionsSection = React.memo(function NoteOptionsSection({
                       {/* icon */}
                       <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
                         {/* <ICMessageQuestion className='size-[1.5rem] shrink-0' /> */}
-                        <Image src='/icon/question.svg' alt='icon' width={24} height={24}  className='size-[1.5rem] shrink-0'/>
+                        <Image
+                          src='/icon/question.svg'
+                          alt='icon'
+                          width={24}
+                          height={24}
+                          className='size-[1.5rem] shrink-0'
+                        />
                         <span className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
                           LƯU Ý
                         </span>
@@ -352,7 +357,13 @@ const NoteContentSection = React.memo(function NoteContentSection({
           {/* icon */}
           <div className='flex items-center space-x-[0.38rem] sm:space-x-[0.69rem]'>
             {/* <ICMessageQuestion className='size-[1.5rem] shrink-0' /> */}
-            <Image src='/icon/question.svg' alt='icon' width={24} height={24}  className='size-[1.5rem] shrink-0'/>
+            <Image
+              src='/icon/question.svg'
+              alt='icon'
+              width={24}
+              height={24}
+              className='size-[1.5rem] shrink-0'
+            />
             <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
               LƯU Ý
             </p>
@@ -427,7 +438,7 @@ export default function CeateNote({
 
         const itemsWithNoteOptions = data.filter(
           (item) =>
-            Array.isArray(item.note_options) && item.note_options.length > 0,
+            Array.isArray(item?.note_options) && item?.note_options?.length > 0,
         )
 
         const requiredKeys = itemsWithNoteOptions
@@ -550,12 +561,22 @@ export default function CeateNote({
   }, [triggerScroll])
   function onSubmit(values: z.infer<typeof FormSchema>) {
     if (values) {
-      // Save noteOptions to dataFromOrder
-      setDataFromOrder((prev: IDataFromOrder) => ({
-        ...prev,
-        noteOptions: values.noteOptions,
-        noteOptionsAgreement: values.noteOptionsAgreement,
-      }))
+      // Merge noteOptions to dataFromOrder instead of override
+      setDataFromOrder((prev: IDataFromOrder) => {
+        const mergedData = {
+          ...prev,
+          noteOptions: {
+            ...((prev.noteOptions as Record<string, string | undefined>) || {}),
+            ...values.noteOptions,
+          },
+          noteOptionsAgreement: {
+            ...((prev.noteOptionsAgreement as Record<string, boolean>) || {}),
+            ...values.noteOptionsAgreement,
+          },
+        }
+
+        return mergedData
+      })
 
       if (stepOrder < 4) {
         setStepOrder(4)

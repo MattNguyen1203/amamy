@@ -41,7 +41,7 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
     },
   })
   const fetchDataServices = fetchData({
-    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping,estimate_price`,
+    api: `chieu-van-chuyen/${params?.services}?_fields=banner,talk_to_ai,list_services,feedback_customer,suggested_reading_articles_about_shipping,estimate_price,clone_reason`,
     option: {
       next: {revalidate: 60},
     },
@@ -118,7 +118,12 @@ const ServicesPage = async ({params}: {params: {services: string}}) => {
       <div className='flex w-full flex-col items-center overflow-hidden bg-white text-black'>
         <ServicePage
           res={dataACF}
-          resDataFaqs={resDataFaqs}
+          resDataFaqs={{
+            acf: {
+              ...resDataFaqs.acf,
+              reason: resService?.clone_reason?.reason,
+            },
+          }}
           resDataServicesHeader={resDataServicesHeader}
           data={resService}
           listService={resListService}

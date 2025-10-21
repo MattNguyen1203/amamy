@@ -470,6 +470,9 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                 className='mt-0'
               >
                 <Insurance
+                  minhBachCanNang={
+                    dataInformation?.information?.minh_bach_can_nang
+                  }
                   type={dataInformation?.type}
                   setDataFromOrder={setDataFromOrder}
                   dataFromOrder={dataFromOrder}
