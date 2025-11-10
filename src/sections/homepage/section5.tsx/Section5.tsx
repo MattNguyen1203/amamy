@@ -33,7 +33,7 @@ const Section5 = ({faqs}: Props) => {
         {faqs?.title}
       </h2>
       <Image
-        src={'/homepage/icon/section-4-background.png'}
+        src={'/homepage/icon/section-4-background.webp'}
         alt=''
         width={1000}
         height={1000}

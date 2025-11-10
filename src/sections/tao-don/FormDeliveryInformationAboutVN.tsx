@@ -197,6 +197,12 @@ export default function FormDeliveryInformationAboutVN({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -702,13 +708,13 @@ export default function FormDeliveryInformationAboutVN({
                     recipientAddressType === 'registeredAddress' ? false : true
                   }
                   className='!mt-[0.5rem] h-[3rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white py-[0.75rem] pl-[1rem] font-montserrat text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.92)] shadow-none placeholder:opacity-[0.3] aria-[invalid=true]:!border-[#F00] aria-[invalid=true]:ring-0 aria-[invalid=true]:focus-visible:ring-0 xsm:!mt-[0.38rem] xsm:h-[2.5rem] xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'
-                  placeholder='Địa chỉ nhận hàng tại Việt Nam'
+                  placeholder='Etage 4, Ha Restaurant, Hotel A, Nails B...'
                   {...field}
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
               <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
-                *Địa chỉ chi tiết, số nhà, tên đường,...
+                *Giao hàng ở Séc không gọi điện, nên buộc phải ghi thêm số tầng, số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
               </p>
             </FormItem>
           )}

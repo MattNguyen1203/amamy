@@ -22,7 +22,7 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
                 <Image
                   className='absolute w-[20.875rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
                   alt='Mask group'
-                  src={'/homepage/icon/Service-Item-Mask-GroupV6.png'}
+                  src={'/homepage/icon/Service-Item-Mask-GroupV6.webp'}
                   width={1000}
                   height={1000}
                 />
@@ -30,7 +30,7 @@ export const MainContainer = ({title, phone, listService}: Prop) => {
                 <Image
                   className='absolute w-[20.875rem] h-[26.9375rem] top-0 left-0 xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
                   alt='Mask group'
-                  src={'/homepage/icon/Service-Item-Mask-GroupV5.png'}
+                  src={'/homepage/icon/Service-Item-Mask-GroupV5.webp'}
                   width={1000}
                   height={1000}
                 />

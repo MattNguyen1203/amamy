@@ -3,8 +3,15 @@
 import useStore from '@/app/(store)/store'
 import ICStar from '@/components/icon/ICStar'
 import ImageV2 from '@/components/image/ImageV2'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
@@ -13,21 +20,21 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {Label} from '@/components/ui/label'
+import { Label } from '@/components/ui/label'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import { cn } from '@/lib/utils'
+import { IDataFromOrder, IOptionField } from '@/sections/tao-don/CreateOrder'
 import {
   IInformationInsurance,
   IInformationInsurance_CargoInsuranceJapanvn,
   IInformationInsurance_policy,
   IMinhBachCanNang,
 } from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
-import React, {useEffect, useRef, useState} from 'react'
-import {FieldErrors, useForm} from 'react-hook-form'
-import {z} from 'zod'
+import React, { useEffect, useRef, useState } from 'react'
+import { FieldErrors, useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 export default function Insurance({
   data,
@@ -39,6 +46,7 @@ export default function Insurance({
   setDataFromOrder,
   type,
   minhBachCanNang,
+  dataNoticeDanger,
 }: {
   data?: IInformationInsurance
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,11 +58,15 @@ export default function Insurance({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   type: string
   minhBachCanNang?: IMinhBachCanNang
+  dataNoticeDanger?: IOptionField
 }) {
   const isMobile = useIsMobile()
-  const {stepOrder, setStepOrder} = useStore((state) => state)
+  const { stepOrder, setStepOrder } = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const insuranceContainerRef = useRef<HTMLDivElement | null>(null)
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const [showWarningDialog, setShowWarningDialog] = useState<boolean>(false)
+  const [pendingFormSubmit, setPendingFormSubmit] = useState<boolean>(false)
   const FormSchema = z.object({
     order: z
       .array(
@@ -119,12 +131,12 @@ export default function Insurance({
           : [false]
         : Array.isArray(data?.compensation?.policy)
           ? data?.compensation?.policy?.map(() =>
-              stepOrder > 5 ? true : false,
-            )
+            stepOrder > 5 ? true : false,
+          )
           : Array.isArray(data?.cargo_insurance_japanvn)
             ? data?.cargo_insurance_japanvn?.map(() =>
-                stepOrder > 5 ? true : false,
-              )
+              stepOrder > 5 ? true : false,
+            )
             : [false],
       typeofinsurance: dataFromOrder?.typeofinsurance || '',
       // Add default values for note fields
@@ -174,34 +186,90 @@ export default function Insurance({
       })
     })
   })
-  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  // Check if selected insurance is the first one (Miễn phí)
+  const isBasicFreeInsurance = () => {
+    const firstInsurance =
+      data?.insurance_types?.list_insurance_types?.[0]
+    const selectedValue = form.getValues('typeofinsurance')
+    return firstInsurance?.label === selectedValue
+  }
+
+  const proceedWithSubmit = (selectedInsurance?: string) => {
+    const values = form.getValues()
+    const insuranceValue =
+      selectedInsurance || values?.typeofinsurance
+
+    if (stepOrder < 6) {
+      setStepOrder(6)
+    }
+    handleClickcurrentTab('6')
+    setTriggerScroll(true)
+    setIndexTab(indexTab + 1)
+    setDataFromOrder({
+      ...dataFromOrder,
+      typeofinsurance: insuranceValue,
+      noteOptions: {
+        ...(dataFromOrder?.noteOptions || {}),
+        ...values.noteOptions,
+      },
+      noteOptionsAgreement: {
+        ...(dataFromOrder?.noteOptionsAgreement || {}),
+        ...values.noteOptionsAgreement,
+      },
+    })
+  }
+
   function onSubmit(values: z.infer<typeof FormSchema>) {
     if (values) {
-      if (stepOrder < 6) {
-        setStepOrder(6)
+      // Check if user selected the first insurance type (Miễn phí)
+      if (isBasicFreeInsurance()) {
+        setShowWarningDialog(true)
+        setPendingFormSubmit(true)
+        return
       }
-      handleClickcurrentTab('6')
-      setTriggerScroll(true)
-      setIndexTab(indexTab + 1)
-      setDataFromOrder({
-        ...dataFromOrder,
-        typeofinsurance: values?.typeofinsurance,
-        // Merge note options data for minh_bach_can_nang instead of override
-        noteOptions: {
-          ...(dataFromOrder?.noteOptions || {}),
-          ...values.noteOptions,
-        },
-        noteOptionsAgreement: {
-          ...(dataFromOrder?.noteOptionsAgreement || {}),
-          ...values.noteOptionsAgreement,
-        },
-      })
+
+      proceedWithSubmit()
+    }
+  }
+
+  const handleSkip = () => {
+    setShowWarningDialog(false)
+    if (pendingFormSubmit) {
+      proceedWithSubmit()
+      setPendingFormSubmit(false)
+    }
+  }
+
+  const handleUpgrade = () => {
+    const secondInsurance =
+      data?.insurance_types?.list_insurance_types?.[1]
+    if (secondInsurance?.label) {
+      form.setValue('typeofinsurance', secondInsurance.label)
+      setShowWarningDialog(false)
+      setPendingFormSubmit(false)
+
+      // Scroll to insurance section to let user review
+      setTimeout(() => {
+        if (insuranceContainerRef.current) {
+          insuranceContainerRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          })
+        }
+      }, 300)
     }
   }
 
@@ -213,8 +281,8 @@ export default function Insurance({
 
     const el = document.querySelector(`[name="${firstErrorField}"]`)
     if (el) {
-      el.scrollIntoView({behavior: 'smooth', block: 'center'})
-      ;(el as HTMLElement).focus({preventScroll: true})
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        ; (el as HTMLElement).focus({ preventScroll: true })
     }
   }
 
@@ -240,7 +308,7 @@ export default function Insurance({
                       }}
                       className={cn(
                         'custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-                        '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
+                        '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
                         '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
                         '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
                       )}
@@ -252,7 +320,7 @@ export default function Insurance({
                     <FormField
                       control={form.control}
                       name={`order.${index}`}
-                      render={({field}) => (
+                      render={({ field }) => (
                         <FormItem className='relative flex flex-row items-center space-x-[0.5rem] space-y-0 border-none'>
                           <FormControl>
                             <Checkbox
@@ -300,7 +368,10 @@ export default function Insurance({
                   </>
                 )}
 
-                <div className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:mb-[0.5rem] xsm:mt-0 xsm:p-[1rem]'>
+                <div
+                  ref={insuranceContainerRef}
+                  className='mt-[1rem] flex flex-col items-start rounded-[2.5rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:mb-[0.5rem] xsm:mt-0 xsm:p-[1rem]'
+                >
                   {/* title */}
                   {isMobile && (
                     <div className='xsm:mb-[1rem]'>
@@ -340,7 +411,7 @@ export default function Insurance({
                             key={insuranceIndex}
                             control={form.control}
                             name='typeofinsurance'
-                            render={({field}) => {
+                            render={({ field }) => {
                               const isChecked =
                                 field.value === insuranceItem?.label
 
@@ -439,7 +510,7 @@ export default function Insurance({
                   <FormField
                     control={form.control}
                     name='order.0'
-                    render={({field}) => (
+                    render={({ field }) => (
                       <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                         <FormControl>
                           <Checkbox
@@ -491,7 +562,7 @@ export default function Insurance({
                     }}
                     className={cn(
                       'custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-                      '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
+                      '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
                       '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
                       '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
                     )}
@@ -519,7 +590,7 @@ export default function Insurance({
                 <FormField
                   control={form.control}
                   name={`order.${data?.user_chooses ? index + 1 : index}`}
-                  render={({field}) => (
+                  render={({ field }) => (
                     <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                       <FormControl>
                         <Checkbox
@@ -572,7 +643,7 @@ export default function Insurance({
                           key={`0-${noteIdx}-${optIndex}`}
                           control={form.control}
                           name={radioFieldName as `noteOptions.${string}`}
-                          render={({field}) => {
+                          render={({ field }) => {
                             const isChecked = field.value === opt?.label
 
                             return (
@@ -675,7 +746,7 @@ export default function Insurance({
                   <div
                     className={cn(
                       'custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-                      '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+                      '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
                       '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
                       '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
                     )}
@@ -692,7 +763,7 @@ export default function Insurance({
                 name={
                   `noteOptionsAgreement.0-${noteIdx}` as `noteOptionsAgreement.${string}`
                 }
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                     <FormControl>
                       <Checkbox
@@ -733,13 +804,43 @@ export default function Insurance({
             className={cn(
               'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
               !form.formState.isValid &&
-                'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+              'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
             )}
           >
             <p className='text-white text-pc-sub16m'>Tiếp tục</p>
           </Button>
         </div>
       </form>
+
+      {/* Warning Dialog for Basic Free Insurance */}
+      <Dialog open={showWarningDialog} onOpenChange={setShowWarningDialog}>
+        <DialogContent className='max-w-[32.5rem] rounded-[2rem] border-0 bg-white p-[2rem] shadow-[0_2px_10px_rgba(0,0,0,0.1)] xsm:max-w-[90%] xsm:rounded-[1.5rem] xsm:p-[1.25rem]'>
+          <DialogHeader>
+            <DialogTitle className='mb-[1rem] font-montserrat text-[1.25rem] font-bold leading-[1.75rem] tracking-[-0.0375rem] text-[rgba(0,0,0,0.92)] xsm:text-[1rem] xsm:leading-[1.5rem] xsm:tracking-[-0.03rem]'>
+              {dataNoticeDanger?.notification_title || 'Thông báo quan trọng'}
+            </DialogTitle>
+            <DialogDescription className='space-y-[0.75rem] text-left xsm:space-y-[0.5rem]'>
+              <div className='custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem] [&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem] [&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem] [&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]' dangerouslySetInnerHTML={{
+                __html: dataNoticeDanger?.notification_description || '',
+              }}></div>
+            </DialogDescription>
+          </DialogHeader>
+          <div className='mt-[1.5rem] flex space-x-[1.25rem] xsm:flex-col xsm:space-x-0 xsm:space-y-[0.75rem]'>
+            <Button
+              onClick={handleSkip}
+              className='flex-1 rounded-[1.25rem] !shadow-none  bg-[#D9F1FF] p-[0.75rem_1.5rem] text-black hover:bg-[#D9F1FF] hover:opacity-80'
+            >
+              <p className='text-pc-sub16m'>Giữ nguyên</p>
+            </Button>
+            <Button
+              onClick={handleUpgrade}
+              className='flex-1 rounded-[1.25rem] !shadow-none bg-[#38B6FF] p-[0.75rem_1.5rem] text-white hover:bg-[#38B6FF] hover:opacity-90'
+            >
+              <p className='text-pc-sub16m'>Nâng cấp gói bảo hiểm</p>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Form>
   )
 }

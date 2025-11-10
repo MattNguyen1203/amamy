@@ -48,7 +48,7 @@ const ItemContent = () => {
   return (
     <div className='w-[26.8125rem] xsm:w-[16.875rem]'>
       <ImageV2
-        src={'/homepage/replace/slideimg.png'}
+        src={'/homepage/replace/slideimg.webp'}
         alt=''
         width={1000}
         height={1000}

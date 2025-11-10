@@ -41,7 +41,7 @@ const QuantitySection = ({data}: Prop) => {
 
         <div className=' flex-1 flex gap-[2.5rem] pt-[7.315rem] bg-[#C1E8FF] pl-[6rem] xsm:pl-0 relative xsm:bg-transparent xsm:pt-[1rem]'>
           <Image
-            src={'/homepage/icon/Isolation_Mode.png'}
+            src={'/homepage/icon/Isolation_Mode.webp'}
             alt='background-image'
             className='absolute left-0 z-0 bottom-0 w-[89.4375rem] h-[35.50475rem] flex-shrink-0 xsm:w-0 xsm:h-fit'
             width={1000}

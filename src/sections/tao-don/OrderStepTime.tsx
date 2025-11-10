@@ -62,7 +62,7 @@ const UserChoicesSection = React.memo(function UserChoicesSection({
     () =>
       cn(
         'custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-        '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+        '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
         '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
         '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
       ),
@@ -354,6 +354,12 @@ const OrderStepTime = React.memo(function OrderStepTime({
       setTriggerScroll(false)
     }
   }, [triggerScroll, scrollToTop])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const onSubmit = useCallback(
     (data: z.infer<typeof FormSchema>) => {
       if (data) {

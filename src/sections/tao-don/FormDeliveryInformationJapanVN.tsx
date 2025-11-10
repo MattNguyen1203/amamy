@@ -142,6 +142,12 @@ export default function FormDeliveryInformationJapanVN({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     if (pending) {
       form.setValue(

@@ -131,7 +131,7 @@ const Faqs: React.FC<Props> = ({faqsData}) => {
   return (
     <div className='flex w-[full] flex-col items-start gap-[0.625rem] bg-white py-10 sm:py-[5rem] relative overflow-hidden xsm:bg-[#fff]'>
       <Image
-        src={'/newPage/img2.png'}
+        src={'/newPage/img2.webp'}
         width={1380}
         height={1022}
         alt='background'

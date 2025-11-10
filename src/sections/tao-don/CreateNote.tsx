@@ -79,7 +79,7 @@ const NoteOptionsSection = React.memo(function NoteOptionsSection({
     () =>
       cn(
         'custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-        '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+        '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
         '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
         '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
       ),
@@ -308,7 +308,7 @@ const NoteContentSection = React.memo(function NoteContentSection({
     () =>
       cn(
         '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
-        '[&_ul]:!my-3 [&_ul]:!list-disc [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+        '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
         '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
         '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
       ),
@@ -415,7 +415,7 @@ export default function CeateNote({
   setDataFromOrder,
 }: {
   data?: IInformationNoteOrder[]
-  handleClickcurrentTab: (nextTab: string) => void
+  handleClickcurrentTab: (_nextTab: string) => void
   prevStep: string
   setIndexTab: React.Dispatch<React.SetStateAction<number>>
   indexTab: number
@@ -434,26 +434,39 @@ export default function CeateNote({
     ),
     noteOptions: z.record(z.string(), z.string().optional()).refine(
       (choices) => {
+        console.log('🔍 noteOptions validation - choices:', choices)
+        console.log('🔍 noteOptions validation - data:', data)
+        
         if (!Array.isArray(data)) return true
 
         const itemsWithNoteOptions = data.filter(
           (item) =>
             Array.isArray(item?.note_options) && item?.note_options?.length > 0,
         )
+        console.log('🔍 itemsWithNoteOptions:', itemsWithNoteOptions)
 
         const requiredKeys = itemsWithNoteOptions
-          .map((item, itemIndex) =>
-            item.note_options?.map((_, noteIdx) => `${itemIndex}-${noteIdx}`),
-          )
+          .map((item, itemIndex) => {
+            // Find the actual index in the original data array
+            const actualIndex = data.findIndex(d => d === item)
+            return item.note_options?.map((_, noteIdx) => `${actualIndex}-${noteIdx}`)
+          })
           .flat()
           .filter(Boolean)
+        
+        console.log('🔍 requiredKeys for noteOptions:', requiredKeys)
 
-        return requiredKeys.every((key) => {
+        const result = requiredKeys.every((key) => {
           if (!key) {
             return true
           }
-          return choices[key] && choices[key] !== ''
+          const isValid = choices[key] && choices[key] !== ''
+          console.log(`🔍 key "${key}": ${choices[key]} -> ${isValid}`)
+          return isValid
         })
+        
+        console.log('🔍 noteOptions validation result:', result)
+        return result
       },
       {
         message: 'Vui lòng chọn đầy đủ các tùy chọn bắt buộc.',
@@ -462,26 +475,39 @@ export default function CeateNote({
     // Dynamic fields for note_options agreements (checkboxes)
     noteOptionsAgreement: z.record(z.string(), z.boolean()).refine(
       (agreements) => {
+        console.log('🔍 noteOptionsAgreement validation - agreements:', agreements)
+        console.log('🔍 noteOptionsAgreement validation - data:', data)
+        
         if (!Array.isArray(data)) return true
 
         const itemsWithNoteOptions = data.filter(
           (item) =>
             Array.isArray(item.note_options) && item.note_options.length > 0,
         )
+        console.log('🔍 itemsWithNoteOptions for agreement:', itemsWithNoteOptions)
 
         const requiredKeys = itemsWithNoteOptions
-          .map((item, itemIndex) =>
-            item.note_options?.map((_, noteIdx) => `${itemIndex}-${noteIdx}`),
-          )
+          .map((item, itemIndex) => {
+            // Find the actual index in the original data array
+            const actualIndex = data.findIndex(d => d === item)
+            return item.note_options?.map((_, noteIdx) => `${actualIndex}-${noteIdx}`)
+          })
           .flat()
           .filter(Boolean)
+        
+        console.log('🔍 requiredKeys for noteOptionsAgreement:', requiredKeys)
 
-        return requiredKeys.every((key) => {
+        const result = requiredKeys.every((key) => {
           if (!key) {
             return true
           }
-          return agreements[key] === true
+          const isValid = agreements[key] === true
+          console.log(`🔍 agreement key "${key}": ${agreements[key]} -> ${isValid}`)
+          return isValid
         })
+        
+        console.log('🔍 noteOptionsAgreement validation result:', result)
+        return result
       },
       {
         message: 'Vui lòng đồng ý với tất cả điều khoản.',
@@ -495,7 +521,7 @@ export default function CeateNote({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       note: Array.isArray(data)
-        ? data?.map(() => (stepOrder > 3 ? true : false))
+        ? data?.map(() => false) // Always start with false, let user check manually
         : [],
       noteOptions: {},
       noteOptionsAgreement: {},
@@ -552,6 +578,16 @@ export default function CeateNote({
       setTriggerScroll(true)
     }
   }, [data, stepOrder, setStepOrder, handleClickcurrentTab])
+
+  // Debug form state
+  const formValues = form.watch()
+  useEffect(() => {
+    console.log('🚀 ~ form.formState:', {
+      isValid: form.formState.isValid,
+      errors: form.formState.errors,
+      values: form.getValues(),
+    })
+  }, [form.formState.isValid, form.formState.errors, formValues, form])
   const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
   useEffect(() => {
     if (triggerScroll) {
@@ -559,7 +595,16 @@ export default function CeateNote({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   function onSubmit(values: z.infer<typeof FormSchema>) {
+    console.log('🚀 ~ onSubmit values:', values)
+    console.log('🚀 ~ form.formState.isValid:', form.formState.isValid)
+    console.log('🚀 ~ form.formState.errors:', form.formState.errors)
     if (values) {
       // Merge noteOptions to dataFromOrder instead of override
       setDataFromOrder((prev: IDataFromOrder) => {
@@ -589,6 +634,7 @@ export default function CeateNote({
   }
 
   const onError = (errors: FieldErrors<z.infer<typeof FormSchema>>) => {
+    console.log('🚀 ~ onError errors:', errors)
     const firstErrorField = Object.keys(errors)[0]
     if (!firstErrorField) {
       return

@@ -62,15 +62,15 @@ const formSchema = z.object({
 
 const dataContactMethod = [
   {
-    img: '/order/like.png',
+    img: '/order/like.webp',
     title: 'Facebook Fanpage Amamy',
   },
   {
-    img: '/order/zalo.png',
+    img: '/order/zalo.webp',
     title: 'Zalo Amamy',
   },
   {
-    img: '/order/kh.png',
+    img: '/order/kh.webp',
     title: 'Trang cá nhân của nhân viên',
   },
 ]
@@ -135,6 +135,12 @@ export default function FormStepStart({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     if (selectServiceDimension || howToContactAmamy) {
       document.body.style.overflow = 'hidden'

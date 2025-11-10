@@ -37,7 +37,12 @@ let StepForm: {title: string; value: string}[] = [
 export interface IDataFromOrder {
   [key: string]: any
 }
-export default function CreateOrder({data}: {data: ICreateOder[]}) {
+export interface IOptionField {
+  notification_description: string,
+  notification_title: string,
+}
+export default function CreateOrder({data, dataNoticeDanger}: {data: ICreateOder[], dataNoticeDanger?: IOptionField}) {
+  console.log(dataNoticeDanger)
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
@@ -481,6 +486,7 @@ export default function CreateOrder({data}: {data: ICreateOder[]}) {
                   indexTab={indexTab}
                   data={dataInformation?.information?.insurance}
                   handleClickcurrentTab={handleClickcurrentTab}
+                  dataNoticeDanger={dataNoticeDanger}
                 />
               </TabsContent>
 

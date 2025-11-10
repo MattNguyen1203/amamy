@@ -17,7 +17,7 @@ export const MainContainer = ({data}: Prop) => {
               <Image
                 className='absolute w-[21.5rem] h-[26.9375rem] top-0 left-0 right-[1rem] xsm:h-[11.25rem] xsm:w-full xsm:rounded-[1.25rem]'
                 alt='Mask group'
-                src={'/homepage/icon/Service-Item-Mask-GroupV3.png'}
+                src={'/homepage/icon/Service-Item-Mask-GroupV3.webp'}
                 width={1000}
                 height={1000}
               />
