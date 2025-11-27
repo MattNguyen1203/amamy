@@ -2,8 +2,8 @@
 
 import useStore from '@/app/(store)/store'
 import ICStar from '@/components/icon/ICStar'
-import {Button} from '@/components/ui/button'
-import {Checkbox} from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
@@ -12,11 +12,18 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {Label} from '@/components/ui/label'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
 import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IInformationNoteOrder} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { cn } from '@/lib/utils'
+import { IInformationNoteOrder } from '@/sections/tao-don/oder.interface'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import React, {
   Fragment,
@@ -26,8 +33,9 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {FieldErrors, useForm, UseFormReturn} from 'react-hook-form'
-import {z} from 'zod'
+import { FieldErrors, useForm, UseFormReturn } from 'react-hook-form'
+import { z } from 'zod'
+import { IOptionFieldNotePopupJapan } from '@/sections/tao-don/CreateOrder'
 
 // Type for form data
 type FormData = {
@@ -126,7 +134,7 @@ const NoteOptionsSection = React.memo(function NoteOptionsSection({
                           key={`${index}-${noteIdx}-${optIndex}`}
                           control={form.control}
                           name={radioFieldName as `noteOptions.${string}`}
-                          render={({field}) => {
+                          render={({ field }) => {
                             const isChecked = field.value === opt?.label
 
                             return (
@@ -227,7 +235,7 @@ const NoteOptionsSection = React.memo(function NoteOptionsSection({
                   <FormField
                     control={form.control}
                     name={checkboxFieldName as `noteOptionsAgreement.${string}`}
-                    render={({field}) => (
+                    render={({ field }) => (
                       <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                         <FormControl>
                           <Checkbox
@@ -276,7 +284,7 @@ const ImageItem = React.memo(function ImageItem({
     <div
       ref={setContainerRef(index)}
       className={imgClassName}
-      dangerouslySetInnerHTML={{__html: roundedImg}}
+      dangerouslySetInnerHTML={{ __html: roundedImg }}
     />
   )
 })
@@ -371,13 +379,13 @@ const NoteContentSection = React.memo(function NoteContentSection({
 
           <div
             className={noteMoreClassName}
-            dangerouslySetInnerHTML={{__html: content}}
+            dangerouslySetInnerHTML={{ __html: content }}
           ></div>
 
           <FormField
             control={form.control}
             name={`note.${index}`}
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
                 <FormControl>
                   <Checkbox
@@ -413,6 +421,8 @@ export default function CeateNote({
   indexTab,
   setSelectedImage,
   setDataFromOrder,
+  dataNotePopupJapan,
+  type,
 }: {
   data?: IInformationNoteOrder[]
   handleClickcurrentTab: (_nextTab: string) => void
@@ -423,6 +433,7 @@ export default function CeateNote({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   type?: string
   importantNote?: string
+  dataNotePopupJapan?: IOptionFieldNotePopupJapan
 }) {
   const isMobile = useIsMobile()
 
@@ -436,7 +447,7 @@ export default function CeateNote({
       (choices) => {
         console.log('🔍 noteOptions validation - choices:', choices)
         console.log('🔍 noteOptions validation - data:', data)
-        
+
         if (!Array.isArray(data)) return true
 
         const itemsWithNoteOptions = data.filter(
@@ -446,14 +457,14 @@ export default function CeateNote({
         console.log('🔍 itemsWithNoteOptions:', itemsWithNoteOptions)
 
         const requiredKeys = itemsWithNoteOptions
-          .map((item, itemIndex) => {
+          .map((item) => {
             // Find the actual index in the original data array
             const actualIndex = data.findIndex(d => d === item)
             return item.note_options?.map((_, noteIdx) => `${actualIndex}-${noteIdx}`)
           })
           .flat()
           .filter(Boolean)
-        
+
         console.log('🔍 requiredKeys for noteOptions:', requiredKeys)
 
         const result = requiredKeys.every((key) => {
@@ -464,7 +475,7 @@ export default function CeateNote({
           console.log(`🔍 key "${key}": ${choices[key]} -> ${isValid}`)
           return isValid
         })
-        
+
         console.log('🔍 noteOptions validation result:', result)
         return result
       },
@@ -477,7 +488,7 @@ export default function CeateNote({
       (agreements) => {
         console.log('🔍 noteOptionsAgreement validation - agreements:', agreements)
         console.log('🔍 noteOptionsAgreement validation - data:', data)
-        
+
         if (!Array.isArray(data)) return true
 
         const itemsWithNoteOptions = data.filter(
@@ -487,14 +498,14 @@ export default function CeateNote({
         console.log('🔍 itemsWithNoteOptions for agreement:', itemsWithNoteOptions)
 
         const requiredKeys = itemsWithNoteOptions
-          .map((item, itemIndex) => {
+          .map((item) => {
             // Find the actual index in the original data array
             const actualIndex = data.findIndex(d => d === item)
             return item.note_options?.map((_, noteIdx) => `${actualIndex}-${noteIdx}`)
           })
           .flat()
           .filter(Boolean)
-        
+
         console.log('🔍 requiredKeys for noteOptionsAgreement:', requiredKeys)
 
         const result = requiredKeys.every((key) => {
@@ -505,7 +516,7 @@ export default function CeateNote({
           console.log(`🔍 agreement key "${key}": ${agreements[key]} -> ${isValid}`)
           return isValid
         })
-        
+
         console.log('🔍 noteOptionsAgreement validation result:', result)
         return result
       },
@@ -514,9 +525,11 @@ export default function CeateNote({
       },
     ),
   })
-  const {stepOrder, setStepOrder} = useStore((state) => state)
+  const { stepOrder, setStepOrder } = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
+  const [showWarningDialog, setShowWarningDialog] = useState<boolean>(false)
+  const [pendingSubmitData, setPendingSubmitData] = useState<z.infer<typeof FormSchema> | null>(null)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -588,7 +601,7 @@ export default function CeateNote({
       values: form.getValues(),
     })
   }, [form.formState.isValid, form.formState.errors, formValues, form])
-  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
@@ -606,31 +619,54 @@ export default function CeateNote({
     console.log('🚀 ~ form.formState.isValid:', form.formState.isValid)
     console.log('🚀 ~ form.formState.errors:', form.formState.errors)
     if (values) {
-      // Merge noteOptions to dataFromOrder instead of override
-      setDataFromOrder((prev: IDataFromOrder) => {
-        const mergedData = {
-          ...prev,
-          noteOptions: {
-            ...((prev.noteOptions as Record<string, string | undefined>) || {}),
-            ...values.noteOptions,
-          },
-          noteOptionsAgreement: {
-            ...((prev.noteOptionsAgreement as Record<string, boolean>) || {}),
-            ...values.noteOptionsAgreement,
-          },
-        }
-
-        return mergedData
-      })
-
-      if (stepOrder < 4) {
-        setStepOrder(4)
+      // Only show popup for Japan -> Vietnam direction (nhatviet)
+      if (type === 'nhatviet' && dataNotePopupJapan) {
+        // Store submit data and show warning dialog
+        setPendingSubmitData(values)
+        setShowWarningDialog(true)
+      } else {
+        // For other directions, proceed directly without popup
+        handleConfirmAfterWarningDirectly(values)
       }
-      setIndexTab(indexTab + 1)
-      form.reset()
-      handleClickcurrentTab('4')
-      setTriggerScroll(true)
     }
+  }
+
+  // Handle confirmation after user acknowledges warning
+  const handleConfirmAfterWarning = () => {
+    if (!pendingSubmitData) return
+    handleConfirmAfterWarningDirectly(pendingSubmitData)
+
+    // Close dialog and reset pending data
+    setShowWarningDialog(false)
+    setPendingSubmitData(null)
+  }
+
+  // Direct confirmation without popup (for non-nhatviet directions)
+  const handleConfirmAfterWarningDirectly = (values: z.infer<typeof FormSchema>) => {
+    // Merge noteOptions to dataFromOrder instead of override
+    setDataFromOrder((prev: IDataFromOrder) => {
+      const mergedData = {
+        ...prev,
+        noteOptions: {
+          ...((prev.noteOptions as Record<string, string | undefined>) || {}),
+          ...values.noteOptions,
+        },
+        noteOptionsAgreement: {
+          ...((prev.noteOptionsAgreement as Record<string, boolean>) || {}),
+          ...values.noteOptionsAgreement,
+        },
+      }
+
+      return mergedData
+    })
+
+    if (stepOrder < 4) {
+      setStepOrder(4)
+    }
+    setIndexTab(indexTab + 1)
+    form.reset()
+    handleClickcurrentTab('4')
+    setTriggerScroll(true)
   }
 
   const onError = (errors: FieldErrors<z.infer<typeof FormSchema>>) => {
@@ -642,70 +678,122 @@ export default function CeateNote({
 
     const el = document.querySelector(`[name="${firstErrorField}"]`)
     if (el) {
-      el.scrollIntoView({behavior: 'smooth', block: 'center'})
-      ;(el as HTMLElement).focus({preventScroll: true})
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        ; (el as HTMLElement).focus({ preventScroll: true })
     }
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit, onError)}
-        className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
-      >
-        {Array.isArray(data) &&
-          data?.map((item: IInformationNoteOrder, index: number) => {
-            const html = item?.text || ''
-            const imgs = html.match(/<img[^>]*>/g) || []
-            const content = html.replace(/<img[^>]*>/g, '').trim()
+    <>
+      <Dialog open={showWarningDialog} onOpenChange={setShowWarningDialog}>
+        <DialogContent className='custom_scrollbar max-w-[50.5rem] max-h-[90vh] overflow-y-auto rounded-[2rem] border-0 bg-white p-[2rem] shadow-[0_2px_10px_rgba(0,0,0,0.1)] xsm:max-w-[90%] xsm:rounded-[1.5rem] xsm:p-[1.25rem]'>
+          <DialogHeader>
+            <DialogTitle className='mb-[1rem] font-montserrat text-center text-[1.25rem] font-bold leading-[1.75rem] tracking-[-0.0375rem] text-[rgba(0,0,0,0.92)] xsm:text-[1rem] xsm:leading-[1.5rem] xsm:tracking-[-0.03rem]'>
+              {dataNotePopupJapan?.title}
+            </DialogTitle>
+            <DialogDescription asChild>
+              <div className='space-y-[1rem] text-left xsm:space-y-[0.75rem]' >
+                <div className='[&_p]:text-[0.875rem] [&_*]:font-medium [&_*]:leading-[1.3125rem] [&_*]:tracking-[-0.02625rem] [&_*]:text-[rgba(0,0,0,0.92)] xsm:[&_p]:text-[0.8125rem] xsm:[&_p]:leading-[1.21875rem] xsm:[&_p]:tracking-[-0.02438rem] [&_ul]:list-disc [&_ul]:space-y-[0.5rem] [&_ul]:pl-[1.4rem] xsm:[&_ul]:pl-[1rem]' dangerouslySetInnerHTML={{ __html: dataNotePopupJapan?.description || '' }}>
 
-            return (
-              <div
-                key={index}
-                className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
-              >
-                <NoteContentSection
-                  item={item}
-                  index={index}
-                  form={form}
-                  containerRefs={containerRefs}
-                  imgs={imgs}
-                  content={content}
-                />
-
-                <NoteOptionsSection
-                  item={item}
-                  index={index}
-                  form={form}
-                  isMobile={isMobile}
+                </div>
+                {dataNotePopupJapan?.text_note &&
+                  <div className='rounded-[1rem] !shadow-none border border-[#FFE4B3] bg-[#FFF4E6] p-[1rem]'>
+                    <p className='text-[0.875rem] font-semibold leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.8125rem] xsm:leading-[1.21875rem] xsm:tracking-[-0.02438rem]'>
+                      {dataNotePopupJapan?.text_note}
+                    </p>
+                  </div>
+                }
+                <Image
+                  src={dataNotePopupJapan?.image || ''}
+                  alt='Hướng dẫn ghi mã 818HN'
+                  width={500}
+                  height={300}
+                  className='h-auto w-full rounded-[1.5rem]'
                 />
               </div>
-            )
-          })}
-
-        <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
-          <div
-            onClick={() => {
-              handleClickcurrentTab(prevStep)
-              setIndexTab(indexTab - 1)
-            }}
-            className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
-          >
-            <p className='text-black text-pc-sub16m'>Quay lại</p>
+            </DialogDescription>
+          </DialogHeader>
+          <div className='mt-[1.5rem] flex space-x-[1.25rem] xsm:flex-col xsm:space-x-0 xsm:space-y-[0.75rem]'>
+            <Button
+              type='button'
+              onClick={() => {
+                setShowWarningDialog(false)
+                setPendingSubmitData(null)
+              }}
+              className='flex-1 rounded-[1.25rem] !shadow-none bg-[#D9F1FF] p-[0.75rem_1.5rem] text-black hover:bg-[#D9F1FF] hover:opacity-80'
+            >
+              <p className='text-pc-sub16m'>Đóng</p>
+            </Button>
+            <Button
+              type='button'
+              onClick={handleConfirmAfterWarning}
+              className='flex-1 rounded-[1.25rem] !shadow-none bg-[#38B6FF] p-[0.75rem_1.5rem] text-white hover:bg-[#38B6FF] hover:opacity-90'
+            >
+              <p className='text-pc-sub16m'>Đã hiểu</p>
+            </Button>
           </div>
-          <Button
-            type='submit'
-            disabled={!form.formState.isValid}
-            className={cn(
-              'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
-              !form.formState.isValid &&
+        </DialogContent>
+      </Dialog>
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit, onError)}
+          className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
+        >
+          {Array.isArray(data) &&
+            data?.map((item: IInformationNoteOrder, index: number) => {
+              const html = item?.text || ''
+              const imgs = html.match(/<img[^>]*>/g) || []
+              const content = html.replace(/<img[^>]*>/g, '').trim()
+
+              return (
+                <div
+                  key={index}
+                  className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
+                >
+                  <NoteContentSection
+                    item={item}
+                    index={index}
+                    form={form}
+                    containerRefs={containerRefs}
+                    imgs={imgs}
+                    content={content}
+                  />
+
+                  <NoteOptionsSection
+                    item={item}
+                    index={index}
+                    form={form}
+                    isMobile={isMobile}
+                  />
+                </div>
+              )
+            })}
+
+          <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+            <div
+              onClick={() => {
+                handleClickcurrentTab(prevStep)
+                setIndexTab(indexTab - 1)
+              }}
+              className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
+            >
+              <p className='text-black text-pc-sub16m'>Quay lại</p>
+            </div>
+            <Button
+              type='submit'
+              disabled={!form.formState.isValid}
+              className={cn(
+                'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+                !form.formState.isValid &&
                 'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
-            )}
-          >
-            <p className='text-white text-pc-sub16m'>Tiếp tục</p>
-          </Button>
-        </div>
-      </form>
-    </Form>
+              )}
+            >
+              <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </>
   )
 }

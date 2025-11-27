@@ -23,10 +23,17 @@ export default async function page() {
       next: {revalidate: 60},
     },
   })
-  const [dataCreateOrder, schemaData, dataNoticeDanger] = await Promise.all([
+  const fetchNotePopupJapan = fetchData({
+    api: `get-option-field?field=note_popup_japan`,
+    option: {
+      next: {revalidate: 60},
+    },
+  })
+  const [dataCreateOrder, schemaData, dataNoticeDanger, dataNotePopupJapan] = await Promise.all([
     fetchCreateOrder,
     getSchemaMarkup('tao-don-hang'),
     fetchNoticeDanger,
+    fetchNotePopupJapan,
   ])
   return (
     <main className='bg-white sm:px-[6rem] sm:pt-0 min-h-[calc(100vh-5.75rem)]'>
@@ -38,7 +45,7 @@ export default async function page() {
         data={[{title: 'Tạo đơn hàng', slug: ''}]}
         className='xsm:hidden'
       />
-      <CreateOrder data={dataCreateOrder} dataNoticeDanger={dataNoticeDanger?.value} />
+      <CreateOrder data={dataCreateOrder} dataNoticeDanger={dataNoticeDanger?.value} dataNotePopupJapan={dataNotePopupJapan?.value} />
     </main>
   )
 }

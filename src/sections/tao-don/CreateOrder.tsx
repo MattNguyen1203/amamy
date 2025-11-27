@@ -41,8 +41,13 @@ export interface IOptionField {
   notification_description: string,
   notification_title: string,
 }
-export default function CreateOrder({data, dataNoticeDanger}: {data: ICreateOder[], dataNoticeDanger?: IOptionField}) {
-  console.log(dataNoticeDanger)
+export interface IOptionFieldNotePopupJapan {
+ title: string,
+  description: string,
+  text_note: string,
+  image: string,
+}
+export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}: {data: ICreateOder[], dataNoticeDanger?: IOptionField, dataNotePopupJapan?: IOptionFieldNotePopupJapan}) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
@@ -371,6 +376,7 @@ export default function CreateOrder({data, dataNoticeDanger}: {data: ICreateOder
                     type={dataInformation?.type}
                     importantNote={dataInformation?.information?.important_note}
                     setDataFromOrder={setDataFromOrder}
+                    dataNotePopupJapan={dataNotePopupJapan}
                   />
                 )}
               </TabsContent>

@@ -286,6 +286,30 @@ html > body[data-scroll-locked] {
   width: 0 !important;
   display: none;
 }
+
+.custom_scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #38b6ff66 transparent;
+}
+
+.custom_scrollbar::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.custom_scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 999px;
+}
+
+.custom_scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6dd1ff 0%, #2a9ce3 100%);
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.custom_scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #58c7ff 0%, #1c89cf 100%);
+}
 #cxgenie-chat-button {
   right: 2.5rem !important;
   bottom: 1.5rem !important;
