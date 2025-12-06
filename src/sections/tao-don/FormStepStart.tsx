@@ -150,15 +150,41 @@ export default function FormStepStart({
   }, [selectServiceDimension, howToContactAmamy])
   async function onSubmit(values: z.infer<typeof formSchema>) {
     handlesetDataInformation(values?.shipping)
+    
+    // Calculate nextStep based on the newly selected service
+    const foundItem = data?.find((item) => item.id === Number(values?.shipping))
+    let calculatedNextStep = '4' // Default to step 4
+    
+    if (foundItem) {
+      // Check if time is valid non-empty array
+      const hasValidTime =
+        foundItem?.information?.time &&
+        Array.isArray(foundItem.information.time) &&
+        foundItem.information.time.length > 0
+
+      if (hasValidTime) {
+        calculatedNextStep = '2'
+      } else if (
+        ['nhatviet', 'ducvn', 'viethan', 'vietnhat'].includes(
+          foundItem.type,
+        ) &&
+        foundItem.information?.note
+      ) {
+        calculatedNextStep = '3'
+      } else {
+        calculatedNextStep = '4'
+      }
+    }
+    
     // localStorage.setItem('user_email', values?.email)
     if (stepOrder < 2) {
-      setStepOrder(Number(nextStep))
+      setStepOrder(Number(calculatedNextStep))
     }
     if (dataFromOrder?.shipping !== values?.shipping) {
-      setStepOrder(Number(nextStep))
+      setStepOrder(Number(calculatedNextStep))
     }
     setIndexTab(indexTab + 1)
-    onSuccess(nextStep)
+    onSuccess(calculatedNextStep)
     setTriggerScroll(true)
     const formData = new FormData()
     formData.append('user', values?.email)

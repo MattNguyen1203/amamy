@@ -38,16 +38,24 @@ export interface IDataFromOrder {
   [key: string]: any
 }
 export interface IOptionField {
-  notification_description: string,
-  notification_title: string,
+  notification_description: string
+  notification_title: string
 }
 export interface IOptionFieldNotePopupJapan {
- title: string,
-  description: string,
-  text_note: string,
-  image: string,
+  title: string
+  description: string
+  text_note: string
+  image: string
 }
-export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}: {data: ICreateOder[], dataNoticeDanger?: IOptionField, dataNotePopupJapan?: IOptionFieldNotePopupJapan}) {
+export default function CreateOrder({
+  data,
+  dataNoticeDanger,
+  dataNotePopupJapan,
+}: {
+  data: ICreateOder[]
+  dataNoticeDanger?: IOptionField
+  dataNotePopupJapan?: IOptionFieldNotePopupJapan
+}) {
   const isMobile = useIsMobile()
   const {setStepOrder} = useStore((state) => state)
   const [currentTab, setCurrentTab] = useState('1')
@@ -67,7 +75,25 @@ export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}
     title: string
   }>({img: '', title: ''})
   const handleClickcurrentTab = (nextTab: string) => {
+    // Validate that the step exists in StepForm before switching
+    const tabIndex = StepForm.findIndex((item) => item.value === nextTab)
+    if (tabIndex === -1) {
+      // If step doesn't exist, find the next valid step
+      const nextValidStep = StepForm.find((item) => {
+        const itemIndex = StepForm.findIndex((i) => i.value === item.value)
+        return itemIndex > indexTab
+      })
+      if (nextValidStep) {
+        const validIndex = StepForm.findIndex(
+          (item) => item.value === nextValidStep.value,
+        )
+        setCurrentTab(nextValidStep.value)
+        setIndexTab(validIndex)
+      }
+      return
+    }
     setCurrentTab(nextTab)
+    setIndexTab(tabIndex)
   }
   const handlesetDataInformation = (shipping: string) => {
     setDataInformation(undefined)
@@ -79,7 +105,13 @@ export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}
       {title: 'Thông tin gửi hàng', value: '1'},
     ]
 
-    if (foundItem?.information?.time) {
+    // Check if time exists and is a valid non-empty array
+    const hasValidTime =
+      foundItem?.information?.time &&
+      Array.isArray(foundItem.information.time) &&
+      foundItem.information.time.length > 0
+
+    if (hasValidTime) {
       newStepForm.push({title: 'Thời gian gửi hàng', value: '2'})
     }
 
@@ -118,6 +150,9 @@ export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}
     }
 
     StepForm = newStepForm
+    // Reset indexTab to 0 when StepForm changes
+    setIndexTab(0)
+    setCurrentTab('1')
   }
 
   // useEffect(() => {
@@ -126,6 +161,7 @@ export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}
   //   }, 1000)
   // }, [])
   useEffect(() => {
+    // debugger
     if (
       dataInformation?.information?.note &&
       (dataInformation?.type === 'nhatviet' ||
@@ -134,7 +170,11 @@ export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}
         dataInformation?.type === 'vietnhat')
     ) {
       setPrevTabFormDelivery('3')
-    } else if (dataInformation?.information?.time) {
+    } else if (
+      dataInformation?.information?.time &&
+      Array.isArray(dataInformation.information.time) &&
+      dataInformation.information.time.length > 0
+    ) {
       setPrevTabFormDelivery('2')
     } else {
       setPrevTabFormDelivery('1')
@@ -323,11 +363,21 @@ export default function CreateOrder({data, dataNoticeDanger, dataNotePopupJapan}
               // sentGoodsAtAmamy={sentGoodsAtAmamy}
               nextStep={
                 dataInformation
-                  ? dataInformation?.information?.time
-                    ? '2'
-                    : dataInformation?.information?.note
-                      ? '3'
-                      : '4'
+                  ? (() => {
+                      // Check if time is valid non-empty array
+                      const hasValidTime =
+                        dataInformation?.information?.time &&
+                        Array.isArray(dataInformation.information.time) &&
+                        dataInformation.information.time.length > 0
+
+                      if (hasValidTime) {
+                        return '2'
+                      } else if (dataInformation?.information?.note) {
+                        return '3'
+                      } else {
+                        return '4'
+                      }
+                    })()
                   : '2'
               }
             />

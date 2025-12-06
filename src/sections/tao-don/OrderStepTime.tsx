@@ -336,7 +336,12 @@ const OrderStepTime = React.memo(function OrderStepTime({
     })
   })
   useEffect(() => {
-    if (!dataInformation) {
+    // Check if dataInformation is undefined, null, or empty array
+    const isEmpty =
+      !dataInformation ||
+      (Array.isArray(dataInformation) && dataInformation.length === 0)
+
+    if (isEmpty) {
       if (stepOrder < 3) {
         setStepOrder(3)
       }
