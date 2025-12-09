@@ -1,8 +1,8 @@
 'use client'
 
 import {IImage} from '@/utils/type'
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
+// import {useGSAP} from '@gsap/react'
+// import gsap from 'gsap'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {Navigation} from 'swiper/modules'
@@ -39,18 +39,18 @@ export interface IService {
   content: string
 }
 const Reason = ({data}: {data: IReason}) => {
-  useGSAP(() => {
-    gsap.from('.fade-in-reason', {
-      scrollTrigger: {
-        trigger: '.fade-in-reason',
-        start: 'top bottom',
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.2,
-    })
-  }, [])
+  // useGSAP(() => {
+  //   gsap.from('.fade-in-reason', {
+  //     scrollTrigger: {
+  //       trigger: '.fade-in-reason',
+  //       start: 'top bottom',
+  //     },
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 1,
+  //     stagger: 0.2,
+  //   })
+  // }, [])
 
   return (
     <section className='size-full px-[6rem] xsm:px-[1rem]'>
@@ -72,7 +72,7 @@ const Reason = ({data}: {data: IReason}) => {
             className='fade-in-reason'
           >
             <ImageContainer
-              img={item.thumbnail.url}
+              img={item.thumbnail.url || ''}
               label={item.title}
               description={item.content}
             />

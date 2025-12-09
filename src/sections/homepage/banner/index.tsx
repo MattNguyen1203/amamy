@@ -10,8 +10,7 @@ import {
   IBoxChatAI,
   IImage,
 } from '@/utils/type'
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
+// GSAP imports removed - animations handled by GsapProvider
 import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
@@ -36,25 +35,7 @@ const Banner = ({
   currencyExchangeRateData,
   isFaq = false,
 }: BannerProps) => {
-  useGSAP(() => {
-    gsap.from('.fade-image', {
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: '.fade-image',
-        start: 'top bottom',
-      },
-    })
-    gsap.from('.fade-box', {
-      duration: 1,
-      delay: 0.5,
-      y: 50,
-      scrollTrigger: {
-        trigger: '.fade-box',
-        start: 'top bottom',
-      },
-    })
-  })
+  // GSAP animations handled by GsapProvider for .fade-in-box class
 
   return (
     <>
@@ -73,9 +54,9 @@ const Banner = ({
             width={dataFaqs?.background_pc?.width || 1600}
             height={dataFaqs?.background_pc?.height || 788}
           />
-        ) : (
+        ) : banner?.background && banner.background.length > 0 ? (
           <Swiper
-            loop={true}
+            loop={banner.background.length > 1}
             effect='fade'
             modules={[EffectFade]}
             spaceBetween={0}
@@ -88,7 +69,7 @@ const Banner = ({
             speed={750}
             grabCursor={true}
           >
-            {banner?.background?.map(({background_pc}, index) => (
+            {banner.background.map(({background_pc}, index) => (
               <SwiperSlide
                 key={index}
                 className='size-full'
@@ -104,6 +85,10 @@ const Banner = ({
               </SwiperSlide>
             ))}
           </Swiper>
+        ) : (
+          <div className='size-full bg-gray-200 flex items-center justify-center'>
+            <p className='text-gray-500'>No banner images available</p>
+          </div>
         )}
         {/* <div className='absolute top-[11rem] left-[47rem] flex items-center space-x-4'>
           <ImageV2
@@ -234,9 +219,9 @@ const BackgroundMobile = ({
           />
         </>
       )}
-      {!isFaq && (
+      {!isFaq && banner?.background && banner.background.length > 0 && (
         <Swiper
-          loop={true}
+          loop={banner.background.length > 1}
           effect='fade'
           modules={[EffectFade]}
           spaceBetween={0}
@@ -249,7 +234,7 @@ const BackgroundMobile = ({
           speed={750}
           grabCursor={true}
         >
-          {banner?.background?.map(({background_mobile}, index) => (
+          {banner.background.map(({background_mobile}, index) => (
             <SwiperSlide
               key={index}
               className='size-full'

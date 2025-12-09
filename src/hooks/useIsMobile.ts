@@ -3,7 +3,7 @@
 import {useEffect, useState} from 'react'
 
 const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -28,7 +28,8 @@ const useIsMobile = () => {
     }
   }, [])
 
-  return isMobile
+  // Return false during SSR to prevent hydration mismatch
+  return isMobile ?? false
 }
 
 export default useIsMobile

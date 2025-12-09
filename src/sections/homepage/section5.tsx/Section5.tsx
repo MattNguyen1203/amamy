@@ -2,8 +2,8 @@
 
 import FAQItem from '@/sections/homepage/section5.tsx/FAQItem'
 import {IFaq, IFaqs} from '@/utils/type'
-import {useGSAP} from '@gsap/react'
-import gsap from 'gsap'
+// import {useGSAP} from '@gsap/react'
+// import gsap from 'gsap'
 import Image from 'next/image'
 
 type Props = {
@@ -11,18 +11,18 @@ type Props = {
 }
 
 const Section5 = ({faqs}: Props) => {
-  useGSAP(() => {
-    gsap.from('.fade-in-faq', {
-      scrollTrigger: {
-        trigger: '.faq-wrap',
-        start: 'top center',
-      },
-      opacity: 0,
-      y: 50,
-      duration: 0.5,
-      stagger: 0.2,
-    })
-  }, [])
+  // useGSAP(() => {
+  //   gsap.from('.fade-in-faq', {
+  //     scrollTrigger: {
+  //       trigger: '.faq-wrap',
+  //       start: 'top center',
+  //     },
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 0.5,
+  //     stagger: 0.2,
+  //   })
+  // }, [])
 
   return (
     <section
@@ -33,7 +33,7 @@ const Section5 = ({faqs}: Props) => {
         {faqs?.title}
       </h2>
       <Image
-        src={'/homepage/icon/section-4-background.png'}
+        src={'/homepage/icon/section-4-background.webp'}
         alt=''
         width={1000}
         height={1000}

@@ -17,7 +17,7 @@ const MultiCountryService = ({
           height={600 * 2}
           className='size-full object-cover'
           alt='Mask group'
-          src={'/homepage/icon/Service-Item-Mask-GroupV5.png'}
+          src={'/homepage/icon/Service-Item-Mask-GroupV5.webp'}
         />
         <div className='absolute z-10 size-full top-0 left-0 p-7 flex flex-col justify-between'>
           <p className='w-[16.625rem] text-pc-h6 text-white'>

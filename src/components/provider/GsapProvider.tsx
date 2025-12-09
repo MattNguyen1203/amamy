@@ -12,7 +12,11 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase, ScrollToPlugin)
 
 export default function GsapProvider({children}: {children: React.ReactNode}) {
   const isMobile = useIsMobile()
+
   useGSAP(() => {
+    // Only run on client side to prevent hydration mismatch
+    if (typeof window === 'undefined') return
+
     CustomEase.create('easeOut', '0,0,0.58,1')
     CustomEase.create('easeInOut', '0.42,0,0.58,1')
     gsap.defaults({
@@ -35,6 +39,7 @@ export default function GsapProvider({children}: {children: React.ReactNode}) {
       }),
     )
   }, [isMobile])
+
   return (
     <div id='smooth-wrapper'>
       <div id='smooth-content'>{children}</div>

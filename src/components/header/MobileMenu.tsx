@@ -1,9 +1,5 @@
 'use client'
 
-import {Fragment, useState} from 'react'
-import {cn} from '@/lib/utils'
-import {ICreateOder} from '@/sections/tao-don/oder.interface'
-import Link from 'next/link'
 import {IDataHeader, Isocial} from '@/components/header/Header'
 import ICDrop from '@/components/header/ICDrop'
 import {
@@ -16,6 +12,10 @@ import {
 import ImageV2 from '@/components/image/ImageV2'
 import ArrowRight from '@/components/svg/ArrowRight'
 import Menu from '@/components/svg/Menu'
+import {cn} from '@/lib/utils'
+import {ICreateOder} from '@/sections/tao-don/oder.interface'
+import Link from 'next/link'
+import {Fragment, useState} from 'react'
 
 interface INavItems {
   name: string
@@ -39,78 +39,78 @@ const MobileMenu = ({
       <SheetTrigger>
         <Menu className='size-6 stroke-black' />
       </SheetTrigger>
-      <SheetContent className='w-full overflow-auto p-4 pt-0 bg-[#F6F8FA]'>
+      <SheetContent className='w-full overflow-auto bg-[#F6F8FA] p-4 pt-0'>
         <SheetTitle className='hidden' />
-        <div className='sticky top-0 py-4 bg-[#F6F8FA] w-full'>
+        <div className='sticky top-0 w-full bg-[#F6F8FA] py-4'>
           <SheetClose className=''>
             <ArrowRight className='size-6 stroke-black' />
           </SheetClose>
         </div>
-        <div className='px-4 bg-white rounded-[1.25rem]'>
+        <div className='rounded-[1.25rem] bg-white px-4'>
           <SheetClose asChild>
             <Link
               href={navItems?.[0]?.href || '#'}
-              className='text-mb-13M text-black py-4 block'
+              className='block py-4 text-black text-mb-13M'
             >
               {navItems?.[0]?.name}
             </Link>
           </SheetClose>
-          <div className='w-full bg-[#DCDFE4] h-[1px]' />
+          <div className='h-[1px] w-full bg-[#DCDFE4]' />
           <SheetClose asChild>
             <Link
               href='/tao-don-hang'
-              className='text-mb-13M text-black py-4 block'
+              className='block py-4 text-black text-mb-13M'
             >
               Tạo đơn hàng
             </Link>
           </SheetClose>
         </div>
 
-        <div className='mt-6 px-4 bg-white rounded-[1.25rem]'>
+        <div className='mt-6 rounded-[1.25rem] bg-white px-4'>
           <SheetClose asChild>
             <Link
               href={navItems?.[1]?.href || '#'}
-              className='text-mb-13M text-black py-4 block'
+              className='block py-4 text-black text-mb-13M'
             >
               {navItems?.[1]?.name}
             </Link>
           </SheetClose>
-          <div className='w-full bg-[#DCDFE4] h-[1px]' />
+          <div className='h-[1px] w-full bg-[#DCDFE4]' />
           <SheetClose asChild>
             <Link
               href={navItems?.[3]?.href || '#'}
-              className='text-mb-13M text-black py-4 block'
+              className='block py-4 text-black text-mb-13M'
             >
               {navItems?.[3]?.name}
             </Link>
           </SheetClose>
-          <div className='w-full bg-[#DCDFE4] h-[1px]' />
+          <div className='h-[1px] w-full bg-[#DCDFE4]' />
           <SheetClose asChild>
             <Link
               href={navItems?.[4]?.href || '#'}
-              className='text-mb-13M text-black py-4 block'
+              className='block py-4 text-black text-mb-13M'
             >
               {navItems?.[4]?.name}
             </Link>
           </SheetClose>
-          <div className='w-full bg-[#DCDFE4] h-[1px]' />
+          <div className='h-[1px] w-full bg-[#DCDFE4]' />
           <div
             onClick={() => {
               setToggle(!toggle)
             }}
-            className='text-mb-13M text-black py-4 flex w-full justify-between'
+            className='flex w-full justify-between py-4 text-black text-mb-13M'
           >
-            <p className='text-mb-13M text-black'>Dịch vụ</p>
+            <p className='text-black text-mb-13M'>Dịch vụ</p>
             <ICDrop className='size-[1.5rem]' />
           </div>
           <div
             style={{
               height: toggle
-                ? `calc(2.5rem*${dataCreateOrder?.length + 1})`
+                ? `calc(2.5rem*${dataCreateOrder?.length + 2.5})`
                 : '0',
             }}
             className={cn(
-              'space-y-[1rem] h-0 transition-all duration-500 overflow-hidden',
+              'h-0 space-y-[1rem] overflow-hidden transition-all duration-500',
               toggle && 'pb-[1rem]',
             )}
           >
@@ -129,7 +129,7 @@ const MobileMenu = ({
                         height={50 * 2}
                         className='size-[1rem] rounded-[100%]'
                       />
-                      <p className='flex-1 text-mb-13M text-black'>
+                      <p className='flex-1 text-black text-mb-13M'>
                         {item?.title}
                       </p>
                     </Link>
@@ -138,8 +138,8 @@ const MobileMenu = ({
               ))}
           </div>
         </div>
-        <p className='mt-6 text-pc-sub12s text-black/80'>Dịch vụ khác</p>
-        <div className='mt-2 px-4 bg-white rounded-[1.25rem]'>
+        <p className='mt-6 text-black/80 text-pc-sub12s'>Dịch vụ khác</p>
+        <div className='mt-2 rounded-[1.25rem] bg-white px-4'>
           {Array.isArray(dataHeader?.other_services) &&
             dataHeader?.other_services?.map(
               (
@@ -153,13 +153,13 @@ const MobileMenu = ({
                   <Link
                     href={item?.link || ''}
                     target='__blank'
-                    className='text-mb-13M text-black py-4 block'
+                    className='block py-4 text-black text-mb-13M'
                   >
                     {item?.title}
                   </Link>
                   <div
                     className={cn(
-                      'w-full bg-[#DCDFE4] h-[1px]',
+                      'h-[1px] w-full bg-[#DCDFE4]',
                       index + 1 === dataHeader?.other_services?.length &&
                         'hidden',
                     )}
@@ -169,7 +169,7 @@ const MobileMenu = ({
             )}
         </div>
 
-        <div className='mt-[4.31rem] flex-center space-x-4'>
+        <div className='mt-[4.31rem] space-x-4 flex-center'>
           <Link
             href={social?.[0]?.link}
             target='__blank'
@@ -179,7 +179,7 @@ const MobileMenu = ({
               src='/header/icon-facebook.webp'
               width={100}
               height={100}
-              className='size-10 object-cover rounded-full'
+              className='size-10 rounded-full object-cover'
             />
           </Link>
           <Link
@@ -191,7 +191,7 @@ const MobileMenu = ({
               src='/header/icon-zalo.webp'
               width={100}
               height={100}
-              className='size-10 object-cover rounded-full'
+              className='size-10 rounded-full object-cover'
             />
           </Link>
           <Link
@@ -203,29 +203,29 @@ const MobileMenu = ({
               src='/header/icon-tiktok.webp'
               width={100}
               height={100}
-              className='size-10 object-cover rounded-full'
+              className='size-10 rounded-full object-cover'
             />
           </Link>
         </div>
 
         <div className='mt-4 text-center'>
-          <p className='text-pc-sub14m text-black/80'>
+          <p className='text-black/80 text-pc-sub14m'>
             Tất cả quyền được bảo lưu.
             <br />
             Bản quyền © 2025 Ltd.
           </p>
-          <div className='mt-4 flex-center space-x-8'>
+          <div className='mt-4 space-x-8 flex-center'>
             <Link
               href={dataHeader?.clause || '/'}
               target='__blank'
-              className='text-pc-sub12m text-black/80'
+              className='text-black/80 text-pc-sub12m'
             >
               Điều khoản & Điều kiện
             </Link>
             <Link
               href={dataHeader?.privacy_policy || '/'}
               target='__blank'
-              className='text-pc-sub12m text-black/80'
+              className='text-black/80 text-pc-sub12m'
             >
               Chính sách bảo mật
             </Link>

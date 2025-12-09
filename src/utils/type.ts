@@ -200,6 +200,7 @@ interface Link {
   categories: any[]
   tags: any[]
   thumbnail: boolean
+  url?: string
   meta: {
     _edit_last: string[]
     _edit_lock: string[]
@@ -312,6 +313,7 @@ interface ServiceItem2 {
   image: ImageIcon
   title: string
   link: Link
+  description: string
 }
 
 export interface Card {
@@ -326,6 +328,13 @@ export interface Card {
 }
 
 export interface ServicesObject {
+  title: string
+  description: string
+  link: {
+    title: string
+    url: string
+    target: string
+  }
   list_service_1: ServiceItem1[]
   list_service_2: ServiceItem2[]
   card: Card
@@ -597,6 +606,11 @@ export interface IServicePage {
   suggested_reading_articles_about_shipping: {
     title: string
     post: suggested_reading_articles_about_shipping_post[]
+  }
+  estimate_price: {
+    title: string
+    background_pc: IImage
+    background_mobile: IImage
   }
 }
 export interface suggested_reading_articles_about_shipping_post {

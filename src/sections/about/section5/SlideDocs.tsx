@@ -5,9 +5,9 @@ import {useRef} from 'react'
 // Import Swiper React components
 import {Swiper, SwiperSlide} from 'swiper/react'
 // Import Swiper styles
+import {Post} from '@/utils/type'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import {Post} from '@/utils/type'
 import {Pagination} from 'swiper/modules'
 // import required modules
 import ImageV2 from '@/components/image/ImageV2'
@@ -25,7 +25,7 @@ export default function SlideDocs({posts}: Prop) {
       <Swiper
         spaceBetween={24}
         slidesPerView={'auto'}
-        loop={true}
+        loop={posts && posts.length > 1}
         pagination={{
           clickable: true,
           el: '.custom-pagination',
@@ -103,30 +103,30 @@ const CalenderIcon = () => {
       <path
         d='M16.2495 3.125H3.74951C3.40433 3.125 3.12451 3.40482 3.12451 3.75V16.25C3.12451 16.5952 3.40433 16.875 3.74951 16.875H16.2495C16.5947 16.875 16.8745 16.5952 16.8745 16.25V3.75C16.8745 3.40482 16.5947 3.125 16.2495 3.125Z'
         stroke='#7F8286'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M13.7505 1.875V4.375'
         stroke='#7F8286'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M6.25049 1.875V4.375'
         stroke='#7F8286'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M3.12451 6.875H16.8745'
         stroke='#7F8286'
-        stroke-width='1.5'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )

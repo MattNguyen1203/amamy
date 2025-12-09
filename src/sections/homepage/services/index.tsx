@@ -194,7 +194,7 @@ const CustomerSatisfaction = ({card, href}: {card: Card; href?: string}) => (
         height={600 * 2}
         className='absolute w-[17.4375rem] h-[17.9375rem] left-[2.69rem] bottom-[8.32rem] object-cover z-[30]'
         alt='Image'
-        src={card?.image ?? '/homepage/replace/img-1.png'}
+        src={card?.image ?? '/homepage/replace/img-1.webp'}
       />
     </div>
     <div className='flex flex-col items-start gap-4 p-4 absolute bottom-0 left-0 z-[40]'>

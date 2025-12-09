@@ -3,6 +3,7 @@
 import React from 'react'
 import {Input} from '@/components/ui/input'
 import {Label} from '@/components/ui/label'
+import {cn} from '@/lib/utils'
 
 type InputFieldType = 'text' | 'number'
 
@@ -13,6 +14,7 @@ interface InputFieldProps {
   description?: string
   placeholder: string
   value: string | number
+  isStraightAway?: boolean
   // eslint-disable-next-line no-unused-vars
   onChange: (name: string, value: string | number) => void
 }
@@ -24,6 +26,7 @@ export default function InputField({
   type,
   description,
   value,
+  isStraightAway = false,
   onChange,
 }: InputFieldProps) {
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +46,14 @@ export default function InputField({
   }
   return (
     <Label className='flex flex-col space-y-[0.3125rem] relative xsm:space-y-[0.375rem]'>
-      <span className='text-[0.75rem] text-black/80 font-semibold tracking-[-0.015rem] leading-normal xsm:leading-[140%]'>
+      <p
+        className={cn(
+          'text-[0.75rem] text-black/80 font-semibold tracking-[-0.015rem] leading-normal xsm:leading-[140%]',
+          isStraightAway && 'pl-[1rem] xsm:pl-[0.75rem]',
+        )}
+      >
         {label}
-      </span>
+      </p>
 
       <Input
         name={name}
@@ -60,7 +68,7 @@ export default function InputField({
         onChange={handleValueChange}
       />
       {description && (
-        <p className='mt-[0.25rem] text-black/60 text-[0.75rem] font-medium leading-[140%] tracking-[-0.0225rem]'>
+        <p className='mt-[0.25rem] pl-[1rem] xsm:pl-[0.75rem] text-black/60 text-[0.75rem] font-medium leading-[140%] tracking-[-0.0225rem]'>
           {description}
         </p>
       )}

@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import ChatBot from '@/components/chat-bot'
 // import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
-import fetchData from '@/fetch/fetchData'
-import type {Metadata} from 'next'
-import {Open_Sans, Roboto} from 'next/font/google'
-import localFont from 'next/font/local'
-import {Toaster} from 'sonner'
 import GoogleAnalytics from '@/components/google-analytic'
 import Header from '@/components/header/Header'
 import GsapProvider from '@/components/provider/GsapProvider'
+import fetchData from '@/fetch/fetchData'
+import type { Metadata } from 'next'
+import { Open_Sans, Roboto } from 'next/font/google'
+import localFont from 'next/font/local'
+import Script from 'next/script'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 // import PrenyAI from '@/lib/preni'
@@ -95,7 +96,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const fetchCreateOrder = fetchData({
-    api: `chieu-van-chuyen-header`,
+    api: 'chieu-van-chuyen-header',
     option: {
       next: {revalidate: 60},
     },
@@ -112,9 +113,30 @@ export default async function RootLayout({
   ])
   return (
     <html>
+      <head>
+        <Script
+          id='google-tag-manager'
+          strategy='beforeInteractive'
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NR7FL7G6');`,
+          }}
+        />
+      </head>
       <body
         className={`${montserrat.variable} ${roboto.variable} ${openSans.variable} ${montserrat.className} antialiased`}
       >
+        <noscript>
+          <iframe
+            src='https://www.googletagmanager.com/ns.html?id=GTM-NR7FL7G6'
+            height='0'
+            width='0'
+            style={{display: 'none', visibility: 'hidden'}}
+          />
+        </noscript>
         <GoogleAnalytics id='G-D7KW83NYK0' />
         <Header
           social={dataFooter?.data?.footer_site?.social}

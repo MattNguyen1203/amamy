@@ -1,25 +1,7 @@
 'use client'
 
-import {useEffect, useRef, useState, useTransition} from 'react'
-import {useForm} from 'react-hook-form'
+import {ImageMemo} from '@/app/(baselayout)/huong-dan-gui-hang/_components/ShippingInstructions'
 import useStore from '@/app/(store)/store'
-import useIsMobile from '@/hooks/useIsMobile'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import ICAddress from '@/sections/tao-don/ICAddress'
-import ICPhone from '@/sections/tao-don/ICPhone'
-import ICTime from '@/sections/tao-don/ICTime'
-import ICX from '@/sections/tao-don/ICX'
-import {
-  ICreateOder,
-  IInformationInstructOrder,
-  IInformationInstructOrder_SelectBranch,
-} from '@/sections/tao-don/oder.interface'
-import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
-import {zodResolver} from '@hookform/resolvers/zod'
-import Link from 'next/link'
-import {toast} from 'sonner'
-import {z} from 'zod'
 import {ICLoading} from '@/components/icon/ICLoading'
 import ImageV2 from '@/components/image/ImageV2'
 import {
@@ -46,6 +28,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import ICAddress from '@/sections/tao-don/ICAddress'
+import ICPhone from '@/sections/tao-don/ICPhone'
+import ICTime from '@/sections/tao-don/ICTime'
+import ICX from '@/sections/tao-don/ICX'
+import {
+  ICreateOder,
+  IInformationInstructOrder,
+  IInformationInstructOrder_SelectBranch,
+} from '@/sections/tao-don/oder.interface'
+import PopupPaymentInfor from '@/sections/tao-don/PopupPaymentInfor'
+import {zodResolver} from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import {useEffect, useRef, useState, useTransition} from 'react'
+import {FieldErrors, useForm} from 'react-hook-form'
+import {toast} from 'sonner'
+import {z} from 'zod'
 
 const formSchema = z.object({
   branch: z
@@ -117,6 +118,12 @@ export default function Instruct({
       setTriggerScroll(false)
     }
   }, [triggerScroll])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -268,6 +275,15 @@ export default function Instruct({
             ? dataFromOrder?.packageMessage
             : (dataFromOrder?.package ?? ''),
         yeu_cau_them: dataFromOrder?.packageMessage ?? '',
+
+        // Note options data
+        note_options: JSON.stringify(dataFromOrder?.noteOptions || {}),
+        note_options_agreement: JSON.stringify(
+          dataFromOrder?.noteOptionsAgreement || {},
+        ),
+        minh_bach_can_nang: Object.values(
+          dataFromOrder?.noteOptions || {},
+        ).join(', '),
       }
       if (formData) {
         try {
@@ -304,16 +320,31 @@ export default function Instruct({
     console.log('🚀 ~ onSubmit values:', values)
     // console.log(dataFromOrder)
   }
+
+  const onError = (errors: FieldErrors<z.infer<typeof formSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
+    }
+  }
+
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-8'
-      >
-        <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-          <p className='text-[#33A6E8] text-pc-sub16b'>
-            Hướng dẫn gửi hàng lên Amamy Post
-          </p>
+      <form onSubmit={form.handleSubmit(onSubmit, onError)}>
+        {!isMobile && (
+          <div className='mb-[1.25rem] xsm:mb-[1rem]'>
+            <h2 className='mb-[1.5rem] font-montserrat text-[1rem] font-bold leading-[1.3rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:hidden'>
+              Hướng dẫn gửi hàng lên Amamy Post
+            </h2>
+          </div>
+        )}
+        <div className='space-y-[1.75rem] xsm:space-y-[1.25rem]'>
           {data?.select_branch && (
             <>
               <div className='rounded-[1.25rem]'>
@@ -334,8 +365,8 @@ export default function Instruct({
                           'pointer-events-none',
                       )}
                     >
-                      <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                        Chọn chi nhánh Amamy Post (*)
+                      <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
+                        Chọn chi nhánh Amamy Post <strong>(*)</strong>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -343,13 +374,13 @@ export default function Instruct({
                       >
                         <FormControl
                           className={cn(
-                            '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                            '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                             data?.select_branch &&
                               data?.select_branch?.length < 2 &&
                               '[&_svg]:hidden',
                           )}
                         >
-                          <SelectTrigger className='!shadow-none [&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-time]:hidden [&_.select-phone]:hidden xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                          <SelectTrigger className='h-[3rem] pl-[1rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_.amamy-post]:hidden [&_.select-addres]:hidden [&_.select-phone]:hidden [&_.select-time]:hidden [&_span]:!text-black [&_span]:text-pc-sub14m [&_span]:xsm:text-mb-13M'>
                             {!isMobile && (
                               <SelectValue placeholder='Chọn chi nhánh' />
                             )}
@@ -357,15 +388,16 @@ export default function Instruct({
                               <SelectValue placeholder='Chọn chi nhánh' />
                             )}
                             {isMobile && field.value && selectBranchValue && (
-                              <div className='space-x-[0.75rem] flex items-center flex-1'>
-                                <p className='text-black text-pc-sub14m '>
+                              <div className='flex flex-1 items-center space-x-[0.75rem]'>
+                                <p className='text-black text-pc-sub14m'>
                                   {selectBranchValue}
                                 </p>
                               </div>
                             )}
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+
+                        <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                           {Array.isArray(data?.select_branch) &&
                             data?.select_branch?.length > 0 &&
                             data?.select_branch?.map(
@@ -375,41 +407,41 @@ export default function Instruct({
                               ) => (
                                 <SelectItem
                                   key={index}
-                                  className='[&>span>span>svg]:hidden cursor-pointer h-auto rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                                  className='flex h-auto cursor-pointer items-center rounded-[1.25rem] bg-white p-[0.75rem] [&>span>span>svg]:hidden'
                                   value={String(item?.title)}
                                 >
                                   <div className='flex-1 space-y-[0.75rem]'>
-                                    <p className='text-pc-tab-title text-black'>
+                                    <p className='text-black text-pc-tab-title'>
                                       <span className='amamy-post'>
                                         Amamy Post{' '}
                                       </span>
                                       <span>{item?.title}</span>
                                     </p>
-                                    <div className='select-addres flex space-x-[0.5rem] items-start'>
+                                    <div className='select-addres flex items-start space-x-[0.5rem]'>
                                       <ICAddress className='size-[1.5rem]' />
                                       <p
                                         dangerouslySetInnerHTML={{
                                           __html: item?.address,
                                         }}
-                                        className='text-black text-pc-sub14m '
+                                        className='text-black text-pc-sub14m'
                                       ></p>
                                     </div>
-                                    <div className='select-time flex space-x-[0.5rem] items-start'>
+                                    <div className='select-time flex items-start space-x-[0.5rem]'>
                                       <ICTime className='size-[1.5rem]' />
                                       <p
                                         dangerouslySetInnerHTML={{
                                           __html: item?.time,
                                         }}
-                                        className='text-black text-pc-sub14m '
+                                        className='text-black text-pc-sub14m'
                                       ></p>
                                     </div>
-                                    <div className='select-phone flex space-x-[0.5rem] items-start'>
+                                    <div className='select-phone flex items-start space-x-[0.5rem]'>
                                       <ICPhone className='size-[1.5rem]' />
                                       <p
                                         dangerouslySetInnerHTML={{
                                           __html: item?.phone,
                                         }}
-                                        className='text-black text-pc-sub14m '
+                                        className='text-black text-pc-sub14m'
                                       ></p>
                                     </div>
                                   </div>
@@ -418,50 +450,51 @@ export default function Instruct({
                             )}
                         </SelectContent>
                       </Select>
-                      <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:text-mb-sub10m xsm:mt-[0.25rem]' />
+                      <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m xsm:mt-[0.25rem] xsm:text-mb-sub10m' />
                     </FormItem>
                   )}
                 />
               </div>
+
               {dataBranch && (
-                <div className='!mt-[0.75rem] flex-1 space-y-[0.75rem] p-[1rem] bg-white rounded-[1.25rem]'>
-                  <p className='text-pc-tab-title text-black'>
+                <div className='flex-1 space-y-[0.75rem] rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                  <p className='text-black text-pc-tab-title'>
                     <span className='amamy-post'>Amamy Post </span>
                     <span>{dataBranch?.title}</span>
                   </p>
                   {dataBranch?.address && (
-                    <div className='select-addres flex space-x-[0.5rem] items-start'>
+                    <div className='select-addres flex items-start space-x-[0.5rem]'>
                       <ICAddress className='size-[1.5rem]' />
                       <p
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.address || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m '
+                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                       ></p>
                     </div>
                   )}
                   {dataBranch?.time && (
-                    <div className='select-time flex space-x-[0.5rem] items-start'>
+                    <div className='select-time flex items-start space-x-[0.5rem]'>
                       <ICTime className='size-[1.5rem]' />
                       <p
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.time || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m '
+                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                       ></p>
                     </div>
                   )}
                   {dataBranch?.phone && (
                     <Link
                       href={'tel:' + dataBranch?.phone}
-                      className='select-phone flex space-x-[0.5rem] items-start'
+                      className='select-phone flex items-start space-x-[0.5rem]'
                     >
                       <ICPhone className='size-[1.5rem]' />
                       <p
                         dangerouslySetInnerHTML={{
                           __html: dataBranch?.phone || '',
                         }}
-                        className='flex-1 text-black text-pc-sub14m '
+                        className='flex-1 !text-[0.8125rem] !text-[rgba(0,0,0,0.80)] text-black text-pc-sub14m'
                       ></p>
                     </Link>
                   )}
@@ -470,9 +503,9 @@ export default function Instruct({
             </>
           )}
           {data?.packing_instructions && (
-            <div className='flex xsm:flex-col sm:space-x-[1rem] xsm:space-y-[1rem] p-[1rem] rounded-[1.25rem] bg-white'>
+            <div className='flex rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] sm:space-x-[1rem] xsm:flex-col xsm:space-y-[1rem] xsm:p-[1rem]'>
               <div
-                className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]: [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]: [&_strong]:text-black *:text-[rgba(0,0,0,0.60)] *:text-pc-sub14s *:xsm:text-mb-13 *: [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[rgba(0,0,0,0.80)] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                 dangerouslySetInnerHTML={{
                   __html: data?.packing_instructions || '',
                 }}
@@ -483,12 +516,12 @@ export default function Instruct({
                     containerRefs.current[0] = el
                   }}
                 >
-                  <ImageV2
+                  <ImageMemo
                     src={data?.images}
                     alt=''
                     width={300 * 2}
                     height={200 * 2}
-                    className='rounded-[1rem] max-w-[18.75rem] xsm:max-w-full max-h-[12.5rem] xsm:max-h-[12.95831rem] object-contain'
+                    className='max-h-[12.5rem] max-w-[18.75rem] rounded-[1rem] object-contain xsm:max-h-[12.95831rem] xsm:max-w-full'
                   />
                 </div>
               )}
@@ -511,8 +544,8 @@ export default function Instruct({
                     'pointer-events-none',
                 )}
               >
-                <FormLabel className='text-[rgba(0,0,0,0.80)] text-pc-sub12s'>
-                  Chọn thông tin thanh toán (*)
+                <FormLabel className='pl-[1rem] font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-[rgba(0,0,0,0.80)] [&_strong]:font-medium xsm:[&_strong]:text-[rgba(0,0,0,0.60)]'>
+                  Chọn thông tin thanh toán <strong>(*)</strong>
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -520,13 +553,13 @@ export default function Instruct({
                 >
                   <FormControl
                     className={cn(
-                      '!shadow-none xsm:pointer-events-none aria-[invalid=true]:!border-[#F00] bg-white !mt-[0.37rem] p-[0.75rem_0.75rem_0.75rem_1rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] [&_svg]:filter [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:opacity-[1]',
+                      '!mt-[0.5rem] rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white p-[0.75rem_0.75rem_0.75rem_1rem] pl-[1rem] !shadow-none aria-[invalid=true]:!border-[#F00] xsm:pointer-events-none xsm:!mt-[0.37rem] [&_svg]:opacity-[1] [&_svg]:brightness-[100] [&_svg]:invert-[100] [&_svg]:filter',
                       Array.isArray(paymentMethod) &&
                         paymentMethod?.length < 2 &&
                         '[&_svg]:hidden',
                     )}
                   >
-                    <SelectTrigger className='!shadow-none xsm:h-[2.5rem] h-[3rem] [&_span]:!text-black [&_span]:text-pc-sub14m focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'>
+                    <SelectTrigger className='h-[3rem] !shadow-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 xsm:h-[2.5rem] [&_span]:!text-black [&_span]:text-pc-sub14m'>
                       {!isMobile && (
                         <SelectValue placeholder='Chọn thông tin thanh toán' />
                       )}
@@ -534,8 +567,8 @@ export default function Instruct({
                         <SelectValue placeholder='Chọn thông tin thanh toán' />
                       )}
                       {isMobile && field.value && (
-                        <div className='space-x-[0.75rem] flex items-center flex-1 w-full'>
-                          <p className='text-black text-pc-sub14m text-start w-full line-clamp-1 '>
+                        <div className='flex w-full flex-1 items-center space-x-[0.75rem]'>
+                          <p className='line-clamp-1 w-full text-start text-black text-pc-sub14m'>
                             {selectPaymentInformationValue?.title ||
                               dataFromOrder?.recipientPaymentInformation ||
                               `Thanh toán bằng ${field.value}`}
@@ -544,7 +577,7 @@ export default function Instruct({
                       )}
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)] bg-white'>
+                  <SelectContent className='rounded-[1.25rem] border-[1px] border-solid border-[#DCDFE4] bg-white shadow-[0px_4px_32px_0px_rgba(0,39,97,0.08)]'>
                     {Array.isArray(paymentMethod) &&
                       paymentMethod?.map(
                         (
@@ -556,7 +589,7 @@ export default function Instruct({
                         ) => (
                           <SelectItem
                             key={index}
-                            className='h-[3rem] rounded-[1.25rem] p-[0.75rem] bg-white flex items-center'
+                            className='flex h-[3rem] items-center rounded-[1.25rem] bg-white p-[0.75rem]'
                             value={item?.value ?? item?.title}
                           >
                             <p className='text-black text-pc-sub14m'>
@@ -567,27 +600,27 @@ export default function Instruct({
                       )}
                   </SelectContent>
                 </Select>
-                <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
+                <FormMessage className='!mt-[0.25rem] pl-[0.75rem] !text-[#F00] text-pc-sub12m' />
               </FormItem>
             )}
           />
 
-          <div className='space-x-[2rem] xsm:p-[1rem] xsm:bg-[#FAFAFA] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 flex items-center justify-between sm:w-full'>
+          <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
             <div
               onClick={() => {
                 setIndexTab(indexTab - 1)
                 handleClickcurrentTab(prevStep)
               }}
-              className='flex-1 cursor-pointer sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
+              className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] flex-center sm:p-[0.75rem_1.5rem] xsm:py-[0.75rem]'
             >
-              <p className='text-pc-sub16m text-black'>Quay lại</p>
+              <p className='text-black text-pc-sub16m'>Quay lại</p>
             </div>
             <AlertDialog>
               {form.formState.isValid ? (
                 <AlertDialogTrigger className='flex-1'>
                   <div
                     className={cn(
-                      '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
+                      'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
                     )}
                   >
                     {isPending ? (
@@ -602,7 +635,7 @@ export default function Instruct({
                   type='submit'
                   disabled={!form.formState.isValid}
                   className={cn(
-                    '!shadow-none flex-1 sm:p-[0.75rem_1.5rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)] h-[2.8125rem] flex-center rounded-[1.25rem]',
+                    'h-[2.8125rem] flex-1 rounded-[1.25rem] border-[rgba(255,255,255,0.80)] bg-[#F0F0F0] !shadow-none flex-center sm:p-[0.75rem_1.5rem] [&_p]:text-[rgba(0,0,0,0.30)]',
                   )}
                 >
                   <p className='text-white text-pc-sub16m'>Xác nhận</p>
@@ -610,29 +643,29 @@ export default function Instruct({
               )}
               <AlertDialogContent
                 className={cn(
-                  'gap-0 w-[21.4375rem] max-w-[21.4375rem] sm:w-[29.375rem] sm:max-w-[29.375rem] p-[2rem_1rem_1rem_1.25rem] xsm:p-[1.5rem_1rem_1rem_1rem] !rounded-[1.25rem] bg-white',
+                  'w-[21.4375rem] max-w-[21.4375rem] gap-0 !rounded-[1.25rem] bg-white p-[2rem_1rem_1rem_1.25rem] sm:w-[29.375rem] sm:max-w-[29.375rem] xsm:p-[1.5rem_1rem_1rem_1rem]',
                   type === 'nhatviet' &&
                     'w-[21.4375rem] max-w-[21.4375rem] sm:w-[52.5rem] sm:max-w-[52.5rem]',
                 )}
               >
-                <div className='xsm:max-h-[28rem] max-h-[60vh] overflow-hidden overflow-y-auto'>
+                <div className='max-h-[60vh] overflow-hidden overflow-y-auto xsm:max-h-[28rem]'>
                   <ImageV2
                     alt=''
                     src={'/order/WarningCircle.svg'}
                     width={50 * 2}
                     height={50 * 2}
-                    className='size-[2rem] sm:size-[2.5rem] mx-auto'
+                    className='mx-auto size-[2rem] sm:size-[2.5rem]'
                   />
-                  <AlertDialogTitle className='w-full text-center !mt-[1rem] !mb-[1.75rem] text-[1rem] sm:text-[1.25rem] font-bold leading-[1.2] tracking-[-0.04rem] sm:tracking-[-0.05rem] text-[#38B6FF] font-montserrat'>
+                  <AlertDialogTitle className='!mb-[1.75rem] !mt-[1rem] w-full text-center font-montserrat text-[1rem] font-bold leading-[1.2] tracking-[-0.04rem] text-[#38B6FF] sm:text-[1.25rem] sm:tracking-[-0.05rem]'>
                     Xác nhận đơn hàng & địa chỉ giao
                   </AlertDialogTitle>
-                  <div className='xsm:px-[0.75rem] px-[1rem]'>
-                    <div className='mb-[0.62rem] text-[0.875rem] sm:text-[1rem] font-semibold leading-[1.4] sm:leading-[1.62] tracking-[-0.035rem] sm:tracking-[-0.03rem] text-black font-montserrat'>
+                  <div className='px-[1rem] xsm:px-[0.75rem]'>
+                    <div className='mb-[0.62rem] font-montserrat text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.035rem] text-black sm:text-[1rem] sm:leading-[1.62] sm:tracking-[-0.03rem]'>
                       Thông tin nhận hàng
                     </div>
                     <div className='space-y-[0.25rem]'>
                       {dataFromOrder?.recipientName && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Tên người nhận:{' '}
                           </strong>
@@ -640,7 +673,7 @@ export default function Instruct({
                         </p>
                       )}
                       {dataFromOrder?.recipientAddress && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Địa chỉ chi tiết:{' '}
                           </strong>
@@ -694,7 +727,7 @@ export default function Instruct({
                         </p>
                       )} */}
                       {type === 'viethan' && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Mã thông quan, ID hoặc CMT:{' '}
                           </strong>
@@ -702,7 +735,7 @@ export default function Instruct({
                         </p>
                       )}
                       {type === 'vietnhat' && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Mã bưu điện:{' '}
                           </strong>
@@ -710,7 +743,7 @@ export default function Instruct({
                         </p>
                       )}
                       {european === 'vnEu' && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Quốc gia:{' '}
                           </strong>
@@ -718,7 +751,7 @@ export default function Instruct({
                         </p>
                       )}
                       {dataFromOrder?.recipientPhone && (
-                        <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Số điện thoại:{' '}
                           </strong>
@@ -726,14 +759,14 @@ export default function Instruct({
                         </p>
                       )}
                       {dataFromOrder?.email && (
-                        <p className='text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                        <p className='font-montserrat text-[0.8125rem] font-medium leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                           <strong className='font-semibold sm:leading-[1.14]'>
                             Email:{' '}
                           </strong>
                           <span>{dataFromOrder?.email}</span>
                         </p>
                       )}
-                      <p className='capitalize text-[0.8125rem] sm:text-[0.875rem] font-medium text-[rgba(0,0,0,0.80)] leading-[1.5] tracking-[-0.02438rem] sm:tracking-[-0.02625rem] font-montserrat'>
+                      <p className='font-montserrat text-[0.8125rem] font-medium capitalize leading-[1.5] tracking-[-0.02438rem] text-[rgba(0,0,0,0.80)] sm:text-[0.875rem] sm:tracking-[-0.02625rem]'>
                         <strong className='font-semibold sm:leading-[1.14]'>
                           Loại tiền tệ thanh toán:{' '}
                         </strong>
@@ -744,35 +777,40 @@ export default function Instruct({
                     </div>
                     {type === 'nhatviet' && (
                       <div className='mt-[1.75rem]'>
-                        <div className='mb-[0.75rem] text-black text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
+                        <div className='mb-[0.75rem] text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem] text-black xsm:text-[0.875rem] xsm:leading-[1.4] xsm:tracking-[-0.035rem]'>
                           Lưu ý quan trọng về mã bưu điện nội địa Nhật
                         </div>
                         <p
                           dangerouslySetInnerHTML={{
                             __html: importantNote || '',
                           }}
-                          className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] flex-1 [&_a]:text-[#0084FF] [&_h3]:text-pc-tab-title [&_h3]:text-black [&_strong]:text-pc-sub14s [&_strong]:text-black *:text-[rgba(0,0,0,0.90)] *:text-pc-sub14m *:xsm:text-mb-13 [&_ul]:content-ul [&_ul]:!my-0 marker:[&_ul_li]:text-[#f00] xsm:marker:[&_ul_li]:text-[0.5rem]'
+                          className={cn(
+                            '*:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+                            '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!pl-[1.35rem] [&_ul]:xsm:!pl-3',
+                            '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!pl-[1.35rem] [&_ol]:xsm:!pl-3',
+                            '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+                          )}
                         ></p>
                       </div>
                     )}
-                    <div className='mt-[1.75rem] sm:mt-[1.25rem] mb-[1.5rem] sm:mb-[2rem] text-[#F00] text-[0.75rem] font-semibold leading-[1.4] sm:leading-[1.5] tracking-[-0.015rem] font-montserrat'>
+                    <div className='mb-[1.5rem] mt-[1.75rem] font-montserrat text-[0.75rem] font-semibold leading-[1.4] tracking-[-0.015rem] text-[#F00] sm:mb-[2rem] sm:mt-[1.25rem] sm:leading-[1.5]'>
                       *Sau khi xác nhận, bạn sẽ không thể chỉnh sửa đơn hàng.
                     </div>
                   </div>
                 </div>
                 <AlertDialogFooter
                   className={cn(
-                    'flex xsm:flex-row !mt-0 space-x-[1rem] xsm:space-x-[0.75rem] xsm:space-y-0',
+                    '!mt-0 flex space-x-[1rem] xsm:flex-row xsm:space-x-[0.75rem] xsm:space-y-0',
                     type === 'nhatviet' &&
-                      'xsm:absolute xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:bg-white xsm:px-[1rem] xsm:pb-[1rem] xsm:pt-[1.5rem] xsm:rounded-b-[1.25rem]',
+                      'xsm:absolute xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:rounded-b-[1.25rem] xsm:bg-white xsm:px-[1rem] xsm:pb-[1rem] xsm:pt-[1.5rem]',
                   )}
                 >
-                  <AlertDialogCancel className='!border-none !shadow-none xsm:p-0 xsm:mt-0 flex-1 text-black xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[2.625rem] bg-[#F0F0F0] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white font-montserrat'>
+                  <AlertDialogCancel className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#F0F0F0] font-montserrat text-black !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:mt-0 xsm:p-0 xsm:text-pc-sub16m'>
                     Hủy
                   </AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleCreateOrder}
-                    className='!border-none !shadow-none flex-1 xsm:p-0 xsm:text-pc-sub16m flex-center rounded-[1.25rem] h-[2.625rem] bg-[#38B6FF] hover:bg-[#38B6FF] transition-all duration-500 hover:text-white font-montserrat'
+                    className='h-[2.625rem] flex-1 rounded-[1.25rem] !border-none bg-[#38B6FF] font-montserrat !shadow-none transition-all duration-500 flex-center hover:bg-[#38B6FF] hover:text-white xsm:p-0 xsm:text-pc-sub16m'
                   >
                     Xác nhận
                   </AlertDialogAction>
@@ -801,30 +839,30 @@ export default function Instruct({
                       setSelectBranch(false)
                     }}
                     className={cn(
-                      'fixed transition-all duration-700 ease-in-out inset-0 bg-black/0 z-[51] pointer-events-none invisible !mt-0',
-                      selectBranch && 'bg-black/50 visible pointer-events-auto',
+                      'pointer-events-none invisible fixed inset-0 z-[51] !mt-0 bg-black/0 transition-all duration-700 ease-in-out',
+                      selectBranch && 'pointer-events-auto visible bg-black/50',
                     )}
                   ></div>
                   <div
                     className={cn(
-                      'fixed transition-all duration-700 shadow-lg bottom-0 translate-y-full z-[52] left-0 w-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem]',
+                      'fixed bottom-0 left-0 z-[52] w-full translate-y-full rounded-t-[1.25rem] bg-[#F6F6F6] pb-[2rem] shadow-lg transition-all duration-700',
                       selectBranch && 'translate-y-0',
                     )}
                   >
-                    <div className='bg-white border-b-[1px] border-solid border-b-[#DCDFE4] rounded-t-[1.25rem] relative p-[0.5rem] flex-center '>
-                      <p className='text-center text-[0.75rem] font-montserrat font-semibold tracking-[-0.015rem] text-black'>
+                    <div className='relative rounded-t-[1.25rem] border-b-[1px] border-solid border-b-[#DCDFE4] bg-white p-[0.5rem] flex-center'>
+                      <p className='text-center font-montserrat text-[0.75rem] font-semibold tracking-[-0.015rem] text-black'>
                         Chọn chi nhánh Amamy Post
                       </p>
                       <div
                         onClick={() => {
                           setSelectBranch(false)
                         }}
-                        className='absolute top-[0.5rem] right-[0.5rem]'
+                        className='absolute right-[0.5rem] top-[0.5rem]'
                       >
                         <ICX className='size-[1.5rem]' />
                       </div>
                     </div>
-                    <div className='p-[1rem] bg-[#F6F6F6] space-y-[1rem] overflow-hidden overflow-y-auto max-h-[70vh] hidden_scroll'>
+                    <div className='hidden_scroll max-h-[70vh] space-y-[1rem] overflow-hidden overflow-y-auto bg-[#F6F6F6] p-[1rem]'>
                       {Array.isArray(data?.select_branch) &&
                         data?.select_branch?.map(
                           (
@@ -840,40 +878,40 @@ export default function Instruct({
                                 setSelectBranchValue(item?.title)
                                 setSelectBranch(false)
                               }}
-                              className='bg-white rounded-[1.25rem] space-x-[0.75rem] flex items-center p-[0.75rem] border-[1px] border-solid border-[#F8F8F8]'
+                              className='flex items-center space-x-[0.75rem] rounded-[1.25rem] border-[1px] border-solid border-[#F8F8F8] bg-white p-[0.75rem]'
                             >
                               <div className='flex-1 space-y-[0.75rem]'>
-                                <p className='text-pc-tab-title text-black xsm:text-pc-sub14s'>
+                                <p className='font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'>
                                   <span className='amamy-post'>
                                     Amamy Post{' '}
                                   </span>
                                   <span>{item?.title}</span>
                                 </p>
-                                <div className='select-addres flex space-x-[0.5rem] items-start'>
+                                <div className='select-addres flex items-start space-x-[0.5rem]'>
                                   <ICAddress className='size-[1.5rem] xsm:size-[1.125rem]' />
                                   <p
                                     dangerouslySetInnerHTML={{
                                       __html: item?.address,
                                     }}
-                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
-                                <div className='select-time flex space-x-[0.5rem] items-start'>
+                                <div className='select-time flex items-start space-x-[0.5rem]'>
                                   <ICTime className='size-[1.5rem] xsm:size-[1.125rem]' />
                                   <p
                                     dangerouslySetInnerHTML={{
                                       __html: item?.time,
                                     }}
-                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
-                                <div className='select-phone flex space-x-[0.5rem] items-start'>
+                                <div className='select-phone flex items-start space-x-[0.5rem]'>
                                   <ICPhone className='size-[1.5rem] xsm:size-[1.125rem]' />
                                   <p
                                     dangerouslySetInnerHTML={{
                                       __html: item?.phone,
                                     }}
-                                    className=' flex-1 text-black text-pc-sub14m xsm:text-mb-13M xsm:text-[rgba(0,0,0,0.80)]'
+                                    className='custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
                                   ></p>
                                 </div>
                               </div>

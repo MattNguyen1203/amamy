@@ -1,13 +1,8 @@
 'use client'
 
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {useForm} from 'react-hook-form'
 import useStore from '@/app/(store)/store'
-import {cn} from '@/lib/utils'
-import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
-import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {z} from 'zod'
+import ICMessageQuestion from '@/components/icon/ICMessageQuestion'
+import ICStar from '@/components/icon/ICStar'
 import {Button} from '@/components/ui/button'
 import {Checkbox} from '@/components/ui/checkbox'
 import {
@@ -18,8 +13,215 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {Label} from '@/components/ui/label'
+import useIsMobile from '@/hooks/useIsMobile'
+import {cn} from '@/lib/utils'
+import {IDataFromOrder} from '@/sections/tao-don/CreateOrder'
+import {IInformationTimeOrder} from '@/sections/tao-don/oder.interface'
+import {zodResolver} from '@hookform/resolvers/zod'
+import Image from 'next/image'
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import {FieldErrors, useForm, UseFormReturn} from 'react-hook-form'
+import {z} from 'zod'
 
-export default function OrderStepTime({
+// Type for form data
+type FormData = {
+  policy: boolean[]
+  userChoices: Record<string, string | undefined>
+}
+
+// Memoized component for user choices section
+const UserChoicesSection = React.memo(function UserChoicesSection({
+  item,
+  index,
+  form,
+  isMobile,
+  containerRefs,
+}: {
+  item: IInformationTimeOrder
+  index: number
+  form: UseFormReturn<FormData>
+  isMobile: boolean
+  containerRefs: React.MutableRefObject<(HTMLDivElement | null)[]>
+}) {
+  const setContainerRef = useCallback(
+    (index: number) => (el: HTMLDivElement | null) => {
+      containerRefs.current[index] = el
+    },
+    [containerRefs],
+  )
+
+  const noteMoreClassName = useMemo(
+    () =>
+      cn(
+        'custom-prose *:text-[0.875rem] *:font-medium *:leading-[1.3125rem] *:tracking-[-0.02625rem] *:text-[rgba(0,0,0,0.80)] xsm:*:text-[0.8125rem] xsm:*:leading-[1.21875rem] xsm:*:tracking-[-0.02438rem]',
+        '[&_ul]:!my-3 [&_ul]:!list-disc [&_li]:mb-2 [&_ul]:!px-[1.4rem] [&_ul]:xsm:!px-[1rem]',
+        '[&_ol]:!my-3 [&_ol]:!list-decimal [&_ol]:!px-[1.4rem] [&_ol]:xsm:!px-[1rem]',
+        '[&_p]:pt-[0.62rem] first:[&_p]:pt-0 [&_p]:xsm:pt-[0.38rem]',
+      ),
+    [],
+  )
+
+  const stockClassName = useMemo(
+    () =>
+      cn(
+        'custom-prose xsm:-[-0.0225rem] text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem] [&_img]:my-2 [&_img]:h-auto [&_img]:w-full [&_img]:rounded-[1rem]',
+      ),
+    [],
+  )
+
+  const checkboxClassName = useMemo(
+    () =>
+      cn(
+        // layout reset
+        'relative box-border inline-flex items-center justify-center align-middle',
+        // fixed shape
+        'size-[1.25rem] rounded-full border border-[#A3DDFF]',
+        // visual bg
+        'bg-[rgba(239,239,239,0.60)] shadow-none transition-all duration-200 ease-out',
+        // ensure perfect circle
+        'aspect-square overflow-hidden',
+        // handle checked state
+        'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-transparent',
+        // hide radix default SVG
+        '[&_svg]:hidden',
+        // span (indicator wrapper)
+        'flex items-center justify-center [&>span]:absolute [&>span]:inset-0',
+        // pseudo indicator
+        '[&>span]:before:block [&>span]:before:rounded-full [&>span]:before:transition-all [&>span]:before:duration-200',
+        '[&>span]:before:size-[0.75rem] [&>span]:before:bg-transparent [&>span]:before:content-[""]',
+        '[&[data-state=checked]>span:before]:!bg-[#38B6FF]',
+        // fine-tune optical centering
+        'translate-y-[0.5px]', // adjusts subpixel misalignment
+      ),
+    [],
+  )
+
+  return (
+    <>
+      {item?.user_chooses ? (
+        <>
+          <div className='space-y-[0.75rem] xsm:space-y-[0.5rem]'>
+            {item?.stock_user?.map((stockItem, stockIndex) => (
+              <FormField
+                key={stockIndex}
+                control={form.control}
+                name={`userChoices.${item?.time_content}`}
+                render={({field}) => {
+                  const isChecked = field.value === stockItem?.label
+
+                  return (
+                    <Label
+                      htmlFor={`userChoices.${item?.time_content}-${stockIndex}`}
+                      className='block w-full cursor-pointer'
+                    >
+                      <FormItem
+                        className={cn(
+                          'relative flex cursor-pointer flex-row items-center space-x-[0.75rem] space-y-0 rounded-[2.25rem] border-[0.075rem] px-[1.25rem] py-[0.88rem] transition-all duration-150 xsm:space-x-[0.5rem] xsm:rounded-[2rem] xsm:py-[0.62rem] xsm:pl-[0.75rem]',
+                          isChecked
+                            ? 'border-[#38B6FF] bg-[#F1F9FF]'
+                            : 'border-transparent bg-[rgba(239,239,239,0.60)]',
+                        )}
+                      >
+                        <FormControl>
+                          <Checkbox
+                            id={`userChoices.${item?.time_content}-${stockIndex}`}
+                            className={checkboxClassName}
+                            checked={isChecked}
+                            onCheckedChange={() => {
+                              if (field.value === stockItem?.label) {
+                                field.onChange(undefined)
+                              } else {
+                                field.onChange(stockItem?.label)
+                              }
+                            }}
+                          />
+                        </FormControl>
+                        <div className='flex flex-col gap-y-[0.25rem] leading-none'>
+                          <div className='flex sm:items-center sm:space-x-[0.5rem] xsm:flex-wrap xsm:gap-[0.19rem]'>
+                            {isMobile && stockItem?.tag && (
+                              <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.12rem_0.38rem] sm:hidden'>
+                                <ICStar className='size-[0.75rem]' />
+                                <p className='font-montserrat text-[0.625rem] font-semibold leading-[0.875rem] tracking-[-0.01875rem] text-white flex-center'>
+                                  {stockItem?.tag}
+                                </p>
+                              </div>
+                            )}
+                            <FormLabel
+                              htmlFor={`userChoices.${item?.time_content}-${stockIndex}`}
+                              className='cursor-pointer font-montserrat text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:tracking-[-0.01625rem]'
+                            >
+                              {stockItem?.label}
+                            </FormLabel>
+                            {!isMobile && stockItem?.tag && (
+                              <div className='flex items-center space-x-[0.25rem] rounded-[62.5rem] bg-[#3FC371] p-[0.25rem_0.75rem] xsm:hidden'>
+                                <ICStar className='size-[0.875rem]' />
+                                <p className='font-montserrat text-[0.75rem] font-semibold leading-normal tracking-[-0.015rem] text-white flex-center'>
+                                  {stockItem?.tag}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                          {stockItem?.desc && (
+                            <FormLabel
+                              htmlFor={`userChoices.${item?.time_content}-${stockIndex}`}
+                              className='custom-prose xsm:-[-0.0225rem] cursor-pointer text-[0.875rem] font-medium leading-[1.3125rem] tracking-[-0.02625rem] text-[rgba(0,0,0,0.80)] xsm:text-[0.75rem] xsm:leading-[1.05rem]'
+                              dangerouslySetInnerHTML={{
+                                __html: stockItem?.desc,
+                              }}
+                            ></FormLabel>
+                          )}
+                        </div>
+                      </FormItem>
+                    </Label>
+                  )
+                }}
+              />
+            ))}
+          </div>
+
+          {item?.note_more && (
+            <div className='mt-[1rem] flex flex-col items-start xsm:mb-[0.5rem] xsm:mt-[1.5rem] xsm:p-0'>
+              {/* icon */}
+              <div className='mb-[0.63rem] flex items-center space-x-[0.38rem] sm:space-x-[0.69rem] xsm:mb-[0.5rem]'>
+                {/* <ICMessageQuestion className='size-[1.5rem] shrink-0' /> */}
+                <Image src='/icon/question.svg' alt='icon' width={24} height={24}  className='size-[1.5rem] shrink-0'/>
+
+                <p className='text-[1rem] font-bold leading-[1.5rem] tracking-[-0.03rem] text-[#33A6E8] xsm:text-[0.875rem] xsm:leading-[1.3125rem] xsm:tracking-[-0.02625rem]'>
+                  LƯU Ý
+                </p>
+              </div>
+
+              <div
+                className={noteMoreClassName}
+                dangerouslySetInnerHTML={{
+                  __html: item?.note_more,
+                }}
+              ></div>
+            </div>
+          )}
+        </>
+      ) : (
+        <div
+          ref={setContainerRef(index)}
+          className={stockClassName}
+          dangerouslySetInnerHTML={{
+            __html: item?.stock || '',
+          }}
+        ></div>
+      )}
+    </>
+  )
+})
+
+const OrderStepTime = React.memo(function OrderStepTime({
   dataInformation,
   handleClickcurrentTab,
   nextStep,
@@ -38,46 +240,58 @@ export default function OrderStepTime({
   setDataFromOrder: React.Dispatch<React.SetStateAction<IDataFromOrder>>
   dataFromOrder: IDataFromOrder
 }) {
-  const FormSchema = z.object({
-    policy: z.array(
-      z.boolean().refine((value) => value === true, {
-        message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
+  const isMobile = useIsMobile()
+  // Create dynamic FormSchema based on dataInformation
+  const FormSchema = useMemo(
+    () =>
+      z.object({
+        policy: z.array(
+          z.boolean().refine((value) => value === true, {
+            message: 'Vui lòng đồng ý với điều khoản của chúng tôi.',
+          }),
+        ),
+        userChoices: z.record(z.string(), z.string().optional()).refine(
+          (choices) => {
+            if (!Array.isArray(dataInformation)) return true
+
+            const itemsWithUserChoices = dataInformation.filter(
+              (item) => item?.user_chooses,
+            )
+            const requiredKeys = itemsWithUserChoices.map(
+              (item) => item?.time_content,
+            )
+
+            return requiredKeys.every((key) => {
+              if (!key) {
+                return true
+              }
+              return choices[key] && choices[key] !== ''
+            })
+          },
+          {
+            message: 'Vui lòng chọn đầy đủ các tùy chọn bắt buộc.',
+          },
+        ),
       }),
-    ),
-    userChoices: z.record(z.string(), z.string().optional()).refine(
-      (choices) => {
-        if (!Array.isArray(dataInformation)) return true
-
-        const itemsWithUserChoices = dataInformation.filter(
-          (item) => item?.user_chooses,
-        )
-        const requiredKeys = itemsWithUserChoices.map(
-          (item) => item?.time_content,
-        )
-
-        return requiredKeys.every((key) => {
-          if (!key) {
-            return true
-          }
-          return choices[key] && choices[key] !== ''
-        })
-      },
-      {
-        message: 'Vui lòng chọn đầy đủ các tùy chọn bắt buộc.',
-      },
-    ),
-  })
+    [dataInformation],
+  )
   const {stepOrder, setStepOrder} = useStore((state) => state)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [triggerScroll, setTriggerScroll] = useState<boolean>(false)
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
+
+  const formDefaultValues = useMemo(
+    () => ({
       policy: Array.isArray(dataInformation)
         ? dataInformation?.map(() => (stepOrder > 2 ? true : false))
         : [],
       userChoices: dataFromOrder?.userChoices || {},
-    },
+    }),
+    [dataInformation, stepOrder, dataFromOrder?.userChoices],
+  )
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: formDefaultValues,
   })
   useEffect(() => {
     containerRefs.current.forEach((container) => {
@@ -122,173 +336,155 @@ export default function OrderStepTime({
     })
   })
   useEffect(() => {
-    if (!dataInformation) {
+    // Check if dataInformation is undefined, null, or empty array
+    const isEmpty =
+      !dataInformation ||
+      (Array.isArray(dataInformation) && dataInformation.length === 0)
+
+    if (isEmpty) {
       if (stepOrder < 3) {
         setStepOrder(3)
       }
       handleClickcurrentTab('3')
       setTriggerScroll(true)
     }
-  }, [])
-  const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'})
+  }, [dataInformation, stepOrder, setStepOrder, handleClickcurrentTab])
+  const scrollToTop = useCallback(
+    () => window.scrollTo({top: 0, behavior: 'smooth'}),
+    [],
+  )
   useEffect(() => {
     if (triggerScroll) {
       scrollToTop()
       setTriggerScroll(false)
     }
-  }, [triggerScroll])
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    if (data) {
-      if (stepOrder < 3) {
-        setStepOrder(Number(nextStep))
+  }, [triggerScroll, scrollToTop])
+
+  // Scroll to top when component mounts (when entering this step)
+  useEffect(() => {
+    scrollToTop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const onSubmit = useCallback(
+    (data: z.infer<typeof FormSchema>) => {
+      if (data) {
+        if (stepOrder < 3) {
+          setStepOrder(Number(nextStep))
+        }
+        setIndexTab(indexTab + 1)
+        setDataFromOrder({...dataFromOrder, userChoices: data?.userChoices})
+        // form.reset()
+        handleClickcurrentTab(nextStep)
+        setTriggerScroll(true)
       }
-      setIndexTab(indexTab + 1)
-      setDataFromOrder({...dataFromOrder, userChoices: data?.userChoices})
-      // form.reset()
-      handleClickcurrentTab(nextStep)
-      setTriggerScroll(true)
+    },
+    [
+      stepOrder,
+      nextStep,
+      setStepOrder,
+      setIndexTab,
+      indexTab,
+      setDataFromOrder,
+      dataFromOrder,
+      handleClickcurrentTab,
+    ],
+  )
+
+  const onError = (errors: FieldErrors<z.infer<typeof FormSchema>>) => {
+    const firstErrorField = Object.keys(errors)[0]
+    if (!firstErrorField) {
+      return
+    }
+
+    const el = document.querySelector(`[name="${firstErrorField}"]`)
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'center'})
+      ;(el as HTMLElement).focus({preventScroll: true})
     }
   }
+
+  const handleBackClick = useCallback(() => {
+    handleClickcurrentTab('1')
+    setIndexTab(indexTab - 1)
+    // setDataInformation(undefined)
+    // setDataFromOrder({...dataFromOrder})
+  }, [handleClickcurrentTab, setIndexTab, indexTab])
+
   return (
-    <div className='space-y-[1.5rem] xsm:space-y-[0.75rem]'>
-      <p className='sm:hidden text-pc-sub16b text-[#33A6E8]'>
-        Thời gian gửi hàng
-      </p>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-[1.59rem]'
-        >
-          {Array.isArray(dataInformation) &&
-            dataInformation?.map(
-              (item: IInformationTimeOrder, index: number) => (
-                <Fragment key={index}>
-                  <div className='p-[1rem] rounded-[1.25rem] bg-white'>
-                    <p className='xsm:text-pc-sub14s mb-[0.75rem] xsm:!font-bold text-black font-montserrat text-[1rem] font-semibold leading-[1.625] tracking-[-0.03rem]'>
-                      {item?.time_content}
-                    </p>
-                    {item?.user_chooses ? (
-                      <>
-                        <div className='space-y-[0.875rem] mb-[0.875rem]'>
-                          {item?.stock_user?.map((stockItem, stockIndex) => (
-                            <FormField
-                              key={stockIndex}
-                              control={form.control}
-                              name={`userChoices.${item?.time_content}`}
-                              render={({field}) => (
-                                <FormItem className='xsm:pt-[0.5rem] xsm:border-t-[1px] xsm:border-solid xsm:border-[#DCDFE4] xsm:first:border-t-0 xsm:first:pt-0 relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none mb-[0.5rem]'>
-                                  <FormControl>
-                                    <Checkbox
-                                      className='[&_svg]:!hidden size-[1.25rem] rounded-[100%] border-[1.66667px] border-solid border-[#000000] data-[state=checked]:!border-[#38B6FF] !bg-white flex-center [&>span]:data-[state=checked]:!bg-[#38B6FF] [&>span]:bg-transparent [&>span]:size-[0.75rem] [&>span]:rounded-[100%]'
-                                      checked={field.value === stockItem?.label}
-                                      onCheckedChange={(checked) => {
-                                        field.onChange(
-                                          checked
-                                            ? stockItem?.label
-                                            : undefined,
-                                        )
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <div className='leading-none space-y-[0rem] flex flex-col'>
-                                    <div className='flex xsm:flex-wrap sm:items-center xsm:gap-[0.5rem] sm:space-x-[0.3875rem]'>
-                                      <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13S xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
-                                        {stockItem?.label}
-                                      </FormLabel>
-                                      {stockItem?.tag && (
-                                        <p className='xsm:w-max p-[0.25rem_0.75rem] flex-center rounded-[62.5rem] bg-[#5DAF46] text-pc-sub14m xsm:text-[0.625rem] xsm:font-semibold xsm:leading-[1.4] xsm:tracking-[-0.01875rem] text-white'>
-                                          {stockItem?.tag}
-                                        </p>
-                                      )}
-                                    </div>
-                                    {stockItem?.desc && (
-                                      <FormLabel className='pt-[0.5rem] text-pc-sub14m text-[rgba(0,0,0,0.80)] cursor-pointer'>
-                                        <p
-                                          className='text-pc-sub14m text-[rgba(0,0,0,0.80)]'
-                                          dangerouslySetInnerHTML={{
-                                            __html: stockItem?.desc,
-                                          }}
-                                        ></p>
-                                      </FormLabel>
-                                    )}
-                                  </div>
-                                </FormItem>
-                              )}
-                            />
-                          ))}
-                        </div>
-                        {item?.note_more && (
-                          <p
-                            className='text-pc-sub14m text-[#F00] mb-[1rem]'
-                            dangerouslySetInnerHTML={{
-                              __html: item?.note_more,
-                            }}
-                          ></p>
-                        )}
-                      </>
-                    ) : (
-                      <div
-                        ref={(el) => {
-                          containerRefs.current[index] = el
-                        }}
-                        className='[&_img]:my-2 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-[1rem] [&_a]:text-[#0084FF] mb-[1rem] [&_h3]:text-pc-tab-title [&_strong]:text-pc-sub14s *:text-black/[0.92] *:text-pc-14 *:font-medium *:xsm:text-mb-13 [&>p>span]:font-medium [&_ul]:content-ul [&_ol]:content-ol [&_ol>li]:my-[0.5rem] [&_ol]:!my-0 marker:[&_ul_li]:text-[0.65rem] xsm:marker:[&_ul_li]:text-[0.5rem] [&_em]:not-italic [&_em]:text-[0.75rem] [&_em]:font-semibold [&_em]:tracking-[-0.015rem] [&_em]:text-[#8F8F8F]'
-                        dangerouslySetInnerHTML={{
-                          __html: item?.stock || '',
-                        }}
-                      ></div>
-                    )}
-                    <FormField
-                      control={form.control}
-                      name={`policy.${index}`}
-                      render={({field}) => (
-                        <FormItem className='relative flex flex-row items-center space-y-0 space-x-[0.5rem] border-none'>
-                          <FormControl>
-                            <Checkbox
-                              className='[&_.svg-none-check]:aria-[checked=false]:block size-[1.875rem] xsm:size-[1.5rem] [&_svg]:size-[1rem] [&>span>svg]:size-[1.25rem] flex-center border-none data-[state=checked]:bg-[#FFEC1F] bg-[#FFEC1F] data-[state=checked]:text-[#000000] text-[#000000]'
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <div className='space-y-1 leading-none'>
-                            <FormLabel className='text-pc-sub14s !font-semibold xsm:text-mb-13M xsm:!font-semibold xsm:line-clamp-2 text-black/[0.92] cursor-pointer'>
-                              {item?.clause ||
-                                'Tôi đồng ý với điều khoản của Amamy'}
-                            </FormLabel>
-                          </div>
-                          <FormMessage className='pl-[0.75rem] !text-[#F00] text-pc-sub12m absolute bottom-[-80%] left-0' />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </Fragment>
-              ),
-            )}
-          <div className='space-x-[2rem] xsm:space-x-[0.5rem] xsm:fixed xsm:bottom-0 xsm:z-[49] disabled:xsm:opacity-[1] xsm:left-0 xsm:right-0 xsm:p-[1rem] xsm:bg-[#FAFAFA] flex items-center justify-between sm:w-full'>
-            <div
-              onClick={() => {
-                handleClickcurrentTab('1')
-                setIndexTab(indexTab - 1)
-                // setDataInformation(undefined)
-                // setDataFromOrder({...dataFromOrder})
-              }}
-              className='flex-1 cursor-pointer p-[0.75rem_1.5rem] flex-center rounded-[1.25rem] bg-[#D9F1FF]'
-            >
-              <p className='text-pc-sub16m text-black'>Quay lại</p>
-            </div>
-            <Button
-              type='submit'
-              disabled={!form.formState.isValid}
-              className={cn(
-                '!shadow-none flex-1 hover:bg-[#38B6FF] mt-[0rem] ml-auto h-[2.8125rem] flex-center p-[0.75rem_1.5rem] rounded-[1.25rem] bg-[#38B6FF]',
-                !form.formState.isValid &&
-                  'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
-              )}
-            >
-              <p className='text-white text-pc-sub16m'>Tiếp tục</p>
-            </Button>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onError)}
+        className='space-y-[1.75rem] xsm:space-y-[1.25rem]'
+      >
+        {Array.isArray(dataInformation) &&
+          dataInformation?.map((item: IInformationTimeOrder, index: number) => (
+            <Fragment key={index}>
+              <div className='rounded-[2.25rem] bg-white p-[1.5rem] shadow-[0_2px_6px_-1px_rgba(15,15,16,0.04)] xsm:rounded-[2rem] xsm:p-[1rem]'>
+                <div className='mb-[1rem]'>
+                  <h3 className='font-montserrat text-[1rem] font-semibold leading-[1.625rem] tracking-[-0.03rem] text-[rgba(0,0,0,0.92)] xsm:text-[0.875rem] xsm:leading-[1.225rem] xsm:tracking-[-0.035rem]'>
+                    {item?.time_content}
+                  </h3>
+                </div>
+
+                <UserChoicesSection
+                  item={item}
+                  index={index}
+                  form={form}
+                  isMobile={isMobile}
+                  containerRefs={containerRefs}
+                />
+
+                <FormField
+                  control={form.control}
+                  name={`policy.${index}`}
+                  render={({field}) => (
+                    <FormItem className='relative mt-[1.25rem] flex flex-row items-center space-x-[0.5rem] space-y-0 border-none xsm:mt-[1rem]'>
+                      <FormControl>
+                        <Checkbox
+                          className={cn(
+                            'relative aspect-square size-[1.25rem] rounded-[0.375rem] border-[0.094rem] border-[#A3DDFF] bg-white shadow-none transition-all duration-150 sm:size-[1.5rem] sm:rounded-[0.5rem]',
+                            'data-[state=checked]:border-[#38B6FF] data-[state=checked]:bg-[#38B6FF]',
+                          )}
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className='space-y-1 leading-none'>
+                        <FormLabel className='cursor-pointer text-[0.875rem] font-semibold leading-normal tracking-[-0.0175rem] text-[rgba(0,0,0,0.92)] xsm:line-clamp-2 xsm:text-[0.8125rem] xsm:leading-[1rem] xsm:tracking-[-0.02438rem]'>
+                          {item?.clause ||
+                            'Tôi đồng ý với điều khoản của Amamy'}
+                        </FormLabel>
+                      </div>
+                      <FormMessage className='absolute bottom-[-80%] left-0 pl-[0.75rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </Fragment>
+          ))}
+
+        <div className='mt-[1.5rem] flex w-full items-center justify-between space-x-[1.25rem] xsm:fixed xsm:bottom-0 xsm:left-0 xsm:right-0 xsm:z-[49] xsm:mt-0 xsm:space-x-[0.5rem] xsm:bg-[#FAFAFA] xsm:p-[1rem] disabled:xsm:opacity-[1]'>
+          <div
+            onClick={handleBackClick}
+            className='flex-1 cursor-pointer rounded-[1.25rem] bg-[#D9F1FF] p-[0.75rem_1.5rem] flex-center'
+          >
+            <p className='text-black text-pc-sub16m'>Quay lại</p>
           </div>
-        </form>
-      </Form>
-    </div>
+          <Button
+            type='submit'
+            disabled={!form.formState.isValid}
+            className={cn(
+              'ml-auto mt-[0rem] h-[2.8125rem] flex-1 rounded-[1.25rem] bg-[#38B6FF] p-[0.75rem_1.5rem] !shadow-none flex-center hover:bg-[#38B6FF]',
+              !form.formState.isValid &&
+                'bg-[#F0F0F0] [&_p]:text-[rgba(0,0,0,0.30)]',
+            )}
+          >
+            <p className='text-white text-pc-sub16m'>Tiếp tục</p>
+          </Button>
+        </div>
+      </form>
+    </Form>
   )
-}
+})
+
+export default OrderStepTime

@@ -5,12 +5,12 @@ export default function ICX({className}: {className?: string}) {
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      fill='none'
+      fill='currentColor'
       className={className}
     >
       <path
         d='M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16'
-        stroke='black'
+        stroke='#38B6FF'
         strokeOpacity='0.6'
         strokeWidth='2'
         strokeLinecap='round'

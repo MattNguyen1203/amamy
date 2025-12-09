@@ -26,6 +26,29 @@ export interface IInformationNoteOrder {
   title: string
   text: string
   agree_with: string
+  note_options?: Array<{
+    note_options_title: string
+    note_options_clause: string
+    list_note_options: Array<{
+      label: string
+      description?: string
+      tag?: string
+    }>
+    note_more?: string
+  }>
+}
+
+export interface IMinhBachCanNang {
+  note_options: Array<{
+    note_options_title: string
+    note_options_clause: string
+    list_note_options: Array<{
+      label: string
+      description?: string
+      tag?: string
+    }>
+    note_more?: string
+  }>
 }
 export interface IInformationInstructOrder_SelectBranch {
   title: string
@@ -76,6 +99,7 @@ export interface IInformation_Package {
   separate_request?: boolean
 }
 export interface IInformationOrder {
+  minh_bach_can_nang?: IMinhBachCanNang
   hidden_shipping?: boolean
   time?: IInformationTimeOrder[]
   note?: IInformationNoteOrder[]

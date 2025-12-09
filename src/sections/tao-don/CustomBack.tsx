@@ -23,7 +23,7 @@ const CustomBack = () => {
   return (
     <div
       onClick={handleBack}
-      className='cursor-pointer size-[1.5rem]'
+      className='size-[1.5rem] cursor-pointer'
     >
       <ICX className='size-[1.5rem]' />
     </div>

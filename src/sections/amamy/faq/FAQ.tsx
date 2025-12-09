@@ -2,8 +2,8 @@
 'use client'
 
 import ICAngleRight from '@/components/icon/ICAngleRight'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
+// import { useGSAP } from '@gsap/react'
+// import gsap from 'gsap'
 import { useState } from 'react'
 import ContactContainer from './ContactContainer'
 import FaqContainer from './FaqContainer'
@@ -12,28 +12,28 @@ import ServiceContainer from './ServiceContainer'
 const FAQ = ({ data, dataServices }: any) => {
   const [open, setOpen] = useState(false)
 
-  useGSAP(() => {
-    gsap.from('.fade-in-faq', {
-      scrollTrigger: {
-        trigger: '.fade-in-faq',
-        start: 'top bottom',
-      },
-      opacity: 0,
-      y: 50,
-      duration: 0.5,
-      stagger: 0.2,
-    })
-    gsap.from('.fade-in-service', {
-      scrollTrigger: {
-        trigger: '.fade-in-service',
-        start: 'top bottom',
-      },
-      opacity: 0,
-      y: 50,
-      duration: 0.5,
-      stagger: 0.2,
-    })
-  }, [])
+  // useGSAP(() => {
+  //   gsap.from('.fade-in-faq', {
+  //     scrollTrigger: {
+  //       trigger: '.fade-in-faq',
+  //       start: 'top bottom',
+  //     },
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 0.5,
+  //     stagger: 0.2,
+  //   })
+  //   gsap.from('.fade-in-service', {
+  //     scrollTrigger: {
+  //       trigger: '.fade-in-service',
+  //       start: 'top bottom',
+  //     },
+  //     opacity: 0,
+  //     y: 50,
+  //     duration: 0.5,
+  //     stagger: 0.2,
+  //   })
+  // }, [])
 
   return (
     <section className='my-12 size-full px-[6rem] xsm:px-[1rem]'>
@@ -64,7 +64,7 @@ const FAQ = ({ data, dataServices }: any) => {
 
         {/* Services */}
         <div className='col-span-4 xsm:col-span-12'>
-          <div className='sticky top-[5rem]'>
+          <div className='sticky top-[5rem] xsm:-translate-x-[0.3rem]'>
             {/* Desktop */}
             <div className='h-fit rounded-[1.5rem] border border-white bg-[#F4FBFF] px-10 py-8 xsm:hidden'>
               {dataServices?.map((item, index) => (
