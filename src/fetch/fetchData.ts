@@ -9,6 +9,9 @@ export type RequestPostGuest = {
 
 export default async function fetchData(request: RequestPostGuest) {
   try {
+    console.log(
+      `${process.env.NEXT_PUBLIC_API}${process.env.NEXT_PUBLIC_API_VERSION}${request.api}`,
+    )
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API}${process.env.NEXT_PUBLIC_API_VERSION}${request.api}`,
       {

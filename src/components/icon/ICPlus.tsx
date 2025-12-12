@@ -10,7 +10,7 @@ const ICPlus = ({className}: {className: string}) => {
     >
       <path
         d='M8 0.999878L8 14.9999M15 7.99988L1 7.99988'
-        stroke='black'
+        stroke='currentColor'
         strokeOpacity='0.8'
         strokeWidth='2'
         strokeLinecap='round'

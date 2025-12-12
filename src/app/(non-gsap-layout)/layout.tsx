@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import fetchData from '@/fetch/fetchData'
 import ContactButton from '@/components/contact-button'
 import Footer from '@/components/footer/Footer'
-import GsapProvider from '@/components/provider/GsapProvider'
+import fetchData from '@/fetch/fetchData'
+import React from 'react'
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
+interface NonGsapLayoutProps {
   children: React.ReactNode
-}>) {
+}
+
+export default async function NonGsapLayout({children}: NonGsapLayoutProps) {
   const fetchFooter = await fetchData({
     api: 'options?fields=footer_site,header_site',
     option: {
@@ -17,10 +16,10 @@ export default async function RootLayout({
   })
   const [dataFooter] = await Promise.all([fetchFooter])
   return (
-    <GsapProvider>
+    <>
       {children}
       <ContactButton data={dataFooter?.data?.header_site?.contact_us} />
       <Footer data={dataFooter.data.footer_site} />
-    </GsapProvider>
+    </>
   )
 }

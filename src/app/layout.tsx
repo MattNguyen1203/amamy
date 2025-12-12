@@ -3,13 +3,12 @@
 // import ChatButtonMobile from '@/components/chat-bot/ChatButtonMobile'
 import GoogleAnalytics from '@/components/google-analytic'
 import Header from '@/components/header/Header'
-import GsapProvider from '@/components/provider/GsapProvider'
 import fetchData from '@/fetch/fetchData'
-import type { Metadata } from 'next'
-import { Open_Sans, Roboto } from 'next/font/google'
+import type {Metadata} from 'next'
+import {Open_Sans, Roboto} from 'next/font/google'
 import localFont from 'next/font/local'
 import Script from 'next/script'
-import { Toaster } from 'sonner'
+import {Toaster} from 'sonner'
 import './globals.css'
 
 // import PrenyAI from '@/lib/preni'
@@ -151,7 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         <ChatButtonMobile /> */}
         {/* <PrenyAI /> */}
-        <GsapProvider>{children}</GsapProvider>
+        {children}
         <Toaster
           theme='light'
           richColors
