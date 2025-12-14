@@ -277,6 +277,7 @@ html > body[data-scroll-locked] {
   width: 2.5rem !important; /* 10px = 2.5rem */
   height: 0.25rem !important; /* 1px = 0.25rem */
 }
+
 .hidden_scroll {
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;

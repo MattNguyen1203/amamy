@@ -48,7 +48,7 @@ export default function LeadList() {
 
   return (
     <div className='w-full max-w-full xsm:overflow-x-auto'>
-      <Table className='w-full xsm:ml-[1rem] xsm:mr-[1rem]'>
+      <Table className='w-full border-separate border-spacing-0 xsm:ml-[1rem] xsm:mr-[1rem]'>
         <TableHeader>
           <TableRow className='!bg-[#F1F9FF]'>
             <TableHead className='h-[3rem] w-[2.8125rem] max-w-[2.8125rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
@@ -84,7 +84,7 @@ export default function LeadList() {
             <TableHead className='h-[3rem] w-[8.75rem] max-w-[8.75rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
               <div>Upload label (PDF)</div>
             </TableHead>
-            <TableHead className='h-[3rem] w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8] xsm:sticky xsm:right-0 xsm:z-10 xsm:bg-[#F1F9FF]'>
+            <TableHead className='h-[3rem] w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8] xsm:sticky xsm:right-0 xsm:z-10 xsm:border-b-[0.8px] xsm:border-l-[0.8px] xsm:border-r-[0.8px] xsm:border-t-[0.8px] xsm:border-solid xsm:border-[#DCDFE4] xsm:bg-[#F1F9FF]'>
               <div>Gửi label</div>
             </TableHead>
           </TableRow>
@@ -177,7 +177,7 @@ export default function LeadList() {
                     />
                   </button>
                 </TableCell>
-                <TableCell className='w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] !p-0 py-[0.75rem] xsm:sticky xsm:right-0 xsm:z-10 xsm:!bg-[#F1F9FF]'>
+                <TableCell className='w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] !p-0 py-[0.75rem] xsm:sticky xsm:right-0 xsm:z-10 xsm:border-b-[0.8px] xsm:border-l-[0.8px] xsm:border-r-[0.8px] xsm:border-t-[0.8px] xsm:border-solid xsm:border-[#DCDFE4] xsm:bg-[#F1F9FF]'>
                   <div className='flex-center'>
                     {packageInfo.isLabelSent ? (
                       <p className='flex items-center justify-center space-x-[0.375rem]'>
