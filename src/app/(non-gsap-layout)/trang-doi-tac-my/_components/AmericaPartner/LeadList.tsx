@@ -19,13 +19,14 @@ interface TableRowData {
   packageIndex: number
   isFirstPackage: boolean
   rowspan: number
+  realIndex: number
 }
 
 // Transform data to create rows for each package
 function transformDataToRows(leads: LeadData[]): TableRowData[] {
   const rows: TableRowData[] = []
 
-  leads.forEach((lead) => {
+  leads.forEach((lead, index) => {
     const packageCount = lead.packages.length
 
     lead.packages.forEach((_, packageIndex) => {
@@ -34,6 +35,7 @@ function transformDataToRows(leads: LeadData[]): TableRowData[] {
         packageIndex,
         isFirstPackage: packageIndex === 0,
         rowspan: packageCount,
+        realIndex: index,
       })
     })
   })
@@ -46,58 +48,58 @@ export default function LeadList() {
 
   return (
     <div className='w-full max-w-full xsm:overflow-x-auto'>
-      <Table className='w-full border-collapse border-[0.8px] border-solid border-[#DCDFE4] xsm:ml-[1rem] xsm:mr-[1rem]'>
+      <Table className='w-full xsm:ml-[1rem] xsm:mr-[1rem]'>
         <TableHeader>
-          <TableRow className='border-[0.8px] border-solid border-[#DCDFE4] !bg-[#F1F9FF]'>
+          <TableRow className='!bg-[#F1F9FF]'>
             <TableHead className='h-[3rem] w-[2.8125rem] max-w-[2.8125rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>STT</p>
+              <div>STT</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[10.625rem] max-w-[10.625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Họ tên</p>
+              <div>Họ tên</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[6.875rem] max-w-[6.875rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>SĐT</p>
+              <div>SĐT</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[10.625rem] max-w-[10.625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Email</p>
+              <div>Email</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[5.625rem] max-w-[5.625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Mã KH</p>
+              <div>Mã KH</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[5.625rem] max-w-[5.625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Pick up</p>
+              <div>Pick up</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[12.5rem] max-w-[12.5rem] whitespace-normal border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Địa chỉ lấy hàng</p>
+              <div>Địa chỉ lấy hàng</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[6.25rem] max-w-[6.25rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Kiện hàng</p>
+              <div>Kiện hàng</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[5.625rem] max-w-[5.625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Cân nặng</p>
+              <div>Cân nặng</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[5.625rem] max-w-[5.625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Dạng label</p>
+              <div>Dạng label</div>
             </TableHead>
             <TableHead className='h-[3rem] w-[8.75rem] max-w-[8.75rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8]'>
-              <p>Upload label (PDF)</p>
+              <div>Upload label (PDF)</div>
             </TableHead>
-            <TableHead className='h-[3rem] w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8] xsm:sticky xsm:right-0 xsm:z-10 xsm:border-l-[0.125rem] xsm:border-l-[#DCDFE4] xsm:bg-[#F1F9FF]'>
-              <p>Gửi label</p>
+            <TableHead className='h-[3rem] w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] text-center text-[0.875rem] font-semibold leading-[1.4] tracking-[-0.02625rem] text-[#33A6E8] xsm:sticky xsm:right-0 xsm:z-10 xsm:bg-[#F1F9FF]'>
+              <div>Gửi label</div>
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {tableRows.map((rowData) => {
-            const {lead, packageIndex, isFirstPackage, rowspan} = rowData
+            const {lead, packageIndex, isFirstPackage, rowspan, realIndex} =
+              rowData
             const packageInfo = lead.packages[packageIndex]
 
             return (
               <TableRow
                 key={uuidv4()}
                 className={cn(
-                  'border-[0.8px] border-solid border-[#DCDFE4]',
-                  lead.index % 2 === 1 ? '!bg-white' : '!bg-[#f8f8f8]',
+                  realIndex % 2 === 1 ? '!bg-white' : '!bg-[#f8f8f8]',
                 )}
               >
                 {/* Common columns - only show on first package row with rowspan */}
@@ -175,25 +177,28 @@ export default function LeadList() {
                     />
                   </button>
                 </TableCell>
-                <TableCell className='w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] py-[0.75rem] xsm:sticky xsm:right-0 xsm:z-10 xsm:!bg-[#F1F9FF]'>
-                  {packageInfo.isLabelSent ? (
-                    <p className='flex items-center justify-center space-x-[0.375rem]'>
-                      <Image
-                        alt=''
-                        width={32}
-                        height={32}
-                        src='/icons/icon-dbcheck.svg'
-                        className='size-[1rem] object-contain'
-                      />
-                      <span className='text-[0.75rem] font-medium leading-[1.3] tracking-[-0.0225rem] text-[#38B6FF]'>
-                        Đã gửi
-                      </span>
-                    </p>
-                  ) : (
-                    <button className='h-[1.75rem] rounded-full bg-[#38B6FF] px-[0.875rem] text-[0.75rem] font-medium leading-[1.3] tracking-[-0.0225rem] text-white'>
-                      Send label
-                    </button>
-                  )}
+                <TableCell className='w-[7.0625rem] max-w-[7.0625rem] border-[0.8px] border-solid border-[#DCDFE4] !p-0 py-[0.75rem] xsm:sticky xsm:right-0 xsm:z-10 xsm:!bg-[#F1F9FF]'>
+                  <div className='flex-center'>
+                    {packageInfo.isLabelSent ? (
+                      <p className='flex items-center justify-center space-x-[0.375rem]'>
+                        <Image
+                          alt=''
+                          width={32}
+                          height={32}
+                          src='/icons/icon-dbcheck.svg'
+                          className='size-[1rem] object-contain'
+                        />
+                        <span className='text-[0.75rem] font-medium leading-[1.3] tracking-[-0.0225rem] text-[#38B6FF]'>
+                          Đã gửi
+                        </span>
+                      </p>
+                    ) : (
+                      <button className='mx-auto h-[1.75rem] w-fit rounded-full bg-[#38B6FF] px-[0.875rem] text-[0.75rem] font-medium leading-[1.3] tracking-[-0.0225rem] text-white xsm:border-[1.5px] xsm:border-solid xsm:border-white/80'>
+                        <span className='block xsm:hidden'>Send label</span>
+                        <span className='hidden xsm:block'>Send</span>
+                      </button>
+                    )}
+                  </div>
                 </TableCell>
               </TableRow>
             )

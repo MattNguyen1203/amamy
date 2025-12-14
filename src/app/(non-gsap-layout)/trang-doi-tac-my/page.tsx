@@ -1,8 +1,15 @@
 import AmericaPartner from '@/app/(non-gsap-layout)/trang-doi-tac-my/_components/AmericaPartner'
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb'
+import getMetaDataRankMath from '@/fetch/getMetaDataRankMath'
 import getSchemaMarkup from '@/fetch/getSchemaMarkup'
 import endpoints from '@/utils/endpoints'
-import React from 'react'
+import metadataValues from '@/utils/metadataValues'
+import React, {Suspense} from 'react'
+
+export async function generateMetadata() {
+  const res = await getMetaDataRankMath(endpoints.americaPartner)
+  return metadataValues(res)
+}
 
 export default async function page() {
   const [schemaData] = await Promise.all([
@@ -19,7 +26,9 @@ export default async function page() {
         data={[{title: 'Trang đối tác Mỹ', slug: ''}]}
         className='mx-auto max-w-[89.5rem] xsm:bg-white xsm:p-[1rem]'
       />
-      <AmericaPartner />
+      <Suspense fallback={<div>Loading...</div>}>
+        <AmericaPartner />
+      </Suspense>
     </main>
   )
 }
