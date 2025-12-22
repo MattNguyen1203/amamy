@@ -70,6 +70,7 @@ export default function CreateOrder({
   const [dataInformation, setDataInformation] = useState<
     ICreateOder | undefined
   >()
+  console.log({dataInformation})
   const [selectNationValue, setSelectNationValue] = useState<{
     img: string
     title: string

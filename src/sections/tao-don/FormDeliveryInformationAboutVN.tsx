@@ -137,6 +137,7 @@ export default function FormDeliveryInformationAboutVN({
     () => recipientAddressType == 'registeredAddress' && idOrder === 1073,
     [recipientAddressType, idOrder],
   )
+
   const isAmeriacaToVietNam = useMemo(
     () => recipientAddressType === 'registeredAddress' && idOrder === 1183,
     [recipientAddressType, idOrder],
@@ -713,8 +714,14 @@ export default function FormDeliveryInformationAboutVN({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
-              <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
-                *Giao hàng ở Séc không gọi điện, nên buộc phải ghi thêm số tầng, số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
+              <p
+                className={cn(
+                  '!mt-[0.25rem] hidden pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]',
+                  isVietSec && 'block',
+                )}
+              >
+                *Giao hàng ở Séc không gọi điện, nên buộc phải ghi thêm số tầng,
+                số phòng, tên tiệm Nails, bệnh viên, nhà hàng nếu có
               </p>
             </FormItem>
           )}
