@@ -353,6 +353,7 @@ export default function FormDeliveryInformation({
                 />
               </FormControl>
               <FormMessage className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] !text-[#F00]' />
+              {/* Mã ID Việt Đức 326 */}
               {dataFromOrder?.shipping === '326' && (
                 <p className='!mt-[0.25rem] pl-[1rem] font-montserrat text-[0.75rem] font-medium leading-[1.05rem] tracking-[-0.0225rem] text-[rgba(0,0,0,0.80)]'>
                   *Giao hàng ở Đức không gọi điện, nên buộc phải ghi thêm số
